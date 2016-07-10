@@ -8,13 +8,13 @@
 /app/spool/*
 
 # Cache, session files and logs (Symfony3)
-/var/cache/*
-/var/logs/*
+var/cache/*
+var/logs/*
 /var/sessions/*
-!var/cache/.gitkeep
-!var/logs/.gitkeep
-!var/sessions/.gitkeep
-
+var/cache/.gitkeep
+var/logs/.gitkeep
+var/sessions/.gitkeep
+.idea/*
 # Parameters
 /app/config/parameters.yml
 /app/config/parameters.ini
@@ -30,19 +30,3 @@
 # Assets and user uploads
 /web/bundles/
 /web/uploads/
-
-# Assets managed by Bower
-/web/assets/vendor/
-
-# PHPUnit
-/app/phpunit.xml
-/phpunit.xml
-
-# Build data
-/build/
-
-# Composer PHAR
-/composer.phar
-
-# Backup entities generated with doctrine:generate:entities command
-*/Entity/*~
