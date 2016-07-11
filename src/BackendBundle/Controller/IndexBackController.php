@@ -1,17 +1,17 @@
 <?php
 
-namespace MentorBundle\Controller;
+namespace BackendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class DefaultController extends Controller
+class IndexBackController extends Controller
 {
     /**
      * @Route("/")
      */
     public function indexAction()
     {
-        return $this->render('MentorBundle:Default:index.html.twig');
+        return $this->render('BackendBundle:Index:index.html.twig');
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace UserBundle\Entity;
+namespace MentoratBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Soutenance
  *
- * @ORM\Table(name="soutenance")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\SoutenanceRepository")
+ * @ORM\Table(name="zboard_soutenance")
+ * @ORM\Entity(repositoryClass="MentoratBundle\Repository\SoutenanceRepository")
  */
 class Soutenance
 {
@@ -33,7 +33,7 @@ class Soutenance
     private $mentore_id;
 
     /**
-     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Projet")
+     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Projet")
      * @ORM\JoinColumn(name="projet_id", referencedColumnName="id"))
      */
     private $projet_id;

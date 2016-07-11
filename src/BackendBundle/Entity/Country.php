@@ -1,14 +1,14 @@
 <?php
 
-namespace UserBundle\Entity;
+namespace BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Country
  *
- * @ORM\Table(name="country")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\CountryRepository")
+ * @ORM\Table(name="zboard_country")
+ * @ORM\Entity(repositoryClass="BackendBundle\Repository\CountryRepository")
  */
 class Country
 {

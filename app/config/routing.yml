@@ -1,20 +1,27 @@
-# Core Routes
-app:
-    resource: "@AppBundle/Controller/"
+core:
+    resource: "@CoreBundle/Controller/"
     type:     annotation
     prefix:   /
 
-mentor:
-    resource: "@MentorBundle/Controller/"
+backend:
+    resource: "@BackendBundle/Controller/"
     type:     annotation
+    prefix:   /backend
+
+mentorat:
+    resource: "@MentoratBundle/Controller/"
+    type:     annotation
+    prefix:   /dashboard
 
 user:
     resource: "@UserBundle/Controller/"
     type:     annotation
+    prefix:   /
 
 admin:
     resource: "@AdminBundle/Controller/"
     type:     annotation
+    prefix:   /admin3744
 
 # FOS Routes
 fos_user:

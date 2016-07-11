@@ -1,14 +1,14 @@
 <?php
 
-namespace UserBundle\Entity;
+namespace MentoratBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Projet
  *
- * @ORM\Table(name="projet")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\ProjetRepository")
+ * @ORM\Table(name="zboard_projet")
+ * @ORM\Entity(repositoryClass="MentoratBundle\Repository\ProjetRepository")
  */
 class Projet
 {

@@ -8,11 +8,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * User
  *
- * @ORM\Table(name="user")
+ * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  */
 class User extends BaseUser
 {
+
     /**
      * @var int
      *
@@ -54,14 +55,14 @@ class User extends BaseUser
     protected $city;
 
     /**
-     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Country")
-     * @ORM\JoinColumn(name="country", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Country")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $country;
 
 
     /**
-     * @var int
+     * @var string
      * @ORM\Column(name="phone", type="string", length=40)
      */
     protected $phone;
@@ -258,11 +259,11 @@ class User extends BaseUser
     /**
      * Set country
      *
-     * @param \UserBundle\Entity\Country $country
+     * @param \BackendBundle\Entity\Country $country
      *
      * @return User
      */
-    public function setCountry(\UserBundle\Entity\Country $country = null)
+    public function setCountry(\BackendBundle\Entity\Country $country = null)
     {
         $this->country = $country;
 
@@ -272,7 +273,7 @@ class User extends BaseUser
     /**
      * Get country
      *
-     * @return \UserBundle\Entity\Country
+     * @return \BackendBundle\Entity\Country
      */
     public function getCountry()
     {

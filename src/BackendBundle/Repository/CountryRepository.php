@@ -1,6 +1,6 @@
 <?php
 
-namespace UserBundle\Repository;
+namespace BackendBundle\Repository;
 
 /**
  * CountryRepository

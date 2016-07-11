@@ -1,9 +1,9 @@
 <?php
 
-namespace MentorBundle;
+namespace CoreBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class MentorBundle extends Bundle
+class CoreBundle extends Bundle
 {
 }

@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Mentore
  *
- * @ORM\Table(name="mentore")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\MentoreRepository")
+ * @ORM\Table(name="zboard_mentore")
+ * @ORM\Entity(repositoryClass="MentoratBundle\Repository\MentoreRepository")
  */
 class Mentore
 {
