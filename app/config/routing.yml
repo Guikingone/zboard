@@ -1,17 +1,20 @@
-user:
-    resource: "@UserBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-admin:
-    resource: "@AdminBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
+# Core Routes
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
     prefix:   /
+
+mentor:
+    resource: "@MentorBundle/Controller/"
+    type:     annotation
+
+user:
+    resource: "@UserBundle/Controller/"
+    type:     annotation
+
+admin:
+    resource: "@AdminBundle/Controller/"
+    type:     annotation
 
 # FOS Routes
 fos_user:

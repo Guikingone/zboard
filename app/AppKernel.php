@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new AdminBundle\AdminBundle(),
             new UserBundle\UserBundle(),
+            new MentorBundle\MentorBundle(),
             new FOS\UserBundle\FOSUserBundle(),
         ];
 
