@@ -25,7 +25,8 @@ class RouteControllerTest extends WebTestCase
     public function urlProvider()
     {
         return array(
-            array('/')
+            array('/'),
+            array('/login')
         );
     }
 }
