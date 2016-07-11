@@ -19,6 +19,7 @@ class User extends BaseUser
      * @ORM\Column(name="id", type="integer", length=11)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\Informations", mappedBy="author")
      */
     protected $id;
 
