@@ -1,0 +1,18 @@
+{
+  "name": "zboard",
+  "homepage": "https://github.com/christophe-44-27/zboard",
+  "authors": [
+    "Guikingone <guillaume.loulier@hotmail.fr>"
+  ],
+  "description": "",
+  "main": "web/js/main.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor",
+    "test",
+    "tests"
+  ]
+}
