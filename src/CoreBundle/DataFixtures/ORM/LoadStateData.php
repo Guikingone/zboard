@@ -7,14 +7,15 @@
  */
 namespace CoreBundle\DataFixtures\ORM;
 
+use BackendBundle\Entity\StateRelationship;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use BackendBundle\Entity\Parcours;
+use MentoratBundle\Entity\Parcours;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-class LoadParcoursData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
+class LoadStateData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     private $privateContainer;
 
@@ -26,21 +27,14 @@ class LoadParcoursData implements FixtureInterface, ContainerAwareInterface, Ord
     public function load(ObjectManager $manager)
     {
 
-        $cpmDev= new Parcours();
-        $cpmDev->setCodeParcours("CPM-DEV");
-        $cpmDev->setLibelle("Chef de Projet Multimédia - Développement");
+        $enCours= new StateRelationship();
+        $enCours->setLibelle("En cours");
 
-        $cpmDes= new Parcours();
-        $cpmDes->setCodeParcours("CPM-DES");
-        $cpmDes->setLibelle("Chef de Projet Multimédia - Design");
+        $finish= new StateRelationship();
+        $finish->setLibelle("Terminé");
 
-        $cpmMar= new Parcours();
-        $cpmMar->setCodeParcours("CPM-MAR");
-        $cpmMar->setLibelle("Chef de Projet Multimédia - Marketing");
-
-        $manager->persist($cpmDev);
-        $manager->persist($cpmDes);
-        $manager->persist($cpmMar);
+        $manager->persist($enCours);
+        $manager->persist($finish);
         $manager->flush();
     }
 
@@ -48,6 +42,6 @@ class LoadParcoursData implements FixtureInterface, ContainerAwareInterface, Ord
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 3;
+        return 4;
     }
 }
