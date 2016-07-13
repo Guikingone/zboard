@@ -28,5 +28,4 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin3744/, role: ROLE_ADMIN }
-        - { path: ^/backend/, roles: [ROLE_ADMIN, ROLE_SUPERVISEUR_MENTOR] }
         - { path: ^/dashboard, roles: [ROLE_ADMIN, ROLE_SUPERVISEUR_MENTOR, ROLE_MENTOR] }

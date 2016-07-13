@@ -8,10 +8,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class IndexBackController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="home_backend")
      */
     public function indexAction()
     {
-        return $this->render('BackendBundle:Index:index.html.twig');
+        return $this->render('BackBundle/Index/index.html.twig');
     }
 }
