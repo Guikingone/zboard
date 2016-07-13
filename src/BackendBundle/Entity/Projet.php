@@ -1,6 +1,6 @@
 <?php
 
-namespace MentoratBundle\Entity;
+namespace BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Projet
  *
  * @ORM\Table(name="zboard_projet")
- * @ORM\Entity(repositoryClass="MentoratBundle\Repository\ProjetRepository")
+ * @ORM\Entity(repositoryClass="BackendBundle\Repository\ProjetRepository")
  */
 class Projet
 {
@@ -29,7 +29,7 @@ class Projet
     private $libelleProjet;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Parcours")
+     * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours")
      * @ORM\JoinColumn(nullable=false)
      */
     private $parcours;
@@ -77,7 +77,7 @@ class Projet
      *
      * @return Parcours
      */
-    public function setParcours(\MentoratBundle\Entity\Parcours $parcours)
+    public function setParcours(\BackendBundle\Entity\Parcours $parcours)
     {
         $this->parcours = $parcours;
 
@@ -87,7 +87,7 @@ class Projet
     /**
      * Get projet
      *
-     * @return \MentoratBundle\Entity\Parcours
+     * @return \BackendBundle\Entity\Parcours
      */
     public function getParcours()
     {

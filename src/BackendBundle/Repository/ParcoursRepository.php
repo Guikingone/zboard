@@ -1,6 +1,6 @@
 <?php
 
-namespace MentoratBundle\Repository;
+namespace BackendBundle\Repository;
 
 /**
  * ParcoursRepository

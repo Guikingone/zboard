@@ -1,6 +1,6 @@
 <?php
 
-namespace MentoratBundle\Entity;
+namespace BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Parcours
  *
  * @ORM\Table(name="zboard_parcours")
- * @ORM\Entity(repositoryClass="MentoratBundle\Repository\ParcoursRepository")
+ * @ORM\Entity(repositoryClass="BackendBundle\Repository\ParcoursRepository")
  */
 class Parcours
 {
