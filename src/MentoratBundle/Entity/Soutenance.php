@@ -33,7 +33,7 @@ class Soutenance
     private $mentore_id;
 
     /**
-     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Projet")
+     * @ORM\OneToOne(targetEntity="BackendBundle\Entity\Projet")
      * @ORM\JoinColumn(name="projet_id", referencedColumnName="id"))
      */
     private $projet_id;

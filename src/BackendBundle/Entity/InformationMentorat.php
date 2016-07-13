@@ -1,16 +1,16 @@
 <?php
 
-namespace UserBundle\Entity;
+namespace BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Informations
+ * InformationMentorat
  *
- * @ORM\Table(name="informations_mentorat")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\InformationsRepository")
+ * @ORM\Table(name="zboard_information_mentorat")
+ * @ORM\Entity(repositoryClass="BackendBundle\Repository\InformationMentoratRepository")
  */
-class Informations
+class InformationMentorat
 {
     /**
      * @var int
@@ -38,22 +38,16 @@ class Informations
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="d_created", type="datetime")
+     * @ORM\Column(name="dCreated", type="datetime")
      */
     private $dCreated;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="d_updated", type="datetime", nullable=true)
+     * @ORM\Column(name="updated", type="datetime")
      */
-    private $dUpdated;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="id")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
-     */
-    private $author;
+    private $updated;
 
     /**
      * @var bool
@@ -61,6 +55,12 @@ class Informations
      * @ORM\Column(name="enabled", type="boolean")
      */
     private $enabled;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
 
 
     /**
@@ -78,7 +78,7 @@ class Informations
      *
      * @param string $title
      *
-     * @return Informations
+     * @return InformationMentorat
      */
     public function setTitle($title)
     {
@@ -102,7 +102,7 @@ class Informations
      *
      * @param string $body
      *
-     * @return Informations
+     * @return InformationMentorat
      */
     public function setBody($body)
     {
@@ -126,7 +126,7 @@ class Informations
      *
      * @param \DateTime $dCreated
      *
-     * @return Informations
+     * @return InformationMentorat
      */
     public function setDCreated($dCreated)
     {
@@ -146,51 +146,27 @@ class Informations
     }
 
     /**
-     * Set dUpdated
+     * Set updated
      *
-     * @param \DateTime $dUpdated
+     * @param \DateTime $updated
      *
-     * @return Informations
+     * @return InformationMentorat
      */
-    public function setDUpdated($dUpdated)
+    public function setUpdated($updated)
     {
-        $this->dUpdated = $dUpdated;
+        $this->updated = $updated;
 
         return $this;
     }
 
     /**
-     * Get dUpdated
+     * Get updated
      *
      * @return \DateTime
      */
-    public function getDUpdated()
+    public function getUpdated()
     {
-        return $this->dUpdated;
-    }
-
-    /**
-     * Set author
-     *
-     * @param integer $author
-     *
-     * @return Informations
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return int
-     */
-    public function getAuthor()
-    {
-        return $this->author;
+        return $this->updated;
     }
 
     /**
@@ -198,7 +174,7 @@ class Informations
      *
      * @param boolean $enabled
      *
-     * @return Informations
+     * @return InformationMentorat
      */
     public function setEnabled($enabled)
     {
@@ -216,5 +192,28 @@ class Informations
     {
         return $this->enabled;
     }
-}
 
+    /**
+     * Set author
+     *
+     * @param \UserBundle\Entity\User $author
+     *
+     * @return InformationMentorat
+     */
+    public function setAuthor(\UserBundle\Entity\User $author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+}
