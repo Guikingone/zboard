@@ -28,6 +28,12 @@ class Projet
      */
     private $libelleProjet;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Parcours")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $parcours;
+
 
     /**
      * Get id
@@ -61,6 +67,31 @@ class Projet
     public function getLibelleProjet()
     {
         return $this->libelleProjet;
+    }
+
+
+    /**
+     * Set projet
+     *
+     * @param \MentoratBundle\Entity\Parcours $parcours
+     *
+     * @return Parcours
+     */
+    public function setParcours(\MentoratBundle\Entity\Parcours $parcours)
+    {
+        $this->parcours = $parcours;
+
+        return $this;
+    }
+
+    /**
+     * Get projet
+     *
+     * @return \MentoratBundle\Entity\Parcours
+     */
+    public function getParcours()
+    {
+        return $this->parcours;
     }
 }
 
