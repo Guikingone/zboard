@@ -6,3 +6,7 @@ parameters:
 services:
     core.admin:
         class: AdminBundle\Services\Admin
+
+    core.back:
+        class: BackendBundle\Services\Back
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@router", "@session"]
