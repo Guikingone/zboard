@@ -25,18 +25,19 @@ class Soutenance
      * @ORM\OneToOne(targetEntity="UserBundle\Entity\User")
      * @ORM\JoinColumn(name="mentor_id", referencedColumnName="id")
      */
-    private $mentor_id;
+    private $mentor;
 
     /**
+     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Mentore")
      * @ORM\JoinColumn(name="mentore_id", referencedColumnName="id")
      */
-    private $mentore_id;
+    private $mentore;
 
     /**
      * @ORM\OneToOne(targetEntity="BackendBundle\Entity\Projet")
      * @ORM\JoinColumn(name="projet_id", referencedColumnName="id"))
      */
-    private $projet_id;
+    private $projet;
 
     /**
      * @var \DateTime
@@ -79,5 +80,76 @@ class Soutenance
     {
         return $this->passedAt;
     }
-}
 
+    /**
+     * Set mentor
+     *
+     * @param \UserBundle\Entity\User $mentor
+     *
+     * @return Soutenance
+     */
+    public function setMentor(\UserBundle\Entity\User $mentor = null)
+    {
+        $this->mentor = $mentor;
+
+        return $this;
+    }
+
+    /**
+     * Get mentor
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getMentor()
+    {
+        return $this->mentor;
+    }
+
+    /**
+     * Set projet
+     *
+     * @param \BackendBundle\Entity\Projet $projet
+     *
+     * @return Soutenance
+     */
+    public function setProjet(\BackendBundle\Entity\Projet $projet = null)
+    {
+        $this->projet = $projet;
+
+        return $this;
+    }
+
+    /**
+     * Get projet
+     *
+     * @return \BackendBundle\Entity\Projet
+     */
+    public function getProjet()
+    {
+        return $this->projet;
+    }
+
+    /**
+     * Set mentore
+     *
+     * @param \MentoratBundle\Entity\Mentore $mentore
+     *
+     * @return Soutenance
+     */
+    public function setMentore(\MentoratBundle\Entity\Mentore $mentore = null)
+    {
+        $this->mentore = $mentore;
+
+        return $this;
+    }
+
+    /**
+     * Get mentore
+     *
+     * @return \MentoratBundle\Entity\Mentore
+     */
+    public function getMentore()
+    {
+        return $this->mentore;
+    }
+}

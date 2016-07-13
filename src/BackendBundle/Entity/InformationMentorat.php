@@ -38,7 +38,7 @@ class InformationMentorat
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dCreated", type="datetime")
+     * @ORM\Column(name="d_created", type="datetime")
      */
     private $dCreated;
 
