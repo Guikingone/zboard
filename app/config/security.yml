@@ -17,15 +17,21 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
-                # if you are using Symfony < 2.8, use the following config instead:
-                # csrf_provider: form.csrf_provider
-
+            form_login:
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+            logout:
+                path:    fos_user_security_logout
+                target: /
+            remember_me:
+                secret:    %secret%
             logout:       true
             anonymous:    true
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$,     role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register,   role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting,  role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin3744/, role: ROLE_ADMIN }
-        - { path: ^/dashboard, roles: [ROLE_ADMIN, ROLE_SUPERVISEUR_MENTOR, ROLE_MENTOR] }
+        #- { path: ^/backend,    role: [ROLE_ADMIN, ROLE_SUPERVISEUR_MENTOR] }
+        - { path: ^/dashboard,  roles: [ROLE_ADMIN, ROLE_SUPERVISEUR_MENTOR, ROLE_MENTOR] }
