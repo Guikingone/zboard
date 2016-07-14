@@ -84,7 +84,7 @@ class Back {
         if($form->isValid()){
             $this->doctrine->persist($mentore);
             $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', "Mentore enregistré.");
+            $this->session->getFlashBag()->add('success', "Elève enregistré.");
         }
         return $form;
     }
