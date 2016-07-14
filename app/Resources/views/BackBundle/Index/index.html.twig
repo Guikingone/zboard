@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/Boostrap/_datepicker/datepicker3.css') }}">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
 {% endblock %}
 
 
@@ -281,7 +281,7 @@
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer clearfix">
-                                <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Voir tout les mentores</a>
+                                <a href="{{ path('list_mentores_backend') }}" class="btn btn-sm btn-default btn-flat pull-right">Voir tout les mentores</a>
                             </div>
                             <!-- /.box-footer -->
                         </div>
@@ -522,9 +522,9 @@
                         {{ form_widget(nMentore.city, {'attr': {'class': 'form-control'}}) }}
                     </div>
                     <div class="input-group">
-                        {{ form_errors(nMentore.country.libelle) }}
-                        {{ form_label(nMentore.country.libelle, 'Pays')}}
-                        {{ form_widget(nMentore.country.libelle, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(nMentore.country) }}
+                        {{ form_label(nMentore.country, 'Pays')}}
+                        {{ form_widget(nMentore.country, {'attr': {'class': 'form-control'}}) }}
                     </div>
                     <div class="input-group">
                         {{ form_errors(nMentore.email) }}
@@ -596,7 +596,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/boostrap/_datepicker/bootstrap-datepicker.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
     <script>
         $(document).ready(function() {
             $('.datepicker').datepicker({

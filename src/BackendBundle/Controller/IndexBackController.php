@@ -23,7 +23,7 @@ class IndexBackController extends Controller
     }
 
     /**
-     * @Route("/list/mentore", name="list_backend")
+     * @Route("/list/mentore", name="list_mentores_backend")
      * @Template("BackBundle/Action/list.html.twig")
      * @Method("GET")
      */

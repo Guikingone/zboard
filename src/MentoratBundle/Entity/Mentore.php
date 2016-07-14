@@ -93,7 +93,7 @@ class Mentore
     protected $financement;
 
     /**
-     * @ORM\OneToOne(targetEntity="BackendBundle\Entity\Parcours")
+     * @ORM\OneToOne(targetEntity="BackendBundle\Entity\Parcours", cascade={ "persist" })
      * @ORM\JoinColumn(name="parcours_id", referencedColumnName="id")
      */
     private $parcours;

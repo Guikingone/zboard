@@ -22,7 +22,8 @@ class ParcoursType extends AbstractType
             ->add('date_start', DateType::class, array(
                 'widget' => 'single_text',
                 'html5' => false,
-                'attr' => ['class' => 'datepicker'],
+                'format' => 'yyyy-MM-dd',
+                'attr' => ['class' => 'js-datepicker'],
             ))
         ;
     }

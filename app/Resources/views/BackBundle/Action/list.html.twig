@@ -1,5 +1,7 @@
 {% extends 'Layout/admin.html.twig' %}
+
 {% block title %} - Suivi des élèves{% endblock %}
+
 {% block _side_admin %}
     <aside class="main-sidebar">
         <section class="sidebar">
@@ -30,18 +32,6 @@
                         </li>
                     </ul>
                 </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-laptop"></i>
-                        <span>Zboard</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                </span>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ path('home_backend') }}"><i class="fa fa-circle-o"></i>Revenir à l'accueil</a></li>
-                        </ul>
-                    </a>
-                </li>
                 <li class="header">LABELS</li>
                 <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
                 <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>A surveiller</span></a></li>
@@ -69,7 +59,8 @@
                     <table class="table no-margin">
                         <thead>
                         <tr>
-                            <th>Nom Prénom</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
                             <th>Status</th>
                             <th>Durée de financement</th>
                             <th>Parcours suivi</th>
@@ -79,8 +70,10 @@
                             {% for mentores in mentores %}
                                 <tr>
                                     <td>
-                                        {{ mentores.firstname }}
                                         {{ mentores.lastname }}
+                                    </td>
+                                    <td>
+                                        {{ mentores.firstname }}
                                     </td>
                                     <td>
                                         {% if mentores.status == 'En formation' %}
@@ -102,9 +95,6 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="box-footer clearfix">
-                <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Voir tout les mentores</a>
             </div>
         </div>
     </div>

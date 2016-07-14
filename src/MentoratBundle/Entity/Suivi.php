@@ -5,12 +5,12 @@ namespace MentoratBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * MentorMentore
+ * Suivi
  *
- * @ORM\Table(name="zboard_mentor_mentore")
- * @ORM\Entity(repositoryClass="MentoratBundle\Repository\MentorMentoreRepository")
+ * @ORM\Table(name="zboard_suivi")
+ * @ORM\Entity(repositoryClass="MentoratBundle\Repository\SuiviRepository")
  */
-class MentorMentore
+class Suivi
 {
     /**
      * @var int

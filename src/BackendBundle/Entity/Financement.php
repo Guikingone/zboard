@@ -30,14 +30,16 @@ class Financement
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=255, nullable=true)
+     * @ORM\Column(name="libelle", type="string", length=255)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $libelle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="duree", type="string", length=255, nullable=true)
+     * @ORM\Column(name="duree", type="string", length=255)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $duree;
 
