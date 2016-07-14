@@ -252,63 +252,22 @@
                                             <th>Parcours suivi</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                            <td>Call of Duty IV</td>
-                                            <td><span class="label label-success">Shipped</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                            <td>Samsung Smart TV</td>
-                                            <td><span class="label label-warning">Pending</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                            <td>iPhone 6 Plus</td>
-                                            <td><span class="label label-danger">Delivered</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                            <td>Samsung Smart TV</td>
-                                            <td><span class="label label-info">Processing</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                            <td>Samsung Smart TV</td>
-                                            <td><span class="label label-warning">Pending</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                            <td>iPhone 6 Plus</td>
-                                            <td><span class="label label-danger">Delivered</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                            <td>Call of Duty IV</td>
-                                            <td><span class="label label-success">Shipped</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                            </td>
-                                        </tr>
+                                        <tbody>{% for mentores in mentores %}
+                                            <tr>
+                                                <td>
+                                                    {{ mentores.firstname }}
+                                                    {{ mentores.lastname }}
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+
+                                                </td>
+                                                <td>
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -576,15 +535,30 @@
                         {{ form_label(nMentore.resume, 'Bio')}}
                         {{ form_widget(nMentore.resume, {'attr': {'class': 'form-control'}}) }}
                     </div>
+                    <div class="input-group">
+                        {{ form_errors(nMentore.financement.isFinanced) }}
+                        {{ form_label(nMentore.financement.isFinanced, 'Financé')}}
+                        {{ form_widget(nMentore.financement.isFinanced, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="input-group">
+                        {{ form_errors(nMentore.financement.libelle) }}
+                        {{ form_label(nMentore.financement.libelle, 'Nom du financeur')}}
+                        {{ form_widget(nMentore.financement.libelle, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="input-group">
+                        {{ form_errors(nMentore.financement.duree) }}
+                        {{ form_label(nMentore.financement.duree, 'Durée du financement')}}
+                        {{ form_widget(nMentore.financement.duree, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                     <br>
                     <div class="input-group">
-                        {{ form_widget(nMentore.save) }}
+                        {{ form_label(nMentore.save, "Enregistrer") }}
+                        {{ form_widget(nMentore.save, {'attr': {'class': 'btn btn-info'}}) }}
                     </div>
                     {{ form_end(nMentore) }}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>

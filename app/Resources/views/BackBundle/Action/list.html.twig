@@ -23,25 +23,17 @@
                                 <i class="fa fa-circle-o"></i>Trier les élèves (Financement)
                             </a>
                         </li>
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#myModal">
+                                <i class="fa fa-circle-o"></i>Trier les élèves (Status)
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-laptop"></i>
-                        <span>Contenu du Zboard</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i>Liste des tutoriels</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i>Informations mentorat</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-laptop"></i>
-                        <span>Menu</span>
+                        <span>Zboard</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                 </span>
@@ -96,7 +88,7 @@
 
                                     </td>
                                     <td>
-
+                                        {{ mentores.parcours }}
                                     </td>
                                 </tr>
                             {% endfor %}

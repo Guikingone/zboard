@@ -2,9 +2,11 @@
 
 namespace MentoratBundle\Form;
 
+use BackendBundle\Form\FinancementType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,7 +28,8 @@ class MentoreType extends AbstractType
             ->add('country')
             ->add('email', EmailType::class)
             ->add('phone')
-            ->add('resume', TextType::class)
+            ->add('resume', TextareaType::class)
+            ->add('financement', FinancementType::class)
             ->add('save', SubmitType::class)
         ;
     }
