@@ -67,7 +67,10 @@ class Back {
         return $this->doctrine->getRepository('UserBundle:User')->findAll();
     }
 
-    public function addMentor(){}
+    public function addMentor()
+    {
+
+    }
 
     /**
      * Allow to create a new instance of Mentore.

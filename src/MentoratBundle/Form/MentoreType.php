@@ -2,8 +2,11 @@
 
 namespace MentoratBundle\Form;
 
+use BackendBundle\Form\CountryType;
 use BackendBundle\Form\FinancementType;
+use BackendBundle\Form\ParcoursType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -22,14 +25,24 @@ class MentoreType extends AbstractType
         $builder
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
-            ->add('address')
-            ->add('zipcode')
-            ->add('city')
-            ->add('country')
+            ->add('address', TextType::class)
+            ->add('zipcode', TextType::class)
+            ->add('city', TextType::class)
+            ->add('country', CountryType::class)
             ->add('email', EmailType::class)
-            ->add('phone')
+            ->add('phone', TextType::class)
             ->add('resume', TextareaType::class)
+            ->add('parcours', ParcoursType::class)
             ->add('financement', FinancementType::class)
+            ->add('status', ChoiceType::class, array(
+                'choices' => [
+                    'En attente de prise de contact' => 'En attente',
+                    'Contacté'                       => 'Contacté',
+                    'En formation'                   => 'En formation',
+                    'En pause'                       => 'En pause',
+                    'Formation terminée'             => 'Formation terminé',
+                ],
+            ))
             ->add('save', SubmitType::class)
         ;
     }

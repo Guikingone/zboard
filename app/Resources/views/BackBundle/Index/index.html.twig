@@ -1,5 +1,11 @@
 {% extends 'Layout/admin.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/Boostrap/_datepicker/datepicker3.css') }}">
+{% endblock %}
+
+
 {% block admin_body %}
     <div class="row">
         <div class="col-xs-12">
@@ -76,7 +82,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Nom Prénom</th>
-                                            <th>Status</th>
+                                            <th>Statuts</th>
                                             <th>Nombre d'élèves</th>
                                             <th>Compétences</th>
                                         </tr>
@@ -516,9 +522,9 @@
                         {{ form_widget(nMentore.city, {'attr': {'class': 'form-control'}}) }}
                     </div>
                     <div class="input-group">
-                        {{ form_errors(nMentore.country) }}
-                        {{ form_label(nMentore.country, 'Pays')}}
-                        {{ form_widget(nMentore.country, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(nMentore.country.libelle) }}
+                        {{ form_label(nMentore.country.libelle, 'Pays')}}
+                        {{ form_widget(nMentore.country.libelle, {'attr': {'class': 'form-control'}}) }}
                     </div>
                     <div class="input-group">
                         {{ form_errors(nMentore.email) }}
@@ -535,6 +541,23 @@
                         {{ form_label(nMentore.resume, 'Bio')}}
                         {{ form_widget(nMentore.resume, {'attr': {'class': 'form-control'}}) }}
                     </div>
+                    <hr>
+                    <div class="input-group">
+                        {{ form_errors(nMentore.parcours.codeParcours) }}
+                        {{ form_label(nMentore.parcours.codeParcours, 'Code du parcours')}}
+                        {{ form_widget(nMentore.parcours.codeParcours, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="input-group">
+                        {{ form_errors(nMentore.parcours.libelle) }}
+                        {{ form_label(nMentore.parcours.libelle, 'Nom du parcours')}}
+                        {{ form_widget(nMentore.parcours.libelle, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="input-group date" data-provide="datepicker">
+                        {{ form_errors(nMentore.parcours.date_start) }}
+                        {{ form_label(nMentore.parcours.date_start, 'Date de début')}}
+                        {{ form_widget(nMentore.parcours.date_start, {'attr': {'class': 'form-control pull-right'}}) }}
+                    </div>
+                    <hr>
                     <div class="input-group">
                         {{ form_errors(nMentore.financement.isFinanced) }}
                         {{ form_label(nMentore.financement.isFinanced, 'Financé')}}
@@ -550,6 +573,12 @@
                         {{ form_label(nMentore.financement.duree, 'Durée du financement')}}
                         {{ form_widget(nMentore.financement.duree, {'attr': {'class': 'form-control'}}) }}
                     </div>
+                    <hr>
+                    <div class="input-group">
+                        {{ form_errors(nMentore.status) }}
+                        {{ form_label(nMentore.status, 'Statut')}}
+                        {{ form_widget(nMentore.status, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                     <br>
                     <div class="input-group">
                         {{ form_label(nMentore.save, "Enregistrer") }}
@@ -563,4 +592,16 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/boostrap/_datepicker/bootstrap-datepicker.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+    </script>
 {% endblock %}

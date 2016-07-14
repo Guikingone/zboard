@@ -83,9 +83,16 @@
                                         {{ mentores.lastname }}
                                     </td>
                                     <td>
+                                        {% if mentores.status == 'En formation' %}
+                                                <span class="label label-success">{{ mentores.status }}</span>
+                                            {% elseif mentores.status == 'Contacté' %}
+                                                <span class="label label-warning">{{ mentores.status }}</span>
+                                            {% elseif mentores.status == 'En pause' %}
+                                                <span class="label label-danger">{{ mentores.status }}</span>
+                                        {% endif %}
                                     </td>
                                     <td>
-
+                                        {{ mentores.financement }}
                                     </td>
                                     <td>
                                         {{ mentores.parcours }}
@@ -95,13 +102,10 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- /.table-responsive -->
             </div>
-            <!-- /.box-body -->
             <div class="box-footer clearfix">
                 <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Voir tout les mentores</a>
             </div>
-            <!-- /.box-footer -->
         </div>
     </div>
 </div>

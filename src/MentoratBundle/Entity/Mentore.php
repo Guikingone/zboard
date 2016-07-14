@@ -61,6 +61,7 @@ class Mentore
      * @var int
      *
      * @ORM\Column(name="country", type="integer")
+     * @Assert\Type(type="BackendBundle\Entity\Country")
      */
     private $country;
 
@@ -96,6 +97,12 @@ class Mentore
      * @ORM\JoinColumn(name="parcours_id", referencedColumnName="id")
      */
     private $parcours;
+
+    /**
+     * @var string
+     * @ORM\Column(name="status", type="string", length=100)
+     */
+    private $status;
 
 
     /**
@@ -370,5 +377,29 @@ class Mentore
     public function getFinancement()
     {
         return $this->financement;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     *
+     * @return Mentore
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

@@ -97,6 +97,12 @@ class Mentore
      */
     private $parcours;
 
+    /**
+     * @var string
+     * @ORM\Column(name="status", type="string", length=100)
+     */
+    private $status;
+
 
     /**
      * Get id

@@ -100,28 +100,4 @@ class Parcours
     {
         return $this->codeParcours;
     }
-
-    /**
-     * Set dateStart
-     *
-     * @param \DateTime $dateStart
-     *
-     * @return Parcours
-     */
-    public function setDateStart($dateStart)
-    {
-        $this->date_start = $dateStart;
-
-        return $this;
-    }
-
-    /**
-     * Get dateStart
-     *
-     * @return \DateTime
-     */
-    public function getDateStart()
-    {
-        return $this->date_start;
-    }
 }
