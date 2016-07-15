@@ -59,6 +59,17 @@ class Back {
         $this->session = $session;
     }
 
+
+    /**
+     * Allow the back to get all the mentors.
+     *
+     * @return array|\UserBundle\Entity\User[]
+     */
+    public function getMentors()
+    {
+        return $this->doctrine->getRepository('UserBundle:User')->findAll();
+    }
+
     /**
      * Allow the back to get all the mentores.
      *
@@ -88,16 +99,6 @@ class Back {
     public function viewMentore($id)
     {
         return $this->doctrine->getRepository('MentoratBundle:Mentore')->find($id);
-    }
-
-    /**
-     * Allow the back to get all the mentors.
-     *
-     * @return array|\UserBundle\Entity\User[]
-     */
-    public function getMentors()
-    {
-        return $this->doctrine->getRepository('UserBundle:User')->findAll();
     }
 
     /**
