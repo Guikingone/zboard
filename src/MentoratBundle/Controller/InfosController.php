@@ -14,8 +14,11 @@ class InfosController extends Controller
    */
   public function indexAction()
   {
+     $informations    = $this->get('core.back')->getMentoratInformations();
+
       return array(
-          "controller" => "infos"
+          "controller" => "infos",
+          "informations"=>$informations
       );
   }
 }

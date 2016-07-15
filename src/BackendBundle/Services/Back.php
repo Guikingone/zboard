@@ -83,6 +83,16 @@ class Back {
     }
 
     /**
+     * Allow the back to get all the mentorat informations.
+     *
+     * @return array|\BackBundle\Entity\InformationMentorat[]
+     */
+    public function getMentoratInformations()
+    {
+        return $this->doctrine->getRepository('BackendBundle:InformationMentorat')->findAll();
+    }
+
+    /**
      * Allow to find a student by is name in order to show details.
      *
      * @param $id
