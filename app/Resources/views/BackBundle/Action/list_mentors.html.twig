@@ -17,17 +17,17 @@
                     <ul class="treeview-menu">
                         <li>
                             <a href="#" data-toggle="modal" data-target="#myModal">
-                                <i class="fa fa-circle-o"></i>Trier les élèves (Parcours)
+                                <i class="fa fa-circle-o"></i>Trier les mentors (Compétences)
                             </a>
                         </li>
                         <li>
                             <a href="#" data-toggle="modal" data-target="#myModal">
-                                <i class="fa fa-circle-o"></i>Trier les élèves (Financement)
+                                <i class="fa fa-circle-o"></i>Trier les Mentors (Nbr d'élèves)
                             </a>
                         </li>
                         <li>
                             <a href="#" data-toggle="modal" data-target="#myModal">
-                                <i class="fa fa-circle-o"></i>Trier les élèves (Status)
+                                <i class="fa fa-circle-o"></i>Trier les mentors (Statut)
                             </a>
                         </li>
                     </ul>
@@ -42,20 +42,20 @@
 {% endblock %}
 
 {% block admin_body %}
-<div class="row">
-    <div class="col-xs-12">
-        <div class="box box-info">
-            <div class="box-header with-border">
-                <h3 class="box-title">Liste des mentores</h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Liste des mentors</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
                 </div>
+
+                {% include 'BackBundle/Elements/box_mentors.html.twig' %}
+
             </div>
-
-            {% include ':BackBundle/Elements:box_mentores.html.twig' %}
-
         </div>
     </div>
-</div>
 {% endblock %}

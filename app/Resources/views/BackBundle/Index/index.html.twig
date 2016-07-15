@@ -64,79 +64,9 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="box-body">
-                                <div class="table-responsive">
-                                    <table class="table no-margin">
-                                        <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Nom Prénom</th>
-                                            <th>Statuts</th>
-                                            <th>Nombre d'élèves</th>
-                                            <th>Compétences</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                            <td>Call of Duty IV</td>
-                                            <td><span class="label label-success">Shipped</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                            <td>Samsung Smart TV</td>
-                                            <td><span class="label label-warning">Pending</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                            <td>iPhone 6 Plus</td>
-                                            <td><span class="label label-danger">Delivered</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                            <td>Samsung Smart TV</td>
-                                            <td><span class="label label-info">Processing</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                            <td>Samsung Smart TV</td>
-                                            <td><span class="label label-warning">Pending</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                            <td>iPhone 6 Plus</td>
-                                            <td><span class="label label-danger">Delivered</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                            <td>Call of Duty IV</td>
-                                            <td><span class="label label-success">Shipped</span></td>
-                                            <td>
-                                                <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+
+                            {% include 'BackBundle/Elements/box_mentors.html.twig' %}
+
                             <div class="box-footer clearfix">
                                 <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Voir tout les mentors</a>
                             </div>
@@ -199,7 +129,6 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <!-- TABLE: LATEST ORDERS -->
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Liste des mentores</h3>
@@ -209,63 +138,21 @@
                                     </button>
                                 </div>
                             </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <div class="table-responsive">
-                                    <table class="table no-margin">
-                                        <thead>
-                                        <tr>
-                                            <th>Nom</th>
-                                            <th>Prénom</th>
-                                            <th>Status</th>
-                                            <th>Durée de financement</th>
-                                            <th>Parcours suivi</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>{% for mentores in mentores %}
-                                            <tr>
-                                                <td>
-                                                    <a href="{{ path('show_details_mentore', {'id': mentores.id}) }}">{{ mentores.lastname }}</a>
-                                                </td>
-                                                <td>
-                                                    {{ mentores.firstname }}
-                                                </td>
-                                                <td>
 
-                                                </td>
-                                                <td>
+                            {% include ':BackBundle/Elements:box_mentores.html.twig' %}
 
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.table-responsive -->
-                            </div>
-                            <!-- /.box-body -->
                             <div class="box-footer clearfix">
                                 <a href="{{ path('list_mentores_backend') }}" class="btn btn-sm btn-default btn-flat pull-right">Voir tout les mentores</a>
                             </div>
-                            <!-- /.box-footer -->
                         </div>
-                        <!-- /.box -->
                     </div>
                 </div>
-            </section>
-            <!-- /.content -->
-        </div>
-
-        <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
-            <!-- Create the tabs -->
             <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
                 <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
                 <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
             </ul>
-            <!-- Tab panes -->
             <div class="tab-content">
-                <!-- Home tab content -->
                 <div class="tab-pane" id="control-sidebar-home-tab">
                     <h3 class="control-sidebar-heading">Recent Activity</h3>
                     <ul class="control-sidebar-menu">
@@ -283,10 +170,8 @@
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="menu-icon fa fa-user bg-yellow"></i>
-
                                 <div class="menu-info">
                                     <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
                                     <p>New phone +1(800)555-1234</p>
                                 </div>
                             </a>
@@ -294,10 +179,8 @@
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
                                 <div class="menu-info">
                                     <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
                                     <p>nora@example.com</p>
                                 </div>
                             </a>
@@ -305,10 +188,8 @@
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
                                 <div class="menu-info">
                                     <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
                                     <p>Execution time 5 seconds</p>
                                 </div>
                             </a>
@@ -322,7 +203,6 @@
                                     Custom Template Design
                                     <span class="label label-danger pull-right">70%</span>
                                 </h4>
-
                                 <div class="progress progress-xxs">
                                     <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
                                 </div>

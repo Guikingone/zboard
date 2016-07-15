@@ -3,7 +3,6 @@
 namespace BackendBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,24 +45,18 @@ class Back {
     protected $session;
 
     /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
      * Back constructor.
      * @param EntityManager $doctrine
      * @param FormFactory $formFactory
      * @param Router $router
      * @param Session $session
      */
-    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Router $router, Session $session, ContainerInterface $container)
+    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Router $router, Session $session)
     {
         $this->doctrine = $doctrine;
         $this->formFactory = $formFactory;
         $this->router = $router;
         $this->session = $session;
-        $this->container = $container;
     }
 
     /**

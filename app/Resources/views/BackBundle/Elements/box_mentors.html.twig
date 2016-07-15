@@ -1,0 +1,40 @@
+<div class="box-body">
+    <div class="table-responsive">
+        <table class="table no-margin">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Statut</th>
+                <th>Nombre d'élèves</th>
+                <th>Compétences</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for mentors in mentors %}
+            <tr>
+                <td>
+                    {{ mentors.lastname }}
+                </td>
+                <td>
+                    {{ mentors.firstname }}
+                </td>
+                <td>
+                    {% if mentors.available == true %}
+                        <span class="label label-success">Disponible</span>
+                        {% else %}
+                        <span class="label label-danger">Indisponible</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <p>A définir</p>
+                </td>
+                <td>
+                    <p>A définir</p>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

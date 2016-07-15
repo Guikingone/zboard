@@ -42,6 +42,17 @@ class IndexBackController extends Controller
     }
 
     /**
+     * @Route("/list/mentors", name="list_mentors_backend")
+     * @Template("BackBundle/Action/list_mentors.html.twig")
+     * @Method("GET")
+     */
+    public function showMentorsAction()
+    {
+        $mentors = $this->get('core.back')->getMentors();
+        return array( 'mentors' => $mentors );
+    }
+
+    /**
      * @Route("/show/{id}/details", name="show_details_mentore")
      * @Template("BackBundle/Action/details.html.twig")
      * @Method("GET")

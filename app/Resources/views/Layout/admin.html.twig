@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="hold-transition skin-blue sidebar-mini">
+<div class="hold-transition skin-yellow sidebar-mini">
     <div class="wrapper">
         <header class="main-header">
             <a href="{{ path('home_backend') }}" class="logo">
@@ -34,7 +34,6 @@
                                             <p>Why not buy a new awesome theme?</p>
                                         </a>
                                         </li>
-                                        <!-- end message -->
                                         <li>
                                             <a href="#">
                                                 <div class="pull-left">
@@ -177,8 +176,7 @@
                                                 </div>
                                             </a>
                                         </li>
-                                        <!-- end task item -->
-                                        <li><!-- Task item -->
+                                        <li>
                                             <a href="#">
                                                 <h3>
                                                     Make beautiful transitions
@@ -191,7 +189,6 @@
                                                 </div>
                                             </a>
                                         </li>
-                                        <!-- end task item -->
                                     </ul>
                                 </li>
                                 <li class="footer">
@@ -212,7 +209,6 @@
                                         <small>Member since Nov. 2012</small>
                                     </p>
                                 </li>
-                                <!-- Menu Body -->
                                 <li class="user-body">
                                     <div class="row">
                                         <div class="col-xs-4 text-center">
@@ -225,9 +221,7 @@
                                             <a href="{{ path('fos_user_profile_show') }}">Profil</a>
                                         </div>
                                     </div>
-                                    <!-- /.row -->
                                 </li>
-                                <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-right">
                                         <a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-flat">Se déconnecter</a>
@@ -235,7 +229,6 @@
                                 </li>
                             </ul>
                         </li>
-                        <!-- Control Sidebar Toggle Button -->
                         <li>
                             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                         </li>
@@ -258,7 +251,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="#"data-toggle="modal" data-target="#myModalM"><i class="fa fa-circle-o"></i>Ajouter un mentor</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o"></i>Liste des mentors</a></li>
+                                <li><a href="{{ path('list_mentors_backend') }}"><i class="fa fa-circle-o"></i>Liste des mentors</a></li>
                                 <li><a href="#"><i class="fa fa-circle-o"></i>Mentors disponibles</a></li>
                                 <li><a href="#"><i class="fa fa-circle-o"></i>Soutenance des mentors</a></li>
                                 <li><a href="#"><i class="fa fa-circle-o"></i>Gestion des compétences</a></li>
@@ -366,10 +359,7 @@
                 {% block admin_body %}
                 {% endblock %}
             </section>
-            <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
                 <b>Version</b> 2.3.5
@@ -377,27 +367,20 @@
             <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
             reserved.
         </footer>
-
-        <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
-            <!-- Create the tabs -->
             <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
                 <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
                 <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
             </ul>
-            <!-- Tab panes -->
             <div class="tab-content">
-                <!-- Home tab content -->
                 <div class="tab-pane" id="control-sidebar-home-tab">
                     <h3 class="control-sidebar-heading">Recent Activity</h3>
                     <ul class="control-sidebar-menu">
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
                                 <div class="menu-info">
                                     <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
                                     <p>Will be 23 on April 24th</p>
                                 </div>
                             </a>
@@ -405,10 +388,8 @@
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="menu-icon fa fa-user bg-yellow"></i>
-
                                 <div class="menu-info">
                                     <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
                                     <p>New phone +1(800)555-1234</p>
                                 </div>
                             </a>
@@ -416,10 +397,8 @@
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
                                 <div class="menu-info">
                                     <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
                                     <p>nora@example.com</p>
                                 </div>
                             </a>
@@ -427,10 +406,8 @@
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
                                 <div class="menu-info">
                                     <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
                                     <p>Execution time 5 seconds</p>
                                 </div>
                             </a>
@@ -444,7 +421,6 @@
                                     Custom Template Design
                                     <span class="label label-danger pull-right">70%</span>
                                 </h4>
-
                                 <div class="progress progress-xxs">
                                     <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
                                 </div>
@@ -456,7 +432,6 @@
                                     Update Resume
                                     <span class="label label-success pull-right">95%</span>
                                 </h4>
-
                                 <div class="progress progress-xxs">
                                     <div class="progress-bar progress-bar-success" style="width: 95%"></div>
                                 </div>
@@ -468,7 +443,6 @@
                                     Laravel Integration
                                     <span class="label label-warning pull-right">50%</span>
                                 </h4>
-
                                 <div class="progress progress-xxs">
                                     <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
                                 </div>
@@ -480,7 +454,6 @@
                                     Back End Framework
                                     <span class="label label-primary pull-right">68%</span>
                                 </h4>
-
                                 <div class="progress progress-xxs">
                                     <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
                                 </div>
