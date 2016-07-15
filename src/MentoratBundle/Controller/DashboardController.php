@@ -4,14 +4,16 @@ namespace MentoratBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class DefaultController extends Controller
+class DashboardController extends Controller
 {
     /**
      * @Route("/")
+     * @Template("MentoratBundle/Dashboard/index.html.twig")
      */
     public function indexAction()
     {
-        return $this->render('MentorBundle:Index:index.html.twig');
+        return array();
     }
 }
