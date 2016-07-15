@@ -4,6 +4,8 @@
 Infos mentorat
 
 
-
+{% for info in informations %}
+  {{ info.body|e }}
+{% endfor %}
 
 {% endblock %}
