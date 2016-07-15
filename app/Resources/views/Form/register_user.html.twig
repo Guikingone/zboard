@@ -1,0 +1,82 @@
+<!-- Modal used in order to add a new teacher -->
+<div class="modal fade" id="myModalM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ajouter un mentor</h4>
+            </div>
+            <div class="modal-body">
+                {{ form_start(mentor) }}
+                <div class="input-group">
+                    {{ form_errors(mentor.firstname) }}
+                    {{ form_label(mentor.firstname, 'Prénom')}}
+                    {{ form_widget(mentor.firstname, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(mentor.lastname) }}
+                    {{ form_label(mentor.lastname, 'Nom')}}
+                    {{ form_widget(mentor.lastname, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(mentor.email) }}
+                    {{ form_label(mentor.email, 'Adresse email')}}
+                    {{ form_widget(mentor.email, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(mentor.username) }}
+                    {{ form_label(mentor.username, 'Pseudo (Obligatoire !)')}}
+                    {{ form_widget(mentor.username, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(mentor.address) }}
+                    {{ form_label(mentor.address, 'Address')}}
+                    {{ form_widget(mentor.address, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(mentor.zipcode) }}
+                    {{ form_label(mentor.zipcode, 'Code postal')}}
+                    {{ form_widget(mentor.zipcode, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(mentor.city) }}
+                    {{ form_label(mentor.city, 'Ville')}}
+                    {{ form_widget(mentor.city, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(mentor.phone) }}
+                    {{ form_label(mentor.phone, 'Téléphone')}}
+                    {{ form_widget(mentor.phone, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(mentor.available) }}
+                    {{ form_label(mentor.available, 'Disponible :')}}
+                    {{ form_widget(mentor.available, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(mentor.country) }}
+                    {{ form_label(mentor.country, 'Pays')}}
+                    {{ form_widget(mentor.country, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(mentor.plainPassword.first) }}
+                    {{ form_label(mentor.plainPassword.first, 'Mot de passe')}}
+                    {{ form_widget(mentor.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(mentor.plainPassword.second) }}
+                    {{ form_label(mentor.plainPassword.second, 'Valider le mot de passe')}}
+                    {{ form_widget(mentor.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <br>
+                <div class="text-center">
+                    <input class="btn btn-warning" type="submit" value="Enregistrer le mentor" />
+                </div>
+                {{ form_end(mentor) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,4 +9,10 @@ services:
 
     core.back:
         class: BackendBundle\Services\Back
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@router", "@session"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@router", "@session", "@service_container"]
+
+    # Used to registrer the users with FOS !
+    core.user_register:
+        class: UserBundle\Form\RegistrationType
+        tags:
+        - { name: form.type, alias: app_user_registration }

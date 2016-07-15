@@ -3,8 +3,15 @@
 namespace BackendBundle\Services;
 
 use Doctrine\ORM\EntityManager;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\Form\Type\RegistrationFormType;
+use FOS\UserBundle\FOSUserEvents;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -19,6 +26,8 @@ use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
 use BackendBundle\Form\TypeAdd\CountryTypeAdd;
 
 use MentoratBundle\Form\MentoreType;
+use UserBundle\Entity\User;
+use UserBundle\Form\RegistrationType;
 
 class Back {
 
@@ -43,18 +52,24 @@ class Back {
     protected $session;
 
     /**
+     * @var ContainerInterface
+     */
+    protected $container;
+
+    /**
      * Back constructor.
      * @param EntityManager $doctrine
      * @param FormFactory $formFactory
      * @param Router $router
      * @param Session $session
      */
-    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Router $router, Session $session)
+    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Router $router, Session $session, ContainerInterface $container)
     {
         $this->doctrine = $doctrine;
         $this->formFactory = $formFactory;
         $this->router = $router;
         $this->session = $session;
+        $this->container = $container;
     }
 
     /**
@@ -88,11 +103,6 @@ class Back {
         return $this->doctrine->getRepository('UserBundle:User')->findAll();
     }
 
-    public function addMentor()
-    {
-
-    }
-
     /**
      * Allow to create a new instance of Mentore.
      *
@@ -109,6 +119,27 @@ class Back {
             $this->doctrine->persist($mentore);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', "Elève enregistré.");
+        }
+        return $form;
+    }
+
+    /**
+     * Allow to create a new instance of Mentor.
+     *
+     * @param Request $request
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addMentor(Request $request)
+    {
+        $mentor = new User();
+        $form = $this->formFactory->create(RegistrationType::class, $mentor);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $mentor->setUsername($mentor->getFirstName() . '_' . $mentor->getLastName());
+            $this->doctrine->persist($mentor);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', "Mentor enregistré.");
         }
         return $form;
     }

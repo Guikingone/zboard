@@ -1,0 +1,101 @@
+<!-- Modal used in order to add a new student -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ajouter un élève</h4>
+            </div>
+            <div class="modal-body">
+                {{ form_start(nMentore) }}
+                <div class="input-group">
+                    {{ form_errors(nMentore.firstname) }}
+                    {{ form_label(nMentore.firstname, 'Prenom')}}
+                    {{ form_widget(nMentore.firstname, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(nMentore.lastname) }}
+                    {{ form_label(nMentore.lastname, 'Nom')}}
+                    {{ form_widget(nMentore.lastname, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(nMentore.address) }}
+                    {{ form_label(nMentore.address, 'Adresse')}}
+                    {{ form_widget(nMentore.address, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(nMentore.zipcode) }}
+                    {{ form_label(nMentore.zipcode, 'Code postal')}}
+                    {{ form_widget(nMentore.zipcode, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(nMentore.city) }}
+                    {{ form_label(nMentore.city, 'Ville')}}
+                    {{ form_widget(nMentore.city, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(nMentore.country.libelle) }}
+                    {{ form_label(nMentore.country.libelle, 'Pays')}}
+                    {{ form_widget(nMentore.country.libelle, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(nMentore.email) }}
+                    {{ form_label(nMentore.email, 'Adresse email')}}
+                    {{ form_widget(nMentore.email, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(nMentore.phone) }}
+                    {{ form_label(nMentore.phone, 'Téléphone')}}
+                    {{ form_widget(nMentore.phone, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(nMentore.resume) }}
+                    {{ form_label(nMentore.resume, 'Bio')}}
+                    {{ form_widget(nMentore.resume, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <hr>
+                <div class="input-group">
+                    {{ form_errors(nMentore.parcours.libelle) }}
+                    {{ form_label(nMentore.parcours.libelle, 'Nom du parcours')}}
+                    {{ form_widget(nMentore.parcours.libelle, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group date" data-provide="datepicker">
+                    {{ form_errors(nMentore.parcours.date_start) }}
+                    {{ form_label(nMentore.parcours.date_start, 'Date de début')}}
+                    {{ form_widget(nMentore.parcours.date_start, {'attr': {'class': 'form-control pull-right'}}) }}
+                </div>
+                <hr>
+                <div class="input-group">
+                    {{ form_errors(nMentore.financement.isFinanced) }}
+                    {{ form_label(nMentore.financement.isFinanced, 'Financé')}}
+                    {{ form_widget(nMentore.financement.isFinanced, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(nMentore.financement.libelle) }}
+                    {{ form_label(nMentore.financement.libelle, 'Nom du financeur')}}
+                    {{ form_widget(nMentore.financement.libelle, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(nMentore.financement.duree) }}
+                    {{ form_label(nMentore.financement.duree, 'Durée du financement')}}
+                    {{ form_widget(nMentore.financement.duree, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <hr>
+                <div class="input-group">
+                    {{ form_errors(nMentore.status) }}
+                    {{ form_label(nMentore.status, 'Statut')}}
+                    {{ form_widget(nMentore.status, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <br>
+                <div class="input-group">
+                    {{ form_label(nMentore.save, "Enregistrer") }}
+                    {{ form_widget(nMentore.save, {'attr': {'class': 'btn btn-info'}}) }}
+                </div>
+                {{ form_end(nMentore) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>

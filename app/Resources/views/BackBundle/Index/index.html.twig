@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
 {% endblock %}
 
-
 {% block admin_body %}
     <div class="row">
         <div class="col-xs-12">
@@ -45,36 +44,26 @@
                 </div>
             </div>
         </div>
-                    <!-- /.col -->
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="info-box">
                             <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-
                             <div class="info-box-content">
                                 <span class="info-box-text">NOUVEAUX MEMBRES (depuis le mois dernier)</span>
                                 <span class="info-box-number">2,000</span>
                             </div>
-                            <!-- /.info-box-content -->
                         </div>
-                        <!-- /.info-box -->
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- Main row -->
                 <div class="row">
-                    <!-- Left col -->
                     <div class="col-md-8">
-                        <!-- TABLE: LATEST ORDERS -->
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Liste des mentors</h3>
-
                                 <div class="box-tools pull-right">
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                     </button>
                                 </div>
                             </div>
-                            <!-- /.box-header -->
                             <div class="box-body">
                                 <div class="table-responsive">
                                     <table class="table no-margin">
@@ -147,27 +136,18 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- /.table-responsive -->
                             </div>
-                            <!-- /.box-body -->
                             <div class="box-footer clearfix">
                                 <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Voir tout les mentors</a>
                             </div>
-                            <!-- /.box-footer -->
                         </div>
-                        <!-- /.box -->
                     </div>
-                    <!-- /.col -->
-
                     <div class="col-md-4">
-                        <!-- Info Boxes Style 2 -->
                         <div class="info-box bg-yellow">
                             <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
-
                             <div class="info-box-content">
                                 <span class="info-box-text">Elèves en attente</span>
                                 <span class="info-box-number">5,200</span>
-
                                 <div class="progress">
                                     <div class="progress-bar" style="width: 50%"></div>
                                 </div>
@@ -175,16 +155,12 @@
                     50% Increase in 30 Days
                   </span>
                             </div>
-                            <!-- /.info-box-content -->
                         </div>
-                        <!-- /.info-box -->
                         <div class="info-box bg-green">
                             <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
-
                             <div class="info-box-content">
                                 <span class="info-box-text">Mentions</span>
                                 <span class="info-box-number">92,050</span>
-
                                 <div class="progress">
                                     <div class="progress-bar" style="width: 20%"></div>
                                 </div>
@@ -192,16 +168,12 @@
                     20% Increase in 30 Days
                   </span>
                             </div>
-                            <!-- /.info-box-content -->
                         </div>
-                        <!-- /.info-box -->
                         <div class="info-box bg-red">
                             <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
-
                             <div class="info-box-content">
                                 <span class="info-box-text">Downloads</span>
                                 <span class="info-box-number">114,381</span>
-
                                 <div class="progress">
                                     <div class="progress-bar" style="width: 70%"></div>
                                 </div>
@@ -209,16 +181,12 @@
                     70% Increase in 30 Days
                   </span>
                             </div>
-                            <!-- /.info-box-content -->
                         </div>
-                        <!-- /.info-box -->
                         <div class="info-box bg-aqua">
                             <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
-
                             <div class="info-box-content">
                                 <span class="info-box-text">Direct Messages</span>
                                 <span class="info-box-number">163,921</span>
-
                                 <div class="progress">
                                     <div class="progress-bar" style="width: 40%"></div>
                                 </div>
@@ -226,13 +194,9 @@
                     40% Increase in 30 Days
                   </span>
                             </div>
-                            <!-- /.info-box-content -->
                         </div>
-                        <!-- /.info-box -->
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
                 <div class="row">
                     <div class="col-md-12">
                         <!-- TABLE: LATEST ORDERS -->
@@ -457,127 +421,11 @@
         </aside>
         <div class="control-sidebar-bg"></div>
 
+    {% include 'Form/register_user.html.twig' %}
 
-    <!-- Modal used in order to add a new teacher -->
-    <div class="modal fade" id="myModalM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Ajouter un mentor</h4>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'Form/register_student.html.twig' %}
 
-    <!-- Modal used in order to add a new student -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Ajouter un élève</h4>
-                </div>
-                <div class="modal-body">
-                    {{ form_start(nMentore) }}
-                    <div class="input-group">
-                        {{ form_errors(nMentore.firstname) }}
-                        {{ form_label(nMentore.firstname, 'Prenom')}}
-                        {{ form_widget(nMentore.firstname, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(nMentore.lastname) }}
-                        {{ form_label(nMentore.lastname, 'Nom')}}
-                        {{ form_widget(nMentore.lastname, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(nMentore.address) }}
-                        {{ form_label(nMentore.address, 'Adresse')}}
-                        {{ form_widget(nMentore.address, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(nMentore.zipcode) }}
-                        {{ form_label(nMentore.zipcode, 'Code postal')}}
-                        {{ form_widget(nMentore.zipcode, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(nMentore.city) }}
-                        {{ form_label(nMentore.city, 'Ville')}}
-                        {{ form_widget(nMentore.city, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(nMentore.country.libelle) }}
-                        {{ form_label(nMentore.country.libelle, 'Pays')}}
-                        {{ form_widget(nMentore.country.libelle, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(nMentore.email) }}
-                        {{ form_label(nMentore.email, 'Adresse email')}}
-                        {{ form_widget(nMentore.email, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(nMentore.phone) }}
-                        {{ form_label(nMentore.phone, 'Téléphone')}}
-                        {{ form_widget(nMentore.phone, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(nMentore.resume) }}
-                        {{ form_label(nMentore.resume, 'Bio')}}
-                        {{ form_widget(nMentore.resume, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <hr>
-                    <div class="input-group">
-                        {{ form_errors(nMentore.parcours.libelle) }}
-                        {{ form_label(nMentore.parcours.libelle, 'Nom du parcours')}}
-                        {{ form_widget(nMentore.parcours.libelle, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group date" data-provide="datepicker">
-                        {{ form_errors(nMentore.parcours.date_start) }}
-                        {{ form_label(nMentore.parcours.date_start, 'Date de début')}}
-                        {{ form_widget(nMentore.parcours.date_start, {'attr': {'class': 'form-control pull-right'}}) }}
-                    </div>
-                    <hr>
-                    <div class="input-group">
-                        {{ form_errors(nMentore.financement.isFinanced) }}
-                        {{ form_label(nMentore.financement.isFinanced, 'Financé')}}
-                        {{ form_widget(nMentore.financement.isFinanced, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(nMentore.financement.libelle) }}
-                        {{ form_label(nMentore.financement.libelle, 'Nom du financeur')}}
-                        {{ form_widget(nMentore.financement.libelle, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(nMentore.financement.duree) }}
-                        {{ form_label(nMentore.financement.duree, 'Durée du financement')}}
-                        {{ form_widget(nMentore.financement.duree, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <hr>
-                    <div class="input-group">
-                        {{ form_errors(nMentore.status) }}
-                        {{ form_label(nMentore.status, 'Statut')}}
-                        {{ form_widget(nMentore.status, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        {{ form_label(nMentore.save, "Enregistrer") }}
-                        {{ form_widget(nMentore.save, {'attr': {'class': 'btn btn-info'}}) }}
-                    </div>
-                    {{ form_end(nMentore) }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'Form/register_entity.html.twig' %}
 
     <!-- Modal used in order to search a student -->
     <div class="modal fade" id="myModalMentore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -600,129 +448,6 @@
         </div>
     </div>
 
-    <!-- Modal used in order to add a path -->
-    <div class="modal fade" id="myModalParcours" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Gestion des parcours</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        {{ form_start(parcours) }}
-                        <div class="input-group">
-                            {{ form_errors(parcours.libelle) }}
-                            {{ form_label(parcours.libelle, 'Nom du parcours')}}
-                            {{ form_widget(parcours.libelle, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            {{ form_label(parcours.save, "Enregistrer") }}
-                            {{ form_widget(parcours.save, {'attr': {'class': 'btn btn-info'}}) }}
-                        </div>
-                        {{ form_end(parcours) }}
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal used in order to add a financement -->
-    <div class="modal fade" id="myModalFinanceur" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Gestion des financeurs</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        {{ form_start(financeur) }}
-                        <div class="input-group">
-                            {{ form_errors(financeur.libelle) }}
-                            {{ form_label(financeur.libelle, 'Nom du financeur')}}
-                            {{ form_widget(financeur.libelle, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            {{ form_label(financeur.save, "Enregistrer") }}
-                            {{ form_widget(financeur.save, {'attr': {'class': 'btn btn-info'}}) }}
-                        </div>
-                        {{ form_end(financeur) }}
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal used in order to add a path -->
-    <div class="modal fade" id="myModalPays" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Gestion des Pays</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        {{ form_start(pays) }}
-                        <div class="input-group">
-                            {{ form_errors(pays.libelle) }}
-                            {{ form_label(pays.libelle, 'Nom du pays')}}
-                            {{ form_widget(pays.libelle, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            {{ form_label(pays.save, "Enregistrer") }}
-                            {{ form_widget(pays.save, {'attr': {'class': 'btn btn-info'}}) }}
-                        </div>
-                        {{ form_end(pays) }}
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal used in order to add a project -->
-    <div class="modal fade" id="myModalProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Gestion des Projet</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        {{ form_start(projet) }}
-                        <div class="input-group">
-                            {{ form_errors(projet.libelle) }}
-                            {{ form_label(projet.libelle, 'Intitulé du projet')}}
-                            {{ form_widget(projet.libelle, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            {{ form_label(projet.save, "Enregistrer") }}
-                            {{ form_widget(projet.save, {'attr': {'class': 'btn btn-info'}}) }}
-                        </div>
-                        {{ form_end(projet) }}
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                </div>
-            </div>
-        </div>
-    </div>
 {% endblock %}
 
 {% block javascripts %}
