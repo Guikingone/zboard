@@ -16,10 +16,14 @@ class IndexBackController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $mentors = $this->get('core.back')->getMentors();
-        $mentores = $this->get('core.back')->getMentores();
-        $nMentore = $this->get('core.back')->addMentore($request);
-        return array( 'mentors' => $mentors, 'mentores' => $mentores, 'nMentore' => $nMentore->createView() );
+        $mentors    = $this->get('core.back')->getMentors();
+        $mentores   = $this->get('core.back')->getMentores();
+        $nMentore   = $this->get('core.back')->addMentore($request);
+        $parcours   = $this->get('core.back')->addParcours($request);
+        $financeur  = $this->get('core.back')->addFinancement($request);
+        return array( 'mentors' => $mentors, 'mentores' => $mentores,
+                      'nMentore' => $nMentore->createView(), 'parcours' => $parcours->createView(),
+                      'financeur' => $financeur->createView() );
     }
 
     /**
@@ -30,6 +34,17 @@ class IndexBackController extends Controller
     public function showMentoreAction()
     {
         $mentores = $this->get('core.back')->getMentores();
+        return array( 'mentores' => $mentores );
+    }
+
+    /**
+     * @Route("/show/{id}/details", name="show_details_mentore")
+     * @Template("BackBundle/Action/details.html.twig")
+     * @Method("GET")
+     */
+    public function detailsMentoreAction($id)
+    {
+        $mentores = $this->get('core.back')->viewMentore($id);
         return array( 'mentores' => $mentores );
     }
 }

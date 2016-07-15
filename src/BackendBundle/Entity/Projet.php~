@@ -94,3 +94,4 @@ class Projet
         return $this->parcours;
     }
 }
+

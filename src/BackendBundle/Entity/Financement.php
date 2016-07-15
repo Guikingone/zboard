@@ -23,23 +23,21 @@ class Financement
 
     /**
      * @var boolean
-     * @ORM\Column(name="is_financed", type="boolean")
+     * @ORM\Column(name="is_financed", type="boolean", nullable=true)
      */
     private $isFinanced;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=255)
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\Column(name="libelle", type="string", length=255, nullable=true)
      */
     private $libelle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="duree", type="string", length=255)
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\Column(name="duree", type="string", length=255, nullable=true)
      */
     private $duree;
 

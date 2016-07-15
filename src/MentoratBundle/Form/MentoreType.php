@@ -29,10 +29,7 @@ class MentoreType extends AbstractType
             ->add('address', TextType::class)
             ->add('zipcode', TextType::class)
             ->add('city', TextType::class)
-            ->add('country', EntityType::class, array(
-                'class' => 'BackendBundle\Entity\Country',
-                'choice_label' => 'libelle',
-            ))
+            ->add('country', TextType::class)
             ->add('email', EmailType::class)
             ->add('phone', TextType::class)
             ->add('resume', TextareaType::class)
