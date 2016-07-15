@@ -24,9 +24,9 @@ class Projet
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle_projet", type="string", length=255)
+     * @ORM\Column(name="libelle", type="string", length=255)
      */
-    private $libelleProjet;
+    private $libelle;
 
     /**
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours")
@@ -94,4 +94,3 @@ class Projet
         return $this->parcours;
     }
 }
-

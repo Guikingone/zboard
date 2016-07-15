@@ -513,9 +513,9 @@
                         {{ form_widget(nMentore.city, {'attr': {'class': 'form-control'}}) }}
                     </div>
                     <div class="input-group">
-                        {{ form_errors(nMentore.country) }}
-                        {{ form_label(nMentore.country, 'Pays')}}
-                        {{ form_widget(nMentore.country, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(nMentore.country.libelle) }}
+                        {{ form_label(nMentore.country.libelle, 'Pays')}}
+                        {{ form_widget(nMentore.country.libelle, {'attr': {'class': 'form-control'}}) }}
                     </div>
                     <div class="input-group">
                         {{ form_errors(nMentore.email) }}
@@ -653,6 +653,68 @@
                             {{ form_widget(financeur.save, {'attr': {'class': 'btn btn-info'}}) }}
                         </div>
                         {{ form_end(financeur) }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal used in order to add a path -->
+    <div class="modal fade" id="myModalPays" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Gestion des Pays</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        {{ form_start(pays) }}
+                        <div class="input-group">
+                            {{ form_errors(pays.libelle) }}
+                            {{ form_label(pays.libelle, 'Nom du pays')}}
+                            {{ form_widget(pays.libelle, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            {{ form_label(pays.save, "Enregistrer") }}
+                            {{ form_widget(pays.save, {'attr': {'class': 'btn btn-info'}}) }}
+                        </div>
+                        {{ form_end(pays) }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal used in order to add a project -->
+    <div class="modal fade" id="myModalProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Gestion des Projet</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        {{ form_start(projet) }}
+                        <div class="input-group">
+                            {{ form_errors(projet.libelle) }}
+                            {{ form_label(projet.libelle, 'Intitulé du projet')}}
+                            {{ form_widget(projet.libelle, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            {{ form_label(projet.save, "Enregistrer") }}
+                            {{ form_widget(projet.save, {'attr': {'class': 'btn btn-info'}}) }}
+                        </div>
+                        {{ form_end(projet) }}
                     </div>
                 </div>
                 <div class="modal-footer">

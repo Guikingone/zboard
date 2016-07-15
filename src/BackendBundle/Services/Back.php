@@ -2,17 +2,23 @@
 
 namespace BackendBundle\Services;
 
-use BackendBundle\Entity\Financement;
-use BackendBundle\Entity\Parcours;
-use BackendBundle\Form\FinancementTypeAdd;
-use BackendBundle\Form\ParcoursTypeAdd;
 use Doctrine\ORM\EntityManager;
-use MentoratBundle\Entity\Mentore;
-use MentoratBundle\Form\MentoreType;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+
+use BackendBundle\Entity\Financement;
+use BackendBundle\Entity\Parcours;
+use MentoratBundle\Entity\Mentore;
+use BackendBundle\Entity\Country;
+use BackendBundle\Entity\Projet;
+use BackendBundle\Form\TypeAdd\ProjetTypeAdd;
+use BackendBundle\Form\TypeAdd\FinancementTypeAdd;
+use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
+use BackendBundle\Form\TypeAdd\CountryTypeAdd;
+
+use MentoratBundle\Form\MentoreType;
 
 class Back {
 
@@ -108,6 +114,16 @@ class Back {
     }
 
     /**
+     *
+     *
+     * This section is devoted to the addAction, every add--- take the control for adding something in the Entity, in
+     * order to be effective, the form of every entity is called here and instancied every time the controller ask for.
+     *
+     *
+     */
+
+
+    /**
      * Allow to add a new path.
      *
      * @param Request $request
@@ -128,6 +144,26 @@ class Back {
     }
 
     /**
+     * Allow to add a new project.
+     *
+     * @param Request $request
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addProject(Request $request)
+    {
+        $projet = new Projet();
+        $form = $this->formFactory->create(ProjetTypeAdd::class, $projet);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->doctrine->persist($projet);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Projet ajouté !');
+        }
+        return $form;
+    }
+
+    /**
      * Allow to add a new Financement.
      *
      * @param Request $request
@@ -143,6 +179,20 @@ class Back {
             $this->doctrine->persist($financement);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Financeur ajouté !');
+        }
+        return $form;
+    }
+
+    public function addCountry(Request $request)
+    {
+        $pays = new Country();
+        $form = $this->formFactory->create(CountryTypeAdd::class, $pays);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->doctrine->persist($pays);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Pays ajouté !');
         }
         return $form;
     }

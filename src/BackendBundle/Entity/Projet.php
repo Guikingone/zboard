@@ -24,9 +24,9 @@ class Projet
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle_projet", type="string", length=255)
+     * @ORM\Column(name="libelle", type="string", length=255)
      */
-    private $libelleProjet;
+    private $libelle;
 
     /**
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours")
@@ -46,34 +46,9 @@ class Projet
     }
 
     /**
-     * Set libelleProjet
+     * Set parco
      *
-     * @param string $libelleProjet
-     *
-     * @return Projet
-     */
-    public function setLibelleProjet($libelleProjet)
-    {
-        $this->libelleProjet = $libelleProjet;
-
-        return $this;
-    }
-
-    /**
-     * Get libelleProjet
-     *
-     * @return string
-     */
-    public function getLibelleProjet()
-    {
-        return $this->libelleProjet;
-    }
-
-
-    /**
-     * Set projet
-     *
-     * @param \MentoratBundle\Entity\Parcours $parcours
+     * @param \BackendBundle\Entity\Parcours $parcours
      *
      * @return Parcours
      */
@@ -85,12 +60,36 @@ class Projet
     }
 
     /**
-     * Get projet
+     * Get parcours
      *
      * @return \BackendBundle\Entity\Parcours
      */
     public function getParcours()
     {
         return $this->parcours;
+    }
+
+    /**
+     * Set libelle
+     *
+     * @param string $libelle
+     *
+     * @return Projet
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get libelle
+     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
     }
 }

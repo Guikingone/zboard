@@ -31,7 +31,7 @@ class Parcours
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_start", type="date")
+     * @ORM\Column(name="date_start", type="date", nullable=true)
      */
     private $date_start;
 

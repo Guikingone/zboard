@@ -23,7 +23,7 @@ class Financement
 
     /**
      * @var boolean
-     * @ORM\Column(name="is_financed", type="boolean")
+     * @ORM\Column(name="is_financed", type="boolean", nullable=true)
      */
     private $isFinanced;
 

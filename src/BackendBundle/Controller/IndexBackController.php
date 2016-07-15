@@ -21,9 +21,12 @@ class IndexBackController extends Controller
         $nMentore   = $this->get('core.back')->addMentore($request);
         $parcours   = $this->get('core.back')->addParcours($request);
         $financeur  = $this->get('core.back')->addFinancement($request);
+        $pays       = $this->get('core.back')->addCountry($request);
+        $projet     = $this->get('core.back')->addProject($request);
         return array( 'mentors' => $mentors, 'mentores' => $mentores,
                       'nMentore' => $nMentore->createView(), 'parcours' => $parcours->createView(),
-                      'financeur' => $financeur->createView() );
+                      'financeur' => $financeur->createView(), 'pays' => $pays->createView(),
+                      'projet' => $projet->createView() );
     }
 
     /**
