@@ -58,10 +58,9 @@ class Mentore
     private $city;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="country", type="integer")
-     * @Assert\Type(type="BackendBundle\Entity\Country")
+     * @ORM\Column(name="country", type="string", length=255)
      */
     private $country;
 
@@ -83,6 +82,7 @@ class Mentore
      * @var string
      *
      * @ORM\Column(name="resume", type="text")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $resume;
 

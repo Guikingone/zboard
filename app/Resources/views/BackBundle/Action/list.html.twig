@@ -61,7 +61,7 @@
                         <tr>
                             <th>Nom</th>
                             <th>Prénom</th>
-                            <th>Status</th>
+                            <th>Statut</th>
                             <th>Durée de financement</th>
                             <th>Parcours suivi</th>
                         </tr>
@@ -82,13 +82,21 @@
                                                 <span class="label label-warning">{{ mentores.status }}</span>
                                             {% elseif mentores.status == 'En pause' %}
                                                 <span class="label label-danger">{{ mentores.status }}</span>
+                                            {% elseif mentores.status == 'En attente' %}
+                                                <span class="label label-warning">{{ mentores.status }}</span>
+                                            {% elseif mentores.status == 'Formation terminé' %}
+                                                <span class="label label-success">{{ mentores.status }}</span>
                                         {% endif %}
                                     </td>
                                     <td>
-                                        {{ mentores.financement }}
+                                        {% if mentores.financement is null %}
+                                                <p>Non financé</p>
+                                            {% else %}
+                                                {{ mentores.financement }}
+                                        {% endif %}
                                     </td>
                                     <td>
-                                        {{ mentores.parcours }}
+                                        {{ mentores.parcours.libelle }}
                                     </td>
                                 </tr>
                             {% endfor %}

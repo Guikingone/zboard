@@ -2,6 +2,10 @@
 
 namespace BackendBundle\Services;
 
+use BackendBundle\Entity\Financement;
+use BackendBundle\Entity\Parcours;
+use BackendBundle\Form\FinancementTypeAdd;
+use BackendBundle\Form\ParcoursTypeAdd;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Mentore;
 use MentoratBundle\Form\MentoreType;
@@ -58,6 +62,17 @@ class Back {
     }
 
     /**
+     * Allow to find a student by is name in order to show details.
+     *
+     * @param $id
+     * @return array|\MentoratBundle\Entity\Mentore[]
+     */
+    public function viewMentore($id)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Mentore')->find($id);
+    }
+
+    /**
      * Allow the back to get all the mentors.
      *
      * @return array|\UserBundle\Entity\User[]
@@ -84,10 +99,50 @@ class Back {
         $form = $this->formFactory->create(MentoreType::class, $mentore);
         $form->handleRequest($request);
 
-        if($form->isValid()){
+        if ($form->isValid()) {
             $this->doctrine->persist($mentore);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', "Elève enregistré.");
+        }
+        return $form;
+    }
+
+    /**
+     * Allow to add a new path.
+     *
+     * @param Request $request
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addParcours(Request $request)
+    {
+        $parcours = new Parcours();
+        $form = $this->formFactory->create(ParcoursTypeAdd::class, $parcours);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+           $this->doctrine->persist($parcours);
+           $this->doctrine->flush();
+           $this->session->getFlashBag()->add('success', 'Parcours ajouté !');
+        }
+        return $form;
+    }
+
+    /**
+     * Allow to add a new Financement.
+     *
+     * @param Request $request
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addFinancement(Request $request)
+    {
+        $financement = new Financement();
+        $form = $this->formFactory->create(FinancementTypeAdd::class, $financement);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->doctrine->persist($financement);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Financeur ajouté !');
         }
         return $form;
     }

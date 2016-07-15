@@ -251,8 +251,8 @@
                                     <table class="table no-margin">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Nom Prénom</th>
+                                            <th>Nom</th>
+                                            <th>Prénom</th>
                                             <th>Status</th>
                                             <th>Durée de financement</th>
                                             <th>Parcours suivi</th>
@@ -261,10 +261,10 @@
                                         <tbody>{% for mentores in mentores %}
                                             <tr>
                                                 <td>
-                                                    {{ mentores.firstname }}
-                                                    {{ mentores.lastname }}
+                                                    <a href="{{ path('show_details_mentore', {'id': mentores.id}) }}">{{ mentores.lastname }}</a>
                                                 </td>
                                                 <td>
+                                                    {{ mentores.firstname }}
                                                 </td>
                                                 <td>
 
@@ -291,15 +291,6 @@
             </section>
             <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-
-        <footer class="main-footer">
-            <div class="pull-right hidden-xs">
-                <b>Version</b> 2.3.5
-            </div>
-            <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-            reserved.
-        </footer>
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
@@ -543,11 +534,6 @@
                     </div>
                     <hr>
                     <div class="input-group">
-                        {{ form_errors(nMentore.parcours.codeParcours) }}
-                        {{ form_label(nMentore.parcours.codeParcours, 'Code du parcours')}}
-                        {{ form_widget(nMentore.parcours.codeParcours, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
                         {{ form_errors(nMentore.parcours.libelle) }}
                         {{ form_label(nMentore.parcours.libelle, 'Nom du parcours')}}
                         {{ form_widget(nMentore.parcours.libelle, {'attr': {'class': 'form-control'}}) }}
@@ -585,6 +571,89 @@
                         {{ form_widget(nMentore.save, {'attr': {'class': 'btn btn-info'}}) }}
                     </div>
                     {{ form_end(nMentore) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal used in order to search a student -->
+    <div class="modal fade" id="myModalMentore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Rechercher un élève</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal used in order to add a path -->
+    <div class="modal fade" id="myModalParcours" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Gestion des parcours</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        {{ form_start(parcours) }}
+                        <div class="input-group">
+                            {{ form_errors(parcours.libelle) }}
+                            {{ form_label(parcours.libelle, 'Nom du parcours')}}
+                            {{ form_widget(parcours.libelle, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            {{ form_label(parcours.save, "Enregistrer") }}
+                            {{ form_widget(parcours.save, {'attr': {'class': 'btn btn-info'}}) }}
+                        </div>
+                        {{ form_end(parcours) }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal used in order to add a financement -->
+    <div class="modal fade" id="myModalFinanceur" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Gestion des financeurs</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        {{ form_start(financeur) }}
+                        <div class="input-group">
+                            {{ form_errors(financeur.libelle) }}
+                            {{ form_label(financeur.libelle, 'Nom du financeur')}}
+                            {{ form_widget(financeur.libelle, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            {{ form_label(financeur.save, "Enregistrer") }}
+                            {{ form_widget(financeur.save, {'attr': {'class': 'btn btn-info'}}) }}
+                        </div>
+                        {{ form_end(financeur) }}
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>

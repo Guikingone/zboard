@@ -24,13 +24,6 @@ class Parcours
     /**
      * @var string
      *
-     * @ORM\Column(name="code_parcours", type="string", length=150, unique=true)
-     */
-    private $codeParcours;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="libelle", type="string", length=150, unique=true)
      */
     private $libelle;
@@ -38,7 +31,7 @@ class Parcours
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_start", type="date")
+     * @ORM\Column(name="date_start", type="date", nullable=true)
      */
     private $date_start;
 
