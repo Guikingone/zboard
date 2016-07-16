@@ -6,8 +6,11 @@
         "psr-4": {
             "": "src/",
             "Tests\\": "tests/",
-            "AppBundle\\": "src/",
-            "AdminBundle\\": "src/"
+            "AdminBundle\\": "src/",
+            "BackendBundle\\": "src/",
+            "CoreBundle\\": "src/",
+            "MentoratBundle\\": "src/",
+            "UserBundle\\": "src/"
         },
         "classmap": [
             "app/AppKernel.php",
@@ -17,8 +20,11 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/",
-            "AppBundle\\": "src/",
-            "AdminBundle\\": "src/"
+            "AdminBundle\\": "src/",
+            "BackendBundle\\": "src/",
+            "CoreBundle\\": "src/",
+            "MentoratBundle\\": "src/",
+            "UserBundle\\": "src/"
         }
     },
     "require": {

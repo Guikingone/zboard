@@ -14,7 +14,7 @@ class IndexBackController extends Controller
      * @Route("/", name="home_backend")
      * @Template("BackBundle/index/index.html.twig")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $mentors    = $this->get('core.back')->getMentors();
         $mentores   = $this->get('core.back')->getMentores();

@@ -2,47 +2,6 @@
 
 {% block title %} - {{ mentores.lastname }} {{ mentores.firstname }}{% endblock %}
 
-{% block _side_admin %}
-    <aside class="main-sidebar">
-        <section class="sidebar">
-            <ul class="sidebar-menu">
-                <li class="header">NAVIGATION PRINCIPALE</li>
-                <li class="active treeview">
-                    <a href="#">
-                        <i class="fa fa-user"></i> <span>Gestion Mentor</span>
-                        <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"data-toggle="modal" data-target="#myModalM"><i class="fa fa-circle-o"></i>Mentor actuel de {{ mentores.firstname }}</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i>Les notes de session de {{ mentores.firstname }}</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i>Suivi parcours de {{ mentores.firstname }}</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i>Soutenances de {{ mentores.firstname }}</a></li>
-                    </ul>
-                </li>
-                <li class="active treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Statistiques</span>
-                        <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-circle-o"></i>Ajouter un élève</a></li>
-                        <li><a href="{{ path('list_mentores_backend') }}"><i class="fa fa-circle-o"></i>Liste des elèves</a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#myModalMentore"><i class="fa fa-circle-o"></i>Suivi d'un elève</a></li>
-                    </ul>
-                </li>
-                <li class="header">LABELS</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>A surveiller</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-            </ul>
-        </section>
-    </aside>
-{% endblock %}
-
 {% block admin_body %}
     <div class="content-wrapper">
         <section class="content">
