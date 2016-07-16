@@ -18,7 +18,6 @@ class CountryTypeAdd extends AbstractType
     {
         $builder
             ->add('libelle', TextType::class)
-            ->add('save', SubmitType::class)
         ;
     }
 

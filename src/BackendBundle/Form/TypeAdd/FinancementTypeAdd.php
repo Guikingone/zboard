@@ -20,7 +20,6 @@ class FinancementTypeAdd extends AbstractType
             ->remove('isFinanced')
             ->add('libelle', TextType::class)
             ->remove('duree')
-            ->add('save', SubmitType::class)
         ;
     }
 

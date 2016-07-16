@@ -15,10 +15,7 @@
                         {{ form_widget(parcours.libelle, {'attr': {'class': 'form-control'}}) }}
                     </div>
                     <br>
-                    <div class="input-group">
-                        {{ form_label(parcours.save, "Enregistrer") }}
-                        {{ form_widget(parcours.save, {'attr': {'class': 'btn btn-info'}}) }}
-                    </div>
+                    <button type="submit" class="btn btn-warning">Enregistrer</button>
                     {{ form_end(parcours) }}
                 </div>
             </div>
@@ -46,10 +43,7 @@
                         {{ form_widget(financeur.libelle, {'attr': {'class': 'form-control'}}) }}
                     </div>
                     <br>
-                    <div class="input-group">
-                        {{ form_label(financeur.save, "Enregistrer") }}
-                        {{ form_widget(financeur.save, {'attr': {'class': 'btn btn-info'}}) }}
-                    </div>
+                    <button type="submit" class="btn btn-warning">Enregistrer</button>
                     {{ form_end(financeur) }}
                 </div>
             </div>
@@ -77,10 +71,7 @@
                         {{ form_widget(pays.libelle, {'attr': {'class': 'form-control'}}) }}
                     </div>
                     <br>
-                    <div class="input-group">
-                        {{ form_label(pays.save, "Enregistrer") }}
-                        {{ form_widget(pays.save, {'attr': {'class': 'btn btn-info'}}) }}
-                    </div>
+                    <button type="submit" class="btn btn-warning">Enregistrer</button>
                     {{ form_end(pays) }}
                 </div>
             </div>
@@ -113,10 +104,7 @@
                         {{ form_widget(projet.competences, {'attr': {'class': 'form-control'}}) }}
                     </div>
                     <br>
-                    <div class="input-group">
-                        {{ form_label(projet.save, "Enregistrer") }}
-                        {{ form_widget(projet.save, {'attr': {'class': 'btn btn-info'}}) }}
-                    </div>
+                    <button type="submit" class="btn btn-warning">Enregistrer</button>
                     {{ form_end(projet) }}
                 </div>
             </div>
@@ -143,6 +131,7 @@
                         {{ form_label(competences.libelle, 'Intitulé de la compétence')}}
                         {{ form_widget(competences.libelle, {'attr': {'class': 'form-control'}}) }}
                     </div>
+                    <br>
                     <button type="submit" class="btn btn-warning">Enregistrer</button>
                     {{ form_end(competences) }}
                 </div>

@@ -43,7 +43,6 @@ class MentoreType extends AbstractType
                     'Formation terminée'             => 'Formation terminé',
                 ],
             ))
-            ->add('save', SubmitType::class)
         ;
     }
     

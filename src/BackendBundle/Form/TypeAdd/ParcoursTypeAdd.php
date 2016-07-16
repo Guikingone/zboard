@@ -15,7 +15,6 @@ class ParcoursTypeAdd extends AbstractType
         $builder
             ->add('libelle', TextType::class)
             ->remove('date_start')
-            ->add('save', SubmitType::class)
         ;
     }
 

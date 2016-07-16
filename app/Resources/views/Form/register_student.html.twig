@@ -87,10 +87,7 @@
                     {{ form_widget(nMentore.status, {'attr': {'class': 'form-control'}}) }}
                 </div>
                 <br>
-                <div class="input-group">
-                    {{ form_label(nMentore.save, "Enregistrer") }}
-                    {{ form_widget(nMentore.save, {'attr': {'class': 'btn btn-info'}}) }}
-                </div>
+                <button type="submit" class="btn btn-warning">Enregistrer</button>
                 {{ form_end(nMentore) }}
             </div>
             <div class="modal-footer">
