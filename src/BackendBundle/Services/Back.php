@@ -5,6 +5,8 @@ namespace BackendBundle\Services;
 use BackendBundle\Entity\Competences;
 use BackendBundle\Form\TypeAdd\CompetencesTypeAdd;
 use Doctrine\ORM\EntityManager;
+use MentoratBundle\Entity\Soutenance;
+use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\Request;
@@ -155,16 +157,6 @@ class Back {
     }
 
     /**
-     *
-     *
-     * This section is devoted to the addAction, every add--- take the control for adding something in the Entity, in
-     * order to be effective, the form of every entity is called here and instancied every time the controller ask for.
-     *
-     *
-     */
-
-
-    /**
      * Allow to add a new path.
      *
      * @param Request $request
@@ -244,6 +236,12 @@ class Back {
         return $form;
     }
 
+    /**
+     * Allow to add a new Country.
+     *
+     * @param Request $request
+     * @return \Symfony\Component\Form\FormInterface
+     */
     public function addCountry(Request $request)
     {
         $pays = new Country();
@@ -254,6 +252,26 @@ class Back {
             $this->doctrine->persist($pays);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Pays ajouté !');
+        }
+        return $form;
+    }
+
+    /**
+     * Allow to add a new soutenance between a mentor and a mentore.
+     *
+     * @param Request $request
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addSoutenance(Request $request)
+    {
+        $soutenance = new Soutenance();
+        $form = $this->formFactory->create(SoutenanceTypeAdd::class, $soutenance);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->doctrine->persist($soutenance);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Soutenance ajoutée !');
         }
         return $form;
     }

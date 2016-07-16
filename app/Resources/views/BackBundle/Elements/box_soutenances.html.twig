@@ -11,23 +11,25 @@
             </tr>
             </thead>
             <tbody>
-            {% for soutenances in soutenances %}
                 <tr>
-                    {{ soutenances.mentore }}
+                {% for soutenances in soutenances %}
+                    <td>
+                        {{ soutenances.mentore.lastname }}
+                    </td>
+                    <td>
+                        {{ soutenances.mentor.lastname }}
+                    </td>
+                    <td>
+                        {{ soutenances.passedAt|date("d-M-Y", "Europe/Paris") }}
+                    </td>
+                    <td>
+                        {{ soutenances.projet }}
+                    </td>
+                    <td>
+                        A définir
+                    </td>
+                {% endfor %}
                 </tr>
-                <tr>
-                    {{ soutenances.mentor }}
-                </tr>
-                <tr>
-                    {{ soutenances.passedAt }}
-                </tr>
-                <tr>
-                    {{ soutenances.projet }}
-                </tr>
-                <tr>
-                    A définir
-                </tr>
-            {% endfor %}
             </tbody>
         </table>
     </div>

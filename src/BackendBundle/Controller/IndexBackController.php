@@ -37,10 +37,11 @@ class IndexBackController extends Controller
      * @Route("/list/soutenances", name="gestion_soutenances")
      * @Template("BackBundle/Action/list_soutenances.html.twig")
      */
-    public function showSoutenancesMentorsAction()
+    public function showSoutenancesMentorsAction(Request $request)
     {
         $soutenances = $this->get('core.back')->getSoutenances();
-        return array( 'soutenances' => $soutenances );
+        $soutenance  = $this->get('core.back')->addSoutenance($request);
+        return array( 'soutenances' => $soutenances, 'soutenance' => $soutenance->createView() );
     }
 
     /**
@@ -64,7 +65,7 @@ class IndexBackController extends Controller
 
     /**
      * @Route("/show/{id}/details", name="show_details_mentore")
-     * @Template("BackBundle/Action/details.html.twig")
+     * @Template("BackBundle/Action/Details/show_mentores.html.twig")
      * @Method("GET")
      */
     public function detailsMentoreAction($id)
