@@ -3,16 +3,19 @@
 {% block title %} - Soutenances{% endblock %}
 
 {% block admin_body %}
-
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalSoutenance">
+                Ajouter un soutenance
+            </button>
+        </div>
+    </div>
+    <br>
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-info">
                 <div class="box-header with-border">
                     <h3 class="box-title">Liste des mentors</h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                    </div>
                 </div>
 
                 {% include 'BackBundle/Elements/box_soutenances.html.twig' %}
@@ -20,4 +23,6 @@
             </div>
         </div>
     </div>
+
+    {% include ':Form:register_soutenance.html.twig' %}
 {% endblock %}

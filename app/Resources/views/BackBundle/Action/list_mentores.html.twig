@@ -11,6 +11,9 @@
             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalProject">
                 Ajouter un projet
             </button>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalCompetences">
+                Ajouter une compétences à valider
+            </button>
             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalParcours">
                 Ajouter un parcours
             </button>
@@ -41,4 +44,24 @@
 
     {% include ':Form:register_entity.html.twig' %}
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var $collectionHolder;
+
+        var $addTagLink = $('<a href="#" class="add_tag_link">Add a tag</a>');
+        var $newLinkLi = $('<li></li>').append($addTagLink);
+
+        jQuery(document).ready(function() {
+            $collectionHolder = $('#ul');
+            $collectionHolder.append($newLinkLi);
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+            $addTagLink.on('click', function(e) {
+                e.preventDefault();
+                addTagForm($collectionHolder, $newLinkLi);
+            });
+        });
+    </script>
 {% endblock %}

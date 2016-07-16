@@ -107,12 +107,44 @@
                         {{ form_label(projet.libelle, 'Intitulé du projet')}}
                         {{ form_widget(projet.libelle, {'attr': {'class': 'form-control'}}) }}
                     </div>
+                    <div class="input-group">
+                        {{ form_errors(projet.competences) }}
+                        {{ form_label(projet.competences, 'Ajouter une compétence à valider')}}
+                        {{ form_widget(projet.competences, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                     <br>
                     <div class="input-group">
                         {{ form_label(projet.save, "Enregistrer") }}
                         {{ form_widget(projet.save, {'attr': {'class': 'btn btn-info'}}) }}
                     </div>
                     {{ form_end(projet) }}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal used in order to add a competences -->
+<div class="modal fade" id="myModalCompetences" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Gestion des competences à valider</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    {{ form_start(competences) }}
+                    <div class="input-group">
+                        {{ form_errors(competences.libelle) }}
+                        {{ form_label(competences.libelle, 'Intitulé de la compétence')}}
+                        {{ form_widget(competences.libelle, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <button type="submit" class="btn btn-warning">Enregistrer</button>
+                    {{ form_end(competences) }}
                 </div>
             </div>
             <div class="modal-footer">

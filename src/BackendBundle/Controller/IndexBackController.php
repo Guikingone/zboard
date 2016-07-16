@@ -39,13 +39,13 @@ class IndexBackController extends Controller
      */
     public function showSoutenancesMentorsAction()
     {
-
+        $soutenances = $this->get('core.back')->getSoutenances();
+        return array( 'soutenances' => $soutenances );
     }
 
     /**
      * @Route("/list/mentore", name="gestion_mentores")
      * @Template("BackBundle/Action/list_mentores.html.twig")
-     * @Method("GET")
      */
     public function showMentoreAction(Request $request)
     {
@@ -55,9 +55,11 @@ class IndexBackController extends Controller
         $financeur  = $this->get('core.back')->addFinancement($request);
         $pays       = $this->get('core.back')->addCountry($request);
         $projet     = $this->get('core.back')->addProject($request);
+        $compt      = $this->get('core.back')->addCompetences($request);
         return array( 'mentores' => $mentores, 'nMentore' => $nMentore->createView(),
                       'parcours' => $parcours->createView(), 'financeur' => $financeur->createView(),
-                      'pays' => $pays->createView(), 'projet' => $projet->createView() );
+                      'pays' => $pays->createView(), 'projet' => $projet->createView(),
+                      'competences' => $compt->createView() );
     }
 
     /**

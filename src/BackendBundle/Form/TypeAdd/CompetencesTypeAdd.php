@@ -1,13 +1,13 @@
 <?php
 
-namespace BackendBundle\Form;
+namespace BackendBundle\Form\TypeAdd;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProjetType extends AbstractType
+class CompetencesTypeAdd extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,24 +16,18 @@ class ProjetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle', EntityType::class, array(
-                'class'        => 'BackendBundle\Entity\Projet',
-                'choice_label' => 'libelle',
-            ))
-            ->add('parcours', EntityType::class, array(
-                'class'        => 'BackendBundle\Entity\Parcours',
-                'choice_label' => 'libelle',
-            ))
+            ->add('libelle', TextareaType::class)
+            ->remove('projet')
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackendBundle\Entity\Projet'
+            'data_class' => 'BackendBundle\Entity\Competences'
         ));
     }
 }

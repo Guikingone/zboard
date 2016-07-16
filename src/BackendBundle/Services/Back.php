@@ -2,6 +2,8 @@
 
 namespace BackendBundle\Services;
 
+use BackendBundle\Entity\Competences;
+use BackendBundle\Form\TypeAdd\CompetencesTypeAdd;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
@@ -78,6 +80,16 @@ class Back {
     public function getMentores()
     {
         return $this->doctrine->getRepository('MentoratBundle:Mentore')->findAll();
+    }
+
+    /**
+     * Allow the back to get all the soutenances.
+     *
+     * @return array|\MentoratBundle\Entity\Soutenance[]
+     */
+    public function getSoutenances()
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findAll();
     }
 
     /**
@@ -188,6 +200,26 @@ class Back {
             $this->doctrine->persist($projet);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Projet ajouté !');
+        }
+        return $form;
+    }
+
+    /**
+     * Allow to add a new competences.
+     *
+     * @param Request $request
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addCompetences(Request $request)
+    {
+        $competences = new Competences();
+        $form = $this->formFactory->create(CompetencesTypeAdd::class, $competences);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->doctrine->persist($competences);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Competences ajouté !');
         }
         return $form;
     }

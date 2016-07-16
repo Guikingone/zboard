@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProjetType extends AbstractType
+class CompetencesType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -17,12 +17,12 @@ class ProjetType extends AbstractType
     {
         $builder
             ->add('libelle', EntityType::class, array(
-                'class'        => 'BackendBundle\Entity\Projet',
-                'choice_label' => 'libelle',
+                'class' => 'BackendBundle\Entity\Competences',
+                'choice_label' => 'libelle'
             ))
-            ->add('parcours', EntityType::class, array(
-                'class'        => 'BackendBundle\Entity\Parcours',
-                'choice_label' => 'libelle',
+            ->add('projet', EntityType::class, array(
+                'class' => 'BackendBundle\Entity\Projet',
+                'choice_label' => 'libelle'
             ))
         ;
     }
@@ -33,7 +33,7 @@ class ProjetType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackendBundle\Entity\Projet'
+            'data_class' => 'BackendBundle\Entity\Competences'
         ));
     }
 }

@@ -5,12 +5,29 @@
             <tr>
                 <th>Nom de l'élève</th>
                 <th>Nom du mentor</th>
-                <th>Statut</th>
+                <th>Date de passage</th>
                 <th>Projet</th>
+                <th>Statut</th>
             </tr>
             </thead>
             <tbody>
-
+            {% for soutenances in soutenances %}
+                <tr>
+                    {{ soutenances.mentore }}
+                </tr>
+                <tr>
+                    {{ soutenances.mentor }}
+                </tr>
+                <tr>
+                    {{ soutenances.passedAt }}
+                </tr>
+                <tr>
+                    {{ soutenances.projet }}
+                </tr>
+                <tr>
+                    A définir
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
