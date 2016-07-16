@@ -83,7 +83,7 @@ class Back {
     /**
      * Allow the back to get all the mentorat informations.
      *
-     * @return array|\BackBundle\Entity\InformationMentorat[]
+     * @return array|\BackendBundle\Entity\InformationMentorat[]
      */
     public function getMentoratInformations()
     {

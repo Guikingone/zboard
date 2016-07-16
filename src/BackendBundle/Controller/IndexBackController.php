@@ -18,31 +18,23 @@ class IndexBackController extends Controller
     {
         $mentors    = $this->get('core.back')->getMentors();
         $mentores   = $this->get('core.back')->getMentores();
-        $nMentore   = $this->get('core.back')->addMentore($request);
-        $parcours   = $this->get('core.back')->addParcours($request);
-        $financeur  = $this->get('core.back')->addFinancement($request);
-        $pays       = $this->get('core.back')->addCountry($request);
-        $projet     = $this->get('core.back')->addProject($request);
-        $mentor     = $this->get('core.back')->addMentor($request);
-        return array( 'mentors' => $mentors, 'mentores' => $mentores,
-                      'nMentore' => $nMentore->createView(), 'parcours' => $parcours->createView(),
-                      'financeur' => $financeur->createView(), 'pays' => $pays->createView(),
-                      'projet' => $projet->createView(), 'mentor' => $mentor->createView() );
+        return array( 'mentors' => $mentors, 'mentores' => $mentores );
     }
 
     /**
-     * @Route("/list/mentors", name="list_mentors_backend")
+     * @Route("/list/mentors", name="gestion_mentors")
      * @Template("BackBundle/Action/list_mentors.html.twig")
      * @Method("GET")
      */
-    public function showMentorsAction()
+    public function showMentorsAction(Request $request)
     {
-        $mentors = $this->get('core.back')->getMentors();
-        return array( 'mentors' => $mentors );
+        $mentors    = $this->get('core.back')->getMentors();
+        $mentor     = $this->get('core.back')->addMentor($request);
+        return array( 'mentors' => $mentors, 'mentor' => $mentor->createView() );
     }
 
     /**
-     * @Route("/list/soutenances", name="list_soutenances")
+     * @Route("/list/soutenances", name="gestion_soutenances")
      * @Template("BackBundle/Action/list_soutenances.html.twig")
      */
     public function showSoutenancesMentorsAction()
@@ -51,14 +43,21 @@ class IndexBackController extends Controller
     }
 
     /**
-     * @Route("/list/mentore", name="list_mentores_backend")
-     * @Template("BackBundle/Action/list.html.twig")
+     * @Route("/list/mentore", name="gestion_mentores")
+     * @Template("BackBundle/Action/list_mentores.html.twig")
      * @Method("GET")
      */
-    public function showMentoreAction()
+    public function showMentoreAction(Request $request)
     {
-        $mentores = $this->get('core.back')->getMentores();
-        return array( 'mentores' => $mentores );
+        $mentores   = $this->get('core.back')->getMentores();
+        $nMentore   = $this->get('core.back')->addMentore($request);
+        $parcours   = $this->get('core.back')->addParcours($request);
+        $financeur  = $this->get('core.back')->addFinancement($request);
+        $pays       = $this->get('core.back')->addCountry($request);
+        $projet     = $this->get('core.back')->addProject($request);
+        return array( 'mentores' => $mentores, 'nMentore' => $nMentore->createView(),
+                      'parcours' => $parcours->createView(), 'financeur' => $financeur->createView(),
+                      'pays' => $pays->createView(), 'projet' => $projet->createView() );
     }
 
     /**

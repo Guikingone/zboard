@@ -1,0 +1,44 @@
+{% extends 'Layout/admin.html.twig' %}
+
+{% block title %} - Suivi des élèves{% endblock %}
+
+{% block admin_body %}
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+                Ajouter un élève
+            </button>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalProject">
+                Ajouter un projet
+            </button>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalParcours">
+                Ajouter un parcours
+            </button>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalFinanceur">
+                Ajouter un financeur
+            </button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Liste des mentores</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                {% include ':BackBundle/Elements:box_mentores.html.twig' %}
+
+            </div>
+        </div>
+    </div>
+
+    {% include ':Form:register_student.html.twig' %}
+
+    {% include ':Form:register_entity.html.twig' %}
+
+{% endblock %}

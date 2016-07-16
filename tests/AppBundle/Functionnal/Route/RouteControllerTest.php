@@ -26,7 +26,17 @@ class RouteControllerTest extends WebTestCase
     {
         return array(
             array('/'),
-            array('/login')
+            array('/login'),
+            array('/login_check'),
+            array('backend/'),
+            array('/backend/list/mentors'),
+            array('/backend/list/mentore'),
+            array('/backend/list/soutenances'),
+            array('/dashboard'),
+            array('/dashboard/infos'),
+            array('/dashboard/mes-mentores/en-cours'),
+            array('/dashboard/mes-mentores/en-attente'),
+            array('/dashboard/mes-mentores/mentorat-termine')
         );
     }
 }

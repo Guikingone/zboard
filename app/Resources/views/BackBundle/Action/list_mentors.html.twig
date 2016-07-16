@@ -2,46 +2,15 @@
 
 {% block title %} - Suivi des élèves{% endblock %}
 
-{% block _side_admin %}
-    <aside class="main-sidebar">
-        <section class="sidebar">
-            <ul class="sidebar-menu">
-                <li class="header">NAVIGATION PRINCIPALE</li>
-                <li class="active treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Les élèves</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <i class="fa fa-circle-o"></i>Trier les mentors (Compétences)
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <i class="fa fa-circle-o"></i>Trier les Mentors (Nbr d'élèves)
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <i class="fa fa-circle-o"></i>Trier les mentors (Statut)
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="header">LABELS</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>A surveiller</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-            </ul>
-        </section>
-    </aside>
-{% endblock %}
-
 {% block admin_body %}
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalM">
+                Ajouter un mentor
+            </button>
+        </div>
+    </div>
+    <br>
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-info">
@@ -58,4 +27,7 @@
             </div>
         </div>
     </div>
+
+    {% include ':Form:register_user.html.twig' %}
+
 {% endblock %}

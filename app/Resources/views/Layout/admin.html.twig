@@ -250,10 +250,7 @@
                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="#"data-toggle="modal" data-target="#myModalM"><i class="fa fa-circle-o"></i>Ajouter un mentor</a></li>
-                                <li><a href="{{ path('list_mentors_backend') }}"><i class="fa fa-circle-o"></i>Liste des mentors</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o"></i>Mentors disponibles</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o"></i>Gestion des compétences</a></li>
+                                <li><a href="{{ path('gestion_mentors') }}"><i class="fa fa-circle-o"></i>Gestion des mentors</a></li>
                             </ul>
                         </li>
                         <li class="active treeview">
@@ -264,9 +261,7 @@
                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-circle-o"></i>Ajouter un élève</a></li>
-                                <li><a href="{{ path('list_mentores_backend') }}"><i class="fa fa-circle-o"></i>Liste des elèves</a></li>
-                                <li><a href="#" data-toggle="modal" data-target="#myModalMentore"><i class="fa fa-circle-o"></i>Suivi d'un elève</a></li>
+                                <li><a href="{{ path('gestion_mentores') }}"><i class="fa fa-circle-o"></i>Gestion des élèves</a></li>
                             </ul>
                         </li>
                         <li class="treeview">
@@ -278,60 +273,9 @@
                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="{{ path('list_soutenances') }}"><i class="fa fa-circle-o"></i>Les soutenances en cours</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o"></i>Prévoir une soutenance</a></li>
+                                <li><a href="{{ path('gestion_soutenances') }}"><i class="fa fa-circle-o"></i>Gestion des soutenances</a></li>
                             </ul>
                         </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-laptop"></i>
-                                <span>Outils d'administration</span>
-                                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li>
-                                    <a href="#"><i class="fa fa-circle-o text-red"></i>Parcours
-                                        <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                                    </a>
-                                    <ul class="treeview-menu">
-                                        <li><a href="#" data-toggle="modal" data-target="#myModalParcours"><i class="fa fa-circle-o"></i>Ajouter un parcours</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-circle-o text-red"></i>Financeur
-                                        <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                                    </a>
-                                    <ul class="treeview-menu">
-                                        <li><a href="#" data-toggle="modal" data-target="#myModalFinanceur"><i class="fa fa-circle-o"></i>Ajouter un Financeur</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-circle-o text-red"></i>Pays
-                                        <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                                    </a>
-                                    <ul class="treeview-menu">
-                                        <li><a href="#" data-toggle="modal" data-target="#myModalPays"><i class="fa fa-circle-o"></i>Ajouter un pays</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-circle-o text-red"></i>Projet
-                                        <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                                    </a>
-                                    <ul class="treeview-menu">
-                                        <li><a href="#" data-toggle="modal" data-target="#myModalProject"><i class="fa fa-circle-o"></i>Ajouter un projet</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-laptop"></i>
