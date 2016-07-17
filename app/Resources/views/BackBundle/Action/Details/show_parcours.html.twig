@@ -1,0 +1,77 @@
+{% extends ':Layout:admin.html.twig' %}
+
+{% block title %} - {{ parcours.libelle }}{% endblock %}
+
+{% block admin_body %}
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary">
+                        <div class="box-body box-profile">
+                            <h3 class="profile-username text-center"><p>{{ parcours.libelle }}</p></h3>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <b>Nombre d'élève ayant choisi ce parcours</b> <a class="pull-right">30 000</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Diplôme : </b> <p class="pull-right">{{ parcours.diplome }}</p>
+                                </li>
+                            </ul>
+                            <a href="#" data-toggle="modal" data-target="#myModalProjet" class="btn btn-primary btn-block"><b>Ajouter un projet</b></a>
+                        </div>
+                    </div>
+                    <div class="box box-primary">
+                        <div class="box-body box-profile">
+                            <h3 class="profile-username text-center"><p>Liste des projets</p></h3>
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <b>Nombre d'élève ayant choisi ce parcours</b> <a class="pull-right">30 000</a>
+                                </li>
+                                {% for projet in parcours %}
+                                    <li class="list-group-item">
+                                        <b>Nombre d'élève ayant terminé ce projet</b> <a class="pull-right">30 000</a>
+                                    </li>
+                                {% endfor %}
+                                <li class="list-group-item">
+                                    <b>Nombre d'élève ayant choisi ce parcours</b> <a class="pull-right">30 000</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Diplôme : </b> <p class="pull-right">{{ parcours.diplome }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">A propos</h3>
+                        </div>
+                        <div class="box-body">
+                            <strong><i class="fa fa-book margin-r-5"></i>Intitulé</strong>
+                            <p class="text-muted">
+                                Hello World !
+                            </p>
+                            <hr>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i>Emplacement</strong>
+                            <hr>
+                            <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+                            <p>
+                                <span class="label label-danger">UI Design</span>
+                                <span class="label label-success">Coding</span>
+                                <span class="label label-info">Javascript</span>
+                                <span class="label label-warning">PHP</span>
+                                <span class="label label-primary">Node.js</span>
+                            </p>
+                            <hr>
+                            <strong><i class="fa fa-file-text-o margin-r-5"></i>Notes</strong>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    {% include ':Form:register_project.html.twig' %}
+
+{% endblock %}

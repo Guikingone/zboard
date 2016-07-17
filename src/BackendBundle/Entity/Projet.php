@@ -30,20 +30,10 @@ class Projet
     private $libelle;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours", inversedBy="projet")
+     * @ORM\JoinColumn(name="parcours_id", referencedColumnName="id")
      */
     private $parcours;
-
-    private $competences;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->competences = new ArrayCollection();
-    }
 
     /**
      * Get id
@@ -101,39 +91,5 @@ class Projet
     public function getLibelle()
     {
         return $this->libelle;
-    }
-
-    /**
-     * Add competence
-     *
-     * @param \BackendBundle\Entity\Competences $competence
-     *
-     * @return Projet
-     */
-    public function addCompetence(\BackendBundle\Entity\Competences $competence)
-    {
-        $this->competences[] = $competence;
-
-        return $this;
-    }
-
-    /**
-     * Remove competence
-     *
-     * @param \BackendBundle\Entity\Competences $competence
-     */
-    public function removeCompetence(\BackendBundle\Entity\Competences $competence)
-    {
-        $this->competences->removeElement($competence);
-    }
-
-    /**
-     * Get competences
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCompetences()
-    {
-        return $this->competences;
     }
 }

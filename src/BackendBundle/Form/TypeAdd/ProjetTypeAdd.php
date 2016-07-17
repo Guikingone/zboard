@@ -4,7 +4,6 @@ namespace BackendBundle\Form\TypeAdd;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,10 +18,10 @@ class ProjetTypeAdd extends AbstractType
     {
         $builder
             ->add('libelle', TextType::class)
-            ->add('competences', CollectionType::class, array(
-                'entry_type' => CompetencesTypeAdd::class
+            ->add('parcours', EntityType::class, array(
+                'class'              => 'BackendBundle\Entity\Projet',
+                'choice_label'       => 'libelle',
             ))
-            ->remove('parcours')
         ;
     }
 

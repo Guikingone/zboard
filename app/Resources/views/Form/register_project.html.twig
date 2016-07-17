@@ -1,0 +1,23 @@
+<!-- Modal used in order to add a project -->
+<div class="modal fade" id="myModalProjet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ajouter un projet</h4>
+            </div>
+            <div class="modal-body">
+                {{ form_start(projet) }}
+                <div class="input-group">
+                    {{ form_errors(projet.libelle) }}
+                    {{ form_label(projet.libelle, 'Nom du projet :')}}
+                    {{ form_widget(projet.libelle, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_end(projet) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>

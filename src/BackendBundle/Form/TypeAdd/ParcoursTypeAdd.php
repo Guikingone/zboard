@@ -14,6 +14,7 @@ class ParcoursTypeAdd extends AbstractType
     {
         $builder
             ->add('libelle', TextType::class)
+            ->add('diplome', TextType::class)
             ->remove('date_start')
         ;
     }

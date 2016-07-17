@@ -11,8 +11,8 @@
             </tr>
             </thead>
             <tbody>
-                <tr>
                 {% for soutenances in soutenances %}
+                <tr>
                     <td>
                         {{ soutenances.mentore.lastname }}
                     </td>
@@ -36,8 +36,8 @@
                             <span class="label label-danger">{{ soutenances.status }}</span>
                         {% endif %}
                     </td>
-                {% endfor %}
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

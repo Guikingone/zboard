@@ -1,0 +1,24 @@
+<div class="box-body">
+    <div class="table-responsive">
+        <table class="table no-margin">
+            <thead>
+            <tr>
+                <th>Nom du parcours</th>
+                <th>Niveau diplôme</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for path in path %}
+                <tr>
+                    <td>
+                        <a href="{{ path('show_parcours', {'id': path.id}) }}">{{ path.libelle }}</a>
+                    </td>
+                    <td>
+                        {{ path.diplome }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

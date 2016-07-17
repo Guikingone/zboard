@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Soutenance;
 use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
 use Symfony\Component\Form\FormFactory;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -39,11 +38,6 @@ class Back {
     protected $formFactory;
 
     /**
-     * @var Router
-     */
-    protected $router;
-
-    /**
      * @var Session
      */
     protected $session;
@@ -52,14 +46,12 @@ class Back {
      * Back constructor.
      * @param EntityManager $doctrine
      * @param FormFactory $formFactory
-     * @param Router $router
      * @param Session $session
      */
-    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Router $router, Session $session)
+    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Session $session)
     {
         $this->doctrine = $doctrine;
         $this->formFactory = $formFactory;
-        $this->router = $router;
         $this->session = $session;
     }
 
@@ -84,6 +76,16 @@ class Back {
     }
 
     /**
+     * Allow the back to get all the paths.
+     *
+     * @return array|\BackendBundle\Entity\Parcours[]
+     */
+    public function getParcours()
+    {
+        return $this->doctrine->getRepository('BackendBundle:Parcours')->findAll();
+    }
+
+    /**
      * Allow the back to get all the soutenances.
      *
      * @return array|\MentoratBundle\Entity\Soutenance[]
@@ -101,17 +103,6 @@ class Back {
     public function getMentoratInformations()
     {
         return $this->doctrine->getRepository('BackendBundle:InformationMentorat')->findAll();
-    }
-
-    /**
-     * Allow to find a student by is name in order to show details.
-     *
-     * @param $id
-     * @return array|\MentoratBundle\Entity\Mentore[]
-     */
-    public function viewMentore($id)
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->find($id);
     }
 
     /**
@@ -275,5 +266,27 @@ class Back {
             $this->session->getFlashBag()->add('success', 'Soutenance ajoutée !');
         }
         return $form;
+    }
+
+    /**
+     * Allow to find a student by is name in order to show details.
+     *
+     * @param $id
+     * @return array|\MentoratBundle\Entity\Mentore[]
+     */
+    public function viewMentore($id)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Mentore')->find($id);
+    }
+
+    /**
+     * Allow to find a path by is id | $id.
+     *
+     * @param $id
+     * @return array|\BackendBundle\Entity\Parcours[]
+     */
+    public function viewParcours($id)
+    {
+        return $this->doctrine->getRepository('BackendBundle:Parcours')->find($id);
     }
 }

@@ -1,6 +1,6 @@
 {% extends 'Layout/admin.html.twig' %}
 
-{% block title %} - Suivi des élèves{% endblock %}
+{% block title %} - Parcours{% endblock %}
 
 {% block admin_body %}
     {% for message in app.session.flashbag.get('success') %}
@@ -12,8 +12,11 @@
     {% endfor %}
     <div class="row">
         <div class="col-xs-12">
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
-                Ajouter un élève
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalParcours">
+                Ajouter un parcours
+            </button>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalFinanceur">
+                Ajouter un financeur
             </button>
         </div>
     </div>
@@ -22,19 +25,15 @@
         <div class="col-xs-12">
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Liste des mentores</h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                    </div>
+                    <h3 class="box-title">Liste des parcours</h3>
                 </div>
 
-                {% include ':BackBundle/Elements:box_mentores.html.twig' %}
+                {% include 'BackBundle/Elements/box_parcours.html.twig' %}
 
             </div>
         </div>
     </div>
 
-    {% include ':Form:register_student.html.twig' %}
+    {% include ':Form:register_entity.html.twig' %}
 
 {% endblock %}

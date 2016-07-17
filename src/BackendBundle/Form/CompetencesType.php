@@ -20,10 +20,6 @@ class CompetencesType extends AbstractType
                 'class' => 'BackendBundle\Entity\Competences',
                 'choice_label' => 'libelle'
             ))
-            ->add('projet', EntityType::class, array(
-                'class' => 'BackendBundle\Entity\Projet',
-                'choice_label' => 'libelle'
-            ))
         ;
     }
     

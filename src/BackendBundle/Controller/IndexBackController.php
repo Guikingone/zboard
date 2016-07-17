@@ -22,6 +22,7 @@ class IndexBackController extends Controller
     }
 
     /**
+     * @param Request $request
      * @Route("/list/mentors", name="gestion_mentors")
      * @Template("BackBundle/Action/list_mentors.html.twig")
      */
@@ -33,6 +34,19 @@ class IndexBackController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @Route("/list/mentore", name="gestion_mentores")
+     * @Template("BackBundle/Action/list_mentores.html.twig")
+     */
+    public function showMentoreAction(Request $request)
+    {
+        $mentores   = $this->get('core.back')->getMentores();
+        $nMentore   = $this->get('core.back')->addMentore($request);
+        return array( 'mentores' => $mentores, 'nMentore' => $nMentore->createView() );
+    }
+
+    /**
+     * @param Request $request
      * @Route("/list/soutenances", name="gestion_soutenances")
      * @Template("BackBundle/Action/list_soutenances.html.twig")
      */
@@ -44,22 +58,18 @@ class IndexBackController extends Controller
     }
 
     /**
-     * @Route("/list/mentore", name="gestion_mentores")
-     * @Template("BackBundle/Action/list_mentores.html.twig")
+     * @param Request $request
+     * @Route("/list/parcours", name="gestion_parcours")
+     * @template("BackBundle/Action/list_parcours.html.twig")
      */
-    public function showMentoreAction(Request $request)
+    public function showParcoursActions(Request $request)
     {
-        $mentores   = $this->get('core.back')->getMentores();
-        $nMentore   = $this->get('core.back')->addMentore($request);
         $parcours   = $this->get('core.back')->addParcours($request);
+        $path       = $this->get('core.back')->getParcours();
         $financeur  = $this->get('core.back')->addFinancement($request);
         $pays       = $this->get('core.back')->addCountry($request);
-        $projet     = $this->get('core.back')->addProject($request);
-        $compt      = $this->get('core.back')->addCompetences($request);
-        return array( 'mentores' => $mentores, 'nMentore' => $nMentore->createView(),
-                      'parcours' => $parcours->createView(), 'financeur' => $financeur->createView(),
-                      'pays' => $pays->createView(), 'projet' => $projet->createView(),
-                      'competences' => $compt->createView() );
+        return array( 'parcours' => $parcours->createView(), 'path' => $path,
+                      'financeur' => $financeur->createView(), 'pays' => $pays->createView() );
     }
 
     /**

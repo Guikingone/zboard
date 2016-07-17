@@ -17,7 +17,6 @@ class CompetencesTypeAdd extends AbstractType
     {
         $builder
             ->add('libelle', TextareaType::class)
-            ->remove('projet')
         ;
     }
 
