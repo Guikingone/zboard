@@ -99,9 +99,9 @@
                         {{ form_widget(projet.libelle, {'attr': {'class': 'form-control'}}) }}
                     </div>
                     <div class="input-group">
-                        {{ form_errors(projet.competences) }}
-                        {{ form_label(projet.competences, 'Ajouter une compétence à valider')}}
-                        {{ form_widget(projet.competences, {'attr': {'class': 'form-control'}}) }}
+                        {% for competences in projet.competences %}
+                            {{ form_row(competences.libelle) }}
+                        {% endfor %}
                     </div>
                     <br>
                     <button type="submit" class="btn btn-warning">Enregistrer</button>

@@ -24,13 +24,8 @@
                     {{ form_widget(mentor.email, {'attr': {'class': 'form-control'}}) }}
                 </div>
                 <div class="input-group">
-                    {{ form_errors(mentor.username) }}
-                    {{ form_label(mentor.username, 'Pseudo (Obligatoire !)')}}
-                    {{ form_widget(mentor.username, {'attr': {'class': 'form-control'}}) }}
-                </div>
-                <div class="input-group">
                     {{ form_errors(mentor.address) }}
-                    {{ form_label(mentor.address, 'Address')}}
+                    {{ form_label(mentor.address, 'Addresse')}}
                     {{ form_widget(mentor.address, {'attr': {'class': 'form-control'}}) }}
                 </div>
                 <div class="input-group">
@@ -57,16 +52,6 @@
                     {{ form_errors(mentor.country) }}
                     {{ form_label(mentor.country, 'Pays')}}
                     {{ form_widget(mentor.country, {'attr': {'class': 'form-control'}}) }}
-                </div>
-                <div class="input-group">
-                    {{ form_errors(mentor.plainPassword.first) }}
-                    {{ form_label(mentor.plainPassword.first, 'Mot de passe')}}
-                    {{ form_widget(mentor.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
-                </div>
-                <div class="input-group">
-                    {{ form_errors(mentor.plainPassword.second) }}
-                    {{ form_label(mentor.plainPassword.second, 'Valider le mot de passe')}}
-                    {{ form_widget(mentor.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
                 </div>
                 <br>
                 <div class="text-center">

@@ -20,6 +20,7 @@ class RegistrationType extends AbstractType
             ->add('zipcode', TextType::class)
             ->add('city', TextType::class)
             ->add('phone', TextType::class)
+            ->remove('username')
             ->add('available', ChoiceType::class, array(
                 'choices' => array(
                     'Oui' => true,
@@ -30,6 +31,8 @@ class RegistrationType extends AbstractType
                 'class' => 'BackendBundle\Entity\Country',
                 'choice_label' => 'libelle',
             ))
+            ->remove('plainPassword')
+            ->remove('plainPassword_confirmation')
             ;
     }
 

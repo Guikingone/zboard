@@ -63,7 +63,6 @@ class Back {
         $this->session = $session;
     }
 
-
     /**
      * Allow the back to get all the mentors.
      *
@@ -136,7 +135,8 @@ class Back {
     }
 
     /**
-     * Allow to create a new instance of Mentor.
+     * Allow to create a new instance of Mentor, in order to be fast and effective, the registration of a new mentor
+     * doesn't require that the back enter a Username or a Password, this tasks are handled by the system.
      *
      * @param Request $request
      * @return \Symfony\Component\Form\FormInterface
@@ -148,7 +148,8 @@ class Back {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $mentor->setUsername($mentor->getFirstName() . '_' . $mentor->getLastName());
+            $mentor->setUsername(strtolower($mentor->getFirstName() . '_' . $mentor->getLastName()));
+            $mentor->setPlainPassword(strtolower($mentor->getFirstName() . '_' . $mentor->getLastName()));
             $this->doctrine->persist($mentor);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', "Mentor enregistré.");

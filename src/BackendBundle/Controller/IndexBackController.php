@@ -24,7 +24,6 @@ class IndexBackController extends Controller
     /**
      * @Route("/list/mentors", name="gestion_mentors")
      * @Template("BackBundle/Action/list_mentors.html.twig")
-     * @Method("GET")
      */
     public function showMentorsAction(Request $request)
     {

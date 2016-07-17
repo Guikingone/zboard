@@ -2,6 +2,7 @@
 
 namespace BackendBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,10 +35,15 @@ class Projet
      */
     private $parcours;
 
-    /**
-     * @ORM\OneToMany(targetEntity="BackendBundle\Entity\Competences", mappedBy="projet")
-     */
     private $competences;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->competences = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -95,13 +101,6 @@ class Projet
     public function getLibelle()
     {
         return $this->libelle;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->competences = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

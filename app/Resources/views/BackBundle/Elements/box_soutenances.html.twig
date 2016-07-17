@@ -26,7 +26,15 @@
                         {{ soutenances.projet }}
                     </td>
                     <td>
-                        A définir
+                        {% if soutenances.status == 'En attente' %}
+                            <span class="label label-warning">{{ soutenances.status }}</span>
+                        {% elseif soutenances.status == 'En cours' %}
+                            <span class="label label-warning">{{ soutenances.status }}</span>
+                        {% elseif soutenances.status == 'Validé' %}
+                            <span class="label label-success">{{ soutenances.status }}</span>
+                        {% elseif soutenances.status == 'A revoir' %}
+                            <span class="label label-danger">{{ soutenances.status }}</span>
+                        {% endif %}
                     </td>
                 {% endfor %}
                 </tr>

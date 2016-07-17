@@ -29,12 +29,6 @@ class Competences
     private $libelle;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Projet", inversedBy="competences")
-     * @ORM\JoinColumn(name="projet_id", referencedColumnName="id")
-     */
-    private $projet;
-
-    /**
      * Get id
      *
      * @return int
