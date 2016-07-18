@@ -25,20 +25,14 @@
                         <div class="box-body box-profile">
                             <h3 class="profile-username text-center"><p>Liste des projets</p></h3>
                             <ul class="list-group list-group-unbordered">
-                                <li class="list-group-item">
-                                    <b>Nombre d'élève ayant choisi ce parcours</b> <a class="pull-right">30 000</a>
-                                </li>
-                                {% for projet in parcours %}
+                                {% for projets in projets %}
                                     <li class="list-group-item">
-                                        <b>Nombre d'élève ayant terminé ce projet</b> <a class="pull-right">30 000</a>
+                                        <b>{{ projets.libelle }}</b> <a href="#" class="pull-right" data-toggle="modal" data-target="#myModalCompetences">Ajouter des compétences</a>
+                                        <br>
+                                        <br>
+                                        <a href="#" data-toggle="modal" data-target="#myModalShowCompetences">Voir les compétences</a>
                                     </li>
                                 {% endfor %}
-                                <li class="list-group-item">
-                                    <b>Nombre d'élève ayant choisi ce parcours</b> <a class="pull-right">30 000</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Diplôme : </b> <p class="pull-right">{{ parcours.diplome }}</p>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -73,5 +67,9 @@
     </div>
 
     {% include ':Form:register_project.html.twig' %}
+
+    {% include ':Form:register_competences.html.twig' %}
+
+    {% include ':Form:show_competences.html.twig' %}
 
 {% endblock %}

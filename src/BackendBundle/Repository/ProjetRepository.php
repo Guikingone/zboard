@@ -10,4 +10,12 @@ namespace BackendBundle\Repository;
  */
 class ProjetRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getProjetByParcours($parcours)
+    {
+        return $this->createQueryBuilder('p')
+                    ->where('p.parcours = :parcours')
+                        ->setParameter('parcours', $parcours)
+                    ->getQuery()
+                    ->getResult();
+    }
 }

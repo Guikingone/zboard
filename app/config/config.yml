@@ -75,5 +75,7 @@ fos_user:
     user_class: UserBundle\Entity\User
     # Allow to surcharge the basic FOS RegisterForm
     registration:
+       confirmation:
+           enabled: true
        form:
-          type: UserBundle\Form\RegistrationType
+           type: UserBundle\Form\RegistrationType

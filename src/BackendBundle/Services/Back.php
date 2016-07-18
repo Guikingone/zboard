@@ -85,6 +85,18 @@ class Back
     }
 
     /**
+     * Allow th back to get access to the project linked to a path.
+     *
+     * @param $id
+     *
+     * @return array
+     */
+    public function getProjet($id)
+    {
+        return $this->doctrine->getRepository('BackendBundle:Projet')->getProjetByParcours($id);
+    }
+
+    /**
      * Allow the back to get all the soutenances.
      *
      * @return array|\MentoratBundle\Entity\Soutenance[]

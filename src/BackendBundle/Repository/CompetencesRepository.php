@@ -10,4 +10,12 @@ namespace BackendBundle\Repository;
  */
 class CompetencesRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getCompetencesByProject($id)
+    {
+        return $this->createQueryBuilder('c')
+                    ->where('c.projet = :projet')
+                        ->setParameter('projet', $id)
+                    ->getQuery()
+                    ->getResult();
+    }
 }

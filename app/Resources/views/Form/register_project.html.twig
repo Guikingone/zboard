@@ -13,6 +13,13 @@
                     {{ form_label(projet.libelle, 'Nom du projet :')}}
                     {{ form_widget(projet.libelle, {'attr': {'class': 'form-control'}}) }}
                 </div>
+                <div class="input-group">
+                    {{ form_errors(projet.parcours) }}
+                    {{ form_label(projet.parcours, 'Nom du parcours lié :')}}
+                    {{ form_widget(projet.parcours, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <br>
+                <button type="submit" class="btn btn-warning">Enregistrer</button>
                 {{ form_end(projet) }}
             </div>
             <div class="modal-footer">

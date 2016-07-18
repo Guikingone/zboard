@@ -21,6 +21,13 @@ class ShowBackController extends Controller
         $parcours = $this->get('core.back')->viewParcours($id);
         $projet = $this->get('core.back')->addProject($request);
 
-        return array('parcours' => $parcours, 'projet' => $projet->createView());
+        // Used to find all the projects linked to the path.
+        $id = $request->attributes->get('id');
+
+        $projets = $this->get('core.back')->getProjet($id);
+        $competences = $this->get('core.back')->addCompetences($request);
+
+        return array('parcours' => $parcours, 'projet' => $projet->createView(),
+                      'projets' => $projets, 'competences' => $competences->createView(), );
     }
 }

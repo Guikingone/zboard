@@ -35,6 +35,11 @@ class Projet
     private $parcours;
 
     /**
+     * @ORM\OneToMany(targetEntity="BackendBundle\Entity\Competences", mappedBy="projet")
+     */
+    private $competences;
+
+    /**
      * Get id.
      *
      * @return int
@@ -90,5 +95,46 @@ class Projet
     public function getLibelle()
     {
         return $this->libelle;
+    }
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->competences = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add competence.
+     *
+     * @param \BackendBundle\Entity\Competences $competence
+     *
+     * @return Projet
+     */
+    public function addCompetence(\BackendBundle\Entity\Competences $competence)
+    {
+        $this->competences[] = $competence;
+
+        return $this;
+    }
+
+    /**
+     * Remove competence.
+     *
+     * @param \BackendBundle\Entity\Competences $competence
+     */
+    public function removeCompetence(\BackendBundle\Entity\Competences $competence)
+    {
+        $this->competences->removeElement($competence);
+    }
+
+    /**
+     * Get competences.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCompetences()
+    {
+        return $this->competences;
     }
 }
