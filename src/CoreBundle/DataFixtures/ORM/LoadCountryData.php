@@ -3,8 +3,9 @@
  * Created by PhpStorm.
  * User: Audrophe
  * Date: 11/07/2016
- * Time: 22:53
+ * Time: 22:53.
  */
+
 namespace CoreBundle\DataFixtures\ORM;
 
 use BackendBundle\Entity\Country;
@@ -25,11 +26,11 @@ class LoadCountryData implements FixtureInterface, ContainerAwareInterface, Orde
 
     public function load(ObjectManager $manager)
     {
-        $france= new Country();
-        $france->setLibelle("france");
+        $france = new Country();
+        $france->setLibelle('france');
 
-        $canada= new Country();
-        $canada->setLibelle("canada");
+        $canada = new Country();
+        $canada->setLibelle('canada');
 
         $manager->persist($france);
         $manager->persist($canada);

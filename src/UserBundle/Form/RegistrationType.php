@@ -7,7 +7,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
 
 class RegistrationType extends AbstractType
 {
@@ -46,7 +45,7 @@ class RegistrationType extends AbstractType
         return 'app_user_registration';
     }
 
-        public function getName()
+    public function getName()
     {
         return 'user_bundle_registration_type';
     }

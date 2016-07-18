@@ -5,7 +5,7 @@ namespace MentoratBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Suivi
+ * Suivi.
  *
  * @ORM\Table(name="zboard_suivi")
  * @ORM\Entity(repositoryClass="MentoratBundle\Repository\SuiviRepository")
@@ -46,9 +46,8 @@ class Suivi
      */
     private $state;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -58,7 +57,7 @@ class Suivi
     }
 
     /**
-     * Set dUpdate
+     * Set dUpdate.
      *
      * @param \DateTime $dUpdate
      *
@@ -72,7 +71,7 @@ class Suivi
     }
 
     /**
-     * Get dUpdate
+     * Get dUpdate.
      *
      * @return \DateTime
      */
@@ -82,7 +81,7 @@ class Suivi
     }
 
     /**
-     * Set mentor
+     * Set mentor.
      *
      * @param \UserBundle\Entity\User $mentor
      *
@@ -96,7 +95,7 @@ class Suivi
     }
 
     /**
-     * Get mentor
+     * Get mentor.
      *
      * @return \UserBundle\Entity\User
      */
@@ -106,7 +105,7 @@ class Suivi
     }
 
     /**
-     * Set mentore
+     * Set mentore.
      *
      * @param \MentoratBundle\Entity\Mentore $mentore
      *
@@ -120,7 +119,7 @@ class Suivi
     }
 
     /**
-     * Get mentore
+     * Get mentore.
      *
      * @return \MentoratBundle\Entity\Mentore
      */
@@ -130,7 +129,7 @@ class Suivi
     }
 
     /**
-     * Set state
+     * Set state.
      *
      * @param \BackendBundle\Entity\StateRelationship $state
      *
@@ -144,7 +143,7 @@ class Suivi
     }
 
     /**
-     * Get state
+     * Get state.
      *
      * @return \BackendBundle\Entity\StateRelationship
      */

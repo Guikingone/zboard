@@ -5,7 +5,7 @@ namespace BackendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Financement
+ * Financement.
  *
  * @ORM\Table(name="financement")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\FinancementRepository")
@@ -22,7 +22,7 @@ class Financement
     private $id;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(name="is_financed", type="boolean", nullable=true)
      */
     private $isFinanced;
@@ -41,9 +41,8 @@ class Financement
      */
     private $duree;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -53,7 +52,7 @@ class Financement
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -67,7 +66,7 @@ class Financement
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */
@@ -77,7 +76,7 @@ class Financement
     }
 
     /**
-     * Set duree
+     * Set duree.
      *
      * @param string $duree
      *
@@ -91,7 +90,7 @@ class Financement
     }
 
     /**
-     * Get duree
+     * Get duree.
      *
      * @return string
      */
@@ -101,9 +100,9 @@ class Financement
     }
 
     /**
-     * Set isFinanced
+     * Set isFinanced.
      *
-     * @param boolean $isFinanced
+     * @param bool $isFinanced
      *
      * @return Financement
      */
@@ -115,9 +114,9 @@ class Financement
     }
 
     /**
-     * Get isFinanced
+     * Get isFinanced.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsFinanced()
     {

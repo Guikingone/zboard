@@ -5,7 +5,7 @@ namespace BackendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Competences
+ * Competences.
  *
  * @ORM\Table(name="competences")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\CompetencesRepository")
@@ -29,7 +29,7 @@ class Competences
     private $libelle;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -39,7 +39,7 @@ class Competences
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -53,7 +53,7 @@ class Competences
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */

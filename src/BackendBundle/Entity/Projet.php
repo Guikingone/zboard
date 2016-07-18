@@ -2,11 +2,10 @@
 
 namespace BackendBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Projet
+ * Projet.
  *
  * @ORM\Table(name="zboard_projet")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\ProjetRepository")
@@ -36,7 +35,7 @@ class Projet
     private $parcours;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -46,7 +45,7 @@ class Projet
     }
 
     /**
-     * Set parco
+     * Set parco.
      *
      * @param \BackendBundle\Entity\Parcours $parcours
      *
@@ -60,7 +59,7 @@ class Projet
     }
 
     /**
-     * Get parcours
+     * Get parcours.
      *
      * @return \BackendBundle\Entity\Parcours
      */
@@ -70,7 +69,7 @@ class Projet
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -84,7 +83,7 @@ class Projet
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */

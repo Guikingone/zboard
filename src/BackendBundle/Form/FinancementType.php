@@ -13,7 +13,7 @@ class FinancementType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -31,14 +31,14 @@ class FinancementType extends AbstractType
             ->add('duree', TextType::class)
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackendBundle\Entity\Financement'
+            'data_class' => 'BackendBundle\Entity\Financement',
         ));
     }
 }

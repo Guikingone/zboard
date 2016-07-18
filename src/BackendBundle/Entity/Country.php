@@ -5,7 +5,7 @@ namespace BackendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Country
+ * Country.
  *
  * @ORM\Table(name="zboard_country")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\CountryRepository")
@@ -29,7 +29,7 @@ class Country
     private $libelle;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -39,7 +39,7 @@ class Country
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -53,7 +53,7 @@ class Country
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */

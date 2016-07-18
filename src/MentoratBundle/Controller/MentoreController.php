@@ -18,7 +18,7 @@ class MentoreController extends Controller
     public function enCoursAction()
     {
         return array(
-            "controller" => "mentore"
+            'controller' => 'mentore',
         );
     }
 
@@ -29,7 +29,7 @@ class MentoreController extends Controller
     public function enAttenteAction()
     {
         return array(
-            "controller" => "mentore"
+            'controller' => 'mentore',
         );
     }
 
@@ -40,7 +40,7 @@ class MentoreController extends Controller
     public function mentoratFinishedAction()
     {
         return array(
-            "controller" => "mentore"
+            'controller' => 'mentore',
         );
     }
 }

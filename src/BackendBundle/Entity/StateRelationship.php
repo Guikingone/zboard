@@ -5,7 +5,7 @@ namespace BackendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * StateRelationship
+ * StateRelationship.
  *
  * @ORM\Table(name="zboard_state_relationship")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\StateRelationshipRepository")
@@ -28,9 +28,8 @@ class StateRelationship
      */
     private $libelle;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -40,7 +39,7 @@ class StateRelationship
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -54,7 +53,7 @@ class StateRelationship
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */

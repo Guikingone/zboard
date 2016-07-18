@@ -3,16 +3,10 @@
 namespace MentoratBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Form\FormFactory;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
-
 use MentoratBundle\Entity\Mentore;
 
-
-class MentoreService {
-
+class MentoreService
+{
     /**
      * @var EntityManager
      */
@@ -37,5 +31,4 @@ class MentoreService {
         return $this->doctrine->getRepository('MentoratBundle:Mentore')->findAll(
         );
     }
-
 }

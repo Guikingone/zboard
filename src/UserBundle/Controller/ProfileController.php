@@ -2,17 +2,17 @@
 
 namespace UserBundle\Controller;
 
-
 use FOS\UserBundle\Controller\ProfileController as BaseController;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class ProfileController extends BaseController{
-
+class ProfileController extends BaseController
+{
     /**
-     * Show the user
+     * Show the user.
+     *
      * @Route("/profile", name="show_profile")
      * @Template("UserBundle/Profile/show.html.twig")
      */
@@ -25,8 +25,8 @@ class ProfileController extends BaseController{
         }
 
         return array(
-            'user'          => $user,
-            'controller'    => 'user'
+            'user' => $user,
+            'controller' => 'user',
         );
     }
 }

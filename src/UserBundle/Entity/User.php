@@ -6,14 +6,13 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * User
+ * User.
  *
  * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  */
 class User extends BaseUser
 {
-
     /**
      * @var int
      *
@@ -60,7 +59,6 @@ class User extends BaseUser
      */
     private $country;
 
-
     /**
      * @var string
      * @ORM\Column(name="phone", type="string", length=40)
@@ -68,13 +66,13 @@ class User extends BaseUser
     protected $phone;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(name="available", type="boolean")
      */
     protected $available;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -89,7 +87,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set firstName
+     * Set firstName.
      *
      * @param string $firstName
      *
@@ -103,7 +101,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get firstName
+     * Get firstName.
      *
      * @return string
      */
@@ -113,7 +111,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set lastName
+     * Set lastName.
      *
      * @param string $lastName
      *
@@ -127,7 +125,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get lastName
+     * Get lastName.
      *
      * @return string
      */
@@ -137,7 +135,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set address
+     * Set address.
      *
      * @param string $address
      *
@@ -151,7 +149,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get address
+     * Get address.
      *
      * @return string
      */
@@ -161,7 +159,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set zipcode
+     * Set zipcode.
      *
      * @param string $zipcode
      *
@@ -175,7 +173,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get zipcode
+     * Get zipcode.
      *
      * @return string
      */
@@ -185,7 +183,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set city
+     * Set city.
      *
      * @param string $city
      *
@@ -199,7 +197,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get city
+     * Get city.
      *
      * @return string
      */
@@ -209,9 +207,9 @@ class User extends BaseUser
     }
 
     /**
-     * Set phone
+     * Set phone.
      *
-     * @param integer $phone
+     * @param int $phone
      *
      * @return User
      */
@@ -223,9 +221,9 @@ class User extends BaseUser
     }
 
     /**
-     * Get phone
+     * Get phone.
      *
-     * @return integer
+     * @return int
      */
     public function getPhone()
     {
@@ -233,9 +231,9 @@ class User extends BaseUser
     }
 
     /**
-     * Set available
+     * Set available.
      *
-     * @param boolean $available
+     * @param bool $available
      *
      * @return User
      */
@@ -247,9 +245,9 @@ class User extends BaseUser
     }
 
     /**
-     * Get available
+     * Get available.
      *
-     * @return boolean
+     * @return bool
      */
     public function getAvailable()
     {
@@ -257,7 +255,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set country
+     * Set country.
      *
      * @param \BackendBundle\Entity\Country $country
      *
@@ -271,7 +269,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get country
+     * Get country.
      *
      * @return \BackendBundle\Entity\Country
      */

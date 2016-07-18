@@ -2,6 +2,6 @@
 
 namespace AdminBundle\Services;
 
-class Admin {
-    
+class Admin
+{
 }

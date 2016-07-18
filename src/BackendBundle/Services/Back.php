@@ -10,7 +10,6 @@ use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-
 use BackendBundle\Entity\Financement;
 use BackendBundle\Entity\Parcours;
 use MentoratBundle\Entity\Mentore;
@@ -20,13 +19,12 @@ use BackendBundle\Form\TypeAdd\ProjetTypeAdd;
 use BackendBundle\Form\TypeAdd\FinancementTypeAdd;
 use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
 use BackendBundle\Form\TypeAdd\CountryTypeAdd;
-
 use MentoratBundle\Form\MentoreType;
 use UserBundle\Entity\User;
 use UserBundle\Form\RegistrationType;
 
-class Back {
-
+class Back
+{
     /**
      * @var EntityManager
      */
@@ -44,9 +42,10 @@ class Back {
 
     /**
      * Back constructor.
+     *
      * @param EntityManager $doctrine
-     * @param FormFactory $formFactory
-     * @param Session $session
+     * @param FormFactory   $formFactory
+     * @param Session       $session
      */
     public function __construct(EntityManager $doctrine, FormFactory $formFactory, Session $session)
     {
@@ -109,6 +108,7 @@ class Back {
      * Allow to create a new instance of Mentore.
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\Form\FormInterface
      */
     public function addMentore(Request $request)
@@ -120,8 +120,9 @@ class Back {
         if ($form->isValid()) {
             $this->doctrine->persist($mentore);
             $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', "Elève enregistré.");
+            $this->session->getFlashBag()->add('success', 'Elève enregistré.');
         }
+
         return $form;
     }
 
@@ -130,6 +131,7 @@ class Back {
      * doesn't require that the back enter a Username or a Password, this tasks are handled by the system.
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\Form\FormInterface
      */
     public function addMentor(Request $request)
@@ -139,12 +141,13 @@ class Back {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $mentor->setUsername(strtolower($mentor->getFirstName() . '_' . $mentor->getLastName()));
-            $mentor->setPlainPassword(strtolower($mentor->getFirstName() . '_' . $mentor->getLastName()));
+            $mentor->setUsername(strtolower($mentor->getFirstName().'_'.$mentor->getLastName()));
+            $mentor->setPlainPassword(strtolower($mentor->getFirstName().'_'.$mentor->getLastName()));
             $this->doctrine->persist($mentor);
             $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', "Mentor enregistré.");
+            $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
         }
+
         return $form;
     }
 
@@ -152,6 +155,7 @@ class Back {
      * Allow to add a new path.
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\Form\FormInterface
      */
     public function addParcours(Request $request)
@@ -161,10 +165,11 @@ class Back {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-           $this->doctrine->persist($parcours);
-           $this->doctrine->flush();
-           $this->session->getFlashBag()->add('success', 'Parcours ajouté !');
+            $this->doctrine->persist($parcours);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Parcours ajouté !');
         }
+
         return $form;
     }
 
@@ -172,6 +177,7 @@ class Back {
      * Allow to add a new project.
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\Form\FormInterface
      */
     public function addProject(Request $request)
@@ -185,6 +191,7 @@ class Back {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Projet ajouté !');
         }
+
         return $form;
     }
 
@@ -192,6 +199,7 @@ class Back {
      * Allow to add a new competences.
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\Form\FormInterface
      */
     public function addCompetences(Request $request)
@@ -205,6 +213,7 @@ class Back {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Competences ajouté !');
         }
+
         return $form;
     }
 
@@ -212,6 +221,7 @@ class Back {
      * Allow to add a new Financement.
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\Form\FormInterface
      */
     public function addFinancement(Request $request)
@@ -225,6 +235,7 @@ class Back {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Financeur ajouté !');
         }
+
         return $form;
     }
 
@@ -232,6 +243,7 @@ class Back {
      * Allow to add a new Country.
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\Form\FormInterface
      */
     public function addCountry(Request $request)
@@ -245,6 +257,7 @@ class Back {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Pays ajouté !');
         }
+
         return $form;
     }
 
@@ -252,6 +265,7 @@ class Back {
      * Allow to add a new soutenance between a mentor and a mentore.
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\Form\FormInterface
      */
     public function addSoutenance(Request $request)
@@ -265,6 +279,7 @@ class Back {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Soutenance ajoutée !');
         }
+
         return $form;
     }
 
@@ -272,6 +287,7 @@ class Back {
      * Allow to find a student by is name in order to show details.
      *
      * @param $id
+     *
      * @return array|\MentoratBundle\Entity\Mentore[]
      */
     public function viewMentore($id)
@@ -283,6 +299,7 @@ class Back {
      * Allow to find a path by is id | $id.
      *
      * @param $id
+     *
      * @return array|\BackendBundle\Entity\Parcours[]
      */
     public function viewParcours($id)

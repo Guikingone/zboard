@@ -12,15 +12,15 @@ class ProjetTypeAdd extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('libelle', TextType::class)
             ->add('parcours', EntityType::class, array(
-                'class'              => 'BackendBundle\Entity\Projet',
-                'choice_label'       => 'libelle',
+                'class' => 'BackendBundle\Entity\Projet',
+                'choice_label' => 'libelle',
             ))
         ;
     }
@@ -31,7 +31,7 @@ class ProjetTypeAdd extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackendBundle\Entity\Projet'
+            'data_class' => 'BackendBundle\Entity\Projet',
         ));
     }
 }

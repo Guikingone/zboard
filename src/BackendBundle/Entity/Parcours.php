@@ -5,7 +5,7 @@ namespace BackendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Parcours
+ * Parcours.
  *
  * @ORM\Table(name="zboard_parcours")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\ParcoursRepository")
@@ -47,7 +47,7 @@ class Parcours
     private $date_start;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -57,7 +57,7 @@ class Parcours
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -71,7 +71,7 @@ class Parcours
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */
@@ -81,7 +81,7 @@ class Parcours
     }
 
     /**
-     * Set dateStart
+     * Set dateStart.
      *
      * @param \DateTime $dateStart
      *
@@ -95,7 +95,7 @@ class Parcours
     }
 
     /**
-     * Get dateStart
+     * Get dateStart.
      *
      * @return \DateTime
      */
@@ -105,7 +105,7 @@ class Parcours
     }
 
     /**
-     * Set diplome
+     * Set diplome.
      *
      * @param string $diplome
      *
@@ -119,7 +119,7 @@ class Parcours
     }
 
     /**
-     * Get diplome
+     * Get diplome.
      *
      * @return string
      */
@@ -128,7 +128,7 @@ class Parcours
         return $this->diplome;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -136,7 +136,7 @@ class Parcours
     }
 
     /**
-     * Add projet
+     * Add projet.
      *
      * @param \BackendBundle\Entity\Projet $projet
      *
@@ -150,7 +150,7 @@ class Parcours
     }
 
     /**
-     * Remove projet
+     * Remove projet.
      *
      * @param \BackendBundle\Entity\Projet $projet
      */
@@ -160,7 +160,7 @@ class Parcours
     }
 
     /**
-     * Get projet
+     * Get projet.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

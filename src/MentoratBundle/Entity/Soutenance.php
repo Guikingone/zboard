@@ -5,7 +5,7 @@ namespace MentoratBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Soutenance
+ * Soutenance.
  *
  * @ORM\Table(name="zboard_soutenance")
  * @ORM\Entity(repositoryClass="MentoratBundle\Repository\SoutenanceRepository")
@@ -52,9 +52,8 @@ class Soutenance
      */
     private $status;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -64,7 +63,7 @@ class Soutenance
     }
 
     /**
-     * Set passedAt
+     * Set passedAt.
      *
      * @param \DateTime $passedAt
      *
@@ -78,7 +77,7 @@ class Soutenance
     }
 
     /**
-     * Get passedAt
+     * Get passedAt.
      *
      * @return \DateTime
      */
@@ -88,7 +87,7 @@ class Soutenance
     }
 
     /**
-     * Set mentor
+     * Set mentor.
      *
      * @param \UserBundle\Entity\User $mentor
      *
@@ -102,7 +101,7 @@ class Soutenance
     }
 
     /**
-     * Get mentor
+     * Get mentor.
      *
      * @return \UserBundle\Entity\User
      */
@@ -112,7 +111,7 @@ class Soutenance
     }
 
     /**
-     * Set projet
+     * Set projet.
      *
      * @param \BackendBundle\Entity\Projet $projet
      *
@@ -126,7 +125,7 @@ class Soutenance
     }
 
     /**
-     * Get projet
+     * Get projet.
      *
      * @return \BackendBundle\Entity\Projet
      */
@@ -136,7 +135,7 @@ class Soutenance
     }
 
     /**
-     * Set mentore
+     * Set mentore.
      *
      * @param \MentoratBundle\Entity\Mentore $mentore
      *
@@ -150,7 +149,7 @@ class Soutenance
     }
 
     /**
-     * Get mentore
+     * Get mentore.
      *
      * @return \MentoratBundle\Entity\Mentore
      */
@@ -160,7 +159,7 @@ class Soutenance
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param string $status
      *
@@ -174,7 +173,7 @@ class Soutenance
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return string
      */

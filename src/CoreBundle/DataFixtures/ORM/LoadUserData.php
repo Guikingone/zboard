@@ -3,8 +3,9 @@
  * Created by PhpStorm.
  * User: Audrophe
  * Date: 11/07/2016
- * Time: 22:53
+ * Time: 22:53.
  */
+
 namespace CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -27,12 +28,12 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         // Get our userManager, you must implement `ContainerAwareInterface`
         $userManager = $this->privateContainer->get('fos_user.user_manager');
 
-        $france = $this->privateContainer->get("doctrine")->getManager()->getRepository("BackendBundle:Country")->findOneBy(array(
-            'libelle' => 'france'
+        $france = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Country')->findOneBy(array(
+            'libelle' => 'france',
         ));
 
-        $canada = $this->privateContainer->get("doctrine")->getManager()->getRepository("BackendBundle:Country")->findOneBy(array(
-            'libelle' => 'canada'
+        $canada = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Country')->findOneBy(array(
+            'libelle' => 'canada',
         ));
 
         // Création de notre utilisateur ADMIN
@@ -42,12 +43,12 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $userAdmin->setLastname('Doe');
         $userAdmin->setEmail('contact@zboard.fr');
         $userAdmin->setPlainPassword('admin');
-        $userAdmin->setAddress("3 rue LABAS");
-        $userAdmin->setZipCode("44300");
-        $userAdmin->setCity("nantes");
+        $userAdmin->setAddress('3 rue LABAS');
+        $userAdmin->setZipCode('44300');
+        $userAdmin->setCity('nantes');
         $userAdmin->setCountry($france);
         $userAdmin->setEnabled(true);
-        $userAdmin->setPhone("06.06.06.06.06");
+        $userAdmin->setPhone('06.06.06.06.06');
         $userAdmin->setRoles(array('ROLE_ADMIN'));
         $userAdmin->setAvailable(true);
 
@@ -58,12 +59,12 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $mentor->setLastname('Chan');
         $mentor->setEmail('mentor@zboard.fr');
         $mentor->setPlainPassword('mentor');
-        $mentor->setAddress("3 rue LABAS");
-        $mentor->setZipCode("44390");
-        $mentor->setCity("nantes");
+        $mentor->setAddress('3 rue LABAS');
+        $mentor->setZipCode('44390');
+        $mentor->setCity('nantes');
         $mentor->setCountry($canada);
         $mentor->setEnabled(true);
-        $mentor->setPhone("02.22.01.05.06");
+        $mentor->setPhone('02.22.01.05.06');
         $mentor->setRoles(array('ROLE_MENTOR'));
         $mentor->setAvailable(true);
 
@@ -74,12 +75,12 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $supervisteurMentor->setLastname('Chan');
         $supervisteurMentor->setEmail('smentor@zboard.fr');
         $supervisteurMentor->setPlainPassword('severine');
-        $supervisteurMentor->setAddress("4 rue LABAS");
-        $supervisteurMentor->setZipCode("44290");
-        $supervisteurMentor->setCity("nantes");
+        $supervisteurMentor->setAddress('4 rue LABAS');
+        $supervisteurMentor->setZipCode('44290');
+        $supervisteurMentor->setCity('nantes');
         $supervisteurMentor->setCountry($canada);
         $supervisteurMentor->setEnabled(true);
-        $supervisteurMentor->setPhone("02.22.29.05.06");
+        $supervisteurMentor->setPhone('02.22.29.05.06');
         $supervisteurMentor->setRoles(array('ROLE_SUPERVISEUR_MENTOR'));
         $supervisteurMentor->setAvailable(true);
 

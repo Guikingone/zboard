@@ -3,14 +3,14 @@
  * Created by PhpStorm.
  * User: Audrophe
  * Date: 11/07/2016
- * Time: 22:53
+ * Time: 22:53.
  */
+
 namespace CoreBundle\DataFixtures\ORM;
 
 use BackendBundle\Entity\StateRelationship;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use MentoratBundle\Entity\Parcours;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -26,12 +26,11 @@ class LoadStateData implements FixtureInterface, ContainerAwareInterface, Ordere
 
     public function load(ObjectManager $manager)
     {
+        $enCours = new StateRelationship();
+        $enCours->setLibelle('En cours');
 
-        $enCours= new StateRelationship();
-        $enCours->setLibelle("En cours");
-
-        $finish= new StateRelationship();
-        $finish->setLibelle("Terminé");
+        $finish = new StateRelationship();
+        $finish->setLibelle('Terminé');
 
         $manager->persist($enCours);
         $manager->persist($finish);

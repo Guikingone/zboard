@@ -16,9 +16,10 @@ class IndexBackController extends Controller
      */
     public function indexAction()
     {
-        $mentors    = $this->get('core.back')->getMentors();
-        $mentores   = $this->get('core.back')->getMentores();
-        return array( 'mentors' => $mentors, 'mentores' => $mentores );
+        $mentors = $this->get('core.back')->getMentors();
+        $mentores = $this->get('core.back')->getMentores();
+
+        return array('mentors' => $mentors, 'mentores' => $mentores);
     }
 
     /**
@@ -28,9 +29,10 @@ class IndexBackController extends Controller
      */
     public function showMentorsAction(Request $request)
     {
-        $mentors    = $this->get('core.back')->getMentors();
-        $mentor     = $this->get('core.back')->addMentor($request);
-        return array( 'mentors' => $mentors, 'mentor' => $mentor->createView() );
+        $mentors = $this->get('core.back')->getMentors();
+        $mentor = $this->get('core.back')->addMentor($request);
+
+        return array('mentors' => $mentors, 'mentor' => $mentor->createView());
     }
 
     /**
@@ -40,9 +42,10 @@ class IndexBackController extends Controller
      */
     public function showMentoreAction(Request $request)
     {
-        $mentores   = $this->get('core.back')->getMentores();
-        $nMentore   = $this->get('core.back')->addMentore($request);
-        return array( 'mentores' => $mentores, 'nMentore' => $nMentore->createView() );
+        $mentores = $this->get('core.back')->getMentores();
+        $nMentore = $this->get('core.back')->addMentore($request);
+
+        return array('mentores' => $mentores, 'nMentore' => $nMentore->createView());
     }
 
     /**
@@ -53,8 +56,9 @@ class IndexBackController extends Controller
     public function showSoutenancesMentorsAction(Request $request)
     {
         $soutenances = $this->get('core.back')->getSoutenances();
-        $soutenance  = $this->get('core.back')->addSoutenance($request);
-        return array( 'soutenances' => $soutenances, 'soutenance' => $soutenance->createView() );
+        $soutenance = $this->get('core.back')->addSoutenance($request);
+
+        return array('soutenances' => $soutenances, 'soutenance' => $soutenance->createView());
     }
 
     /**
@@ -64,12 +68,12 @@ class IndexBackController extends Controller
      */
     public function showParcoursActions(Request $request)
     {
-        $parcours   = $this->get('core.back')->addParcours($request);
-        $path       = $this->get('core.back')->getParcours();
-        $financeur  = $this->get('core.back')->addFinancement($request);
-        $pays       = $this->get('core.back')->addCountry($request);
-        return array( 'parcours' => $parcours->createView(), 'path' => $path,
-                      'financeur' => $financeur->createView(), 'pays' => $pays->createView() );
+        $parcours = $this->get('core.back')->addParcours($request);
+        $path = $this->get('core.back')->getParcours();
+        $financeur = $this->get('core.back')->addFinancement($request);
+
+        return array('parcours' => $parcours->createView(), 'path' => $path,
+                      'financeur' => $financeur->createView(), );
     }
 
     /**
@@ -80,6 +84,7 @@ class IndexBackController extends Controller
     public function detailsMentoreAction($id)
     {
         $mentores = $this->get('core.back')->viewMentore($id);
-        return array( 'mentores' => $mentores );
+
+        return array('mentores' => $mentores);
     }
 }

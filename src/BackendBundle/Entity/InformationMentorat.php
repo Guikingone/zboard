@@ -5,7 +5,7 @@ namespace BackendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * InformationMentorat
+ * InformationMentorat.
  *
  * @ORM\Table(name="zboard_information_mentorat")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\InformationMentoratRepository")
@@ -62,9 +62,8 @@ class InformationMentorat
      */
     private $author;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -74,7 +73,7 @@ class InformationMentorat
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      *
@@ -88,7 +87,7 @@ class InformationMentorat
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -98,7 +97,7 @@ class InformationMentorat
     }
 
     /**
-     * Set body
+     * Set body.
      *
      * @param string $body
      *
@@ -112,7 +111,7 @@ class InformationMentorat
     }
 
     /**
-     * Get body
+     * Get body.
      *
      * @return string
      */
@@ -122,7 +121,7 @@ class InformationMentorat
     }
 
     /**
-     * Set dCreated
+     * Set dCreated.
      *
      * @param \DateTime $dCreated
      *
@@ -136,7 +135,7 @@ class InformationMentorat
     }
 
     /**
-     * Get dCreated
+     * Get dCreated.
      *
      * @return \DateTime
      */
@@ -146,7 +145,7 @@ class InformationMentorat
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *
@@ -160,7 +159,7 @@ class InformationMentorat
     }
 
     /**
-     * Get updated
+     * Get updated.
      *
      * @return \DateTime
      */
@@ -170,9 +169,9 @@ class InformationMentorat
     }
 
     /**
-     * Set enabled
+     * Set enabled.
      *
-     * @param boolean $enabled
+     * @param bool $enabled
      *
      * @return InformationMentorat
      */
@@ -184,7 +183,7 @@ class InformationMentorat
     }
 
     /**
-     * Get enabled
+     * Get enabled.
      *
      * @return bool
      */
@@ -194,7 +193,7 @@ class InformationMentorat
     }
 
     /**
-     * Set author
+     * Set author.
      *
      * @param \UserBundle\Entity\User $author
      *
@@ -208,7 +207,7 @@ class InformationMentorat
     }
 
     /**
-     * Get author
+     * Get author.
      *
      * @return \UserBundle\Entity\User
      */
