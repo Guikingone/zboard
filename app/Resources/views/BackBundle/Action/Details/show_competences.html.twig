@@ -7,9 +7,11 @@
                 <h4 class="modal-title" id="myModalLabel">Liste des compétences</h4>
             </div>
             <div class="modal-body">
-                {% for competences in projets %}
-                    <li>{{ competences.libelle }}</li>
-                {% endfor %}
+                <ul>
+                    {% for competence in competence %}
+                        <li>{{ competence.libelle }}</li>
+                    {% endfor %}
+                </ul>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>

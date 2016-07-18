@@ -25,9 +25,11 @@ class ShowBackController extends Controller
         $id = $request->attributes->get('id');
 
         $projets = $this->get('core.back')->getProjet($id);
+        $competence = $this->getDoctrine()->getManager()->getRepository('BackendBundle:Competences')->findBy(array('projet' => $projets));
         $competences = $this->get('core.back')->addCompetences($request);
 
         return array('parcours' => $parcours, 'projet' => $projet->createView(),
-                      'projets' => $projets, 'competences' => $competences->createView(), );
+                      'projets' => $projets, 'competence' => $competence,
+                      'competences' => $competences->createView(), );
     }
 }

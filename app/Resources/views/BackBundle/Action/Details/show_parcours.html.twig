@@ -3,6 +3,13 @@
 {% block title %} - {{ parcours.libelle }}{% endblock %}
 
 {% block admin_body %}
+    {% for message in app.session.flashbag.get('success') %}
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i>Information</h4>
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="content-wrapper">
         <section class="content">
             <div class="row">
@@ -17,6 +24,14 @@
                                 <li class="list-group-item">
                                     <b>Diplôme : </b> <p class="pull-right">{{ parcours.diplome }}</p>
                                 </li>
+                                <li class="list-group-item">
+                                    <b>Résumé :</b>
+                                    <p class="pull-right"></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Technologies utilisées :</b>
+                                    <p class="pull-right"></p>
+                                </li>
                             </ul>
                             <a href="#" data-toggle="modal" data-target="#myModalProjet" class="btn btn-primary btn-block"><b>Ajouter un projet</b></a>
                         </div>
@@ -28,37 +43,14 @@
                                 {% for projets in projets %}
                                     <li class="list-group-item">
                                         <b>{{ projets.libelle }}</b> <a href="#" class="pull-right" data-toggle="modal" data-target="#myModalCompetences">Ajouter des compétences</a>
-                                        <br>
-                                        <br>
-                                        <a href="#" data-toggle="modal" data-target="#myModalShowCompetences">Voir les compétences</a>
+                                        {% for competence in competence %}
+                                            <ul>
+                                                <li>{{ competence.libelle }}</li>
+                                            </ul>
+                                        {% endfor %}
                                     </li>
                                 {% endfor %}
                             </ul>
-                        </div>
-                    </div>
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">A propos</h3>
-                        </div>
-                        <div class="box-body">
-                            <strong><i class="fa fa-book margin-r-5"></i>Intitulé</strong>
-                            <p class="text-muted">
-                                Hello World !
-                            </p>
-                            <hr>
-                            <strong><i class="fa fa-map-marker margin-r-5"></i>Emplacement</strong>
-                            <hr>
-                            <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-                            <p>
-                                <span class="label label-danger">UI Design</span>
-                                <span class="label label-success">Coding</span>
-                                <span class="label label-info">Javascript</span>
-                                <span class="label label-warning">PHP</span>
-                                <span class="label label-primary">Node.js</span>
-                            </p>
-                            <hr>
-                            <strong><i class="fa fa-file-text-o margin-r-5"></i>Notes</strong>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
                         </div>
                     </div>
                 </div>
@@ -69,7 +61,5 @@
     {% include ':Form:register_project.html.twig' %}
 
     {% include ':Form:register_competences.html.twig' %}
-
-    {% include ':Form:show_competences.html.twig' %}
 
 {% endblock %}

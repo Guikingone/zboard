@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\AppBundle\Functionnal\Route;
+namespace tests\AppBundle\Functionnal\Route;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -36,7 +36,7 @@ class RouteControllerTest extends WebTestCase
             array('/dashboard/infos'),
             array('/dashboard/mes-mentores/en-cours'),
             array('/dashboard/mes-mentores/en-attente'),
-            array('/dashboard/mes-mentores/mentorat-termine')
+            array('/dashboard/mes-mentores/mentorat-termine'),
         );
     }
 }
