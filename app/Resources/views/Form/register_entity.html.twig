@@ -19,6 +19,11 @@
                         {{ form_label(parcours.diplome, 'Niveau du diplôme')}}
                         {{ form_widget(parcours.diplome, {'attr': {'class': 'form-control'}}) }}
                     </div>
+                    <div class="input-group">
+                        {{ form_errors(parcours.abonnement) }}
+                        {{ form_label(parcours.abonnement, 'Abonnement demandé :')}}
+                        {{ form_widget(parcours.abonnement, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                     <br>
                     <button type="submit" class="btn btn-warning">Enregistrer</button>
                     {{ form_end(parcours) }}

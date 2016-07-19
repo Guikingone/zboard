@@ -40,6 +40,12 @@ class Parcours
     private $projet;
 
     /**
+     * @ORM\OneToOne(targetEntity="BackendBundle\Entity\Abonnement")
+     * @ORM\JoinColumn(name="abonnement_id", referencedColumnName="id")
+     */
+    private $abonnement;
+
+    /**
      * Get id.
      *
      * @return int
@@ -71,30 +77,6 @@ class Parcours
     public function getLibelle()
     {
         return $this->libelle;
-    }
-
-    /**
-     * Set dateStart.
-     *
-     * @param \DateTime $dateStart
-     *
-     * @return Parcours
-     */
-    public function setDateStart($dateStart)
-    {
-        $this->date_start = $dateStart;
-
-        return $this;
-    }
-
-    /**
-     * Get dateStart.
-     *
-     * @return \DateTime
-     */
-    public function getDateStart()
-    {
-        return $this->date_start;
     }
 
     /**
@@ -160,5 +142,29 @@ class Parcours
     public function getProjet()
     {
         return $this->projet;
+    }
+
+    /**
+     * Set abonnement.
+     *
+     * @param \BackendBundle\Entity\Abonnement $abonnement
+     *
+     * @return Parcours
+     */
+    public function setAbonnement(\BackendBundle\Entity\Abonnement $abonnement = null)
+    {
+        $this->abonnement = $abonnement;
+
+        return $this;
+    }
+
+    /**
+     * Get abonnement.
+     *
+     * @return \BackendBundle\Entity\Abonnement
+     */
+    public function getAbonnement()
+    {
+        return $this->abonnement;
     }
 }

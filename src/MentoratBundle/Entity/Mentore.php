@@ -431,4 +431,28 @@ class Mentore
     {
         return $this->date_start;
     }
+
+    /**
+     * Set abonnement.
+     *
+     * @param string $abonnement
+     *
+     * @return Mentore
+     */
+    public function setAbonnement($abonnement)
+    {
+        $this->abonnement = $abonnement;
+
+        return $this;
+    }
+
+    /**
+     * Get abonnement.
+     *
+     * @return string
+     */
+    public function getAbonnement()
+    {
+        return $this->abonnement;
+    }
 }

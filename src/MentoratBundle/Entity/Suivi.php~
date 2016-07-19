@@ -46,6 +46,10 @@ class Suivi
      */
     private $state;
 
+    private $notes;
+
+    private $projets;
+
     /**
      * Get id.
      *

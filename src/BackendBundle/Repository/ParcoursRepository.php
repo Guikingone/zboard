@@ -10,4 +10,21 @@ namespace BackendBundle\Repository;
  */
 class ParcoursRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getParcoursPlus()
+    {
+        return $this->createQueryBuilder('pp')
+                    ->where('pp.abonnement = :abonnement')
+                        ->setParameter('abonnement', $abonnement = 'Premium Plus')
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    public function getParcoursClass()
+    {
+        return $this->createQueryBuilder('pp')
+            ->where('pp.abonnement = :abonnement')
+            ->setParameter('abonnement', $abonnement = 'Premium Class')
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -1,0 +1,97 @@
+{% extends ':Layout:administration.html.twig' %}
+
+{% block admin_body %}
+    <div class="row">
+        <div class="col-xs-12">
+            {% for message in app.session.flashbag.get('success') %}
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><i class="icon fa fa-check"></i>Information</h4>
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% for message in app.session.flashbag.get('danger') %}
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><i class="icon fa fa-danger"></i>Danger</h4>
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% for message in app.session.flashbag.get('warning') %}
+                <div class="alert alert-warning alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><i class="icon fa fa-warning"></i>Information</h4>
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-purple"><i class="ion ion-ios-person"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Eleves Premium Plus</span>
+                    <span class="info-box-number">{{ mentoresPPlus|length }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="ion ion-ios-people"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Eleves Premium Class</span>
+                    <span class="info-box-number">2000</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-purple"><i class="ion ion-university"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Parcours Premium Plus</span>
+                    <span class="info-box-number">{{ parcoursPlus|length }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="ion ion-ribbon-b"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Parcours Premium Class</span>
+                    <span class="info-box-number">{{ parcoursClass|length }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="ion ion-person-stalker"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Mentors</span>
+                    <span class="info-box-number">{{ mentors|length }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-orange"><i class="ion ion-videocamera"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Soutenances</span>
+                    <span class="info-box-number">{{ soutenances|length }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-grey"><i class="ion ion-settings"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Projets</span>
+                    <span class="info-box-number">{{ projets|length }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

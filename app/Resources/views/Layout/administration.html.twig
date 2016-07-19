@@ -1,0 +1,185 @@
+{% extends "base.html.twig" %}
+
+{% block title %} - Administration{% endblock %}
+
+{% block body %}
+    <div class="hold-transition skin-red sidebar-mini">
+        <div class="wrapper">
+            <header class="main-header">
+                <a href="{{ path('home_admin') }}" class="logo">
+                    <span class="logo-mini">Zboard</span>
+                    <span class="logo-lg">Zboard</span>
+                </a>
+                <nav class="navbar navbar-static-top">
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown notifications-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-bell-o"></i>
+                                    <span class="label label-warning">10</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="header">Vous avez .. notifications en attente</li>
+                                    <li>
+                                        <ul class="menu">
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                                                    page and may cause design problems
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-users text-red"></i> 5 new members joined
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-user text-red"></i> You changed your username
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="footer"><a href="#">View all</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown user user-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">{{ app.user.username }}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="user-header">
+                                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                        <p>
+                                            {{ app.user.username }} - Responsable des mentors OC
+                                            <small>Member since Nov. 2012</small>
+                                        </p>
+                                    </li>
+                                    <li class="user-body">
+                                        <div class="row">
+                                            <div class="col-xs-4 text-center">
+                                                <a href="#">Compte</a>
+                                            </div>
+                                            <div class="col-xs-4 text-center">
+                                                <a href="#">Compétences</a>
+                                            </div>
+                                            <div class="col-xs-4 text-center">
+                                                <a href="{{ path('fos_user_profile_show') }}">Profil</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="user-footer">
+                                        <div class="pull-right">
+                                            <a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-flat">Se déconnecter</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            {% block _side_admin %}
+                <aside class="main-sidebar">
+                    <section class="sidebar">
+                        <ul class="sidebar-menu">
+                            <li class="header">NAVIGATION PRINCIPALE</li>
+                            <li class="active treeview">
+                                <a href="#">
+                                    <i class="fa fa-dashboard"></i> <span>Les Mentors</span>
+                                    <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ path('gestion_mentors') }}"><i class="fa fa-circle-o"></i>Gestion des mentors</a></li>
+                                </ul>
+                            </li>
+                            <li class="active treeview">
+                                <a href="#">
+                                    <i class="fa fa-dashboard"></i> <span>Les élèves</span>
+                                    <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ path('gestion_mentores') }}"><i class="fa fa-circle-o"></i>Gestion des élèves</a></li>
+                                </ul>
+                            </li>
+                            <li class="active treeview">
+                                <a href="#">
+                                    <i class="fa fa-dashboard"></i>
+                                    <span>Les soutenances</span>
+                                    <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ path('gestion_soutenances') }}"><i class="fa fa-circle-o"></i>Gestion des soutenances</a></li>
+                                </ul>
+                            </li>
+                            <li class="active treeview">
+                                <a href="#">
+                                    <i class="fa fa-dashboard"></i>
+                                    <span>Les parcours</span>
+                                    <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ path('gestion_parcours') }}"><i class="fa fa-circle-o"></i>Gestion des parcours</a></li>
+                                    <li><a href="{{ path('gestion_abonnements') }}"><i class="fa fa-circle-o"></i>Gestion des abonnements</a></li>
+                                </ul>
+                            </li>
+                            <li class="active treeview">
+                                <a href="#">
+                                    <i class="fa fa-laptop"></i>
+                                    <span>Contenu du Zboard</span>
+                                    <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#"><i class="fa fa-circle-o"></i>Liste des tutoriels</a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i>Informations mentorat</a></li>
+                                </ul>
+                            </li>
+                            <li class="header">LABELS</li>
+                            <li><a><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+                            <li><a><i class="fa fa-circle-o text-yellow"></i> <span>A surveiller</span></a></li>
+                            <li><a><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+                        </ul>
+                    </section>
+                </aside>
+            {% endblock %}
+            <div class="content-wrapper">
+                <section class="content">
+                    {% block admin_body %}
+                    {% endblock %}
+                </section>
+            </div>
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 0.1
+                </div>
+                <strong>Copyright &copy; 2016 <a href="http://almsaeedstudio.com">Zboard Team</a>.</strong> All rights
+                reserved.
+            </footer>
+            <div class="control-sidebar-bg"></div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends ':Layout:administration.html.twig' %}
+
+{% block title %} - Abonnements{% endblock %}
+
+{% block admin_body %}
+    {% for message in app.session.flashbag.get('success') %}
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i>Information</h4>
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalAbonnements">
+                Ajouter un abonnement
+            </button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Liste des abonnements</h3>
+                </div>
+
+                {% include ':AdminBundle/Elements:box_abonnements.html.twig' %}
+
+            </div>
+        </div>
+    </div>
+
+    {% include ':Form:register_abonnement.html.twig' %}
+{% endblock %}
