@@ -21,7 +21,6 @@ class indexAdminController extends Controller
         $projets = $this->get('core.admin')->getProjets();
         $soutenances = $this->get('core.admin')->getSoutenances();
 
-
         return array('mentors' => $mentors, 'mentoresPPlus' => $mentoresPPlus,
                      'parcoursPlus' => $parcoursPlus, 'parcoursClass' => $parcoursClass,
                      'projets' => $projets, 'soutenances' => $soutenances, );

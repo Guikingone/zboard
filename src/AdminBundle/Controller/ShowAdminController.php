@@ -12,6 +12,7 @@ class ShowAdminController extends Controller
     /**
      * @Route("/show/abonnements", name="gestion_abonnements")
      * @Template("AdminBundle/Action/list_abonnements.html.twig")
+     *
      * @param Request $request
      */
     public function showAbonnementsAction(Request $request)

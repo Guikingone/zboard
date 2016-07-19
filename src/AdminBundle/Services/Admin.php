@@ -174,7 +174,7 @@ class Admin
     public function addAbonnement(Request $request)
     {
         $abonnement = new Abonnement();
-        $form = $this->form->create(AbonnementTypeAdd::class);
+        $form = $this->form->create(AbonnementTypeAdd::class, $abonnement);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
