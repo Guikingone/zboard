@@ -92,8 +92,8 @@ class Mentore
     protected $financement;
 
     /**
-     * @ORM\OneToMany(targetEntity="BackendBundle\Entity\Parcours", mappedBy="id")
-     * @ORM\JoinColumn(name="parcours_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $parcours;
 

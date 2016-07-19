@@ -28,14 +28,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         // Get our userManager, you must implement `ContainerAwareInterface`
         $userManager = $this->privateContainer->get('fos_user.user_manager');
 
-        $france = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Country')->findOneBy(array(
-            'libelle' => 'france',
-        ));
-
-        $canada = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Country')->findOneBy(array(
-            'libelle' => 'canada',
-        ));
-
         // Création de notre utilisateur ADMIN
         $userAdmin = $userManager->createUser();
         $userAdmin->setUsername('admin');
@@ -46,6 +38,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $userAdmin->setAddress('3 rue LABAS');
         $userAdmin->setZipCode('44300');
         $userAdmin->setCity('nantes');
+        $userAdmin->setCountry("France");
         $userAdmin->setEnabled(true);
         $userAdmin->setPhone('06.06.06.06.06');
         $userAdmin->setRoles(array('ROLE_ADMIN'));
@@ -61,6 +54,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $mentor->setAddress('3 rue LABAS');
         $mentor->setZipCode('44390');
         $mentor->setCity('nantes');
+        $mentor->setCountry("France");
         $mentor->setEnabled(true);
         $mentor->setPhone('02.22.01.05.06');
         $mentor->setRoles(array('ROLE_MENTOR'));
@@ -76,6 +70,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $supervisteurMentor->setAddress('4 rue LABAS');
         $supervisteurMentor->setZipCode('44290');
         $supervisteurMentor->setCity('nantes');
+        $supervisteurMentor->setCountry("France");
         $supervisteurMentor->setEnabled(true);
         $supervisteurMentor->setPhone('02.22.29.05.06');
         $supervisteurMentor->setRoles(array('ROLE_SUPERVISEUR_MENTOR'));

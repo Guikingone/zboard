@@ -56,7 +56,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=255)
+     * @ORM\Column(name="country", type="string", length=255, nullable=true)
      */
     private $country;
 
@@ -255,27 +255,4 @@ class User extends BaseUser
         return $this->available;
     }
 
-    /**
-     * Set country.
-     *
-     * @param \BackendBundle\Entity\Country $country
-     *
-     * @return User
-     */
-    public function setCountry(\BackendBundle\Entity\Country $country = null)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country.
-     *
-     * @return \BackendBundle\Entity\Country
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
 }

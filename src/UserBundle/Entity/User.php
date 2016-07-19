@@ -255,14 +255,15 @@ class User extends BaseUser
         return $this->available;
     }
 
+
     /**
-     * Set country.
+     * Set country
      *
-     * @param \BackendBundle\Entity\Country $country
+     * @param string $country
      *
      * @return User
      */
-    public function setCountry(\BackendBundle\Entity\Country $country = null)
+    public function setCountry($country)
     {
         $this->country = $country;
 
@@ -270,9 +271,9 @@ class User extends BaseUser
     }
 
     /**
-     * Get country.
+     * Get country
      *
-     * @return \BackendBundle\Entity\Country
+     * @return string
      */
     public function getCountry()
     {

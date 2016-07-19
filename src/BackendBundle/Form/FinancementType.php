@@ -5,6 +5,7 @@ namespace BackendBundle\Form;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,10 +25,7 @@ class FinancementType extends AbstractType
                     'Non' => false,
                 ),
             ))
-            ->add('libelle', EntityType::class, array(
-                'class' => 'BackendBundle\Entity\Financement',
-                'choice_label' => 'libelle',
-            ))
+            ->add('libelle', SearchType::class)
             ->add('duree', TextType::class, array(
                 'required' => false,
             ))
