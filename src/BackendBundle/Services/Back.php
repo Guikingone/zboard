@@ -153,7 +153,7 @@ class Back
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $mentor->setUsername(strtolower($mentor->getFirstName().'_'.$mentor->getLastName()));
+            $mentor->setUsername($mentor->getFirstName().'_'.$mentor->getLastName());
             $mentor->setPlainPassword(strtolower($mentor->getFirstName().'_'.$mentor->getLastName()));
             $this->doctrine->persist($mentor);
             $this->doctrine->flush();

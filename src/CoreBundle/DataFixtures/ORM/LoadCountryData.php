@@ -44,3 +44,4 @@ class LoadCountryData implements FixtureInterface, ContainerAwareInterface, Orde
         return 1;
     }
 }
+

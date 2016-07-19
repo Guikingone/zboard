@@ -27,17 +27,14 @@ class LoadParcoursData implements FixtureInterface, ContainerAwareInterface, Ord
     public function load(ObjectManager $manager)
     {
         $cpmDev = new Parcours();
-        $cpmDev->setCodeParcours('CPM-DEV');
         $cpmDev->setLibelle('Chef de Projet Multimédia - Développement');
         $cpmDev->setDateStart(new \DateTime());
 
         $cpmDes = new Parcours();
-        $cpmDes->setCodeParcours('CPM-DES');
         $cpmDes->setLibelle('Chef de Projet Multimédia - Design');
         $cpmDes->setDateStart(new \DateTime());
 
         $cpmMar = new Parcours();
-        $cpmMar->setCodeParcours('CPM-MAR');
         $cpmMar->setLibelle('Chef de Projet Multimédia - Marketing');
         $cpmMar->setDateStart(new \DateTime());
 

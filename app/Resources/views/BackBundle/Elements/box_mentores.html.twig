@@ -8,6 +8,7 @@
                 <th>Statut</th>
                 <th>Durée de financement</th>
                 <th>Parcours suivi</th>
+                <th>Pays</th>
             </tr>
             </thead>
             <tbody>
@@ -36,11 +37,14 @@
                         {% if mentores.financement is null %}
                             <p>Non financé</p>
                         {% else %}
-                            {{ mentores.financement }}
+                            {{ mentores.financement.duree }}
                         {% endif %}
                     </td>
                     <td>
                         {{ mentores.parcours.libelle }}
+                    </td>
+                    <td>
+                        {{ mentores.country }}
                     </td>
                 </tr>
             {% endfor %}

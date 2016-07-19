@@ -5,7 +5,7 @@ namespace BackendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Parcours
+ * Parcours.
  *
  * @ORM\Table(name="zboard_parcours")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\ParcoursRepository")
@@ -40,14 +40,7 @@ class Parcours
     private $projet;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_start", type="date", nullable=true)
-     */
-    private $date_start;
-
-    /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -57,7 +50,7 @@ class Parcours
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -71,7 +64,7 @@ class Parcours
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */
@@ -81,7 +74,7 @@ class Parcours
     }
 
     /**
-     * Set dateStart
+     * Set dateStart.
      *
      * @param \DateTime $dateStart
      *
@@ -95,7 +88,7 @@ class Parcours
     }
 
     /**
-     * Get dateStart
+     * Get dateStart.
      *
      * @return \DateTime
      */
@@ -105,7 +98,7 @@ class Parcours
     }
 
     /**
-     * Set diplome
+     * Set diplome.
      *
      * @param string $diplome
      *
@@ -119,12 +112,53 @@ class Parcours
     }
 
     /**
-     * Get diplome
+     * Get diplome.
      *
      * @return string
      */
     public function getDiplome()
     {
         return $this->diplome;
+    }
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->projet = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add projet.
+     *
+     * @param \BackendBundle\Entity\Projet $projet
+     *
+     * @return Parcours
+     */
+    public function addProjet(\BackendBundle\Entity\Projet $projet)
+    {
+        $this->projet[] = $projet;
+
+        return $this;
+    }
+
+    /**
+     * Remove projet.
+     *
+     * @param \BackendBundle\Entity\Projet $projet
+     */
+    public function removeProjet(\BackendBundle\Entity\Projet $projet)
+    {
+        $this->projet->removeElement($projet);
+    }
+
+    /**
+     * Get projet.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProjet()
+    {
+        return $this->projet;
     }
 }

@@ -22,19 +22,19 @@ class Soutenance
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
      * @ORM\JoinColumn(name="mentor_id", referencedColumnName="id")
      */
     private $mentor;
 
     /**
-     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Mentore")
+     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Mentore")
      * @ORM\JoinColumn(name="mentore_id", referencedColumnName="id")
      */
     private $mentore;
 
     /**
-     * @ORM\OneToOne(targetEntity="BackendBundle\Entity\Projet")
+     * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Projet")
      * @ORM\JoinColumn(name="projet_id", referencedColumnName="id"))
      */
     private $projet;

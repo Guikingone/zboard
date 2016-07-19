@@ -23,13 +23,13 @@
                         {{ soutenances.passedAt|date("d-M-Y", "Europe/Paris") }}
                     </td>
                     <td>
-                        {{ soutenances.projet }}
+                        {{ soutenances.projet.libelle }}
                     </td>
                     <td>
                         {% if soutenances.status == 'En attente' %}
                             <span class="label label-warning">{{ soutenances.status }}</span>
                         {% elseif soutenances.status == 'En cours' %}
-                            <span class="label label-warning">{{ soutenances.status }}</span>
+                            <span class="label label-success">{{ soutenances.status }}</span>
                         {% elseif soutenances.status == 'Validé' %}
                             <span class="label label-success">{{ soutenances.status }}</span>
                         {% elseif soutenances.status == 'A revoir' %}

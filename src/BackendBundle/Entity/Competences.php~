@@ -67,4 +67,28 @@ class Competences
     {
         return $this->libelle;
     }
+
+    /**
+     * Set projet.
+     *
+     * @param \BackendBundle\Entity\Projet $projet
+     *
+     * @return Competences
+     */
+    public function setProjet(\BackendBundle\Entity\Projet $projet = null)
+    {
+        $this->projet = $projet;
+
+        return $this;
+    }
+
+    /**
+     * Get projet.
+     *
+     * @return \BackendBundle\Entity\Projet
+     */
+    public function getProjet()
+    {
+        return $this->projet;
+    }
 }

@@ -28,7 +28,9 @@ class FinancementType extends AbstractType
                 'class' => 'BackendBundle\Entity\Financement',
                 'choice_label' => 'libelle',
             ))
-            ->add('duree', TextType::class)
+            ->add('duree', TextType::class, array(
+                'required' => false,
+            ))
         ;
     }
 

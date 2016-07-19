@@ -2,11 +2,12 @@
 
 namespace MentoratBundle\Form;
 
-use BackendBundle\Form\CountryType;
 use BackendBundle\Form\FinancementType;
-use BackendBundle\Form\ParcoursType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -31,7 +32,15 @@ class MentoreType extends AbstractType
             ->add('email', EmailType::class)
             ->add('phone', TextType::class)
             ->add('resume', TextareaType::class)
-            ->add('parcours', ParcoursType::class)
+            ->add('parcours', EntityType::class, array(
+                'class' => 'BackendBundle\Entity\Parcours',
+                'choice_label' => 'libelle',
+            ))
+            ->add('date_start', DateType::class, array(
+                'widget' => 'single_text',
+                'html5' => false,
+                'format' => 'dd-MM-yyyy',
+            ))
             ->add('financement', FinancementType::class)
             ->add('status', ChoiceType::class, array(
                 'choices' => [

@@ -46,7 +46,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $userAdmin->setAddress('3 rue LABAS');
         $userAdmin->setZipCode('44300');
         $userAdmin->setCity('nantes');
-        $userAdmin->setCountry($france);
         $userAdmin->setEnabled(true);
         $userAdmin->setPhone('06.06.06.06.06');
         $userAdmin->setRoles(array('ROLE_ADMIN'));
@@ -62,7 +61,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $mentor->setAddress('3 rue LABAS');
         $mentor->setZipCode('44390');
         $mentor->setCity('nantes');
-        $mentor->setCountry($canada);
         $mentor->setEnabled(true);
         $mentor->setPhone('02.22.01.05.06');
         $mentor->setRoles(array('ROLE_MENTOR'));
@@ -78,7 +76,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $supervisteurMentor->setAddress('4 rue LABAS');
         $supervisteurMentor->setZipCode('44290');
         $supervisteurMentor->setCity('nantes');
-        $supervisteurMentor->setCountry($canada);
         $supervisteurMentor->setEnabled(true);
         $supervisteurMentor->setPhone('02.22.29.05.06');
         $supervisteurMentor->setRoles(array('ROLE_SUPERVISEUR_MENTOR'));

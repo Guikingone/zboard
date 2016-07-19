@@ -92,7 +92,7 @@ class Mentore
     protected $financement;
 
     /**
-     * @ORM\OneToMany(targetEntity="BackendBundle\Entity\Parcours", mappedBy="id")
+     * @ORM\OneToOne(targetEntity="BackendBundle\Entity\Parcours", cascade={ "persist" })
      * @ORM\JoinColumn(name="parcours_id", referencedColumnName="id")
      */
     private $parcours;
@@ -406,29 +406,5 @@ class Mentore
     public function getStatus()
     {
         return $this->status;
-    }
-
-    /**
-     * Set dateStart.
-     *
-     * @param \DateTime $dateStart
-     *
-     * @return Mentore
-     */
-    public function setDateStart($dateStart)
-    {
-        $this->date_start = $dateStart;
-
-        return $this;
-    }
-
-    /**
-     * Get dateStart.
-     *
-     * @return \DateTime
-     */
-    public function getDateStart()
-    {
-        return $this->date_start;
     }
 }

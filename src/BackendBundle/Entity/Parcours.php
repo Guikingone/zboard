@@ -40,13 +40,6 @@ class Parcours
     private $projet;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_start", type="date", nullable=true)
-     */
-    private $date_start;
-
-    /**
      * Get id.
      *
      * @return int
