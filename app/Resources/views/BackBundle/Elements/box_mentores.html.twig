@@ -6,6 +6,7 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Statut</th>
+                <th>Date de commencement</th>
                 <th>Durée de financement</th>
                 <th>Parcours suivi</th>
                 <th>Pays</th>
@@ -32,6 +33,9 @@
                         {% elseif mentores.status == 'Formation terminé' %}
                             <span class="label label-success">{{ mentores.status }}</span>
                         {% endif %}
+                    </td>
+                    <td>
+                       {{ mentores.dateStart|date('d-m-Y') }}
                     </td>
                     <td>
                         {% if mentores.financement is null %}

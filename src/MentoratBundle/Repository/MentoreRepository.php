@@ -10,4 +10,12 @@ namespace MentoratBundle\Repository;
  */
 class MentoreRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getNewMentores($days)
+    {
+        return $this->createQueryBuilder('m')
+                    ->where('m.date_start <= :days')
+                        ->setParameter('days', $days)
+                    ->getQuery()
+                    ->getResult();
+    }
 }

@@ -25,13 +25,23 @@ class MentoreType extends AbstractType
         $builder
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
-            ->add('address', TextType::class)
-            ->add('zipcode', TextType::class)
-            ->add('city', TextType::class)
+            ->add('address', TextType::class, array(
+                'required' => false,
+            ))
+            ->add('zipcode', TextType::class, array(
+                'required' => false,
+            ))
+            ->add('city', TextType::class, array(
+                'required' => false,
+            ))
             ->add('country', CountryType::class)
             ->add('email', EmailType::class)
-            ->add('phone', TextType::class)
-            ->add('resume', TextareaType::class)
+            ->add('phone', TextType::class, array(
+                'required' => false,
+            ))
+            ->add('resume', TextareaType::class, array(
+                'required' => false,
+            ))
             ->add('parcours', EntityType::class, array(
                 'class' => 'BackendBundle\Entity\Parcours',
                 'choice_label' => 'libelle',

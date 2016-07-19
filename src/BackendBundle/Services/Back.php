@@ -75,6 +75,18 @@ class Back
     }
 
     /**
+     * Allow the back to get all the new mentores since actual datetime.
+     *
+     * @return array
+     */
+    public function getNewMentores()
+    {
+        $days = new \DateTime();
+
+        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getNewMentores($days);
+    }
+
+    /**
      * Allow the back to get all the paths.
      *
      * @return array|\BackendBundle\Entity\Parcours[]

@@ -39,21 +39,21 @@ class Mentore
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="zipcode", type="string", length=25)
+     * @ORM\Column(name="zipcode", type="string", length=25, nullable=true)
      */
     private $zipcode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255)
+     * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
     private $city;
 
@@ -74,7 +74,7 @@ class Mentore
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=40)
+     * @ORM\Column(name="phone", type="string", length=40, nullable=true)
      */
     private $phone;
 
@@ -89,7 +89,7 @@ class Mentore
      * @Assert\Type(type="BackendBundle\Entity\Financement")
      * @Assert\Valid()
      */
-    protected $financement;
+    private $financement;
 
     /**
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours")

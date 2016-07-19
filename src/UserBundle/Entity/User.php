@@ -255,9 +255,8 @@ class User extends BaseUser
         return $this->available;
     }
 
-
     /**
-     * Set country
+     * Set country.
      *
      * @param string $country
      *
@@ -271,7 +270,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get country
+     * Get country.
      *
      * @return string
      */
