@@ -18,4 +18,12 @@ class ProjetRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()
                     ->getResult();
     }
+
+    public function getProjetTermine()
+    {
+        return $this->createQueryBuilder('p')
+                    ->where('p.status = Validé')
+                    ->getQuery()
+                    ->getResult();
+    }
 }

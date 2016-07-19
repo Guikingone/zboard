@@ -13,12 +13,10 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use BackendBundle\Entity\Financement;
 use BackendBundle\Entity\Parcours;
 use MentoratBundle\Entity\Mentore;
-use BackendBundle\Entity\Country;
 use BackendBundle\Entity\Projet;
 use BackendBundle\Form\TypeAdd\ProjetTypeAdd;
 use BackendBundle\Form\TypeAdd\FinancementTypeAdd;
 use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
-use BackendBundle\Form\TypeAdd\CountryTypeAdd;
 use MentoratBundle\Form\MentoreType;
 use UserBundle\Entity\User;
 use UserBundle\Form\RegistrationType;
@@ -55,7 +53,7 @@ class Back
     }
 
     /**
-     * Allow the back to get all the mentors.
+     * Allow to get all the mentors.
      *
      * @return array|\UserBundle\Entity\User[]
      */
@@ -65,7 +63,7 @@ class Back
     }
 
     /**
-     * Allow the back to get all the mentores.
+     * Allow to get all the mentores.
      *
      * @return array|\MentoratBundle\Entity\Mentore[]
      */
@@ -87,7 +85,7 @@ class Back
     }
 
     /**
-     * Allow the back to get all the paths.
+     * Allow to get all the paths.
      *
      * @return array|\BackendBundle\Entity\Parcours[]
      */
@@ -109,7 +107,7 @@ class Back
     }
 
     /**
-     * Allow the back to get all the soutenances.
+     * Allow to get all the soutenances.
      *
      * @return array|\MentoratBundle\Entity\Soutenance[]
      */
@@ -167,6 +165,7 @@ class Back
         if ($form->isValid()) {
             $mentor->setUsername($mentor->getFirstName().'_'.$mentor->getLastName());
             $mentor->setPlainPassword(strtolower($mentor->getFirstName().'_'.$mentor->getLastName()));
+            $mentor->setRoles(array('ROLE_MENTOR'));
             $this->doctrine->persist($mentor);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
@@ -258,28 +257,6 @@ class Back
             $this->doctrine->persist($financement);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Financeur ajouté !');
-        }
-
-        return $form;
-    }
-
-    /**
-     * Allow to add a new Country.
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addCountry(Request $request)
-    {
-        $pays = new Country();
-        $form = $this->formFactory->create(CountryTypeAdd::class, $pays);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $this->doctrine->persist($pays);
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'Pays ajouté !');
         }
 
         return $form;

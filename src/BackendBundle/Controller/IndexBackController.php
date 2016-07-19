@@ -19,11 +19,9 @@ class IndexBackController extends Controller
         $mentores = $this->get('core.back')->getMentores();
         $soutenances = $this->get('core.back')->getSoutenances();
         $parcours = $this->get('core.back')->getParcours();
-        $mentorsSince = $this->get('core.back')->getNewMentores();
 
         return array('mentors' => $mentors, 'mentores' => $mentores,
-                     'soutenances' => $soutenances, 'parcours' => $parcours,
-                     'mentoresSince' => $mentorsSince, );
+                     'soutenances' => $soutenances, 'parcours' => $parcours, );
     }
 
     /**
