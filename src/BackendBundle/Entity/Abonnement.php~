@@ -5,7 +5,7 @@ namespace BackendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Abonnement
+ * Abonnement.
  *
  * @ORM\Table(name="abonnement")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\AbonnementRepository")
@@ -35,9 +35,8 @@ class Abonnement
      */
     private $prix;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -47,7 +46,7 @@ class Abonnement
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -61,7 +60,7 @@ class Abonnement
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */
@@ -71,7 +70,7 @@ class Abonnement
     }
 
     /**
-     * Set prix
+     * Set prix.
      *
      * @param string $prix
      *
@@ -85,7 +84,7 @@ class Abonnement
     }
 
     /**
-     * Get prix
+     * Get prix.
      *
      * @return string
      */
@@ -94,4 +93,3 @@ class Abonnement
         return $this->prix;
     }
 }
-

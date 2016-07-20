@@ -37,7 +37,7 @@ class Financement
     /**
      * @var string
      *
-     * @ORM\Column(name="duree", type="string", length=255, nullable=TRUE)
+     * @ORM\Column(name="duree", type="string", length=255, nullable=true)
      */
     private $duree;
 

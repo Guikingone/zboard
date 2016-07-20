@@ -39,10 +39,6 @@ class Parcours
      */
     private $projet;
 
-    /**
-     * @ORM\OneToOne(targetEntity="BackendBundle\Entity\Abonnement")
-     * @ORM\JoinColumn(name="abonnement_id", referencedColumnName="id")
-     */
     private $abonnement;
 
     /**
