@@ -1,15 +1,22 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Guillaume
+ * Date: 20/07/2016
+ * Time: 19:15
+ */
 
 namespace CoreBundle\DataFixtures\ORM;
 
-use BackendBundle\Entity\Abonnement;
+use BackendBundle\Entity\Projet;
+use BackendBundle\Entity\StateRelationship;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-class LoadAbonnementData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
+class LoadProjetData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     private $privateContainer;
 
@@ -20,16 +27,15 @@ class LoadAbonnementData implements FixtureInterface, ContainerAwareInterface, O
 
     public function load(ObjectManager $manager)
     {
-        $abonnementPlus = new Abonnement();
-        $abonnementPlus->setLibelle('Premium Plus');
-        $abonnementPlus->setPrix('300€');
+        $parcours = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
+            ->findOneBy(array('libelle' => 'Chef de Projet Multimédia - Développement'));
 
-        $abonnementClass = new Abonnement();
-        $abonnementClass->setLibelle('Premium Class');
-        $abonnementClass->setPrix('90€');
+        $projet = new Projet();
 
-        $manager->persist($abonnementPlus);
-        $manager->persist($abonnementClass);
+        $projet->setParcours($parcours);
+        $projet->setLibelle('[PROJET] Développez un back-end pour un client');
+
+        $manager->persist($projet);
         $manager->flush();
     }
 
@@ -37,6 +43,6 @@ class LoadAbonnementData implements FixtureInterface, ContainerAwareInterface, O
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 1;
+        return 5;
     }
 }

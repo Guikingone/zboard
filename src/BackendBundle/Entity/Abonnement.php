@@ -36,6 +36,11 @@ class Abonnement
     private $prix;
 
     /**
+     * @ORM\OneToMany(targetEntity="BackendBundle\Entity\Parcours", mappedBy="abonnement")
+     */
+    private $parcours;
+
+    /**
      * Get id.
      *
      * @return int
@@ -91,5 +96,46 @@ class Abonnement
     public function getPrix()
     {
         return $this->prix;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->parcours = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add parcour
+     *
+     * @param \BackendBundle\Entity\Parcours $parcour
+     *
+     * @return Abonnement
+     */
+    public function addParcour(\BackendBundle\Entity\Parcours $parcour)
+    {
+        $this->parcours[] = $parcour;
+
+        return $this;
+    }
+
+    /**
+     * Remove parcour
+     *
+     * @param \BackendBundle\Entity\Parcours $parcour
+     */
+    public function removeParcour(\BackendBundle\Entity\Parcours $parcour)
+    {
+        $this->parcours->removeElement($parcour);
+    }
+
+    /**
+     * Get parcours
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getParcours()
+    {
+        return $this->parcours;
     }
 }

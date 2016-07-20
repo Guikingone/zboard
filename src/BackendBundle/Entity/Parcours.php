@@ -35,11 +35,14 @@ class Parcours
     private $diplome;
 
     /**
+     * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Abonnement", inversedBy="parcours")
+     */
+    private $abonnement;
+
+    /**
      * @ORM\OneToMany(targetEntity="BackendBundle\Entity\Projet", mappedBy="parcours")
      */
     private $projet;
-
-    private $abonnement;
 
     /**
      * Get id.
@@ -98,50 +101,9 @@ class Parcours
     {
         return $this->diplome;
     }
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->projet = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add projet.
-     *
-     * @param \BackendBundle\Entity\Projet $projet
-     *
-     * @return Parcours
-     */
-    public function addProjet(\BackendBundle\Entity\Projet $projet)
-    {
-        $this->projet[] = $projet;
-
-        return $this;
-    }
-
-    /**
-     * Remove projet.
-     *
-     * @param \BackendBundle\Entity\Projet $projet
-     */
-    public function removeProjet(\BackendBundle\Entity\Projet $projet)
-    {
-        $this->projet->removeElement($projet);
-    }
-
-    /**
-     * Get projet.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProjet()
-    {
-        return $this->projet;
-    }
-
-    /**
-     * Set abonnement.
+     * Set abonnement
      *
      * @param \BackendBundle\Entity\Abonnement $abonnement
      *
@@ -155,12 +117,53 @@ class Parcours
     }
 
     /**
-     * Get abonnement.
+     * Get abonnement
      *
      * @return \BackendBundle\Entity\Abonnement
      */
     public function getAbonnement()
     {
         return $this->abonnement;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->projet = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add projet
+     *
+     * @param \BackendBundle\Entity\Projet $projet
+     *
+     * @return Parcours
+     */
+    public function addProjet(\BackendBundle\Entity\Projet $projet)
+    {
+        $this->projet[] = $projet;
+
+        return $this;
+    }
+
+    /**
+     * Remove projet
+     *
+     * @param \BackendBundle\Entity\Projet $projet
+     */
+    public function removeProjet(\BackendBundle\Entity\Projet $projet)
+    {
+        $this->projet->removeElement($projet);
+    }
+
+    /**
+     * Get projet
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProjet()
+    {
+        return $this->projet;
     }
 }

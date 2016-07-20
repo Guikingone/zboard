@@ -26,21 +26,34 @@ class LoadParcoursData implements FixtureInterface, ContainerAwareInterface, Ord
 
     public function load(ObjectManager $manager)
     {
+        $PPlus = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Abonnement')->findOneBy(array('libelle' => 'Premium Plus'));
+
+        $PClass = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Abonnement')->findOneBy(array('libelle' => 'Premium Class'));
+
         $cpmDev = new Parcours();
         $cpmDev->setLibelle('Chef de Projet Multimédia - Développement');
         $cpmDev->setDiplome('Bac+3');
+        $cpmDev->setAbonnement($PPlus);
 
         $cpmDes = new Parcours();
         $cpmDes->setLibelle('Chef de Projet Multimédia - Design');
         $cpmDes->setDiplome('Bac+3');
+        $cpmDes->setAbonnement($PPlus);
 
         $cpmMar = new Parcours();
         $cpmMar->setLibelle('Chef de Projet Multimédia - Marketing');
         $cpmMar->setDiplome('Bac+3');
+        $cpmMar->setAbonnement($PPlus);
+
+        $devSf = new Parcours();
+        $devSf->setLibelle('Développeur PHP/Symfony');
+        $devSf->setDiplome(null);
+        $devSf->setAbonnement($PClass);
 
         $manager->persist($cpmDev);
         $manager->persist($cpmDes);
         $manager->persist($cpmMar);
+        $manager->persist($devSf);
         $manager->flush();
     }
 
