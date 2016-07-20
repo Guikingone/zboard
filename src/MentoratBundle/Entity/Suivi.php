@@ -159,7 +159,7 @@ class Suivi
         return $this->state;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -167,7 +167,7 @@ class Suivi
     }
 
     /**
-     * Add note
+     * Add note.
      *
      * @param \MentoratBundle\Entity\Notes $note
      *
@@ -181,7 +181,7 @@ class Suivi
     }
 
     /**
-     * Remove note
+     * Remove note.
      *
      * @param \MentoratBundle\Entity\Notes $note
      */
@@ -191,7 +191,7 @@ class Suivi
     }
 
     /**
-     * Get notes
+     * Get notes.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

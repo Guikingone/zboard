@@ -93,6 +93,16 @@ class Admin
     }
 
     /**
+     * Allow to get the students waiting for a teacher.
+     *
+     * @return array
+     */
+    public function getMentoresWaiting()
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getMentoresWaiting();
+    }
+
+    /**
      * Allow the back to get all the paths.
      *
      * @return array|\BackendBundle\Entity\Parcours[]

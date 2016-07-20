@@ -5,7 +5,7 @@ namespace MentoratBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Notes
+ * Notes.
  *
  * @ORM\Table(name="notes")
  * @ORM\Entity(repositoryClass="MentoratBundle\Repository\NotesRepository")
@@ -41,9 +41,8 @@ class Notes
      */
     private $suivi;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -53,7 +52,7 @@ class Notes
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -67,7 +66,7 @@ class Notes
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */
@@ -77,7 +76,7 @@ class Notes
     }
 
     /**
-     * Set dateCreated
+     * Set dateCreated.
      *
      * @param \DateTime $dateCreated
      *
@@ -91,7 +90,7 @@ class Notes
     }
 
     /**
-     * Get dateCreated
+     * Get dateCreated.
      *
      * @return \DateTime
      */
@@ -101,7 +100,7 @@ class Notes
     }
 
     /**
-     * Set suivi
+     * Set suivi.
      *
      * @param \MentoratBundle\Entity\Suivi $suivi
      *
@@ -115,7 +114,7 @@ class Notes
     }
 
     /**
-     * Get suivi
+     * Get suivi.
      *
      * @return \MentoratBundle\Entity\Suivi
      */

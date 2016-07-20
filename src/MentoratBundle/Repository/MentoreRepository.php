@@ -44,4 +44,13 @@ class MentoreRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()
                     ->getResult();
     }
+
+    public function getMentoresWaiting()
+    {
+        return $this->createQueryBuilder('s')
+                    ->where('s.status = :status')
+                        ->setParameter('status', $status = 'En attente')
+                    ->getQuery()
+                    ->getResult();
+    }
 }
