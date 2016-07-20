@@ -46,6 +46,9 @@ class Suivi
      */
     private $state;
 
+    /**
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Notes", mappedBy="suivi")
+     */
     private $notes;
 
     private $projets;

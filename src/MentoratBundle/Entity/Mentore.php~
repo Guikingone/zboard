@@ -111,12 +111,6 @@ class Mentore
     private $status;
 
     /**
-     * @var string
-     * @ORM\Column(name="abonnement", type="string", length=200)
-     */
-    private $abonnement;
-
-    /**
      * Get id.
      *
      * @return int
@@ -436,5 +430,29 @@ class Mentore
     public function getDateStart()
     {
         return $this->date_start;
+    }
+
+    /**
+     * Set abonnement.
+     *
+     * @param string $abonnement
+     *
+     * @return Mentore
+     */
+    public function setAbonnement($abonnement)
+    {
+        $this->abonnement = $abonnement;
+
+        return $this;
+    }
+
+    /**
+     * Get abonnement.
+     *
+     * @return string
+     */
+    public function getAbonnement()
+    {
+        return $this->abonnement;
     }
 }

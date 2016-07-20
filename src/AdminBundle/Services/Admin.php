@@ -165,6 +165,16 @@ class Admin
     }
 
     /**
+     * Allow to get all the notes.
+     *
+     * @return array|\MentoratBundle\Entity\Notes[]
+     */
+    public function getNotesSuivi()
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Notes')->findAll();
+    }
+
+    /**
      * Allow to add a new abonnement.
      *
      * @param Request $request

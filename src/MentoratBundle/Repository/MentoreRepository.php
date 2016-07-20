@@ -13,7 +13,11 @@ class MentoreRepository extends \Doctrine\ORM\EntityRepository
     public function getMentoresPlus()
     {
         return $this->createQueryBuilder('pp')
-                    ->where('pp.parcours.abonnement = :abonnement')
+                    ->innerJoin('pp.parcours', 'pc')
+                        ->addSelect('pc')
+                    ->innerJoin('pc.abonnement', 'a')
+                        ->addSelect('a')
+                    ->where('a.libelle = :abonnement')
                         ->setParameter('abonnement', $abonnement = 'Premium Plus')
                     ->getQuery()
                     ->getResult();
@@ -22,10 +26,14 @@ class MentoreRepository extends \Doctrine\ORM\EntityRepository
     public function getMentoresClass()
     {
         return $this->createQueryBuilder('pp')
-            ->where('pp.parcours.abonnement = :abonnement')
-            ->setParameter('abonnement', $abonnement = 'Premium Class')
-            ->getQuery()
-            ->getResult();
+                    ->innerJoin('pp.parcours', 'pc')
+                         ->addSelect('pc')
+                    ->leftJoin('pc.abonnement', 'a')
+                         ->addSelect('a')
+                    ->where('a.libelle = :abonnement')
+                         ->setParameter('abonnement', $abonnement = 'Premium Class')
+                    ->getQuery()
+                    ->getResult();
     }
 
     public function getNewMentores($days)

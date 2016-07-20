@@ -86,11 +86,6 @@
                     {{ form_label(nMentore.status, 'Statut')}}
                     {{ form_widget(nMentore.status, {'attr': {'class': 'form-control'}}) }}
                 </div>
-                <div class="input-group">
-                    {{ form_errors(nMentore.abonnement) }}
-                    {{ form_label(nMentore.abonnement, 'Abonnement')}}
-                    {{ form_widget(nMentore.abonnement, {'attr': {'class': 'form-control'}}) }}
-                </div>
                 <br>
                 <button type="submit" class="btn btn-warning">Enregistrer</button>
                 {{ form_end(nMentore) }}

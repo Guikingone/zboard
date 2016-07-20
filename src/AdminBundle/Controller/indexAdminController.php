@@ -15,14 +15,17 @@ class indexAdminController extends Controller
     public function indexAction()
     {
         $mentors = $this->get('core.admin')->getMentors();
-        $mentoresPPlus = $this->get('core.admin')->getMentores();
+        $mentoresPPlus = $this->get('core.admin')->getMentoresPlus();
+        $mentoresPClass = $this->get('core.admin')->getMentoreClass();
         $parcoursPlus = $this->get('core.admin')->getParcoursPlus();
         $parcoursClass = $this->get('core.admin')->getParcoursClass();
         $projets = $this->get('core.admin')->getProjets();
         $soutenances = $this->get('core.admin')->getSoutenances();
+        $notes = $this->get('core.admin')->getNotesSuivi();
 
         return array('mentors' => $mentors, 'mentoresPPlus' => $mentoresPPlus,
-                     'parcoursPlus' => $parcoursPlus, 'parcoursClass' => $parcoursClass,
-                     'projets' => $projets, 'soutenances' => $soutenances, );
+                     'mentoresPClass' => $mentoresPClass, 'parcoursPlus' => $parcoursPlus,
+                     'parcoursClass' => $parcoursClass, 'projets' => $projets, 'soutenances' => $soutenances,
+                     'notes' => $notes, );
     }
 }

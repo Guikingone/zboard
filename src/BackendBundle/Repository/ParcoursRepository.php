@@ -13,7 +13,9 @@ class ParcoursRepository extends \Doctrine\ORM\EntityRepository
     public function getParcoursPlus()
     {
         return $this->createQueryBuilder('pp')
-                    ->where('pp.abonnement = :abonnement')
+                    ->innerJoin('pp.abonnement', 'a')
+                        ->addSelect('a')
+                    ->where('a.libelle = :abonnement')
                         ->setParameter('abonnement', $abonnement = 'Premium Plus')
                     ->getQuery()
                     ->getResult();
@@ -22,9 +24,11 @@ class ParcoursRepository extends \Doctrine\ORM\EntityRepository
     public function getParcoursClass()
     {
         return $this->createQueryBuilder('pp')
-            ->where('pp.abonnement = :abonnement')
-            ->setParameter('abonnement', $abonnement = 'Premium Class')
-            ->getQuery()
-            ->getResult();
+                    ->innerJoin('pp.abonnement', 'a')
+                        ->addSelect('a')
+                    ->where('a.libelle = :abonnement')
+                        ->setParameter('abonnement', $abonnement = 'Premium Class')
+                    ->getQuery()
+                    ->getResult();
     }
 }

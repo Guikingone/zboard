@@ -46,6 +46,9 @@ class Suivi
      */
     private $state;
 
+    /**
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Notes", mappedBy="suivi")
+     */
     private $notes;
 
     private $projets;
@@ -154,5 +157,46 @@ class Suivi
     public function getState()
     {
         return $this->state;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->notes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add note
+     *
+     * @param \MentoratBundle\Entity\Notes $note
+     *
+     * @return Suivi
+     */
+    public function addNote(\MentoratBundle\Entity\Notes $note)
+    {
+        $this->notes[] = $note;
+
+        return $this;
+    }
+
+    /**
+     * Remove note
+     *
+     * @param \MentoratBundle\Entity\Notes $note
+     */
+    public function removeNote(\MentoratBundle\Entity\Notes $note)
+    {
+        $this->notes->removeElement($note);
+    }
+
+    /**
+     * Get notes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 }
