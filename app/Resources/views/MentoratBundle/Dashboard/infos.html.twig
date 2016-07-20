@@ -3,9 +3,20 @@
 {% block body %}
 Infos mentorat
 
+{% if is_granted('ROLE_ADMIN') %}
+<div class="row">
+    <div class="col-xs-12">
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalInformation">
+            Ajouter une information
+        </button>
+    </div>
+</div>
+{% endif %}
 
 {% for info in informations %}
   {{ info.body|e }}
 {% endfor %}
+
+{% include ':Form:register_information.html.twig' %}
 
 {% endblock %}

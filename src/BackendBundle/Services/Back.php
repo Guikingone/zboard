@@ -18,6 +18,7 @@ use BackendBundle\Form\TypeAdd\ProjetTypeAdd;
 use BackendBundle\Form\TypeAdd\FinancementTypeAdd;
 use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
 use MentoratBundle\Form\MentoreType;
+use MentoratBundle\Form\InformationType;
 use UserBundle\Entity\User;
 use UserBundle\Form\RegistrationType;
 
@@ -124,6 +125,29 @@ class Back
     public function getMentoratInformations()
     {
         return $this->doctrine->getRepository('BackendBundle:InformationMentorat')->findAll();
+    }
+
+    /**
+     * Creates a new MentoratInformation
+     *
+     *@param Request $request
+     *
+     *@return \Symfony\Component\Form\FormInterface
+     */
+    public function addMentoratInformation(Request $request)
+    {
+        $information = new InformationMentorat();
+
+        $form = $this->formFactory->create(InformationType::class, $information);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->doctrine->persist($information);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Information ajouté.');
+        }
+
+        return $form;
     }
 
     /**
