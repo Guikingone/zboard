@@ -5,9 +5,11 @@ namespace AdminBundle\Services;
 use BackendBundle\Entity\Abonnement;
 use BackendBundle\Form\TypeAdd\AbonnementTypeAdd;
 use Doctrine\ORM\EntityManager;
+use MentoratBundle\Form\MentoreType;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Admin
 {
@@ -201,6 +203,33 @@ class Admin
             $this->doctrine->persist($abonnement);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', "L'abonnement a bien été ajouté !");
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to update the informations about a student.
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function updateMentores(Request $request, $id)
+    {
+        $mentore = $this->doctrine->getRepository('MentoratBundle:Mentore')->find($id);
+
+        if (null === $mentore) {
+            throw new NotFoundHttpException('Le mentore ne semble pas exister.');
+        }
+
+        $form = $this->form->create(MentoreType::class, $mentore);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Le mentore a bien été mis à jour');
         }
 
         return $form;

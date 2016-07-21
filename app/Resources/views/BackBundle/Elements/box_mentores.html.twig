@@ -9,7 +9,7 @@
                 <th>Date de commencement</th>
                 <th>Durée de financement</th>
                 <th>Parcours suivi</th>
-                <th>Pays</th>
+                <th>Outils</th>
             </tr>
             </thead>
             <tbody>
@@ -38,17 +38,22 @@
                        {{ mentores.dateStart|date('d-m-Y') }}
                     </td>
                     <td>
-                        {% if mentores.financement is null %}
+                        {% if mentores.dureeFinancement is null %}
                             <p>Non financé</p>
                         {% else %}
-                            {{ mentores.financement.duree }}
+                            {{ mentores.dureeFinancement }}
                         {% endif %}
                     </td>
                     <td>
                         {{ mentores.parcours.libelle }}
                     </td>
                     <td>
-                        {{ mentores.country }}
+                        <button type="button" class="btn btn-info">
+                            <a  class="_no_link" href="{{ path('update_mentores', {'id': mentores.id}) }}">
+                                Modifier
+                            </a>
+                        </button>
+                        <button type="button" class="btn btn-danger" href="#">Archiver</button>
                     </td>
                 </tr>
             {% endfor %}

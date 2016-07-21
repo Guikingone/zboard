@@ -20,13 +20,16 @@ class LoadInformationData implements FixtureInterface, ContainerAwareInterface, 
 
     public function load(ObjectManager $manager)
     {
+        $user = $this->privateContainer->get('doctrine')->getRepository('UserBundle:User')
+                                       ->findOneBy(array('lastName' => 'Chan'));
+
         $info = new InformationMentorat();
         $info->setTitle('Première news !');
         $info->setBody("C'est parti pour une graannnde aventure !");
         $info->setDCreated(new \DateTime());
         $info->setUpdated(new \DateTime());
         $info->setEnabled(true);
-        $info->setAuthor();
+        $info->setAuthor($user);
 
         $info_2 = new InformationMentorat();
         $info_2->setTitle('Pourquoi ?');
@@ -34,7 +37,7 @@ class LoadInformationData implements FixtureInterface, ContainerAwareInterface, 
         $info_2->setDCreated(new \DateTime());
         $info_2->setUpdated(new \DateTime());
         $info_2->setEnabled(true);
-        $info_2->setAuthor();
+        $info_2->setAuthor($user);
 
         $manager->persist($info);
         $manager->persist($info_2);
@@ -46,6 +49,6 @@ class LoadInformationData implements FixtureInterface, ContainerAwareInterface, 
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 5;
+        return 7;
     }
 }

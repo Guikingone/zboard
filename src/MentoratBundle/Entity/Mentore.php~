@@ -86,10 +86,22 @@ class Mentore
     private $resume;
 
     /**
-     * @Assert\Type(type="BackendBundle\Entity\Financement")
-     * @Assert\Valid()
+     * @var boolean
+     * @ORM\Column(name="financement", type="boolean")
      */
     private $financement;
+
+    /**
+     * @var string
+     * @ORM\Column(name="financeur", type="string", length=150, nullable=true)
+     */
+    private $financeur;
+
+    /**
+     * @var string
+     * @ORM\Column(name="duree_financement", type="string", length=100, nullable=true)
+     */
+    private $duree_financement;
 
     /**
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours")
@@ -359,31 +371,7 @@ class Mentore
     {
         return $this->parcours;
     }
-
-    /**
-     * Set financement.
-     *
-     * @param bool $financement
-     *
-     * @return Mentore
-     */
-    public function setFinancement($financement)
-    {
-        $this->financement = $financement;
-
-        return $this;
-    }
-
-    /**
-     * Get financement.
-     *
-     * @return bool
-     */
-    public function getFinancement()
-    {
-        return $this->financement;
-    }
-
+    
     /**
      * Set status.
      *

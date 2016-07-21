@@ -2,7 +2,6 @@
 
 namespace MentoratBundle\Form;
 
-use BackendBundle\Form\FinancementType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -51,7 +50,14 @@ class MentoreType extends AbstractType
                 'html5' => false,
                 'format' => 'dd-MM-yyyy',
             ))
-            ->add('financement', FinancementType::class)
+            ->add('financement', ChoiceType::class, array(
+                'choices' => array(
+                    'Oui' => true,
+                    'Non' => false,
+                ),
+            ))
+            ->add('financeur', TextType::class)
+            ->add('duree_financement', TextType::class)
             ->add('status', ChoiceType::class, array(
                 'choices' => [
                     'En attente de prise de contact' => 'En attente',

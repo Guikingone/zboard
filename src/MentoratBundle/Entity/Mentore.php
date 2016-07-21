@@ -3,7 +3,6 @@
 namespace MentoratBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Mentore.
@@ -86,10 +85,22 @@ class Mentore
     private $resume;
 
     /**
-     * @Assert\Type(type="BackendBundle\Entity\Financement")
-     * @Assert\Valid()
+     * @var bool
+     * @ORM\Column(name="financement", type="boolean")
      */
     private $financement;
+
+    /**
+     * @var string
+     * @ORM\Column(name="financeur", type="string", length=150, nullable=true)
+     */
+    private $financeur;
+
+    /**
+     * @var string
+     * @ORM\Column(name="duree_financement", type="string", length=100, nullable=true)
+     */
+    private $duree_financement;
 
     /**
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours")
@@ -361,30 +372,6 @@ class Mentore
     }
 
     /**
-     * Set financement.
-     *
-     * @param bool $financement
-     *
-     * @return Mentore
-     */
-    public function setFinancement($financement)
-    {
-        $this->financement = $financement;
-
-        return $this;
-    }
-
-    /**
-     * Get financement.
-     *
-     * @return bool
-     */
-    public function getFinancement()
-    {
-        return $this->financement;
-    }
-
-    /**
      * Set status.
      *
      * @param string $status
@@ -454,5 +441,77 @@ class Mentore
     public function getAbonnement()
     {
         return $this->abonnement;
+    }
+
+    /**
+     * Set financement.
+     *
+     * @param bool $financement
+     *
+     * @return Mentore
+     */
+    public function setFinancement($financement)
+    {
+        $this->financement = $financement;
+
+        return $this;
+    }
+
+    /**
+     * Get financement.
+     *
+     * @return bool
+     */
+    public function getFinancement()
+    {
+        return $this->financement;
+    }
+
+    /**
+     * Set financeur.
+     *
+     * @param string $financeur
+     *
+     * @return Mentore
+     */
+    public function setFinanceur($financeur)
+    {
+        $this->financeur = $financeur;
+
+        return $this;
+    }
+
+    /**
+     * Get financeur.
+     *
+     * @return string
+     */
+    public function getFinanceur()
+    {
+        return $this->financeur;
+    }
+
+    /**
+     * Set dureeFinancement.
+     *
+     * @param string $dureeFinancement
+     *
+     * @return Mentore
+     */
+    public function setDureeFinancement($dureeFinancement)
+    {
+        $this->duree_financement = $dureeFinancement;
+
+        return $this;
+    }
+
+    /**
+     * Get dureeFinancement.
+     *
+     * @return string
+     */
+    public function getDureeFinancement()
+    {
+        return $this->duree_financement;
     }
 }

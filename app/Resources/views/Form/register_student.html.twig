@@ -66,19 +66,19 @@
                 </div>
                 <hr>
                 <div class="input-group">
-                    {{ form_errors(nMentore.financement.isFinanced) }}
-                    {{ form_label(nMentore.financement.isFinanced, 'Financé')}}
-                    {{ form_widget(nMentore.financement.isFinanced, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(nMentore.financement) }}
+                    {{ form_label(nMentore.financement, 'Financé')}}
+                    {{ form_widget(nMentore.financement, {'attr': {'class': 'form-control'}}) }}
                 </div>
                 <div class="input-group">
-                    {{ form_errors(nMentore.financement.libelle) }}
-                    {{ form_label(nMentore.financement.libelle, 'Nom du financeur')}}
-                    {{ form_widget(nMentore.financement.libelle, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(nMentore.financeur) }}
+                    {{ form_label(nMentore.financeur, 'Nom du financeur')}}
+                    {{ form_widget(nMentore.financeur, {'attr': {'class': 'form-control'}}) }}
                 </div>
                 <div class="input-group">
-                    {{ form_errors(nMentore.financement.duree) }}
-                    {{ form_label(nMentore.financement.duree, 'Durée du financement')}}
-                    {{ form_widget(nMentore.financement.duree, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(nMentore.duree_financement) }}
+                    {{ form_label(nMentore.duree_financement, 'Durée du financement')}}
+                    {{ form_widget(nMentore.duree_financement, {'attr': {'class': 'form-control'}}) }}
                 </div>
                 <hr>
                 <div class="input-group">
