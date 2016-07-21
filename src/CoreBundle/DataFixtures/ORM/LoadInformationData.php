@@ -8,7 +8,6 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use BackendBundle\Entity\InformationMentorat;
-use UserBundle\Entity\User;
 
 class LoadInformationData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
@@ -22,7 +21,7 @@ class LoadInformationData implements FixtureInterface, ContainerAwareInterface, 
     public function load(ObjectManager $manager)
     {
         $info = new InformationMentorat();
-        $info->setTitle("Première news !");
+        $info->setTitle('Première news !');
         $info->setBody("C'est parti pour une graannnde aventure !");
         $info->setDCreated(new \DateTime());
         $info->setUpdated(new \DateTime());
@@ -30,8 +29,8 @@ class LoadInformationData implements FixtureInterface, ContainerAwareInterface, 
         $info->setAuthor();
 
         $info_2 = new InformationMentorat();
-        $info_2->setTitle("Pourquoi ?");
-        $info_2->setBody("Parce que");
+        $info_2->setTitle('Pourquoi ?');
+        $info_2->setBody('Parce que');
         $info_2->setDCreated(new \DateTime());
         $info_2->setUpdated(new \DateTime());
         $info_2->setEnabled(true);
@@ -42,7 +41,6 @@ class LoadInformationData implements FixtureInterface, ContainerAwareInterface, 
 
         $manager->flush();
     }
-
 
     public function getOrder()
     {

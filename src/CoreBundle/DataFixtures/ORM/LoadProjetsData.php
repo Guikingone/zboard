@@ -3,20 +3,19 @@
  * Created by PhpStorm.
  * User: Guillaume
  * Date: 20/07/2016
- * Time: 19:15
+ * Time: 19:15.
  */
 
 namespace CoreBundle\DataFixtures\ORM;
 
 use BackendBundle\Entity\Projet;
-use BackendBundle\Entity\StateRelationship;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-class LoadProjetData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
+class LoadProjetsData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     private $privateContainer;
 

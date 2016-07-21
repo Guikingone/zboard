@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Guillaume
  * Date: 20/07/2016
- * Time: 19:25
+ * Time: 19:25.
  */
 
 namespace CoreBundle\DataFixtures\ORM;
@@ -33,7 +33,6 @@ class LoadSoutenanceData implements FixtureInterface, ContainerAwareInterface, O
 
         $projet = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Projet')
             ->findOneBy(array('libelle' => '[PROJET] Développez un back-end pour un client'));
-
 
         $soutenance = new Soutenance();
         $soutenance->setMentor($mentor);

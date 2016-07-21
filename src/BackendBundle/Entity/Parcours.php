@@ -103,7 +103,7 @@ class Parcours
     }
 
     /**
-     * Set abonnement
+     * Set abonnement.
      *
      * @param \BackendBundle\Entity\Abonnement $abonnement
      *
@@ -117,7 +117,7 @@ class Parcours
     }
 
     /**
-     * Get abonnement
+     * Get abonnement.
      *
      * @return \BackendBundle\Entity\Abonnement
      */
@@ -126,7 +126,7 @@ class Parcours
         return $this->abonnement;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -134,7 +134,7 @@ class Parcours
     }
 
     /**
-     * Add projet
+     * Add projet.
      *
      * @param \BackendBundle\Entity\Projet $projet
      *
@@ -148,7 +148,7 @@ class Parcours
     }
 
     /**
-     * Remove projet
+     * Remove projet.
      *
      * @param \BackendBundle\Entity\Projet $projet
      */
@@ -158,7 +158,7 @@ class Parcours
     }
 
     /**
-     * Get projet
+     * Get projet.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

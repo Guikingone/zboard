@@ -128,7 +128,7 @@ class Back
     }
 
     /**
-     * Creates a new MentoratInformation
+     * Creates a new MentoratInformation.
      *
      *@param Request $request
      *

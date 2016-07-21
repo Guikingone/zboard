@@ -32,7 +32,6 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $abonnementC = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Abonnement')
             ->findOneBy(array('libelle' => 'Premium Class'));
 
-
         $mentore = new Mentore();
         $mentore->setFirstname('Aurore');
         $mentore->setLastname('Gaucher');
