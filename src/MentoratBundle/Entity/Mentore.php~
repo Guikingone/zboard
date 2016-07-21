@@ -3,7 +3,6 @@
 namespace MentoratBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Mentore.
@@ -86,7 +85,7 @@ class Mentore
     private $resume;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(name="financement", type="boolean")
      */
     private $financement;
@@ -123,9 +122,14 @@ class Mentore
     private $status;
 
     /**
-     * Get id.
+     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="mentore")
+     */
+    private $suivi;
+
+    /**
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -133,7 +137,7 @@ class Mentore
     }
 
     /**
-     * Set firstname.
+     * Set firstname
      *
      * @param string $firstname
      *
@@ -147,7 +151,7 @@ class Mentore
     }
 
     /**
-     * Get firstname.
+     * Get firstname
      *
      * @return string
      */
@@ -157,7 +161,7 @@ class Mentore
     }
 
     /**
-     * Set lastname.
+     * Set lastname
      *
      * @param string $lastname
      *
@@ -171,7 +175,7 @@ class Mentore
     }
 
     /**
-     * Get lastname.
+     * Get lastname
      *
      * @return string
      */
@@ -181,7 +185,7 @@ class Mentore
     }
 
     /**
-     * Set address.
+     * Set address
      *
      * @param string $address
      *
@@ -195,7 +199,7 @@ class Mentore
     }
 
     /**
-     * Get address.
+     * Get address
      *
      * @return string
      */
@@ -205,7 +209,7 @@ class Mentore
     }
 
     /**
-     * Set zipcode.
+     * Set zipcode
      *
      * @param string $zipcode
      *
@@ -219,7 +223,7 @@ class Mentore
     }
 
     /**
-     * Get zipcode.
+     * Get zipcode
      *
      * @return string
      */
@@ -229,7 +233,7 @@ class Mentore
     }
 
     /**
-     * Set city.
+     * Set city
      *
      * @param string $city
      *
@@ -243,7 +247,7 @@ class Mentore
     }
 
     /**
-     * Get city.
+     * Get city
      *
      * @return string
      */
@@ -253,9 +257,9 @@ class Mentore
     }
 
     /**
-     * Set country.
+     * Set country
      *
-     * @param int $country
+     * @param string $country
      *
      * @return Mentore
      */
@@ -267,9 +271,9 @@ class Mentore
     }
 
     /**
-     * Get country.
+     * Get country
      *
-     * @return int
+     * @return string
      */
     public function getCountry()
     {
@@ -277,7 +281,7 @@ class Mentore
     }
 
     /**
-     * Set email.
+     * Set email
      *
      * @param string $email
      *
@@ -291,7 +295,7 @@ class Mentore
     }
 
     /**
-     * Get email.
+     * Get email
      *
      * @return string
      */
@@ -301,7 +305,7 @@ class Mentore
     }
 
     /**
-     * Set phone.
+     * Set phone
      *
      * @param string $phone
      *
@@ -315,7 +319,7 @@ class Mentore
     }
 
     /**
-     * Get phone.
+     * Get phone
      *
      * @return string
      */
@@ -325,7 +329,7 @@ class Mentore
     }
 
     /**
-     * Set resume.
+     * Set resume
      *
      * @param string $resume
      *
@@ -339,7 +343,7 @@ class Mentore
     }
 
     /**
-     * Get resume.
+     * Get resume
      *
      * @return string
      */
@@ -349,55 +353,79 @@ class Mentore
     }
 
     /**
-     * Set parcours.
+     * Set financement
      *
-     * @param \BackendBundle\Entity\Parcours $parcours
+     * @param boolean $financement
      *
      * @return Mentore
      */
-    public function setParcours(\BackendBundle\Entity\Parcours $parcours = null)
+    public function setFinancement($financement)
     {
-        $this->parcours = $parcours;
+        $this->financement = $financement;
 
         return $this;
     }
 
     /**
-     * Get parcours.
+     * Get financement
      *
-     * @return \BackendBundle\Entity\Parcours
+     * @return boolean
      */
-    public function getParcours()
+    public function getFinancement()
     {
-        return $this->parcours;
+        return $this->financement;
     }
-    
+
     /**
-     * Set status.
+     * Set financeur
      *
-     * @param string $status
+     * @param string $financeur
      *
      * @return Mentore
      */
-    public function setStatus($status)
+    public function setFinanceur($financeur)
     {
-        $this->status = $status;
+        $this->financeur = $financeur;
 
         return $this;
     }
 
     /**
-     * Get status.
+     * Get financeur
      *
      * @return string
      */
-    public function getStatus()
+    public function getFinanceur()
     {
-        return $this->status;
+        return $this->financeur;
     }
 
     /**
-     * Set dateStart.
+     * Set dureeFinancement
+     *
+     * @param string $dureeFinancement
+     *
+     * @return Mentore
+     */
+    public function setDureeFinancement($dureeFinancement)
+    {
+        $this->duree_financement = $dureeFinancement;
+
+        return $this;
+    }
+
+    /**
+     * Get dureeFinancement
+     *
+     * @return string
+     */
+    public function getDureeFinancement()
+    {
+        return $this->duree_financement;
+    }
+
+    /**
+     * Set dateStart
      *
      * @param \DateTime $dateStart
      *
@@ -411,7 +439,7 @@ class Mentore
     }
 
     /**
-     * Get dateStart.
+     * Get dateStart
      *
      * @return \DateTime
      */
@@ -421,26 +449,74 @@ class Mentore
     }
 
     /**
-     * Set abonnement.
+     * Set status
      *
-     * @param string $abonnement
+     * @param string $status
      *
      * @return Mentore
      */
-    public function setAbonnement($abonnement)
+    public function setStatus($status)
     {
-        $this->abonnement = $abonnement;
+        $this->status = $status;
 
         return $this;
     }
 
     /**
-     * Get abonnement.
+     * Get status
      *
      * @return string
      */
-    public function getAbonnement()
+    public function getStatus()
     {
-        return $this->abonnement;
+        return $this->status;
+    }
+
+    /**
+     * Set parcours
+     *
+     * @param \BackendBundle\Entity\Parcours $parcours
+     *
+     * @return Mentore
+     */
+    public function setParcours(\BackendBundle\Entity\Parcours $parcours = null)
+    {
+        $this->parcours = $parcours;
+
+        return $this;
+    }
+
+    /**
+     * Get parcours
+     *
+     * @return \BackendBundle\Entity\Parcours
+     */
+    public function getParcours()
+    {
+        return $this->parcours;
+    }
+
+    /**
+     * Set suivi
+     *
+     * @param \MentoratBundle\Entity\Suivi $suivi
+     *
+     * @return Mentore
+     */
+    public function setSuivi(\MentoratBundle\Entity\Suivi $suivi = null)
+    {
+        $this->suivi = $suivi;
+
+        return $this;
+    }
+
+    /**
+     * Get suivi
+     *
+     * @return \MentoratBundle\Entity\Suivi
+     */
+    public function getSuivi()
+    {
+        return $this->suivi;
     }
 }

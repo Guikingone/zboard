@@ -86,7 +86,7 @@ class Mentore
 
     /**
      * @var bool
-     * @ORM\Column(name="financement", type="boolean")
+     * @ORM\Column(name="financement", type="boolean", nullable=true)
      */
     private $financement;
 
@@ -122,9 +122,14 @@ class Mentore
     private $status;
 
     /**
-     * Get id.
+     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="mentore", cascade={ "persist"})
+     */
+    private $suivi;
+
+    /**
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -132,7 +137,7 @@ class Mentore
     }
 
     /**
-     * Set firstname.
+     * Set firstname
      *
      * @param string $firstname
      *
@@ -146,7 +151,7 @@ class Mentore
     }
 
     /**
-     * Get firstname.
+     * Get firstname
      *
      * @return string
      */
@@ -156,7 +161,7 @@ class Mentore
     }
 
     /**
-     * Set lastname.
+     * Set lastname
      *
      * @param string $lastname
      *
@@ -170,7 +175,7 @@ class Mentore
     }
 
     /**
-     * Get lastname.
+     * Get lastname
      *
      * @return string
      */
@@ -180,7 +185,7 @@ class Mentore
     }
 
     /**
-     * Set address.
+     * Set address
      *
      * @param string $address
      *
@@ -194,7 +199,7 @@ class Mentore
     }
 
     /**
-     * Get address.
+     * Get address
      *
      * @return string
      */
@@ -204,7 +209,7 @@ class Mentore
     }
 
     /**
-     * Set zipcode.
+     * Set zipcode
      *
      * @param string $zipcode
      *
@@ -218,7 +223,7 @@ class Mentore
     }
 
     /**
-     * Get zipcode.
+     * Get zipcode
      *
      * @return string
      */
@@ -228,7 +233,7 @@ class Mentore
     }
 
     /**
-     * Set city.
+     * Set city
      *
      * @param string $city
      *
@@ -242,7 +247,7 @@ class Mentore
     }
 
     /**
-     * Get city.
+     * Get city
      *
      * @return string
      */
@@ -252,9 +257,9 @@ class Mentore
     }
 
     /**
-     * Set country.
+     * Set country
      *
-     * @param int $country
+     * @param string $country
      *
      * @return Mentore
      */
@@ -266,9 +271,9 @@ class Mentore
     }
 
     /**
-     * Get country.
+     * Get country
      *
-     * @return int
+     * @return string
      */
     public function getCountry()
     {
@@ -276,7 +281,7 @@ class Mentore
     }
 
     /**
-     * Set email.
+     * Set email
      *
      * @param string $email
      *
@@ -290,7 +295,7 @@ class Mentore
     }
 
     /**
-     * Get email.
+     * Get email
      *
      * @return string
      */
@@ -300,7 +305,7 @@ class Mentore
     }
 
     /**
-     * Set phone.
+     * Set phone
      *
      * @param string $phone
      *
@@ -314,7 +319,7 @@ class Mentore
     }
 
     /**
-     * Get phone.
+     * Get phone
      *
      * @return string
      */
@@ -324,7 +329,7 @@ class Mentore
     }
 
     /**
-     * Set resume.
+     * Set resume
      *
      * @param string $resume
      *
@@ -338,7 +343,7 @@ class Mentore
     }
 
     /**
-     * Get resume.
+     * Get resume
      *
      * @return string
      */
@@ -348,105 +353,9 @@ class Mentore
     }
 
     /**
-     * Set parcours.
+     * Set financement
      *
-     * @param \BackendBundle\Entity\Parcours $parcours
-     *
-     * @return Mentore
-     */
-    public function setParcours(\BackendBundle\Entity\Parcours $parcours = null)
-    {
-        $this->parcours = $parcours;
-
-        return $this;
-    }
-
-    /**
-     * Get parcours.
-     *
-     * @return \BackendBundle\Entity\Parcours
-     */
-    public function getParcours()
-    {
-        return $this->parcours;
-    }
-
-    /**
-     * Set status.
-     *
-     * @param string $status
-     *
-     * @return Mentore
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status.
-     *
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * Set dateStart.
-     *
-     * @param \DateTime $dateStart
-     *
-     * @return Mentore
-     */
-    public function setDateStart($dateStart)
-    {
-        $this->date_start = $dateStart;
-
-        return $this;
-    }
-
-    /**
-     * Get dateStart.
-     *
-     * @return \DateTime
-     */
-    public function getDateStart()
-    {
-        return $this->date_start;
-    }
-
-    /**
-     * Set abonnement.
-     *
-     * @param string $abonnement
-     *
-     * @return Mentore
-     */
-    public function setAbonnement($abonnement)
-    {
-        $this->abonnement = $abonnement;
-
-        return $this;
-    }
-
-    /**
-     * Get abonnement.
-     *
-     * @return string
-     */
-    public function getAbonnement()
-    {
-        return $this->abonnement;
-    }
-
-    /**
-     * Set financement.
-     *
-     * @param bool $financement
+     * @param boolean $financement
      *
      * @return Mentore
      */
@@ -458,9 +367,9 @@ class Mentore
     }
 
     /**
-     * Get financement.
+     * Get financement
      *
-     * @return bool
+     * @return boolean
      */
     public function getFinancement()
     {
@@ -468,7 +377,7 @@ class Mentore
     }
 
     /**
-     * Set financeur.
+     * Set financeur
      *
      * @param string $financeur
      *
@@ -482,7 +391,7 @@ class Mentore
     }
 
     /**
-     * Get financeur.
+     * Get financeur
      *
      * @return string
      */
@@ -492,7 +401,7 @@ class Mentore
     }
 
     /**
-     * Set dureeFinancement.
+     * Set dureeFinancement
      *
      * @param string $dureeFinancement
      *
@@ -506,12 +415,108 @@ class Mentore
     }
 
     /**
-     * Get dureeFinancement.
+     * Get dureeFinancement
      *
      * @return string
      */
     public function getDureeFinancement()
     {
         return $this->duree_financement;
+    }
+
+    /**
+     * Set dateStart
+     *
+     * @param \DateTime $dateStart
+     *
+     * @return Mentore
+     */
+    public function setDateStart($dateStart)
+    {
+        $this->date_start = $dateStart;
+
+        return $this;
+    }
+
+    /**
+     * Get dateStart
+     *
+     * @return \DateTime
+     */
+    public function getDateStart()
+    {
+        return $this->date_start;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     *
+     * @return Mentore
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set parcours
+     *
+     * @param \BackendBundle\Entity\Parcours $parcours
+     *
+     * @return Mentore
+     */
+    public function setParcours(\BackendBundle\Entity\Parcours $parcours = null)
+    {
+        $this->parcours = $parcours;
+
+        return $this;
+    }
+
+    /**
+     * Get parcours
+     *
+     * @return \BackendBundle\Entity\Parcours
+     */
+    public function getParcours()
+    {
+        return $this->parcours;
+    }
+
+    /**
+     * Set suivi
+     *
+     * @param \MentoratBundle\Entity\Suivi $suivi
+     *
+     * @return Mentore
+     */
+    public function setSuivi(\MentoratBundle\Entity\Suivi $suivi = null)
+    {
+        $this->suivi = $suivi;
+
+        return $this;
+    }
+
+    /**
+     * Get suivi
+     *
+     * @return \MentoratBundle\Entity\Suivi
+     */
+    public function getSuivi()
+    {
+        return $this->suivi;
     }
 }

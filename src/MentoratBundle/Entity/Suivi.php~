@@ -22,9 +22,15 @@ class Suivi
     private $id;
 
     /**
+     * @var string
+     * @ORM\Column(name="libelle", type="string", length=255, nullable=true)
+     */
+    private $libelle;
+
+    /**
      * @var \DateTime
      *
-     * @ORM\Column(name="d_update", type="datetime")
+     * @ORM\Column(name="d_update", type="datetime", nullable=true)
      */
     private $dUpdate;
 
@@ -35,14 +41,13 @@ class Suivi
     private $mentor;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Mentore")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Mentore", inversedBy="suivi")
      */
     private $mentore;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\StateRelationship")
-     * @ORM\JoinColumn(nullable=false)
+     * @var string
+     * @ORM\Column(name="state", type="string", length=150, nullable=false)
      */
     private $state;
 
@@ -51,12 +56,18 @@ class Suivi
      */
     private $notes;
 
-    private $projets;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->notes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -64,11 +75,35 @@ class Suivi
     }
 
     /**
-     * Set dUpdate.
+     * Set libelle
+     *
+     * @param string $libelle
+     *
+     * @return Suivi
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get libelle
+     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * Set dUpdate
      *
      * @param \DateTime $dUpdate
      *
-     * @return MentorMentore
+     * @return Suivi
      */
     public function setDUpdate($dUpdate)
     {
@@ -78,7 +113,7 @@ class Suivi
     }
 
     /**
-     * Get dUpdate.
+     * Get dUpdate
      *
      * @return \DateTime
      */
@@ -88,11 +123,11 @@ class Suivi
     }
 
     /**
-     * Set mentor.
+     * Set mentor
      *
      * @param \UserBundle\Entity\User $mentor
      *
-     * @return MentorMentore
+     * @return Suivi
      */
     public function setMentor(\UserBundle\Entity\User $mentor)
     {
@@ -102,7 +137,7 @@ class Suivi
     }
 
     /**
-     * Get mentor.
+     * Get mentor
      *
      * @return \UserBundle\Entity\User
      */
@@ -112,13 +147,13 @@ class Suivi
     }
 
     /**
-     * Set mentore.
+     * Set mentore
      *
      * @param \MentoratBundle\Entity\Mentore $mentore
      *
-     * @return MentorMentore
+     * @return Suivi
      */
-    public function setMentore(\MentoratBundle\Entity\Mentore $mentore)
+    public function setMentore(\MentoratBundle\Entity\Mentore $mentore = null)
     {
         $this->mentore = $mentore;
 
@@ -126,7 +161,7 @@ class Suivi
     }
 
     /**
-     * Get mentore.
+     * Get mentore
      *
      * @return \MentoratBundle\Entity\Mentore
      */
@@ -136,38 +171,7 @@ class Suivi
     }
 
     /**
-     * Set state.
-     *
-     * @param \BackendBundle\Entity\StateRelationship $state
-     *
-     * @return MentorMentore
-     */
-    public function setState(\BackendBundle\Entity\StateRelationship $state)
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * Get state.
-     *
-     * @return \BackendBundle\Entity\StateRelationship
-     */
-    public function getState()
-    {
-        return $this->state;
-    }
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->notes = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add note.
+     * Add note
      *
      * @param \MentoratBundle\Entity\Notes $note
      *
@@ -181,7 +185,7 @@ class Suivi
     }
 
     /**
-     * Remove note.
+     * Remove note
      *
      * @param \MentoratBundle\Entity\Notes $note
      */
@@ -191,7 +195,7 @@ class Suivi
     }
 
     /**
-     * Get notes.
+     * Get notes
      *
      * @return \Doctrine\Common\Collections\Collection
      */

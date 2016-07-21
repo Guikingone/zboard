@@ -56,8 +56,12 @@ class MentoreType extends AbstractType
                     'Non' => false,
                 ),
             ))
-            ->add('financeur', TextType::class)
-            ->add('duree_financement', TextType::class)
+            ->add('financeur', TextType::class, array(
+                'required' => false,
+            ))
+            ->add('duree_financement', TextType::class, array(
+                'required' => false,
+            ))
             ->add('status', ChoiceType::class, array(
                 'choices' => [
                     'En attente de prise de contact' => 'En attente',
@@ -67,6 +71,7 @@ class MentoreType extends AbstractType
                     'Formation terminée' => 'Formation terminé',
                 ],
             ))
+            ->add('suivi', SuiviType::class)
         ;
     }
 

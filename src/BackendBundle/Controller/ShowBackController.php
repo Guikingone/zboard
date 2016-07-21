@@ -29,7 +29,7 @@ class ShowBackController extends Controller
      */
     public function showMentoreAction(Request $request)
     {
-        $nMentore = $this->get('core.back')->addMentore($request);
+        $nMentore = $this->get('core.admin')->addMentore($request);
         $mentores = $this->get('core.back')->getMentores();
 
         return array('mentores' => $mentores, 'nMentore' => $nMentore->createView());

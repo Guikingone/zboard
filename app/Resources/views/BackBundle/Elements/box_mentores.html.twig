@@ -6,6 +6,7 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Statut</th>
+                <th>Mentor actuel</th>
                 <th>Date de commencement</th>
                 <th>Durée de financement</th>
                 <th>Parcours suivi</th>
@@ -35,25 +36,20 @@
                         {% endif %}
                     </td>
                     <td>
+                        {{ mentores.suivi.mentor }}
+                    </td>
+                    <td>
                        {{ mentores.dateStart|date('d-m-Y') }}
                     </td>
                     <td>
                         {% if mentores.dureeFinancement is null %}
                             <p>Non financé</p>
                         {% else %}
-                            {{ mentores.dureeFinancement }}
+                            <span class="label label-primary">{{ mentores.dureeFinancement }}</span>
                         {% endif %}
                     </td>
                     <td>
                         {{ mentores.parcours.libelle }}
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-info">
-                            <a  class="_no_link" href="{{ path('update_mentores', {'id': mentores.id}) }}">
-                                Modifier
-                            </a>
-                        </button>
-                        <button type="button" class="btn btn-danger" href="#">Archiver</button>
                     </td>
                 </tr>
             {% endfor %}

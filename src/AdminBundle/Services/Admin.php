@@ -5,11 +5,14 @@ namespace AdminBundle\Services;
 use BackendBundle\Entity\Abonnement;
 use BackendBundle\Form\TypeAdd\AbonnementTypeAdd;
 use Doctrine\ORM\EntityManager;
+use MentoratBundle\Entity\Mentore;
+use MentoratBundle\Entity\Suivi;
 use MentoratBundle\Form\MentoreType;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use UserBundle\Form\RegistrationType;
 
 class Admin
 {
@@ -187,6 +190,34 @@ class Admin
     }
 
     /**
+     * Allow to create a new instance of Mentore.
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addMentore(Request $request)
+    {
+        $mentore = new Mentore();
+        $suivi = new Suivi();
+
+        $mentore->setSuivi($suivi);
+        $suivi->setMentore($mentore);
+
+        $form = $this->form->create(MentoreType::class, $mentore);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->doctrine->persist($mentore);
+            $this->doctrine->persist($suivi);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Elève enregistré.');
+        }
+
+        return $form;
+    }
+
+    /**
      * Allow to add a new abonnement.
      *
      * @param Request $request
@@ -230,6 +261,33 @@ class Admin
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le mentore a bien été mis à jour');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to update the informations about a teacher.
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function updateMentors(Request $request, $id)
+    {
+        $mentor = $this->doctrine->getRepository('UserBundle:User')->find($id);
+
+        if (null === $mentor) {
+            throw new NotFoundHttpException('Le mentor ne semble pas exister');
+        }
+
+        $form = $this->form->create(RegistrationType::class, $mentor);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Le mentor a bien été mis à jour');
         }
 
         return $form;

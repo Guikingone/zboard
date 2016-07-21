@@ -5,6 +5,7 @@ namespace CoreBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use MentoratBundle\Entity\Mentore;
+use MentoratBundle\Entity\Suivi;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -26,13 +27,13 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $parcoursC = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
             ->findOneBy(array('libelle' => 'Développeur PHP/Symfony'));
 
-        $abonnement = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Abonnement')
-            ->findOneBy(array('libelle' => 'Premium Plus'));
-
-        $abonnementC = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Abonnement')
-            ->findOneBy(array('libelle' => 'Premium Class'));
+        $mentor = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
+                       ->findOneBy(array('lastName' => 'Chan'));
 
         $mentore = new Mentore();
+        $suivi = new Suivi();
+        $suiviC = new Suivi();
+
         $mentore->setFirstname('Aurore');
         $mentore->setLastname('Gaucher');
         $mentore->setEmail('aurore.gaucher@gmail.com');
@@ -43,8 +44,12 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $mentore->setPhone('00.00.00.00.00');
         $mentore->setDateStart(new \DateTime());
         $mentore->setResume('Something');
+        $mentore->setSuivi($suivi);
+        $suivi->setMentor($mentor);
+        $suivi->setState('En cours');
+        $suivi->setMentore($mentore);
         $mentore->setStatus('En formation');
-        $mentore->setAbonnement($abonnement);
+        $mentore->setFinancement(true);
 
         $mentoreC = new Mentore();
         $mentoreC->setFirstname('Toto');
@@ -57,11 +62,17 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $mentoreC->setPhone('00.00.00.00.00');
         $mentoreC->setDateStart(new \DateTime());
         $mentoreC->setResume('Something');
+        $mentoreC->setSuivi($suiviC);
+        $suiviC->setMentor($mentor);
+        $suiviC->setState('En cours');
+        $suiviC->setMentore($mentoreC);
+        $mentore->setFinancement(false);
         $mentoreC->setStatus('En formation');
-        $mentoreC->setAbonnement($abonnementC);
 
         $manager->persist($mentore);
         $manager->persist($mentoreC);
+        $manager->persist($suivi);
+        $manager->persist($suiviC);
         $manager->flush();
     }
 

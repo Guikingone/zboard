@@ -5,6 +5,7 @@
             <tr>
                 <th>Nom du parcours</th>
                 <th>Niveau diplôme</th>
+                <th>Outils</th>
             </tr>
             </thead>
             <tbody>
@@ -15,6 +16,18 @@
                     </td>
                     <td>
                         {{ path.diplome }}
+                    </td>
+                    <td>
+                        <button class="btn btn-info">
+                            <a href="#">
+                                Modifier
+                            </a>
+                        </button>
+                        <button class="btn btn-info">
+                            <a href="#">
+                                Archiver
+                            </a>
+                        </button>
                     </td>
                 </tr>
                 {% endfor %}
