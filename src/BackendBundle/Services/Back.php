@@ -52,26 +52,6 @@ class Back
     }
 
     /**
-     * Allow to get all the mentors.
-     *
-     * @return array|\UserBundle\Entity\User[]
-     */
-    public function getMentors()
-    {
-        return $this->doctrine->getRepository('UserBundle:User')->findAll();
-    }
-
-    /**
-     * Allow to get all the mentores.
-     *
-     * @return array|\MentoratBundle\Entity\Mentore[]
-     */
-    public function getMentores()
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->findAll();
-    }
-
-    /**
      * Allow the back to get all the new mentores since actual datetime.
      *
      * @return array

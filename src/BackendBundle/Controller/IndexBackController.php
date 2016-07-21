@@ -15,8 +15,8 @@ class IndexBackController extends Controller
      */
     public function indexAction()
     {
-        $mentors = $this->get('core.back')->getMentors();
-        $mentores = $this->get('core.back')->getMentores();
+        $mentors = $this->get('core.admin')->getMentors();
+        $mentores = $this->get('core.admin')->getMentores();
         $soutenances = $this->get('core.back')->getSoutenances();
         $parcours = $this->get('core.back')->getParcours();
 

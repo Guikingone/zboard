@@ -10,4 +10,12 @@ namespace UserBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getMentors()
+    {
+        return $this->createQueryBuilder('m')
+                    ->where('m.roles = :role')
+                        ->setParameter('role', $role = 'ROLE_MENTOR')
+                    ->getQuery()
+                    ->getResult();
+    }
 }
