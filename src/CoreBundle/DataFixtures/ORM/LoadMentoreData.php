@@ -28,7 +28,7 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
             ->findOneBy(array('libelle' => 'Développeur PHP/Symfony'));
 
         $mentor = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
-                       ->findOneBy(array('lastName' => 'Chan'));
+                       ->findOneBy(array('firstName' => 'Jacky'));
 
         $mentore = new Mentore();
         $suivi = new Suivi();

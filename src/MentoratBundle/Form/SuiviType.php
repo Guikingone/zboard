@@ -12,7 +12,7 @@ class SuiviType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -33,14 +33,14 @@ class SuiviType extends AbstractType
             ))
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MentoratBundle\Entity\Suivi'
+            'data_class' => 'MentoratBundle\Entity\Suivi',
         ));
     }
 }

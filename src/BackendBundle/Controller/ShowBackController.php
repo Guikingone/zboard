@@ -57,10 +57,8 @@ class ShowBackController extends Controller
     {
         $parcours = $this->get('core.back')->addParcours($request);
         $path = $this->get('core.back')->getParcours();
-        $financeur = $this->get('core.back')->addFinancement($request);
 
-        return array('parcours' => $parcours->createView(), 'path' => $path,
-            'financeur' => $financeur->createView(), );
+        return array('parcours' => $parcours->createView(), 'path' => $path);
     }
 
     /**

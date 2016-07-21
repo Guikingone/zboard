@@ -12,6 +12,7 @@ class UtilsBackController extends Controller
     /**
      * @param Request $request
      * @param $id
+     *
      * @return array
      *
      * @Route("/utils/{id}/mentores", name="update_mentores")
@@ -27,6 +28,7 @@ class UtilsBackController extends Controller
     /**
      * @param Request $request
      * @param $id
+     *
      * @return array
      *
      * @Route("/utils/{id}/mentors", name="update_mentors")

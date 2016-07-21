@@ -64,13 +64,18 @@ class User extends BaseUser
      * @var string
      * @ORM\Column(name="phone", type="string", length=40)
      */
-    protected $phone;
+    private $phone;
 
     /**
      * @var bool
      * @ORM\Column(name="available", type="boolean")
      */
-    protected $available;
+    private $available;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="mentor")
+     */
+    private $suivi;
 
     /**
      * Get id.
@@ -277,5 +282,39 @@ class User extends BaseUser
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Add suivi.
+     *
+     * @param \MentoratBundle\Entity\Suivi $suivi
+     *
+     * @return User
+     */
+    public function addSuivi(\MentoratBundle\Entity\Suivi $suivi)
+    {
+        $this->suivi[] = $suivi;
+
+        return $this;
+    }
+
+    /**
+     * Remove suivi.
+     *
+     * @param \MentoratBundle\Entity\Suivi $suivi
+     */
+    public function removeSuivi(\MentoratBundle\Entity\Suivi $suivi)
+    {
+        $this->suivi->removeElement($suivi);
+    }
+
+    /**
+     * Get suivi.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSuivi()
+    {
+        return $this->suivi;
     }
 }

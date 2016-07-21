@@ -10,12 +10,10 @@ use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use BackendBundle\Entity\Financement;
 use BackendBundle\Entity\Parcours;
 use MentoratBundle\Entity\Mentore;
 use BackendBundle\Entity\Projet;
 use BackendBundle\Form\TypeAdd\ProjetTypeAdd;
-use BackendBundle\Form\TypeAdd\FinancementTypeAdd;
 use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
 use MentoratBundle\Form\MentoreType;
 use MentoratBundle\Form\InformationType;
@@ -259,28 +257,6 @@ class Back
             $this->doctrine->persist($competences);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Competences ajouté !');
-        }
-
-        return $form;
-    }
-
-    /**
-     * Allow to add a new Financement.
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addFinancement(Request $request)
-    {
-        $financement = new Financement();
-        $form = $this->formFactory->create(FinancementTypeAdd::class, $financement);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $this->doctrine->persist($financement);
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'Financeur ajouté !');
         }
 
         return $form;

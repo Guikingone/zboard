@@ -127,9 +127,9 @@ class Mentore
     private $suivi;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -137,7 +137,7 @@ class Mentore
     }
 
     /**
-     * Set firstname
+     * Set firstname.
      *
      * @param string $firstname
      *
@@ -151,7 +151,7 @@ class Mentore
     }
 
     /**
-     * Get firstname
+     * Get firstname.
      *
      * @return string
      */
@@ -161,7 +161,7 @@ class Mentore
     }
 
     /**
-     * Set lastname
+     * Set lastname.
      *
      * @param string $lastname
      *
@@ -175,7 +175,7 @@ class Mentore
     }
 
     /**
-     * Get lastname
+     * Get lastname.
      *
      * @return string
      */
@@ -185,7 +185,7 @@ class Mentore
     }
 
     /**
-     * Set address
+     * Set address.
      *
      * @param string $address
      *
@@ -199,7 +199,7 @@ class Mentore
     }
 
     /**
-     * Get address
+     * Get address.
      *
      * @return string
      */
@@ -209,7 +209,7 @@ class Mentore
     }
 
     /**
-     * Set zipcode
+     * Set zipcode.
      *
      * @param string $zipcode
      *
@@ -223,7 +223,7 @@ class Mentore
     }
 
     /**
-     * Get zipcode
+     * Get zipcode.
      *
      * @return string
      */
@@ -233,7 +233,7 @@ class Mentore
     }
 
     /**
-     * Set city
+     * Set city.
      *
      * @param string $city
      *
@@ -247,7 +247,7 @@ class Mentore
     }
 
     /**
-     * Get city
+     * Get city.
      *
      * @return string
      */
@@ -257,7 +257,7 @@ class Mentore
     }
 
     /**
-     * Set country
+     * Set country.
      *
      * @param string $country
      *
@@ -271,7 +271,7 @@ class Mentore
     }
 
     /**
-     * Get country
+     * Get country.
      *
      * @return string
      */
@@ -281,7 +281,7 @@ class Mentore
     }
 
     /**
-     * Set email
+     * Set email.
      *
      * @param string $email
      *
@@ -295,7 +295,7 @@ class Mentore
     }
 
     /**
-     * Get email
+     * Get email.
      *
      * @return string
      */
@@ -305,7 +305,7 @@ class Mentore
     }
 
     /**
-     * Set phone
+     * Set phone.
      *
      * @param string $phone
      *
@@ -319,7 +319,7 @@ class Mentore
     }
 
     /**
-     * Get phone
+     * Get phone.
      *
      * @return string
      */
@@ -329,7 +329,7 @@ class Mentore
     }
 
     /**
-     * Set resume
+     * Set resume.
      *
      * @param string $resume
      *
@@ -343,7 +343,7 @@ class Mentore
     }
 
     /**
-     * Get resume
+     * Get resume.
      *
      * @return string
      */
@@ -353,9 +353,9 @@ class Mentore
     }
 
     /**
-     * Set financement
+     * Set financement.
      *
-     * @param boolean $financement
+     * @param bool $financement
      *
      * @return Mentore
      */
@@ -367,9 +367,9 @@ class Mentore
     }
 
     /**
-     * Get financement
+     * Get financement.
      *
-     * @return boolean
+     * @return bool
      */
     public function getFinancement()
     {
@@ -377,7 +377,7 @@ class Mentore
     }
 
     /**
-     * Set financeur
+     * Set financeur.
      *
      * @param string $financeur
      *
@@ -391,7 +391,7 @@ class Mentore
     }
 
     /**
-     * Get financeur
+     * Get financeur.
      *
      * @return string
      */
@@ -401,7 +401,7 @@ class Mentore
     }
 
     /**
-     * Set dureeFinancement
+     * Set dureeFinancement.
      *
      * @param string $dureeFinancement
      *
@@ -415,7 +415,7 @@ class Mentore
     }
 
     /**
-     * Get dureeFinancement
+     * Get dureeFinancement.
      *
      * @return string
      */
@@ -425,7 +425,7 @@ class Mentore
     }
 
     /**
-     * Set dateStart
+     * Set dateStart.
      *
      * @param \DateTime $dateStart
      *
@@ -439,7 +439,7 @@ class Mentore
     }
 
     /**
-     * Get dateStart
+     * Get dateStart.
      *
      * @return \DateTime
      */
@@ -449,7 +449,7 @@ class Mentore
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param string $status
      *
@@ -463,7 +463,7 @@ class Mentore
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return string
      */
@@ -473,7 +473,7 @@ class Mentore
     }
 
     /**
-     * Set parcours
+     * Set parcours.
      *
      * @param \BackendBundle\Entity\Parcours $parcours
      *
@@ -487,7 +487,7 @@ class Mentore
     }
 
     /**
-     * Get parcours
+     * Get parcours.
      *
      * @return \BackendBundle\Entity\Parcours
      */
@@ -497,7 +497,7 @@ class Mentore
     }
 
     /**
-     * Set suivi
+     * Set suivi.
      *
      * @param \MentoratBundle\Entity\Suivi $suivi
      *
@@ -511,7 +511,7 @@ class Mentore
     }
 
     /**
-     * Get suivi
+     * Get suivi.
      *
      * @return \MentoratBundle\Entity\Suivi
      */

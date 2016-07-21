@@ -35,31 +35,3 @@
         </div>
     </div>
 </div>
-
-<!-- Modal used in order to add a financement -->
-<div class="modal fade" id="myModalFinanceur" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Gestion des financeurs</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    {{ form_start(financeur) }}
-                    <div class="input-group">
-                        {{ form_errors(financeur.libelle) }}
-                        {{ form_label(financeur.libelle, 'Nom du financeur')}}
-                        {{ form_widget(financeur.libelle, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-warning">Enregistrer</button>
-                    {{ form_end(financeur) }}
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-            </div>
-        </div>
-    </div>
-</div>

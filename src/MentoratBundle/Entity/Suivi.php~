@@ -35,7 +35,7 @@ class Suivi
     private $dUpdate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="suivi")
      * @ORM\JoinColumn(nullable=false)
      */
     private $mentor;
@@ -202,5 +202,29 @@ class Suivi
     public function getNotes()
     {
         return $this->notes;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     *
+     * @return Suivi
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 }

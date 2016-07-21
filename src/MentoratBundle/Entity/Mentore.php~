@@ -86,7 +86,7 @@ class Mentore
 
     /**
      * @var bool
-     * @ORM\Column(name="financement", type="boolean")
+     * @ORM\Column(name="financement", type="boolean", nullable=true)
      */
     private $financement;
 
@@ -122,7 +122,7 @@ class Mentore
     private $status;
 
     /**
-     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="mentore")
+     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="mentore", cascade={ "persist"})
      */
     private $suivi;
 
