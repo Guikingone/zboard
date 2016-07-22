@@ -78,21 +78,6 @@ class User extends BaseUser
     private $suivi;
 
     /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Set firstName.
      *
      * @param string $firstName
@@ -213,9 +198,33 @@ class User extends BaseUser
     }
 
     /**
+     * Set country.
+     *
+     * @param string $country
+     *
+     * @return User
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country.
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
      * Set phone.
      *
-     * @param int $phone
+     * @param string $phone
      *
      * @return User
      */
@@ -229,7 +238,7 @@ class User extends BaseUser
     /**
      * Get phone.
      *
-     * @return int
+     * @return string
      */
     public function getPhone()
     {
@@ -258,30 +267,6 @@ class User extends BaseUser
     public function getAvailable()
     {
         return $this->available;
-    }
-
-    /**
-     * Set country.
-     *
-     * @param string $country
-     *
-     * @return User
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country.
-     *
-     * @return string
-     */
-    public function getCountry()
-    {
-        return $this->country;
     }
 
     /**

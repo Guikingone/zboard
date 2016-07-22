@@ -78,22 +78,12 @@ class User extends BaseUser
     private $suivi;
 
     /**
-     * Get id.
-     *
-     * @return int
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\Competences", mappedBy="users")
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    private $competences;
 
     /**
-     * Set firstName.
+     * Set firstName
      *
      * @param string $firstName
      *
@@ -107,7 +97,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get firstName.
+     * Get firstName
      *
      * @return string
      */
@@ -117,7 +107,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set lastName.
+     * Set lastName
      *
      * @param string $lastName
      *
@@ -131,7 +121,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get lastName.
+     * Get lastName
      *
      * @return string
      */
@@ -141,7 +131,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set address.
+     * Set address
      *
      * @param string $address
      *
@@ -155,7 +145,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get address.
+     * Get address
      *
      * @return string
      */
@@ -165,7 +155,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set zipcode.
+     * Set zipcode
      *
      * @param string $zipcode
      *
@@ -179,7 +169,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get zipcode.
+     * Get zipcode
      *
      * @return string
      */
@@ -189,7 +179,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set city.
+     * Set city
      *
      * @param string $city
      *
@@ -203,7 +193,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get city.
+     * Get city
      *
      * @return string
      */
@@ -213,55 +203,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set phone.
-     *
-     * @param int $phone
-     *
-     * @return User
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Get phone.
-     *
-     * @return int
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
-     * Set available.
-     *
-     * @param bool $available
-     *
-     * @return User
-     */
-    public function setAvailable($available)
-    {
-        $this->available = $available;
-
-        return $this;
-    }
-
-    /**
-     * Get available.
-     *
-     * @return bool
-     */
-    public function getAvailable()
-    {
-        return $this->available;
-    }
-
-    /**
-     * Set country.
+     * Set country
      *
      * @param string $country
      *
@@ -275,12 +217,94 @@ class User extends BaseUser
     }
 
     /**
-     * Get country.
+     * Get country
      *
      * @return string
      */
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     *
+     * @return User
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set available
+     *
+     * @param boolean $available
+     *
+     * @return User
+     */
+    public function setAvailable($available)
+    {
+        $this->available = $available;
+
+        return $this;
+    }
+
+    /**
+     * Get available
+     *
+     * @return boolean
+     */
+    public function getAvailable()
+    {
+        return $this->available;
+    }
+
+    /**
+     * Add suivi
+     *
+     * @param \MentoratBundle\Entity\Suivi $suivi
+     *
+     * @return User
+     */
+    public function addSuivi(\MentoratBundle\Entity\Suivi $suivi)
+    {
+        $this->suivi[] = $suivi;
+
+        return $this;
+    }
+
+    /**
+     * Remove suivi
+     *
+     * @param \MentoratBundle\Entity\Suivi $suivi
+     */
+    public function removeSuivi(\MentoratBundle\Entity\Suivi $suivi)
+    {
+        $this->suivi->removeElement($suivi);
+    }
+
+    /**
+     * Get suivi
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSuivi()
+    {
+        return $this->suivi;
     }
 }

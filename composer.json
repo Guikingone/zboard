@@ -10,7 +10,7 @@
             "BackendBundle\\": "src/",
             "CoreBundle\\": "src/",
             "MentoratBundle\\": "src/",
-            "UserBundle\\": "src/"
+            "UserBundle\\": "src/",
         },
         "classmap": [
             "app/AppKernel.php",

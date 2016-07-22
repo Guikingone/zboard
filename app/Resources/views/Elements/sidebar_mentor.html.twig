@@ -9,7 +9,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MENU PRINCIPAL</li>
-            <li class="treeview {{ (controller == "mentore") ? "active" : "" }}">
+            <li class="treeview">
                 <a href="#">
                     <i class="ion ion-person-stalker"></i>
                     <span>Mes mentorés</span>
@@ -23,7 +23,7 @@
                     <li><a href="{{ path('mentorat_termine') }}"><i class="fa fa-circle-o"></i> Mentorat terminés</a></li>
                 </ul>
             </li>
-            <li class="treeview {{ (controller == "infos") ? "active" : "" }}"><a href="infos"><i class='fa fa-info-circle'></i> <span>Informations mentorat</span></a></li>
+            <li class="treeview"><a href="{{ path('mentorat_infos_index') }}"><i class='fa fa-info-circle'></i> <span>Informations mentorat</span></a></li>
             {% if is_granted('ROLE_ADMIN') %}
                 <li class="active treeview">
                     <a href="#">

@@ -29,6 +29,7 @@ class SuiviType extends AbstractType
                     'En attente de prise de contact' => 'En attente',
                     'En cours' => 'En cours',
                     'Elève transféré' => 'Transfert en cours',
+                    'Transfert terminé' => 'Transfert terminé',
                 ),
             ))
         ;

@@ -16,7 +16,7 @@
             {% for mentors in mentors %}
             <tr>
                 <td>
-                    <a href="#">{{ mentors.lastname }}</a>
+                    <a href="{{ path('show_details_mentor', {'id': mentors.id}) }}">{{ mentors.lastname }}</a>
                 </td>
                 <td>
                     {{ mentors.firstname }}

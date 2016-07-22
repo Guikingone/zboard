@@ -1,0 +1,27 @@
+<!-- Modal used in order to add a competences into a teacher profil -->
+<div class="modal fade" id="myModalCompetences" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ajouter une compétences</h4>
+            </div>
+            <div class="modal-body">
+                {{ form_start(competence) }}
+                <div class="input-group">
+                    {{ form_errors(competence.libelle) }}
+                    {{ form_label(competence.libelle, 'Compétences :') }}
+                    {{ form_widget(competence.libelle, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <br />
+                <button type="submit" class="btn btn-warning">
+                    Enregistrer
+                </button>
+                {{ form_end(competence) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>
