@@ -26,10 +26,10 @@ class SuiviType extends AbstractType
             ->remove('mentore')
             ->add('state', ChoiceType::class, array(
                 'choices' => array(
-                    'En attente de prise de contact' => 'En attente',
-                    'En cours' => 'En cours',
-                    'Elève transféré' => 'Transfert en cours',
-                    'Transfert terminé' => 'Transfert terminé',
+                    'WAITING_LIST'          => 'En attente',
+                    'IN_PROGRESS'           => 'En cours',
+                    'TRANSFERT_IN_PROGRESS' => 'Transfert en cours',
+                    'TRANSFERT_FINISHED'    => 'Transfert terminé',
                 ),
             ))
         ;

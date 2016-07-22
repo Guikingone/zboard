@@ -48,7 +48,7 @@ class MentoreService
     {
         return $this->doctrine->getRepository('MentoratBundle:Suivi')->findBy(array(
             'mentor'    => $user,
-            'state'     => 'En cours'
+            'state'     => 'IN_PROGRESS'
         ));
     }
 
@@ -63,7 +63,7 @@ class MentoreService
     {
         return $this->doctrine->getRepository('MentoratBundle:Suivi')->findBy(array(
             'mentor'    => $user,
-            'state'     => 'En attente'
+            'state'     => 'WAITING_LIST'
         ));
     }
 

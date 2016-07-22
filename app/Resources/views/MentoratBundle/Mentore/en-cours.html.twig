@@ -9,35 +9,43 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <table class="table table-bordered">
-                    <tr>
-                        <th style="width: 10px">#</th>
-                        <th>Prénom & Nom</th>
-                        <th>Parcours</th>
-                    </tr>
-                    <tr>
-                        <td>{{ mentore.id }}</td>
-                        <td>{{ mentore.username }}</td>
-                        <td>
-                            <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-red">55%</span></td>
-                    </tr>
-
-                </table>
+                {% if mentores %}
+                    <table class="table table-bordered">
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Prénom & Nom</th>
+                            <th>Parcours</th>
+                            <th>Etat de la formation</th>
+                            <th>Actions</th>
+                        </tr>
+                        {% for unMentore in mentores %}
+                        <tr>
+                            <td>{{ unMentore.id }}</td>
+                            <td>{{ unMentore.mentore.firstname }} {{ unMentore.mentore.lastname }}</td>
+                            <td></td>
+                            <td>
+                                {% if unMentore.state == "IN_PROGRESS" %}
+                                    <span class="badge bg-success">En cours</span>
+                                {% elseif unMentore.state == "WAITING_LIST" %}
+                                    <span class="badge bg-warning">En liste d'attente</span>
+                                {% elseif unMentore.state == "TRANSFERT_IN_PROGRESS" %}
+                                    <span class="badge bg-info">Changement de mentor en cours</span>
+                                {% else %}
+                                    <span class="badge bg-primary">Changement de mentor terminé</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary">Détails</button>
+                                <button type="button" class="btn btn-warning">Transférer le mentoré</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <div class="alert alert-info">Vous n'avez pas encore de mentoré d'assigné. Patience !</div>
+                {% endif %}
             </div>
             <!-- /.box-body -->
-            <div class="box-footer clearfix">
-                <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>
-            </div>
         </div>
         <!-- /.box -->
     </div>
