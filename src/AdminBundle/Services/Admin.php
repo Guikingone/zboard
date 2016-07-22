@@ -15,7 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use UserBundle\Entity\Competences;
 use UserBundle\Entity\User;
+use UserBundle\Form\CompetencesType;
 use UserBundle\Form\RegistrationType;
 
 class Admin
@@ -63,6 +65,11 @@ class Admin
     public function getMentors()
     {
         return $this->doctrine->getRepository('UserBundle:User')->findAll();
+    }
+
+    public function getMentorCompetences($id)
+    {
+        return $this->doctrine->getRepository('UserBundle:User')->findBy(array('id' => $id));
     }
 
     /**
@@ -225,6 +232,25 @@ class Admin
         return $form;
     }
 
+    public function addCompetencesMentor(Request $request, $id)
+    {
+        $mentor = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
+
+        $competences = new Competences();
+
+        $form = $this->form->create(CompetencesType::class, $competences);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $competences->addUser($mentor);
+            $this->doctrine->persist($competences);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'La compétence a bien été ajoutée.');
+        }
+
+        return $form;
+    }
+
     /**
      * Allow to create a new instance of Mentore.
      *
@@ -371,5 +397,17 @@ class Admin
     public function viewParcours($id)
     {
         return $this->doctrine->getRepository('BackendBundle:Parcours')->find($id);
+    }
+
+    /**
+     * Allow to find a teacher by is $id in order to show details.
+     *
+     * @param $id
+     *
+     * @return null|object|\UserBundle\Entity\User
+     */
+    public function viewMentor($id)
+    {
+        return $this->doctrine->getRepository('UserBundle:User')->find($id);
     }
 }

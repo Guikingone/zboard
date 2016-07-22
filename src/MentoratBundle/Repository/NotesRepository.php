@@ -15,6 +15,7 @@ class NotesRepository extends \Doctrine\ORM\EntityRepository
         return $this->createQueryBuilder('n')
                     ->where('n.suivi = :id')
                         ->setParameter('id', $id)
+                    ->orderBy('n.dateCreated', 'DESC')
                     ->getQuery()
                     ->getResult();
     }

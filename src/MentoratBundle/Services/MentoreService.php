@@ -68,7 +68,7 @@ class MentoreService
     }
 
     /**
-     * Allow to find a student by is name in order to show details.
+     * Allow to find a student by is $id in order to show details.
      *
      * @param $id
      *

@@ -1,32 +1,34 @@
 {% extends 'Layout/admin.html.twig' %}
 
-{% block title %} - {{ mentores.lastname }} {{ mentores.firstname }}{% endblock %}
+{% block title %} - {{ mentor.lastname }} {{ mentor.firstname }}{% endblock %}
 
 {% block admin_body %}
     <div class="content-wrapper">
         <section class="content">
             <div class="row">
-                <div class="col-md-3 col-lg-pull-2 col-lg-4">
+                <div class="col-md-3 col-lg-pull-2 col-lg-5">
                     <div class="box box-primary">
                         <div class="box-body box-profile">
                             <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
-                            <h3 class="profile-username text-center"><p>{{ mentors.firstname }}</p></h3>
-                            <p class="text-muted text-center">Hello world !</p>
+                            <h3 class="profile-username text-center"><p>{{ mentor.firstname }} {{ mentor.lastname }}</p></h3>
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <b>% de complétion du parcours : </b> <a class="pull-right">1,322</a>
+                                    <b>Statut : </b>
+                                    <p class="pull-right">
+                                        {% if mentor.available == true %}
+                                                <span class="label label-success">Disponible</span>
+                                            {% else %}
+                                                <span class="label label-danger">indisponible</span>
+                                        {% endif %}
+                                    </p>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Statut : </b> <p class="pull-right">{{ mentores.status }}</p>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Financement : </b> <a class="pull-right">{{ mentores.financement }}</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Date commencement : </b> <a class="pull-right"></a>
+                                    <b>Nombre d'élèves : </b> <a class="pull-right"></a>
                                 </li>
                             </ul>
-                            <a href="#" class="btn btn-primary btn-block"><b>Contacter</b></a>
+                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModalContact"><b>Contacter par email</b></a>
+                            <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#myModalMessage"><b>Envoyer un message</b></a>
+                            <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#myModalCompetences"><b>Ajouter une compétences</b></a>
                         </div>
                     </div>
                     <div class="box box-primary">
@@ -36,19 +38,14 @@
                         <div class="box-body">
                             <strong><i class="fa fa-book margin-r-5"></i>Biographie</strong>
                             <p class="text-muted">
-                                {{ mentores.resume }}
                             </p>
                             <hr>
                             <strong><i class="fa fa-map-marker margin-r-5"></i>Emplacement</strong>
-                            <p class="text-muted">{{ mentores.country }}</p>
+                            <p class="text-muted">{{ mentor.country }}</p>
                             <hr>
-                            <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+                            <strong><i class="fa fa-pencil margin-r-5"></i> Compétences</strong>
                             <p>
-                                <span class="label label-danger">UI Design</span>
-                                <span class="label label-success">Coding</span>
-                                <span class="label label-info">Javascript</span>
-                                <span class="label label-warning">PHP</span>
-                                <span class="label label-primary">Node.js</span>
+
                             </p>
                             <hr>
                             <strong><i class="fa fa-file-text-o margin-r-5"></i>Notes</strong>
@@ -56,12 +53,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-9 col-lg-pull-2 col-lg-8">
+                <div class="col-md-9 col-lg-pull-2 col-lg-7">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
-                            <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-                            <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                            <li class="active"><a href="#activity" data-toggle="tab">Activités récentes</a></li>
+                            <li><a href="#timeline" data-toggle="tab">Suivi</a></li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li><a href="#settings" data-toggle="tab">Options</a></li>
+                            {% endif %}
                         </ul>
                         <div class="tab-content">
                             <div class="active tab-pane" id="activity">
@@ -322,17 +321,17 @@
                                     </div>
                                 </form>
                             </div>
-                            <!-- /.tab-pane -->
                         </div>
-                        <!-- /.tab-content -->
                     </div>
-                    <!-- /.nav-tabs-custom -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
-
         </section>
-        <!-- /.content -->
     </div>
+
+    {% include ':Form/Contact:register_mentor_contact.html.twig' %}
+
+    {% include ':Form/Contact:register_mentor_message.html.twig' %}
+
+    {% include ':Form:register_competences_mentor.html.twig' %}
+
 {% endblock %}

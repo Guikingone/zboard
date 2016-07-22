@@ -94,6 +94,16 @@
                         {{ form_label(mentore.status, 'Statut') }}
                         {{ form_widget(mentore.status, {'attr': {'class': 'form-control'}}) }}
                     </div>
+                    <div class="input-group">
+                        {{ form_errors(mentore.suivi.mentor) }}
+                        {{ form_label(mentore.suivi.mentor, 'Mentor') }}
+                        {{ form_widget(mentore.suivi.mentor, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="input-group">
+                        {{ form_errors(mentore.suivi.state) }}
+                        {{ form_label(mentore.suivi.state, 'Statut du suivi') }}
+                        {{ form_widget(mentore.suivi.state, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                     <br />
                     <button type="submit" class="btn btn-success">Enregistrer</button>
                     {{ form_end(mentore) }}

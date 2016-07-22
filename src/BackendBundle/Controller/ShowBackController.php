@@ -24,6 +24,24 @@ class ShowBackController extends Controller
 
     /**
      * @param Request $request
+     * @param $id
+     *
+     * @return array
+     * @Route("/show/mentor/{id}/details", name="show_details_mentor")
+     * @Template("BackBundle/Action/Details/show_mentors.html.twig")
+     */
+    public function showProfilMentorAction(Request $request, $id)
+    {
+        $competence = $this->get('core.admin')->addCompetencesMentor($request, $id);
+        $competences = $this->get('core.admin')->getMentorCompetences($id);
+        $mentor = $this->get('core.admin')->viewMentor($id);
+
+        return array('mentor' => $mentor, 'competence' => $competence->createView(),
+                     'competences' => $competences, );
+    }
+
+    /**
+     * @param Request $request
      * @Route("/list/mentore", name="gestion_mentores")
      * @Template("BackBundle/Action/list_mentores.html.twig")
      */
