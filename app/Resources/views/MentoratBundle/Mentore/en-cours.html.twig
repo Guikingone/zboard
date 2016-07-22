@@ -22,7 +22,7 @@
                         <tr>
                             <td>{{ unMentore.id }}</td>
                             <td>{{ unMentore.mentore.firstname }} {{ unMentore.mentore.lastname }}</td>
-                            <td>{{ unMentore.parcours.libelle }}</td>
+                            <td>{{ unMentore.mentore.parcours.libelle }}</td>
                             <td>
                                 {% if unMentore.state == "IN_PROGRESS" %}
                                     <span class="badge bg-success">En cours</span>
