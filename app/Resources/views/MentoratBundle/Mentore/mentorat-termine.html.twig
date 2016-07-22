@@ -1,5 +1,42 @@
 {% extends "::layout_mentor.html.twig" %}
 
 {% block body %}
-  <h1>Mentorat terminé</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title">Liste des mentorés ayant fini le parcours </h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          {% if mentores %}
+            <table class="table table-bordered">
+              <tr>
+                <th style="width: 10px">#</th>
+                <th>Prénom & Nom</th>
+                <th>Parcours</th>
+                <th>Etat de la formation</th>
+                <th>Actions</th>
+              </tr>
+              {% for unMentore in mentores %}
+                <tr>
+                  <td>{{ unMentore.id }}</td>
+                  <td>{{ unMentore.mentore.firstname }} {{ unMentore.mentore.lastname }}</td>
+                  <td>{{ unMentore.mentore.parcours.libelle }}</td>
+                  <td><span class="badge bg-info">Mentorat terminé</span></td>
+                  <td>
+                    <button type="button" class="btn btn-primary">Détails</button>
+                  </td>
+                </tr>
+              {% endfor %}
+            </table>
+          {% else %}
+            <div class="alert alert-info">Aucun de vos mentorés n'a encore fini son parcours. Patience !</div>
+          {% endif %}
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+  </div>
 {% endblock %}

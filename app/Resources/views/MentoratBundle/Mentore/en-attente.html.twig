@@ -1,5 +1,43 @@
 {% extends "::layout_mentor.html.twig" %}
 
 {% block body %}
-  <h1>Liste des mentorés en attente</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title">Liste des mentorés en attente de session découverte</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          {% if mentores %}
+            <table class="table table-bordered">
+              <tr>
+                <th style="width: 10px">#</th>
+                <th>Prénom & Nom</th>
+                <th>Parcours</th>
+                <th>Etat de la formation</th>
+                <th>Actions</th>
+              </tr>
+              {% for unMentore in mentores %}
+                <tr>
+                  <td>{{ unMentore.id }}</td>
+                  <td>{{ unMentore.mentore.firstname }} {{ unMentore.mentore.lastname }}</td>
+                  <td>{{ unMentore.mentore.parcours.libelle }}</td>
+                  <td><span class="badge bg-warning">En attente</span></td>
+                  <td>
+                    <button type="button" class="btn btn-primary">Détails</button>
+                    <button type="button" class="btn btn-warning">Transférer le mentoré</button>
+                  </td>
+                </tr>
+              {% endfor %}
+            </table>
+          {% else %}
+            <div class="alert alert-info">Vous n'avez pas encore de mentoré d'assigné. Patience !</div>
+          {% endif %}
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+  </div>
 {% endblock %}

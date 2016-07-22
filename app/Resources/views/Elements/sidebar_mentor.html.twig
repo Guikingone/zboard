@@ -9,7 +9,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MENU PRINCIPAL</li>
-            <li class="treeview">
+            <li class="{{ ('controller' == 'mentorat') ? '' : 'active' }} treeview">
                 <a href="#">
                     <i class="ion ion-person-stalker"></i>
                     <span>Mes mentorés</span>
@@ -25,7 +25,7 @@
             </li>
             <li class="treeview"><a href="{{ path('mentorat_infos_index') }}"><i class='fa fa-info-circle'></i> <span>Informations mentorat</span></a></li>
             {% if is_granted('ROLE_ADMIN') %}
-                <li class="active treeview">
+                <li class="treeview">
                     <a href="#">
                         <i class="fa fa-dashboard"></i>
                         <span>Administration</span>
@@ -39,13 +39,11 @@
                     </ul>
                 </li>
                 {% elseif is_granted('ROLE_SUPERVISEUR_MENTOR') %}
-                    <li class="active treeview">
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-dashboard"></i>
                             <span>Administration</span>
-                            <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
+                            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="{{ path('home_backend') }}"><i class="fa fa-circle-o"></i>Accès au backend</a></li>

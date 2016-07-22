@@ -68,6 +68,20 @@ class MentoreService
     }
 
     /**
+     * Display the mentore which are waiting to have the first
+     * show and which are attributing to the connected user.
+     *
+     * @return array|\MentoratBundle\Entity\Mentore[]
+     */
+    public function getMentoratFinished($user)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Suivi')->findBy(array(
+            'mentor'    => $user,
+            'state'     => 'MENTORAT_FINISHED'
+        ));
+    }
+
+    /**
      * Allow to find a student by is $id in order to show details.
      *
      * @param $id

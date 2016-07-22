@@ -20,7 +20,7 @@ class MentoreController extends Controller
         $mentores = $this->get('core.mentore')->getMentores($this->getUser());
 
         return array(
-            'controller'    => 'mentore',
+            'controller'    => 'mentorat',
             'mentores'      => $mentores
         );
     }
@@ -31,8 +31,11 @@ class MentoreController extends Controller
      */
     public function enAttenteAction()
     {
+        $mentores = $this->get('core.mentore')->getMyWaitingMentore($this->getUser());
+
         return array(
-            'controller' => 'mentore',
+            'controller'    => 'mentorat',
+            'mentores'      => $mentores
         );
     }
 
@@ -42,8 +45,11 @@ class MentoreController extends Controller
      */
     public function mentoratFinishedAction()
     {
+        $mentores = $this->get('core.mentore')->getMentoratFinished($this->getUser());
+
         return array(
-            'controller' => 'mentore',
+            'controller'    => 'mentorat',
+            'mentores'      => $mentores
         );
     }
 }
