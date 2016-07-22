@@ -17,8 +17,11 @@ class MentoreController extends Controller
      */
     public function enCoursAction()
     {
+        $mentores = $this->get('core.mentore')->getMentores($this->getUser());
+
         return array(
-            'controller' => 'mentore',
+            'controller'    => 'mentore',
+            'mentores'      => $mentores
         );
     }
 

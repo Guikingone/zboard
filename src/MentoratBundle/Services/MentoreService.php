@@ -40,15 +40,31 @@ class MentoreService
     }
 
     /**
+     * Display the mentores who are attributed to the connected user.
+     *
+     * @return array|\MentoratBundle\Entity\Mentore[]
+     */
+    public function getMentores($user)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Suivi')->findBy(array(
+            'mentor'    => $user,
+            'state'     => 'En cours'
+        ));
+    }
+
+
+    /**
      * Display the mentore which are waiting to have the first
      * show and which are attributing to the connected user.
      *
      * @return array|\MentoratBundle\Entity\Mentore[]
      */
-    public function getMyWaitingMentore()
+    public function getMyWaitingMentore($user)
     {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->findAll(
-        );
+        return $this->doctrine->getRepository('MentoratBundle:Suivi')->findBy(array(
+            'mentor'    => $user,
+            'state'     => 'En attente'
+        ));
     }
 
     /**
