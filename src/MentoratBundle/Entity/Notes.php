@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Notes.
  *
- * @ORM\Table(name="notes")
+ * @ORM\Table(name="zboard_notes")
  * @ORM\Entity(repositoryClass="MentoratBundle\Repository\NotesRepository")
  */
 class Notes
@@ -27,6 +27,12 @@ class Notes
      * @ORM\Column(name="libelle", type="text")
      */
     private $libelle;
+
+    /**
+     * @var string
+     * @ORM\Column(name="auteur", type="string", length=255, nullable=false)
+     */
+    private $auteur;
 
     /**
      * @var \DateTime
@@ -121,5 +127,29 @@ class Notes
     public function getSuivi()
     {
         return $this->suivi;
+    }
+
+    /**
+     * Set auteur.
+     *
+     * @param string $auteur
+     *
+     * @return Notes
+     */
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    /**
+     * Get auteur.
+     *
+     * @return string
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
     }
 }

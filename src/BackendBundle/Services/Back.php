@@ -263,28 +263,4 @@ class Back
 
         return $form;
     }
-
-    /**
-     * Allow to find a student by is name in order to show details.
-     *
-     * @param $id
-     *
-     * @return array|\MentoratBundle\Entity\Mentore[]
-     */
-    public function viewMentore($id)
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->find($id);
-    }
-
-    /**
-     * Allow to find a path by is id | $id.
-     *
-     * @param $id
-     *
-     * @return array|\BackendBundle\Entity\Parcours[]
-     */
-    public function viewParcours($id)
-    {
-        return $this->doctrine->getRepository('BackendBundle:Parcours')->find($id);
-    }
 }

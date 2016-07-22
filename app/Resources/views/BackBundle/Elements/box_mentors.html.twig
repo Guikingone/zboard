@@ -38,16 +38,7 @@
                     <p>A définir</p>
                 </td>
                 <td>
-                    <button class="btn btn-info">
-                        <a href="{{ path('update_mentors', {'id': mentors.id}) }}">
-                            Modifier
-                        </a>
-                    </button>
-                    <button class="btn btn-danger">
-                        <a href="#">
-                            Archiver
-                        </a>
-                    </button>
+                    <a href="{{ path('update_mentors', {'id': mentors.id}) }}"><span class="ion ion-wrench"></span></a>
                 </td>
             </tr>
             {% endfor %}

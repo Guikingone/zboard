@@ -57,7 +57,7 @@ class Suivi
     private $notes;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -65,9 +65,9 @@ class Suivi
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -75,7 +75,7 @@ class Suivi
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -89,7 +89,7 @@ class Suivi
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */
@@ -99,7 +99,7 @@ class Suivi
     }
 
     /**
-     * Set dUpdate
+     * Set dUpdate.
      *
      * @param \DateTime $dUpdate
      *
@@ -113,7 +113,7 @@ class Suivi
     }
 
     /**
-     * Get dUpdate
+     * Get dUpdate.
      *
      * @return \DateTime
      */
@@ -123,7 +123,7 @@ class Suivi
     }
 
     /**
-     * Set mentor
+     * Set mentor.
      *
      * @param \UserBundle\Entity\User $mentor
      *
@@ -137,7 +137,7 @@ class Suivi
     }
 
     /**
-     * Get mentor
+     * Get mentor.
      *
      * @return \UserBundle\Entity\User
      */
@@ -147,7 +147,7 @@ class Suivi
     }
 
     /**
-     * Set mentore
+     * Set mentore.
      *
      * @param \MentoratBundle\Entity\Mentore $mentore
      *
@@ -161,7 +161,7 @@ class Suivi
     }
 
     /**
-     * Get mentore
+     * Get mentore.
      *
      * @return \MentoratBundle\Entity\Mentore
      */
@@ -171,7 +171,7 @@ class Suivi
     }
 
     /**
-     * Add note
+     * Add note.
      *
      * @param \MentoratBundle\Entity\Notes $note
      *
@@ -185,7 +185,7 @@ class Suivi
     }
 
     /**
-     * Remove note
+     * Remove note.
      *
      * @param \MentoratBundle\Entity\Notes $note
      */
@@ -195,7 +195,7 @@ class Suivi
     }
 
     /**
-     * Get notes
+     * Get notes.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -205,7 +205,7 @@ class Suivi
     }
 
     /**
-     * Set state
+     * Set state.
      *
      * @param string $state
      *
@@ -219,7 +219,7 @@ class Suivi
     }
 
     /**
-     * Get state
+     * Get state.
      *
      * @return string
      */

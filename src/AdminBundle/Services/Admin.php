@@ -6,12 +6,16 @@ use BackendBundle\Entity\Abonnement;
 use BackendBundle\Form\TypeAdd\AbonnementTypeAdd;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Mentore;
+use MentoratBundle\Entity\Notes;
 use MentoratBundle\Entity\Suivi;
 use MentoratBundle\Form\MentoreType;
+use MentoratBundle\Form\TypeAdd\NoteTypeAdd;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use UserBundle\Entity\User;
 use UserBundle\Form\RegistrationType;
 
 class Admin
@@ -32,17 +36,23 @@ class Admin
     private $session;
 
     /**
+     * @var TokenStorage
+     */
+    private $user;
+
+    /**
      * Admin constructor.
      *
      * @param EntityManager $doctrine
      * @param FormFactory   $form
      * @param Session       $session
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
         $this->session = $session;
+        $this->user = $user;
     }
 
     /**
@@ -190,6 +200,32 @@ class Admin
     }
 
     /**
+     * Allow to create a new instance of Mentor, in order to be fast and effective, the registration of a new mentor
+     * doesn't require that the back enter a Username or a Password, this tasks are handled by the system.
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addMentor(Request $request)
+    {
+        $mentor = new User();
+        $form = $this->form->create(RegistrationType::class, $mentor);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $mentor->setUsername($mentor->getFirstName().'_'.$mentor->getLastName());
+            $mentor->setPlainPassword(strtolower($mentor->getFirstName().'_'.$mentor->getLastName()));
+            $mentor->setRoles(array('ROLE_MENTOR'));
+            $this->doctrine->persist($mentor);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
+        }
+
+        return $form;
+    }
+
+    /**
      * Allow to create a new instance of Mentore.
      *
      * @param Request $request
@@ -212,6 +248,38 @@ class Admin
             $this->doctrine->persist($suivi);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Elève enregistré.');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to add a new note linked to the suivi and the mentor who follow the student.
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addNote(Request $request, $id)
+    {
+        $suivi = $this->doctrine->getRepository('MentoratBundle:Suivi')
+                      ->findOneBy(array(
+                                'id' => $id,
+                            ));
+        $note = new Notes();
+        $user = $this->user->getToken()->getUser();
+
+        $form = $this->form->create(NoteTypeAdd::class, $note);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $note->setSuivi($suivi);
+            $note->setAuteur($user);
+            $note->setDateCreated(new \DateTime());
+            $this->doctrine->persist($note);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'La note a bien été ajoutée.');
         }
 
         return $form;
@@ -291,5 +359,17 @@ class Admin
         }
 
         return $form;
+    }
+
+    /**
+     * Allow to find a path by is id | $id.
+     *
+     * @param $id
+     *
+     * @return array|\BackendBundle\Entity\Parcours[]
+     */
+    public function viewParcours($id)
+    {
+        return $this->doctrine->getRepository('BackendBundle:Parcours')->find($id);
     }
 }

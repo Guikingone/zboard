@@ -30,7 +30,7 @@ class ShowBackController extends Controller
     public function showMentoreAction(Request $request)
     {
         $nMentore = $this->get('core.admin')->addMentore($request);
-        $mentores = $this->get('core.back')->getMentores();
+        $mentores = $this->get('core.admin')->getMentores();
 
         return array('mentores' => $mentores, 'nMentore' => $nMentore->createView());
     }
@@ -70,7 +70,7 @@ class ShowBackController extends Controller
      */
     public function showParcoursByIdAction(Request $request, $id)
     {
-        $parcours = $this->get('core.back')->viewParcours($id);
+        $parcours = $this->get('core.admin')->viewParcours($id);
         $projet = $this->get('core.back')->addProject($request);
 
         // Used to find all the projects linked to the path.

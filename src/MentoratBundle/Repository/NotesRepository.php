@@ -10,4 +10,12 @@ namespace MentoratBundle\Repository;
  */
 class NotesRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getNotesByStudent($id)
+    {
+        return $this->createQueryBuilder('n')
+                    ->where('n.id = :id')
+                        ->setParameter('id', $id)
+                    ->getQuery()
+                    ->getResult();
+    }
 }

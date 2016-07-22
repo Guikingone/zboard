@@ -4,6 +4,8 @@ namespace MentoratBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Mentore;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class MentoreService
 {
@@ -13,11 +15,28 @@ class MentoreService
     protected $doctrine;
 
     /**
+     * @var Session
+     */
+    private $session;
+
+    /**
+     * @var TokenStorage
+     */
+    private $user;
+
+    /**
      * @param EntityManager $doctrine
      */
-    public function __construct(EntityManager $doctrine)
+    public function __construct(EntityManager $doctrine, Session $session, TokenStorage $user)
     {
         $this->doctrine = $doctrine;
+        $this->session = $session;
+        $this->user = $user;
+    }
+
+    public function getNotesByStudent($id)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Notes')->getNotesByStudent($id);
     }
 
     /**
@@ -30,5 +49,17 @@ class MentoreService
     {
         return $this->doctrine->getRepository('MentoratBundle:Mentore')->findAll(
         );
+    }
+
+    /**
+     * Allow to find a student by is name in order to show details.
+     *
+     * @param $id
+     *
+     * @return array|\MentoratBundle\Entity\Mentore[]
+     */
+    public function viewMentore($id)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Mentore')->find($id);
     }
 }
