@@ -13,7 +13,7 @@ class NotesRepository extends \Doctrine\ORM\EntityRepository
     public function getNotesByStudent($id)
     {
         return $this->createQueryBuilder('n')
-                    ->where('n.id = :id')
+                    ->where('n.suivi = :id')
                         ->setParameter('id', $id)
                     ->getQuery()
                     ->getResult();
