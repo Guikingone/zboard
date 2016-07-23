@@ -29,6 +29,12 @@ class Competences
     private $libelle;
 
     /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="competences")*
+     * @ORM\JoinColumn(name="user_competences", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
      * Get id.
      *
      * @return int
@@ -60,5 +66,29 @@ class Competences
     public function getLibelle()
     {
         return $this->libelle;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return Competences
+     */
+    public function setUser(\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

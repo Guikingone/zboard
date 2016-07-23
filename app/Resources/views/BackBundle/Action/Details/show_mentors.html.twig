@@ -3,6 +3,13 @@
 {% block title %} - {{ mentor.lastname }} {{ mentor.firstname }}{% endblock %}
 
 {% block body %}
+    {% for message in app.session.flashbag.get('success') %}
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i>Information</h4>
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="content-wrapper">
         <section class="content">
             <div class="row">
@@ -45,7 +52,9 @@
                             <hr>
                             <strong><i class="fa fa-pencil margin-r-5"></i> Compétences</strong>
                             <p>
-
+                                {% for competences in competences %}
+                                    <span class="label label-warning">{{ competences.libelle }}</span>
+                                {% endfor %}
                             </p>
                             <hr>
                             <strong><i class="fa fa-file-text-o margin-r-5"></i>Notes</strong>
@@ -235,6 +244,27 @@
                             </div>
                             <div class="tab-pane" id="student">
                                 <!-- Suivi elèves -->
+                                <ul>
+                                    {% for mentores in mentores %}
+                                        <li>
+                                            <a href="{{ path('show_details_mentore', {'id': mentores.id}) }}">
+                                                {{ mentores.lastname }} {{ mentores.firstname }}
+                                            </a>
+
+                                            {% if mentores.status == 'En formation' %}
+                                                <span class="label label-success">{{ mentores.status }}</span>
+                                            {% elseif mentores.status == 'Contacté' %}
+                                                <span class="label label-warning">{{ mentores.status }}</span>
+                                            {% elseif mentores.status == 'En pause' %}
+                                                <span class="label label-danger">{{ mentores.status }}</span>
+                                            {% elseif mentores.status == 'En attente' %}
+                                                <span class="label label-warning">{{ mentores.status }}</span>
+                                            {% elseif mentores.status == 'Formation terminé' %}
+                                                <span class="label label-success">{{ mentores.status }}</span>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
                             </div>
                             <div class="tab-pane" id="sessions">
                                 <!-- Suivi sessions -->

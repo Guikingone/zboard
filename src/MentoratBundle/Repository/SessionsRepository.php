@@ -29,4 +29,13 @@ class SessionsRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()
                     ->getResult();
     }
+
+    public function getSessionsCancelled()
+    {
+        return $this->createQueryBuilder('s')
+                    ->where('s.status = :status')
+                        ->setParameter('status', $status = 'Annulee')
+                    ->getQuery()
+                    ->getResult();
+    }
 }

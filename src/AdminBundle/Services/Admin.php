@@ -69,9 +69,15 @@ class Admin
         return $this->doctrine->getRepository('UserBundle:User')->findAll();
     }
 
+    /**
+     * Allow to get all the competences linked to a teacher.
+     *
+     * @param $id
+     * @return array
+     */
     public function getMentorCompetences($id)
     {
-        return $this->doctrine->getRepository('UserBundle:User')->findBy(array('id' => $id));
+        return $this->doctrine->getRepository('UserBundle:Competences')->getCompetencesByMentor($id);
     }
 
     /**
@@ -82,6 +88,11 @@ class Admin
     public function getMentores()
     {
         return $this->doctrine->getRepository('MentoratBundle:Mentore')->findAll();
+    }
+
+    public function getMentoresbyTeacher($id)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getStudentsByMentor($id);
     }
 
     /**
@@ -242,6 +253,11 @@ class Admin
         return $this->doctrine->getRepository('MentoratBundle:Sessions')->getSessionsbyMentor($id);
     }
 
+    public function getSessionsCancelled()
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Sessions')->getSessionsCancelled();
+    }
+
     /**
      * Allow to create a new instance of Mentor, in order to be fast and effective, the registration of a new mentor
      * doesn't require that the back enter a Username or a Password, this tasks are handled by the system.
@@ -268,6 +284,13 @@ class Admin
         return $form;
     }
 
+    /**
+     * Allow to add a new set of competences to a teacher profil.
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\Form\FormInterface
+     */
     public function addCompetencesMentor(Request $request, $id)
     {
         $mentor = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
@@ -278,7 +301,7 @@ class Admin
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $competences->addUser($mentor);
+            $competences->setUser($mentor);
             $this->doctrine->persist($competences);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La compétence a bien été ajoutée.');

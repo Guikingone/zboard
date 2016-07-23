@@ -2,6 +2,7 @@
 
 namespace UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -81,6 +82,18 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Sessions", mappedBy="mentor")
      */
     private $sessions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\Competences", mappedBy="user")
+     */
+    private $competences;
+
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->competences = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Set firstName.
@@ -340,5 +353,39 @@ class User extends BaseUser
     public function getSessions()
     {
         return $this->sessions;
+    }
+
+    /**
+     * Add competence
+     *
+     * @param \UserBundle\Entity\Competences $competence
+     *
+     * @return User
+     */
+    public function addCompetence(\UserBundle\Entity\Competences $competence)
+    {
+        $this->competences[] = $competence;
+
+        return $this;
+    }
+
+    /**
+     * Remove competence
+     *
+     * @param \UserBundle\Entity\Competences $competence
+     */
+    public function removeCompetence(\UserBundle\Entity\Competences $competence)
+    {
+        $this->competences->removeElement($competence);
+    }
+
+    /**
+     * Get competences
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCompetences()
+    {
+        return $this->competences;
     }
 }

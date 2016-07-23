@@ -10,4 +10,14 @@ namespace UserBundle\Repository;
  */
 class CompetencesRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getCompetencesByMentor($id)
+    {
+        return $this->createQueryBuilder('c')
+                    ->innerJoin('c.user', 'u')
+                        ->addSelect('u')
+                    ->where('u.id = :id')
+                        ->setParameter('id', $id)
+                    ->getQuery()
+                    ->getResult();
+    }
 }

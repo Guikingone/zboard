@@ -23,10 +23,11 @@ class indexAdminController extends Controller
         $soutenances = $this->get('core.admin')->getSoutenances();
         $mentorsW = $this->get('core.admin')->getMentoresWaiting();
         $notes = $this->get('core.admin')->getNotesSuivi();
+        $sessionsC = $this->get('core.admin')->getSessionsCancelled();
 
         return array('mentors' => $mentors, 'mentoresPPlus' => $mentoresPPlus,
                      'mentoresPClass' => $mentoresPClass, 'parcoursPlus' => $parcoursPlus,
                      'parcoursClass' => $parcoursClass, 'projets' => $projets, 'soutenances' => $soutenances,
-                     'mentoresW' => $mentorsW, 'notes' => $notes, );
+                     'mentoresW' => $mentorsW, 'notes' => $notes, 'sessionsC' => $sessionsC );
     }
 }

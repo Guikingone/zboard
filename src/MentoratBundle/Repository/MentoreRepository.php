@@ -53,4 +53,15 @@ class MentoreRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()
                     ->getResult();
     }
+
+    public function getStudentsByMentor($id)
+    {
+        return $this->createQueryBuilder('s')
+                    ->innerJoin('s.suivi', 'ss')
+                        ->addSelect('ss')
+                    ->where('ss.mentor = :id')
+                        ->setParameter('id', $id)
+                    ->getQuery()
+                    ->getResult();
+    }
 }

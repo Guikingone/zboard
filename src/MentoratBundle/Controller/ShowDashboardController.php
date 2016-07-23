@@ -44,8 +44,11 @@ class ShowDashboardController extends Controller
         $competences = $this->get('core.admin')->getMentorCompetences($id);
         $mentor = $this->get('core.admin')->viewMentor($id);
         $sessions = $this->get('core.admin')->getSessionsByMentor($id);
+        $mentores = $this->get('core.admin')->getMentoresbyTeacher($id);
+        $competencesM = $this->get('core.admin')->addCompetencesMentor($request, $id);
 
         return array('mentor' => $mentor, 'competence' => $competence->createView(),
-            'competences' => $competences, 'sessions' => $sessions );
+                     'competences' => $competences, 'sessions' => $sessions,
+                     'mentores' => $mentores, 'competencesM' => $competencesM->createView());
     }
 }

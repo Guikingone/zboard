@@ -7,17 +7,17 @@
                 <h4 class="modal-title" id="myModalLabel">Ajouter une compétences</h4>
             </div>
             <div class="modal-body">
-                {{ form_start(competence) }}
+                {{ form_start(competencesM) }}
                 <div class="input-group">
-                    {{ form_errors(competence.libelle) }}
-                    {{ form_label(competence.libelle, 'Compétences :') }}
-                    {{ form_widget(competence.libelle, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(competencesM.libelle) }}
+                    {{ form_label(competencesM.libelle, 'Compétences :') }}
+                    {{ form_widget(competencesM.libelle, {'attr': {'class': 'form-control'}}) }}
                 </div>
                 <br />
                 <button type="submit" class="btn btn-warning">
                     Enregistrer
                 </button>
-                {{ form_end(competence) }}
+                {{ form_end(competencesM) }}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>

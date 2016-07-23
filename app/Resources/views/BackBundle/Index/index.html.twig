@@ -77,7 +77,7 @@
                             <span class="info-box-icon"><i class="ion ion-ios-clock-outline"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Elèves en attente</span>
-                                <span class="info-box-number">5,200</span>
+                                <span class="info-box-number">{{ mentoresWaiting|length }}</span>
                                 <div class="progress">
                                     <div class="progress-bar" style="width: 50%"></div>
                                 </div>
@@ -103,9 +103,9 @@
                             <span class="info-box-icon"><i class="ion ion-stats-bars"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Sessions annulées</span>
-                                <span class="info-box-number">114,381</span>
+                                <span class="info-box-number">{{ sessions|length }}</span>
                                 <div class="progress">
-                                    <div class="progress-bar" style="width: 70%"></div>
+                                    <div class="progress-bar" style="width: {{ sessions|length }}%"></div>
                                 </div>
                   <span class="progress-description">
                     70% Increase in 30 Days

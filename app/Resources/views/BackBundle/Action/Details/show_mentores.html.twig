@@ -267,7 +267,12 @@
                                         <li>
                                             <i class="ion ion-clock bg-yellow"></i>
                                             <div class="timeline-item">
-                                                <h3 class="timeline-header"><a href="#">{{ session.mentor.lastname }} {{ session.mentor.firstname }}</a> a planifier une session</h3>
+                                                <h3 class="timeline-header">
+                                                    <a href="{{ path('show_details_mentor', {'id': session.mentor.id}) }}">
+                                                        {{ session.mentor.lastname }} {{ session.mentor.firstname }}
+                                                    </a>
+                                                    a planifier une session
+                                                </h3>
                                                 <div class="timeline-body">
                                                     <strong>{{ session.libelle }}</strong>
                                                     <br />
