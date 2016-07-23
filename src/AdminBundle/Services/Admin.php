@@ -73,6 +73,7 @@ class Admin
      * Allow to get all the competences linked to a teacher.
      *
      * @param $id
+     *
      * @return array
      */
     public function getMentorCompetences($id)
@@ -210,6 +211,18 @@ class Admin
     }
 
     /**
+     * Allow to get the whole suivi of a student using is $id.
+     *
+     * @param $id
+     *
+     * @return array|\MentoratBundle\Entity\Suivi[]
+     */
+    public function getSuiviByStudent($id)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Suivi')->getSuiviByStudent($id);
+    }
+
+    /**
      * Allow to get all the notes.
      *
      * @return array|\MentoratBundle\Entity\Notes[]
@@ -289,6 +302,7 @@ class Admin
      *
      * @param Request $request
      * @param $id
+     *
      * @return \Symfony\Component\Form\FormInterface
      */
     public function addCompetencesMentor(Request $request, $id)

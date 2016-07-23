@@ -10,4 +10,16 @@ namespace MentoratBundle\Repository;
  */
 class SuiviRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getSuiviByStudent($id)
+    {
+        return $this->createQueryBuilder('s')
+                    ->innerJoin('s.notes', 'n')
+                        ->addSelect('n')
+                    ->leftJoin('s.mentore', 'm')
+                        ->addSelect('m')
+                    ->where('m.id = :id')
+                        ->setParameter('id', $id)
+                    ->getQuery()
+                    ->getResult();
+    }
 }

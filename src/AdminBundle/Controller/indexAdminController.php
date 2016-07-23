@@ -28,6 +28,6 @@ class indexAdminController extends Controller
         return array('mentors' => $mentors, 'mentoresPPlus' => $mentoresPPlus,
                      'mentoresPClass' => $mentoresPClass, 'parcoursPlus' => $parcoursPlus,
                      'parcoursClass' => $parcoursClass, 'projets' => $projets, 'soutenances' => $soutenances,
-                     'mentoresW' => $mentorsW, 'notes' => $notes, 'sessionsC' => $sessionsC );
+                     'mentoresW' => $mentorsW, 'notes' => $notes, 'sessionsC' => $sessionsC, );
     }
 }

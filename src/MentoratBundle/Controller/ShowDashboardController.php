@@ -49,6 +49,6 @@ class ShowDashboardController extends Controller
 
         return array('mentor' => $mentor, 'competence' => $competence->createView(),
                      'competences' => $competences, 'sessions' => $sessions,
-                     'mentores' => $mentores, 'competencesM' => $competencesM->createView());
+                     'mentores' => $mentores, 'competencesM' => $competencesM->createView(), );
     }
 }

@@ -25,6 +25,6 @@ class IndexBackController extends Controller
         return array('mentors' => $mentors, 'mentores' => $mentores,
                      'soutenances' => $soutenances, 'parcours' => $parcours,
                      'notes' => $notes, 'sessions' => $sessions,
-                     'mentoresWaiting' => $mentoresWaiting);
+                     'mentoresWaiting' => $mentoresWaiting, );
     }
 }

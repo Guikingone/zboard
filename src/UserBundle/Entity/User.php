@@ -2,7 +2,6 @@
 
 namespace UserBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -87,7 +86,6 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="UserBundle\Entity\Competences", mappedBy="user")
      */
     private $competences;
-
 
     public function __construct()
     {
@@ -356,7 +354,7 @@ class User extends BaseUser
     }
 
     /**
-     * Add competence
+     * Add competence.
      *
      * @param \UserBundle\Entity\Competences $competence
      *
@@ -370,7 +368,7 @@ class User extends BaseUser
     }
 
     /**
-     * Remove competence
+     * Remove competence.
      *
      * @param \UserBundle\Entity\Competences $competence
      */
@@ -380,7 +378,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get competences
+     * Get competences.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
