@@ -19,11 +19,14 @@ class ShowDashboardController extends Controller
      */
     public function showProfilMentoreAction(Request $request, $id)
     {
+        $sessions = $this->get('core.admin')->addSessionMentorat($request, $id);
         $mentores = $this->get('core.mentore')->viewMentore($id);
         $note = $this->get('core.admin')->addNote($request, $id);
         $notes = $this->get('core.mentore')->getNotesByStudent($id);
+        $session = $this->get('core.admin')->getSessionsByMentore($id);
 
         return array('mentores' => $mentores, 'note' => $note->createView(),
-            'notes' => $notes, );
+                     'notes' => $notes, 'sessions' => $sessions->createView(),
+                     'session' => $session, );
     }
 }

@@ -39,6 +39,7 @@
                             </ul>
                             <a href="#" class="btn btn-primary btn-block"><b>Contacter</b></a>
                             <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#myModalNotes"><b>Ecrire une note de suivi</b></a>
+                            <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#myModalSessions"><b>Planifier une session</b></a>
                         </div>
                     </div>
                     <div class="box box-primary">
@@ -72,8 +73,8 @@
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#activity" data-toggle="tab">Suivi parcours</a></li>
-                            <li><a href="#timeline" data-toggle="tab">Suivi notes</a></li>
-                            <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                            <li><a href="#notes" data-toggle="tab">Suivi notes</a></li>
+                            <li><a href="#sessions" data-toggle="tab">Suivi sessions</a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="active tab-pane" id="activity">
@@ -172,7 +173,8 @@
                                     <input class="form-control input-sm" type="text" placeholder="Type a comment">
                                 </div>
                             </div>
-                            <div class="tab-pane" id="timeline">
+                            <div class="tab-pane" id="notes">
+                                <!-- Suivi notes -->
                                 <ul class="timeline timeline-inverse">
                                     {% for notes in notes %}
                                         <li class="time-label">
@@ -235,16 +237,11 @@
                           3 Jan. 2014
                         </span>
                                     </li>
-                                    <!-- /.timeline-label -->
-                                    <!-- timeline item -->
                                     <li>
                                         <i class="fa fa-camera bg-purple"></i>
-
                                         <div class="timeline-item">
                                             <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
-
                                             <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
                                             <div class="timeline-body">
                                                 <img src="http://placehold.it/150x100" alt="..." class="margin">
                                                 <img src="http://placehold.it/150x100" alt="..." class="margin">
@@ -253,66 +250,45 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <!-- END timeline item -->
                                     <li>
                                         <i class="fa fa-clock-o bg-gray"></i>
                                     </li>
                                 </ul>
                             </div>
-                            <!-- /.tab-pane -->
-
-                            <div class="tab-pane" id="settings">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputName" placeholder="Name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputName" placeholder="Name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-
-                                        <div class="col-sm-10">
-                                            <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                                                </label>
+                            <div class="tab-pane" id="sessions">
+                                <!-- Suivi sessions -->
+                                <ul class="timeline timeline-inverse">
+                                    {% for session in session %}
+                                        <li class="time-label">
+                            <span class="bg-red">
+                                {{ session.dateSession|date('d-m-Y') }}
+                            </span>
+                                        </li>
+                                        <li>
+                                            <i class="ion ion-clock bg-yellow"></i>
+                                            <div class="timeline-item">
+                                                <h3 class="timeline-header"><a href="#">{{ session.mentor.lastname }} {{ session.mentor.firstname }}</a> a planifier une session</h3>
+                                                <div class="timeline-body">
+                                                    <strong>{{ session.libelle }}</strong>
+                                                    <br />
+                                                </div>
+                                                <div class="timeline-footer">
+                                                    {% if session.status == 'Planifiee' %}
+                                                            Statut : <span class="label label-warning">{{ session.status }}</span>
+                                                        {% elseif session.status == 'Present' %}
+                                                            Statut : <span class="label label-success">{{ session.status }}</span>
+                                                        {% elseif session.status == 'Absent' %}
+                                                            Statut : <span class="label label-danger">{{ session.status }}</span>
+                                                        {% elseif session.status == 'Annulee' %}
+                                                            Statut : <span class="label label-danger">{{ session.status }}</span>
+                                                        {% elseif session.status == 'No Show' %}
+                                                            Statut : <span class="label label-danger">{{ session.status }}</span>
+                                                    {% endif %}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-danger">Submit</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -322,5 +298,7 @@
     </div>
 
     {% include ':Form:register_notes.html.twig' %}
+
+    {% include ':Form:register_sessions.html.twig' %}
 
 {% endblock %}

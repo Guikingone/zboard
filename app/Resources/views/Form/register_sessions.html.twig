@@ -1,0 +1,36 @@
+<!-- Modal used in order to save a session -->
+<div class="modal fade" id="myModalSessions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Planifier une session</h4>
+            </div>
+            <div class="modal-body">
+                {{ form_start(sessions) }}
+                <div class="input-group">
+                    {{ form_errors(sessions.dateSession) }}
+                    {{ form_label(sessions.dateSession, 'Date de la session') }}
+                    {{ form_widget(sessions.dateSession, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(sessions.status) }}
+                    {{ form_label(sessions.status, 'Statut de la session') }}
+                    {{ form_widget(sessions.status, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="input-group">
+                    {{ form_errors(sessions.periodicity) }}
+                    {{ form_label(sessions.periodicity, 'Renouvellement de la session ?') }}
+                    {{ form_widget(sessions.periodicity, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <br />
+                <button type="submit" class="btn btn-warning">
+                    Enregistrer
+                </button>
+                {{ form_end(sessions) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>

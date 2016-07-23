@@ -47,11 +47,10 @@ class MentoreService
     public function getMentores($user)
     {
         return $this->doctrine->getRepository('MentoratBundle:Suivi')->findBy(array(
-            'mentor'    => $user,
-            'state'     => 'IN_PROGRESS'
+            'mentor' => $user,
+            'state' => 'IN_PROGRESS',
         ));
     }
-
 
     /**
      * Display the mentore which are waiting to have the first
@@ -62,8 +61,8 @@ class MentoreService
     public function getMyWaitingMentore($user)
     {
         return $this->doctrine->getRepository('MentoratBundle:Suivi')->findBy(array(
-            'mentor'    => $user,
-            'state'     => 'WAITING_LIST'
+            'mentor' => $user,
+            'state' => 'WAITING_LIST',
         ));
     }
 
@@ -76,8 +75,8 @@ class MentoreService
     public function getMentoratFinished($user)
     {
         return $this->doctrine->getRepository('MentoratBundle:Suivi')->findBy(array(
-            'mentor'    => $user,
-            'state'     => 'MENTORAT_FINISHED'
+            'mentor' => $user,
+            'state' => 'MENTORAT_FINISHED',
         ));
     }
 

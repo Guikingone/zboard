@@ -78,12 +78,12 @@ class User extends BaseUser
     private $suivi;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserBundle\Entity\Competences", mappedBy="users")
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Sessions", mappedBy="mentor")
      */
-    private $competences;
+    private $sessions;
 
     /**
-     * Set firstName
+     * Set firstName.
      *
      * @param string $firstName
      *
@@ -97,7 +97,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get firstName
+     * Get firstName.
      *
      * @return string
      */
@@ -107,7 +107,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set lastName
+     * Set lastName.
      *
      * @param string $lastName
      *
@@ -121,7 +121,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get lastName
+     * Get lastName.
      *
      * @return string
      */
@@ -131,7 +131,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set address
+     * Set address.
      *
      * @param string $address
      *
@@ -145,7 +145,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get address
+     * Get address.
      *
      * @return string
      */
@@ -155,7 +155,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set zipcode
+     * Set zipcode.
      *
      * @param string $zipcode
      *
@@ -169,7 +169,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get zipcode
+     * Get zipcode.
      *
      * @return string
      */
@@ -179,7 +179,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set city
+     * Set city.
      *
      * @param string $city
      *
@@ -193,7 +193,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get city
+     * Get city.
      *
      * @return string
      */
@@ -203,7 +203,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set country
+     * Set country.
      *
      * @param string $country
      *
@@ -217,7 +217,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get country
+     * Get country.
      *
      * @return string
      */
@@ -227,7 +227,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set phone
+     * Set phone.
      *
      * @param string $phone
      *
@@ -241,7 +241,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get phone
+     * Get phone.
      *
      * @return string
      */
@@ -251,9 +251,9 @@ class User extends BaseUser
     }
 
     /**
-     * Set available
+     * Set available.
      *
-     * @param boolean $available
+     * @param bool $available
      *
      * @return User
      */
@@ -265,9 +265,9 @@ class User extends BaseUser
     }
 
     /**
-     * Get available
+     * Get available.
      *
-     * @return boolean
+     * @return bool
      */
     public function getAvailable()
     {
@@ -275,7 +275,7 @@ class User extends BaseUser
     }
 
     /**
-     * Add suivi
+     * Add suivi.
      *
      * @param \MentoratBundle\Entity\Suivi $suivi
      *
@@ -289,7 +289,7 @@ class User extends BaseUser
     }
 
     /**
-     * Remove suivi
+     * Remove suivi.
      *
      * @param \MentoratBundle\Entity\Suivi $suivi
      */
@@ -299,7 +299,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get suivi
+     * Get suivi.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

@@ -7,8 +7,10 @@ use BackendBundle\Form\TypeAdd\AbonnementTypeAdd;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Mentore;
 use MentoratBundle\Entity\Notes;
+use MentoratBundle\Entity\Sessions;
 use MentoratBundle\Entity\Suivi;
 use MentoratBundle\Form\MentoreType;
+use MentoratBundle\Form\SessionsType;
 use MentoratBundle\Form\TypeAdd\NoteTypeAdd;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
@@ -207,6 +209,28 @@ class Admin
     }
 
     /**
+     * Allow to get all the sessions planified.
+     *
+     * @return array|\MentoratBundle\Entity\Sessions[]
+     */
+    public function getSessionsMentorat()
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Sessions')->findAll();
+    }
+
+    /**
+     * Allow to get the sessions planified by the teacher into the student profil using is $id.
+     *
+     * @param $id
+     *
+     * @return array
+     */
+    public function getSessionsByMentore($id)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Sessions')->getSessionsbyMentore($id);
+    }
+
+    /**
      * Allow to create a new instance of Mentor, in order to be fast and effective, the registration of a new mentor
      * doesn't require that the back enter a Username or a Password, this tasks are handled by the system.
      *
@@ -306,6 +330,37 @@ class Admin
             $this->doctrine->persist($note);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La note a bien été ajoutée.');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to save a new session between a teacher and a student.
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addSessionMentorat(Request $request, $id)
+    {
+        $mentore = $this->doctrine->getRepository('MentoratBundle:Mentore')->findOneBy(array('id' => $id));
+
+        $mentor = $this->user->getToken()->getUser();
+
+        $sessions = new Sessions();
+
+        $form = $this->form->create(SessionsType::class, $sessions);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $sessions->setLibelle('Session de mentorat Premium Plus');
+            $sessions->setMentor($mentor);
+            $sessions->setMentore($mentore);
+            $this->doctrine->persist($sessions);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'La session a bien été planifiée.');
         }
 
         return $form;

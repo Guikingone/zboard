@@ -78,6 +78,11 @@ class User extends BaseUser
     private $suivi;
 
     /**
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Sessions", mappedBy="mentor")
+     */
+    private $sessions;
+
+    /**
      * Set firstName.
      *
      * @param string $firstName
@@ -301,5 +306,39 @@ class User extends BaseUser
     public function getSuivi()
     {
         return $this->suivi;
+    }
+
+    /**
+     * Add session.
+     *
+     * @param \MentoratBundle\Entity\Sessions $session
+     *
+     * @return User
+     */
+    public function addSession(\MentoratBundle\Entity\Sessions $session)
+    {
+        $this->sessions[] = $session;
+
+        return $this;
+    }
+
+    /**
+     * Remove session.
+     *
+     * @param \MentoratBundle\Entity\Sessions $session
+     */
+    public function removeSession(\MentoratBundle\Entity\Sessions $session)
+    {
+        $this->sessions->removeElement($session);
+    }
+
+    /**
+     * Get sessions.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSessions()
+    {
+        return $this->sessions;
     }
 }

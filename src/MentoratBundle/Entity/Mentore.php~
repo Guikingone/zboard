@@ -524,45 +524,4 @@ class Mentore
     {
         return $this->suivi;
     }
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->sessions = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add session.
-     *
-     * @param \MentoratBundle\Entity\Sessions $session
-     *
-     * @return Mentore
-     */
-    public function addSession(\MentoratBundle\Entity\Sessions $session)
-    {
-        $this->sessions[] = $session;
-
-        return $this;
-    }
-
-    /**
-     * Remove session.
-     *
-     * @param \MentoratBundle\Entity\Sessions $session
-     */
-    public function removeSession(\MentoratBundle\Entity\Sessions $session)
-    {
-        $this->sessions->removeElement($session);
-    }
-
-    /**
-     * Get sessions.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSessions()
-    {
-        return $this->sessions;
-    }
 }

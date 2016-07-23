@@ -5,7 +5,7 @@ namespace UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Competences
+ * Competences.
  *
  * @ORM\Table(name="zboard_mentors_competences")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\CompetencesRepository")
@@ -29,15 +29,9 @@ class Competences
     private $libelle;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="users_id", referencedColumnName="id")
-     */
-    private $users;
-
-    /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -45,7 +39,7 @@ class Competences
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param array $libelle
      *
@@ -59,7 +53,7 @@ class Competences
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return array
      */
