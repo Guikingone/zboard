@@ -231,6 +231,18 @@ class Admin
     }
 
     /**
+     * Allow to get the sessions planified by the teacher into the teacher profil using is $id.
+     *
+     * @param $id
+     *
+     * @return array
+     */
+    public function getSessionsByMentor($id)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Sessions')->getSessionsbyMentor($id);
+    }
+
+    /**
      * Allow to create a new instance of Mentor, in order to be fast and effective, the registration of a new mentor
      * doesn't require that the back enter a Username or a Password, this tasks are handled by the system.
      *

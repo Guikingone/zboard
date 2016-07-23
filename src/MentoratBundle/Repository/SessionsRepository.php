@@ -19,4 +19,14 @@ class SessionsRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()
                     ->getResult();
     }
+
+    public function getSessionsbyMentor($id)
+    {
+        return $this->createQueryBuilder('s')
+                    ->where('s.mentor = :id')
+                        ->setParameter('id', $id)
+                    ->orderBy('s.dateSession', 'DESC')
+                    ->getQuery()
+                    ->getResult();
+    }
 }
