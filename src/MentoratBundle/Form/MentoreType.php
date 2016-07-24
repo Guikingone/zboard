@@ -2,7 +2,6 @@
 
 namespace MentoratBundle\Form;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
@@ -40,10 +39,6 @@ class MentoreType extends AbstractType
             ))
             ->add('resume', TextareaType::class, array(
                 'required' => false,
-            ))
-            ->add('parcours', EntityType::class, array(
-                'class' => 'BackendBundle\Entity\Parcours',
-                'choice_label' => 'libelle',
             ))
             ->add('date_start', DateType::class, array(
                 'widget' => 'single_text',

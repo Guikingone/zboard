@@ -18,6 +18,7 @@ class ProjetTypeAdd extends AbstractType
     {
         $builder
             ->add('libelle', TextType::class)
+            ->remove('status')
             ->add('parcours', EntityType::class, array(
                 'class' => 'BackendBundle\Entity\Parcours',
                 'choice_label' => 'libelle',

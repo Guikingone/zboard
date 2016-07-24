@@ -91,11 +91,6 @@ class Admin
         return $this->doctrine->getRepository('MentoratBundle:Mentore')->findAll();
     }
 
-    public function getMentoresbyTeacher($id)
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getStudentsByMentor($id);
-    }
-
     /**
      * Allow to return the students learning a path in Premium Plusabonnements.
      *
@@ -211,18 +206,6 @@ class Admin
     }
 
     /**
-     * Allow to get the whole suivi of a student using is $id.
-     *
-     * @param $id
-     *
-     * @return array|\MentoratBundle\Entity\Suivi[]
-     */
-    public function getSuiviByStudent($id)
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Suivi')->getSuiviByStudent($id);
-    }
-
-    /**
      * Allow to get all the notes.
      *
      * @return array|\MentoratBundle\Entity\Notes[]
@@ -252,18 +235,6 @@ class Admin
     public function getSessionsByMentore($id)
     {
         return $this->doctrine->getRepository('MentoratBundle:Sessions')->getSessionsbyMentore($id);
-    }
-
-    /**
-     * Allow to get the sessions planified by the teacher into the teacher profil using is $id.
-     *
-     * @param $id
-     *
-     * @return array
-     */
-    public function getSessionsByMentor($id)
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Sessions')->getSessionsbyMentor($id);
     }
 
     public function getSessionsCancelled()
@@ -363,9 +334,9 @@ class Admin
     public function addNote(Request $request, $id)
     {
         $suivi = $this->doctrine->getRepository('MentoratBundle:Suivi')
-                      ->findOneBy(array(
-                                'id' => $id,
-                            ));
+                                ->findOneBy(array(
+                                          'id' => $id,
+                                      ));
         $note = new Notes();
         $user = $this->user->getToken()->getUser();
 
@@ -501,17 +472,5 @@ class Admin
     public function viewParcours($id)
     {
         return $this->doctrine->getRepository('BackendBundle:Parcours')->find($id);
-    }
-
-    /**
-     * Allow to find a teacher by is $id in order to show details.
-     *
-     * @param $id
-     *
-     * @return null|object|\UserBundle\Entity\User
-     */
-    public function viewMentor($id)
-    {
-        return $this->doctrine->getRepository('UserBundle:User')->find($id);
     }
 }

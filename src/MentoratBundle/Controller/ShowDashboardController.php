@@ -14,20 +14,17 @@ class ShowDashboardController extends Controller
      * @param $id
      *
      * @return array
-     * @Route("/show/{id}/details", name="show_details_mentore")
+     * @Route("/show/{id}/mentore/details", name="show_details_mentore")
      * @Template("BackBundle/Action/Details/show_mentores.html.twig")
      */
     public function showProfilMentoreAction(Request $request, $id)
     {
-        $sessions = $this->get('core.admin')->addSessionMentorat($request, $id);
-        $mentores = $this->get('core.mentore')->viewMentore($id);
+        $mentore = $this->get('core.mentore')->viewMentore($id);
         $note = $this->get('core.admin')->addNote($request, $id);
-        $notes = $this->get('core.mentore')->getNotesByStudent($id);
-        $session = $this->get('core.admin')->getSessionsByMentore($id);
+        $sessions = $this->get('core.admin')->addSessionMentorat($request, $id);
 
-        return array('mentores' => $mentores, 'note' => $note->createView(),
-                     'notes' => $notes, 'sessions' => $sessions->createView(),
-                     'session' => $session, );
+        return array('mentore' => $mentore, 'note' => $note->createView(),
+                     'sessions' => $sessions->createView(), );
     }
 
     /**
@@ -42,9 +39,9 @@ class ShowDashboardController extends Controller
     {
         $competence = $this->get('core.admin')->addCompetencesMentor($request, $id);
         $competences = $this->get('core.admin')->getMentorCompetences($id);
-        $mentor = $this->get('core.admin')->viewMentor($id);
-        $sessions = $this->get('core.admin')->getSessionsByMentor($id);
-        $mentores = $this->get('core.admin')->getMentoresbyTeacher($id);
+        $mentor = $this->get('core.mentore')->viewMentor($id);
+        $sessions = $this->get('core.mentore')->getSessionsByMentor($id);
+        $mentores = $this->get('core.mentore')->getMentoresbyTeacher($id);
         $competencesM = $this->get('core.admin')->addCompetencesMentor($request, $id);
 
         return array('mentor' => $mentor, 'competence' => $competence->createView(),

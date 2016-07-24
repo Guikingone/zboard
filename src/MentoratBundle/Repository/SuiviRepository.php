@@ -17,6 +17,8 @@ class SuiviRepository extends \Doctrine\ORM\EntityRepository
                         ->addSelect('n')
                     ->leftJoin('s.mentore', 'm')
                         ->addSelect('m')
+                    ->leftJoin('s.parcours', 'p')
+                        ->addSelect('p')
                     ->where('m.id = :id')
                         ->setParameter('id', $id)
                     ->getQuery()

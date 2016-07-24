@@ -103,12 +103,6 @@ class Mentore
     private $duree_financement;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $parcours;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_start", type="date")

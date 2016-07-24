@@ -98,7 +98,7 @@ class Abonnement
         return $this->prix;
     }
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -106,7 +106,7 @@ class Abonnement
     }
 
     /**
-     * Add parcour
+     * Add parcour.
      *
      * @param \BackendBundle\Entity\Parcours $parcour
      *
@@ -120,7 +120,7 @@ class Abonnement
     }
 
     /**
-     * Remove parcour
+     * Remove parcour.
      *
      * @param \BackendBundle\Entity\Parcours $parcour
      */
@@ -130,7 +130,7 @@ class Abonnement
     }
 
     /**
-     * Get parcours
+     * Get parcours.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

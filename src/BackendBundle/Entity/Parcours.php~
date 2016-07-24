@@ -45,6 +45,11 @@ class Parcours
     private $projet;
 
     /**
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="parcours")
+     */
+    private $suivi;
+
+    /**
      * Get id.
      *
      * @return int
@@ -103,7 +108,7 @@ class Parcours
     }
 
     /**
-     * Set abonnement
+     * Set abonnement.
      *
      * @param \BackendBundle\Entity\Abonnement $abonnement
      *
@@ -117,12 +122,53 @@ class Parcours
     }
 
     /**
-     * Get abonnement
+     * Get abonnement.
      *
      * @return \BackendBundle\Entity\Abonnement
      */
     public function getAbonnement()
     {
         return $this->abonnement;
+    }
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->projet = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add projet.
+     *
+     * @param \BackendBundle\Entity\Projet $projet
+     *
+     * @return Parcours
+     */
+    public function addProjet(\BackendBundle\Entity\Projet $projet)
+    {
+        $this->projet[] = $projet;
+
+        return $this;
+    }
+
+    /**
+     * Remove projet.
+     *
+     * @param \BackendBundle\Entity\Projet $projet
+     */
+    public function removeProjet(\BackendBundle\Entity\Projet $projet)
+    {
+        $this->projet->removeElement($projet);
+    }
+
+    /**
+     * Get projet.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProjet()
+    {
+        return $this->projet;
     }
 }

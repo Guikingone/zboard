@@ -57,6 +57,11 @@ class Suivi
     private $notes;
 
     /**
+     * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours", inversedBy="suivi")
+     */
+    private $parcours;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -226,5 +231,29 @@ class Suivi
     public function getState()
     {
         return $this->state;
+    }
+
+    /**
+     * Set parcours.
+     *
+     * @param \BackendBundle\Entity\Parcours $parcours
+     *
+     * @return Suivi
+     */
+    public function setParcours(\BackendBundle\Entity\Parcours $parcours = null)
+    {
+        $this->parcours = $parcours;
+
+        return $this;
+    }
+
+    /**
+     * Get parcours.
+     *
+     * @return \BackendBundle\Entity\Parcours
+     */
+    public function getParcours()
+    {
+        return $this->parcours;
     }
 }

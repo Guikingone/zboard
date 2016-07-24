@@ -40,7 +40,6 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $mentore->setAddress('Somewhere');
         $mentore->setCity('Don\'t say, somewhere near by');
         $mentore->setCountry('FR');
-        $mentore->setParcours($parcours);
         $mentore->setPhone('00.00.00.00.00');
         $mentore->setDateStart(new \DateTime());
         $mentore->setResume('Something');
@@ -48,6 +47,7 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $suivi->setMentor($mentor);
         $suivi->setState('En cours');
         $suivi->setMentore($mentore);
+        $suivi->setParcours($parcours);
         $mentore->setStatus('En formation');
         $mentore->setFinancement(true);
 
@@ -58,7 +58,6 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $mentoreC->setAddress('Somewhere');
         $mentoreC->setCity('Don\'t say, somewhere near by');
         $mentoreC->setCountry('FR');
-        $mentoreC->setParcours($parcoursC);
         $mentoreC->setPhone('00.00.00.00.00');
         $mentoreC->setDateStart(new \DateTime());
         $mentoreC->setResume('Something');
@@ -66,6 +65,7 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $suiviC->setMentor($mentor);
         $suiviC->setState('En cours');
         $suiviC->setMentore($mentoreC);
+        $suiviC->setParcours($parcoursC);
         $mentore->setFinancement(false);
         $mentoreC->setStatus('En formation');
 

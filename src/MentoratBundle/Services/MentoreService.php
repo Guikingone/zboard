@@ -34,9 +34,28 @@ class MentoreService
         $this->user = $user;
     }
 
-    public function getNotesByStudent($id)
+    /**
+     * Allow to get the sessions planified by the teacher into the teacher profil using is $id.
+     *
+     * @param $id
+     *
+     * @return array
+     */
+    public function getSessionsByMentor($id)
     {
-        return $this->doctrine->getRepository('MentoratBundle:Notes')->getNotesByStudent($id);
+        return $this->doctrine->getRepository('MentoratBundle:Sessions')->getSessionsbyMentor($id);
+    }
+
+    /**
+     * Allow to get all the student followed by a teacher.
+     *
+     * @param $id
+     *
+     * @return array
+     */
+    public function getMentoresbyTeacher($id)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getStudentsByMentor($id);
     }
 
     /**
@@ -90,5 +109,17 @@ class MentoreService
     public function viewMentore($id)
     {
         return $this->doctrine->getRepository('MentoratBundle:Mentore')->find($id);
+    }
+
+    /**
+     * Allow to find a teacher by is $id in order to show details.
+     *
+     * @param $id
+     *
+     * @return null|object|\UserBundle\Entity\User
+     */
+    public function viewMentor($id)
+    {
+        return $this->doctrine->getRepository('UserBundle:User')->find($id);
     }
 }

@@ -16,7 +16,7 @@
                 <div class="col-md-3 col-lg-pull-2 col-lg-5">
                     <div class="box box-primary">
                         <div class="box-body box-profile">
-                            <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+                            <img class="profile-user-img img-responsive img-circle" src="{{ asset('img/avatars/user-default.jpg') }}" alt="User profile picture">
                             <h3 class="profile-username text-center"><p>{{ mentor.firstname }} {{ mentor.lastname }}</p></h3>
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
@@ -136,12 +136,10 @@
                         </span>
                                         <span class="description">Posted 5 photos - 5 days ago</span>
                                     </div>
-                                    <!-- /.user-block -->
                                     <div class="row margin-bottom">
                                         <div class="col-sm-6">
                                             <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
                                         </div>
-                                        <!-- /.col -->
                                         <div class="col-sm-6">
                                             <div class="row">
                                                 <div class="col-sm-6">
@@ -149,17 +147,13 @@
                                                     <br>
                                                     <img class="img-responsive" src="../../dist/img/photo3.jpg" alt="Photo">
                                                 </div>
-                                                <!-- /.col -->
                                                 <div class="col-sm-6">
                                                     <img class="img-responsive" src="../../dist/img/photo4.jpg" alt="Photo">
                                                     <br>
                                                     <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
                                                 </div>
-                                                <!-- /.col -->
                                             </div>
-                                            <!-- /.row -->
                                         </div>
-                                        <!-- /.col -->
                                     </div>
                                     <ul class="list-inline">
                                         <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
@@ -244,27 +238,44 @@
                             </div>
                             <div class="tab-pane" id="student">
                                 <!-- Suivi elèves -->
-                                <ul>
-                                    {% for mentores in mentores %}
-                                        <li>
-                                            <a href="{{ path('show_details_mentore', {'id': mentores.id}) }}">
-                                                {{ mentores.lastname }} {{ mentores.firstname }}
-                                            </a>
-
-                                            {% if mentores.status == 'En formation' %}
-                                                <span class="label label-success">{{ mentores.status }}</span>
-                                            {% elseif mentores.status == 'Contacté' %}
-                                                <span class="label label-warning">{{ mentores.status }}</span>
-                                            {% elseif mentores.status == 'En pause' %}
-                                                <span class="label label-danger">{{ mentores.status }}</span>
-                                            {% elseif mentores.status == 'En attente' %}
-                                                <span class="label label-warning">{{ mentores.status }}</span>
-                                            {% elseif mentores.status == 'Formation terminé' %}
-                                                <span class="label label-success">{{ mentores.status }}</span>
-                                            {% endif %}
-                                        </li>
-                                    {% endfor %}
-                                </ul>
+                                <div class="table-responsive">
+                                    <table class="table no-margin">
+                                        <thead>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>Prenom</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for mentores in mentores %}
+                                            <tr>
+                                                <td>
+                                                    <a href="{{ path('show_details_mentore', {'id': mentores.id}) }}">
+                                                        {{ mentores.lastname }}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    {{ mentores.firstname }}
+                                                </td>
+                                                <td>
+                                                    {% if mentores.status == 'En formation' %}
+                                                        <span class="label label-success">{{ mentores.status }}</span>
+                                                    {% elseif mentores.status == 'Contacté' %}
+                                                        <span class="label label-warning">{{ mentores.status }}</span>
+                                                    {% elseif mentores.status == 'En pause' %}
+                                                        <span class="label label-danger">{{ mentores.status }}</span>
+                                                    {% elseif mentores.status == 'En attente' %}
+                                                        <span class="label label-warning">{{ mentores.status }}</span>
+                                                    {% elseif mentores.status == 'Formation terminé' %}
+                                                        <span class="label label-success">{{ mentores.status }}</span>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <div class="tab-pane" id="sessions">
                                 <!-- Suivi sessions -->

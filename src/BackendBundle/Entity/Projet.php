@@ -29,6 +29,13 @@ class Projet
     private $libelle;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=120, nullable=true)
+     */
+    private $status;
+
+    /**
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours", inversedBy="projet")
      * @ORM\JoinColumn(name="parcours_id", referencedColumnName="id")
      */
@@ -40,6 +47,14 @@ class Projet
     private $competences;
 
     /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->competences = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id.
      *
      * @return int
@@ -47,30 +62,6 @@ class Projet
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set parco.
-     *
-     * @param \BackendBundle\Entity\Parcours $parcours
-     *
-     * @return Parcours
-     */
-    public function setParcours(\BackendBundle\Entity\Parcours $parcours)
-    {
-        $this->parcours = $parcours;
-
-        return $this;
-    }
-
-    /**
-     * Get parcours.
-     *
-     * @return \BackendBundle\Entity\Parcours
-     */
-    public function getParcours()
-    {
-        return $this->parcours;
     }
 
     /**
@@ -96,12 +87,53 @@ class Projet
     {
         return $this->libelle;
     }
+
     /**
-     * Constructor.
+     * Set status.
+     *
+     * @param string $status
+     *
+     * @return Projet
      */
-    public function __construct()
+    public function setStatus($status)
     {
-        $this->competences = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status.
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set parcours.
+     *
+     * @param \BackendBundle\Entity\Parcours $parcours
+     *
+     * @return Projet
+     */
+    public function setParcours(\BackendBundle\Entity\Parcours $parcours = null)
+    {
+        $this->parcours = $parcours;
+
+        return $this;
+    }
+
+    /**
+     * Get parcours.
+     *
+     * @return \BackendBundle\Entity\Parcours
+     */
+    public function getParcours()
+    {
+        return $this->parcours;
     }
 
     /**

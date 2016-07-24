@@ -45,6 +45,11 @@ class Parcours
     private $projet;
 
     /**
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="parcours")
+     */
+    private $suivi;
+
+    /**
      * Get id.
      *
      * @return int
@@ -165,5 +170,39 @@ class Parcours
     public function getProjet()
     {
         return $this->projet;
+    }
+
+    /**
+     * Add suivi.
+     *
+     * @param \MentoratBundle\Entity\Suivi $suivi
+     *
+     * @return Parcours
+     */
+    public function addSuivi(\MentoratBundle\Entity\Suivi $suivi)
+    {
+        $this->suivi[] = $suivi;
+
+        return $this;
+    }
+
+    /**
+     * Remove suivi.
+     *
+     * @param \MentoratBundle\Entity\Suivi $suivi
+     */
+    public function removeSuivi(\MentoratBundle\Entity\Suivi $suivi)
+    {
+        $this->suivi->removeElement($suivi);
+    }
+
+    /**
+     * Get suivi.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSuivi()
+    {
+        return $this->suivi;
     }
 }

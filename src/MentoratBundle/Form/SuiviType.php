@@ -19,6 +19,10 @@ class SuiviType extends AbstractType
         $builder
             ->remove('libelle')
             ->remove('dUpdate')
+            ->add('parcours', EntityType::class, array(
+                'class' => 'BackendBundle\Entity\Parcours',
+                'choice_label' => 'libelle',
+            ))
             ->add('mentor', EntityType::class, array(
                 'class' => 'UserBundle\Entity\User',
                 'choice_label' => 'lastName',

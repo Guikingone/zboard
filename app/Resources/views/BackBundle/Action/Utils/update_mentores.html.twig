@@ -63,11 +63,6 @@
                     </div>
                     <hr />
                     <div class="input-group">
-                        {{ form_errors(mentore.parcours) }}
-                        {{ form_label(mentore.parcours, 'Parcours') }}
-                        {{ form_widget(mentore.parcours, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
                         {{ form_errors(mentore.date_start) }}
                         {{ form_label(mentore.date_start, 'Date de commencement') }}
                         {{ form_widget(mentore.date_start, {'attr': {'class': 'form-control'}}) }}
@@ -103,6 +98,11 @@
                         {{ form_errors(mentore.suivi.state) }}
                         {{ form_label(mentore.suivi.state, 'Statut du suivi') }}
                         {{ form_widget(mentore.suivi.state, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="input-group">
+                        {{ form_errors(mentore.suivi.parcours) }}
+                        {{ form_label(mentore.suivi.parcours, 'Parcours :') }}
+                        {{ form_widget(mentore.suivi.parcours, {'attr': {'class': 'form-control'}}) }}
                     </div>
                     <br />
                     <button type="submit" class="btn btn-success">Enregistrer</button>

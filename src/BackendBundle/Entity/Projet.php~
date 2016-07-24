@@ -29,6 +29,13 @@ class Projet
     private $libelle;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=120, nullable=true)
+     */
+    private $status;
+
+    /**
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours", inversedBy="projet")
      * @ORM\JoinColumn(name="parcours_id", referencedColumnName="id")
      */
@@ -38,103 +45,4 @@ class Projet
      * @ORM\OneToMany(targetEntity="BackendBundle\Entity\Competences", mappedBy="projet")
      */
     private $competences;
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set parco.
-     *
-     * @param \BackendBundle\Entity\Parcours $parcours
-     *
-     * @return Parcours
-     */
-    public function setParcours(\BackendBundle\Entity\Parcours $parcours)
-    {
-        $this->parcours = $parcours;
-
-        return $this;
-    }
-
-    /**
-     * Get parcours.
-     *
-     * @return \BackendBundle\Entity\Parcours
-     */
-    public function getParcours()
-    {
-        return $this->parcours;
-    }
-
-    /**
-     * Set libelle.
-     *
-     * @param string $libelle
-     *
-     * @return Projet
-     */
-    public function setLibelle($libelle)
-    {
-        $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    /**
-     * Get libelle.
-     *
-     * @return string
-     */
-    public function getLibelle()
-    {
-        return $this->libelle;
-    }
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->competences = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add competence.
-     *
-     * @param \BackendBundle\Entity\Competences $competence
-     *
-     * @return Projet
-     */
-    public function addCompetence(\BackendBundle\Entity\Competences $competence)
-    {
-        $this->competences[] = $competence;
-
-        return $this;
-    }
-
-    /**
-     * Remove competence.
-     *
-     * @param \BackendBundle\Entity\Competences $competence
-     */
-    public function removeCompetence(\BackendBundle\Entity\Competences $competence)
-    {
-        $this->competences->removeElement($competence);
-    }
-
-    /**
-     * Get competences.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCompetences()
-    {
-        return $this->competences;
-    }
 }
