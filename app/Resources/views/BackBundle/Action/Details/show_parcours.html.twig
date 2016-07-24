@@ -33,13 +33,28 @@
                                     <p class="pull-right"></p>
                                 </li>
                             </ul>
-                            <a href="#" data-toggle="modal" data-target="#myModalProjet" class="btn btn-primary btn-block"><b>Ajouter un projet</b></a>
+                            <a href="#" data-toggle="modal" data-target="#myModalCours" class="btn btn-warning btn-block"><b>Ajouter un cours</b></a>
+                            <a href="#" data-toggle="modal" data-target="#myModalProjet" class="btn btn-warning btn-block"><b>Ajouter un projet</b></a>
+                        </div>
+                    </div>
+                    <div class="box box-primary">
+                        <div class="box-body box-profile">
+                            <h3 class="profile-username text-center"><p>Liste des cours</p></h3>
+                            <ul class="list-group list-group-unbordered">
+                                <!-- Liste des cours -->
+                                {% for coursP in coursP %}
+                                    <li class="list-group-item">
+                                        <b>{{ coursP.libelle }}</b>
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     </div>
                     <div class="box box-primary">
                         <div class="box-body box-profile">
                             <h3 class="profile-username text-center"><p>Liste des projets</p></h3>
                             <ul class="list-group list-group-unbordered">
+                                <!-- Liste des projets -->
                                 {% for projets in projets %}
                                     <li class="list-group-item">
                                         <b>{{ projets.libelle }}</b> <a href="#" class="pull-right" data-toggle="modal" data-target="#myModalCompetences">Ajouter des compétences</a>
@@ -57,6 +72,8 @@
             </div>
         </section>
     </div>
+
+    {% include ':Form:register_cours.html.twig' %}
 
     {% include ':Form:register_project.html.twig' %}
 

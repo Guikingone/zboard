@@ -1,20 +1,20 @@
-<!-- Modal used in order to add a project -->
-<div class="modal fade" id="myModalProjet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- Modal used in order to add a cours -->
+<div class="modal fade" id="myModalCours" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Ajouter un projet</h4>
+                <h4 class="modal-title" id="myModalLabel">Ajouter un Cours</h4>
             </div>
             <div class="modal-body">
-                {{ form_start(projet) }}
+                {{ form_start(cours) }}
                 <div class="input-group">
-                    {{ form_errors(projet.libelle) }}
-                    {{ form_label(projet.libelle, 'Nom du projet :')}}
-                    {{ form_widget(projet.libelle, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(cours.libelle) }}
+                    {{ form_label(cours.libelle, 'Nom du cours :')}}
+                    {{ form_widget(cours.libelle, {'attr': {'class': 'form-control'}}) }}
                 </div>
                 <br>
                 <button type="submit" class="btn btn-warning">Enregistrer</button>
-                {{ form_end(projet) }}
+                {{ form_end(cours) }}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>

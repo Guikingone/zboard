@@ -82,6 +82,36 @@
                             <div class="tab-content">
                                 <div class="active tab-pane" id="parcours">
                                     <!-- Suivi parcours -->
+                                    <div class="box-body">
+                                        <div class="table-responsive">
+                                            <table class="table no-margin">
+                                                <thead>
+                                                <tr>
+                                                    <th>Intitulé du cours</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for cours in mentore.suivi.parcours.cours %}
+                                                    <tr>
+                                                        <td>
+                                                            {{ cours.libelle }}
+                                                        </td>
+                                                        <td>
+                                                            {% if cours.status == null %}
+                                                                <span class="label label-info">En attente</span>
+                                                            {% elseif cours.status == 'En cours' %}
+                                                                <span class="label label-warning">{{ cours.status }}</span>
+                                                            {% elseif cours.status == 'Terminé' %}
+                                                                <span class="label label-success">{{ cours.status }}</span>
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="tab-pane" id="projets">
                                     <!-- Suivi projets -->

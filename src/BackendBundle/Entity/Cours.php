@@ -5,12 +5,12 @@ namespace BackendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Projet.
+ * Cours
  *
- * @ORM\Table(name="zboard_projet")
- * @ORM\Entity(repositoryClass="BackendBundle\Repository\ProjetRepository")
+ * @ORM\Table(name="zboard_parcours_cours")
+ * @ORM\Entity(repositoryClass="BackendBundle\Repository\CoursRepository")
  */
-class Projet
+class Cours
 {
     /**
      * @var int
@@ -36,28 +36,15 @@ class Projet
     private $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours", inversedBy="projet")
-     * @ORM\JoinColumn(name="parcours_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours", inversedBy="cours")
      */
     private $parcours;
+    
 
     /**
-     * @ORM\OneToMany(targetEntity="BackendBundle\Entity\Competences", mappedBy="projet")
-     */
-    private $competences;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->competences = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -65,11 +52,11 @@ class Projet
     }
 
     /**
-     * Set libelle.
+     * Set libelle
      *
      * @param string $libelle
      *
-     * @return Projet
+     * @return Cours
      */
     public function setLibelle($libelle)
     {
@@ -79,7 +66,7 @@ class Projet
     }
 
     /**
-     * Get libelle.
+     * Get libelle
      *
      * @return string
      */
@@ -89,11 +76,11 @@ class Projet
     }
 
     /**
-     * Set status.
+     * Set status
      *
      * @param string $status
      *
-     * @return Projet
+     * @return Cours
      */
     public function setStatus($status)
     {
@@ -103,7 +90,7 @@ class Projet
     }
 
     /**
-     * Get status.
+     * Get status
      *
      * @return string
      */
@@ -113,11 +100,11 @@ class Projet
     }
 
     /**
-     * Set parcours.
+     * Set parcours
      *
      * @param \BackendBundle\Entity\Parcours $parcours
      *
-     * @return Projet
+     * @return Cours
      */
     public function setParcours(\BackendBundle\Entity\Parcours $parcours = null)
     {
@@ -127,46 +114,12 @@ class Projet
     }
 
     /**
-     * Get parcours.
+     * Get parcours
      *
      * @return \BackendBundle\Entity\Parcours
      */
     public function getParcours()
     {
         return $this->parcours;
-    }
-
-    /**
-     * Add competence.
-     *
-     * @param \BackendBundle\Entity\Competences $competence
-     *
-     * @return Projet
-     */
-    public function addCompetence(\BackendBundle\Entity\Competences $competence)
-    {
-        $this->competences[] = $competence;
-
-        return $this;
-    }
-
-    /**
-     * Remove competence.
-     *
-     * @param \BackendBundle\Entity\Competences $competence
-     */
-    public function removeCompetence(\BackendBundle\Entity\Competences $competence)
-    {
-        $this->competences->removeElement($competence);
-    }
-
-    /**
-     * Get competences.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCompetences()
-    {
-        return $this->competences;
     }
 }

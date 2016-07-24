@@ -71,17 +71,21 @@ class ShowBackController extends Controller
     public function showParcoursByIdAction(Request $request, $id)
     {
         $parcours = $this->get('core.admin')->viewParcours($id);
-        $projet = $this->get('core.back')->addProject($request);
+        $projet = $this->get('core.back')->addProject($request, $id);
+        $cours = $this->get('core.admin')->addCours($request, $id);
 
         // Used to find all the projects linked to the path.
         $id = $request->attributes->get('id');
 
+        $coursP = $this->get('core.admin')->getCours($id);
         $projets = $this->get('core.back')->getProjet($id);
         $competences = $this->get('core.back')->addCompetences($request);
-        $competence = $this->getDoctrine()->getManager()->getRepository('BackendBundle:Competences')->findBy(array('projet' => $projets));
+        $competence = $this->getDoctrine()->getManager()->getRepository('BackendBundle:Competences')
+                           ->findBy(array('projet' => $projets));
 
         return array('parcours' => $parcours, 'projet' => $projet->createView(),
                       'projets' => $projets, 'competence' => $competence,
-                      'competences' => $competences->createView(), );
+                      'competences' => $competences->createView(), 'cours' => $cours->createView(),
+                      'coursP' => $coursP);
     }
 }

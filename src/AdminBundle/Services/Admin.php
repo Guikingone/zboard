@@ -3,6 +3,8 @@
 namespace AdminBundle\Services;
 
 use BackendBundle\Entity\Abonnement;
+use BackendBundle\Entity\Cours;
+use BackendBundle\Form\CoursType;
 use BackendBundle\Form\TypeAdd\AbonnementTypeAdd;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Mentore;
@@ -171,6 +173,11 @@ class Admin
     public function getParcoursClass()
     {
         return $this->doctrine->getRepository('BackendBundle:Parcours')->getParcoursClass();
+    }
+
+    public function getCours($id)
+    {
+        return $this->doctrine->getRepository('BackendBundle:Cours')->getCoursByParcours($id);
     }
 
     /**
@@ -381,6 +388,32 @@ class Admin
             $this->doctrine->persist($sessions);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La session a bien été planifiée.');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to add a new courses linked to a path.
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addCours(Request $request, $id)
+    {
+        $parcours = $this->doctrine->getRepository('BackendBundle:Parcours')->findOneBy(array('id' => $id));
+
+        $cours = new Cours();
+
+        $form = $this->form->create(CoursType::class, $cours);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $cours->setParcours($parcours);
+            $this->doctrine->persist($cours);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Le cours a bien été ajouté.');
         }
 
         return $form;

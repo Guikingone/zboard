@@ -40,6 +40,11 @@ class Parcours
     private $abonnement;
 
     /**
+     * @ORM\OneToMany(targetEntity="BackendBundle\Entity\Cours", mappedBy="parcours")
+     */
+    private $cours;
+
+    /**
      * @ORM\OneToMany(targetEntity="BackendBundle\Entity\Projet", mappedBy="parcours")
      */
     private $projet;
@@ -50,9 +55,19 @@ class Parcours
     private $suivi;
 
     /**
-     * Get id.
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->cours = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->projet = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->suivi = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -60,7 +75,7 @@ class Parcours
     }
 
     /**
-     * Set libelle.
+     * Set libelle
      *
      * @param string $libelle
      *
@@ -74,7 +89,7 @@ class Parcours
     }
 
     /**
-     * Get libelle.
+     * Get libelle
      *
      * @return string
      */
@@ -84,7 +99,7 @@ class Parcours
     }
 
     /**
-     * Set diplome.
+     * Set diplome
      *
      * @param string $diplome
      *
@@ -98,7 +113,7 @@ class Parcours
     }
 
     /**
-     * Get diplome.
+     * Get diplome
      *
      * @return string
      */
@@ -108,7 +123,7 @@ class Parcours
     }
 
     /**
-     * Set abonnement.
+     * Set abonnement
      *
      * @param \BackendBundle\Entity\Abonnement $abonnement
      *
@@ -122,7 +137,7 @@ class Parcours
     }
 
     /**
-     * Get abonnement.
+     * Get abonnement
      *
      * @return \BackendBundle\Entity\Abonnement
      */
@@ -130,16 +145,43 @@ class Parcours
     {
         return $this->abonnement;
     }
+
     /**
-     * Constructor.
+     * Add cour
+     *
+     * @param \BackendBundle\Entity\Cours $cour
+     *
+     * @return Parcours
      */
-    public function __construct()
+    public function addCour(\BackendBundle\Entity\Cours $cour)
     {
-        $this->projet = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->cours[] = $cour;
+
+        return $this;
     }
 
     /**
-     * Add projet.
+     * Remove cour
+     *
+     * @param \BackendBundle\Entity\Cours $cour
+     */
+    public function removeCour(\BackendBundle\Entity\Cours $cour)
+    {
+        $this->cours->removeElement($cour);
+    }
+
+    /**
+     * Get cours
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCours()
+    {
+        return $this->cours;
+    }
+
+    /**
+     * Add projet
      *
      * @param \BackendBundle\Entity\Projet $projet
      *
@@ -153,7 +195,7 @@ class Parcours
     }
 
     /**
-     * Remove projet.
+     * Remove projet
      *
      * @param \BackendBundle\Entity\Projet $projet
      */
@@ -163,7 +205,7 @@ class Parcours
     }
 
     /**
-     * Get projet.
+     * Get projet
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -173,7 +215,7 @@ class Parcours
     }
 
     /**
-     * Add suivi.
+     * Add suivi
      *
      * @param \MentoratBundle\Entity\Suivi $suivi
      *
@@ -187,7 +229,7 @@ class Parcours
     }
 
     /**
-     * Remove suivi.
+     * Remove suivi
      *
      * @param \MentoratBundle\Entity\Suivi $suivi
      */
@@ -197,7 +239,7 @@ class Parcours
     }
 
     /**
-     * Get suivi.
+     * Get suivi
      *
      * @return \Doctrine\Common\Collections\Collection
      */

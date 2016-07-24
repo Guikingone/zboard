@@ -186,6 +186,7 @@ class Back
     public function addParcours(Request $request)
     {
         $parcours = new Parcours();
+
         $form = $this->formFactory->create(ParcoursTypeAdd::class, $parcours);
         $form->handleRequest($request);
 
@@ -199,19 +200,22 @@ class Back
     }
 
     /**
-     * Allow to add a new project.
+     * Allow to add a new project linked to a path.
      *
      * @param Request $request
      *
      * @return \Symfony\Component\Form\FormInterface
      */
-    public function addProject(Request $request)
+    public function addProject(Request $request, $id)
     {
+        $parcours = $this->doctrine->getRepository('BackendBundle:Parcours')->findOneBy(array('id' => $id));
         $projet = new Projet();
+
         $form = $this->formFactory->create(ProjetTypeAdd::class, $projet);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
+            $projet->setParcours($parcours);
             $this->doctrine->persist($projet);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Projet ajouté !');
@@ -230,6 +234,7 @@ class Back
     public function addCompetences(Request $request)
     {
         $competences = new Competences();
+
         $form = $this->formFactory->create(CompetencesTypeAdd::class, $competences);
         $form->handleRequest($request);
 
