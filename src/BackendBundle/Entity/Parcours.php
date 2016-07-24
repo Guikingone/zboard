@@ -55,7 +55,7 @@ class Parcours
     private $suivi;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -65,9 +65,9 @@ class Parcours
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -75,7 +75,7 @@ class Parcours
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -89,7 +89,7 @@ class Parcours
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */
@@ -99,7 +99,7 @@ class Parcours
     }
 
     /**
-     * Set diplome
+     * Set diplome.
      *
      * @param string $diplome
      *
@@ -113,7 +113,7 @@ class Parcours
     }
 
     /**
-     * Get diplome
+     * Get diplome.
      *
      * @return string
      */
@@ -123,7 +123,7 @@ class Parcours
     }
 
     /**
-     * Set abonnement
+     * Set abonnement.
      *
      * @param \BackendBundle\Entity\Abonnement $abonnement
      *
@@ -137,7 +137,7 @@ class Parcours
     }
 
     /**
-     * Get abonnement
+     * Get abonnement.
      *
      * @return \BackendBundle\Entity\Abonnement
      */
@@ -147,7 +147,7 @@ class Parcours
     }
 
     /**
-     * Add cour
+     * Add cour.
      *
      * @param \BackendBundle\Entity\Cours $cour
      *
@@ -161,7 +161,7 @@ class Parcours
     }
 
     /**
-     * Remove cour
+     * Remove cour.
      *
      * @param \BackendBundle\Entity\Cours $cour
      */
@@ -171,7 +171,7 @@ class Parcours
     }
 
     /**
-     * Get cours
+     * Get cours.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -181,7 +181,7 @@ class Parcours
     }
 
     /**
-     * Add projet
+     * Add projet.
      *
      * @param \BackendBundle\Entity\Projet $projet
      *
@@ -195,7 +195,7 @@ class Parcours
     }
 
     /**
-     * Remove projet
+     * Remove projet.
      *
      * @param \BackendBundle\Entity\Projet $projet
      */
@@ -205,7 +205,7 @@ class Parcours
     }
 
     /**
-     * Get projet
+     * Get projet.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -215,7 +215,7 @@ class Parcours
     }
 
     /**
-     * Add suivi
+     * Add suivi.
      *
      * @param \MentoratBundle\Entity\Suivi $suivi
      *
@@ -229,7 +229,7 @@ class Parcours
     }
 
     /**
-     * Remove suivi
+     * Remove suivi.
      *
      * @param \MentoratBundle\Entity\Suivi $suivi
      */
@@ -239,7 +239,7 @@ class Parcours
     }
 
     /**
-     * Get suivi
+     * Get suivi.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

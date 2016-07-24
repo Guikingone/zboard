@@ -398,6 +398,7 @@ class Admin
      *
      * @param Request $request
      * @param $id
+     *
      * @return \Symfony\Component\Form\FormInterface
      */
     public function addCours(Request $request, $id)

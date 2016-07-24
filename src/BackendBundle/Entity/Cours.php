@@ -5,7 +5,7 @@ namespace BackendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Cours
+ * Cours.
  *
  * @ORM\Table(name="zboard_parcours_cours")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\CoursRepository")
@@ -39,12 +39,11 @@ class Cours
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours", inversedBy="cours")
      */
     private $parcours;
-    
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -52,7 +51,7 @@ class Cours
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -66,7 +65,7 @@ class Cours
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */
@@ -76,7 +75,7 @@ class Cours
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param string $status
      *
@@ -90,7 +89,7 @@ class Cours
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return string
      */
@@ -100,7 +99,7 @@ class Cours
     }
 
     /**
-     * Set parcours
+     * Set parcours.
      *
      * @param \BackendBundle\Entity\Parcours $parcours
      *
@@ -114,7 +113,7 @@ class Cours
     }
 
     /**
-     * Get parcours
+     * Get parcours.
      *
      * @return \BackendBundle\Entity\Parcours
      */

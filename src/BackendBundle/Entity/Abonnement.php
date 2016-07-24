@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Abonnement.
  *
- * @ORM\Table(name="abonnement")
+ * @ORM\Table(name="zboard_parcours_abonnement")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\AbonnementRepository")
  */
 class Abonnement

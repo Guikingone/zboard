@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Projet.
  *
- * @ORM\Table(name="zboard_projet")
+ * @ORM\Table(name="zboard_parcours_projet")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\ProjetRepository")
  */
 class Projet

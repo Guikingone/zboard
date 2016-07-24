@@ -86,6 +86,6 @@ class ShowBackController extends Controller
         return array('parcours' => $parcours, 'projet' => $projet->createView(),
                       'projets' => $projets, 'competence' => $competence,
                       'competences' => $competences->createView(), 'cours' => $cours->createView(),
-                      'coursP' => $coursP);
+                      'coursP' => $coursP, );
     }
 }

@@ -11,7 +11,7 @@ class CoursType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,14 +21,14 @@ class CoursType extends AbstractType
             ->remove('parcours')
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackendBundle\Entity\Cours'
+            'data_class' => 'BackendBundle\Entity\Cours',
         ));
     }
 }
