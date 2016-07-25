@@ -14,7 +14,9 @@ class ParcoursTypeAdd extends AbstractType
     {
         $builder
             ->add('libelle', TextType::class)
-            ->add('diplome', TextType::class)
+            ->add('diplome', TextType::class, array(
+                'required' => false,
+            ))
             ->add('abonnement', EntityType::class, array(
                 'class' => 'BackendBundle\Entity\Abonnement',
                 'choice_label' => 'libelle',

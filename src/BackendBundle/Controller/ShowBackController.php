@@ -56,9 +56,11 @@ class ShowBackController extends Controller
     public function showParcoursAction(Request $request)
     {
         $parcours = $this->get('core.back')->addParcours($request);
+        $abonnement = $this->get('core.admin')->addAbonnement($request);
         $path = $this->get('core.back')->getParcours();
 
-        return array('parcours' => $parcours->createView(), 'path' => $path);
+        return array('parcours' => $parcours->createView(), 'path' => $path,
+                     'abonnement' => $abonnement->createView());
     }
 
     /**

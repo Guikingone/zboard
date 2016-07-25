@@ -9,7 +9,10 @@
                 <th>Statut</th>
                 <th>Nombre d'élèves</th>
                 <th>Compétences</th>
-                <th>Outils</th>
+                {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                    <th>Modifier</th>
+                    <th>Archiver</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -32,14 +35,21 @@
                     {% endif %}
                 </td>
                 <td>
-                    <p>A définir</p>
+                    {{ mentors.suivi|length }}
                 </td>
                 <td>
-                    <p>A définir</p>
+                    {% for competences in mentors.competences %}
+                        <span class="label label-info">{{ competences.libelle }}</span>
+                    {% endfor %}
                 </td>
-                <td>
-                    <a href="{{ path('update_mentors', {'id': mentors.id}) }}"><span class="ion ion-wrench"></span></a>
-                </td>
+                {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                    <td>
+                        <a href="{{ path('update_mentors', {'id': mentors.id}) }}"><span class="ion ion-wrench"></span></a>
+                    </td>
+                    <td>
+                        <a href="{{ path('update_mentors', {'id': mentors.id}) }}"><span class="ion ion-folder"></span></a>
+                    </td>
+                {% endif %}
             </tr>
             {% endfor %}
             </tbody>

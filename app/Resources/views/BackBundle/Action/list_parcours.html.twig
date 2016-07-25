@@ -1,4 +1,4 @@
-{% extends 'Layout/admin.html.twig' %}
+{% extends ':BackBundle/Layout:admin.html.twig' %}
 
 {% block title %} - Parcours{% endblock %}
 
@@ -11,9 +11,12 @@
         </div>
     {% endfor %}
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 text-center">
             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalParcours">
                 Ajouter un parcours
+            </button>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalAbonnement">
+                Ajouter un abonnement
             </button>
         </div>
     </div>
@@ -31,6 +34,8 @@
         </div>
     </div>
 
-    {% include ':Form:register_entity.html.twig' %}
+    {% include ':Form:register_parcours.html.twig' %}
+
+    {% include ':Form:register_abonnement.html.twig' %}
 
 {% endblock %}

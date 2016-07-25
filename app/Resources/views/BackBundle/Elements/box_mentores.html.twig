@@ -10,7 +10,10 @@
                 <th>Date de commencement</th>
                 <th>Durée de financement</th>
                 <th>Parcours suivi</th>
-                <th>Outils</th>
+                {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                    <th>Modifier</th>
+                    <th>Archiver</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -36,7 +39,9 @@
                         {% endif %}
                     </td>
                     <td>
-                        {{ mentores.suivi.mentor }}
+                        <a href="{{ path('show_details_mentor', {'id': mentores.suivi.mentor.id}) }}">
+                            {{ mentores.suivi.mentor.firstname }} {{ mentores.suivi.mentor.lastname }}
+                        </a>
                     </td>
                     <td>
                        {{ mentores.dateStart|date('d-m-Y') }}
@@ -49,10 +54,16 @@
                         {% endif %}
                     </td>
                     <td>
+                        {{ mentores.suivi.parcours.libelle }}
                     </td>
-                    <td>
-                        <a href="{{ path('update_mentores', {'id': mentores.id}) }}"><span class="ion ion-wrench"></span></a>
-                    </td>
+                    {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                        <td>
+                            <a href="{{ path('update_mentores', {'id': mentores.id}) }}"><span class="ion ion-wrench"></span></a>
+                        </td>
+                        <td>
+                            <a href="{{ path('update_mentores', {'id': mentores.id}) }}"><span class="ion ion-folder"></span></a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>

@@ -1,4 +1,4 @@
-{% extends 'Layout/admin.html.twig' %}
+{% extends ':BackBundle/Layout:admin.html.twig' %}
 
 {% block title %} - Suivi des élèves{% endblock %}
 
@@ -11,8 +11,8 @@
         </div>
     {% endfor %}
     <div class="row">
-        <div class="col-xs-12">
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalM">
+        <div class="col-xs-12 text-center">
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalMentor">
                 Ajouter un mentor
             </button>
         </div>

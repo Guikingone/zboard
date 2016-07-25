@@ -1,0 +1,40 @@
+<!-- Modal used in order to add a path -->
+<div class="modal fade" id="myModalParcours" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal- text-center" id="myModalLabel">Gestion des parcours</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <div class="form-group">
+                            {{ form_start(parcours) }}
+                            <div class="form-group">
+                                {{ form_errors(parcours.libelle) }}
+                                {{ form_label(parcours.libelle, 'Nom du parcours :')}}
+                                {{ form_widget(parcours.libelle, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_errors(parcours.diplome) }}
+                                {{ form_label(parcours.diplome, 'Niveau du diplôme (Optionnel) :')}}
+                                {{ form_widget(parcours.diplome, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_errors(parcours.abonnement) }}
+                                {{ form_label(parcours.abonnement, 'Abonnement demandé :')}}
+                                {{ form_widget(parcours.abonnement, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-warning">Enregistrer</button>
+                            {{ form_end(parcours) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>

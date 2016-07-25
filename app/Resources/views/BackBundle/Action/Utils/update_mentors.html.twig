@@ -3,6 +3,7 @@
 {% block title %} - Mentors{% endblock %}
 
 {% block admin_body %}
+
     {% for message in app.session.flashbag.get('success') %}
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -10,62 +11,69 @@
             {{ message }}
         </div>
     {% endfor %}
+
     <div class="row">
         <div class="col-xs-12 col-md-offset-4 col-md-4">
             <div class="box box-primary">
                 <div class="box-body box-profile">
                     <h3 class="profile-username text-center">Modifier un mentor</h3>
-                    {{ form_start(mentor) }}
-                    <div class="input-group">
-                        {{ form_errors(mentor.firstname) }}
-                        {{ form_label(mentor.firstname, 'Prénom')}}
-                        {{ form_widget(mentor.firstname, {'attr': {'class': 'form-control'}}) }}
+                    <br />
+                    <hr />
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            {{ form_start(mentor) }}
+                            <div class="form-group">
+                                {{ form_errors(mentor.firstname) }}
+                                {{ form_label(mentor.firstname, 'Prénom')}}
+                                {{ form_widget(mentor.firstname, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_errors(mentor.lastname) }}
+                                {{ form_label(mentor.lastname, 'Nom')}}
+                                {{ form_widget(mentor.lastname, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_errors(mentor.email) }}
+                                {{ form_label(mentor.email, 'Adresse email')}}
+                                {{ form_widget(mentor.email, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_errors(mentor.address) }}
+                                {{ form_label(mentor.address, 'Addresse')}}
+                                {{ form_widget(mentor.address, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_errors(mentor.zipcode) }}
+                                {{ form_label(mentor.zipcode, 'Code postal')}}
+                                {{ form_widget(mentor.zipcode, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_errors(mentor.city) }}
+                                {{ form_label(mentor.city, 'Ville')}}
+                                {{ form_widget(mentor.city, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_errors(mentor.phone) }}
+                                {{ form_label(mentor.phone, 'Téléphone')}}
+                                {{ form_widget(mentor.phone, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_errors(mentor.available) }}
+                                {{ form_label(mentor.available, 'Disponible :')}}
+                                {{ form_widget(mentor.available, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_errors(mentor.country) }}
+                                {{ form_label(mentor.country, 'Pays')}}
+                                {{ form_widget(mentor.country, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <input class="btn btn-warning" type="submit" value="Enregistrer le mentor" />
+                            </div>
+                            {{ form_end(mentor) }}
+                        </div>
                     </div>
-                    <div class="input-group">
-                        {{ form_errors(mentor.lastname) }}
-                        {{ form_label(mentor.lastname, 'Nom')}}
-                        {{ form_widget(mentor.lastname, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(mentor.email) }}
-                        {{ form_label(mentor.email, 'Adresse email')}}
-                        {{ form_widget(mentor.email, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(mentor.address) }}
-                        {{ form_label(mentor.address, 'Addresse')}}
-                        {{ form_widget(mentor.address, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(mentor.zipcode) }}
-                        {{ form_label(mentor.zipcode, 'Code postal')}}
-                        {{ form_widget(mentor.zipcode, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(mentor.city) }}
-                        {{ form_label(mentor.city, 'Ville')}}
-                        {{ form_widget(mentor.city, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(mentor.phone) }}
-                        {{ form_label(mentor.phone, 'Téléphone')}}
-                        {{ form_widget(mentor.phone, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(mentor.available) }}
-                        {{ form_label(mentor.available, 'Disponible :')}}
-                        {{ form_widget(mentor.available, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="input-group">
-                        {{ form_errors(mentor.country) }}
-                        {{ form_label(mentor.country, 'Pays')}}
-                        {{ form_widget(mentor.country, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <br>
-                    <div class="text-center">
-                        <input class="btn btn-warning" type="submit" value="Enregistrer le mentor" />
-                    </div>
-                    {{ form_end(mentor) }}
                 </div>
             </div>
         </div>
