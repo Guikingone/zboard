@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: Guillaume
  * Date: 25/07/2016
- * Time: 17:03
+ * Time: 17:03.
  */
 
 namespace CoreBundle\DataFixtures\ORM;
-
 
 use BackendBundle\Entity\Cours;
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -44,5 +43,4 @@ class LoadCoursData implements FixtureInterface, ContainerAwareInterface, Ordere
     {
         return 11;
     }
-
 }

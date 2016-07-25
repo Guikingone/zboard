@@ -3,18 +3,22 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Ajouter un projet</h4>
+                <h4 class="modal-title text-center" id="myModalLabel">Ajouter un projet</h4>
             </div>
             <div class="modal-body">
-                {{ form_start(projet) }}
-                <div class="input-group">
-                    {{ form_errors(projet.libelle) }}
-                    {{ form_label(projet.libelle, 'Nom du projet :')}}
-                    {{ form_widget(projet.libelle, {'attr': {'class': 'form-control'}}) }}
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        {{ form_start(projet) }}
+                        <div class="form-group">
+                            {{ form_errors(projet.libelle) }}
+                            {{ form_label(projet.libelle, 'Nom du projet :')}}
+                            {{ form_widget(projet.libelle, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-warning">Enregistrer</button>
+                        {{ form_end(projet) }}
+                    </div>
                 </div>
-                <br>
-                <button type="submit" class="btn btn-warning">Enregistrer</button>
-                {{ form_end(projet) }}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>

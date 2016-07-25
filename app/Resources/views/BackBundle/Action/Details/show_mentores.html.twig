@@ -3,6 +3,7 @@
 {% block title %} - {{ mentore.lastname }} {{ mentore.firstname }}{% endblock %}
 
 {% block body %}
+
     {% for message in app.session.flashbag.get('success') %}
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -10,6 +11,7 @@
             {{ message }}
         </div>
     {% endfor %}
+
     <div class="content-wrapper">
         <section class="content">
                 <div class="row">
@@ -89,6 +91,9 @@
                                                 <tr>
                                                     <th>Intitulé du cours</th>
                                                     <th>Status</th>
+                                                    {% if is_granted('ROLE_MENTOR') %}
+                                                        <th>Modifier</th>
+                                                    {% endif %}
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -106,6 +111,11 @@
                                                                 <span class="label label-success">{{ cours.status }}</span>
                                                             {% endif %}
                                                         </td>
+                                                        {% if is_granted('ROLE_MENTOR') %}
+                                                            <td>
+                                                                <a href="{{ path('update_status_courses', {'id': cours.id}) }}"><span class="ion ion-wrench"></span></a>
+                                                            </td>
+                                                        {% endif %}
                                                     </tr>
                                                 {% endfor %}
                                                 </tbody>
@@ -122,6 +132,9 @@
                                                 <tr>
                                                     <th>Intitulé du projet</th>
                                                     <th>Status</th>
+                                                    {% if is_granted('ROLE_MENTOR') %}
+                                                        <th>Modifier</th>
+                                                    {% endif %}
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -143,6 +156,11 @@
                                                                 <span class="label label-danger">{{ projets.status }}</span>
                                                             {% endif %}
                                                         </td>
+                                                        {% if is_granted('ROLE_MENTOR') %}
+                                                            <td>
+                                                                <a href="{{ path('update_status_project', {'id': projets.id}) }}"><span class="ion ion-wrench"></span></a>
+                                                            </td>
+                                                        {% endif %}
                                                     </tr>
                                                 {% endfor %}
                                                 </tbody>
@@ -179,14 +197,17 @@
                                         {% for sessions in mentore.sessions %}
                                             <li class="time-label">
                                 <span class="bg-red">
-                                    {{ sessions.dateSession|date('d-M-y') }}
+                                    {{ sessions.dateSession|date('d-m-Y') }}
                                 </span>
                                             </li>
                                             <li>
                                                 <i class="ion ion-clock bg-yellow"></i>
                                                 <div class="timeline-item">
                                                     <h3 class="timeline-header">
-                                                        {{ sessions.mentor.firstname }} {{ sessions.mentor.lastname }} a planifier une session
+                                                        <a href="{{ path('show_details_mentor', {'id': sessions.mentor.id}) }}">
+                                                            {{ sessions.mentor.firstname }} {{ sessions.mentor.lastname }}
+                                                        </a>
+                                                        a planifier une session
                                                     </h3>
                                                     <div class="timeline-body">
                                                         <strong>
@@ -197,7 +218,7 @@
                                                     <div class="timeline-footer">
                                                         {% if sessions.status == 'Planifiee' %}
                                                             Statut : <span class="label label-warning">{{ sessions.status }}</span>
-                                                        {% elseif sessions.status == 'Présent' %}
+                                                        {% elseif sessions.status == 'Present' %}
                                                             Statut : <span class="label label-success">{{ sessions.status }}</span>
                                                         {% elseif sessions.status == 'Absent' %}
                                                             Statut : <span class="label label-danger">{{ sessions.status }}</span>
@@ -222,5 +243,7 @@
     {% include ':Form:register_notes.html.twig' %}
 
     {% include ':Form:register_sessions.html.twig' %}
+
+    {% include ':MentoratBundle/Form:update_cours.html.twig' %}
 
 {% endblock %}

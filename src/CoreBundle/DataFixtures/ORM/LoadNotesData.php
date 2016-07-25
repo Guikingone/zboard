@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: Guillaume
  * Date: 25/07/2016
- * Time: 17:03
+ * Time: 17:03.
  */
 
 namespace CoreBundle\DataFixtures\ORM;
-
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -48,5 +47,4 @@ class LoadNotesData implements FixtureInterface, ContainerAwareInterface, Ordere
     {
         return 9;
     }
-
 }

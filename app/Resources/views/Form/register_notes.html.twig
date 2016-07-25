@@ -3,20 +3,24 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Ajouter une note de suivi</h4>
+                <h4 class="modal-title text-center" id="myModalLabel">Ajouter une note de suivi</h4>
             </div>
             <div class="modal-body">
-                {{ form_start(note) }}
-                <div class="input-group">
-                    {{ form_errors(note.libelle) }}
-                    {{ form_label(note.libelle, 'Contenu de la note') }}
-                    {{ form_widget(note.libelle, {'attr': {'class': 'form-control'}}) }}
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        {{ form_start(note) }}
+                        <div class="form-group">
+                            {{ form_errors(note.libelle) }}
+                            {{ form_label(note.libelle, 'Contenu de la note') }}
+                            {{ form_widget(note.libelle, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <br />
+                        <button type="submit" class="btn btn-warning">
+                            Enregistrer
+                        </button>
+                        {{ form_end(note) }}
+                    </div>
                 </div>
-                <br />
-                <button type="submit" class="btn btn-warning">
-                    Enregistrer
-                </button>
-                {{ form_end(note) }}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>

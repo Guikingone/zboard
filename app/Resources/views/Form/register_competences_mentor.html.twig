@@ -4,20 +4,24 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Ajouter une compétences</h4>
+                <h4 class="modal-title" id="myModalLabel">Ajouter une compétence</h4>
             </div>
             <div class="modal-body">
-                {{ form_start(competencesM) }}
-                <div class="input-group">
-                    {{ form_errors(competencesM.libelle) }}
-                    {{ form_label(competencesM.libelle, 'Compétences :') }}
-                    {{ form_widget(competencesM.libelle, {'attr': {'class': 'form-control'}}) }}
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        {{ form_start(competencesM) }}
+                        <div class="form-group">
+                            {{ form_errors(competencesM.libelle) }}
+                            {{ form_label(competencesM.libelle, 'Compétence :') }}
+                            {{ form_widget(competencesM.libelle, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <br />
+                        <button type="submit" class="btn btn-warning">
+                            Enregistrer
+                        </button>
+                        {{ form_end(competencesM) }}
+                    </div>
                 </div>
-                <br />
-                <button type="submit" class="btn btn-warning">
-                    Enregistrer
-                </button>
-                {{ form_end(competencesM) }}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>

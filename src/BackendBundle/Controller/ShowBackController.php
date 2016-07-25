@@ -60,7 +60,7 @@ class ShowBackController extends Controller
         $path = $this->get('core.back')->getParcours();
 
         return array('parcours' => $parcours->createView(), 'path' => $path,
-                     'abonnement' => $abonnement->createView());
+                     'abonnement' => $abonnement->createView(), );
     }
 
     /**

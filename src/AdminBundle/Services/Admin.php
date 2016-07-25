@@ -5,8 +5,10 @@ namespace AdminBundle\Services;
 use BackendBundle\Entity\Abonnement;
 use BackendBundle\Entity\Cours;
 use BackendBundle\Form\CoursType;
+use BackendBundle\Form\ProjetUpdateType;
 use BackendBundle\Form\TypeAdd\AbonnementTypeAdd;
 use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
+use BackendBundle\Form\UpdateAdd\CoursUpdateType;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Mentore;
 use MentoratBundle\Entity\Notes;
@@ -520,6 +522,7 @@ class Admin
      *
      * @param Request $request
      * @param $id
+     *
      * @return \Symfony\Component\Form\FormInterface
      */
     public function updateParcours(Request $request, $id)
@@ -546,6 +549,7 @@ class Admin
      *
      * @param Request $request
      * @param $id
+     *
      * @return \Symfony\Component\Form\FormInterface
      */
     public function updateSoutenances(Request $request, $id)
@@ -562,6 +566,52 @@ class Admin
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La soutenance a bien été mise à jour.');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to update the status of a courses.
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function updateStatusCourses(Request $request, $id)
+    {
+        $cours = $this->doctrine->getRepository('BackendBundle:Cours')->findOneBy(array('id' => $id));
+
+        $form = $this->form->create(CoursUpdateType::class, $cours);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Le cours a bien été mis à jour.');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to update the status of a courses.
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function updateStatusProject(Request $request, $id)
+    {
+        $projet = $this->doctrine->getRepository('BackendBundle:Projet')->findOneBy(array('id' => $id));
+
+        $form = $this->form->create(ProjetUpdateType::class, $projet);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Le projet a bien été mis à jour.');
         }
 
         return $form;
