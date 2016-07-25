@@ -6,6 +6,7 @@ use BackendBundle\Entity\Abonnement;
 use BackendBundle\Entity\Cours;
 use BackendBundle\Form\CoursType;
 use BackendBundle\Form\TypeAdd\AbonnementTypeAdd;
+use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Mentore;
 use MentoratBundle\Entity\Notes;
@@ -514,6 +515,39 @@ class Admin
         return $form;
     }
 
+    /**
+     * Allow to update the path using is $id.
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function updateParcours(Request $request, $id)
+    {
+        $parcours = $this->doctrine->getRepository('BackendBundle:Parcours')->findOneBy(array('id' => $id));
+
+        if (null === $parcours) {
+            throw new NotFoundHttpException('Le parcours ne semble pas exister.');
+        }
+
+        $form = $this->form->create(ParcoursTypeAdd::class, $parcours);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Le parcours a bien été mis à jour.');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to update the soutenance using is $id.
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\Form\FormInterface
+     */
     public function updateSoutenances(Request $request, $id)
     {
         $soutenances = $this->doctrine->getRepository('MentoratBundle:Soutenance')->findOneBy(array('id' => $id));

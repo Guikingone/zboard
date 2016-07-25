@@ -22,7 +22,7 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
     public function load(ObjectManager $manager)
     {
         $parcours = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
-                         ->findOneBy(array('libelle' => 'Chef de Projet Multimédia - Développement'));
+                         ->findOneBy(array('id' => 1));
 
         $parcoursC = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
             ->findOneBy(array('libelle' => 'Développeur PHP/Symfony'));
@@ -80,6 +80,6 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 3;
+        return 4;
     }
 }

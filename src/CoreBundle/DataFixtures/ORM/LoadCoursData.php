@@ -2,20 +2,21 @@
 /**
  * Created by PhpStorm.
  * User: Guillaume
- * Date: 20/07/2016
- * Time: 19:15.
+ * Date: 25/07/2016
+ * Time: 17:03
  */
 
 namespace CoreBundle\DataFixtures\ORM;
 
-use BackendBundle\Entity\Projet;
+
+use BackendBundle\Entity\Cours;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-class LoadProjetsData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
+class LoadCoursData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     private $privateContainer;
 
@@ -27,21 +28,21 @@ class LoadProjetsData implements FixtureInterface, ContainerAwareInterface, Orde
     public function load(ObjectManager $manager)
     {
         $parcours = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
-            ->findOneBy(array('libelle' => 'Chef de Projet Multimédia - Développement'));
+                                        ->findOneBy(array('libelle' => 'Chef de Projet Multimédia - Développement'));
 
-        $projet = new Projet();
+        $cours = new Cours();
 
-        $projet->setParcours($parcours);
-        $projet->setLibelle('[PROJET] Développez un back-end pour un client');
+        $cours->setParcours($parcours);
+        $cours->setLibelle('Comprendre le web');
+        $cours->setStatus(null);
 
-        $manager->persist($projet);
+        $manager->persist($cours);
         $manager->flush();
     }
 
     public function getOrder()
     {
-        // the order in which fixtures will be loaded
-        // the lower the number, the sooner that this fixture is loaded
-        return 6;
+        return 11;
     }
+
 }

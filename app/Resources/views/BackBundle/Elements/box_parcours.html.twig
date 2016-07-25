@@ -22,7 +22,7 @@
                     </td>
                     {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
                         <td>
-                            <a href="#"><span class="ion ion-wrench"></span></a>
+                            <a href="{{ path('update_parcours', {'id': path.id}) }}"><span class="ion ion-wrench"></span></a>
                         </td>
                         <td>
                             <a href="#"><span class="ion ion-folder"></span></a>

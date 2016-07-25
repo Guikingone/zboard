@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Sessions.
  *
- * @ORM\Table(name="zboard_sessions")
+ * @ORM\Table(name="zboard_suivi_sessions")
  * @ORM\Entity(repositoryClass="MentoratBundle\Repository\SessionsRepository")
  */
 class Sessions

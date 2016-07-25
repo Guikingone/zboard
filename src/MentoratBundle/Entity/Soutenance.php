@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Soutenance.
  *
- * @ORM\Table(name="zboard_soutenance")
+ * @ORM\Table(name="zboard_suivi_soutenance")
  * @ORM\Entity(repositoryClass="MentoratBundle\Repository\SoutenanceRepository")
  */
 class Soutenance

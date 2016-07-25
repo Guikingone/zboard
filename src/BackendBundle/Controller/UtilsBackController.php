@@ -15,6 +15,22 @@ class UtilsBackController extends Controller
      *
      * @return array
      *
+     * @Route("/utils/{id}/mentors", name="update_mentors")
+     * @Template("BackBundle/Action/Utils/update_mentors.html.twig")
+     */
+    public function updateMentorsAction(Request $request, $id)
+    {
+        $mentor = $this->get('core.admin')->updateMentors($request, $id);
+
+        return array('mentor' => $mentor->createView());
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return array
+     *
      * @Route("/utils/{id}/mentores", name="update_mentores")
      * @Template("BackBundle/Action/Utils/update_mentores.html.twig")
      */
@@ -31,14 +47,14 @@ class UtilsBackController extends Controller
      *
      * @return array
      *
-     * @Route("/utils/{id}/mentors", name="update_mentors")
-     * @Template("BackBundle/Action/Utils/update_mentors.html.twig")
+     * @Route("/utils/{id}/path", name="update_parcours")
+     * @Template("BackBundle/Action/Utils/update_parcours.html.twig")
      */
-    public function updateMentorsAction(Request $request, $id)
+    public function updateParcoursAction(Request $request, $id)
     {
-        $mentor = $this->get('core.admin')->updateMentors($request, $id);
+        $parcours = $this->get('core.admin')->updateParcours($request, $id);
 
-        return array('mentor' => $mentor->createView());
+        return array('parcours' => $parcours->createView());
     }
 
     /**
