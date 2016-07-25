@@ -15,19 +15,22 @@ class indexAdminController extends Controller
     public function indexAction()
     {
         $mentors = $this->get('core.admin')->getMentors();
-        $mentoresPPlus = $this->get('core.admin')->getMentoresPlus();
+        $mentoresPlus = $this->get('core.admin')->getMentoresPlus();
         $mentoresPClass = $this->get('core.admin')->getMentoreClass();
         $parcoursPlus = $this->get('core.admin')->getParcoursPlus();
         $parcoursClass = $this->get('core.admin')->getParcoursClass();
         $projets = $this->get('core.admin')->getProjets();
+        $projetsF = $this->get('core.admin')->getProjetsFinished();
         $soutenances = $this->get('core.admin')->getSoutenances();
         $mentorsW = $this->get('core.admin')->getMentoresWaiting();
         $notes = $this->get('core.admin')->getNotesSuivi();
         $sessionsC = $this->get('core.admin')->getSessionsCancelled();
 
-        return array('mentors' => $mentors, 'mentoresPPlus' => $mentoresPPlus,
+        return array('mentors' => $mentors, 'mentoresPlus' => $mentoresPlus,
                      'mentoresPClass' => $mentoresPClass, 'parcoursPlus' => $parcoursPlus,
-                     'parcoursClass' => $parcoursClass, 'projets' => $projets, 'soutenances' => $soutenances,
-                     'mentoresW' => $mentorsW, 'notes' => $notes, 'sessionsC' => $sessionsC, );
+                     'parcoursClass' => $parcoursClass, 'projetsF' => $projetsF,
+                     'projets' => $projets, 'soutenances' => $soutenances,
+                     'mentoresW' => $mentorsW, 'notes' => $notes,
+                     'sessionsC' => $sessionsC, );
     }
 }

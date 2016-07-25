@@ -3,6 +3,7 @@
 namespace BackendBundle\Services;
 
 use BackendBundle\Entity\Competences;
+use BackendBundle\Entity\InformationMentorat;
 use BackendBundle\Form\TypeAdd\CompetencesTypeAdd;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Soutenance;
@@ -15,10 +16,7 @@ use MentoratBundle\Entity\Mentore;
 use BackendBundle\Entity\Projet;
 use BackendBundle\Form\TypeAdd\ProjetTypeAdd;
 use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
-use MentoratBundle\Form\MentoreType;
 use MentoratBundle\Form\InformationType;
-use UserBundle\Entity\User;
-use UserBundle\Form\RegistrationType;
 
 class Back
 {
@@ -123,54 +121,6 @@ class Back
             $this->doctrine->persist($information);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Information ajouté.');
-        }
-
-        return $form;
-    }
-
-    /**
-     * Allow to create a new instance of Mentore.
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addMentore(Request $request)
-    {
-        $mentore = new Mentore();
-        $form = $this->formFactory->create(MentoreType::class, $mentore);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $this->doctrine->persist($mentore);
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'Elève enregistré.');
-        }
-
-        return $form;
-    }
-
-    /**
-     * Allow to create a new instance of Mentor, in order to be fast and effective, the registration of a new mentor
-     * doesn't require that the back enter a Username or a Password, this tasks are handled by the system.
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addMentor(Request $request)
-    {
-        $mentor = new User();
-        $form = $this->formFactory->create(RegistrationType::class, $mentor);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $mentor->setUsername($mentor->getFirstName().'_'.$mentor->getLastName());
-            $mentor->setPlainPassword(strtolower($mentor->getFirstName().'_'.$mentor->getLastName()));
-            $mentor->setRoles(array('ROLE_MENTOR'));
-            $this->doctrine->persist($mentor);
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
         }
 
         return $form;

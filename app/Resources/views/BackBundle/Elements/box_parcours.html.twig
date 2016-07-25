@@ -5,7 +5,10 @@
             <tr>
                 <th>Nom du parcours</th>
                 <th>Niveau diplôme</th>
-                <th>Outils</th>
+                {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                    <th>Modifier</th>
+                    <th>Archiver</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -17,18 +20,14 @@
                     <td>
                         {{ path.diplome }}
                     </td>
-                    <td>
-                        <button class="btn btn-info">
-                            <a href="#">
-                                Modifier
-                            </a>
-                        </button>
-                        <button class="btn btn-info">
-                            <a href="#">
-                                Archiver
-                            </a>
-                        </button>
-                    </td>
+                    {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                        <td>
+                            <a href="#"><span class="ion ion-wrench"></span></a>
+                        </td>
+                        <td>
+                            <a href="#"><span class="ion ion-folder"></span></a>
+                        </td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>

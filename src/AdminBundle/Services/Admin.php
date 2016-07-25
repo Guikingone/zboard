@@ -14,6 +14,7 @@ use MentoratBundle\Entity\Suivi;
 use MentoratBundle\Form\MentoreType;
 use MentoratBundle\Form\SessionsType;
 use MentoratBundle\Form\TypeAdd\NoteTypeAdd;
+use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -100,7 +101,7 @@ class Admin
      */
     public function getMentoresPlus()
     {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getMentoresPlus();
+        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getMentoresPPlus();
     }
 
     /**
@@ -110,7 +111,7 @@ class Admin
      */
     public function getMentoreClass()
     {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getMentoresClass();
+        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getMentorePClass();
     }
 
     /**
@@ -175,6 +176,13 @@ class Admin
         return $this->doctrine->getRepository('BackendBundle:Parcours')->getParcoursClass();
     }
 
+    /**
+     * Allow to get the courses linked to a path.
+     *
+     * @param $id
+     *
+     * @return array
+     */
     public function getCours($id)
     {
         return $this->doctrine->getRepository('BackendBundle:Cours')->getCoursByParcours($id);
@@ -200,6 +208,16 @@ class Admin
     public function getProjets()
     {
         return $this->doctrine->getRepository('BackendBundle:Projet')->findAll();
+    }
+
+    /**
+     * Allow to get all the project finished.
+     *
+     * @return array
+     */
+    public function getProjetsFinished()
+    {
+        return $this->doctrine->getRepository('BackendBundle:Projet')->getProjetTermine();
     }
 
     /**
@@ -443,6 +461,33 @@ class Admin
     }
 
     /**
+     * Allow to update the informations about a teacher.
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function updateMentors(Request $request, $id)
+    {
+        $mentor = $this->doctrine->getRepository('UserBundle:User')->find($id);
+
+        if (null === $mentor) {
+            throw new NotFoundHttpException('Le mentor ne semble pas exister');
+        }
+
+        $form = $this->form->create(RegistrationType::class, $mentor);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Le mentor a bien été mis à jour');
+        }
+
+        return $form;
+    }
+
+    /**
      * Allow to update the informations about a student.
      *
      * @param Request $request
@@ -469,28 +514,20 @@ class Admin
         return $form;
     }
 
-    /**
-     * Allow to update the informations about a teacher.
-     *
-     * @param Request $request
-     * @param $id
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function updateMentors(Request $request, $id)
+    public function updateSoutenances(Request $request, $id)
     {
-        $mentor = $this->doctrine->getRepository('UserBundle:User')->find($id);
+        $soutenances = $this->doctrine->getRepository('MentoratBundle:Soutenance')->findOneBy(array('id' => $id));
 
-        if (null === $mentor) {
-            throw new NotFoundHttpException('Le mentor ne semble pas exister');
+        if (null === $soutenances) {
+            throw new NotFoundHttpException('Il semble que la soutenance n\'existe pas');
         }
 
-        $form = $this->form->create(RegistrationType::class, $mentor);
+        $form = $this->form->create(SoutenanceTypeAdd::class, $soutenances);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'Le mentor a bien été mis à jour');
+            $this->session->getFlashBag()->add('success', 'La soutenance a bien été mise à jour.');
         }
 
         return $form;

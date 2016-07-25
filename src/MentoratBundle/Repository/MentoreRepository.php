@@ -10,6 +10,36 @@ namespace MentoratBundle\Repository;
  */
 class MentoreRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getMentoresPPlus()
+    {
+        return $this->createQueryBuilder('mp')
+                    ->innerJoin('mp.suivi', 's')
+                        ->addSelect('s')
+                    ->leftJoin('s.parcours', 'p')
+                        ->addSelect('p')
+                    ->leftJoin('p.abonnement', 'a')
+                        ->addSelect('a')
+                    ->where('a.libelle = :abonnement')
+                        ->setParameter('abonnement', $abonnement = 'Premium Plus')
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    public function getMentorePClass()
+    {
+        return $this->createQueryBuilder('mp')
+            ->innerJoin('mp.suivi', 's')
+            ->addSelect('s')
+            ->leftJoin('s.parcours', 'p')
+            ->addSelect('p')
+            ->leftJoin('p.abonnement', 'a')
+            ->addSelect('a')
+            ->where('a.libelle = :abonnement')
+            ->setParameter('abonnement', $abonnement = 'Premium Class')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function getNewMentores($days)
     {
         return $this->createQueryBuilder('m')

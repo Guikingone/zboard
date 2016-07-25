@@ -5,9 +5,12 @@
             <tr>
                 <th>Nom de l'élève</th>
                 <th>Nom du mentor</th>
-                <th>Date de passage</th>
+                <th>Date de création</th>
                 <th>Projet</th>
                 <th>Statut</th>
+                {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                    <th>Modifier</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -36,6 +39,11 @@
                             <span class="label label-danger">{{ soutenances.status }}</span>
                         {% endif %}
                     </td>
+                    {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                        <td>
+                            <a href="{{ path('update_soutenances', {'id': soutenances.id}) }}"><span class="ion ion-wrench"></span></a>
+                        </td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>

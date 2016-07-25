@@ -19,12 +19,13 @@ class IndexBackController extends Controller
         $soutenances = $this->get('core.back')->getSoutenances();
         $parcours = $this->get('core.back')->getParcours();
         $notes = $this->get('core.admin')->getNotesSuivi();
+        $projets = $this->get('core.admin')->getProjetsFinished();
         $sessions = $this->get('core.admin')->getSessionsCancelled();
         $mentoresWaiting = $this->get('core.admin')->getMentoresWaiting();
 
         return array('mentors' => $mentors, 'mentores' => $mentores,
                      'soutenances' => $soutenances, 'parcours' => $parcours,
                      'notes' => $notes, 'sessions' => $sessions,
-                     'mentoresWaiting' => $mentoresWaiting, );
+                     'mentoresWaiting' => $mentoresWaiting, 'projets' => $projets, );
     }
 }

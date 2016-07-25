@@ -40,4 +40,20 @@ class UtilsBackController extends Controller
 
         return array('mentor' => $mentor->createView());
     }
+
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return array
+     *
+     * @Route("/utils/{id}/soutenance", name="update_soutenances")
+     * @Template("BackBundle/Action/Utils/update_soutenances.html.twig")
+     */
+    public function updateSoutenancesAction(Request $request, $id)
+    {
+        $soutenance = $this->get('core.admin')->updateSoutenances($request, $id);
+
+        return array('soutenance' => $soutenance->createView());
+    }
 }
