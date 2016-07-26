@@ -33,8 +33,6 @@
                                     <p class="pull-right"></p>
                                 </li>
                             </ul>
-                            <a href="#" data-toggle="modal" data-target="#myModalCours" class="btn btn-warning btn-block"><b>Ajouter un cours</b></a>
-                            <a href="#" data-toggle="modal" data-target="#myModalProjet" class="btn btn-warning btn-block"><b>Ajouter un projet</b></a>
                         </div>
                     </div>
                     <div class="box box-primary">
@@ -63,10 +61,10 @@
                                             </td>
                                             {% if is_granted('ROLE_ADMIN') %}
                                                 <td>
-                                                    <a href="{{ path('update_status_courses', {'id': coursP.id}) }}"><span class="ion ion-wrench"></span></a>
+                                                    <a href="{{ path('update_courses', {'id': coursP.id}) }}"><span class="ion ion-wrench"></span></a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ path('update_status_courses', {'id': coursP.id}) }}"><span class="ion ion-trash-b"></span></a>
+                                                    <a href="#"><span class="ion ion-trash-b"></span></a>
                                                 </td>
                                             {% endif %}
                                         </tr>
@@ -74,6 +72,8 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <hr />
+                            <a href="#" data-toggle="modal" data-target="#myModalCours" class="btn btn-warning btn-block"><b>Ajouter un cours</b></a>
                         </div>
                     </div>
                     <div class="box box-primary">
@@ -85,6 +85,7 @@
                                     <tr>
                                         <th>Intitulé du projets</th>
                                         <th>Durée</th>
+                                        <th>Compétences</th>
                                         {% if is_granted('ROLE_ADMIN') %}
                                             <th>Modifier</th>
                                             <th>Supprimer</th>
@@ -100,12 +101,19 @@
                                             <td>
                                                 {{ projets.duree }}
                                             </td>
+                                            <td>
+                                                <ul>
+                                                {% for competences in projets.competences %}
+                                                    <li> <a href="{{ path('update_competences', {'id': competences.id}) }}">{{ competences.libelle }}</a></li>
+                                                {% endfor %}
+                                                </ul>
+                                            </td>
                                             {% if is_granted('ROLE_ADMIN') %}
                                                 <td>
-                                                    <a href="{{ path('update_status_courses', {'id': projets.id}) }}"><span class="ion ion-wrench"></span></a>
+                                                    <a href="{{ path('update_project', {'id': projets.id}) }}"><span class="ion ion-wrench"></span></a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ path('update_status_courses', {'id': projets.id}) }}"><span class="ion ion-trash-b"></span></a>
+                                                    <a href="#"><span class="ion ion-trash-b"></span></a>
                                                 </td>
                                             {% endif %}
                                         </tr>
@@ -113,6 +121,9 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <hr />
+                            <a href="#" data-toggle="modal" data-target="#myModalProjet" class="btn btn-warning btn-block"><b>Ajouter un projet</b></a>
+                            <a href="#" data-toggle="modal" data-target="#myModalCompetences" class="btn btn-warning btn-block"><b>Ajouter des compétences</b></a>
                         </div>
                     </div>
                 </div>

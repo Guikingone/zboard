@@ -4,11 +4,14 @@ namespace AdminBundle\Services;
 
 use BackendBundle\Entity\Abonnement;
 use BackendBundle\Entity\Cours;
+use BackendBundle\Form\_UpdateType\UpdateCompetencesType;
+use BackendBundle\Form\_UpdateType\UpdateProjetType;
 use BackendBundle\Form\CoursType;
-use BackendBundle\Form\ProjetUpdateType;
+use BackendBundle\Form\UpdateAdd\ProjetUpdateType;
 use BackendBundle\Form\TypeAdd\AbonnementTypeAdd;
 use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
 use BackendBundle\Form\UpdateAdd\CoursUpdateType;
+use BackendBundle\Form\_UpdateType\UpdateCoursType;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Mentore;
 use MentoratBundle\Entity\Sessions;
@@ -378,6 +381,71 @@ class Admin
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le parcours a bien été mis à jour.');
+        }
+
+        return $form;
+    }
+
+    public function updateCours(Request $request, $id)
+    {
+        $cours = $this->doctrine->getRepository('BackendBundle:Cours')->findOneBy(array('id' => $id));
+
+        if (null === $cours) {
+            throw new NotFoundHttpException('Le cours ne semble pas exister.');
+        }
+
+        $form = $this->form->create(UpdateCoursType::class, $cours);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Le cours a bien été mise à jour.');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to update a project using is $id.
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function updateProjet(Request $request, $id)
+    {
+        $projet = $this->doctrine->getRepository('BackendBundle:Projet')->findOneBy(array('id' => $id));
+
+        if (null === $projet) {
+            throw new NotFoundHttpException('Le projet ne semble pas exister.');
+        }
+
+        $form = $this->form->create(UpdateProjetType::class, $projet);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Le projet a bien été mis à jour.');
+        }
+
+        return $form;
+    }
+
+    public function updateCompetencesProjet(Request $request, $id)
+    {
+        $competences = $this->doctrine->getRepository('BackendBundle:Competences')->findOneBy(array('id' => $id));
+
+        if (null === $competences) {
+            throw new NotFoundHttpException('La competences ne semble pas exister');
+        }
+
+        $form = $this->form->create(UpdateCompetencesType::class, $competences);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'La compétence a bien été mise à jour');
         }
 
         return $form;

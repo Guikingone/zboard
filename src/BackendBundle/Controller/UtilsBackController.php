@@ -26,7 +26,10 @@ class UtilsBackController extends Controller
             return $this->redirectToRoute('show_details_mentor', array('id' => $id));
         }
 
-        return array('mentor' => $mentor->createView());
+        return array(
+            'controller' => 'users',
+            'mentor' => $mentor->createView()
+        );
     }
 
     /**
@@ -46,7 +49,10 @@ class UtilsBackController extends Controller
             return $this->redirectToRoute('show_details_mentore', array('id' => $id));
         }
 
-        return array('mentore' => $mentore->createView());
+        return array(
+            'controller' => 'mentore',
+            'mentore' => $mentore->createView()
+        );
     }
 
     /**
@@ -66,7 +72,79 @@ class UtilsBackController extends Controller
             return $this->redirectToRoute('show_parcours', array('id' => $id));
         }
 
-        return array('parcours' => $parcours->createView());
+        return array(
+            'controller' => 'parcours',
+            'parcours' => $parcours->createView()
+        );
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @Route("/utils/{id}/courses", name="update_courses")
+     * @Template("BackBundle/Action/Utils/update_courses.html.twig")
+     */
+    public function updateCoursAction(Request $request, $id)
+    {
+        $cours = $this->get('core.admin')->updateCours($request, $id);
+
+        if ($cours->isValid()) {
+            return $this->redirectToRoute('gestion_parcours');
+        }
+
+        return array(
+            'controller' => 'cours',
+            'cours' => $cours->createView()
+        );
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @Route("/utils/{id}/project", name="update_project")
+     * @Template("BackBundle/Action/Utils/update_projet.html.twig")
+     */
+    public function updateProjetAction(Request $request, $id)
+    {
+        $projet = $this->get('core.admin')->updateProjet($request, $id);
+
+        if ($projet->isValid()) {
+            return $this->redirectToRoute('gestion_parcours');
+        }
+
+        return array(
+            'controller' => 'projet',
+            'projet' => $projet->createView()
+        );
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @Route("/utils/{id}/competence", name="update_competences")
+     * @Template("BackBundle/Action/Utils/update_competences.html.twig")
+     */
+    public function updateCompetencesAction(Request $request, $id)
+    {
+        $competence = $this->get('core.admin')->updateCompetencesProjet($request, $id);
+
+        if ($competence->isValid()) {
+            return $this->redirectToRoute('gestion_parcours');
+        }
+
+        return array(
+            'controller' => 'competences',
+            'competence' => $competence->createView()
+        );
     }
 
     /**
@@ -86,6 +164,9 @@ class UtilsBackController extends Controller
             return $this->redirectToRoute('gestion_soutenances');
         }
 
-        return array('soutenance' => $soutenance->createView());
+        return array(
+            'controller' => 'soutenance',
+            'soutenance' => $soutenance->createView()
+        );
     }
 }
