@@ -22,6 +22,10 @@ class UtilsBackController extends Controller
     {
         $mentor = $this->get('core.admin')->updateMentors($request, $id);
 
+        if ($mentor->isValid()) {
+            return $this->redirectToRoute('show_details_mentor', array('id' => $id));
+        }
+
         return array('mentor' => $mentor->createView());
     }
 
@@ -37,6 +41,10 @@ class UtilsBackController extends Controller
     public function updateMentoresAction(Request $request, $id)
     {
         $mentore = $this->get('core.admin')->updateMentores($request, $id);
+
+        if ($mentore->isValid()) {
+            return $this->redirectToRoute('show_details_mentore', array('id' => $id));
+        }
 
         return array('mentore' => $mentore->createView());
     }
@@ -54,6 +62,10 @@ class UtilsBackController extends Controller
     {
         $parcours = $this->get('core.admin')->updateParcours($request, $id);
 
+        if ($parcours->isValid()) {
+            return $this->redirectToRoute('show_parcours', array('id' => $id));
+        }
+
         return array('parcours' => $parcours->createView());
     }
 
@@ -69,6 +81,10 @@ class UtilsBackController extends Controller
     public function updateSoutenancesAction(Request $request, $id)
     {
         $soutenance = $this->get('core.admin')->updateSoutenances($request, $id);
+
+        if ($soutenance->isValid()) {
+            return $this->redirectToRoute('gestion_soutenances');
+        }
 
         return array('soutenance' => $soutenance->createView());
     }

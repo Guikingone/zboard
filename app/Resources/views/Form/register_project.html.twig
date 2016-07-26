@@ -14,6 +14,11 @@
                             {{ form_label(projet.libelle, 'Nom du projet :')}}
                             {{ form_widget(projet.libelle, {'attr': {'class': 'form-control'}}) }}
                         </div>
+                        <div class="form-group">
+                            {{ form_errors(projet.duree) }}
+                            {{ form_label(projet.duree, 'Durée du projet :')}}
+                            {{ form_widget(projet.duree, {'attr': {'class': 'form-control'}}) }}
+                        </div>
                         <br>
                         <button type="submit" class="btn btn-warning">Enregistrer</button>
                         {{ form_end(projet) }}

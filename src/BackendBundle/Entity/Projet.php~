@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Projet.
  *
- * @ORM\Table(name="zboard_projet")
+ * @ORM\Table(name="zboard_parcours_projet")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\ProjetRepository")
  */
 class Projet
@@ -27,6 +27,12 @@ class Projet
      * @ORM\Column(name="libelle", type="string", length=255)
      */
     private $libelle;
+
+    /**
+     * @var string
+     * @ORM\Column(name="duree", type="string", length=100, nullable=true)
+     */
+    private $duree;
 
     /**
      * @var string

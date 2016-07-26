@@ -5,9 +5,9 @@ namespace BackendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Cours
+ * Cours.
  *
- * @ORM\Table(name="cours")
+ * @ORM\Table(name="zboard_parcours_cours")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\CoursRepository")
  */
 class Cours
@@ -30,6 +30,12 @@ class Cours
 
     /**
      * @var string
+     * @ORM\Column(name="duree", type="string", length=150, nullable=true)
+     */
+    private $duree;
+
+    /**
+     * @var string
      *
      * @ORM\Column(name="status", type="string", length=120, nullable=true)
      */
@@ -39,5 +45,6 @@ class Cours
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours", inversedBy="cours")
      */
     private $parcours;
-    
+
+
 }

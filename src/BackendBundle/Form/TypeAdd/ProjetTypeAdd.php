@@ -17,6 +17,7 @@ class ProjetTypeAdd extends AbstractType
     {
         $builder
             ->add('libelle', TextType::class)
+            ->add('duree', TextType::class)
             ->remove('status')
             ->remove('parcours')
         ;

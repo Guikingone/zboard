@@ -30,6 +30,12 @@ class Projet
 
     /**
      * @var string
+     * @ORM\Column(name="duree", type="string", length=100, nullable=true)
+     */
+    private $duree;
+
+    /**
+     * @var string
      *
      * @ORM\Column(name="status", type="string", length=120, nullable=true)
      */
@@ -86,6 +92,30 @@ class Projet
     public function getLibelle()
     {
         return $this->libelle;
+    }
+
+    /**
+     * Set duree.
+     *
+     * @param string $duree
+     *
+     * @return Projet
+     */
+    public function setDuree($duree)
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    /**
+     * Get duree.
+     *
+     * @return string
+     */
+    public function getDuree()
+    {
+        return $this->duree;
     }
 
     /**
