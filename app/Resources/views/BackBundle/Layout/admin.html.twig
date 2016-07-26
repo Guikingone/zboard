@@ -5,8 +5,8 @@
     <div class="wrapper">
         <header class="main-header">
             <a href="{{ path('home_backend') }}" class="logo">
-                <span class="logo-mini">Zboard</span>
-                <span class="logo-lg">Zboard</span>
+                <span class="logo-mini">ZBoard</span>
+                <span class="logo-lg">ZBoard</span>
             </a>
             <nav class="navbar navbar-static-top">
                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -96,59 +96,49 @@
                 <section class="sidebar">
                     <ul class="sidebar-menu">
                         <li class="header">NAVIGATION PRINCIPALE</li>
-                        <li class="active treeview">
+                        <li class="{{ (controller == "users")? "active" : "" }} treeview">
                             <a href="#">
-                                <i class="fa fa-dashboard"></i> <span>Les Mentors</span>
+                                <i class="fa fa-users"></i> <span>Utilisateurs ZBoard</span>
                                 <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="{{ path('gestion_mentors') }}"><i class="fa fa-circle-o"></i>Gestion des mentors</a></li>
-                            </ul>
-                        </li>
-                        <li class="active treeview">
-                            <a href="#">
-                                <i class="fa fa-dashboard"></i> <span>Les élèves</span>
-                                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-                            </a>
-                            <ul class="treeview-menu">
                                 <li><a href="{{ path('gestion_mentores') }}"><i class="fa fa-circle-o"></i>Gestion des élèves</a></li>
                             </ul>
                         </li>
-                        <li class="active treeview">
+                        <li class="{{ (controller == "soutenances")? "active" : "" }} treeview">
                             <a href="#">
-                                <i class="fa fa-dashboard"></i>
+                                <i class="fa fa-calendar"></i>
                                 <span>Les soutenances</span>
                                 <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="{{ path('gestion_soutenances') }}"><i class="fa fa-circle-o"></i>Gestion des soutenances</a></li>
                             </ul>
                         </li>
-                        <li class="active treeview">
+                        <li class="{{ (controller == "parcours")? "active" : "" }} treeview">
                             <a href="#">
-                                <i class="fa fa-dashboard"></i>
+                                <i class="fa fa-tasks"></i>
                                 <span>Les parcours</span>
                                 <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="{{ path('gestion_parcours') }}"><i class="fa fa-circle-o"></i>Gestion des parcours</a></li>
                             </ul>
                         </li>
-                        <li class="active treeview">
+                        <li class="{{ (controller == "cms")? "active" : "" }} treeview">
                             <a href="#">
                                 <i class="fa fa-laptop"></i>
                                 <span>Contenu du Zboard</span>
                                 <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="#"><i class="fa fa-circle-o"></i>Liste des tutoriels</a></li>
@@ -156,13 +146,13 @@
                             </ul>
                         </li>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <li class="active treeview">
+                            <li class="treeview">
                                 <a href="#">
-                                    <i class="fa fa-dashboard"></i>
+                                    <i class="fa fa-lock"></i>
                                     <span>Administration</span>
                                     <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
                                 </a>
                                 <ul class="treeview-menu">
                                     <li><a href="{{ path('home_admin') }}"><i class="fa fa-circle-o"></i>Accès à l'administration</a></li>
@@ -187,8 +177,7 @@
             <div class="pull-right hidden-xs">
                 <b>Version</b> 0.1
             </div>
-            <strong>Copyright &copy; 2016 <a href="http://almsaeedstudio.com">Zboard Team</a>.</strong> All rights
-            reserved.
+            <strong>Copyright &copy; 2016 <a href="http://almsaeedstudio.com">Zboard Team</a>.</strong> Tous droits réservés.
         </footer>
         <div class="control-sidebar-bg"></div>
     </div>

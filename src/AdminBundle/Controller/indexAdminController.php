@@ -26,11 +26,19 @@ class indexAdminController extends Controller
         $notes = $this->get('core.statistiques')->getNotesSuivi();
         $sessionsC = $this->get('core.statistiques')->getSessionsCancelled();
 
-        return array('mentors' => $mentors, 'mentoresPlus' => $mentoresPlus,
-                     'mentoresPClass' => $mentoresPClass, 'parcoursPlus' => $parcoursPlus,
-                     'parcoursClass' => $parcoursClass, 'projetsF' => $projetsF,
-                     'projets' => $projets, 'soutenances' => $soutenances,
-                     'mentoresW' => $mentorsW, 'notes' => $notes,
-                     'sessionsC' => $sessionsC, );
+        return array(
+            'controller'        => 'home',
+            'mentors'           => $mentors,
+            'mentoresPlus'      => $mentoresPlus,
+            'mentoresPClass'    => $mentoresPClass,
+            'parcoursPlus'      => $parcoursPlus,
+            'parcoursClass'     => $parcoursClass,
+            'projetsF'          => $projetsF,
+            'projets'           => $projets,
+            'soutenances'       => $soutenances,
+            'mentoresW'         => $mentorsW,
+            'notes'             => $notes,
+            'sessionsC'         => $sessionsC,
+        );
     }
 }

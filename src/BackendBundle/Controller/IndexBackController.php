@@ -23,9 +23,16 @@ class IndexBackController extends Controller
         $sessions = $this->get('core.statistiques')->getSessionsCancelled();
         $mentoresWaiting = $this->get('core.statistiques')->getMentoresWaiting();
 
-        return array('mentors' => $mentors, 'mentores' => $mentores,
-                     'soutenances' => $soutenances, 'parcours' => $parcours,
-                     'notes' => $notes, 'sessions' => $sessions,
-                     'mentoresWaiting' => $mentoresWaiting, 'projets' => $projets, );
+        return array(
+            'controller'        => 'home_back',
+            'mentors'           => $mentors,
+            'mentores'          => $mentores,
+            'soutenances'       => $soutenances,
+            'parcours'          => $parcours,
+            'notes'             => $notes,
+            'sessions'          => $sessions,
+            'mentoresWaiting'   => $mentoresWaiting,
+            'projets'           => $projets,
+        );
     }
 }

@@ -19,7 +19,11 @@ class ShowBackController extends Controller
         $mentor = $this->get('core.admin')->addMentor($request);
         $mentors = $this->get('core.admin')->getMentors();
 
-        return array('mentors' => $mentors, 'mentor' => $mentor->createView());
+        return array(
+            'controller'    => "users",
+            'mentors'       => $mentors,
+            'mentor'        => $mentor->createView()
+        );
     }
 
     /**
@@ -32,7 +36,11 @@ class ShowBackController extends Controller
         $nMentore = $this->get('core.admin')->addMentore($request);
         $mentores = $this->get('core.admin')->getMentores();
 
-        return array('mentores' => $mentores, 'nMentore' => $nMentore->createView());
+        return array(
+            'controller'    => "users",
+            'mentores'      => $mentores,
+            'nMentore'      => $nMentore->createView()
+        );
     }
 
     /**
@@ -45,7 +53,11 @@ class ShowBackController extends Controller
         $soutenance = $this->get('core.back')->addSoutenance($request);
         $soutenances = $this->get('core.back')->getSoutenances();
 
-        return array('soutenances' => $soutenances, 'soutenance' => $soutenance->createView());
+        return array(
+            'controller'    => "soutenances",
+            'soutenances'   => $soutenances,
+            'soutenance'    => $soutenance->createView()
+        );
     }
 
     /**
@@ -59,8 +71,12 @@ class ShowBackController extends Controller
         $abonnement = $this->get('core.admin')->addAbonnement($request);
         $path = $this->get('core.back')->getParcours();
 
-        return array('parcours' => $parcours->createView(), 'path' => $path,
-                     'abonnement' => $abonnement->createView(), );
+        return array(
+            'controller'    => "parcours",
+            'parcours'      => $parcours->createView(),
+            'path'          => $path,
+            'abonnement'    => $abonnement->createView()
+        );
     }
 
     /**
@@ -85,9 +101,14 @@ class ShowBackController extends Controller
         $competence = $this->getDoctrine()->getManager()->getRepository('BackendBundle:Competences')
                            ->findBy(array('projet' => $projets));
 
-        return array('parcours' => $parcours, 'projet' => $projet->createView(),
-                      'projets' => $projets, 'competence' => $competence,
-                      'competences' => $competences->createView(), 'cours' => $cours->createView(),
-                      'coursP' => $coursP, );
+        return array(
+            'controller'    => "parcours",
+            'parcours'      => $parcours,
+            'projet'        => $projet->createView(),
+            'projets'       => $projets,
+            'competence'    => $competence,
+            'competences'   => $competences->createView(),
+            'cours'         => $cours->createView(),
+            'coursP'        => $coursP, );
     }
 }
