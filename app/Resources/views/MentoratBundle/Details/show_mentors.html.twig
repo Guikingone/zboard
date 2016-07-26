@@ -3,6 +3,7 @@
 {% block title %} - {{ mentor.lastname }} {{ mentor.firstname }}{% endblock %}
 
 {% block body %}
+
     {% for message in app.session.flashbag.get('success') %}
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -10,6 +11,7 @@
             {{ message }}
         </div>
     {% endfor %}
+
     <div class="content-wrapper">
         <section class="content">
             <div class="row">
@@ -30,12 +32,14 @@
                                     </p>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Nombre d'élèves : </b> <a class="pull-right">{{ mentor.suivi|length }}</a>
+                                    <b>Nombre d'élèves : </b> <p class="pull-right">{{ mentor.suivi|length }}</p>
                                 </li>
                             </ul>
                             <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModalContact"><b>Contacter par email</b></a>
                             <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#myModalMessage"><b>Envoyer un message</b></a>
-                            <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#myModalCompetences"><b>Ajouter une compétences</b></a>
+                            {% if app.user == mentor %}
+                                <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#myModalCompetences"><b>Ajouter une compétences</b></a>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="box box-primary">
@@ -52,13 +56,10 @@
                             <hr>
                             <strong><i class="fa fa-pencil margin-r-5"></i> Compétences</strong>
                             <p>
-                                {% for competences in competences %}
+                                {% for competences in mentor.competences %}
                                     <span class="label label-warning">{{ competences.libelle }}</span>
                                 {% endfor %}
                             </p>
-                            <hr>
-                            <strong><i class="fa fa-file-text-o margin-r-5"></i>Notes</strong>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
                         </div>
                     </div>
                 </div>
@@ -248,27 +249,27 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {% for mentores in mentores %}
+                                        {% for mentores in mentor.suivi %}
                                             <tr>
                                                 <td>
-                                                    <a href="{{ path('show_details_mentore', {'id': mentores.id}) }}">
-                                                        {{ mentores.lastname }}
+                                                    <a href="{{ path('show_details_mentore', {'id': mentores.mentore.id}) }}">
+                                                        {{ mentores.mentore.lastname }}
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    {{ mentores.firstname }}
+                                                    {{ mentores.mentore.firstname }}
                                                 </td>
                                                 <td>
-                                                    {% if mentores.status == 'En formation' %}
-                                                        <span class="label label-success">{{ mentores.status }}</span>
-                                                    {% elseif mentores.status == 'Contacté' %}
-                                                        <span class="label label-warning">{{ mentores.status }}</span>
-                                                    {% elseif mentores.status == 'En pause' %}
-                                                        <span class="label label-danger">{{ mentores.status }}</span>
-                                                    {% elseif mentores.status == 'En attente' %}
-                                                        <span class="label label-warning">{{ mentores.status }}</span>
-                                                    {% elseif mentores.status == 'Formation terminé' %}
-                                                        <span class="label label-success">{{ mentores.status }}</span>
+                                                    {% if mentores.mentore.status == 'En formation' %}
+                                                        <span class="label label-success">{{ mentores.mentore.status }}</span>
+                                                    {% elseif mentores.mentore.status == 'Contacté' %}
+                                                        <span class="label label-warning">{{ mentores.mentore.status }}</span>
+                                                    {% elseif mentores.mentore.status == 'En pause' %}
+                                                        <span class="label label-danger">{{ mentores.mentore.status }}</span>
+                                                    {% elseif mentores.mentore.status == 'En attente' %}
+                                                        <span class="label label-warning">{{ mentores.mentore.status }}</span>
+                                                    {% elseif mentores.mentore.status == 'Formation terminé' %}
+                                                        <span class="label label-success">{{ mentores.mentore.status }}</span>
                                                     {% endif %}
                                                 </td>
                                             </tr>
@@ -280,7 +281,7 @@
                             <div class="tab-pane" id="sessions">
                                 <!-- Suivi sessions -->
                                 <ul class="timeline timeline-inverse">
-                                    {% for sessions in sessions %}
+                                    {% for sessions in mentor.sessions %}
                                         <li class="time-label">
                             <span class="bg-red">
                                 {{ sessions.dateSession|date('d-m-Y') }}

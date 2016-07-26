@@ -44,10 +44,8 @@
                                     <tr>
                                         <th>Intitulé du cours</th>
                                         <th>Durée</th>
-                                        {% if is_granted('ROLE_ADMIN') %}
-                                            <th>Modifier</th>
-                                            <th>Supprimer</th>
-                                        {% endif %}
+                                        <th>Modifier</th>
+                                        <th>Supprimer</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -59,14 +57,12 @@
                                             <td>
                                                 {{ coursP.duree }}
                                             </td>
-                                            {% if is_granted('ROLE_ADMIN') %}
-                                                <td>
-                                                    <a href="{{ path('update_courses', {'id': coursP.id}) }}"><span class="ion ion-wrench"></span></a>
-                                                </td>
-                                                <td>
-                                                    <a href="#"><span class="ion ion-trash-b"></span></a>
-                                                </td>
-                                            {% endif %}
+                                            <td>
+                                                <a href="{{ path('update_courses', {'id': coursP.id}) }}"><span class="ion ion-wrench"></span></a>
+                                            </td>
+                                            <td>
+                                                <a href="#"><span class="ion ion-trash-b"></span></a>
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
@@ -86,10 +82,8 @@
                                         <th>Intitulé du projets</th>
                                         <th>Durée</th>
                                         <th>Compétences</th>
-                                        {% if is_granted('ROLE_ADMIN') %}
-                                            <th>Modifier</th>
-                                            <th>Supprimer</th>
-                                        {% endif %}
+                                        <th>Modifier</th>
+                                        <th>Supprimer</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -108,14 +102,12 @@
                                                 {% endfor %}
                                                 </ul>
                                             </td>
-                                            {% if is_granted('ROLE_ADMIN') %}
-                                                <td>
-                                                    <a href="{{ path('update_project', {'id': projets.id}) }}"><span class="ion ion-wrench"></span></a>
-                                                </td>
-                                                <td>
-                                                    <a href="#"><span class="ion ion-trash-b"></span></a>
-                                                </td>
-                                            {% endif %}
+                                            <td>
+                                                <a href="{{ path('update_project', {'id': projets.id}) }}"><span class="ion ion-wrench"></span></a>
+                                            </td>
+                                            <td>
+                                                <a href="#"><span class="ion ion-trash-b"></span></a>
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

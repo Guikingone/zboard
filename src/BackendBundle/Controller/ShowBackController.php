@@ -84,7 +84,7 @@ class ShowBackController extends Controller
      *
      * @return array
      * @Route("/show/path/{id}/details", name="show_parcours")
-     * @Template("BackBundle/Action/Details/show_parcours.html.twig")
+     * @Template("BackBundle/Details/show_parcours.html.twig")
      */
     public function showParcoursByIdAction(Request $request, $id)
     {

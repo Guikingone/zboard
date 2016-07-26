@@ -9,17 +9,17 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-xs-12 text-center">
-                        {{ form_start(competencesM) }}
+                        {{ form_start(competence) }}
                         <div class="form-group">
-                            {{ form_errors(competencesM.libelle) }}
-                            {{ form_label(competencesM.libelle, 'Compétence :') }}
-                            {{ form_widget(competencesM.libelle, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(competence.libelle) }}
+                            {{ form_label(competence.libelle, 'Compétence :') }}
+                            {{ form_widget(competence.libelle, {'attr': {'class': 'form-control'}}) }}
                         </div>
                         <br />
                         <button type="submit" class="btn btn-warning">
                             Enregistrer
                         </button>
-                        {{ form_end(competencesM) }}
+                        {{ form_end(competence) }}
                     </div>
                 </div>
             </div>

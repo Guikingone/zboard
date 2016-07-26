@@ -15,7 +15,7 @@ class ShowDashboardController extends Controller
      *
      * @return array
      * @Route("/show/{id}/mentore/details", name="show_details_mentore")
-     * @Template("BackBundle/Action/Details/show_mentores.html.twig")
+     * @Template("MentoratBundle/Details/show_mentores.html.twig")
      */
     public function showProfilMentoreAction(Request $request, $id)
     {
@@ -33,19 +33,13 @@ class ShowDashboardController extends Controller
      *
      * @return array
      * @Route("/show/{id}/mentor/details", name="show_details_mentor")
-     * @Template("BackBundle/Action/Details/show_mentors.html.twig")
+     * @Template("MentoratBundle/Details/show_mentors.html.twig")
      */
     public function showProfilMentorAction(Request $request, $id)
     {
         $competence = $this->get('core.admin')->addCompetencesMentor($request, $id);
-        $competences = $this->get('core.admin')->getMentorCompetences($id);
         $mentor = $this->get('core.mentore')->viewMentor($id);
-        $sessions = $this->get('core.mentore')->getSessionsByMentor($id);
-        $mentores = $this->get('core.mentore')->getMentoresbyTeacher($id);
-        $competencesM = $this->get('core.admin')->addCompetencesMentor($request, $id);
 
-        return array('mentor' => $mentor, 'competence' => $competence->createView(),
-                     'competences' => $competences, 'sessions' => $sessions,
-                     'mentores' => $mentores, 'competencesM' => $competencesM->createView(), );
+        return array('mentor' => $mentor, 'competence' => $competence->createView());
     }
 }

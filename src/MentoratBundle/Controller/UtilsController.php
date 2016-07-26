@@ -22,6 +22,10 @@ class UtilsController extends Controller
     {
         $cours = $this->get('core.admin')->updateStatusCourses($request, $id);
 
+        if ($cours->isValid()) {
+            return $this->redirectToRoute('mentorat_dashboard_index');
+        }
+
         return array('cours' => $cours->createView());
     }
 
@@ -37,6 +41,10 @@ class UtilsController extends Controller
     public function updateProjectStatus(Request $request, $id)
     {
         $projet = $this->get('core.admin')->updateStatusProject($request, $id);
+
+        if ($projet->isValid()) {
+            return $this->redirectToRoute('mentorat_dashboard_index');
+        }
 
         return array('projet' => $projet->createView());
     }
