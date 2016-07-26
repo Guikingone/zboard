@@ -3,11 +3,11 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-center" id="myModalLabel">Gestion des abonnements</h4>
+                <h4 class="modal-title" id="myModalLabel">Gestion des abonnements</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-xs-12 text-center">
+                    <div class="col-xs-12">
                         {{ form_start(abonnement) }}
                         <div class="form-group">
                             {{ form_errors(abonnement.libelle) }}
@@ -19,15 +19,14 @@
                             {{ form_label(abonnement.prix, 'Prix de l\'abonnement :')}}
                             {{ form_widget(abonnement.prix, {'attr': {'class': 'form-control'}}) }}
                         </div>
-                        <br>
-                        <button type="submit" class="btn btn-warning">Enregistrer</button>
-                        {{ form_end(abonnement) }}
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-flat btn-warning">Enregistrer</button>
+                <button type="button" class="btn btn-flat btn-default" data-dismiss="modal">Annuler</button>
             </div>
+            {{ form_end(abonnement) }}
         </div>
     </div>
 </div>

@@ -4,47 +4,39 @@
 
 {% block admin_body %}
 
-    {% for message in app.session.flashbag.get('success') %}
-        <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-check"></i>Information</h4>
-            {{ message }}
-        </div>
-    {% endfor %}
-
     <div class="row">
-        <div class="col-xs-12 col-md-offset-4 col-md-4">
-            <div class="box box-primary">
+        <div class="col-xs-12 col-md-12">
+            {% for message in app.session.flashbag.get('success') %}
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><i class="icon fa fa-check"></i>Information</h4>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-xs-12 col-md-12">
+            <div class="box box-warning">
                 <div class="box-body box-profile">
-                    <h3 class="profile-username text-center">Modifier un parcours</h3>
-                    <br />
-                    <hr />
-                    <div class="row">
-                        <div class="col-xs-12 text-center">
-                            {{ form_start(parcours) }}
-                            <div class="form-group">
-                                {{ form_errors(parcours.libelle) }}
-                                {{ form_label(parcours.libelle, 'Nom du parcours :')}}
-                                {{ form_widget(parcours.libelle, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_errors(parcours.diplome) }}
-                                {{ form_label(parcours.diplome, 'Niveau du diplôme (Optionnel) :')}}
-                                {{ form_widget(parcours.diplome, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_errors(parcours.abonnement) }}
-                                {{ form_label(parcours.abonnement, 'Abonnement demandé :')}}
-                                {{ form_widget(parcours.abonnement, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-                            </div>
-                            <br>
-                            <div class="text-center">
-                                <input class="btn btn-warning" type="submit" value="Enregistrer" />
-                            </div>
-                            {{ form_end(parcours) }}
+                    <h3 class="profile-username">Modifier un parcours</h3>
+                    {{ form_start(parcours) }}
+                        <div class="form-group">
+                            {{ form_errors(parcours.libelle) }}
+                            {{ form_label(parcours.libelle, 'Nom du parcours :')}}
+                            {{ form_widget(parcours.libelle, {'attr': {'class': 'form-control'}}) }}
                         </div>
-                    </div>
+                        <div class="form-group">
+                            {{ form_errors(parcours.diplome) }}
+                            {{ form_label(parcours.diplome, 'Niveau du diplôme (Optionnel) :')}}
+                            {{ form_widget(parcours.diplome, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_errors(parcours.abonnement) }}
+                            {{ form_label(parcours.abonnement, 'Abonnement demandé :')}}
+                            {{ form_widget(parcours.abonnement, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <button type="submit" class="btn btn-flat btn-warning">Enregistrer</button>
+                        <a href="{{ path('gestion_parcours') }}"><button type="button" class="btn btn-flat btn-default">Annuler</button></a>
+                    {{ form_end(parcours) }}
                 </div>
             </div>
         </div>

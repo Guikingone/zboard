@@ -9,7 +9,7 @@
                 <th>Projet</th>
                 <th>Statut</th>
                 {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
-                    <th>Modifier</th>
+                    <th>Actions</th>
                 {% endif %}
             </tr>
             </thead>
@@ -41,7 +41,9 @@
                     </td>
                     {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
                         <td>
-                            <a href="{{ path('update_soutenances', {'id': soutenances.id}) }}"><span class="ion ion-wrench"></span></a>
+                            <a href="{{ path('update_soutenances', {'id': soutenances.id}) }}">
+                                <button type="button" class="btn btn-flat btn-warning">Modifier <span class="ion ion-wrench"></span> </button>
+                            </a>
                         </td>
                     {% endif %}
                 </tr>

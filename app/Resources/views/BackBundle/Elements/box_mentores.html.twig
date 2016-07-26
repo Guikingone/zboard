@@ -11,8 +11,7 @@
                 <th>Durée de financement</th>
                 <th>Parcours suivi</th>
                 {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
-                    <th>Modifier</th>
-                    <th>Archiver</th>
+                    <th>Actions</th>
                 {% endif %}
             </tr>
             </thead>
@@ -58,10 +57,12 @@
                     </td>
                     {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
                         <td>
-                            <a href="{{ path('update_mentores', {'id': mentores.id}) }}"><span id="url" class="ion ion-wrench"></span></a>
-                        </td>
-                        <td>
-                            <a href="{{ path('update_mentores', {'id': mentores.id}) }}"><span class="ion ion-folder"></span></a>
+                            <a href="{{ path('update_mentores', {'id': mentores.id}) }}">
+                                <button type="button" class="btn btn-flat btn-warning">Modifier <span class="ion ion-wrench"></span> </button>
+                            </a>
+                            <a href="{{ path('update_mentores', {'id': mentores.id}) }}">
+                                <button type="button" class="btn btn-flat btn-danger">Archiver <span class="ion ion-folder"></span> </button>
+                            </a>
                         </td>
                     {% endif %}
                 </tr>

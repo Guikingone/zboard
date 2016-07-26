@@ -2,14 +2,14 @@
 <div class="modal fade" id="myModalSoutenance" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            {{ form_start(soutenance) }}
             <div class="modal-header">
                 <h4 class="modal-title text-center" id="myModalLabel">Créer une soutenance</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-xs-12 text-center">
-                            {{ form_start(soutenance) }}
+                        <div class="col-xs-12 col-md-12">
                             <div class="form-group">
                                 {{ form_errors(soutenance.mentor) }}
                                 {{ form_label(soutenance.mentor, 'Mentor :')}}
@@ -31,15 +31,15 @@
                                 {{ form_widget(soutenance.status, {'attr': {'class': 'form-control'}}) }}
                             </div>
                             <br>
-                            <button type="submit" class="btn btn-warning">Enregistrer</button>
-                            {{ form_end(soutenance) }}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-flat btn-warning">Enregistrer</button>
+                <button type="button" class="btn btn-flat btn-default" data-dismiss="modal">Annuler</button>
             </div>
+            {{ form_end(soutenance) }}
         </div>
     </div>
 </div>

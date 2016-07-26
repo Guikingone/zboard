@@ -3,39 +3,40 @@
 {% block title %} - Parcours{% endblock %}
 
 {% block admin_body %}
-    {% for message in app.session.flashbag.get('success') %}
-        <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-check"></i>Information</h4>
-            {{ message }}
-        </div>
-    {% endfor %}
     <div class="row">
-        <div class="col-xs-12 text-center">
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalParcours">
-                Ajouter un parcours
-            </button>
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalAbonnement">
-                Ajouter un abonnement
-            </button>
+        <div class="col-xs-12 col-md-12">
+            {% for message in app.session.flashbag.get('success') %}
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><i class="icon fa fa-check"></i>Information</h4>
+                    {{ message }}
+                </div>
+            {% endfor %}
         </div>
     </div>
-    <br>
     <div class="row">
         <div class="col-xs-12">
-            <div class="box box-info">
+            <div class="box box-warning">
                 <div class="box-header with-border">
                     <h3 class="box-title">Liste des parcours</h3>
                 </div>
-
                 {% include 'BackBundle/Elements/box_parcours.html.twig' %}
-
             </div>
         </div>
     </div>
-
     {% include ':Form:register_parcours.html.twig' %}
 
     {% include ':Form:register_abonnement.html.twig' %}
-
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="well">
+                <button type="button" class="btn btn-flat btn-warning" data-toggle="modal" data-target="#myModalParcours">
+                    Ajouter un parcours
+                </button>
+                <button type="button" class="btn btn-flat btn-warning" data-toggle="modal" data-target="#myModalAbonnement">
+                    Ajouter un abonnement
+                </button>
+            </div>
+        </div>
+    </div>
 {% endblock %}

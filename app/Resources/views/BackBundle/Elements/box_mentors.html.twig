@@ -10,47 +10,48 @@
                 <th>Nombre d'élèves</th>
                 <th>Compétences</th>
                 {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
-                    <th>Modifier</th>
-                    <th>Archiver</th>
+                    <th>Actions</th>
                 {% endif %}
             </tr>
             </thead>
             <tbody>
             {% for mentors in mentors %}
-            <tr>
-                <td>
-                    <a href="{{ path('show_details_mentor', {'id': mentors.id}) }}">{{ mentors.lastname }}</a>
-                </td>
-                <td>
-                    {{ mentors.firstname }}
-                </td>
-                <td>
-                    {{ mentors.country }}
-                </td>
-                <td>
-                    {% if mentors.available == true %}
-                        <span class="label label-success">Disponible</span>
+                <tr>
+                    <td>
+                        <a href="{{ path('show_details_mentor', {'id': mentors.id}) }}">{{ mentors.lastname }}</a>
+                    </td>
+                    <td>
+                        {{ mentors.firstname }}
+                    </td>
+                    <td>
+                        {{ mentors.country }}
+                    </td>
+                    <td>
+                        {% if mentors.available == true %}
+                            <span class="label label-success">Disponible</span>
                         {% else %}
-                        <span class="label label-danger">Indisponible</span>
+                            <span class="label label-danger">Indisponible</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ mentors.suivi|length }}
+                    </td>
+                    <td>
+                        {% for competences in mentors.competences %}
+                            <span class="label label-info">{{ competences.libelle }}</span>
+                        {% endfor %}
+                    </td>
+                    {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                        <td>
+                            <a href="{{ path('update_mentors', {'id': mentors.id}) }}">
+                                <button type="button" class="btn btn-flat btn-warning">Modifier <span class="ion ion-wrench"></span> </button>
+                            </a>
+                            <a href="{{ path('update_mentors', {'id': mentors.id}) }}">
+                                <button type="button" class="btn btn-flat btn-danger">Archiver <span class="ion ion-folder"></span> </button>
+                            </a>
+                        </td>
                     {% endif %}
-                </td>
-                <td>
-                    {{ mentors.suivi|length }}
-                </td>
-                <td>
-                    {% for competences in mentors.competences %}
-                        <span class="label label-info">{{ competences.libelle }}</span>
-                    {% endfor %}
-                </td>
-                {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
-                    <td>
-                        <a href="{{ path('update_mentors', {'id': mentors.id}) }}"><span class="ion ion-wrench"></span></a>
-                    </td>
-                    <td>
-                        <a href="{{ path('update_mentors', {'id': mentors.id}) }}"><span class="ion ion-folder"></span></a>
-                    </td>
-                {% endif %}
-            </tr>
+                </tr>
             {% endfor %}
             </tbody>
         </table>

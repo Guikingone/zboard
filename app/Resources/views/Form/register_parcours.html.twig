@@ -2,15 +2,15 @@
 <div class="modal fade" id="myModalParcours" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            {{ form_start(parcours) }}
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal- text-center" id="myModalLabel">Gestion des parcours</h4>
+                <h4 class="modal- " id="myModalLabel">Gestion des parcours</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-xs-12 text-center">
+                    <div class="col-xs-12">
                         <div class="form-group">
-                            {{ form_start(parcours) }}
                             <div class="form-group">
                                 {{ form_errors(parcours.libelle) }}
                                 {{ form_label(parcours.libelle, 'Nom du parcours')}}
@@ -26,16 +26,15 @@
                                 {{ form_label(parcours.abonnement, 'Abonnement demandé :')}}
                                 {{ form_widget(parcours.abonnement, {'attr': {'class': 'form-control'}}) }}
                             </div>
-                            <br>
-                            <button type="submit" class="btn btn-warning">Enregistrer</button>
-                            {{ form_end(parcours) }}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-flat btn-warning">Enregistrer</button>
+                <button type="button" class="btn btn-flat btn-default" data-dismiss="modal">Annuler</button>
             </div>
+            {{ form_end(parcours) }}
         </div>
     </div>
 </div>
