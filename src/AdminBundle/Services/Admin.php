@@ -11,12 +11,9 @@ use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
 use BackendBundle\Form\UpdateAdd\CoursUpdateType;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Mentore;
-use MentoratBundle\Entity\Notes;
 use MentoratBundle\Entity\Sessions;
 use MentoratBundle\Entity\Suivi;
 use MentoratBundle\Form\MentoreType;
-use MentoratBundle\Form\SessionsType;
-use MentoratBundle\Form\TypeAdd\NoteTypeAdd;
 use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
@@ -98,26 +95,6 @@ class Admin
     }
 
     /**
-     * Allow to return the students learning a path in Premium Plusabonnements.
-     *
-     * @return array
-     */
-    public function getMentoresPlus()
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getMentoresPPlus();
-    }
-
-    /**
-     * Allow to return the students learning a path in Premium Class abonnements.
-     *
-     * @return array
-     */
-    public function getMentoreClass()
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getMentorePClass();
-    }
-
-    /**
      * Allow the back to get all the new mentores since actual datetime.
      *
      * @return array
@@ -127,16 +104,6 @@ class Admin
         $days = new \DateTime();
 
         return $this->doctrine->getRepository('MentoratBundle:Mentore')->getNewMentores($days);
-    }
-
-    /**
-     * Allow to get the students waiting for a teacher.
-     *
-     * @return array
-     */
-    public function getMentoresWaiting()
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getMentoresWaiting();
     }
 
     /**
@@ -157,26 +124,6 @@ class Admin
     public function getAbonnements()
     {
         return $this->doctrine->getRepository('BackendBundle:Abonnement')->findAll();
-    }
-
-    /**
-     * Allow the back to get all the paths made for the PPlus students.
-     *
-     * @return array|\BackendBundle\Entity\Parcours[]
-     */
-    public function getParcoursPlus()
-    {
-        return $this->doctrine->getRepository('BackendBundle:Parcours')->getParcoursPlus();
-    }
-
-    /**
-     * Allow the back to get all the paths made for the PClass students.
-     *
-     * @return array|\BackendBundle\Entity\Parcours[]
-     */
-    public function getParcoursClass()
-    {
-        return $this->doctrine->getRepository('BackendBundle:Parcours')->getParcoursClass();
     }
 
     /**
@@ -204,46 +151,6 @@ class Admin
     }
 
     /**
-     * Allow to get all the projects.
-     *
-     * @return array|\BackendBundle\Entity\Projet[]
-     */
-    public function getProjets()
-    {
-        return $this->doctrine->getRepository('BackendBundle:Projet')->findAll();
-    }
-
-    /**
-     * Allow to get all the project finished.
-     *
-     * @return array
-     */
-    public function getProjetsFinished()
-    {
-        return $this->doctrine->getRepository('BackendBundle:Projet')->getProjetTermine();
-    }
-
-    /**
-     * Allow the back to get all the soutenances.
-     *
-     * @return array|\MentoratBundle\Entity\Soutenance[]
-     */
-    public function getSoutenances()
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findAll();
-    }
-
-    /**
-     * Allow to get all the notes.
-     *
-     * @return array|\MentoratBundle\Entity\Notes[]
-     */
-    public function getNotesSuivi()
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Notes')->findAll();
-    }
-
-    /**
      * Allow to get all the sessions planified.
      *
      * @return array|\MentoratBundle\Entity\Sessions[]
@@ -263,11 +170,6 @@ class Admin
     public function getSessionsByMentore($id)
     {
         return $this->doctrine->getRepository('MentoratBundle:Sessions')->getSessionsbyMentore($id);
-    }
-
-    public function getSessionsCancelled()
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Sessions')->getSessionsCancelled();
     }
 
     /**
@@ -346,69 +248,6 @@ class Admin
             $this->doctrine->persist($suivi);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Elève enregistré.');
-        }
-
-        return $form;
-    }
-
-    /**
-     * Allow to add a new note linked to the suivi and the mentor who follow the student.
-     *
-     * @param Request $request
-     * @param $id
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addNote(Request $request, $id)
-    {
-        $suivi = $this->doctrine->getRepository('MentoratBundle:Suivi')
-                                ->findOneBy(array(
-                                          'id' => $id,
-                                      ));
-        $note = new Notes();
-        $user = $this->user->getToken()->getUser();
-
-        $form = $this->form->create(NoteTypeAdd::class, $note);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $note->setSuivi($suivi);
-            $note->setAuteur($user);
-            $note->setDateCreated(new \DateTime());
-            $this->doctrine->persist($note);
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'La note a bien été ajoutée.');
-        }
-
-        return $form;
-    }
-
-    /**
-     * Allow to save a new session between a teacher and a student.
-     *
-     * @param Request $request
-     * @param $id
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addSessionMentorat(Request $request, $id)
-    {
-        $mentore = $this->doctrine->getRepository('MentoratBundle:Mentore')->findOneBy(array('id' => $id));
-
-        $mentor = $this->user->getToken()->getUser();
-
-        $sessions = new Sessions();
-
-        $form = $this->form->create(SessionsType::class, $sessions);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $sessions->setLibelle('Session de mentorat Premium Plus');
-            $sessions->setMentor($mentor);
-            $sessions->setMentore($mentore);
-            $this->doctrine->persist($sessions);
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'La session a bien été planifiée.');
         }
 
         return $form;

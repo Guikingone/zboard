@@ -4,6 +4,12 @@ namespace MentoratBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Mentore;
+use MentoratBundle\Entity\Notes;
+use MentoratBundle\Entity\Sessions;
+use MentoratBundle\Form\SessionsType;
+use MentoratBundle\Form\TypeAdd\NoteTypeAdd;
+use Symfony\Component\Form\FormFactory;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
@@ -13,6 +19,11 @@ class MentoreService
      * @var EntityManager
      */
     protected $doctrine;
+
+    /**
+     * @var FormFactory
+     */
+    protected $form;
 
     /**
      * @var Session
@@ -27,9 +38,10 @@ class MentoreService
     /**
      * @param EntityManager $doctrine
      */
-    public function __construct(EntityManager $doctrine, Session $session, TokenStorage $user)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user)
     {
         $this->doctrine = $doctrine;
+        $this->form = $form;
         $this->session = $session;
         $this->user = $user;
     }
@@ -97,6 +109,69 @@ class MentoreService
             'mentor' => $user,
             'state' => 'MENTORAT_FINISHED',
         ));
+    }
+
+    /**
+     * Allow to add a new note linked to the suivi and the mentor who follow the student.
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addNote(Request $request, $id)
+    {
+        $suivi = $this->doctrine->getRepository('MentoratBundle:Suivi')
+                                ->findOneBy(array(
+                                    'id' => $id,
+                                ));
+        $note = new Notes();
+        $user = $this->user->getToken()->getUser();
+
+        $form = $this->form->create(NoteTypeAdd::class, $note);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $note->setSuivi($suivi);
+            $note->setAuteur($user);
+            $note->setDateCreated(new \DateTime());
+            $this->doctrine->persist($note);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'La note a bien été ajoutée.');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to save a new session between a teacher and a student.
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addSessionMentorat(Request $request, $id)
+    {
+        $mentore = $this->doctrine->getRepository('MentoratBundle:Mentore')->findOneBy(array('id' => $id));
+
+        $mentor = $this->user->getToken()->getUser();
+
+        $sessions = new Sessions();
+
+        $form = $this->form->create(SessionsType::class, $sessions);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $sessions->setLibelle('Session de mentorat Premium Plus');
+            $sessions->setMentor($mentor);
+            $sessions->setMentore($mentore);
+            $this->doctrine->persist($sessions);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'La session a bien été planifiée.');
+        }
+
+        return $form;
     }
 
     /**

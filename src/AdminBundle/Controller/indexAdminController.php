@@ -15,16 +15,16 @@ class indexAdminController extends Controller
     public function indexAction()
     {
         $mentors = $this->get('core.admin')->getMentors();
-        $mentoresPlus = $this->get('core.admin')->getMentoresPlus();
-        $mentoresPClass = $this->get('core.admin')->getMentoreClass();
-        $parcoursPlus = $this->get('core.admin')->getParcoursPlus();
-        $parcoursClass = $this->get('core.admin')->getParcoursClass();
-        $projets = $this->get('core.admin')->getProjets();
-        $projetsF = $this->get('core.admin')->getProjetsFinished();
-        $soutenances = $this->get('core.admin')->getSoutenances();
-        $mentorsW = $this->get('core.admin')->getMentoresWaiting();
-        $notes = $this->get('core.admin')->getNotesSuivi();
-        $sessionsC = $this->get('core.admin')->getSessionsCancelled();
+        $mentoresPlus = $this->get('core.statistiques')->getMentoresPlus();
+        $mentoresPClass = $this->get('core.statistiques')->getMentoreClass();
+        $parcoursPlus = $this->get('core.statistiques')->getParcoursPlus();
+        $parcoursClass = $this->get('core.statistiques')->getParcoursClass();
+        $projets = $this->get('core.statistiques')->getProjets();
+        $projetsF = $this->get('core.statistiques')->getProjetsFinished();
+        $soutenances = $this->get('core.statistiques')->getSoutenances();
+        $mentorsW = $this->get('core.statistiques')->getMentoresWaiting();
+        $notes = $this->get('core.statistiques')->getNotesSuivi();
+        $sessionsC = $this->get('core.statistiques')->getSessionsCancelled();
 
         return array('mentors' => $mentors, 'mentoresPlus' => $mentoresPlus,
                      'mentoresPClass' => $mentoresPClass, 'parcoursPlus' => $parcoursPlus,

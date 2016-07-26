@@ -8,13 +8,17 @@ services:
         class: AdminBundle\Services\Admin
         arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
 
+    core.statistiques:
+        class: AdminBundle\Services\Statistiques
+        arguments: ["@doctrine.orm.entity_manager"]
+
     core.back:
         class: BackendBundle\Services\Back
         arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session"]
 
     core.mentore:
         class: MentoratBundle\Services\MentoreService
-        arguments: ["@doctrine.orm.entity_manager", "@session", "@security.token_storage"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
 
     # Used to registrer the users with FOS !
     core.user_register:
