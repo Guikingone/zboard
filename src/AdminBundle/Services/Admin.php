@@ -193,6 +193,7 @@ class Admin
             $mentor->setUsername($mentor->getFirstName().'_'.$mentor->getLastName());
             $mentor->setPlainPassword(strtolower($mentor->getFirstName().'_'.$mentor->getLastName()));
             $mentor->setRoles(array('ROLE_MENTOR'));
+            $mentor->setArchived(false);
             $this->doctrine->persist($mentor);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
@@ -241,6 +242,7 @@ class Admin
         $suivi = new Suivi();
 
         $mentore->setSuivi($suivi);
+        $mentore->setArchived(false);
         $suivi->setMentore($mentore);
 
         $form = $this->form->create(MentoreType::class, $mentore);

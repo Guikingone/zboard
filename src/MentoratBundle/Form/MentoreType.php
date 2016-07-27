@@ -67,6 +67,7 @@ class MentoreType extends AbstractType
                 ],
             ))
             ->add('suivi', SuiviType::class)
+            ->remove('archived')
         ;
     }
 

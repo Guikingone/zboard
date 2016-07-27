@@ -29,7 +29,8 @@ class RegistrationType extends AbstractType
             ->add('country', CountryType::class)
             ->remove('plainPassword')
             ->remove('plainPassword_confirmation')
-            ;
+            ->remove('archived');
+        ;
     }
 
     public function getParent()

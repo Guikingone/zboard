@@ -126,6 +126,12 @@ class Mentore
     private $sessions;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="archived", type="boolean")
+     */
+    private $archived;
+
+    /**
      * Get id.
      *
      * @return int
@@ -558,5 +564,29 @@ class Mentore
     public function getSessions()
     {
         return $this->sessions;
+    }
+
+    /**
+     * Set archived
+     *
+     * @param boolean $archived
+     *
+     * @return Mentore
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+
+        return $this;
+    }
+
+    /**
+     * Get archived
+     *
+     * @return boolean
+     */
+    public function getArchived()
+    {
+        return $this->archived;
     }
 }

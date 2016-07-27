@@ -55,6 +55,12 @@ class Parcours
     private $suivi;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="archived", type="boolean")
+     */
+    private $archived;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -246,5 +252,29 @@ class Parcours
     public function getSuivi()
     {
         return $this->suivi;
+    }
+
+    /**
+     * Set archived
+     *
+     * @param boolean $archived
+     *
+     * @return Parcours
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+
+        return $this;
+    }
+
+    /**
+     * Get archived
+     *
+     * @return boolean
+     */
+    public function getArchived()
+    {
+        return $this->archived;
     }
 }

@@ -17,6 +17,7 @@ use BackendBundle\Entity\Projet;
 use BackendBundle\Form\TypeAdd\ProjetTypeAdd;
 use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
 use MentoratBundle\Form\InformationType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Back
 {

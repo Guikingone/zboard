@@ -44,6 +44,7 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $mentore->setDateStart(new \DateTime());
         $mentore->setResume('Something');
         $mentore->setSuivi($suivi);
+        $mentore->setArchived(false);
         $suivi->setMentor($mentor);
         $suivi->setState('En cours');
         $suivi->setMentore($mentore);
@@ -62,6 +63,7 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $mentoreC->setDateStart(new \DateTime());
         $mentoreC->setResume('Something');
         $mentoreC->setSuivi($suiviC);
+        $mentoreC->setArchived(false);
         $suiviC->setMentor($mentor);
         $suiviC->setState('En cours');
         $suiviC->setMentore($mentoreC);

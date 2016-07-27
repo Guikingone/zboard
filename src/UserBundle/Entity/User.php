@@ -87,6 +87,15 @@ class User extends BaseUser
      */
     private $competences;
 
+    /**
+     * @var boolean
+     * @ORM\Column(name="archived", type="boolean")
+     */
+    private $archived;
+
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -385,5 +394,29 @@ class User extends BaseUser
     public function getCompetences()
     {
         return $this->competences;
+    }
+
+    /**
+     * Set archived
+     *
+     * @param boolean $archived
+     *
+     * @return User
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+
+        return $this;
+    }
+
+    /**
+     * Get archived
+     *
+     * @return boolean
+     */
+    public function getArchived()
+    {
+        return $this->archived;
     }
 }

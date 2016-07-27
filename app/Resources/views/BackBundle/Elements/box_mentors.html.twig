@@ -46,9 +46,18 @@
                             <a href="{{ path('update_mentors', {'id': mentors.id}) }}">
                                 <button type="button" class="btn btn-flat btn-warning">Modifier <span class="ion ion-wrench"></span> </button>
                             </a>
-                            <a href="{{ path('update_mentors', {'id': mentors.id}) }}">
-                                <button type="button" class="btn btn-flat btn-danger">Archiver <span class="ion ion-folder"></span> </button>
-                            </a>
+                            {% if mentors.archived == false %}
+                                    <a type="button" class="btn btn-flat btn-danger" data-toggle="modal" data-target="#myModalArchivageTeacher">
+                                       Archiver <span class="ion ion-folder"></span>
+                                    </a>
+
+                                {% include ':BackBundle/Action/Archivage:archivage_mentor.html.twig' %}
+
+                                {% else %}
+                                    <a type="button" class="btn btn-flat btn-danger" href="{{ path('out_archive_mentor', {'id': mentors.id }) }}">
+                                        Désarchiver <span class="ion ion-folder"></span>
+                                    </a>
+                            {% endif %}
                         </td>
                     {% endif %}
                 </tr>

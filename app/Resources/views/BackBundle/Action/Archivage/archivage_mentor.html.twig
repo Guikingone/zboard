@@ -1,0 +1,29 @@
+<!-- Modal used in order to archive a teacher -->
+<div class="modal fade" id="myModalArchivageTeacher" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center" id="myModalLabel">Archiver un mentor</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <p><strong>Attention !</strong></p>
+                        <p>
+                            En archivant ce mentor, il ne pourra plus accéder à son profil et ne pourra plus poster de
+                            suivi pour les élèves, êtes-vous sûr de vouloir archiver ce mentor ?
+                        </p>
+                    </div>
+                    <div class="col-xs-12 text-center">
+                        <a class="btn btn-danger" href="{{ path('archive_mentor', {'id': mentors.id}) }}">
+                            Oui
+                        </a>
+                        <a class="btn btn-default" data-dismiss="modal">
+                            Non
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
