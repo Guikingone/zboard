@@ -37,7 +37,7 @@ class ShowDashboardController extends Controller
      */
     public function showProfilMentorAction(Request $request, $id)
     {
-        $competence = $this->get('core.admin')->addCompetencesMentor($request, $id);
+        $competence = $this->get('core.user')->addCompetencesMentor($request, $id);
         $mentor = $this->get('core.mentore')->viewMentor($id);
 
         return array('mentor' => $mentor, 'competence' => $competence->createView());

@@ -2,9 +2,7 @@
 
 namespace BackendBundle\Services;
 
-use BackendBundle\Entity\Competences;
 use BackendBundle\Entity\InformationMentorat;
-use BackendBundle\Form\TypeAdd\CompetencesTypeAdd;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Soutenance;
 use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
@@ -14,10 +12,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use BackendBundle\Entity\Parcours;
 use MentoratBundle\Entity\Mentore;
 use BackendBundle\Entity\Projet;
-use BackendBundle\Form\TypeAdd\ProjetTypeAdd;
-use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
 use MentoratBundle\Form\InformationType;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Back
 {
@@ -69,7 +64,17 @@ class Back
      */
     public function getParcours()
     {
-        return $this->doctrine->getRepository('BackendBundle:Parcours')->findAll();
+        return $this->doctrine->getRepository('BackendBundle:Parcours')->getParcours();
+    }
+
+    /**
+     * Allow to get all the paths who's been archived.
+     *
+     * @return array
+     */
+    public function getParcoursArchived()
+    {
+        return $this->doctrine->getRepository('BackendBundle:Parcours')->getParcoursArchived();
     }
 
     /**
@@ -122,77 +127,6 @@ class Back
             $this->doctrine->persist($information);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Information ajouté.');
-        }
-
-        return $form;
-    }
-
-    /**
-     * Allow to add a new path.
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addParcours(Request $request)
-    {
-        $parcours = new Parcours();
-
-        $form = $this->formFactory->create(ParcoursTypeAdd::class, $parcours);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $this->doctrine->persist($parcours);
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'Parcours ajouté !');
-        }
-
-        return $form;
-    }
-
-    /**
-     * Allow to add a new project linked to a path.
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addProject(Request $request, $id)
-    {
-        $parcours = $this->doctrine->getRepository('BackendBundle:Parcours')->findOneBy(array('id' => $id));
-        $projet = new Projet();
-
-        $form = $this->formFactory->create(ProjetTypeAdd::class, $projet);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $projet->setParcours($parcours);
-            $this->doctrine->persist($projet);
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'Projet ajouté !');
-        }
-
-        return $form;
-    }
-
-    /**
-     * Allow to add a new competences.
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addCompetences(Request $request)
-    {
-        $competences = new Competences();
-
-        $form = $this->formFactory->create(CompetencesTypeAdd::class, $competences);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $this->doctrine->persist($competences);
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'Competences ajouté !');
         }
 
         return $form;

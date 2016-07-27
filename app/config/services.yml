@@ -24,6 +24,11 @@ services:
         class: MentoratBundle\Services\MentoreService
         arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
 
+    core.user:
+        class: UserBundle\Services\UserService
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
+
+
     # Used to registrer the users with FOS !
     core.user_register:
         class: UserBundle\Form\RegistrationType

@@ -16,8 +16,8 @@ class ShowBackController extends Controller
      */
     public function showMentorsAction(Request $request)
     {
-        $mentor = $this->get('core.admin')->addMentor($request);
-        $mentors = $this->get('core.admin')->getMentors();
+        $mentor = $this->get('core.user')->addMentor($request);
+        $mentors = $this->get('core.user')->getMentors();
 
         return array(
             'controller'    => "users",
@@ -67,14 +67,16 @@ class ShowBackController extends Controller
      */
     public function showParcoursAction(Request $request)
     {
-        $parcours = $this->get('core.back')->addParcours($request);
+        $parcours = $this->get('core.admin')->addParcours($request);
         $abonnement = $this->get('core.admin')->addAbonnement($request);
         $path = $this->get('core.back')->getParcours();
+        $pathArchived = $this->get('core.back')->getParcoursArchived();
 
         return array(
             'controller'    => "parcours",
             'parcours'      => $parcours->createView(),
             'path'          => $path,
+            'pathArchived'  => $pathArchived,
             'abonnement'    => $abonnement->createView()
         );
     }
@@ -89,7 +91,7 @@ class ShowBackController extends Controller
     public function showParcoursByIdAction(Request $request, $id)
     {
         $parcours = $this->get('core.admin')->viewParcours($id);
-        $projet = $this->get('core.back')->addProject($request, $id);
+        $projet = $this->get('core.admin')->addProject($request, $id);
         $cours = $this->get('core.admin')->addCours($request, $id);
 
         // Used to find all the projects linked to the path.
@@ -97,7 +99,7 @@ class ShowBackController extends Controller
 
         $coursP = $this->get('core.admin')->getCours($id);
         $projets = $this->get('core.back')->getProjet($id);
-        $competences = $this->get('core.back')->addCompetences($request);
+        $competences = $this->get('core.admin')->addCompetences($request);
         $competence = $this->getDoctrine()->getManager()->getRepository('BackendBundle:Competences')
                            ->findBy(array('projet' => $projets));
 

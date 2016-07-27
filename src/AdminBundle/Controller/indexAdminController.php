@@ -14,7 +14,7 @@ class indexAdminController extends Controller
      */
     public function indexAction()
     {
-        $mentors = $this->get('core.admin')->getMentors();
+        $mentors = $this->get('core.user')->getMentors();
         $mentoresPlus = $this->get('core.statistiques')->getMentoresPlus();
         $mentoresPClass = $this->get('core.statistiques')->getMentoreClass();
         $parcoursPlus = $this->get('core.statistiques')->getParcoursPlus();

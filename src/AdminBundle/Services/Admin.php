@@ -3,10 +3,15 @@
 namespace AdminBundle\Services;
 
 use BackendBundle\Entity\Abonnement;
+use BackendBundle\Entity\Competences;
 use BackendBundle\Entity\Cours;
+use BackendBundle\Entity\Parcours;
+use BackendBundle\Entity\Projet;
 use BackendBundle\Form\_UpdateType\UpdateCompetencesType;
 use BackendBundle\Form\_UpdateType\UpdateProjetType;
 use BackendBundle\Form\CoursType;
+use BackendBundle\Form\TypeAdd\CompetencesTypeAdd;
+use BackendBundle\Form\TypeAdd\ProjetTypeAdd;
 use BackendBundle\Form\UpdateAdd\ProjetUpdateType;
 use BackendBundle\Form\TypeAdd\AbonnementTypeAdd;
 use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
@@ -23,10 +28,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-use UserBundle\Entity\Competences;
-use UserBundle\Entity\User;
-use UserBundle\Form\CompetencesType;
-use UserBundle\Form\RegistrationType;
 
 class Admin
 {
@@ -63,28 +64,6 @@ class Admin
         $this->form = $form;
         $this->session = $session;
         $this->user = $user;
-    }
-
-    /**
-     * Allow the back to get all the mentors.
-     *
-     * @return array|\UserBundle\Entity\User[]
-     */
-    public function getMentors()
-    {
-        return $this->doctrine->getRepository('UserBundle:User')->findAll();
-    }
-
-    /**
-     * Allow to get all the competences linked to a teacher.
-     *
-     * @param $id
-     *
-     * @return array
-     */
-    public function getMentorCompetences($id)
-    {
-        return $this->doctrine->getRepository('UserBundle:Competences')->getCompetencesByMentor($id);
     }
 
     /**
@@ -176,60 +155,6 @@ class Admin
     }
 
     /**
-     * Allow to create a new instance of Mentor, in order to be fast and effective, the registration of a new mentor
-     * doesn't require that the back enter a Username or a Password, this tasks are handled by the system.
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addMentor(Request $request)
-    {
-        $mentor = new User();
-        $form = $this->form->create(RegistrationType::class, $mentor);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $mentor->setUsername($mentor->getFirstName().'_'.$mentor->getLastName());
-            $mentor->setPlainPassword(strtolower($mentor->getFirstName().'_'.$mentor->getLastName()));
-            $mentor->setRoles(array('ROLE_MENTOR'));
-            $mentor->setArchived(false);
-            $this->doctrine->persist($mentor);
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
-        }
-
-        return $form;
-    }
-
-    /**
-     * Allow to add a new set of competences to a teacher profil.
-     *
-     * @param Request $request
-     * @param $id
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addCompetencesMentor(Request $request, $id)
-    {
-        $mentor = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
-
-        $competences = new Competences();
-
-        $form = $this->form->create(CompetencesType::class, $competences);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $competences->setUser($mentor);
-            $this->doctrine->persist($competences);
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'La compétence a bien été ajoutée.');
-        }
-
-        return $form;
-    }
-
-    /**
      * Allow to create a new instance of Mentore.
      *
      * @param Request $request
@@ -253,6 +178,78 @@ class Admin
             $this->doctrine->persist($suivi);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Elève enregistré.');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to add a new path.
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addParcours(Request $request)
+    {
+        $parcours = new Parcours();
+
+        $form = $this->form->create(ParcoursTypeAdd::class, $parcours);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->doctrine->persist($parcours);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Parcours ajouté !');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to add a new project linked to a path.
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addProject(Request $request, $id)
+    {
+        $parcours = $this->doctrine->getRepository('BackendBundle:Parcours')->findOneBy(array('id' => $id));
+
+        $projet = new Projet();
+
+        $form = $this->form->create(ProjetTypeAdd::class, $projet);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $projet->setParcours($parcours);
+            $this->doctrine->persist($projet);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Projet ajouté !');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to add a new competences.
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addCompetences(Request $request)
+    {
+        $competencesProject = new Competences();
+
+        $form = $this->form->create(CompetencesTypeAdd::class, $competencesProject);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->doctrine->persist($competencesProject);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Competences ajouté !');
         }
 
         return $form;
@@ -302,33 +299,6 @@ class Admin
             $this->doctrine->persist($abonnement);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', "L'abonnement a bien été ajouté !");
-        }
-
-        return $form;
-    }
-
-    /**
-     * Allow to update the informations about a teacher.
-     *
-     * @param Request $request
-     * @param $id
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function updateMentors(Request $request, $id)
-    {
-        $mentor = $this->doctrine->getRepository('UserBundle:User')->find($id);
-
-        if (null === $mentor) {
-            throw new NotFoundHttpException('Le mentor ne semble pas exister');
-        }
-
-        $form = $this->form->create(RegistrationType::class, $mentor);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'Le mentor a bien été mis à jour');
         }
 
         return $form;
