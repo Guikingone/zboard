@@ -109,6 +109,29 @@
                                     <li><a href="{{ path('gestion_users_admin') }}"><i class="fa fa-circle-o"></i>Gestion des utilisateurs</a></li>
                                 </ul>
                             </li>
+                            <li class="{{ (controller == "statistiques")? "active" : "" }} treeview">
+                                <a href="#">
+                                    <i class="fa fa-bar-chart"></i> <span>Statistiques de ZBoard</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#"><i class="fa fa-circle-o"></i>Utilisateurs</a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i>Fonctionnalités</a></li>
+                                </ul>
+                            </li>
+                            <li class="{{ (controller == "cms")? "active" : "" }} treeview">
+                                <a href="#">
+                                    <i class="fa fa-file"></i> <span>Gestion du contenu</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#"><i class="fa fa-circle-o"></i>Gestion des pays</a></li>
+                                </ul>
+                            </li>
                             <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-dashboard"></i>
