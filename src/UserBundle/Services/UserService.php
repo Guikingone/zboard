@@ -64,7 +64,7 @@ class UserService
      */
     public function getMentors()
     {
-        return $this->doctrine->getRepository('UserBundle:User')->findAll();
+        return $this->doctrine->getRepository('UserBundle:User')->findBy(array('archived' => false));
     }
 
     /**

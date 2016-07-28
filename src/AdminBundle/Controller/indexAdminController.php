@@ -5,6 +5,7 @@ namespace AdminBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class indexAdminController extends Controller
 {
@@ -39,6 +40,33 @@ class indexAdminController extends Controller
             'mentoresW' => $mentorsW,
             'notes' => $notes,
             'sessionsC' => $sessionsC,
+        );
+    }
+
+    /**
+     * @Route("/habilitations", name="gestion_habilitations")
+     * @Template("AdminBundle/Index/habilitations.html.twig")
+     */
+    public function addHabilitationsAction()
+    {
+        return array('controller' => 'habilitations');
+    }
+
+    /**
+     * @Route("/show/abonnements", name="gestion_abonnements")
+     * @Template("AdminBundle/Action/list_abonnements.html.twig")
+     *
+     * @param Request $request
+     */
+    public function showAbonnementsAction(Request $request)
+    {
+        $abonnement = $this->get('core.admin')->addAbonnement($request);
+        $abonnements = $this->get('core.admin')->getAbonnements();
+
+        return array(
+            'controller' => 'parcours',
+            'abonnements' => $abonnements,
+            'abonnement' => $abonnement->createView(),
         );
     }
 }

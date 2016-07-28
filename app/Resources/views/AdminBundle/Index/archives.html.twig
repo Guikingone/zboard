@@ -1,5 +1,41 @@
 {% extends ':AdminBundle/Layout:administration.html.twig' %}
 
 {% block admin_body %}
-    {% include ':Elements/Box:box_mentors.html.twig' %}
+
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Liste des utilisateurs de ZBoard</h3>
+                </div>
+
+                {% include ':Elements/Box:box_mentors.html.twig' %}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Liste des parcours archivés</h3>
+                </div>
+                {% include 'AdminBundle/Archivage/box_parcours_archive.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Liste des élèves archivés</h3>
+                </div>
+                {% include 'AdminBundle/Archivage/box_mentores_archive.html.twig' %}
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

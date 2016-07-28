@@ -21,7 +21,7 @@ services:
         arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session"]
 
     core.archive:
-        class: BackendBundle\Services\Archive
+        class: AdminBundle\Services\Archive
         arguments: ["@doctrine.orm.entity_manager", "@session"]
 
     core.mentore:

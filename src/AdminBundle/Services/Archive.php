@@ -6,7 +6,7 @@
  * Time: 13:30.
  */
 
-namespace BackendBundle\Services;
+namespace AdminBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -44,6 +44,26 @@ class Archive
     public function getMentorArchived()
     {
         return $this->doctrine->getRepository('UserBundle:User')->findBy(array('archived' => true));
+    }
+
+    /**
+     * Allow to get all the student archived.
+     *
+     * @return array|\MentoratBundle\Entity\Mentore[]
+     */
+    public function getMentoresArchived()
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Mentore')->findBy(array('archived' => true));
+    }
+
+    /**
+     * Allow to get all the path archived.
+     *
+     * @return array|\BackendBundle\Entity\Parcours[]
+     */
+    public function getParcoursArchived()
+    {
+        return $this->doctrine->getRepository('BackendBundle:Parcours')->findBy(array('archived' => true));
     }
 
     /**

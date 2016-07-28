@@ -131,8 +131,6 @@
                                     <li><a href="#"><i class="fa fa-circle-o"></i>Gestion des pays</a></li>
                                 </ul>
                             </li>
-<<<<<<< HEAD:app/Resources/views/AdminBundle/Layout/administration.html.twig
-                            {% if is_granted('ROLE_ADMIN') %}
                                 <li class="{{ (controller == "archives")? "active" : "" }} treeview">
                                     <a href="#">
                                         <i class="fa fa-folder-open-o"></i>
@@ -145,9 +143,6 @@
                                         <li><a href="{{ path('home_archives') }}"><i class="fa fa-circle-o"></i>Gestion des archives</a></li>
                                     </ul>
                                 </li>
-                            {% endif %}
-                            <li class="{{ (controller == "cms")? "active" : "" }} treeview">
-=======
                             <li class="{{ (controller == "habilitations")? "active" : "" }} treeview">
                                 <a href="#">
                                     <i class="fa fa-lock"></i> <span>Gestion des habilitations</span>
@@ -156,11 +151,10 @@
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-circle-o"></i>Liste des habilitations</a></li>
+                                    <li><a href="{{ path('gestion_habilitations') }}"><i class="fa fa-circle-o"></i>Liste des habilitations</a></li>
                                 </ul>
                             </li>
                             <li class="{{ (controller == "abonnements")? "active" : "" }} treeview">
->>>>>>> e1cf41a760d4cbeb3eb2b000460a4d5a37c6cd5f:app/Resources/views/Layout/administration.html.twig
                                 <a href="#">
                                     <i class="fa fa-money"></i> <span>Abonnements</span>
                                     <span class="pull-right-container">
@@ -168,7 +162,7 @@
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-circle-o"></i>Gestion des abonnements</a></li>
+                                    <li><a href="{{ path('gestion_abonnements') }}"><i class="fa fa-circle-o"></i>Gestion des abonnements</a></li>
                                 </ul>
                             </li>
                             <li class="treeview">

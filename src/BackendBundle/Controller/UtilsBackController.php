@@ -169,4 +169,47 @@ class UtilsBackController extends Controller
             'soutenance' => $soutenance->createView(),
         );
     }
+
+
+    /**
+     * @param $id
+     *
+     * @return array
+     *
+     * @Route("/archived/mentor/{id}", name="archive_mentor")
+     */
+    public function archiveMentorAction($id)
+    {
+        $this->get('core.archive')->archiveMentor($id);
+
+        return $this->redirectToRoute('home_backend');
+    }
+
+    /**
+     * @param $id
+     *
+     * @return array
+     *
+     * @Route("/archived/mentore/{id}", name="archive_mentore")
+     */
+    public function archiveMentoreAction($id)
+    {
+        $this->get('core.archive')->archiveMentore($id);
+
+        return $this->redirectToRoute('home_backend');
+    }
+
+    /**
+     * @param $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @Route("/archived/path/{id}", name="archive_path")
+     */
+    public function archiveParcoursAction($id)
+    {
+        $this->get('core.archive')->archiveParcours($id);
+
+        return $this->redirectToRoute('home_admin');
+    }
 }
