@@ -8,6 +8,10 @@ services:
         class: AdminBundle\Services\Admin
         arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
 
+    core.user_admin:
+        class: AdminBundle\Services\UserAdmin
+        arguments: ["@doctrine.orm.entity_manager"]
+
     core.statistiques:
         class: AdminBundle\Services\Statistiques
         arguments: ["@doctrine.orm.entity_manager"]

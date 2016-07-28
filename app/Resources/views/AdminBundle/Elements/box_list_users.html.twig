@@ -1,0 +1,61 @@
+<div class="box-body">
+    <div class="table-responsive">
+        <table class="table no-margin">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Pays</th>
+                    <th>Statut</th>
+                    <th>Rôles</th>
+                    {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                        <th>Actions</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>
+                        <a href="{{ path('show_details_mentor', {'id': user.id}) }}">{{ user.lastname }}</a>
+                    </td>
+                    <td>
+                        {{ user.firstname }}
+                    </td>
+                    <td>
+                        {{ user.country }}
+                    </td>
+                    <td>
+                        {% if user.available == true %}
+                            <span class="label label-success">Disponible</span>
+                        {% else %}
+                            <span class="label label-danger">Indisponible</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% for competences in user.competences %}
+                            <span class="label label-info">{{ competences.libelle }}</span>
+                        {% endfor %}
+                    </td>
+                    {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                        <td>
+                            <a href="#">
+                                <button type="button" class="btn btn-flat btn-warning">Modifier <span class="ion ion-wrench"></span> </button>
+                            </a>
+                            {% if user.archived == false %}
+                                <a type="button" class="btn btn-flat btn-danger" data-toggle="modal" data-target="#myModalArchivageTeacher">
+                                    Archiver <span class="ion ion-folder"></span>
+                                </a>
+                            {% else %}
+                                <a type="button" class="btn btn-flat btn-danger" href="#">
+                                    Désarchiver <span class="ion ion-folder"></span>
+                                </a>
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -98,7 +98,7 @@
                     <section class="sidebar">
                         <ul class="sidebar-menu">
                             <li class="header">NAVIGATION PRINCIPALE</li>
-                            <li class="{{ (controller == "users")? "active" : "" }} treeview">
+                            <li class="{{ (controller == "users_admin")? "active" : "" }} treeview">
                                 <a href="#">
                                     <i class="fa fa-users"></i> <span>Utilisateurs de ZBoard</span>
                                     <span class="pull-right-container">
@@ -106,46 +106,7 @@
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li><a href="{{ path('gestion_mentors') }}"><i class="fa fa-circle-o"></i>Gestion des mentors</a></li>
-                                    <li><a href="{{ path('gestion_mentores') }}"><i class="fa fa-circle-o"></i>Gestion des élèves</a></li>
-                                </ul>
-                            </li>
-                            <li class="{{ (controller == "soutenances")? "active" : "" }} treeview">
-                                <a href="#">
-                                    <i class="fa fa-calendar"></i>
-                                    <span>Les soutenances</span>
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="{{ path('gestion_soutenances') }}"><i class="fa fa-circle-o"></i>Gestion des soutenances</a></li>
-                                </ul>
-                            </li>
-                            <li class="{{ (controller == "parcours")? "active" : "" }} treeview">
-                                <a href="#">
-                                    <i class="fa fa-tasks"></i>
-                                    <span>Les parcours</span>
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="{{ path('gestion_parcours') }}"><i class="fa fa-circle-o"></i>Gestion des parcours</a></li>
-                                    <li><a href="{{ path('gestion_abonnements') }}"><i class="fa fa-circle-o"></i>Gestion des abonnements</a></li>
-                                </ul>
-                            </li>
-                            <li class="{{ (controller == "cms")? "active" : "" }} treeview">
-                                <a href="#">
-                                    <i class="fa fa-laptop"></i>
-                                    <span>Contenu du ZBoard</span>
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-circle-o"></i>Liste des tutoriels</a></li>
-                                    <li><a href="#"><i class="fa fa-circle-o"></i>Informations mentorat</a></li>
+                                    <li><a href="{{ path('gestion_users_admin') }}"><i class="fa fa-circle-o"></i>Gestion des utilisateurs</a></li>
                                 </ul>
                             </li>
                             <li class="treeview">
@@ -160,10 +121,6 @@
                                     <li><a href="{{ path('home_backend') }}"><i class="fa fa-circle-o"></i>Accès au backend</a></li>
                                 </ul>
                             </li>
-                            <li class="header">LABELS</li>
-                            <li><a><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-                            <li><a><i class="fa fa-circle-o text-yellow"></i> <span>A surveiller</span></a></li>
-                            <li><a><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
                         </ul>
                     </section>
                 </aside>
