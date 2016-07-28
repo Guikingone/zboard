@@ -21,9 +21,9 @@ class ShowAdminController extends Controller
         $abonnements = $this->get('core.admin')->getAbonnements();
 
         return array(
-            'controller'    => 'parcours',
-            'abonnements'   => $abonnements,
-            'abonnement'    => $abonnement->createView()
+            'controller' => 'parcours',
+            'abonnements' => $abonnements,
+            'abonnement' => $abonnement->createView(),
         );
     }
 }

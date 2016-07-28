@@ -134,6 +134,20 @@
                                 </ul>
                             </li>
                         {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="{{ (controller == "archives")? "active" : "" }} treeview">
+                                <a href="#">
+                                    <i class="fa fa-folder-open-o"></i>
+                                    <span>Les archives</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ path('home_archives') }}"><i class="fa fa-circle-o"></i>Gestion des archives</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
                         <li class="{{ (controller == "cms")? "active" : "" }} treeview">
                             <a href="#">
                                 <i class="fa fa-laptop"></i>

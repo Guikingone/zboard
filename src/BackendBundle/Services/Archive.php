@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Guillaume
  * Date: 27/07/2016
- * Time: 13:30
+ * Time: 13:30.
  */
 
 namespace BackendBundle\Services;
@@ -30,10 +30,20 @@ class Archive
      * @param EntityManager $doctrine
      * @param Session       $session
      */
-    public function __construct(EntityManager $doctrine,Session $session)
+    public function __construct(EntityManager $doctrine, Session $session)
     {
         $this->doctrine = $doctrine;
         $this->session = $session;
+    }
+
+    /**
+     * Allow to get all the mentors archived.
+     *
+     * @return array|\UserBundle\Entity\User[]
+     */
+    public function getMentorArchived()
+    {
+        return $this->doctrine->getRepository('UserBundle:User')->findBy(array('archived' => true));
     }
 
     /**

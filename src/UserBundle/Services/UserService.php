@@ -95,7 +95,7 @@ class UserService
 
         if ($form->isValid()) {
             $mentor->setUsername($mentor->getFirstName().'_'.$mentor->getLastName());
-            $mentor->setPlainPassword(strtolower($mentor->getFirstName().'_'.$mentor->getLastName()));
+            $mentor->setPlainPassword(mb_strtolower($mentor->getFirstName().'_'.$mentor->getLastName()));
             $mentor->setRoles(array('ROLE_MENTOR'));
             $mentor->setArchived(false);
             $this->doctrine->persist($mentor);

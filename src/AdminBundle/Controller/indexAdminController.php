@@ -27,18 +27,18 @@ class indexAdminController extends Controller
         $sessionsC = $this->get('core.statistiques')->getSessionsCancelled();
 
         return array(
-            'controller'        => 'home',
-            'mentors'           => $mentors,
-            'mentoresPlus'      => $mentoresPlus,
-            'mentoresPClass'    => $mentoresPClass,
-            'parcoursPlus'      => $parcoursPlus,
-            'parcoursClass'     => $parcoursClass,
-            'projetsF'          => $projetsF,
-            'projets'           => $projets,
-            'soutenances'       => $soutenances,
-            'mentoresW'         => $mentorsW,
-            'notes'             => $notes,
-            'sessionsC'         => $sessionsC,
+            'controller' => 'home',
+            'mentors' => $mentors,
+            'mentoresPlus' => $mentoresPlus,
+            'mentoresPClass' => $mentoresPClass,
+            'parcoursPlus' => $parcoursPlus,
+            'parcoursClass' => $parcoursClass,
+            'projetsF' => $projetsF,
+            'projets' => $projets,
+            'soutenances' => $soutenances,
+            'mentoresW' => $mentorsW,
+            'notes' => $notes,
+            'sessionsC' => $sessionsC,
         );
     }
 }

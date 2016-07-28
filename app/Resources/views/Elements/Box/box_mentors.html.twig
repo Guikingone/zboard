@@ -1,0 +1,57 @@
+<div class="box-body">
+    <div class="table-responsive">
+        <table class="table no-margin">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Pays</th>
+                <th>Statut</th>
+                <th>Nombre d'élèves</th>
+                <th>Compétences</th>
+                {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                    <th>Actions</th>
+                {% endif %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for mentor in mentor %}
+                <tr>
+                    <td>
+                        <a href="{{ path('show_details_mentor', {'id': mentor.id}) }}">{{ mentor.lastname }}</a>
+                    </td>
+                    <td>
+                        {{ mentor.firstname }}
+                    </td>
+                    <td>
+                        {{ mentor.country }}
+                    </td>
+                    <td>
+                        {% if mentor.available == true %}
+                            <span class="label label-success">Disponible</span>
+                        {% else %}
+                            <span class="label label-danger">Indisponible</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ mentor.suivi|length }}
+                    </td>
+                    <td>
+                        {% for competences in mentor.competences %}
+                            <span class="label label-info">{{ competences.libelle }}</span>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{{ path('update_mentors', {'id': mentor.id}) }}">
+                            <button type="button" class="btn btn-flat btn-warning">Modifier <span class="ion ion-wrench"></span> </button>
+                        </a>
+                        <a type="button" class="btn btn-flat btn-danger" href="{{ path('out_archive_mentor', {'id': mentor.id }) }}">
+                            Désarchiver <span class="ion ion-folder"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

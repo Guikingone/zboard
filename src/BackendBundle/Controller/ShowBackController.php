@@ -20,9 +20,9 @@ class ShowBackController extends Controller
         $mentors = $this->get('core.user')->getMentors();
 
         return array(
-            'controller'    => "users",
-            'mentors'       => $mentors,
-            'mentor'        => $mentor->createView()
+            'controller' => 'users',
+            'mentors' => $mentors,
+            'mentor' => $mentor->createView(),
         );
     }
 
@@ -37,9 +37,9 @@ class ShowBackController extends Controller
         $mentores = $this->get('core.admin')->getMentores();
 
         return array(
-            'controller'    => "users",
-            'mentores'      => $mentores,
-            'nMentore'      => $nMentore->createView()
+            'controller' => 'users',
+            'mentores' => $mentores,
+            'nMentore' => $nMentore->createView(),
         );
     }
 
@@ -54,9 +54,9 @@ class ShowBackController extends Controller
         $soutenances = $this->get('core.back')->getSoutenances();
 
         return array(
-            'controller'    => "soutenances",
-            'soutenances'   => $soutenances,
-            'soutenance'    => $soutenance->createView()
+            'controller' => 'soutenances',
+            'soutenances' => $soutenances,
+            'soutenance' => $soutenance->createView(),
         );
     }
 
@@ -73,11 +73,11 @@ class ShowBackController extends Controller
         $pathArchived = $this->get('core.back')->getParcoursArchived();
 
         return array(
-            'controller'    => "parcours",
-            'parcours'      => $parcours->createView(),
-            'path'          => $path,
-            'pathArchived'  => $pathArchived,
-            'abonnement'    => $abonnement->createView()
+            'controller' => 'parcours',
+            'parcours' => $parcours->createView(),
+            'path' => $path,
+            'pathArchived' => $pathArchived,
+            'abonnement' => $abonnement->createView(),
         );
     }
 
@@ -104,13 +104,13 @@ class ShowBackController extends Controller
                            ->findBy(array('projet' => $projets));
 
         return array(
-            'controller'    => "parcours",
-            'parcours'      => $parcours,
-            'projet'        => $projet->createView(),
-            'projets'       => $projets,
-            'competence'    => $competence,
-            'competences'   => $competences->createView(),
-            'cours'         => $cours->createView(),
-            'coursP'        => $coursP, );
+            'controller' => 'parcours',
+            'parcours' => $parcours,
+            'projet' => $projet->createView(),
+            'projets' => $projets,
+            'competence' => $competence,
+            'competences' => $competences->createView(),
+            'cours' => $cours->createView(),
+            'coursP' => $coursP, );
     }
 }
