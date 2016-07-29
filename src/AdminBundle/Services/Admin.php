@@ -2,6 +2,8 @@
 
 namespace AdminBundle\Services;
 
+use AdminBundle\Entity\Country;
+use AdminBundle\Form\CountryType;
 use BackendBundle\Entity\Abonnement;
 use BackendBundle\Entity\Competences;
 use BackendBundle\Entity\Cours;
@@ -155,6 +157,16 @@ class Admin
     }
 
     /**
+     * Allow to get all the country save in BDD.
+     *
+     * @return \AdminBundle\Entity\Country[]|array
+     */
+    public function getCountry()
+    {
+        return $this->doctrine->getRepository('AdminBundle:Country')->findAll();
+    }
+
+    /**
      * Allow to create a new instance of Mentore.
      *
      * @param Request $request
@@ -299,6 +311,28 @@ class Admin
             $this->doctrine->persist($abonnement);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', "L'abonnement a bien été ajouté !");
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to add a new Country.
+     *
+     * @param Request $request
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addCountry(Request $request)
+    {
+        $country = new Country();
+
+        $form = $this->form->create(CountryType::class, $country);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->persist($country);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Le pays a bien été enregistré.');
         }
 
         return $form;

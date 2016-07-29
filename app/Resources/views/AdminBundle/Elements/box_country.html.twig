@@ -1,0 +1,24 @@
+<div class="box-body">
+    <div class="table-responsive">
+        <table class="table no-margin">
+            <thead>
+            <tr>
+                <th>Nom du pays</th>
+                <th>Membre étant lié à ce pays</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for countrys in countrys %}
+                <tr>
+                    <td>
+                        {{ countrys.libelle }}
+                    </td>
+                    <td>
+                        A définir
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

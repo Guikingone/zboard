@@ -44,6 +44,22 @@ class indexAdminController extends Controller
     }
 
     /**
+     *
+     * @return array
+     *
+     * @Route("/country", name="gestion_country")
+     * @Template("AdminBundle/Action/list_country.html.twig")
+     */
+    public function addCountryAction(Request $request)
+    {
+        $country = $this->get('core.admin')->addCountry($request);
+        $countrys = $this->get('core.admin')->getCountry();
+
+        return array('controller' => 'cms', 'country' => $country->createView(),
+                     'countrys' => $countrys);
+    }
+
+    /**
      * @Route("/habilitations", name="gestion_habilitations")
      * @Template("AdminBundle/Index/habilitations.html.twig")
      */

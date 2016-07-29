@@ -109,6 +109,66 @@ class Archive
     }
 
     /**
+     * Allow to archive a path using is $id.
+     *
+     * @param $id
+     */
+    public function archiveParcours($id)
+    {
+        $parcours = $this->doctrine->getRepository('BackendBundle:Parcours')->findOneBy(array('id' => $id));
+
+        if (null === $parcours) {
+            throw new NotFoundHttpException('Le parcours ne semble pas exister ou a déjà été archiver.');
+        }
+
+        $parcours->setArchived(true);
+
+        $this->doctrine->flush();
+
+        $this->session->getFlashBag()->add('success', 'Le parcours a bien été archivé.');
+    }
+
+    /**
+     * Allow to archive a courses using id $id.
+     *
+     * @param $id
+     */
+    public function archiveCourses($id)
+    {
+        $courses = $this->doctrine->getRepository('BackendBundle:Cours')->findOneBy(array('id' => $id));
+
+        if (null === $courses) {
+            throw new NotFoundHttpException('Le cours ne semble pas exister ou a déjà été archivé.');
+        }
+
+        $courses->setArchived(true);
+
+        $this->doctrine->flush();
+
+        $this->session->getFlashBag()->add('success', 'Le cours a bien été archivé.');
+    }
+
+    /**
+     * Allow to archive a project using id $id.
+     *
+     * @param $id
+     */
+    public function archiveProject($id)
+    {
+        $projet = $this->doctrine->getRepository('BackendBundle:Projet')->findOneBy(array('id' => $id));
+
+        if (null === $projet) {
+            throw new NotFoundHttpException('Le projet ne semble pas exister ou a déjà été archivé.');
+        }
+
+        $projet->setArchived(true);
+
+        $this->doctrine->flush();
+
+        $this->session->getFlashBag()->add('success', 'Le projet a bien été archivé.');
+    }
+
+    /**
      * Allow to get out of the archives the teacher using is $id.
      *
      * @param $id
@@ -146,26 +206,6 @@ class Archive
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le mentore a bien été sorti des archives.');
-    }
-
-    /**
-     * Allow to archive a path using is $id.
-     *
-     * @param $id
-     */
-    public function archiveParcours($id)
-    {
-        $parcours = $this->doctrine->getRepository('BackendBundle:Parcours')->findOneBy(array('id' => $id));
-
-        if (null === $parcours) {
-            throw new NotFoundHttpException('Le parcours ne semble pas exister ou a déjà été archiver.');
-        }
-
-        $parcours->setArchived(true);
-
-        $this->doctrine->flush();
-
-        $this->session->getFlashBag()->add('success', 'Le parcours a bien été archivé.');
     }
 
     /**
