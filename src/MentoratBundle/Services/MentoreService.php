@@ -107,7 +107,7 @@ class MentoreService
     {
         return $this->doctrine->getRepository('MentoratBundle:Suivi')->findBy(array(
             'mentor' => $user,
-            'state' => 'MENTORAT_FINISHED',
+            'state' => 'ENDED',
         ));
     }
 

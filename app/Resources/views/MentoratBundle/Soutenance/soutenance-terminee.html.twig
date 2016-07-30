@@ -5,11 +5,11 @@
     <div class="col-md-12">
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">Liste des mentorés en attente de session découverte</h3>
+          <h3 class="box-title">Liste des soutenance que vous avez validé (ou pas)</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          {% if mentores %}
+          {% if soutenances %}
             <table class="table table-bordered">
               <tr>
                 <th style="width: 10px">#</th>
@@ -18,21 +18,20 @@
                 <th>Etat de la formation</th>
                 <th>Actions</th>
               </tr>
-              {% for unMentore in mentores %}
+              {% for soutenance in soutenances %}
                 <tr>
-                  <td>{{ unMentore.id }}</td>
-                  <td>{{ unMentore.mentore.firstname }} {{ unMentore.mentore.lastname }}</td>
-                  <td>{{ unMentore.parcours.libelle }}</td>
-                  <td><span class="badge bg-warning">En attente</span></td>
+                  <td>{{ soutenance.id }}</td>
+                  <td>{{ soutenance.mentore.firstname }} {{ soutenance.mentore.lastname }}</td>
+                  <td>{{ soutenance.projet.libelle }}</td>
+                  <td><span class="badge bg-success">Soutenance validée</span></td>
                   <td>
-                    <button type="button" class="btn btn-primary">Détails</button>
-                    <button type="button" class="btn btn-warning">Transférer le mentoré</button>
+                    <button type="button" class="btn btn-primary">Voir le détail</button>
                   </td>
                 </tr>
               {% endfor %}
             </table>
           {% else %}
-            <div class="alert alert-info">Vous n'avez pas encore de mentoré d'assigné. Patience !</div>
+            <div class="alert alert-info">Vous n'avez encore validé aucune soutenance. Patience !</div>
           {% endif %}
         </div>
         <!-- /.box-body -->

@@ -5,28 +5,29 @@
     <div class="col-md-12">
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">Liste des mentorés en attente de session découverte</h3>
+          <h3 class="box-title">Soutenances en attente de validation</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          {% if mentores %}
+          {% if soutenances %}
             <table class="table table-bordered">
               <tr>
                 <th style="width: 10px">#</th>
                 <th>Prénom & Nom</th>
                 <th>Parcours</th>
-                <th>Etat de la formation</th>
+                <th>Etat de la soutenance</th>
                 <th>Actions</th>
               </tr>
-              {% for unMentore in mentores %}
+              {% for soutenance in soutenances %}
                 <tr>
-                  <td>{{ unMentore.id }}</td>
-                  <td>{{ unMentore.mentore.firstname }} {{ unMentore.mentore.lastname }}</td>
-                  <td>{{ unMentore.parcours.libelle }}</td>
-                  <td><span class="badge bg-warning">En attente</span></td>
+                  <td>{{ soutenance.id }}</td>
+                  <td>{{ soutenance.mentore.firstname }} {{ soutenance.mentore.lastname }}</td>
+                  <td>{{ soutenance.projet.libelle }}</td>
+                  <td><span class="badge bg-aqua">En attente</span></td>
                   <td>
-                    <button type="button" class="btn btn-primary">Détails</button>
-                    <button type="button" class="btn btn-warning">Transférer le mentoré</button>
+                    <button type="button" class="btn btn-flat btn-primary">Ajouter des documents</button>
+                    <button type="button" class="btn btn-flat btn-info">Voir le détail</button>
+                    <button type="button" class="btn btn-flat btn-success">Valider le projet</button>
                   </td>
                 </tr>
               {% endfor %}

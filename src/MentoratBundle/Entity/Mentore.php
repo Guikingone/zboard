@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Mentore
 {
+
     /**
      * @var int
      *
@@ -528,6 +529,9 @@ class Mentore
     public function __construct()
     {
         $this->sessions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->date_start = new \DateTime("now");
+        $this->archived = false;
+        $this->setFinancement = false;
     }
 
     /**
