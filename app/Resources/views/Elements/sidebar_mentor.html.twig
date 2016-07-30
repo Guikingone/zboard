@@ -9,7 +9,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MENU PRINCIPAL</li>
-            <li class="{{ ('controller' == 'mentorat') ? '' : 'active' }} treeview">
+            <li class="{{ (controller == 'mentorat') ? 'active' : '' }} treeview">
                 <a href="#">
                     <i class="ion ion-person-stalker"></i>
                     <span>Mes mentorés</span>
@@ -21,6 +21,19 @@
                     <li><a href="{{ path('en_attente') }}"><i class="fa fa-circle-o"></i> En attente</a></li>
                     <li><a href="{{ path('en_cours') }}"><i class="fa fa-circle-o"></i> En cours</a></li>
                     <li><a href="{{ path('mentorat_termine') }}"><i class="fa fa-circle-o"></i> Mentorat terminés</a></li>
+                </ul>
+            </li>
+            <li class="{{ (controller == 'soutenances') ? 'active' : '' }} treeview">
+                <a href="#">
+                    <i class="ion ion-calendar"></i>
+                    <span>Mes soutenances</span>
+                    <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ path('soutenance_waiting') }}"><i class="fa fa-circle-o"></i> En attente</a></li>
+                    <li><a href="{{ path('soutenance_done') }}"><i class="fa fa-circle-o"></i> Effectuées</a></li>
                 </ul>
             </li>
             <li class="treeview"><a href="{{ path('mentorat_infos_index') }}"><i class='fa fa-info-circle'></i> <span>Informations mentorat</span></a></li>
