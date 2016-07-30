@@ -19,7 +19,7 @@ class ArchiveController extends Controller
         $path = $this->get('core.archive')->getParcoursArchived();
 
         return array('controller' => 'archives', 'mentor' => $mentor,
-                     'path' => $path, 'mentores' => $mentores);
+                     'path' => $path, 'mentores' => $mentores, );
     }
 
     /**

@@ -170,7 +170,6 @@ class UtilsBackController extends Controller
         );
     }
 
-
     /**
      * @param $id
      *

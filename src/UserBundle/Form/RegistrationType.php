@@ -2,8 +2,8 @@
 
 namespace UserBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -26,7 +26,10 @@ class RegistrationType extends AbstractType
                     'Non' => false,
                 ),
             ))
-            ->add('country', CountryType::class)
+            ->add('country', EntityType::class, array(
+                'class' => 'AdminBundle\Entity\Country',
+                'choice_label' => 'libelle',
+            ))
             ->remove('plainPassword')
             ->remove('plainPassword_confirmation')
             ->remove('archived');

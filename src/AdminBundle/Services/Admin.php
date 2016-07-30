@@ -320,6 +320,7 @@ class Admin
      * Allow to add a new Country.
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\Form\FormInterface
      */
     public function addCountry(Request $request)

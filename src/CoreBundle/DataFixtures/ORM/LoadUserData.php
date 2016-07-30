@@ -28,6 +28,9 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         // Get our userManager, you must implement `ContainerAwareInterface`
         $userManager = $this->privateContainer->get('fos_user.user_manager');
 
+        $country = $this->privateContainer->get('doctrine')->getManager()->getRepository('AdminBundle:Country')
+                                          ->findOneBy(array('libelle' => 'France'));
+
         // Création de notre utilisateur ADMIN
         $userAdmin = $userManager->createUser();
         $userAdmin->setUsername('admin');
@@ -38,8 +41,9 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $userAdmin->setAddress('3 rue LABAS');
         $userAdmin->setZipCode('44300');
         $userAdmin->setCity('nantes');
-        $userAdmin->setCountry('FR');
+        $userAdmin->setCountry($country);
         $userAdmin->setEnabled(true);
+        $userAdmin->setArchived(false);
         $userAdmin->setPhone('06.06.06.06.06');
         $userAdmin->setRoles(array('ROLE_ADMIN'));
         $userAdmin->setAvailable(true);
@@ -54,8 +58,9 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $mentor->setAddress('3 rue LABAS');
         $mentor->setZipCode('44390');
         $mentor->setCity('nantes');
-        $mentor->setCountry('FR');
+        $mentor->setCountry($country);
         $mentor->setEnabled(true);
+        $mentor->setArchived(false);
         $mentor->setPhone('02.22.01.05.06');
         $mentor->setRoles(array('ROLE_MENTOR'));
         $mentor->setAvailable(true);
@@ -70,8 +75,9 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $supervisteurMentor->setAddress('4 rue LABAS');
         $supervisteurMentor->setZipCode('44290');
         $supervisteurMentor->setCity('nantes');
-        $supervisteurMentor->setCountry('FR');
+        $supervisteurMentor->setCountry($country);
         $supervisteurMentor->setEnabled(true);
+        $supervisteurMentor->setArchived(false);
         $supervisteurMentor->setPhone('02.22.29.05.06');
         $supervisteurMentor->setRoles(array('ROLE_SUPERVISEUR_MENTOR'));
         $supervisteurMentor->setAvailable(true);

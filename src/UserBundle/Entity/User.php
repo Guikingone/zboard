@@ -54,9 +54,7 @@ class User extends BaseUser
     protected $city;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="country", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Country", inversedBy="users")
      */
     private $country;
 
@@ -223,13 +221,13 @@ class User extends BaseUser
     }
 
     /**
-     * Set country.
+     * Set country
      *
-     * @param string $country
+     * @param \AdminBundle\Entity\Country $country
      *
      * @return User
      */
-    public function setCountry($country)
+    public function setCountry(\AdminBundle\Entity\Country $country = null)
     {
         $this->country = $country;
 
@@ -237,9 +235,9 @@ class User extends BaseUser
     }
 
     /**
-     * Get country.
+     * Get country
      *
-     * @return string
+     * @return \AdminBundle\Entity\Country
      */
     public function getCountry()
     {

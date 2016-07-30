@@ -57,9 +57,7 @@ class Mentore
     private $city;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="country", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Country", inversedBy="mentores")
      */
     private $country;
 
@@ -259,30 +257,6 @@ class Mentore
     public function getCity()
     {
         return $this->city;
-    }
-
-    /**
-     * Set country.
-     *
-     * @param string $country
-     *
-     * @return Mentore
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country.
-     *
-     * @return string
-     */
-    public function getCountry()
-    {
-        return $this->country;
     }
 
     /**
@@ -564,5 +538,29 @@ class Mentore
     public function getSessions()
     {
         return $this->sessions;
+    }
+
+    /**
+     * Set archived
+     *
+     * @param boolean $archived
+     *
+     * @return Mentore
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+
+        return $this;
+    }
+
+    /**
+     * Get archived
+     *
+     * @return boolean
+     */
+    public function getArchived()
+    {
+        return $this->archived;
     }
 }

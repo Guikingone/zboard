@@ -5,7 +5,7 @@ namespace AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Country.
+ * Country
  *
  * @ORM\Table(name="zboard_country")
  * @ORM\Entity(repositoryClass="AdminBundle\Repository\CountryRepository")
@@ -38,8 +38,9 @@ class Country
      */
     private $mentores;
 
+
     /**
-     * Get id.
+     * Get id
      *
      * @return int
      */
@@ -49,7 +50,7 @@ class Country
     }
 
     /**
-     * Set libelle.
+     * Set libelle
      *
      * @param string $libelle
      *
@@ -63,7 +64,7 @@ class Country
     }
 
     /**
-     * Get libelle.
+     * Get libelle
      *
      * @return string
      */
@@ -72,7 +73,7 @@ class Country
         return $this->libelle;
     }
     /**
-     * Constructor.
+     * Constructor
      */
     public function __construct()
     {
@@ -80,7 +81,7 @@ class Country
     }
 
     /**
-     * Add user.
+     * Add user
      *
      * @param \UserBundle\Entity\User $user
      *
@@ -94,7 +95,7 @@ class Country
     }
 
     /**
-     * Remove user.
+     * Remove user
      *
      * @param \UserBundle\Entity\User $user
      */
@@ -104,46 +105,12 @@ class Country
     }
 
     /**
-     * Get users.
+     * Get users
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {
         return $this->users;
-    }
-
-    /**
-     * Add mentore.
-     *
-     * @param \MentoratBundle\Entity\Mentore $mentore
-     *
-     * @return Country
-     */
-    public function addMentore(\MentoratBundle\Entity\Mentore $mentore)
-    {
-        $this->mentores[] = $mentore;
-
-        return $this;
-    }
-
-    /**
-     * Remove mentore.
-     *
-     * @param \MentoratBundle\Entity\Mentore $mentore
-     */
-    public function removeMentore(\MentoratBundle\Entity\Mentore $mentore)
-    {
-        $this->mentores->removeElement($mentore);
-    }
-
-    /**
-     * Get mentores.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMentores()
-    {
-        return $this->mentores;
     }
 }

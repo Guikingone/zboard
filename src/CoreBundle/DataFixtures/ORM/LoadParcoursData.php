@@ -34,21 +34,25 @@ class LoadParcoursData implements FixtureInterface, ContainerAwareInterface, Ord
         $cpmDev->setLibelle('Chef de Projet Multimédia - Développement');
         $cpmDev->setDiplome('Bac+3');
         $cpmDev->setAbonnement($PPlus);
+        $cpmDev->setArchived(false);
 
         $cpmDes = new Parcours();
         $cpmDes->setLibelle('Chef de Projet Multimédia - Design');
         $cpmDes->setDiplome('Bac+3');
         $cpmDes->setAbonnement($PPlus);
+        $cpmDes->setArchived(false);
 
         $cpmMar = new Parcours();
         $cpmMar->setLibelle('Chef de Projet Multimédia - Marketing');
         $cpmMar->setDiplome('Bac+3');
         $cpmMar->setAbonnement($PPlus);
+        $cpmMar->setArchived(false);
 
         $devSf = new Parcours();
         $devSf->setLibelle('Développeur PHP/Symfony');
         $devSf->setDiplome(null);
         $devSf->setAbonnement($PClass);
+        $devSf->setArchived(false);
 
         $manager->persist($cpmDev);
         $manager->persist($cpmDes);

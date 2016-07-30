@@ -30,6 +30,9 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $mentor = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
                        ->findOneBy(array('firstName' => 'Jacky'));
 
+        $country = $this->privateContainer->get('doctrine')->getManager()->getRepository('AdminBundle:Country')
+                                          ->findOneBy(array('libelle' => 'France'));
+
         $mentore = new Mentore();
         $suivi = new Suivi();
         $suiviC = new Suivi();
@@ -39,7 +42,7 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $mentore->setEmail('aurore.gaucher@gmail.com');
         $mentore->setAddress('Somewhere');
         $mentore->setCity('Don\'t say, somewhere near by');
-        $mentore->setCountry('FR');
+        $mentore->setCountry($country);
         $mentore->setPhone('00.00.00.00.00');
         $mentore->setDateStart(new \DateTime());
         $mentore->setResume('Something');
@@ -58,7 +61,7 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $mentoreC->setEmail('tyoto.toto@gmail.com');
         $mentoreC->setAddress('Somewhere');
         $mentoreC->setCity('Don\'t say, somewhere near by');
-        $mentoreC->setCountry('FR');
+        $mentoreC->setCountry($country);
         $mentoreC->setPhone('00.00.00.00.00');
         $mentoreC->setDateStart(new \DateTime());
         $mentoreC->setResume('Something');

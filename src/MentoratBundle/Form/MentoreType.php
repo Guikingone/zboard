@@ -2,6 +2,7 @@
 
 namespace MentoratBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
@@ -32,7 +33,10 @@ class MentoreType extends AbstractType
             ->add('city', TextType::class, array(
                 'required' => false,
             ))
-            ->add('country', CountryType::class)
+            ->add('country', EntityType::class, array(
+                'class' => 'AdminBundle\Entity\Country',
+                'choice_label' => 'libelle',
+            ))
             ->add('email', EmailType::class)
             ->add('phone', TextType::class, array(
                 'required' => false,

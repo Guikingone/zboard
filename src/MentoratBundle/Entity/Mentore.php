@@ -57,9 +57,7 @@ class Mentore
     private $city;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="country", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Country", inversedBy="mentores")
      */
     private $country;
 
@@ -262,13 +260,13 @@ class Mentore
     }
 
     /**
-     * Set country.
+     * Set country
      *
-     * @param string $country
+     * @param \AdminBundle\Entity\Country $country
      *
      * @return Mentore
      */
-    public function setCountry($country)
+    public function setCountry(\AdminBundle\Entity\Country $country = null)
     {
         $this->country = $country;
 
@@ -276,9 +274,9 @@ class Mentore
     }
 
     /**
-     * Get country.
+     * Get country
      *
-     * @return string
+     * @return \AdminBundle\Entity\Country
      */
     public function getCountry()
     {

@@ -54,9 +54,7 @@ class User extends BaseUser
     protected $city;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="country", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Country", inversedBy="users")
      */
     private $country;
 
@@ -223,30 +221,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set country.
-     *
-     * @param string $country
-     *
-     * @return User
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country.
-     *
-     * @return string
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
      * Set phone.
      *
      * @param string $phone
@@ -394,5 +368,29 @@ class User extends BaseUser
     public function getCompetences()
     {
         return $this->competences;
+    }
+
+    /**
+     * Set archived
+     *
+     * @param boolean $archived
+     *
+     * @return User
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+
+        return $this;
+    }
+
+    /**
+     * Get archived
+     *
+     * @return boolean
+     */
+    public function getArchived()
+    {
+        return $this->archived;
     }
 }

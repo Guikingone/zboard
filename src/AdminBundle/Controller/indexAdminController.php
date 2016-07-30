@@ -44,7 +44,6 @@ class indexAdminController extends Controller
     }
 
     /**
-     *
      * @return array
      *
      * @Route("/country", name="gestion_country")
@@ -56,7 +55,7 @@ class indexAdminController extends Controller
         $countrys = $this->get('core.admin')->getCountry();
 
         return array('controller' => 'cms', 'country' => $country->createView(),
-                     'countrys' => $countrys);
+                     'countrys' => $countrys, );
     }
 
     /**
