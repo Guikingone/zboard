@@ -27,15 +27,14 @@ class LoadSessionsData implements FixtureInterface, ContainerAwareInterface, Ord
     public function load(ObjectManager $manager)
     {
         $mentore = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
-                                        ->findOneBy(array('lastName' => 'Gaucher'));
+                                        ->findOneBy(array('lastname' => 'Gaucher'));
 
         $mentor = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
-                                         ->findOneBy(array('firstName' => 'Jacky'));
+            ->findOneBy(array('lastname' => 'Chan'));
 
         $session = new Sessions();
 
-        $session->setMentore($mentore);
-        $session->setMentor($mentor);
+        $session->addUser($mentor);
         $session->setDateSession(new \DateTime());
         $session->setPeriodicity(false);
         $session->setStatus('Present');

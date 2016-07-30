@@ -33,6 +33,15 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $country = $this->privateContainer->get('doctrine')->getManager()->getRepository('AdminBundle:Country')
                                           ->findOneBy(array('libelle' => 'France'));
 
+        $parcours = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
+                                           ->findOneBy(array('libelle' => 'Chef de projet Multimédia - Développement'));
+
+        $parcoursC = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
+                                           ->findOneBy(array('libelle' => 'Développeur PHP/Symfony'));
+
+        $country = $this->privateContainer->get('doctrine')->getManager()->getRepository('AdminBundle:Country')
+                                           ->findOneBy(array('libelle' => 'France'));
+
         // Création de notre utilisateur ADMIN
         $userAdmin = $userManager->createUser();
         $userAdmin->setUsername('admin');
@@ -84,35 +93,22 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $supervisteurMentor->setRoles(array('ROLE_SUPERVISEUR_MENTOR'));
         $supervisteurMentor->setAvailable(true);
 
-        // Update the user
-        $userManager->updateUser($userAdmin, true);
-        $userManager->updateUser($mentor, true);
-        $userManager->updateUser($supervisteurMentor, true);
-
-
-        $parcours = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
-            ->findOneBy(array('libelle' => 'Chef de projet Multimédia - Développement'));
-
-        $parcoursC = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
-            ->findOneBy(array('libelle' => 'Développeur PHP/Symfony'));
-
-        $country = $this->privateContainer->get('doctrine')->getManager()->getRepository('AdminBundle:Country')
-            ->findOneBy(array('libelle' => 'France'));
-
-        $mentore = new User();
+        $mentore = $userManager->createUser();
         $suivi = new Suivi();
 
-        $mentore->setFirstName('Aurore');
-        $mentore->setLastName('Gaucher');
+        $mentore->setUsername('Aurore');
+        $mentore->setFirstname('Aurore');
+        $mentore->setLastname('Gaucher');
         $mentore->setEmail('aurore.gaucher@gmail.com');
         $mentore->setCountry($country);
         $mentore->setPhone('00.00.00.00.00');
+        $mentore->setPlainPassword('aurore');
         $mentore->setResume('Something');
-        $mentore->addSuivi($suivi);
+        $mentore->setSuivi($suivi);
         $mentore->setArchived(false);
         $mentore->setRoles(array('ROLE_MENTORE'));
-        $suivi->setMentor($mentor);
-        $suivi->setMentore($mentore);
+        $suivi->addUser($mentor);
+        $suivi->addUser($mentore);
         $suivi->setParcours($parcours);
         $suivi->setFinancement(true);
         $suivi->setFinanceur('Pole-Emploi');
@@ -121,34 +117,39 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $suivi->setMentoreStatus('En formation');
         $suivi->setDateStart(new \DateTime());
 
-        $mentoreC = new User();
+        $mentoreC = $userManager->createUser();
         $suiviC = new Suivi();
 
-        $mentoreC->setFirstName('Toto');
-        $mentoreC->setLastName('Toto');
+        $mentoreC->setUsername('toto');
+        $mentoreC->setFirstname('Toto');
+        $mentoreC->setLastname('Toto');
         $mentoreC->setEmail('tyoto.toto@gmail.com');
         $mentoreC->setCountry($country);
         $mentoreC->setPhone('00.00.00.00.00');
+        $mentoreC->setPlainPassword('toto');
         $mentoreC->setResume('Something');
-        $mentoreC->addSuivi($suiviC);
+        $mentoreC->setSuivi($suiviC);
         $mentoreC->setArchived(false);
         $mentoreC->setRoles(array('ROLE_MENTORE'));
-        $suiviC->setMentor($mentor);
-        $suiviC->setMentore($mentore);
+        $suiviC->addUser($mentor);
+        $suiviC->addUser($mentore);
         $suiviC->setParcours($parcoursC);
-        $suiviC->setMentoreStatus('En formation');
+        $suiviC->setSuiviState('En cours');
+        $suiviC->setMentoreStatus('En attente');
         $suiviC->setDateStart(new \DateTime());
 
-        $manager->persist($mentore);
-        $manager->persist($mentoreC);
-        $manager->persist($suivi);
-        $manager->persist($suiviC);
+        // Update the user
+        $userManager->updateUser($userAdmin, true);
+        $userManager->updateUser($mentor, true);
+        $userManager->updateUser($supervisteurMentor, true);
+        $userManager->updateUser($mentore, true);
+        $userManager->updateUser($mentoreC, true);
     }
 
     public function getOrder()
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 2;
+        return 3;
     }
 }

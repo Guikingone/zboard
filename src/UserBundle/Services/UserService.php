@@ -64,9 +64,7 @@ class UserService
      */
     public function getMentors()
     {
-        return $this->doctrine->getRepository('UserBundle:User')
-                              ->findBy(array('archived' => false,
-                                             'roles' => array('ROLE_MENTOR')));
+        return $this->doctrine->getRepository('UserBundle:User')->findBy(array('roles' => array('ROLE_MENTOR')));
     }
 
     /**
@@ -76,9 +74,7 @@ class UserService
      */
     public function getMentores()
     {
-        return $this->doctrine->getRepository('UserBundle:User')
-                              ->findBy(array('archived' => false,
-                                             'roles' => array('ROLE_MENTORE')));
+        return $this->doctrine->getRepository('UserBundle:User')->findBy(array('roles' => array('ROLE_MENTORE')));
     }
 
     /**
@@ -108,8 +104,8 @@ class UserService
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $mentor->setUsername($mentor->getFirstName().'_'.$mentor->getLastName());
-            $mentor->setPlainPassword(mb_strtolower($mentor->getFirstName().'_'.$mentor->getLastName()));
+            $mentor->setUsername($mentor->getFirstname().'_'.$mentor->getLastname());
+            $mentor->setPlainPassword(mb_strtolower($mentor->getFirstname().'_'.$mentor->getLastname()));
             $mentor->setRoles(array('ROLE_MENTOR'));
             $mentor->setArchived(false);
             $this->doctrine->persist($mentor);
@@ -136,11 +132,11 @@ class UserService
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $mentore->setUsername($mentore->getFirstName() . '_' . $mentore->getLastName());
-            $mentore->setPlainPassword(mb_strtolower($mentore->getFirstName() . '_' . $mentore->getLastName()));
+            $mentore->setUsername($mentore->getFirstname() . '_' . $mentore->getLastname());
+            $mentore->setPlainPassword(mb_strtolower($mentore->getFirstname() . '_' . $mentore->getLastname()));
             $mentore->setRoles(array('ROLE_MENTORE'));
             $mentore->setArchived(false);
-            $mentore->addSuivi($suivi);
+            $mentore->setSuivi($suivi);
             $this->doctrine->persist($mentore);
             $this->doctrine->persist($suivi);
             $this->doctrine->flush();

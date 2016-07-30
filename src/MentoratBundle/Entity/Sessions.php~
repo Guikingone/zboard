@@ -55,7 +55,7 @@ class Sessions
     private $suivi;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="sessions")
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="sessions")
      */
     private $users;
     
@@ -167,54 +167,6 @@ class Sessions
     }
 
     /**
-     * Set mentor
-     *
-     * @param \UserBundle\Entity\User $mentor
-     *
-     * @return Sessions
-     */
-    public function setMentor(\UserBundle\Entity\User $mentor = null)
-    {
-        $this->mentor = $mentor;
-
-        return $this;
-    }
-
-    /**
-     * Get mentor
-     *
-     * @return \UserBundle\Entity\User
-     */
-    public function getMentor()
-    {
-        return $this->mentor;
-    }
-
-    /**
-     * Set mentore
-     *
-     * @param \UserBundle\Entity\User $mentore
-     *
-     * @return Sessions
-     */
-    public function setMentore(\UserBundle\Entity\User $mentore = null)
-    {
-        $this->mentore = $mentore;
-
-        return $this;
-    }
-
-    /**
-     * Get mentore
-     *
-     * @return \UserBundle\Entity\User
-     */
-    public function getMentore()
-    {
-        return $this->mentore;
-    }
-
-    /**
      * Set suivi
      *
      * @param \MentoratBundle\Entity\Suivi $suivi
@@ -236,5 +188,46 @@ class Sessions
     public function getSuivi()
     {
         return $this->suivi;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return Sessions
+     */
+    public function addUser(\UserBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \UserBundle\Entity\User $user
+     */
+    public function removeUser(\UserBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

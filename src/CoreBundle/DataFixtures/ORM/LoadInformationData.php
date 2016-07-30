@@ -21,7 +21,7 @@ class LoadInformationData implements FixtureInterface, ContainerAwareInterface, 
     public function load(ObjectManager $manager)
     {
         $user = $this->privateContainer->get('doctrine')->getRepository('UserBundle:User')
-                                       ->findOneBy(array('lastName' => 'Chan'));
+                                       ->findOneBy(array('lastname' => 'Chan'));
 
         $info = new InformationMentorat();
         $info->setTitle('Première news !');

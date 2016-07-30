@@ -42,15 +42,9 @@ class Suivi
     private $date_start;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="suivi")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="suivi")
      */
-    private $mentor;
-
-    /**
-     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User", inversedBy="suivi")
-     */
-    private $mentore;
+    private $users;
 
     /**
      * @var string
@@ -70,7 +64,7 @@ class Suivi
     private $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Sessions", mappedBy="mentor")
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Sessions", mappedBy="suivi")
      */
     private $sessions;
 
@@ -97,12 +91,13 @@ class Suivi
      * @ORM\Column(name="duree_financement", type="string", length=100, nullable=true)
      */
     private $duree_financement;
-
+   
     /**
      * Constructor
      */
     public function __construct()
     {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
         $this->notes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->sessions = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -310,51 +305,37 @@ class Suivi
     }
 
     /**
-     * Set mentor
+     * Add user
      *
-     * @param \UserBundle\Entity\User $mentor
+     * @param \UserBundle\Entity\User $user
      *
      * @return Suivi
      */
-    public function setMentor(\UserBundle\Entity\User $mentor)
+    public function addUser(\UserBundle\Entity\User $user)
     {
-        $this->mentor = $mentor;
+        $this->users[] = $user;
 
         return $this;
     }
 
     /**
-     * Get mentor
+     * Remove user
      *
-     * @return \UserBundle\Entity\User
+     * @param \UserBundle\Entity\User $user
      */
-    public function getMentor()
+    public function removeUser(\UserBundle\Entity\User $user)
     {
-        return $this->mentor;
+        $this->users->removeElement($user);
     }
 
     /**
-     * Set mentore
+     * Get users
      *
-     * @param \UserBundle\Entity\User $mentore
-     *
-     * @return Suivi
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setMentore(\UserBundle\Entity\User $mentore = null)
+    public function getUsers()
     {
-        $this->mentore = $mentore;
-
-        return $this;
-    }
-
-    /**
-     * Get mentore
-     *
-     * @return \UserBundle\Entity\User
-     */
-    public function getMentore()
-    {
-        return $this->mentore;
+        return $this->users;
     }
 
     /**

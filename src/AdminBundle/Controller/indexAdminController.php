@@ -16,28 +16,22 @@ class indexAdminController extends Controller
     public function indexAction()
     {
         $mentors = $this->get('core.user')->getMentors();
-        $mentoresPlus = $this->get('core.statistiques')->getMentoresPlus();
-        $mentoresPClass = $this->get('core.statistiques')->getMentoreClass();
         $parcoursPlus = $this->get('core.statistiques')->getParcoursPlus();
         $parcoursClass = $this->get('core.statistiques')->getParcoursClass();
         $projets = $this->get('core.statistiques')->getProjets();
         $projetsF = $this->get('core.statistiques')->getProjetsFinished();
         $soutenances = $this->get('core.statistiques')->getSoutenances();
-        $mentorsW = $this->get('core.statistiques')->getMentoresWaiting();
         $notes = $this->get('core.statistiques')->getNotesSuivi();
         $sessionsC = $this->get('core.statistiques')->getSessionsCancelled();
 
         return array(
             'controller' => 'home',
             'mentors' => $mentors,
-            'mentoresPlus' => $mentoresPlus,
-            'mentoresPClass' => $mentoresPClass,
             'parcoursPlus' => $parcoursPlus,
             'parcoursClass' => $parcoursClass,
             'projetsF' => $projetsF,
             'projets' => $projets,
             'soutenances' => $soutenances,
-            'mentoresW' => $mentorsW,
             'notes' => $notes,
             'sessionsC' => $sessionsC,
         );

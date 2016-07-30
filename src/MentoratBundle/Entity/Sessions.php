@@ -55,7 +55,7 @@ class Sessions
     private $suivi;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="sessions")
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="sessions")
      */
     private $users;
     
@@ -189,25 +189,42 @@ class Sessions
     {
         return $this->suivi;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
-     * Set users
+     * Add user
      *
-     * @param \UserBundle\Entity\User $users
+     * @param \UserBundle\Entity\User $user
      *
      * @return Sessions
      */
-    public function setUsers(\UserBundle\Entity\User $users = null)
+    public function addUser(\UserBundle\Entity\User $user)
     {
-        $this->users = $users;
+        $this->users[] = $user;
 
         return $this;
     }
 
     /**
+     * Remove user
+     *
+     * @param \UserBundle\Entity\User $user
+     */
+    public function removeUser(\UserBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
      * Get users
      *
-     * @return \UserBundle\Entity\User
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {
