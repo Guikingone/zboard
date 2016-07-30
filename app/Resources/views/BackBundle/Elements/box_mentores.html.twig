@@ -52,9 +52,15 @@
                             <span class="label label-primary">{{ mentores.dureeFinancement }}</span>
                         {% endif %}
                     </td>
-                    <td>
-                        {{ mentores.suivi.parcours.libelle }}
-                    </td>
+                    {% if mentores.suivi.parcours is empty %}
+                            <td>
+                                Aucun parcours lié
+                            </td>
+                        {% else %}
+                            <td>
+                                {{ mentores.suivi.parcours.libelle }}
+                            </td>
+                    {% endif %}
                     {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
                         <td>
                             <a href="{{ path('update_mentores', {'id': mentores.id}) }}">

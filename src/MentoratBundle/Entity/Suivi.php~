@@ -35,13 +35,20 @@ class Suivi
     private $dUpdate;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_start", type="datetime", nullable=true)
+     */
+    private $date_start;
+
+    /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="suivi")
      * @ORM\JoinColumn(nullable=false)
      */
     private $mentor;
 
     /**
-     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Mentore", inversedBy="suivi")
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User", inversedBy="suivi")
      */
     private $mentore;
 
@@ -49,7 +56,13 @@ class Suivi
      * @var string
      * @ORM\Column(name="state", type="string", length=150, nullable=false)
      */
-    private $state;
+    private $suivi_state;
+
+    /**
+     * @var string
+     * @ORM\Column(name="status", type="string", length=100)
+     */
+    private $mentore_status;
 
     /**
      * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Notes", mappedBy="suivi")
@@ -57,22 +70,47 @@ class Suivi
     private $notes;
 
     /**
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Sessions", mappedBy="mentor")
+     */
+    private $sessions;
+
+    /**
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours", inversedBy="suivi")
      */
     private $parcours;
 
+
     /**
-     * Constructor.
+     * @var bool
+     * @ORM\Column(name="financement", type="boolean", nullable=true)
+     */
+    private $financement;
+
+    /**
+     * @var string
+     * @ORM\Column(name="financeur", type="string", length=150, nullable=true)
+     */
+    private $financeur;
+
+    /**
+     * @var string
+     * @ORM\Column(name="duree_financement", type="string", length=100, nullable=true)
+     */
+    private $duree_financement;
+
+    /**
+     * Constructor
      */
     public function __construct()
     {
         $this->notes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->sessions = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -80,7 +118,7 @@ class Suivi
     }
 
     /**
-     * Set libelle.
+     * Set libelle
      *
      * @param string $libelle
      *
@@ -94,7 +132,7 @@ class Suivi
     }
 
     /**
-     * Get libelle.
+     * Get libelle
      *
      * @return string
      */
@@ -104,7 +142,7 @@ class Suivi
     }
 
     /**
-     * Set dUpdate.
+     * Set dUpdate
      *
      * @param \DateTime $dUpdate
      *
@@ -118,7 +156,7 @@ class Suivi
     }
 
     /**
-     * Get dUpdate.
+     * Get dUpdate
      *
      * @return \DateTime
      */
@@ -128,7 +166,151 @@ class Suivi
     }
 
     /**
-     * Set mentor.
+     * Set dateStart
+     *
+     * @param \DateTime $dateStart
+     *
+     * @return Suivi
+     */
+    public function setDateStart($dateStart)
+    {
+        $this->date_start = $dateStart;
+
+        return $this;
+    }
+
+    /**
+     * Get dateStart
+     *
+     * @return \DateTime
+     */
+    public function getDateStart()
+    {
+        return $this->date_start;
+    }
+
+    /**
+     * Set suiviState
+     *
+     * @param string $suiviState
+     *
+     * @return Suivi
+     */
+    public function setSuiviState($suiviState)
+    {
+        $this->suivi_state = $suiviState;
+
+        return $this;
+    }
+
+    /**
+     * Get suiviState
+     *
+     * @return string
+     */
+    public function getSuiviState()
+    {
+        return $this->suivi_state;
+    }
+
+    /**
+     * Set mentoreStatus
+     *
+     * @param string $mentoreStatus
+     *
+     * @return Suivi
+     */
+    public function setMentoreStatus($mentoreStatus)
+    {
+        $this->mentore_status = $mentoreStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get mentoreStatus
+     *
+     * @return string
+     */
+    public function getMentoreStatus()
+    {
+        return $this->mentore_status;
+    }
+
+    /**
+     * Set financement
+     *
+     * @param boolean $financement
+     *
+     * @return Suivi
+     */
+    public function setFinancement($financement)
+    {
+        $this->financement = $financement;
+
+        return $this;
+    }
+
+    /**
+     * Get financement
+     *
+     * @return boolean
+     */
+    public function getFinancement()
+    {
+        return $this->financement;
+    }
+
+    /**
+     * Set financeur
+     *
+     * @param string $financeur
+     *
+     * @return Suivi
+     */
+    public function setFinanceur($financeur)
+    {
+        $this->financeur = $financeur;
+
+        return $this;
+    }
+
+    /**
+     * Get financeur
+     *
+     * @return string
+     */
+    public function getFinanceur()
+    {
+        return $this->financeur;
+    }
+
+    /**
+     * Set dureeFinancement
+     *
+     * @param string $dureeFinancement
+     *
+     * @return Suivi
+     */
+    public function setDureeFinancement($dureeFinancement)
+    {
+        $this->duree_financement = $dureeFinancement;
+
+        return $this;
+    }
+
+    /**
+     * Get dureeFinancement
+     *
+     * @return string
+     */
+    public function getDureeFinancement()
+    {
+        return $this->duree_financement;
+    }
+
+    /**
+     * Set mentor
      *
      * @param \UserBundle\Entity\User $mentor
      *
@@ -142,7 +324,7 @@ class Suivi
     }
 
     /**
-     * Get mentor.
+     * Get mentor
      *
      * @return \UserBundle\Entity\User
      */
@@ -152,13 +334,13 @@ class Suivi
     }
 
     /**
-     * Set mentore.
+     * Set mentore
      *
-     * @param \MentoratBundle\Entity\Mentore $mentore
+     * @param \UserBundle\Entity\User $mentore
      *
      * @return Suivi
      */
-    public function setMentore(\MentoratBundle\Entity\Mentore $mentore = null)
+    public function setMentore(\UserBundle\Entity\User $mentore = null)
     {
         $this->mentore = $mentore;
 
@@ -166,9 +348,9 @@ class Suivi
     }
 
     /**
-     * Get mentore.
+     * Get mentore
      *
-     * @return \MentoratBundle\Entity\Mentore
+     * @return \UserBundle\Entity\User
      */
     public function getMentore()
     {
@@ -176,7 +358,7 @@ class Suivi
     }
 
     /**
-     * Add note.
+     * Add note
      *
      * @param \MentoratBundle\Entity\Notes $note
      *
@@ -190,7 +372,7 @@ class Suivi
     }
 
     /**
-     * Remove note.
+     * Remove note
      *
      * @param \MentoratBundle\Entity\Notes $note
      */
@@ -200,7 +382,7 @@ class Suivi
     }
 
     /**
-     * Get notes.
+     * Get notes
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -210,26 +392,60 @@ class Suivi
     }
 
     /**
-     * Set state.
+     * Add session
      *
-     * @param string $state
+     * @param \MentoratBundle\Entity\Sessions $session
      *
      * @return Suivi
      */
-    public function setState($state)
+    public function addSession(\MentoratBundle\Entity\Sessions $session)
     {
-        $this->state = $state;
+        $this->sessions[] = $session;
 
         return $this;
     }
 
     /**
-     * Get state.
+     * Remove session
      *
-     * @return string
+     * @param \MentoratBundle\Entity\Sessions $session
      */
-    public function getState()
+    public function removeSession(\MentoratBundle\Entity\Sessions $session)
     {
-        return $this->state;
+        $this->sessions->removeElement($session);
+    }
+
+    /**
+     * Get sessions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSessions()
+    {
+        return $this->sessions;
+    }
+
+    /**
+     * Set parcours
+     *
+     * @param \BackendBundle\Entity\Parcours $parcours
+     *
+     * @return Suivi
+     */
+    public function setParcours(\BackendBundle\Entity\Parcours $parcours = null)
+    {
+        $this->parcours = $parcours;
+
+        return $this;
+    }
+
+    /**
+     * Get parcours
+     *
+     * @return \BackendBundle\Entity\Parcours
+     */
+    public function getParcours()
+    {
+        return $this->parcours;
     }
 }

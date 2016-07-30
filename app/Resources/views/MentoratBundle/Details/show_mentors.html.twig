@@ -52,7 +52,7 @@
                             </p>
                             <hr>
                             <strong><i class="fa fa-map-marker margin-r-5"></i>Emplacement</strong>
-                            <p class="text-muted">{{ mentor.country }}</p>
+                            <p class="text-muted">{{ mentor.country.libelle }}</p>
                             <hr>
                             <strong><i class="fa fa-pencil margin-r-5"></i> Compétences</strong>
                             <p>
@@ -280,6 +280,9 @@
                             </div>
                             <div class="tab-pane" id="sessions">
                                 <!-- Suivi sessions -->
+                                {% if mentor.sessions is empty %}
+                                    <p>Aucune session planifiée</p>
+                                {% else %}
                                 <ul class="timeline timeline-inverse">
                                     {% for sessions in mentor.sessions %}
                                         <li class="time-label">
@@ -300,22 +303,23 @@
                                                     {{ sessions.libelle }}
                                                 </div>
                                                 <div class="timeline-footer">
-                                                    {% if sessions.status == 'Planifiee' %}
-                                                        Statut : <span class="label label-warning">{{ sessions.status }}</span>
-                                                    {% elseif sessions.status == 'Present' %}
-                                                        Statut : <span class="label label-success">{{ sessions.status }}</span>
-                                                    {% elseif sessions.status == 'Absent' %}
-                                                        Statut : <span class="label label-danger">{{ sessions.status }}</span>
-                                                    {% elseif sessions.status == 'Annulee' %}
-                                                        Statut : <span class="label label-danger">{{ sessions.status }}</span>
-                                                    {% elseif sessions.status == 'No Show' %}
-                                                        Statut : <span class="label label-danger">{{ sessions.status }}</span>
-                                                    {% endif %}
-                                                </div>
+                                                            {% if sessions.status == 'Planifiee' %}
+                                                                Statut : <span class="label label-warning">{{ sessions.status }}</span>
+                                                            {% elseif sessions.status == 'Present' %}
+                                                                Statut : <span class="label label-success">{{ sessions.status }}</span>
+                                                            {% elseif sessions.status == 'Absent' %}
+                                                                Statut : <span class="label label-danger">{{ sessions.status }}</span>
+                                                            {% elseif sessions.status == 'Annulee' %}
+                                                                Statut : <span class="label label-danger">{{ sessions.status }}</span>
+                                                            {% elseif sessions.status == 'No Show' %}
+                                                                Statut : <span class="label label-danger">{{ sessions.status }}</span>
+                                                            {% endif %}
+                                                        </div>
                                             </div>
                                         </li>
                                     {% endfor %}
                                 </ul>
+                                {% endif %}
                             </div>
                             <div class="tab-pane" id="settings">
                                 <!-- Options -->

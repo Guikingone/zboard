@@ -10,9 +10,11 @@ namespace CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use MentoratBundle\Entity\Suivi;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use UserBundle\Entity\User;
 
 class LoadUserData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
@@ -86,6 +88,61 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $userManager->updateUser($userAdmin, true);
         $userManager->updateUser($mentor, true);
         $userManager->updateUser($supervisteurMentor, true);
+
+
+        $parcours = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
+            ->findOneBy(array('libelle' => 'Chef de projet Multimédia - Développement'));
+
+        $parcoursC = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
+            ->findOneBy(array('libelle' => 'Développeur PHP/Symfony'));
+
+        $country = $this->privateContainer->get('doctrine')->getManager()->getRepository('AdminBundle:Country')
+            ->findOneBy(array('libelle' => 'France'));
+
+        $mentore = new User();
+        $suivi = new Suivi();
+
+        $mentore->setFirstName('Aurore');
+        $mentore->setLastName('Gaucher');
+        $mentore->setEmail('aurore.gaucher@gmail.com');
+        $mentore->setCountry($country);
+        $mentore->setPhone('00.00.00.00.00');
+        $mentore->setResume('Something');
+        $mentore->addSuivi($suivi);
+        $mentore->setArchived(false);
+        $mentore->setRoles(array('ROLE_MENTORE'));
+        $suivi->setMentor($mentor);
+        $suivi->setMentore($mentore);
+        $suivi->setParcours($parcours);
+        $suivi->setFinancement(true);
+        $suivi->setFinanceur('Pole-Emploi');
+        $suivi->setDureeFinancement('16 mois');
+        $suivi->setSuiviState('En cours');
+        $suivi->setMentoreStatus('En formation');
+        $suivi->setDateStart(new \DateTime());
+
+        $mentoreC = new User();
+        $suiviC = new Suivi();
+
+        $mentoreC->setFirstName('Toto');
+        $mentoreC->setLastName('Toto');
+        $mentoreC->setEmail('tyoto.toto@gmail.com');
+        $mentoreC->setCountry($country);
+        $mentoreC->setPhone('00.00.00.00.00');
+        $mentoreC->setResume('Something');
+        $mentoreC->addSuivi($suiviC);
+        $mentoreC->setArchived(false);
+        $mentoreC->setRoles(array('ROLE_MENTORE'));
+        $suiviC->setMentor($mentor);
+        $suiviC->setMentore($mentore);
+        $suiviC->setParcours($parcoursC);
+        $suiviC->setMentoreStatus('En formation');
+        $suiviC->setDateStart(new \DateTime());
+
+        $manager->persist($mentore);
+        $manager->persist($mentoreC);
+        $manager->persist($suivi);
+        $manager->persist($suiviC);
     }
 
     public function getOrder()

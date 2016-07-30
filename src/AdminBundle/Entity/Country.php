@@ -34,11 +34,6 @@ class Country
     private $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Mentore", mappedBy="country")
-     */
-    private $mentores;
-
-    /**
      * Get id.
      *
      * @return int
@@ -111,39 +106,5 @@ class Country
     public function getUsers()
     {
         return $this->users;
-    }
-
-    /**
-     * Add mentore.
-     *
-     * @param \MentoratBundle\Entity\Mentore $mentore
-     *
-     * @return Country
-     */
-    public function addMentore(\MentoratBundle\Entity\Mentore $mentore)
-    {
-        $this->mentores[] = $mentore;
-
-        return $this;
-    }
-
-    /**
-     * Remove mentore.
-     *
-     * @param \MentoratBundle\Entity\Mentore $mentore
-     */
-    public function removeMentore(\MentoratBundle\Entity\Mentore $mentore)
-    {
-        $this->mentores->removeElement($mentore);
-    }
-
-    /**
-     * Get mentores.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMentores()
-    {
-        return $this->mentores;
     }
 }

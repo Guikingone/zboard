@@ -26,8 +26,8 @@ class LoadSessionsData implements FixtureInterface, ContainerAwareInterface, Ord
 
     public function load(ObjectManager $manager)
     {
-        $mentore = $this->privateContainer->get('doctrine')->getManager()->getRepository('MentoratBundle:Mentore')
-                                        ->findOneBy(array('id' => 1));
+        $mentore = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
+                                        ->findOneBy(array('lastName' => 'Gaucher'));
 
         $mentor = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
                                          ->findOneBy(array('firstName' => 'Jacky'));

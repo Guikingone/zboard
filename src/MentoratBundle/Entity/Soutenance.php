@@ -28,7 +28,7 @@ class Soutenance
     private $mentor;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Mentore")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
      * @ORM\JoinColumn(name="mentore_id", referencedColumnName="id")
      */
     private $mentore;
@@ -53,9 +53,9 @@ class Soutenance
     private $status;
 
     /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -63,7 +63,7 @@ class Soutenance
     }
 
     /**
-     * Set passedAt.
+     * Set passedAt
      *
      * @param \DateTime $passedAt
      *
@@ -77,7 +77,7 @@ class Soutenance
     }
 
     /**
-     * Get passedAt.
+     * Get passedAt
      *
      * @return \DateTime
      */
@@ -87,79 +87,7 @@ class Soutenance
     }
 
     /**
-     * Set mentor.
-     *
-     * @param \UserBundle\Entity\User $mentor
-     *
-     * @return Soutenance
-     */
-    public function setMentor(\UserBundle\Entity\User $mentor = null)
-    {
-        $this->mentor = $mentor;
-
-        return $this;
-    }
-
-    /**
-     * Get mentor.
-     *
-     * @return \UserBundle\Entity\User
-     */
-    public function getMentor()
-    {
-        return $this->mentor;
-    }
-
-    /**
-     * Set projet.
-     *
-     * @param \BackendBundle\Entity\Projet $projet
-     *
-     * @return Soutenance
-     */
-    public function setProjet(\BackendBundle\Entity\Projet $projet = null)
-    {
-        $this->projet = $projet;
-
-        return $this;
-    }
-
-    /**
-     * Get projet.
-     *
-     * @return \BackendBundle\Entity\Projet
-     */
-    public function getProjet()
-    {
-        return $this->projet;
-    }
-
-    /**
-     * Set mentore.
-     *
-     * @param \MentoratBundle\Entity\Mentore $mentore
-     *
-     * @return Soutenance
-     */
-    public function setMentore(\MentoratBundle\Entity\Mentore $mentore = null)
-    {
-        $this->mentore = $mentore;
-
-        return $this;
-    }
-
-    /**
-     * Get mentore.
-     *
-     * @return \MentoratBundle\Entity\Mentore
-     */
-    public function getMentore()
-    {
-        return $this->mentore;
-    }
-
-    /**
-     * Set status.
+     * Set status
      *
      * @param string $status
      *
@@ -173,12 +101,84 @@ class Soutenance
     }
 
     /**
-     * Get status.
+     * Get status
      *
      * @return string
      */
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set mentor
+     *
+     * @param \UserBundle\Entity\User $mentor
+     *
+     * @return Soutenance
+     */
+    public function setMentor(\UserBundle\Entity\User $mentor = null)
+    {
+        $this->mentor = $mentor;
+
+        return $this;
+    }
+
+    /**
+     * Get mentor
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getMentor()
+    {
+        return $this->mentor;
+    }
+
+    /**
+     * Set mentore
+     *
+     * @param \UserBundle\Entity\User $mentore
+     *
+     * @return Soutenance
+     */
+    public function setMentore(\UserBundle\Entity\User $mentore = null)
+    {
+        $this->mentore = $mentore;
+
+        return $this;
+    }
+
+    /**
+     * Get mentore
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getMentore()
+    {
+        return $this->mentore;
+    }
+
+    /**
+     * Set projet
+     *
+     * @param \BackendBundle\Entity\Projet $projet
+     *
+     * @return Soutenance
+     */
+    public function setProjet(\BackendBundle\Entity\Projet $projet = null)
+    {
+        $this->projet = $projet;
+
+        return $this;
+    }
+
+    /**
+     * Get projet
+     *
+     * @return \BackendBundle\Entity\Projet
+     */
+    public function getProjet()
+    {
+        return $this->projet;
     }
 }

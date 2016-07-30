@@ -8,8 +8,8 @@
 
 namespace UserBundle\Services;
 
-
 use Doctrine\ORM\EntityManager;
+use MentoratBundle\Entity\Suivi;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -64,7 +64,21 @@ class UserService
      */
     public function getMentors()
     {
-        return $this->doctrine->getRepository('UserBundle:User')->findBy(array('archived' => false));
+        return $this->doctrine->getRepository('UserBundle:User')
+                              ->findBy(array('archived' => false,
+                                             'roles' => array('ROLE_MENTOR')));
+    }
+
+    /**
+     * Allow the back to get all the mentores.
+     *
+     * @return array|\UserBundle\Entity\User[]
+     */
+    public function getMentores()
+    {
+        return $this->doctrine->getRepository('UserBundle:User')
+                              ->findBy(array('archived' => false,
+                                             'roles' => array('ROLE_MENTORE')));
     }
 
     /**
@@ -101,6 +115,36 @@ class UserService
             $this->doctrine->persist($mentor);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to create a student using the User entity.
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addMentore(Request $request)
+    {
+        $mentore = new User();
+        $suivi = new Suivi();
+
+        $form = $this->form->create(RegistrationType::class, $mentore);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $mentore->setUsername($mentore->getFirstName() . '_' . $mentore->getLastName());
+            $mentore->setPlainPassword(mb_strtolower($mentore->getFirstName() . '_' . $mentore->getLastName()));
+            $mentore->setRoles(array('ROLE_MENTORE'));
+            $mentore->setArchived(false);
+            $mentore->addSuivi($suivi);
+            $this->doctrine->persist($mentore);
+            $this->doctrine->persist($suivi);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Elève enregistré.');
         }
 
         return $form;

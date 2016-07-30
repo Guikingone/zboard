@@ -33,13 +33,13 @@ class ShowBackController extends Controller
      */
     public function showMentoreAction(Request $request)
     {
-        $nMentore = $this->get('core.admin')->addMentore($request);
+        $mentore = $this->get('core.user')->addMentore($request);
         $mentores = $this->get('core.admin')->getMentores();
 
         return array(
             'controller' => 'users',
             'mentores' => $mentores,
-            'nMentore' => $nMentore->createView(),
+            'mentore' => $mentore->createView(),
         );
     }
 

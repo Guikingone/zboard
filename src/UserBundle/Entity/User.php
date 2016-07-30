@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * User.
  *
- * @ORM\Table(name="fos_user")
+ * @ORM\Table(name="zboard_user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  */
 class User extends BaseUser
@@ -37,19 +37,19 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="address", type="string", length=255)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     protected $address;
 
     /**
      * @var string
-     * @ORM\Column(name="zipcode", type="string", length=255)
+     * @ORM\Column(name="zipcode", type="string", length=255, nullable=true)
      */
     protected $zipcode;
 
     /**
      * @var string
-     * @ORM\Column(name="city", type="string", length=150)
+     * @ORM\Column(name="city", type="string", length=150, nullable=true)
      */
     protected $city;
 
@@ -60,13 +60,19 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="phone", type="string", length=40)
+     * @ORM\Column(name="phone", type="string", length=40, nullable=true)
      */
     private $phone;
 
     /**
+     * @var string
+     * @ORM\Column(name="resume", type="text", nullable=true)
+     */
+    private $resume;
+
+    /**
      * @var bool
-     * @ORM\Column(name="available", type="boolean")
+     * @ORM\Column(name="available", type="boolean", nullable=true)
      */
     private $available;
 
@@ -76,12 +82,13 @@ class User extends BaseUser
     private $suivi;
 
     /**
-     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Sessions", mappedBy="mentor")
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Sessions", mappedBy="users")
      */
     private $sessions;
 
     /**
      * @ORM\OneToMany(targetEntity="UserBundle\Entity\Competences", mappedBy="user")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $competences;
 
@@ -266,6 +273,30 @@ class User extends BaseUser
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Set resume
+     *
+     * @param string $resume
+     *
+     * @return User
+     */
+    public function setResume($resume)
+    {
+        $this->resume = $resume;
+
+        return $this;
+    }
+
+    /**
+     * Get resume
+     *
+     * @return string
+     */
+    public function getResume()
+    {
+        return $this->resume;
     }
 
     /**

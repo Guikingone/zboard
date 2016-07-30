@@ -50,19 +50,20 @@ class Sessions
     private $periodicity;
 
     /**
+     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Suivi", inversedBy="sessions")
+     */
+    private $suivi;
+
+    /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="sessions")
      */
-    private $mentor;
+    private $users;
+    
 
     /**
-     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Mentore", inversedBy="sessions")
-     */
-    private $mentore;
-
-    /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -70,7 +71,7 @@ class Sessions
     }
 
     /**
-     * Set libelle.
+     * Set libelle
      *
      * @param string $libelle
      *
@@ -84,7 +85,7 @@ class Sessions
     }
 
     /**
-     * Get libelle.
+     * Get libelle
      *
      * @return string
      */
@@ -94,7 +95,7 @@ class Sessions
     }
 
     /**
-     * Set dateSession.
+     * Set dateSession
      *
      * @param \DateTime $dateSession
      *
@@ -108,7 +109,7 @@ class Sessions
     }
 
     /**
-     * Get dateSession.
+     * Get dateSession
      *
      * @return \DateTime
      */
@@ -118,7 +119,7 @@ class Sessions
     }
 
     /**
-     * Set status.
+     * Set status
      *
      * @param string $status
      *
@@ -132,7 +133,7 @@ class Sessions
     }
 
     /**
-     * Get status.
+     * Get status
      *
      * @return string
      */
@@ -142,9 +143,9 @@ class Sessions
     }
 
     /**
-     * Set periodicity.
+     * Set periodicity
      *
-     * @param bool $periodicity
+     * @param boolean $periodicity
      *
      * @return Sessions
      */
@@ -156,9 +157,9 @@ class Sessions
     }
 
     /**
-     * Get periodicity.
+     * Get periodicity
      *
-     * @return bool
+     * @return boolean
      */
     public function getPeriodicity()
     {
@@ -166,50 +167,50 @@ class Sessions
     }
 
     /**
-     * Set mentor.
+     * Set suivi
      *
-     * @param \UserBundle\Entity\User $mentor
+     * @param \MentoratBundle\Entity\Suivi $suivi
      *
      * @return Sessions
      */
-    public function setMentor(\UserBundle\Entity\User $mentor = null)
+    public function setSuivi(\MentoratBundle\Entity\Suivi $suivi = null)
     {
-        $this->mentor = $mentor;
+        $this->suivi = $suivi;
 
         return $this;
     }
 
     /**
-     * Get mentor.
+     * Get suivi
+     *
+     * @return \MentoratBundle\Entity\Suivi
+     */
+    public function getSuivi()
+    {
+        return $this->suivi;
+    }
+
+    /**
+     * Set users
+     *
+     * @param \UserBundle\Entity\User $users
+     *
+     * @return Sessions
+     */
+    public function setUsers(\UserBundle\Entity\User $users = null)
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    /**
+     * Get users
      *
      * @return \UserBundle\Entity\User
      */
-    public function getMentor()
+    public function getUsers()
     {
-        return $this->mentor;
-    }
-
-    /**
-     * Set mentore.
-     *
-     * @param \MentoratBundle\Entity\Mentore $mentore
-     *
-     * @return Sessions
-     */
-    public function setMentore(\MentoratBundle\Entity\Mentore $mentore = null)
-    {
-        $this->mentore = $mentore;
-
-        return $this;
-    }
-
-    /**
-     * Get mentore.
-     *
-     * @return \MentoratBundle\Entity\Mentore
-     */
-    public function getMentore()
-    {
-        return $this->mentore;
+        return $this->users;
     }
 }

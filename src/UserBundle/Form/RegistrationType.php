@@ -32,7 +32,7 @@ class RegistrationType extends AbstractType
             ))
             ->remove('plainPassword')
             ->remove('plainPassword_confirmation')
-            ->remove('archived');
+            ->remove('archived')
         ;
     }
 

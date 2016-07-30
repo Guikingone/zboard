@@ -50,7 +50,6 @@ class LoadParcoursData implements FixtureInterface, ContainerAwareInterface, Ord
 
         $devSf = new Parcours();
         $devSf->setLibelle('Développeur PHP/Symfony');
-        $devSf->setDiplome(null);
         $devSf->setAbonnement($PClass);
         $devSf->setArchived(false);
 
