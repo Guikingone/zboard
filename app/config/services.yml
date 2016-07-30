@@ -18,7 +18,7 @@ services:
 
     core.back:
         class: BackendBundle\Services\Back
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session","@security.token_storage"]
 
     core.archive:
         class: AdminBundle\Services\Archive

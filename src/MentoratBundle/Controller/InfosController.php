@@ -5,6 +5,7 @@ namespace MentoratBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 
 class InfosController extends Controller
 {
@@ -12,13 +13,16 @@ class InfosController extends Controller
    * @Route("/infos")
    * @Template("MentoratBundle/Dashboard/infos.html.twig")
    */
-  public function indexAction()
+  public function indexAction(Request $request)
   {
-      $informations = $this->get('core.back')->getMentoratInformations();
+    $information = $this->get('core.back')->addMentoratInformation($request);
+    $informations = $this->get('core.back')->getMentoratInformations();
 
       return array(
           'controller' => 'infos',
           'informations' => $informations,
+          'information' => $information->createView(),
       );
+
   }
 }

@@ -35,7 +35,7 @@ class InformationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackBundle\Entity\InformationMentorat',
+            'data_class' => 'BackendBundle\Entity\InformationMentorat',
         ));
     }
 }

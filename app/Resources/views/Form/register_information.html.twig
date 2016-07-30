@@ -10,17 +10,17 @@
                 {{ form_start(information) }}
                 <div class="input-group">
                     {{ form_errors(information.title) }}
-                    {{ form_label(information.title, 'Titre : :')}}
+                    {{ form_label(information.title, 'Titre :')}}
                     {{ form_widget(information.title, {'attr': {'class': 'form-control'}}) }}
                 </div>
                 <div class="input-group">
                   {{ form_errors(information.body) }}
-                  {{ form_label(information.body, 'Contenu : :')}}
+                  {{ form_label(information.body, 'Contenu :')}}
                   {{ form_widget(information.body, {'attr': {'class': 'form-control'}}) }}
                 </div>
                 <div class="input-group">
                   {{ form_errors(information.enabled) }}
-                  {{ form_label(information.enabled, 'Contenu : :')}}
+                  {{ form_label(information.enabled, 'Visible :')}}
                   {{ form_widget(information.enabled, {'attr': {'class': 'form-control'}}) }}
                 </div>
                 <br>
