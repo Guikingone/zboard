@@ -23,7 +23,7 @@ class SoutenanceTypeAdd extends AbstractType
                 'choice_label' => 'lastname',
             ))
             ->add('mentore', EntityType::class, array(
-                'class' => 'MentoratBundle\Entity\Mentore',
+                'class' => 'UserBundle\Entity\Mentore',
                 'choice_label' => 'lastname',
             ))
             ->add('projet', EntityType::class, array(

@@ -153,7 +153,7 @@ class MentoreService
      */
     public function addSessionMentorat(Request $request, $id)
     {
-        $mentore = $this->doctrine->getRepository('MentoratBundle:Mentore')->findOneBy(array('id' => $id));
+        $mentore = $this->doctrine->getRepository('UserBundle:Mentore')->findOneBy(array('id' => $id));
 
         $mentor = $this->user->getToken()->getUser();
 
@@ -175,15 +175,15 @@ class MentoreService
     }
 
     /**
-     * Allow to find a student by is $id in order to show details.
+     * Allow to find a student using is $id.
      *
      * @param $id
      *
-     * @return array|\MentoratBundle\Entity\Mentore[]
+     * @return null|object|\UserBundle\Entity\Mentore
      */
     public function viewMentore($id)
     {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->find($id);
+        return $this->doctrine->getRepository('UserBundle:Mentore')->find($id);
     }
 
     /**

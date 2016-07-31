@@ -54,13 +54,13 @@ class Suivi
 
     /**
      * @var string
-     * @ORM\Column(name="state", type="string", length=150, nullable=false)
+     * @ORM\Column(name="status_suivi", type="string", length=150, nullable=true)
      */
     private $suivi_state;
 
     /**
      * @var string
-     * @ORM\Column(name="status", type="string", length=100, nullable=false)
+     * @ORM\Column(name="status_mentore", type="string", length=100, nullable=true)
      */
     private $mentore_status;
 

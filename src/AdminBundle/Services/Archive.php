@@ -47,13 +47,13 @@ class Archive
     }
 
     /**
-     * Allow to get all the student archived.
+     * Allow to get all the students archived.
      *
-     * @return array|\MentoratBundle\Entity\Mentore[]
+     * @return array|\UserBundle\Entity\Mentore[]
      */
     public function getMentoresArchived()
     {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->findBy(array('archived' => true));
+        return $this->doctrine->getRepository('UserBundle:Mentore')->findBy(array('archived' => true));
     }
 
     /**

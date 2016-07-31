@@ -65,7 +65,7 @@ class UserService
      */
     public function getMentors()
     {
-        return $this->doctrine->getRepository('UserBundle:User')->findBy(array('roles' => array('ROLE_MENTOR')));
+        return $this->doctrine->getRepository('UserBundle:User')->findAll();
     }
 
     /**
@@ -75,7 +75,7 @@ class UserService
      */
     public function getMentores()
     {
-        return $this->doctrine->getRepository('UserBundle:User')->findBy(array('roles' => array('ROLE_MENTORE')));
+        return $this->doctrine->getRepository('UserBundle:Mentore')->findAll();
     }
 
     /**
@@ -137,7 +137,7 @@ class UserService
             $mentore->setPlainPassword(mb_strtolower($mentore->getFirstname().'_'.$mentore->getLastname()));
             $mentore->setRoles(array('ROLE_MENTORE'));
             $mentore->setArchived(false);
-            $mentore->setSuivi($suivi);
+            $mentore->addSuivi($suivi);
             $this->doctrine->persist($mentore);
             $this->doctrine->persist($suivi);
             $this->doctrine->flush();

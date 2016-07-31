@@ -99,6 +99,28 @@ class Back
     }
 
     /**
+     * Allow to add a soutenance between a teacher dans a student.
+     *
+     * @param Request $request
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addSoutenance(Request $request)
+    {
+        $soutenance = new Soutenance();
+
+        $form = $this->formFactory->create(SoutenanceTypeAdd::class, $soutenance);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->persist($soutenance);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'La soutenance a bien été enregistrée.');
+        }
+
+        return $form;
+    }
+
+    /**
      * Creates a new MentoratInformation.
      *
      * @param Request $request

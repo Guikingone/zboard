@@ -76,9 +76,21 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $suivi->setDateStart(new\DateTime());
         $suivi->setMentoreStatus('En formation');
 
+        $suiviC = new Suivi();
+
+        $suiviC->setMentor($mentor);
+        $suiviC->setMentore($mentoreC);
+        $suiviC->setLibelle("Suivi Premium Plus");
+        $suiviC->setParcours($parcours);
+        $suiviC->setSuiviState('En cours');
+        $suiviC->setDateStart(new\DateTime());
+        $suiviC->setMentoreStatus('En attente');
+
+
         $manager->persist($mentore);
         $manager->persist($mentoreC);
         $manager->persist($suivi);
+        $manager->persist($suiviC);
         $manager->flush();
     }
 

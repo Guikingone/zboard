@@ -25,16 +25,20 @@
                         {{ mentores.firstname }}
                     </td>
                     <td>
-                        {% if mentores.status == 'En formation' %}
-                            <span class="label label-success">{{ mentores.status }}</span>
-                        {% elseif mentores.status == 'Contacté' %}
-                            <span class="label label-warning">{{ mentores.status }}</span>
-                        {% elseif mentores.status == 'En pause' %}
-                            <span class="label label-danger">{{ mentores.status }}</span>
-                        {% elseif mentores.status == 'En attente' %}
-                            <span class="label label-warning">{{ mentores.status }}</span>
-                        {% elseif mentores.status == 'Formation terminé' %}
-                            <span class="label label-success">{{ mentores.status }}</span>
+                        {% if mentores.suivi.mentoreStatus is empty %}
+                            <p>Aucun statut actuel</p>
+                        {% else %}
+                            {% if mentores.suivi.mentoreStatus == 'En formation' %}
+                                <span class="label label-success">{{ mentores.suivi.mentoreStatus }}</span>
+                            {% elseif mentores.suivi.mentoreStatus == 'Contacté' %}
+                                <span class="label label-warning">{{ mentores.suivi.mentoreStatus }}</span>
+                            {% elseif mentores.suivi.mentoreStatus == 'En pause' %}
+                                <span class="label label-danger">{{ mentores.suivi.mentoreStatus }}</span>
+                            {% elseif mentores.suivi.mentoreStatus == 'En attente' %}
+                                <span class="label label-warning">{{ mentores.suivi.mentoreStatus }}</span>
+                            {% elseif mentores.suivi.mentoreStatus == 'Formation terminé' %}
+                                <span class="label label-success">{{ mentores.suivi.mentoreStatus }}</span>
+                            {% endif %}
                         {% endif %}
                     </td>
                     <td>
@@ -43,13 +47,13 @@
                         </a>
                     </td>
                     <td>
-                       {{ mentores.dateStart|date('d-m-Y') }}
+                       {{ mentores.suivi.dateStart|date('d-m-Y') }}
                     </td>
                     <td>
-                        {% if mentores.dureeFinancement is null %}
+                        {% if mentores.suivi.dureeFinancement is null %}
                             <p>Non financé</p>
                         {% else %}
-                            <span class="label label-primary">{{ mentores.dureeFinancement }}</span>
+                            <span class="label label-primary">{{ mentores.suivi.dureeFinancement }}</span>
                         {% endif %}
                     </td>
                     {% if mentores.suivi.parcours is empty %}

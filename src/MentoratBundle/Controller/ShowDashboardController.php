@@ -23,8 +23,8 @@ class ShowDashboardController extends Controller
         $note = $this->get('core.mentore')->addNote($request, $id);
         $sessions = $this->get('core.mentore')->addSessionMentorat($request, $id);
 
-        return array('mentore' => $mentore, 'note' => $note->createView(),
-                     'sessions' => $sessions->createView(), );
+        return array('controller' => 'mentore', 'mentore' => $mentore,
+                     'note' => $note->createView(), 'sessions' => $sessions->createView());
     }
 
     /**
