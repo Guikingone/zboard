@@ -14,7 +14,9 @@ Infos mentorat
 {% endif %}
 
 {% for info in informations %}
-  {{ info.body|e }}
+  <h3>{{ info.title|e }}</h3>
+  <p>{{ info.body|e }}</p>
+  <hr />
 {% endfor %}
 
 {% include ':Form:register_information.html.twig' %}

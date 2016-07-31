@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use BackendBundle\Entity\Parcours;
 use BackendBundle\Entity\Projet;
 use MentoratBundle\Form\InformationType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class Back
 {
@@ -37,11 +38,12 @@ class Back
      * @param FormFactory   $formFactory
      * @param Session       $session
      */
-    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Session $session)
+    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Session $session, TokenStorage $user)
     {
         $this->doctrine = $doctrine;
         $this->formFactory = $formFactory;
         $this->session = $session;
+        $this->user = $user;
     }
 
     /**
@@ -111,6 +113,9 @@ class Back
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $information->setDCreated(new \DateTime('now'));
+            $information->setUpdated(new \DateTime('now'));
+            $information->setAuthor($this->user->getToken()->getUser());
             $this->doctrine->persist($information);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Information ajouté.');
