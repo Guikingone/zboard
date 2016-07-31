@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use UserBundle\Entity\Competences;
+use UserBundle\Entity\Mentore;
 use UserBundle\Entity\User;
 use UserBundle\Form\CompetencesType;
 use UserBundle\Form\RegistrationMentoreType;
@@ -104,7 +105,7 @@ class UserService
         $form = $this->form->create(RegistrationType::class, $mentor);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $mentor->setUsername($mentor->getFirstname().'_'.$mentor->getLastname());
             $mentor->setPlainPassword(mb_strtolower($mentor->getFirstname().'_'.$mentor->getLastname()));
             $mentor->setRoles(array('ROLE_MENTOR'));
@@ -126,18 +127,21 @@ class UserService
      */
     public function addMentore(Request $request)
     {
-        $mentore = new User();
+        $mentore = new Mentore();
         $suivi = new Suivi();
+
+        $mentore->setSuivi($suivi);
+        $suivi->setMentore($mentore);
+        $suivi->setLibelle('Suivi Premium Plus');
 
         $form = $this->form->create(RegistrationMentoreType::class, $mentore);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $mentore->setUsername($mentore->getFirstname().'_'.$mentore->getLastname());
             $mentore->setPlainPassword(mb_strtolower($mentore->getFirstname().'_'.$mentore->getLastname()));
             $mentore->setRoles(array('ROLE_MENTORE'));
             $mentore->setArchived(false);
-            $mentore->addSuivi($suivi);
             $this->doctrine->persist($mentore);
             $this->doctrine->persist($suivi);
             $this->doctrine->flush();

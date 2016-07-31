@@ -4,7 +4,7 @@
         <div class="modal-content">
             {{ form_start(mentore) }}
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Ajouter un mentore</h4>
+                <h4 class="modal-title" id="myModalLabel">Ajouter un élève</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -49,55 +49,60 @@
                             {{ form_label(mentore.country, 'Pays')}}
                             {{ form_widget(mentore.country, {'attr': {'class': 'form-control'}}) }}
                         </div>
-                        <div class="form-group date" data-provide="datepicker">
-                            {{ form_errors(mentore.suivi.date_start) }}
-                            {{ form_label(mentore.suivi.date_start, 'Date de début')}}
-                            {{ form_widget(mentore.suivi.date_start, {'attr': {'class': 'form-control pull-right', 'placeholder': 'Ex: 12-05-2016'}}) }}
+                        <div class="form-group">
+                            {{ form_errors(mentore.resume) }}
+                            {{ form_label(mentore.resume, 'Résumé')}}
+                            {{ form_widget(mentore.resume, {'attr': {'class': 'form-control'}}) }}
                         </div>
-                        <hr>
+                        <hr />
+                        <div class="form-group">
+                            {{ form_errors(mentore.suivi.date_start) }}
+                            {{ form_label(mentore.suivi.date_start, 'Date de commencement :')}}
+                            {{ form_widget(mentore.suivi.date_start, {'attr': {'class': 'form-control', 'placeholder': 'Ex : 31-05-2016'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_errors(mentore.suivi.parcours) }}
+                            {{ form_label(mentore.suivi.parcours, 'Parcours choisi :')}}
+                            {{ form_widget(mentore.suivi.parcours, {'attr': {'class': 'form-control'}}) }}
+                        </div>
                         <div class="form-group">
                             {{ form_errors(mentore.suivi.financement) }}
-                            {{ form_label(mentore.suivi.financement, 'Financé')}}
+                            {{ form_label(mentore.suivi.financement, 'Financement :')}}
                             {{ form_widget(mentore.suivi.financement, {'attr': {'class': 'form-control'}}) }}
                         </div>
                         <div class="form-group">
                             {{ form_errors(mentore.suivi.financeur) }}
-                            {{ form_label(mentore.suivi.financeur, 'Nom du financeur')}}
+                            {{ form_label(mentore.suivi.financeur, 'Financeur ')}}
                             {{ form_widget(mentore.suivi.financeur, {'attr': {'class': 'form-control'}}) }}
                         </div>
                         <div class="form-group">
                             {{ form_errors(mentore.suivi.duree_financement) }}
-                            {{ form_label(mentore.suivi.duree_financement, 'Durée du financement')}}
+                            {{ form_label(mentore.suivi.duree_financement, 'Durée financement')}}
                             {{ form_widget(mentore.suivi.duree_financement, {'attr': {'class': 'form-control'}}) }}
                         </div>
                         <div class="form-group">
                             {{ form_errors(mentore.suivi.mentor) }}
-                            {{ form_label(mentore.suivi.mentor, 'Mentor')}}
+                            {{ form_label(mentore.suivi.mentor, 'Mentor affilié')}}
                             {{ form_widget(mentore.suivi.mentor, {'attr': {'class': 'form-control'}}) }}
                         </div>
                         <div class="form-group">
-                            {{ form_errors(mentore.suivi.state) }}
-                            {{ form_label(mentore.suivi.state, 'Statut de l\'élève')}}
-                            {{ form_widget(mentore.suivi.state, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(mentore.suivi.suivi_state) }}
+                            {{ form_label(mentore.suivi.suivi_state, 'Statut du mentorat')}}
+                            {{ form_widget(mentore.suivi.suivi_state, {'attr': {'class': 'form-control'}}) }}
                         </div>
                         <div class="form-group">
-                            {{ form_errors(mentore.suivi.status) }}
-                            {{ form_label(mentore.suivi.status, 'Statut du mentorat')}}
-                            {{ form_widget(mentore.suivi.status, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_errors(mentore.suivi.parcours) }}
-                            {{ form_label(mentore.suivi.parcours, 'Parcours :')}}
-                            {{ form_widget(mentore.suivi.parcours, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(mentore.suivi.mentore_status) }}
+                            {{ form_label(mentore.suivi.mentore_status, 'Statut actuel')}}
+                            {{ form_widget(mentore.suivi.mentore_status, {'attr': {'class': 'form-control'}}) }}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <input class="btn btn-flat btn-warning" type="submit" value="Enregistrer le mentor" />
+                <input class="btn btn-flat btn-warning" type="submit" value="Enregistrer" />
                 <button type="button" class="btn btn-flat btn-default" data-dismiss="modal">Annuler</button>
             </div>
-            {{ form_end(mentor) }}
+            {{ form_end(mentore) }}
         </div>
     </div>
 </div>

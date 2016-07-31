@@ -77,7 +77,7 @@ class Mentore extends BaseUser
     private $archived;
 
     /**
-     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="mentore")
+     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="mentore", cascade={ "persist", "remove" })
      */
     private $suivi;
 
