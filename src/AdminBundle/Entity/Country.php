@@ -39,7 +39,7 @@ class Country
     private $mentores;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -48,9 +48,9 @@ class Country
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -58,7 +58,7 @@ class Country
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -72,7 +72,7 @@ class Country
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */
@@ -82,7 +82,7 @@ class Country
     }
 
     /**
-     * Add user
+     * Add user.
      *
      * @param \UserBundle\Entity\User $user
      *
@@ -96,7 +96,7 @@ class Country
     }
 
     /**
-     * Remove user
+     * Remove user.
      *
      * @param \UserBundle\Entity\User $user
      */
@@ -106,7 +106,7 @@ class Country
     }
 
     /**
-     * Get users
+     * Get users.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -116,7 +116,7 @@ class Country
     }
 
     /**
-     * Add mentore
+     * Add mentore.
      *
      * @param \UserBundle\Entity\Mentore $mentore
      *
@@ -130,7 +130,7 @@ class Country
     }
 
     /**
-     * Remove mentore
+     * Remove mentore.
      *
      * @param \UserBundle\Entity\Mentore $mentore
      */
@@ -140,7 +140,7 @@ class Country
     }
 
     /**
-     * Get mentores
+     * Get mentores.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

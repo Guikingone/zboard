@@ -102,7 +102,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set firstname
+     * Set firstname.
      *
      * @param string $firstname
      *
@@ -116,7 +116,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get firstname
+     * Get firstname.
      *
      * @return string
      */
@@ -126,7 +126,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set lastname
+     * Set lastname.
      *
      * @param string $lastname
      *
@@ -140,7 +140,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get lastname
+     * Get lastname.
      *
      * @return string
      */
@@ -150,7 +150,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set address
+     * Set address.
      *
      * @param string $address
      *
@@ -164,7 +164,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get address
+     * Get address.
      *
      * @return string
      */
@@ -174,7 +174,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set zipcode
+     * Set zipcode.
      *
      * @param string $zipcode
      *
@@ -188,7 +188,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get zipcode
+     * Get zipcode.
      *
      * @return string
      */
@@ -198,7 +198,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set city
+     * Set city.
      *
      * @param string $city
      *
@@ -212,7 +212,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get city
+     * Get city.
      *
      * @return string
      */
@@ -222,7 +222,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set phone
+     * Set phone.
      *
      * @param string $phone
      *
@@ -236,7 +236,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get phone
+     * Get phone.
      *
      * @return string
      */
@@ -246,7 +246,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set resume
+     * Set resume.
      *
      * @param string $resume
      *
@@ -260,7 +260,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get resume
+     * Get resume.
      *
      * @return string
      */
@@ -270,9 +270,9 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set archived
+     * Set archived.
      *
-     * @param boolean $archived
+     * @param bool $archived
      *
      * @return Mentore
      */
@@ -284,9 +284,9 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get archived
+     * Get archived.
      *
-     * @return boolean
+     * @return bool
      */
     public function getArchived()
     {
@@ -294,7 +294,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set country
+     * Set country.
      *
      * @param \AdminBundle\Entity\Country $country
      *
@@ -308,7 +308,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get country
+     * Get country.
      *
      * @return \AdminBundle\Entity\Country
      */
@@ -318,7 +318,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set suivi
+     * Set suivi.
      *
      * @param \MentoratBundle\Entity\Suivi $suivi
      *
@@ -332,7 +332,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get suivi
+     * Get suivi.
      *
      * @return \MentoratBundle\Entity\Suivi
      */
@@ -342,7 +342,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Add session
+     * Add session.
      *
      * @param \MentoratBundle\Entity\Sessions $session
      *
@@ -356,7 +356,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Remove session
+     * Remove session.
      *
      * @param \MentoratBundle\Entity\Sessions $session
      */
@@ -366,7 +366,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get sessions
+     * Get sessions.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -376,7 +376,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Add soutenance
+     * Add soutenance.
      *
      * @param \MentoratBundle\Entity\Soutenance $soutenance
      *
@@ -390,7 +390,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Remove soutenance
+     * Remove soutenance.
      *
      * @param \MentoratBundle\Entity\Soutenance $soutenance
      */
@@ -400,7 +400,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get soutenances
+     * Get soutenances.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

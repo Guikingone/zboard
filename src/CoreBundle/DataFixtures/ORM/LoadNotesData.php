@@ -27,7 +27,7 @@ class LoadNotesData implements FixtureInterface, ContainerAwareInterface, Ordere
     public function load(ObjectManager $manager)
     {
         $suivi = $this->privateContainer->get('doctrine')->getManager()->getRepository('MentoratBundle:Suivi')
-                                       ->findOneBy(array('libelle' => "Suivi Premium Plus"));
+                                       ->findOneBy(array('libelle' => 'Suivi Premium Plus'));
 
         $mentor = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
                                          ->findOneBy(array('firstname' => 'Jacky'));

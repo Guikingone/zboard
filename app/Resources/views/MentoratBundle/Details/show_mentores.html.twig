@@ -18,37 +18,37 @@
                     <div class="col-md-6 col-lg-pull-2 col-lg-5">
                         <div class="box box-primary">
                             <div class="box-body box-profile">
-                                <img class="profile-user-img img-responsive img-circle" src="{{ asset('img/avatars/user-default.jpg') }}" alt="User profile picture">
+                                <img class="profile-user-img img-responsive img-circle" src="{{ asset('img/avatars/user-default.png') }}" alt="User profile picture">
                                 <h3 class="profile-username text-center"><p>{{ mentore.firstname }} {{ mentore.lastname }}</p></h3>
                                 <p class="text-muted text-center">{{ mentore.suivi.parcours.libelle }}</p>
                                 <ul class="list-group list-group-unbordered">
                                     <li class="list-group-item">
                                         <b>Statut : </b>
 
-                                        {% if mentore.status == 'En formation' %}
-                                            <p class="pull-right label label-success">{{ mentore.status }}</p>
-                                        {% elseif mentore.status == 'Contacté' %}
+                                        {% if mentore.suivi.mentoreStatus == 'En formation' %}
+                                            <p class="pull-right label label-success">{{ mentore.suivi.mentoreStatus }}</p>
+                                        {% elseif mentore.suivi.mentoreStatus == 'Contacté' %}
                                             <p class="pull-right label label-warning">{{ mentore.status }}</p>
-                                        {% elseif mentore.status == 'En pause' %}
-                                            <p class="pull-right label label-danger">{{ mentore.status }}</p>
-                                        {% elseif mentore.status == 'En attente' %}
-                                            <p class="pull-right label label-warning">{{ mentore.status }}</p>
-                                        {% elseif mentore.status == 'Formation terminé' %}
-                                            <p class="pull-right label label-success">{{ mentore.status }}</p>
+                                        {% elseif mentore.suivi.mentoreStatus == 'En pause' %}
+                                            <p class="pull-right label label-danger">{{ mentore.suivi.mentoreStatus }}</p>
+                                        {% elseif mentore.suivi.mentoreStatus == 'En attente' %}
+                                            <p class="pull-right label label-warning">{{ mentore.suivi.mentoreStatus }}</p>
+                                        {% elseif mentore.suivi.mentoreStatus == 'Formation terminé' %}
+                                            <p class="pull-right label label-success">{{ mentore.suivi.mentoreStatus }}</p>
                                         {% endif %}
                                     </li>
                                     <li class="list-group-item">
                                         <b>Financement : </b>
                                         <p class="pull-right">
-                                            {% if mentore.financement == false %}
+                                            {% if mentore.suivi.financement == false %}
                                                     Non financé
                                                 {% else %}
-                                                    {{ mentore.financeur }} {{ mentore.dureeFinancement }}
+                                                    {{ mentore.suivi.financeur }} {{ mentore.suivi.dureeFinancement }}
                                             {% endif %}
                                         </p>
                                     </li>
                                     <li class="list-group-item">
-                                        <b>Date commencement : </b> <p class="pull-right">{{ mentore.dateStart|date('d-M-y') }}</p>
+                                        <b>Date commencement : </b> <p class="pull-right">{{ mentore.suivi.dateStart|date('d-M-y') }}</p>
                                     </li>
                                 </ul>
                                 {% if is_granted('ROLE_MENTOR') %}

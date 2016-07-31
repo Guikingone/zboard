@@ -60,9 +60,9 @@ class Sessions
     private $mentore;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -70,7 +70,7 @@ class Sessions
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -84,7 +84,7 @@ class Sessions
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */
@@ -94,7 +94,7 @@ class Sessions
     }
 
     /**
-     * Set dateSession
+     * Set dateSession.
      *
      * @param \DateTime $dateSession
      *
@@ -108,7 +108,7 @@ class Sessions
     }
 
     /**
-     * Get dateSession
+     * Get dateSession.
      *
      * @return \DateTime
      */
@@ -118,7 +118,7 @@ class Sessions
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param string $status
      *
@@ -132,7 +132,7 @@ class Sessions
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return string
      */
@@ -142,9 +142,9 @@ class Sessions
     }
 
     /**
-     * Set periodicity
+     * Set periodicity.
      *
-     * @param boolean $periodicity
+     * @param bool $periodicity
      *
      * @return Sessions
      */
@@ -156,9 +156,9 @@ class Sessions
     }
 
     /**
-     * Get periodicity
+     * Get periodicity.
      *
-     * @return boolean
+     * @return bool
      */
     public function getPeriodicity()
     {
@@ -166,7 +166,7 @@ class Sessions
     }
 
     /**
-     * Set mentor
+     * Set mentor.
      *
      * @param \UserBundle\Entity\User $mentor
      *
@@ -180,7 +180,7 @@ class Sessions
     }
 
     /**
-     * Get mentor
+     * Get mentor.
      *
      * @return \UserBundle\Entity\User
      */
@@ -190,7 +190,7 @@ class Sessions
     }
 
     /**
-     * Set mentore
+     * Set mentore.
      *
      * @param \UserBundle\Entity\Mentore $mentore
      *
@@ -204,7 +204,7 @@ class Sessions
     }
 
     /**
-     * Get mentore
+     * Get mentore.
      *
      * @return \UserBundle\Entity\Mentore
      */

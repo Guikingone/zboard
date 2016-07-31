@@ -28,7 +28,6 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
 
     public function load(ObjectManager $manager)
     {
-
         $country = $this->privateContainer->get('doctrine')->getManager()->getRepository('AdminBundle:Country')
                                                            ->findOneBy(array('libelle' => 'France'));
 
@@ -37,7 +36,6 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
 
         $mentor = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
                                          ->findOneBy(array('firstname' => 'Jacky'));
-
 
         $mentore = new Mentore();
 
@@ -51,7 +49,6 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $mentore->setResume('Something');
         $mentore->setArchived(false);
         $mentore->setRoles(array('ROLE_MENTORE'));
-
 
         $mentoreC = new Mentore();
 
@@ -70,7 +67,7 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
 
         $suivi->setMentor($mentor);
         $suivi->setMentore($mentore);
-        $suivi->setLibelle("Suivi Premium Plus");
+        $suivi->setLibelle('Suivi Premium Plus');
         $suivi->setParcours($parcours);
         $suivi->setSuiviState('En cours');
         $suivi->setDateStart(new\DateTime());
@@ -80,12 +77,11 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
 
         $suiviC->setMentor($mentor);
         $suiviC->setMentore($mentoreC);
-        $suiviC->setLibelle("Suivi Premium Plus");
+        $suiviC->setLibelle('Suivi Premium Plus');
         $suiviC->setParcours($parcours);
         $suiviC->setSuiviState('En cours');
         $suiviC->setDateStart(new\DateTime());
         $suiviC->setMentoreStatus('En attente');
-
 
         $manager->persist($mentore);
         $manager->persist($mentoreC);

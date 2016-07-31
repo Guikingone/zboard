@@ -18,7 +18,7 @@
                 <div class="col-md-3 col-lg-pull-2 col-lg-5">
                     <div class="box box-primary">
                         <div class="box-body box-profile">
-                            <img class="profile-user-img img-responsive img-circle" src="{{ asset('img/avatars/user-default.jpg') }}" alt="User profile picture">
+                            <img class="profile-user-img img-responsive img-circle" src="{{ asset('img/avatars/user-default.png') }}" alt="User profile picture">
                             <h3 class="profile-username text-center"><p>{{ mentor.firstname }} {{ mentor.lastname }}</p></h3>
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
@@ -243,8 +243,7 @@
                                     <table class="table no-margin">
                                         <thead>
                                         <tr>
-                                            <th>Nom</th>
-                                            <th>Prenom</th>
+                                            <th>Nom Prenom</th>
                                             <th>Status</th>
                                         </tr>
                                         </thead>
@@ -253,23 +252,20 @@
                                             <tr>
                                                 <td>
                                                     <a href="{{ path('show_details_mentore', {'id': mentores.mentore.id}) }}">
-                                                        {{ mentores.mentore.lastname }}
+                                                        {{ mentores.mentore.lastname }} {{ mentores.mentore.firstname }}
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    {{ mentores.mentore.firstname }}
-                                                </td>
-                                                <td>
-                                                    {% if mentores.mentore.status == 'En formation' %}
-                                                        <span class="label label-success">{{ mentores.mentore.status }}</span>
-                                                    {% elseif mentores.mentore.status == 'Contacté' %}
-                                                        <span class="label label-warning">{{ mentores.mentore.status }}</span>
-                                                    {% elseif mentores.mentore.status == 'En pause' %}
-                                                        <span class="label label-danger">{{ mentores.mentore.status }}</span>
-                                                    {% elseif mentores.mentore.status == 'En attente' %}
-                                                        <span class="label label-warning">{{ mentores.mentore.status }}</span>
-                                                    {% elseif mentores.mentore.status == 'Formation terminé' %}
-                                                        <span class="label label-success">{{ mentores.mentore.status }}</span>
+                                                    {% if mentores.suiviState == 'En formation' %}
+                                                        <span class="label label-success">{{ mentores.suiviState }}</span>
+                                                    {% elseif mentores.suiviState == 'Contacté' %}
+                                                        <span class="label label-warning">{{ mentores.suiviState }}</span>
+                                                    {% elseif mentores.suiviState == 'En pause' %}
+                                                        <span class="label label-danger">{{ mentores.suiviState }}</span>
+                                                    {% elseif mentores.suiviState == 'En attente' %}
+                                                        <span class="label label-warning">{{ mentores.suiviState }}</span>
+                                                    {% elseif mentores.suiviState == 'Formation terminé' %}
+                                                        <span class="label label-success">{{ mentores.suiviState }}</span>
                                                     {% endif %}
                                                 </td>
                                             </tr>

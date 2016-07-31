@@ -93,7 +93,7 @@ class Suivi
     private $duree_financement;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -101,9 +101,9 @@ class Suivi
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -111,7 +111,7 @@ class Suivi
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -125,7 +125,7 @@ class Suivi
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */
@@ -135,7 +135,7 @@ class Suivi
     }
 
     /**
-     * Set dUpdate
+     * Set dUpdate.
      *
      * @param \DateTime $dUpdate
      *
@@ -149,7 +149,7 @@ class Suivi
     }
 
     /**
-     * Get dUpdate
+     * Get dUpdate.
      *
      * @return \DateTime
      */
@@ -159,7 +159,7 @@ class Suivi
     }
 
     /**
-     * Set dateStart
+     * Set dateStart.
      *
      * @param \DateTime $dateStart
      *
@@ -173,7 +173,7 @@ class Suivi
     }
 
     /**
-     * Get dateStart
+     * Get dateStart.
      *
      * @return \DateTime
      */
@@ -183,7 +183,7 @@ class Suivi
     }
 
     /**
-     * Set suiviState
+     * Set suiviState.
      *
      * @param string $suiviState
      *
@@ -197,7 +197,7 @@ class Suivi
     }
 
     /**
-     * Get suiviState
+     * Get suiviState.
      *
      * @return string
      */
@@ -207,7 +207,7 @@ class Suivi
     }
 
     /**
-     * Set mentoreStatus
+     * Set mentoreStatus.
      *
      * @param string $mentoreStatus
      *
@@ -221,7 +221,7 @@ class Suivi
     }
 
     /**
-     * Get mentoreStatus
+     * Get mentoreStatus.
      *
      * @return string
      */
@@ -231,9 +231,9 @@ class Suivi
     }
 
     /**
-     * Set financement
+     * Set financement.
      *
-     * @param boolean $financement
+     * @param bool $financement
      *
      * @return Suivi
      */
@@ -245,9 +245,9 @@ class Suivi
     }
 
     /**
-     * Get financement
+     * Get financement.
      *
-     * @return boolean
+     * @return bool
      */
     public function getFinancement()
     {
@@ -255,7 +255,7 @@ class Suivi
     }
 
     /**
-     * Set financeur
+     * Set financeur.
      *
      * @param string $financeur
      *
@@ -269,7 +269,7 @@ class Suivi
     }
 
     /**
-     * Get financeur
+     * Get financeur.
      *
      * @return string
      */
@@ -279,7 +279,7 @@ class Suivi
     }
 
     /**
-     * Set dureeFinancement
+     * Set dureeFinancement.
      *
      * @param string $dureeFinancement
      *
@@ -293,7 +293,7 @@ class Suivi
     }
 
     /**
-     * Get dureeFinancement
+     * Get dureeFinancement.
      *
      * @return string
      */
@@ -303,7 +303,7 @@ class Suivi
     }
 
     /**
-     * Set mentore
+     * Set mentore.
      *
      * @param \UserBundle\Entity\Mentore $mentore
      *
@@ -317,7 +317,7 @@ class Suivi
     }
 
     /**
-     * Get mentore
+     * Get mentore.
      *
      * @return \UserBundle\Entity\Mentore
      */
@@ -327,7 +327,7 @@ class Suivi
     }
 
     /**
-     * Set mentor
+     * Set mentor.
      *
      * @param \UserBundle\Entity\User $mentor
      *
@@ -341,7 +341,7 @@ class Suivi
     }
 
     /**
-     * Get mentor
+     * Get mentor.
      *
      * @return \UserBundle\Entity\User
      */
@@ -351,7 +351,7 @@ class Suivi
     }
 
     /**
-     * Add note
+     * Add note.
      *
      * @param \MentoratBundle\Entity\Notes $note
      *
@@ -365,7 +365,7 @@ class Suivi
     }
 
     /**
-     * Remove note
+     * Remove note.
      *
      * @param \MentoratBundle\Entity\Notes $note
      */
@@ -375,7 +375,7 @@ class Suivi
     }
 
     /**
-     * Get notes
+     * Get notes.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -385,7 +385,7 @@ class Suivi
     }
 
     /**
-     * Set parcours
+     * Set parcours.
      *
      * @param \BackendBundle\Entity\Parcours $parcours
      *
@@ -399,7 +399,7 @@ class Suivi
     }
 
     /**
-     * Get parcours
+     * Get parcours.
      *
      * @return \BackendBundle\Entity\Parcours
      */

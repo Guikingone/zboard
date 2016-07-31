@@ -24,7 +24,7 @@ class ShowDashboardController extends Controller
         $sessions = $this->get('core.mentore')->addSessionMentorat($request, $id);
 
         return array('controller' => 'mentore', 'mentore' => $mentore,
-                     'note' => $note->createView(), 'sessions' => $sessions->createView());
+                     'note' => $note->createView(), 'sessions' => $sessions->createView(), );
     }
 
     /**
@@ -40,6 +40,7 @@ class ShowDashboardController extends Controller
         $competence = $this->get('core.user')->addCompetencesMentor($request, $id);
         $mentor = $this->get('core.mentore')->viewMentor($id);
 
-        return array('mentor' => $mentor, 'competence' => $competence->createView());
+        return array('controller' => 'mentor', 'mentor' => $mentor,
+                     'competence' => $competence->createView(), );
     }
 }
