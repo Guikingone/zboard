@@ -77,7 +77,7 @@ class User extends BaseUser
     private $available;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Suivi", inversedBy="users")
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="mentor")
      */
     private $suivi;
 
@@ -98,7 +98,7 @@ class User extends BaseUser
     private $competences;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(name="archived", type="boolean")
      */
     private $archived;
@@ -110,10 +110,11 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->competences = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->suivi = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Set firstname
+     * Set firstname.
      *
      * @param string $firstname
      *
@@ -127,7 +128,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get firstname
+     * Get firstname.
      *
      * @return string
      */
@@ -137,7 +138,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set lastname
+     * Set lastname.
      *
      * @param string $lastname
      *
@@ -151,7 +152,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get lastname
+     * Get lastname.
      *
      * @return string
      */
@@ -161,7 +162,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set address
+     * Set address.
      *
      * @param string $address
      *
@@ -175,7 +176,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get address
+     * Get address.
      *
      * @return string
      */
@@ -185,7 +186,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set zipcode
+     * Set zipcode.
      *
      * @param string $zipcode
      *
@@ -199,7 +200,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get zipcode
+     * Get zipcode.
      *
      * @return string
      */
@@ -209,7 +210,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set city
+     * Set city.
      *
      * @param string $city
      *
@@ -223,7 +224,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get city
+     * Get city.
      *
      * @return string
      */
@@ -233,7 +234,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set phone
+     * Set phone.
      *
      * @param string $phone
      *
@@ -247,7 +248,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get phone
+     * Get phone.
      *
      * @return string
      */
@@ -257,7 +258,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set resume
+     * Set resume.
      *
      * @param string $resume
      *
@@ -271,7 +272,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get resume
+     * Get resume.
      *
      * @return string
      */
@@ -281,9 +282,9 @@ class User extends BaseUser
     }
 
     /**
-     * Set available
+     * Set available.
      *
-     * @param boolean $available
+     * @param bool $available
      *
      * @return User
      */
@@ -295,9 +296,9 @@ class User extends BaseUser
     }
 
     /**
-     * Get available
+     * Get available.
      *
-     * @return boolean
+     * @return bool
      */
     public function getAvailable()
     {
@@ -305,9 +306,43 @@ class User extends BaseUser
     }
 
     /**
-     * Set archived
+     * Add suivi
      *
-     * @param boolean $archived
+     * @param \MentoratBundle\Entity\Suivi $suivi
+     *
+     * @return User
+     */
+    public function addSuivi(\MentoratBundle\Entity\Suivi $suivi)
+    {
+        $this->suivi[] = $suivi;
+
+        return $this;
+    }
+
+    /**
+     * Remove suivi
+     *
+     * @param \MentoratBundle\Entity\Suivi $suivi
+     */
+    public function removeSuivi(\MentoratBundle\Entity\Suivi $suivi)
+    {
+        $this->suivi->removeElement($suivi);
+    }
+
+    /**
+     * Get suivi
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSuivi()
+    {
+        return $this->suivi;
+    }
+
+    /**
+     * Set archived.
+     *
+     * @param bool $archived
      *
      * @return User
      */
@@ -319,9 +354,9 @@ class User extends BaseUser
     }
 
     /**
-     * Get archived
+     * Get archived.
      *
-     * @return boolean
+     * @return bool
      */
     public function getArchived()
     {
@@ -329,7 +364,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set country
+     * Set country.
      *
      * @param \AdminBundle\Entity\Country $country
      *
@@ -343,7 +378,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get country
+     * Get country.
      *
      * @return \AdminBundle\Entity\Country
      */
@@ -353,31 +388,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set suivi
-     *
-     * @param \MentoratBundle\Entity\Suivi $suivi
-     *
-     * @return User
-     */
-    public function setSuivi(\MentoratBundle\Entity\Suivi $suivi = null)
-    {
-        $this->suivi = $suivi;
-
-        return $this;
-    }
-
-    /**
-     * Get suivi
-     *
-     * @return \MentoratBundle\Entity\Suivi
-     */
-    public function getSuivi()
-    {
-        return $this->suivi;
-    }
-
-    /**
-     * Set sessions
+     * Set sessions.
      *
      * @param \MentoratBundle\Entity\Sessions $sessions
      *
@@ -391,7 +402,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get sessions
+     * Get sessions.
      *
      * @return \MentoratBundle\Entity\Sessions
      */
@@ -401,7 +412,31 @@ class User extends BaseUser
     }
 
     /**
-     * Add competence
+     * Set soutenances.
+     *
+     * @param \MentoratBundle\Entity\Soutenance $soutenances
+     *
+     * @return User
+     */
+    public function setSoutenances(\MentoratBundle\Entity\Soutenance $soutenances = null)
+    {
+        $this->soutenances = $soutenances;
+
+        return $this;
+    }
+
+    /**
+     * Get soutenances.
+     *
+     * @return \MentoratBundle\Entity\Soutenance
+     */
+    public function getSoutenances()
+    {
+        return $this->soutenances;
+    }
+
+    /**
+     * Add competence.
      *
      * @param \UserBundle\Entity\Competences $competence
      *
@@ -415,7 +450,7 @@ class User extends BaseUser
     }
 
     /**
-     * Remove competence
+     * Remove competence.
      *
      * @param \UserBundle\Entity\Competences $competence
      */
@@ -425,7 +460,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get competences
+     * Get competences.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

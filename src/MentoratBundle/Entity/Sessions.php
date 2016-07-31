@@ -50,15 +50,14 @@ class Sessions
     private $periodicity;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Suivi", inversedBy="sessions")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="sessions")
      */
-    private $suivi;
+    private $mentor;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="sessions")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Mentore", inversedBy="sessions")
      */
-    private $users;
-    
+    private $mentore;
 
     /**
      * Get id
@@ -167,67 +166,50 @@ class Sessions
     }
 
     /**
-     * Set suivi
+     * Set mentor
      *
-     * @param \MentoratBundle\Entity\Suivi $suivi
+     * @param \UserBundle\Entity\User $mentor
      *
      * @return Sessions
      */
-    public function setSuivi(\MentoratBundle\Entity\Suivi $suivi = null)
+    public function setMentor(\UserBundle\Entity\User $mentor = null)
     {
-        $this->suivi = $suivi;
+        $this->mentor = $mentor;
 
         return $this;
     }
 
     /**
-     * Get suivi
+     * Get mentor
      *
-     * @return \MentoratBundle\Entity\Suivi
+     * @return \UserBundle\Entity\User
      */
-    public function getSuivi()
+    public function getMentor()
     {
-        return $this->suivi;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->mentor;
     }
 
     /**
-     * Add user
+     * Set mentore
      *
-     * @param \UserBundle\Entity\User $user
+     * @param \UserBundle\Entity\Mentore $mentore
      *
      * @return Sessions
      */
-    public function addUser(\UserBundle\Entity\User $user)
+    public function setMentore(\UserBundle\Entity\Mentore $mentore = null)
     {
-        $this->users[] = $user;
+        $this->mentore = $mentore;
 
         return $this;
     }
 
     /**
-     * Remove user
+     * Get mentore
      *
-     * @param \UserBundle\Entity\User $user
+     * @return \UserBundle\Entity\Mentore
      */
-    public function removeUser(\UserBundle\Entity\User $user)
+    public function getMentore()
     {
-        $this->users->removeElement($user);
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsers()
-    {
-        return $this->users;
+        return $this->mentore;
     }
 }

@@ -1,21 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Guillaume
- * Date: 25/07/2016
- * Time: 17:03.
- */
 
 namespace CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use MentoratBundle\Entity\Sessions;
+use MentoratBundle\Entity\Suivi;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadSessionsData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
+class LoadSuiviData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     private $privateContainer;
 
@@ -30,17 +24,22 @@ class LoadSessionsData implements FixtureInterface, ContainerAwareInterface, Ord
                                           ->findOneBy(array('lastname' => 'Gaucher'));
 
         $mentor = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
-                                         ->findOneBy(array('lastname' => 'Chan'));
+                                         ->findOneBy(array('firstname' => 'Jacky'));
 
-        $session = new Sessions();
+        $parcours = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
+                                           ->findOneBy(array('libelle' => 'Chef de projet Multimédia - Développement'));
 
-        $session->addUser($mentor);
-        $session->setDateSession(new \DateTime());
-        $session->setPeriodicity(false);
-        $session->setStatus('Present');
-        $session->setLibelle('Session de mentorat Premium Plus');
+        $suivi = new Suivi();
 
-        $manager->persist($session);
+        $suivi->setMentor($mentor);
+        $suivi->setMentore($mentore);
+        $suivi->setLibelle("Suivi Premium Plus");
+        $suivi->setParcours($parcours);
+        $suivi->setSuiviState('En cours');
+        $suivi->setDateStart(new\DateTime());
+        $suivi->setMentoreStatus('En formation');
+
+        $manager->persist($suivi);
         $manager->flush();
     }
 

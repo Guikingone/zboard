@@ -17,10 +17,9 @@
                 {% for soutenances in soutenances %}
                 <tr>
                     <td>
-                        {{ soutenances.mentore.firstname }} {{ soutenances.mentore.lastname }}
-                    </td>
-                    <td>
-                        {{ soutenances.mentor.firstname }} {{ soutenances.mentor.lastname }}
+                        {% for users in soutenances.users %}
+                            {{ users.lastname }}
+                        {% endfor %}
                     </td>
                     <td>
                         {{ soutenances.passedAt|date("d-M-Y", "Europe/Paris") }}

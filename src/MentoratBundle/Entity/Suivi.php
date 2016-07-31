@@ -42,9 +42,14 @@ class Suivi
     private $date_start;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="suivi")
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Mentore", mappedBy="suivi")
      */
-    private $users;
+    private $mentore;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="suivi")
+     */
+    private $mentor;
 
     /**
      * @var string
@@ -54,7 +59,7 @@ class Suivi
 
     /**
      * @var string
-     * @ORM\Column(name="status", type="string", length=100)
+     * @ORM\Column(name="status", type="string", length=100, nullable=false)
      */
     private $mentore_status;
 
@@ -64,15 +69,14 @@ class Suivi
     private $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Sessions", mappedBy="suivi")
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Soutenance", mappedBy="mentore")
      */
-    private $sessions;
+    private $soutenance;
 
     /**
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours", inversedBy="suivi")
      */
     private $parcours;
-
 
     /**
      * @var bool
@@ -91,15 +95,14 @@ class Suivi
      * @ORM\Column(name="duree_financement", type="string", length=100, nullable=true)
      */
     private $duree_financement;
-   
+ 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
         $this->notes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->sessions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->soutenance = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -305,37 +308,51 @@ class Suivi
     }
 
     /**
-     * Add user
+     * Set mentore
      *
-     * @param \UserBundle\Entity\User $user
+     * @param \UserBundle\Entity\Mentore $mentore
      *
      * @return Suivi
      */
-    public function addUser(\UserBundle\Entity\User $user)
+    public function setMentore(\UserBundle\Entity\Mentore $mentore = null)
     {
-        $this->users[] = $user;
+        $this->mentore = $mentore;
 
         return $this;
     }
 
     /**
-     * Remove user
+     * Get mentore
      *
-     * @param \UserBundle\Entity\User $user
+     * @return \UserBundle\Entity\Mentore
      */
-    public function removeUser(\UserBundle\Entity\User $user)
+    public function getMentore()
     {
-        $this->users->removeElement($user);
+        return $this->mentore;
     }
 
     /**
-     * Get users
+     * Set mentor
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @param \UserBundle\Entity\User $mentor
+     *
+     * @return Suivi
      */
-    public function getUsers()
+    public function setMentor(\UserBundle\Entity\User $mentor = null)
     {
-        return $this->users;
+        $this->mentor = $mentor;
+
+        return $this;
+    }
+
+    /**
+     * Get mentor
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getMentor()
+    {
+        return $this->mentor;
     }
 
     /**
@@ -373,37 +390,37 @@ class Suivi
     }
 
     /**
-     * Add session
+     * Add soutenance
      *
-     * @param \MentoratBundle\Entity\Sessions $session
+     * @param \MentoratBundle\Entity\Soutenance $soutenance
      *
      * @return Suivi
      */
-    public function addSession(\MentoratBundle\Entity\Sessions $session)
+    public function addSoutenance(\MentoratBundle\Entity\Soutenance $soutenance)
     {
-        $this->sessions[] = $session;
+        $this->soutenance[] = $soutenance;
 
         return $this;
     }
 
     /**
-     * Remove session
+     * Remove soutenance
      *
-     * @param \MentoratBundle\Entity\Sessions $session
+     * @param \MentoratBundle\Entity\Soutenance $soutenance
      */
-    public function removeSession(\MentoratBundle\Entity\Sessions $session)
+    public function removeSoutenance(\MentoratBundle\Entity\Soutenance $soutenance)
     {
-        $this->sessions->removeElement($session);
+        $this->soutenance->removeElement($soutenance);
     }
 
     /**
-     * Get sessions
+     * Get soutenance
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getSessions()
+    public function getSoutenance()
     {
-        return $this->sessions;
+        return $this->soutenance;
     }
 
     /**

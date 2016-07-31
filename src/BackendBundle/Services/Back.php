@@ -10,7 +10,6 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use BackendBundle\Entity\Parcours;
-use MentoratBundle\Entity\Mentore;
 use BackendBundle\Entity\Projet;
 use MentoratBundle\Form\InformationType;
 
@@ -43,18 +42,6 @@ class Back
         $this->doctrine = $doctrine;
         $this->formFactory = $formFactory;
         $this->session = $session;
-    }
-
-    /**
-     * Allow the back to get all the new mentores since actual datetime.
-     *
-     * @return array
-     */
-    public function getNewMentores()
-    {
-        $days = new \DateTime();
-
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getNewMentores($days);
     }
 
     /**
@@ -127,28 +114,6 @@ class Back
             $this->doctrine->persist($information);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Information ajouté.');
-        }
-
-        return $form;
-    }
-
-    /**
-     * Allow to add a new soutenance between a mentor and a mentore.
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addSoutenance(Request $request)
-    {
-        $soutenance = new Soutenance();
-        $form = $this->formFactory->create(SoutenanceTypeAdd::class, $soutenance);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $this->doctrine->persist($soutenance);
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'Soutenance ajoutée !');
         }
 
         return $form;

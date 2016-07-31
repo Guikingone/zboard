@@ -22,11 +22,6 @@ class Soutenance
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="soutenances")
-     */
-    private $users;
-
-    /**
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Projet")
      * @ORM\JoinColumn(name="projet_id", referencedColumnName="id"))
      */
@@ -46,11 +41,21 @@ class Soutenance
     private $status;
 
     /**
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="soutenances")
+     */
+    private $mentor;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Mentore", inversedBy="soutenances")
+     */
+    private $mentore;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->mentor = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -112,40 +117,6 @@ class Soutenance
     }
 
     /**
-     * Add user
-     *
-     * @param \UserBundle\Entity\User $user
-     *
-     * @return Soutenance
-     */
-    public function addUser(\UserBundle\Entity\User $user)
-    {
-        $this->users[] = $user;
-
-        return $this;
-    }
-
-    /**
-     * Remove user
-     *
-     * @param \UserBundle\Entity\User $user
-     */
-    public function removeUser(\UserBundle\Entity\User $user)
-    {
-        $this->users->removeElement($user);
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
-
-    /**
      * Set projet
      *
      * @param \BackendBundle\Entity\Projet $projet
@@ -167,5 +138,63 @@ class Soutenance
     public function getProjet()
     {
         return $this->projet;
+    }
+
+    /**
+     * Add mentor
+     *
+     * @param \UserBundle\Entity\User $mentor
+     *
+     * @return Soutenance
+     */
+    public function addMentor(\UserBundle\Entity\User $mentor)
+    {
+        $this->mentor[] = $mentor;
+
+        return $this;
+    }
+
+    /**
+     * Remove mentor
+     *
+     * @param \UserBundle\Entity\User $mentor
+     */
+    public function removeMentor(\UserBundle\Entity\User $mentor)
+    {
+        $this->mentor->removeElement($mentor);
+    }
+
+    /**
+     * Get mentor
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMentor()
+    {
+        return $this->mentor;
+    }
+
+    /**
+     * Set mentore
+     *
+     * @param \UserBundle\Entity\Mentore $mentore
+     *
+     * @return Soutenance
+     */
+    public function setMentore(\UserBundle\Entity\Mentore $mentore = null)
+    {
+        $this->mentore = $mentore;
+
+        return $this;
+    }
+
+    /**
+     * Get mentore
+     *
+     * @return \UserBundle\Entity\Mentore
+     */
+    public function getMentore()
+    {
+        return $this->mentore;
     }
 }

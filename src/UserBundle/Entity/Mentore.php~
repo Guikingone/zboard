@@ -6,20 +6,19 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * User.
+ * Mentore.
  *
- * @ORM\Table(name="zboard_user")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
+ * @ORM\Table(name="zboard_mentore")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\MentoreRepository")
  */
-class User extends BaseUser
+class Mentore extends BaseUser
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer", length=11)
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="UserBundle\Entity\Informations", mappedBy="author")
      */
     protected $id;
 
@@ -54,7 +53,7 @@ class User extends BaseUser
     protected $city;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Country", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Country", inversedBy="mentore")
      */
     private $country;
 
@@ -72,45 +71,34 @@ class User extends BaseUser
 
     /**
      * @var bool
-     * @ORM\Column(name="available", type="boolean", nullable=true)
-     */
-    private $available;
-
-    /**
-     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="mentor")
-     */
-    private $suivi;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Sessions", inversedBy="users")
-     */
-    private $sessions;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Soutenance", inversedBy="users")
-     */
-    private $soutenances;
-
-    /**
-     * @ORM\OneToMany(targetEntity="UserBundle\Entity\Competences", mappedBy="user")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $competences;
-
-    /**
-     * @var bool
+     *
      * @ORM\Column(name="archived", type="boolean")
      */
     private $archived;
 
     /**
-     * User constructor.
+     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="mentore")
+     */
+    private $suivi;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Sessions", mappedBy="mentore")
+     */
+    private $sessions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Soutenance", mappedBy="mentore")
+     */
+    private $soutenances;
+
+    /**
+     * Mentore constructor.
      */
     public function __construct()
     {
         parent::__construct();
-        $this->competences = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->suivi = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->sessions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->soutenances = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -118,7 +106,7 @@ class User extends BaseUser
      *
      * @param string $firstname
      *
-     * @return User
+     * @return Mentore
      */
     public function setFirstname($firstname)
     {
@@ -142,7 +130,7 @@ class User extends BaseUser
      *
      * @param string $lastname
      *
-     * @return User
+     * @return Mentore
      */
     public function setLastname($lastname)
     {
@@ -166,7 +154,7 @@ class User extends BaseUser
      *
      * @param string $address
      *
-     * @return User
+     * @return Mentore
      */
     public function setAddress($address)
     {
@@ -190,7 +178,7 @@ class User extends BaseUser
      *
      * @param string $zipcode
      *
-     * @return User
+     * @return Mentore
      */
     public function setZipcode($zipcode)
     {
@@ -214,7 +202,7 @@ class User extends BaseUser
      *
      * @param string $city
      *
-     * @return User
+     * @return Mentore
      */
     public function setCity($city)
     {
@@ -238,7 +226,7 @@ class User extends BaseUser
      *
      * @param string $phone
      *
-     * @return User
+     * @return Mentore
      */
     public function setPhone($phone)
     {
@@ -262,7 +250,7 @@ class User extends BaseUser
      *
      * @param string $resume
      *
-     * @return User
+     * @return Mentore
      */
     public function setResume($resume)
     {
@@ -282,69 +270,11 @@ class User extends BaseUser
     }
 
     /**
-     * Set available.
-     *
-     * @param bool $available
-     *
-     * @return User
-     */
-    public function setAvailable($available)
-    {
-        $this->available = $available;
-
-        return $this;
-    }
-
-    /**
-     * Get available.
-     *
-     * @return bool
-     */
-    public function getAvailable()
-    {
-        return $this->available;
-    }
-
-    /**
-     * Add suivi
-     *
-     * @param \MentoratBundle\Entity\Suivi $suivi
-     *
-     * @return User
-     */
-    public function addSuivi(\MentoratBundle\Entity\Suivi $suivi)
-    {
-        $this->suivi[] = $suivi;
-
-        return $this;
-    }
-
-    /**
-     * Remove suivi
-     *
-     * @param \MentoratBundle\Entity\Suivi $suivi
-     */
-    public function removeSuivi(\MentoratBundle\Entity\Suivi $suivi)
-    {
-        $this->suivi->removeElement($suivi);
-    }
-
-    /**
-     * Get suivi
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSuivi()
-    {
-        return $this->suivi;
-    }
-
-    /**
      * Set archived.
      *
      * @param bool $archived
      *
-     * @return User
+     * @return Mentore
      */
     public function setArchived($archived)
     {
@@ -368,7 +298,7 @@ class User extends BaseUser
      *
      * @param \AdminBundle\Entity\Country $country
      *
-     * @return User
+     * @return Mentore
      */
     public function setCountry(\AdminBundle\Entity\Country $country = null)
     {
@@ -388,23 +318,33 @@ class User extends BaseUser
     }
 
     /**
-     * Set sessions.
+     * Add session.
      *
-     * @param \MentoratBundle\Entity\Sessions $sessions
+     * @param \MentoratBundle\Entity\Sessions $session
      *
-     * @return User
+     * @return Mentore
      */
-    public function setSessions(\MentoratBundle\Entity\Sessions $sessions = null)
+    public function addSession(\MentoratBundle\Entity\Sessions $session)
     {
-        $this->sessions = $sessions;
+        $this->sessions[] = $session;
 
         return $this;
     }
 
     /**
+     * Remove session.
+     *
+     * @param \MentoratBundle\Entity\Sessions $session
+     */
+    public function removeSession(\MentoratBundle\Entity\Sessions $session)
+    {
+        $this->sessions->removeElement($session);
+    }
+
+    /**
      * Get sessions.
      *
-     * @return \MentoratBundle\Entity\Sessions
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSessions()
     {
@@ -412,60 +352,36 @@ class User extends BaseUser
     }
 
     /**
-     * Set soutenances.
+     * Add soutenance.
      *
-     * @param \MentoratBundle\Entity\Soutenance $soutenances
+     * @param \MentoratBundle\Entity\Soutenance $soutenance
      *
-     * @return User
+     * @return Mentore
      */
-    public function setSoutenances(\MentoratBundle\Entity\Soutenance $soutenances = null)
+    public function addSoutenance(\MentoratBundle\Entity\Soutenance $soutenance)
     {
-        $this->soutenances = $soutenances;
+        $this->soutenances[] = $soutenance;
 
         return $this;
+    }
+
+    /**
+     * Remove soutenance.
+     *
+     * @param \MentoratBundle\Entity\Soutenance $soutenance
+     */
+    public function removeSoutenance(\MentoratBundle\Entity\Soutenance $soutenance)
+    {
+        $this->soutenances->removeElement($soutenance);
     }
 
     /**
      * Get soutenances.
      *
-     * @return \MentoratBundle\Entity\Soutenance
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSoutenances()
     {
         return $this->soutenances;
-    }
-
-    /**
-     * Add competence.
-     *
-     * @param \UserBundle\Entity\Competences $competence
-     *
-     * @return User
-     */
-    public function addCompetence(\UserBundle\Entity\Competences $competence)
-    {
-        $this->competences[] = $competence;
-
-        return $this;
-    }
-
-    /**
-     * Remove competence.
-     *
-     * @param \UserBundle\Entity\Competences $competence
-     */
-    public function removeCompetence(\UserBundle\Entity\Competences $competence)
-    {
-        $this->competences->removeElement($competence);
-    }
-
-    /**
-     * Get competences.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCompetences()
-    {
-        return $this->competences;
     }
 }

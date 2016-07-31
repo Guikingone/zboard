@@ -34,9 +34,23 @@ class Country
     private $users;
 
     /**
-     * Get id.
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\Mentore", mappedBy="country")
+     */
+    private $mentores;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->mentores = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -44,7 +58,7 @@ class Country
     }
 
     /**
-     * Set libelle.
+     * Set libelle
      *
      * @param string $libelle
      *
@@ -58,7 +72,7 @@ class Country
     }
 
     /**
-     * Get libelle.
+     * Get libelle
      *
      * @return string
      */
@@ -66,16 +80,9 @@ class Country
     {
         return $this->libelle;
     }
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add user.
+     * Add user
      *
      * @param \UserBundle\Entity\User $user
      *
@@ -89,7 +96,7 @@ class Country
     }
 
     /**
-     * Remove user.
+     * Remove user
      *
      * @param \UserBundle\Entity\User $user
      */
@@ -99,12 +106,46 @@ class Country
     }
 
     /**
-     * Get users.
+     * Get users
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Add mentore
+     *
+     * @param \UserBundle\Entity\Mentore $mentore
+     *
+     * @return Country
+     */
+    public function addMentore(\UserBundle\Entity\Mentore $mentore)
+    {
+        $this->mentores[] = $mentore;
+
+        return $this;
+    }
+
+    /**
+     * Remove mentore
+     *
+     * @param \UserBundle\Entity\Mentore $mentore
+     */
+    public function removeMentore(\UserBundle\Entity\Mentore $mentore)
+    {
+        $this->mentores->removeElement($mentore);
+    }
+
+    /**
+     * Get mentores
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMentores()
+    {
+        return $this->mentores;
     }
 }

@@ -2,14 +2,16 @@
 
 namespace UserBundle\Form;
 
+use MentoratBundle\Form\SuiviType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class RegistrationType extends AbstractType
+class RegistrationMentoreType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -22,6 +24,7 @@ class RegistrationType extends AbstractType
             ->add('city', TextType::class)
             ->add('phone', TextType::class)
             ->add('email', EmailType::class)
+            ->add('resume', TextareaType::class)
             ->add('available', ChoiceType::class, array(
                 'choices' => array(
                     'Oui' => true,
@@ -32,6 +35,9 @@ class RegistrationType extends AbstractType
                 'class' => 'AdminBundle\Entity\Country',
                 'choice_label' => 'libelle',
             ))
+            ->add('suivi', SuiviType::class)
+            ->remove('sessions')
+            ->remove('soutenances')
             ->remove('plainPassword')
             ->remove('plainPassword_confirmation')
             ->remove('archived')
@@ -45,6 +51,6 @@ class RegistrationType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'app_user_registration';
+        return 'app_mentore_registration';
     }
 }

@@ -42,9 +42,14 @@ class Suivi
     private $date_start;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="suivi")
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Mentore", mappedBy="suivi")
      */
-    private $users;
+    private $mentore;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="suivi")
+     */
+    private $mentor;
 
     /**
      * @var string
@@ -54,7 +59,7 @@ class Suivi
 
     /**
      * @var string
-     * @ORM\Column(name="status", type="string", length=100)
+     * @ORM\Column(name="status", type="string", length=100, nullable=false)
      */
     private $mentore_status;
 
@@ -64,15 +69,14 @@ class Suivi
     private $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Sessions", mappedBy="suivi")
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Soutenance", mappedBy="mentore")
      */
-    private $sessions;
+    private $soutenance;
 
     /**
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours", inversedBy="suivi")
      */
     private $parcours;
-
 
     /**
      * @var bool
@@ -91,5 +95,5 @@ class Suivi
      * @ORM\Column(name="duree_financement", type="string", length=100, nullable=true)
      */
     private $duree_financement;
-   
+ 
 }

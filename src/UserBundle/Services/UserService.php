@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Guillaume
  * Date: 27/07/2016
- * Time: 15:42
+ * Time: 15:42.
  */
 
 namespace UserBundle\Services;
@@ -18,6 +18,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use UserBundle\Entity\Competences;
 use UserBundle\Entity\User;
 use UserBundle\Form\CompetencesType;
+use UserBundle\Form\RegistrationMentoreType;
 use UserBundle\Form\RegistrationType;
 
 class UserService
@@ -128,12 +129,12 @@ class UserService
         $mentore = new User();
         $suivi = new Suivi();
 
-        $form = $this->form->create(RegistrationType::class, $mentore);
+        $form = $this->form->create(RegistrationMentoreType::class, $mentore);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $mentore->setUsername($mentore->getFirstname() . '_' . $mentore->getLastname());
-            $mentore->setPlainPassword(mb_strtolower($mentore->getFirstname() . '_' . $mentore->getLastname()));
+            $mentore->setUsername($mentore->getFirstname().'_'.$mentore->getLastname());
+            $mentore->setPlainPassword(mb_strtolower($mentore->getFirstname().'_'.$mentore->getLastname()));
             $mentore->setRoles(array('ROLE_MENTORE'));
             $mentore->setArchived(false);
             $mentore->setSuivi($suivi);

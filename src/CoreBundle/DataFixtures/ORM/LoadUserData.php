@@ -31,15 +31,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $userManager = $this->privateContainer->get('fos_user.user_manager');
 
         $country = $this->privateContainer->get('doctrine')->getManager()->getRepository('AdminBundle:Country')
-                                          ->findOneBy(array('libelle' => 'France'));
-
-        $parcours = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
-                                           ->findOneBy(array('libelle' => 'Chef de projet Multimédia - Développement'));
-
-        $parcoursC = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
-                                           ->findOneBy(array('libelle' => 'Développeur PHP/Symfony'));
-
-        $country = $this->privateContainer->get('doctrine')->getManager()->getRepository('AdminBundle:Country')
                                            ->findOneBy(array('libelle' => 'France'));
 
         // Création de notre utilisateur ADMIN
@@ -93,57 +84,10 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $supervisteurMentor->setRoles(array('ROLE_SUPERVISEUR_MENTOR'));
         $supervisteurMentor->setAvailable(true);
 
-        $mentore = $userManager->createUser();
-        $suivi = new Suivi();
-
-        $mentore->setUsername('Aurore');
-        $mentore->setFirstname('Aurore');
-        $mentore->setLastname('Gaucher');
-        $mentore->setEmail('aurore.gaucher@gmail.com');
-        $mentore->setCountry($country);
-        $mentore->setPhone('00.00.00.00.00');
-        $mentore->setPlainPassword('aurore');
-        $mentore->setResume('Something');
-        $mentore->setSuivi($suivi);
-        $mentore->setArchived(false);
-        $mentore->setRoles(array('ROLE_MENTORE'));
-        $suivi->addUser($mentor);
-        $suivi->addUser($mentore);
-        $suivi->setParcours($parcours);
-        $suivi->setFinancement(true);
-        $suivi->setFinanceur('Pole-Emploi');
-        $suivi->setDureeFinancement('16 mois');
-        $suivi->setSuiviState('En cours');
-        $suivi->setMentoreStatus('En formation');
-        $suivi->setDateStart(new \DateTime());
-
-        $mentoreC = $userManager->createUser();
-        $suiviC = new Suivi();
-
-        $mentoreC->setUsername('toto');
-        $mentoreC->setFirstname('Toto');
-        $mentoreC->setLastname('Toto');
-        $mentoreC->setEmail('tyoto.toto@gmail.com');
-        $mentoreC->setCountry($country);
-        $mentoreC->setPhone('00.00.00.00.00');
-        $mentoreC->setPlainPassword('toto');
-        $mentoreC->setResume('Something');
-        $mentoreC->setSuivi($suiviC);
-        $mentoreC->setArchived(false);
-        $mentoreC->setRoles(array('ROLE_MENTORE'));
-        $suiviC->addUser($mentor);
-        $suiviC->addUser($mentore);
-        $suiviC->setParcours($parcoursC);
-        $suiviC->setSuiviState('En cours');
-        $suiviC->setMentoreStatus('En attente');
-        $suiviC->setDateStart(new \DateTime());
-
         // Update the user
         $userManager->updateUser($userAdmin, true);
         $userManager->updateUser($mentor, true);
         $userManager->updateUser($supervisteurMentor, true);
-        $userManager->updateUser($mentore, true);
-        $userManager->updateUser($mentoreC, true);
     }
 
     public function getOrder()
