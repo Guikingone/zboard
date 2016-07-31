@@ -23,6 +23,9 @@ class indexAdminController extends Controller
         $soutenances = $this->get('core.statistiques')->getSoutenances();
         $notes = $this->get('core.statistiques')->getNotesSuivi();
         $sessionsC = $this->get('core.statistiques')->getSessionsCancelled();
+        $mentoresWaiting = $this->get('core.user')->getMentoresWaiting();
+        $mentoresPlus = $this->get('core.user')->getMentoresPPlus();
+        $mentoresClass = $this->get('core.user')->getMentoresPClass();
 
         return array(
             'controller' => 'home',
@@ -34,6 +37,9 @@ class indexAdminController extends Controller
             'soutenances' => $soutenances,
             'notes' => $notes,
             'sessionsC' => $sessionsC,
+            'mentoresWaiting' => $mentoresWaiting,
+            'mentoresPlus' => $mentoresPlus,
+            'mentoresClass' => $mentoresClass
         );
     }
 

@@ -21,6 +21,7 @@ class IndexBackController extends Controller
         $notes = $this->get('core.statistiques')->getNotesSuivi();
         $projets = $this->get('core.statistiques')->getProjetsFinished();
         $sessions = $this->get('core.statistiques')->getSessionsCancelled();
+        $mentoresWaiting = $this->get('core.user')->getMentoresWaiting();
 
         return array(
             'controller' => 'home_back',
@@ -31,6 +32,7 @@ class IndexBackController extends Controller
             'notes' => $notes,
             'sessions' => $sessions,
             'projets' => $projets,
+            'mentoresWaiting' => $mentoresWaiting
         );
     }
 }

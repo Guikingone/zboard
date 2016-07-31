@@ -10,4 +10,42 @@ namespace UserBundle\Repository;
  */
 class MentoreRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getMentoresWaiting()
+    {
+        return $this->createQueryBuilder('m')
+                    ->innerJoin('m.suivi', 's')
+                        ->addSelect('s')
+                    ->where('s.mentore_status = :status')
+                        ->setParameter('status', $status = 'En attente')
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    public function getMentoresPPlus()
+    {
+        return $this->createQueryBuilder('m')
+                    ->innerJoin('m.suivi', 's')
+                        ->addSelect('s')
+                    ->innerJoin('s.parcours', 'p')
+                        ->addSelect('p')
+                    ->innerJoin('p.abonnement', 'a')
+                    ->where('a.libelle = :abonnement')
+                        ->setParameter('abonnement', $abonnement = 'Premium Plus')
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    public function getMentoresPClass()
+    {
+        return $this->createQueryBuilder('m')
+                    ->innerJoin('m.suivi', 's')
+                        ->addSelect('s')
+                    ->innerJoin('s.parcours', 'p')
+                        ->addSelect('p')
+                    ->innerJoin('p.abonnement', 'a')
+                    ->where('a.libelle = :abonnement')
+                        ->setParameter('abonnement', $abonnement = 'Premium Class')
+                    ->getQuery()
+                    ->getResult();
+    }
 }

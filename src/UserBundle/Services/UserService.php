@@ -80,6 +80,36 @@ class UserService
     }
 
     /**
+     * Allow to get all the student who's on the waiting status.
+     *
+     * @return array
+     */
+    public function getMentoresWaiting()
+    {
+        return $this->doctrine->getRepository('UserBundle:Mentore')->getMentoresWaiting();
+    }
+
+    /**
+     * Allow to get all the student who use the Premium Plus abonnement.
+     *
+     * @return array
+     */
+    public function getMentoresPPlus()
+    {
+        return $this->doctrine->getRepository('UserBundle:Mentore')->getMentoresPPlus();
+    }
+
+    /**
+     * Allow to get all the student who use the Premium Class abonnement.
+     *
+     * @return array
+     */
+    public function getMentoresPClass()
+    {
+        return $this->doctrine->getRepository('UserBundle:Mentore')->getMentoresPClass();
+    }
+
+    /**
      * Allow to get all the competences linked to a teacher.
      *
      * @param $id
