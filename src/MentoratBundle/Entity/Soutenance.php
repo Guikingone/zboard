@@ -41,7 +41,7 @@ class Soutenance
     private $status;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="soutenances")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="soutenances")
      */
     private $mentor;
 
@@ -49,14 +49,6 @@ class Soutenance
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Mentore", inversedBy="soutenances")
      */
     private $mentore;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->mentor = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
@@ -141,33 +133,23 @@ class Soutenance
     }
 
     /**
-     * Add mentor
+     * Set mentor
      *
      * @param \UserBundle\Entity\User $mentor
      *
      * @return Soutenance
      */
-    public function addMentor(\UserBundle\Entity\User $mentor)
+    public function setMentor(\UserBundle\Entity\User $mentor = null)
     {
-        $this->mentor[] = $mentor;
+        $this->mentor = $mentor;
 
         return $this;
     }
 
     /**
-     * Remove mentor
-     *
-     * @param \UserBundle\Entity\User $mentor
-     */
-    public function removeMentor(\UserBundle\Entity\User $mentor)
-    {
-        $this->mentor->removeElement($mentor);
-    }
-
-    /**
      * Get mentor
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \UserBundle\Entity\User
      */
     public function getMentor()
     {

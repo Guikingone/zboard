@@ -47,8 +47,6 @@ class LoadInformationData implements FixtureInterface, ContainerAwareInterface, 
 
     public function getOrder()
     {
-        // the order in which fixtures will be loaded
-        // the lower the number, the sooner that this fixture is loaded
-        return 8;
+        return 7;
     }
 }

@@ -41,6 +41,6 @@ class LoadCoursData implements FixtureInterface, ContainerAwareInterface, Ordere
 
     public function getOrder()
     {
-        return 11;
+        return 4;
     }
 }

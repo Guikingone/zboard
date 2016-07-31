@@ -2,6 +2,7 @@
 
 namespace UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -82,12 +83,12 @@ class User extends BaseUser
     private $suivi;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Sessions", inversedBy="users")
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Sessions", mappedBy="mentor")
      */
     private $sessions;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Soutenance", inversedBy="users")
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Soutenance", mappedBy="mentor")
      */
     private $soutenances;
 
@@ -109,12 +110,13 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        $this->competences = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->suivi = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->competences = new ArrayCollection();
+        $this->suivi = new ArrayCollection();
+        $this->soutenances = new ArrayCollection();
     }
-
+    
     /**
-     * Set firstname.
+     * Set firstname
      *
      * @param string $firstname
      *
@@ -128,7 +130,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get firstname.
+     * Get firstname
      *
      * @return string
      */
@@ -138,7 +140,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set lastname.
+     * Set lastname
      *
      * @param string $lastname
      *
@@ -152,7 +154,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get lastname.
+     * Get lastname
      *
      * @return string
      */
@@ -162,7 +164,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set address.
+     * Set address
      *
      * @param string $address
      *
@@ -176,7 +178,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get address.
+     * Get address
      *
      * @return string
      */
@@ -186,7 +188,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set zipcode.
+     * Set zipcode
      *
      * @param string $zipcode
      *
@@ -200,7 +202,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get zipcode.
+     * Get zipcode
      *
      * @return string
      */
@@ -210,7 +212,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set city.
+     * Set city
      *
      * @param string $city
      *
@@ -224,7 +226,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get city.
+     * Get city
      *
      * @return string
      */
@@ -234,7 +236,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set phone.
+     * Set phone
      *
      * @param string $phone
      *
@@ -248,7 +250,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get phone.
+     * Get phone
      *
      * @return string
      */
@@ -258,7 +260,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set resume.
+     * Set resume
      *
      * @param string $resume
      *
@@ -272,7 +274,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get resume.
+     * Get resume
      *
      * @return string
      */
@@ -282,9 +284,9 @@ class User extends BaseUser
     }
 
     /**
-     * Set available.
+     * Set available
      *
-     * @param bool $available
+     * @param boolean $available
      *
      * @return User
      */
@@ -296,13 +298,61 @@ class User extends BaseUser
     }
 
     /**
-     * Get available.
+     * Get available
      *
-     * @return bool
+     * @return boolean
      */
     public function getAvailable()
     {
         return $this->available;
+    }
+
+    /**
+     * Set archived
+     *
+     * @param boolean $archived
+     *
+     * @return User
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+
+        return $this;
+    }
+
+    /**
+     * Get archived
+     *
+     * @return boolean
+     */
+    public function getArchived()
+    {
+        return $this->archived;
+    }
+
+    /**
+     * Set country
+     *
+     * @param \AdminBundle\Entity\Country $country
+     *
+     * @return User
+     */
+    public function setCountry(\AdminBundle\Entity\Country $country = null)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return \AdminBundle\Entity\Country
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
 
     /**
@@ -340,71 +390,33 @@ class User extends BaseUser
     }
 
     /**
-     * Set archived.
+     * Add session
      *
-     * @param bool $archived
+     * @param \MentoratBundle\Entity\Sessions $session
      *
      * @return User
      */
-    public function setArchived($archived)
+    public function addSession(\MentoratBundle\Entity\Sessions $session)
     {
-        $this->archived = $archived;
+        $this->sessions[] = $session;
 
         return $this;
     }
 
     /**
-     * Get archived.
+     * Remove session
      *
-     * @return bool
+     * @param \MentoratBundle\Entity\Sessions $session
      */
-    public function getArchived()
+    public function removeSession(\MentoratBundle\Entity\Sessions $session)
     {
-        return $this->archived;
+        $this->sessions->removeElement($session);
     }
 
     /**
-     * Set country.
+     * Get sessions
      *
-     * @param \AdminBundle\Entity\Country $country
-     *
-     * @return User
-     */
-    public function setCountry(\AdminBundle\Entity\Country $country = null)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country.
-     *
-     * @return \AdminBundle\Entity\Country
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * Set sessions.
-     *
-     * @param \MentoratBundle\Entity\Sessions $sessions
-     *
-     * @return User
-     */
-    public function setSessions(\MentoratBundle\Entity\Sessions $sessions = null)
-    {
-        $this->sessions = $sessions;
-
-        return $this;
-    }
-
-    /**
-     * Get sessions.
-     *
-     * @return \MentoratBundle\Entity\Sessions
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSessions()
     {
@@ -412,23 +424,33 @@ class User extends BaseUser
     }
 
     /**
-     * Set soutenances.
+     * Add soutenance
      *
-     * @param \MentoratBundle\Entity\Soutenance $soutenances
+     * @param \MentoratBundle\Entity\Soutenance $soutenance
      *
      * @return User
      */
-    public function setSoutenances(\MentoratBundle\Entity\Soutenance $soutenances = null)
+    public function addSoutenance(\MentoratBundle\Entity\Soutenance $soutenance)
     {
-        $this->soutenances = $soutenances;
+        $this->soutenances[] = $soutenance;
 
         return $this;
     }
 
     /**
-     * Get soutenances.
+     * Remove soutenance
      *
-     * @return \MentoratBundle\Entity\Soutenance
+     * @param \MentoratBundle\Entity\Soutenance $soutenance
+     */
+    public function removeSoutenance(\MentoratBundle\Entity\Soutenance $soutenance)
+    {
+        $this->soutenances->removeElement($soutenance);
+    }
+
+    /**
+     * Get soutenances
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSoutenances()
     {
@@ -436,7 +458,7 @@ class User extends BaseUser
     }
 
     /**
-     * Add competence.
+     * Add competence
      *
      * @param \UserBundle\Entity\Competences $competence
      *
@@ -450,7 +472,7 @@ class User extends BaseUser
     }
 
     /**
-     * Remove competence.
+     * Remove competence
      *
      * @param \UserBundle\Entity\Competences $competence
      */
@@ -460,7 +482,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get competences.
+     * Get competences
      *
      * @return \Doctrine\Common\Collections\Collection
      */

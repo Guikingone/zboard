@@ -14,6 +14,7 @@ use MentoratBundle\Entity\Suivi;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use UserBundle\Entity\Mentore;
 use UserBundle\Entity\User;
 
 class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
@@ -27,13 +28,18 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
 
     public function load(ObjectManager $manager)
     {
-        // Get our userManager, you must implement `ContainerAwareInterface`
-        $userManager = $this->privateContainer->get('fos_user.user_manager');
 
         $country = $this->privateContainer->get('doctrine')->getManager()->getRepository('AdminBundle:Country')
                                                            ->findOneBy(array('libelle' => 'France'));
 
-        $mentore = $userManager->createUser();
+        $parcours = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
+                                           ->findOneBy(array('libelle' => 'Chef de projet Multimédia - Développement'));
+
+        $mentor = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
+                                         ->findOneBy(array('firstname' => 'Jacky'));
+
+
+        $mentore = new Mentore();
 
         $mentore->setUsername('Aurore');
         $mentore->setFirstname('Aurore');
@@ -46,7 +52,8 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $mentore->setArchived(false);
         $mentore->setRoles(array('ROLE_MENTORE'));
 
-        $mentoreC = $userManager->createUser();
+
+        $mentoreC = new Mentore();
 
         $mentoreC->setUsername('toto');
         $mentoreC->setFirstname('Toto');
@@ -59,15 +66,24 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $mentoreC->setArchived(false);
         $mentoreC->setRoles(array('ROLE_MENTORE'));
 
-        // Update the user
-        $userManager->updateUser($mentore, true);
-        $userManager->updateUser($mentoreC, true);
+        $suivi = new Suivi();
+
+        $suivi->setMentor($mentor);
+        $suivi->setMentore($mentore);
+        $suivi->setLibelle("Suivi Premium Plus");
+        $suivi->setParcours($parcours);
+        $suivi->setSuiviState('En cours');
+        $suivi->setDateStart(new\DateTime());
+        $suivi->setMentoreStatus('En formation');
+
+        $manager->persist($mentore);
+        $manager->persist($mentoreC);
+        $manager->persist($suivi);
+        $manager->flush();
     }
 
     public function getOrder()
     {
-        // the order in which fixtures will be loaded
-        // the lower the number, the sooner that this fixture is loaded
-        return 4;
+        return 6;
     }
 }

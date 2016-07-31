@@ -34,7 +34,8 @@ class LoadSessionsData implements FixtureInterface, ContainerAwareInterface, Ord
 
         $session = new Sessions();
 
-        $session->addUser($mentor);
+        $session->setMentor($mentor);
+        $session->setMentore($mentore);
         $session->setDateSession(new \DateTime());
         $session->setPeriodicity(false);
         $session->setStatus('Present');

@@ -42,7 +42,8 @@ class Suivi
     private $date_start;
 
     /**
-     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Mentore", mappedBy="suivi")
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Mentore", inversedBy="suivi")
+     * @ORM\JoinColumn(name="mentore_id", referencedColumnName="id")
      */
     private $mentore;
 
@@ -69,11 +70,6 @@ class Suivi
     private $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Soutenance", mappedBy="mentore")
-     */
-    private $soutenance;
-
-    /**
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours", inversedBy="suivi")
      */
     private $parcours;
@@ -95,14 +91,13 @@ class Suivi
      * @ORM\Column(name="duree_financement", type="string", length=100, nullable=true)
      */
     private $duree_financement;
- 
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->notes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->soutenance = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -387,40 +382,6 @@ class Suivi
     public function getNotes()
     {
         return $this->notes;
-    }
-
-    /**
-     * Add soutenance
-     *
-     * @param \MentoratBundle\Entity\Soutenance $soutenance
-     *
-     * @return Suivi
-     */
-    public function addSoutenance(\MentoratBundle\Entity\Soutenance $soutenance)
-    {
-        $this->soutenance[] = $soutenance;
-
-        return $this;
-    }
-
-    /**
-     * Remove soutenance
-     *
-     * @param \MentoratBundle\Entity\Soutenance $soutenance
-     */
-    public function removeSoutenance(\MentoratBundle\Entity\Soutenance $soutenance)
-    {
-        $this->soutenance->removeElement($soutenance);
-    }
-
-    /**
-     * Get soutenance
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSoutenance()
-    {
-        return $this->soutenance;
     }
 
     /**

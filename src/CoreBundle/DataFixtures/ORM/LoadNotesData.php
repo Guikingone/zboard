@@ -45,6 +45,6 @@ class LoadNotesData implements FixtureInterface, ContainerAwareInterface, Ordere
 
     public function getOrder()
     {
-        return 9;
+        return 8;
     }
 }

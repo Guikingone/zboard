@@ -37,7 +37,7 @@ class LoadSoutenanceData implements FixtureInterface, ContainerAwareInterface, O
         $soutenance = new Soutenance();
         $soutenance->setMentore($mentore);
         $soutenance->setProjet($projet);
-        $soutenance->addMentor($mentor);
+        $soutenance->setMentor($mentor);
         $soutenance->setStatus('En attente');
 
         $manager->persist($soutenance);

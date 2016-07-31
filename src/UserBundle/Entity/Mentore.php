@@ -53,7 +53,7 @@ class Mentore extends BaseUser
     protected $city;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Country", inversedBy="mentore")
+     * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Country", inversedBy="mentores")
      */
     private $country;
 
@@ -102,7 +102,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set firstname.
+     * Set firstname
      *
      * @param string $firstname
      *
@@ -116,7 +116,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get firstname.
+     * Get firstname
      *
      * @return string
      */
@@ -126,7 +126,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set lastname.
+     * Set lastname
      *
      * @param string $lastname
      *
@@ -140,7 +140,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get lastname.
+     * Get lastname
      *
      * @return string
      */
@@ -150,7 +150,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set address.
+     * Set address
      *
      * @param string $address
      *
@@ -164,7 +164,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get address.
+     * Get address
      *
      * @return string
      */
@@ -174,7 +174,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set zipcode.
+     * Set zipcode
      *
      * @param string $zipcode
      *
@@ -188,7 +188,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get zipcode.
+     * Get zipcode
      *
      * @return string
      */
@@ -198,7 +198,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set city.
+     * Set city
      *
      * @param string $city
      *
@@ -212,7 +212,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get city.
+     * Get city
      *
      * @return string
      */
@@ -222,7 +222,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set phone.
+     * Set phone
      *
      * @param string $phone
      *
@@ -236,7 +236,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get phone.
+     * Get phone
      *
      * @return string
      */
@@ -246,7 +246,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set resume.
+     * Set resume
      *
      * @param string $resume
      *
@@ -260,7 +260,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get resume.
+     * Get resume
      *
      * @return string
      */
@@ -270,9 +270,9 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set archived.
+     * Set archived
      *
-     * @param bool $archived
+     * @param boolean $archived
      *
      * @return Mentore
      */
@@ -284,13 +284,37 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get archived.
+     * Get archived
      *
-     * @return bool
+     * @return boolean
      */
     public function getArchived()
     {
         return $this->archived;
+    }
+
+    /**
+     * Set country
+     *
+     * @param \AdminBundle\Entity\Country $country
+     *
+     * @return Mentore
+     */
+    public function setCountry(\AdminBundle\Entity\Country $country = null)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return \AdminBundle\Entity\Country
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
 
     /**
@@ -318,31 +342,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Set country.
-     *
-     * @param \AdminBundle\Entity\Country $country
-     *
-     * @return Mentore
-     */
-    public function setCountry(\AdminBundle\Entity\Country $country = null)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country.
-     *
-     * @return \AdminBundle\Entity\Country
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * Add session.
+     * Add session
      *
      * @param \MentoratBundle\Entity\Sessions $session
      *
@@ -356,7 +356,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Remove session.
+     * Remove session
      *
      * @param \MentoratBundle\Entity\Sessions $session
      */
@@ -366,7 +366,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get sessions.
+     * Get sessions
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -376,7 +376,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Add soutenance.
+     * Add soutenance
      *
      * @param \MentoratBundle\Entity\Soutenance $soutenance
      *
@@ -390,7 +390,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Remove soutenance.
+     * Remove soutenance
      *
      * @param \MentoratBundle\Entity\Soutenance $soutenance
      */
@@ -400,7 +400,7 @@ class Mentore extends BaseUser
     }
 
     /**
-     * Get soutenances.
+     * Get soutenances
      *
      * @return \Doctrine\Common\Collections\Collection
      */

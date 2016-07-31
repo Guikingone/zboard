@@ -37,5 +37,4 @@ class Country
      * @ORM\OneToMany(targetEntity="UserBundle\Entity\Mentore", mappedBy="country")
      */
     private $mentores;
-
 }
