@@ -34,9 +34,18 @@ class Country
     private $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Mentore", mappedBy="country")
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\Mentore", mappedBy="country")
      */
     private $mentores;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->mentores = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id.
@@ -70,13 +79,6 @@ class Country
     public function getLibelle()
     {
         return $this->libelle;
-    }
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -116,11 +118,11 @@ class Country
     /**
      * Add mentore.
      *
-     * @param \MentoratBundle\Entity\Mentore $mentore
+     * @param \UserBundle\Entity\Mentore $mentore
      *
      * @return Country
      */
-    public function addMentore(\MentoratBundle\Entity\Mentore $mentore)
+    public function addMentore(\UserBundle\Entity\Mentore $mentore)
     {
         $this->mentores[] = $mentore;
 
@@ -130,9 +132,9 @@ class Country
     /**
      * Remove mentore.
      *
-     * @param \MentoratBundle\Entity\Mentore $mentore
+     * @param \UserBundle\Entity\Mentore $mentore
      */
-    public function removeMentore(\MentoratBundle\Entity\Mentore $mentore)
+    public function removeMentore(\UserBundle\Entity\Mentore $mentore)
     {
         $this->mentores->removeElement($mentore);
     }

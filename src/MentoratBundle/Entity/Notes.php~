@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Notes.
  *
- * @ORM\Table(name="zboard_notes")
+ * @ORM\Table(name="zboard_suivi_notes")
  * @ORM\Entity(repositoryClass="MentoratBundle\Repository\NotesRepository")
  */
 class Notes
@@ -42,15 +42,15 @@ class Notes
     private $dateCreated;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Suivi",inversedBy="notes")
+     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Suivi", inversedBy="notes")
      * @ORM\JoinColumn(name="suivi_id", referencedColumnName="id")
      */
     private $suivi;
 
     /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -58,7 +58,7 @@ class Notes
     }
 
     /**
-     * Set libelle.
+     * Set libelle
      *
      * @param string $libelle
      *
@@ -72,7 +72,7 @@ class Notes
     }
 
     /**
-     * Get libelle.
+     * Get libelle
      *
      * @return string
      */
@@ -82,55 +82,7 @@ class Notes
     }
 
     /**
-     * Set dateCreated.
-     *
-     * @param \DateTime $dateCreated
-     *
-     * @return Notes
-     */
-    public function setDateCreated($dateCreated)
-    {
-        $this->dateCreated = $dateCreated;
-
-        return $this;
-    }
-
-    /**
-     * Get dateCreated.
-     *
-     * @return \DateTime
-     */
-    public function getDateCreated()
-    {
-        return $this->dateCreated;
-    }
-
-    /**
-     * Set suivi.
-     *
-     * @param \MentoratBundle\Entity\Suivi $suivi
-     *
-     * @return Notes
-     */
-    public function setSuivi(\MentoratBundle\Entity\Suivi $suivi = null)
-    {
-        $this->suivi = $suivi;
-
-        return $this;
-    }
-
-    /**
-     * Get suivi.
-     *
-     * @return \MentoratBundle\Entity\Suivi
-     */
-    public function getSuivi()
-    {
-        return $this->suivi;
-    }
-
-    /**
-     * Set auteur.
+     * Set auteur
      *
      * @param string $auteur
      *
@@ -144,12 +96,60 @@ class Notes
     }
 
     /**
-     * Get auteur.
+     * Get auteur
      *
      * @return string
      */
     public function getAuteur()
     {
         return $this->auteur;
+    }
+
+    /**
+     * Set dateCreated
+     *
+     * @param \DateTime $dateCreated
+     *
+     * @return Notes
+     */
+    public function setDateCreated($dateCreated)
+    {
+        $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreated
+     *
+     * @return \DateTime
+     */
+    public function getDateCreated()
+    {
+        return $this->dateCreated;
+    }
+
+    /**
+     * Set suivi
+     *
+     * @param \MentoratBundle\Entity\Suivi $suivi
+     *
+     * @return Notes
+     */
+    public function setSuivi(\MentoratBundle\Entity\Suivi $suivi = null)
+    {
+        $this->suivi = $suivi;
+
+        return $this;
+    }
+
+    /**
+     * Get suivi
+     *
+     * @return \MentoratBundle\Entity\Suivi
+     */
+    public function getSuivi()
+    {
+        return $this->suivi;
     }
 }

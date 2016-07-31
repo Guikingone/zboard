@@ -40,8 +40,6 @@ class LoadProjetsData implements FixtureInterface, ContainerAwareInterface, Orde
 
     public function getOrder()
     {
-        // the order in which fixtures will be loaded
-        // the lower the number, the sooner that this fixture is loaded
-        return 6;
+        return 3;
     }
 }

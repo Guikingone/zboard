@@ -2,13 +2,14 @@
 
 namespace UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User.
  *
- * @ORM\Table(name="fos_user")
+ * @ORM\Table(name="zboard_user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  */
 class User extends BaseUser
@@ -27,29 +28,29 @@ class User extends BaseUser
      * @var string
      * @ORM\Column(name="firstname", type="string", length=255)
      */
-    protected $firstName;
+    protected $firstname;
 
     /**
      * @var string
      * @ORM\Column(name="lastname", type="string", length=255)
      */
-    protected $lastName;
+    protected $lastname;
 
     /**
      * @var string
-     * @ORM\Column(name="address", type="string", length=255)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     protected $address;
 
     /**
      * @var string
-     * @ORM\Column(name="zipcode", type="string", length=255)
+     * @ORM\Column(name="zipcode", type="string", length=255, nullable=true)
      */
     protected $zipcode;
 
     /**
      * @var string
-     * @ORM\Column(name="city", type="string", length=150)
+     * @ORM\Column(name="city", type="string", length=150, nullable=true)
      */
     protected $city;
 
@@ -60,13 +61,19 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="phone", type="string", length=40)
+     * @ORM\Column(name="phone", type="string", length=40, nullable=true)
      */
     private $phone;
 
     /**
+     * @var string
+     * @ORM\Column(name="resume", type="text", nullable=true)
+     */
+    private $resume;
+
+    /**
      * @var bool
-     * @ORM\Column(name="available", type="boolean")
+     * @ORM\Column(name="available", type="boolean", nullable=true)
      */
     private $available;
 
@@ -81,12 +88,18 @@ class User extends BaseUser
     private $sessions;
 
     /**
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Soutenance", mappedBy="mentor")
+     */
+    private $soutenances;
+
+    /**
      * @ORM\OneToMany(targetEntity="UserBundle\Entity\Competences", mappedBy="user")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $competences;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(name="archived", type="boolean")
      */
     private $archived;
@@ -97,55 +110,57 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        $this->competences = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->competences = new ArrayCollection();
+        $this->suivi = new ArrayCollection();
+        $this->soutenances = new ArrayCollection();
     }
 
     /**
-     * Set firstName.
+     * Set firstname.
      *
-     * @param string $firstName
+     * @param string $firstname
      *
      * @return User
      */
-    public function setFirstName($firstName)
+    public function setFirstname($firstname)
     {
-        $this->firstName = $firstName;
+        $this->firstname = $firstname;
 
         return $this;
     }
 
     /**
-     * Get firstName.
+     * Get firstname.
      *
      * @return string
      */
-    public function getFirstName()
+    public function getFirstname()
     {
-        return $this->firstName;
+        return $this->firstname;
     }
 
     /**
-     * Set lastName.
+     * Set lastname.
      *
-     * @param string $lastName
+     * @param string $lastname
      *
      * @return User
      */
-    public function setLastName($lastName)
+    public function setLastname($lastname)
     {
-        $this->lastName = $lastName;
+        $this->lastname = $lastname;
 
         return $this;
     }
 
     /**
-     * Get lastName.
+     * Get lastname.
      *
      * @return string
      */
-    public function getLastName()
+    public function getLastname()
     {
-        return $this->lastName;
+        return $this->lastname;
     }
 
     /**
@@ -221,30 +236,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set country
-     *
-     * @param \AdminBundle\Entity\Country $country
-     *
-     * @return User
-     */
-    public function setCountry(\AdminBundle\Entity\Country $country = null)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country
-     *
-     * @return \AdminBundle\Entity\Country
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
      * Set phone.
      *
      * @param string $phone
@@ -269,6 +260,30 @@ class User extends BaseUser
     }
 
     /**
+     * Set resume.
+     *
+     * @param string $resume
+     *
+     * @return User
+     */
+    public function setResume($resume)
+    {
+        $this->resume = $resume;
+
+        return $this;
+    }
+
+    /**
+     * Get resume.
+     *
+     * @return string
+     */
+    public function getResume()
+    {
+        return $this->resume;
+    }
+
+    /**
      * Set available.
      *
      * @param bool $available
@@ -290,6 +305,54 @@ class User extends BaseUser
     public function getAvailable()
     {
         return $this->available;
+    }
+
+    /**
+     * Set archived.
+     *
+     * @param bool $archived
+     *
+     * @return User
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+
+        return $this;
+    }
+
+    /**
+     * Get archived.
+     *
+     * @return bool
+     */
+    public function getArchived()
+    {
+        return $this->archived;
+    }
+
+    /**
+     * Set country.
+     *
+     * @param \AdminBundle\Entity\Country $country
+     *
+     * @return User
+     */
+    public function setCountry(\AdminBundle\Entity\Country $country = null)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country.
+     *
+     * @return \AdminBundle\Entity\Country
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
 
     /**
@@ -361,6 +424,40 @@ class User extends BaseUser
     }
 
     /**
+     * Add soutenance.
+     *
+     * @param \MentoratBundle\Entity\Soutenance $soutenance
+     *
+     * @return User
+     */
+    public function addSoutenance(\MentoratBundle\Entity\Soutenance $soutenance)
+    {
+        $this->soutenances[] = $soutenance;
+
+        return $this;
+    }
+
+    /**
+     * Remove soutenance.
+     *
+     * @param \MentoratBundle\Entity\Soutenance $soutenance
+     */
+    public function removeSoutenance(\MentoratBundle\Entity\Soutenance $soutenance)
+    {
+        $this->soutenances->removeElement($soutenance);
+    }
+
+    /**
+     * Get soutenances.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSoutenances()
+    {
+        return $this->soutenances;
+    }
+
+    /**
      * Add competence.
      *
      * @param \UserBundle\Entity\Competences $competence
@@ -392,29 +489,5 @@ class User extends BaseUser
     public function getCompetences()
     {
         return $this->competences;
-    }
-
-    /**
-     * Set archived
-     *
-     * @param boolean $archived
-     *
-     * @return User
-     */
-    public function setArchived($archived)
-    {
-        $this->archived = $archived;
-
-        return $this;
-    }
-
-    /**
-     * Get archived
-     *
-     * @return boolean
-     */
-    public function getArchived()
-    {
-        return $this->archived;
     }
 }

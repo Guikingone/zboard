@@ -13,6 +13,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use UserBundle\Entity\User;
 
 class LoadUserData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
@@ -29,7 +30,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $userManager = $this->privateContainer->get('fos_user.user_manager');
 
         $country = $this->privateContainer->get('doctrine')->getManager()->getRepository('AdminBundle:Country')
-                                          ->findOneBy(array('libelle' => 'France'));
+                                           ->findOneBy(array('libelle' => 'France'));
 
         // Création de notre utilisateur ADMIN
         $userAdmin = $userManager->createUser();
@@ -90,8 +91,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
 
     public function getOrder()
     {
-        // the order in which fixtures will be loaded
-        // the lower the number, the sooner that this fixture is loaded
-        return 2;
+        return 5;
     }
 }

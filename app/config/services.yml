@@ -42,3 +42,8 @@ services:
         class: UserBundle\Form\RegistrationType
         tags:
         - { name: form.type, alias: app_user_registration }
+
+    core.mentore_register:
+        class: UserBundle\Form\RegistrationMentoreType
+        tags:
+        - { name: form.type, alias: app_mentore_registration }

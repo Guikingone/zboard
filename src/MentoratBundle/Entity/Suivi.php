@@ -35,21 +35,34 @@ class Suivi
     private $dUpdate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="suivi")
-     * @ORM\JoinColumn(nullable=false)
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_start", type="datetime", nullable=true)
      */
-    private $mentor;
+    private $date_start;
 
     /**
-     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Mentore", inversedBy="suivi")
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Mentore", inversedBy="suivi")
+     * @ORM\JoinColumn(name="mentore_id", referencedColumnName="id")
      */
     private $mentore;
 
     /**
-     * @var string
-     * @ORM\Column(name="state", type="string", length=150, nullable=false)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="suivi")
      */
-    private $state;
+    private $mentor;
+
+    /**
+     * @var string
+     * @ORM\Column(name="status_suivi", type="string", length=150, nullable=true)
+     */
+    private $suivi_state;
+
+    /**
+     * @var string
+     * @ORM\Column(name="status_mentore", type="string", length=100, nullable=true)
+     */
+    private $mentore_status;
 
     /**
      * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Notes", mappedBy="suivi")
@@ -60,6 +73,24 @@ class Suivi
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours", inversedBy="suivi")
      */
     private $parcours;
+
+    /**
+     * @var bool
+     * @ORM\Column(name="financement", type="boolean", nullable=true)
+     */
+    private $financement;
+
+    /**
+     * @var string
+     * @ORM\Column(name="financeur", type="string", length=150, nullable=true)
+     */
+    private $financeur;
+
+    /**
+     * @var string
+     * @ORM\Column(name="duree_financement", type="string", length=100, nullable=true)
+     */
+    private $duree_financement;
 
     /**
      * Constructor.
@@ -128,13 +159,181 @@ class Suivi
     }
 
     /**
+     * Set dateStart.
+     *
+     * @param \DateTime $dateStart
+     *
+     * @return Suivi
+     */
+    public function setDateStart($dateStart)
+    {
+        $this->date_start = $dateStart;
+
+        return $this;
+    }
+
+    /**
+     * Get dateStart.
+     *
+     * @return \DateTime
+     */
+    public function getDateStart()
+    {
+        return $this->date_start;
+    }
+
+    /**
+     * Set suiviState.
+     *
+     * @param string $suiviState
+     *
+     * @return Suivi
+     */
+    public function setSuiviState($suiviState)
+    {
+        $this->suivi_state = $suiviState;
+
+        return $this;
+    }
+
+    /**
+     * Get suiviState.
+     *
+     * @return string
+     */
+    public function getSuiviState()
+    {
+        return $this->suivi_state;
+    }
+
+    /**
+     * Set mentoreStatus.
+     *
+     * @param string $mentoreStatus
+     *
+     * @return Suivi
+     */
+    public function setMentoreStatus($mentoreStatus)
+    {
+        $this->mentore_status = $mentoreStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get mentoreStatus.
+     *
+     * @return string
+     */
+    public function getMentoreStatus()
+    {
+        return $this->mentore_status;
+    }
+
+    /**
+     * Set financement.
+     *
+     * @param bool $financement
+     *
+     * @return Suivi
+     */
+    public function setFinancement($financement)
+    {
+        $this->financement = $financement;
+
+        return $this;
+    }
+
+    /**
+     * Get financement.
+     *
+     * @return bool
+     */
+    public function getFinancement()
+    {
+        return $this->financement;
+    }
+
+    /**
+     * Set financeur.
+     *
+     * @param string $financeur
+     *
+     * @return Suivi
+     */
+    public function setFinanceur($financeur)
+    {
+        $this->financeur = $financeur;
+
+        return $this;
+    }
+
+    /**
+     * Get financeur.
+     *
+     * @return string
+     */
+    public function getFinanceur()
+    {
+        return $this->financeur;
+    }
+
+    /**
+     * Set dureeFinancement.
+     *
+     * @param string $dureeFinancement
+     *
+     * @return Suivi
+     */
+    public function setDureeFinancement($dureeFinancement)
+    {
+        $this->duree_financement = $dureeFinancement;
+
+        return $this;
+    }
+
+    /**
+     * Get dureeFinancement.
+     *
+     * @return string
+     */
+    public function getDureeFinancement()
+    {
+        return $this->duree_financement;
+    }
+
+    /**
+     * Set mentore.
+     *
+     * @param \UserBundle\Entity\Mentore $mentore
+     *
+     * @return Suivi
+     */
+    public function setMentore(\UserBundle\Entity\Mentore $mentore = null)
+    {
+        $this->mentore = $mentore;
+
+        return $this;
+    }
+
+    /**
+     * Get mentore.
+     *
+     * @return \UserBundle\Entity\Mentore
+     */
+    public function getMentore()
+    {
+        return $this->mentore;
+    }
+
+    /**
      * Set mentor.
      *
      * @param \UserBundle\Entity\User $mentor
      *
      * @return Suivi
      */
-    public function setMentor(\UserBundle\Entity\User $mentor)
+    public function setMentor(\UserBundle\Entity\User $mentor = null)
     {
         $this->mentor = $mentor;
 
@@ -149,30 +348,6 @@ class Suivi
     public function getMentor()
     {
         return $this->mentor;
-    }
-
-    /**
-     * Set mentore.
-     *
-     * @param \MentoratBundle\Entity\Mentore $mentore
-     *
-     * @return Suivi
-     */
-    public function setMentore(\MentoratBundle\Entity\Mentore $mentore = null)
-    {
-        $this->mentore = $mentore;
-
-        return $this;
-    }
-
-    /**
-     * Get mentore.
-     *
-     * @return \MentoratBundle\Entity\Mentore
-     */
-    public function getMentore()
-    {
-        return $this->mentore;
     }
 
     /**
@@ -207,30 +382,6 @@ class Suivi
     public function getNotes()
     {
         return $this->notes;
-    }
-
-    /**
-     * Set state.
-     *
-     * @param string $state
-     *
-     * @return Suivi
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * Get state.
-     *
-     * @return string
-     */
-    public function getState()
-    {
-        return $this->state;
     }
 
     /**

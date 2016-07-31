@@ -20,10 +20,7 @@ use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
 use BackendBundle\Form\UpdateAdd\CoursUpdateType;
 use BackendBundle\Form\_UpdateType\UpdateCoursType;
 use Doctrine\ORM\EntityManager;
-use MentoratBundle\Entity\Mentore;
 use MentoratBundle\Entity\Sessions;
-use MentoratBundle\Entity\Suivi;
-use MentoratBundle\Form\MentoreType;
 use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,28 +63,6 @@ class Admin
         $this->form = $form;
         $this->session = $session;
         $this->user = $user;
-    }
-
-    /**
-     * Allow the back to get all the mentores.
-     *
-     * @return array|\MentoratBundle\Entity\Mentore[]
-     */
-    public function getMentores()
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->findAll();
-    }
-
-    /**
-     * Allow the back to get all the new mentores since actual datetime.
-     *
-     * @return array
-     */
-    public function getNewMentores()
-    {
-        $days = new \DateTime();
-
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getNewMentores($days);
     }
 
     /**
@@ -164,35 +139,6 @@ class Admin
     public function getCountry()
     {
         return $this->doctrine->getRepository('AdminBundle:Country')->findAll();
-    }
-
-    /**
-     * Allow to create a new instance of Mentore.
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addMentore(Request $request)
-    {
-        $mentore = new Mentore();
-        $suivi = new Suivi();
-
-        $mentore->setSuivi($suivi);
-        $mentore->setArchived(false);
-        $suivi->setMentore($mentore);
-
-        $form = $this->form->create(MentoreType::class, $mentore);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $this->doctrine->persist($mentore);
-            $this->doctrine->persist($suivi);
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'Elève enregistré.');
-        }
-
-        return $form;
     }
 
     /**

@@ -42,7 +42,7 @@ class Notes
     private $dateCreated;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Suivi",inversedBy="notes")
+     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Suivi", inversedBy="notes")
      * @ORM\JoinColumn(name="suivi_id", referencedColumnName="id")
      */
     private $suivi;
@@ -79,6 +79,30 @@ class Notes
     public function getLibelle()
     {
         return $this->libelle;
+    }
+
+    /**
+     * Set auteur.
+     *
+     * @param string $auteur
+     *
+     * @return Notes
+     */
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    /**
+     * Get auteur.
+     *
+     * @return string
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
     }
 
     /**
@@ -127,29 +151,5 @@ class Notes
     public function getSuivi()
     {
         return $this->suivi;
-    }
-
-    /**
-     * Set auteur.
-     *
-     * @param string $auteur
-     *
-     * @return Notes
-     */
-    public function setAuteur($auteur)
-    {
-        $this->auteur = $auteur;
-
-        return $this;
-    }
-
-    /**
-     * Get auteur.
-     *
-     * @return string
-     */
-    public function getAuteur()
-    {
-        return $this->auteur;
     }
 }

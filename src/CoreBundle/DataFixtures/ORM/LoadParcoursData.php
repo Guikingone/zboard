@@ -50,7 +50,6 @@ class LoadParcoursData implements FixtureInterface, ContainerAwareInterface, Ord
 
         $devSf = new Parcours();
         $devSf->setLibelle('Développeur PHP/Symfony');
-        $devSf->setDiplome(null);
         $devSf->setAbonnement($PClass);
         $devSf->setArchived(false);
 
@@ -65,6 +64,6 @@ class LoadParcoursData implements FixtureInterface, ContainerAwareInterface, Ord
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 3;
+        return 2;
     }
 }

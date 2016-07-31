@@ -15,13 +15,13 @@ class IndexBackController extends Controller
     public function indexAction()
     {
         $mentors = $this->get('core.user')->getMentors();
-        $mentores = $this->get('core.admin')->getMentores();
+        $mentores = $this->get('core.user')->getMentores();
         $soutenances = $this->get('core.back')->getSoutenances();
         $parcours = $this->get('core.back')->getParcours();
         $notes = $this->get('core.statistiques')->getNotesSuivi();
         $projets = $this->get('core.statistiques')->getProjetsFinished();
         $sessions = $this->get('core.statistiques')->getSessionsCancelled();
-        $mentoresWaiting = $this->get('core.statistiques')->getMentoresWaiting();
+        $mentoresWaiting = $this->get('core.user')->getMentoresWaiting();
 
         return array(
             'controller' => 'home_back',
@@ -31,8 +31,8 @@ class IndexBackController extends Controller
             'parcours' => $parcours,
             'notes' => $notes,
             'sessions' => $sessions,
-            'mentoresWaiting' => $mentoresWaiting,
             'projets' => $projets,
+            'mentoresWaiting' => $mentoresWaiting
         );
     }
 }

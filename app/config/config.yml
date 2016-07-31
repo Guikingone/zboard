@@ -77,3 +77,4 @@ fos_user:
     registration:
        form:
            type: UserBundle\Form\RegistrationType
+           type: UserBundle\Form\RegistrationMentoreType

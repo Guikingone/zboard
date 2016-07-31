@@ -37,6 +37,6 @@ class LoadAbonnementData implements FixtureInterface, ContainerAwareInterface, O
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 1;
+        return 0;
     }
 }

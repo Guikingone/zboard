@@ -1,14 +1,21 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Audrophe
+ * Date: 11/07/2016
+ * Time: 22:53.
+ */
 
 namespace CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use MentoratBundle\Entity\Mentore;
 use MentoratBundle\Entity\Suivi;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use UserBundle\Entity\Mentore;
+use UserBundle\Entity\User;
 
 class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
@@ -21,114 +28,70 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
 
     public function load(ObjectManager $manager)
     {
-        $parcours = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
-            ->findOneBy(array('libelle' => 'Chef de Projet Multimédia - Développement'));
+        $country = $this->privateContainer->get('doctrine')->getManager()->getRepository('AdminBundle:Country')
+                                                           ->findOneBy(array('libelle' => 'France'));
 
-        $parcoursC = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
-            ->findOneBy(array('libelle' => 'Développeur PHP/Symfony'));
+        $parcours = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
+                                           ->findOneBy(array('libelle' => 'Chef de projet Multimédia - Développement'));
 
         $mentor = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
-                       ->findOneBy(array('firstName' => 'Jacky'));
-
-        $country = $this->privateContainer->get('doctrine')->getManager()->getRepository('AdminBundle:Country')
-                                          ->findOneBy(array('libelle' => 'France'));
-
+                                         ->findOneBy(array('firstname' => 'Jacky'));
 
         $mentore = new Mentore();
+
+        $mentore->setUsername('Aurore');
         $mentore->setFirstname('Aurore');
         $mentore->setLastname('Gaucher');
         $mentore->setEmail('aurore.gaucher@gmail.com');
-        $mentore->setAddress('Somewhere');
-        $mentore->setCity('Don\'t say, somewhere near by');
         $mentore->setCountry($country);
         $mentore->setPhone('00.00.00.00.00');
+        $mentore->setPlainPassword('aurore');
         $mentore->setResume('Something');
-        $mentore->setStatus('En formation');
-
+        $mentore->setArchived(false);
+        $mentore->setRoles(array('ROLE_MENTORE'));
 
         $mentoreC = new Mentore();
+
+        $mentoreC->setUsername('toto');
         $mentoreC->setFirstname('Toto');
         $mentoreC->setLastname('Toto');
         $mentoreC->setEmail('tyoto.toto@gmail.com');
-        $mentoreC->setAddress('Somewhere');
-        $mentoreC->setCity('Don\'t say, somewhere near by');
         $mentoreC->setCountry($country);
         $mentoreC->setPhone('00.00.00.00.00');
+        $mentoreC->setPlainPassword('toto');
         $mentoreC->setResume('Something');
-        $mentoreC->setStatus('En formation');
-
-        $mentoreEnAttenteUn = new Mentore();
-        $mentoreEnAttenteUn->setFirstname("jean-claude");
-        $mentoreEnAttenteUn->setLastname("mammouth");
-        $mentoreEnAttenteUn->setEmail("jc-dusse-un@gmail.com");
-        $mentoreEnAttenteUn->setAddress("12 rue ici");
-        $mentoreEnAttenteUn->setCity("nantes");
-        $mentoreEnAttenteUn->setZipcode("44000");
-        $mentoreEnAttenteUn->setPhone('00.00.00.00.01');
-        $mentoreEnAttenteUn->setCountry($country);
-        $mentoreEnAttenteUn->setParcours($parcours);
-        $mentoreEnAttenteUn->setStatus("En attente");
-        $mentoreEnAttenteUn->setResume("C'est une maison bleu, adossée à la coline !");
-        $mentoreEnAttenteUn->setSuivi(null);
-
-        $mentoreEnded = new Mentore();
-        $mentoreEnded->setFirstname("jean-claude");
-        $mentoreEnded->setLastname("dusse");
-        $mentoreEnded->setAddress("12 rue la bas");
-        $mentoreEnded->setCity("nantes");
-        $mentoreEnded->setEmail("jc-dusse@gmail.com");
-        $mentoreEnded->setZipcode("44000");
-        $mentoreEnded->setPhone('00.00.00.00.00');
-        $mentoreEnded->setCountry($country);
-        $mentoreEnded->setParcours($parcoursC);
-        $mentoreEnded->setStatus("Formation terminée");
-        $mentoreEnded->setResume("C'est une maison bleu, adossée à la coline !");
+        $mentoreC->setArchived(false);
+        $mentoreC->setRoles(array('ROLE_MENTORE'));
 
         $suivi = new Suivi();
+
         $suivi->setMentor($mentor);
-        $suivi->setState('IN_PROGRESS');
         $suivi->setMentore($mentore);
+        $suivi->setLibelle('Suivi Premium Plus');
         $suivi->setParcours($parcours);
-
-        $suiviAttente = new Suivi();
-        $suiviAttente->setMentor($mentor);
-        $suiviAttente->setState('WAITING_LIST');
-        $suiviAttente->setMentore($mentoreEnAttenteUn);
-        $suiviAttente->setParcours($parcours);
-
-        $suiviOver = new Suivi();
-        $suiviOver->setMentor($mentor);
-        $suiviOver->setState('ENDED');
-        $suiviOver->setMentore($mentoreEnded);
-        $suiviOver->setParcours($parcoursC);
+        $suivi->setSuiviState('En cours');
+        $suivi->setDateStart(new\DateTime());
+        $suivi->setMentoreStatus('En formation');
 
         $suiviC = new Suivi();
-        $suiviC->setMentor($mentor);
-        $suiviC->setState('IN_PROGRESS');
-        $suiviC->setMentore($mentoreC);
-        $suiviC->setParcours($parcoursC);
 
-        $mentore->setSuivi($suivi);
-        $mentoreC->setSuivi($suiviC);
-        $mentoreEnded->setSuivi($suiviOver);
+        $suiviC->setMentor($mentor);
+        $suiviC->setMentore($mentoreC);
+        $suiviC->setLibelle('Suivi Premium Plus');
+        $suiviC->setParcours($parcours);
+        $suiviC->setSuiviState('En cours');
+        $suiviC->setDateStart(new\DateTime());
+        $suiviC->setMentoreStatus('En attente');
 
         $manager->persist($mentore);
-        $manager->persist($mentoreEnAttenteUn);
-        $manager->persist($mentoreEnded);
         $manager->persist($mentoreC);
-
         $manager->persist($suivi);
         $manager->persist($suiviC);
-        $manager->persist($suiviOver);
-        $manager->persist($suiviAttente);
-
         $manager->flush();
     }
 
     public function getOrder()
     {
-        // the order in which fixtures will be loaded
-        // the lower the number, the sooner that this fixture is loaded
-        return 4;
+        return 6;
     }
 }

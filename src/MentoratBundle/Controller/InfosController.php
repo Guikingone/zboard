@@ -15,14 +15,13 @@ class InfosController extends Controller
    */
   public function indexAction(Request $request)
   {
-    $information = $this->get('core.back')->addMentoratInformation($request);
-    $informations = $this->get('core.back')->getMentoratInformations();
+      $information = $this->get('core.back')->addMentoratInformation($request);
+      $informations = $this->get('core.back')->getMentoratInformations();
 
       return array(
           'controller' => 'infos',
           'informations' => $informations,
           'information' => $information->createView(),
       );
-
   }
 }

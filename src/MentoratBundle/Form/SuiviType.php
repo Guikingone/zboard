@@ -5,6 +5,8 @@ namespace MentoratBundle\Form;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,6 +20,11 @@ class SuiviType extends AbstractType
     {
         $builder
             ->remove('libelle')
+            ->add('date_start', DateType::class, array(
+                'html5' => false,
+                'format' => 'dd-MM-yyyy',
+                'widget' => 'single_text',
+            ))
             ->remove('dUpdate')
             ->add('parcours', EntityType::class, array(
                 'class' => 'BackendBundle\Entity\Parcours',
@@ -25,16 +32,37 @@ class SuiviType extends AbstractType
             ))
             ->add('mentor', EntityType::class, array(
                 'class' => 'UserBundle\Entity\User',
-                'choice_label' => 'lastName',
+                'choice_label' => 'lastname',
+            ))
+            ->add('financement', ChoiceType::class, array(
+                'choices' => array(
+                    'Oui' => true,
+                    'Non' => false,
+                ),
+            ))
+            ->add('financeur', TextType::class, array(
+                'required' => false,
+            ))
+            ->add('duree_financement', TextType::class, array(
+                'required' => false,
             ))
             ->remove('mentore')
-            ->add('state', ChoiceType::class, array(
+            ->add('suivi_state', ChoiceType::class, array(
                 'choices' => array(
-                    'WAITING_LIST'          => 'En attente',
-                    'IN_PROGRESS'           => 'En cours',
-                    'ENDED'                 => 'Mentorat terminé',
-                    'TRANSFERT_IN_PROGRESS' => 'Transfert en cours',
-                    'TRANSFERT_FINISHED'    => 'Transfert terminé',
+                    'En attente' => 'WAITING_LIST',
+                    'En cours' => 'IN_PROGRESS',
+                    'Mentorat terminé' => 'ENDED',
+                    'Transfert en cours' => 'TRANSFERT_IN_PROGRESS',
+                    'Transfert terminé' => 'TRANSFERT_FINISHED',
+                ),
+            ))
+            ->add('mentore_status', ChoiceType::class, array(
+                'choices' => array(
+                    'En attente' => 'En attente',
+                    'Contacté' => 'Contacté',
+                    'En formation' => 'En formation',
+                    'En pause' => 'En pause',
+                    'Formation terminée' => 'Formation terminée',
                 ),
             ))
         ;
