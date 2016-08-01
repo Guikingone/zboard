@@ -13,6 +13,8 @@ use BackendBundle\Entity\Parcours;
 use BackendBundle\Entity\Projet;
 use MentoratBundle\Form\InformationType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class Back
 {
@@ -32,18 +34,24 @@ class Back
     protected $session;
 
     /**
+     * @var authorizationChecker
+     */
+    protected $authorizationChecker;
+
+    /**
      * Back constructor.
      *
      * @param EntityManager $doctrine
      * @param FormFactory   $formFactory
      * @param Session       $session
      */
-    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Session $session, TokenStorage $user)
+    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Session $session, TokenStorage $user,AuthorizationCheckerInterface $authorizationChecker)
     {
         $this->doctrine = $doctrine;
         $this->formFactory = $formFactory;
         $this->session = $session;
         $this->user = $user;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
@@ -130,6 +138,11 @@ class Back
      */
     public function addMentoratInformation(Request $request)
     {
+        if (false === $this->authorizationChecker->isGranted('ROLE_ADMIN'))
+        {
+            throw new AccessDeniedException();
+        }
+
         $information = new InformationMentorat();
 
         $form = $this->formFactory->create(InformationType::class, $information);
