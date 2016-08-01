@@ -8,7 +8,14 @@
     {% block fos_user_content %}
 
     {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4 class="text-center"><i class="icon fa fa-exclamation"></i>Informations</h4>
+            <p class="text-center">
+                Vos identifiants sembles invalides, merci de les corriger, si vous avez perdu votre mot de passe, merci
+                de cliquer sur le lien approprié.
+            </p>
+        </div>
     {% endif %}
         <body class="hold-transition login-page">
         <div class="login-box">

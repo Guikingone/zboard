@@ -70,13 +70,11 @@ class ShowBackController extends Controller
         $parcours = $this->get('core.admin')->addParcours($request);
         $abonnement = $this->get('core.admin')->addAbonnement($request);
         $path = $this->get('core.back')->getParcours();
-        $pathArchived = $this->get('core.back')->getParcoursArchived();
 
         return array(
             'controller' => 'parcours',
             'parcours' => $parcours->createView(),
             'path' => $path,
-            'pathArchived' => $pathArchived,
             'abonnement' => $abonnement->createView(),
         );
     }
@@ -93,24 +91,13 @@ class ShowBackController extends Controller
         $parcours = $this->get('core.admin')->viewParcours($id);
         $projet = $this->get('core.admin')->addProject($request, $id);
         $cours = $this->get('core.admin')->addCours($request, $id);
-
-        // Used to find all the projects linked to the path.
-        $id = $request->attributes->get('id');
-
-        $coursP = $this->get('core.admin')->getCours($id);
-        $projets = $this->get('core.back')->getProjet($id);
         $competences = $this->get('core.admin')->addCompetences($request);
-        $competence = $this->getDoctrine()->getManager()->getRepository('BackendBundle:Competences')
-                           ->findBy(array('projet' => $projets));
 
         return array(
             'controller' => 'parcours',
             'parcours' => $parcours,
             'projet' => $projet->createView(),
-            'projets' => $projets,
-            'competence' => $competence,
             'competences' => $competences->createView(),
-            'cours' => $cours->createView(),
-            'coursP' => $coursP, );
+            'cours' => $cours->createView(), );
     }
 }

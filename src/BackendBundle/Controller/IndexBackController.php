@@ -32,7 +32,7 @@ class IndexBackController extends Controller
             'notes' => $notes,
             'sessions' => $sessions,
             'projets' => $projets,
-            'mentoresWaiting' => $mentoresWaiting
+            'mentoresWaiting' => $mentoresWaiting,
         );
     }
 }

@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 class indexAdminController extends Controller
 {
     /**
+     * @return array
+     *
      * @Route("/", name="home_admin")
      * @Template("AdminBundle/Index/index.html.twig")
      */
@@ -39,11 +41,13 @@ class indexAdminController extends Controller
             'sessionsC' => $sessionsC,
             'mentoresWaiting' => $mentoresWaiting,
             'mentoresPlus' => $mentoresPlus,
-            'mentoresClass' => $mentoresClass
+            'mentoresClass' => $mentoresClass,
         );
     }
 
     /**
+     * @param Request $request
+     *
      * @return array
      *
      * @Route("/country", name="gestion_country")
@@ -59,19 +63,27 @@ class indexAdminController extends Controller
     }
 
     /**
+     * @return array
+     *
      * @Route("/habilitations", name="gestion_habilitations")
      * @Template("AdminBundle/Index/habilitations.html.twig")
      */
-    public function addHabilitationsAction()
+    public function showHabilitationsAction()
     {
-        return array('controller' => 'habilitations');
+        $users = $this->get('core.user')->getMentors();
+        $mentores = $this->get('core.user')->getMentores();
+
+        return array('controller' => 'habilitations', 'users' => $users,
+                     'mentores' => $mentores, );
     }
 
     /**
+     * @param Request $request
+     *
+     * @return array
+     *
      * @Route("/show/abonnements", name="gestion_abonnements")
      * @Template("AdminBundle/Action/list_abonnements.html.twig")
-     *
-     * @param Request $request
      */
     public function showAbonnementsAction(Request $request)
     {

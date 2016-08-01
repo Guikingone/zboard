@@ -99,6 +99,15 @@ class User extends BaseUser
     private $competences;
 
     /**
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\Group_User")
+     * @ORM\JoinTable(name="zboard_user_group_user",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
+
+    /**
      * @var bool
      * @ORM\Column(name="archived", type="boolean")
      */
