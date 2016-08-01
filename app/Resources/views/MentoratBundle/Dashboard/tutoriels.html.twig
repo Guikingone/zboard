@@ -1,0 +1,24 @@
+{% extends "::layout_mentor.html.twig" %}
+
+{% block body %}
+{% if is_granted('ROLE_ADMIN') %}
+<div class="row">
+    <div class="col-xs-12">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalInformation">
+            Ajouter un lien vers un tutoriel
+        </button>
+    </div>
+</div>
+{% endif %}
+
+Tutoriels mentorat
+
+<ul>
+{% for tuto in tutoriels %}
+  <a href="{{ tuto.link|e }}"><li>{{ tuto.title|e }}</li></a>
+{% endfor %}
+</ul>
+
+{% include ':Form:register_tutoriel.html.twig' %}
+
+{% endblock %}

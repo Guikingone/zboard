@@ -11,7 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use BackendBundle\Entity\Parcours;
 use BackendBundle\Entity\Projet;
+use BackendBundle\Entity\Tutoriel;
 use MentoratBundle\Form\InformationType;
+use MentoratBundle\Form\TutorielType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -107,6 +109,16 @@ class Back
     }
 
     /**
+     * Allow the back to get all the tutorials.
+     *
+     * @return array|\BackendBundle\Entity\InformationMentorat[]
+     */
+    public function getTutorials()
+    {
+        return $this->doctrine->getRepository('BackendBundle:Tutoriel')->findAll();
+    }
+
+    /**
      * Allow to add a soutenance between a teacher dans a student.
      *
      * @param Request $request
@@ -159,4 +171,32 @@ class Back
 
         return $form;
     }
+
+        /**
+         * Creates a new tutorial.
+         *
+         * @param Request $request
+         *
+         * @return \Symfony\Component\Form\FormInterface
+         */
+        public function addTutorial(Request $request)
+        {
+            if (false === $this->authorizationChecker->isGranted('ROLE_ADMIN'))
+            {
+                throw new AccessDeniedException();
+            }
+
+            $tutoriel = new Tutoriel();
+
+            $form = $this->formFactory->create(TutorielType::class, $tutoriel);
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $this->doctrine->persist($tutoriel);
+                $this->doctrine->flush();
+                $this->session->getFlashBag()->add('success', 'Tutoriel ajouté.');
+            }
+
+            return $form;
+        }
 }
