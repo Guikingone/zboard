@@ -1,3 +1,8 @@
+notification:
+    resource: "@NotificationBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 core:
     resource: "@CoreBundle/Controller/"
     type:     annotation
