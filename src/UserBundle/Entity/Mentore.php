@@ -1,16 +1,17 @@
 <?php
 
-namespace MentoratBundle\Entity;
+namespace UserBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Mentore.
  *
  * @ORM\Table(name="zboard_mentore")
- * @ORM\Entity(repositoryClass="MentoratBundle\Repository\MentoreRepository")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\MentoreRepository")
  */
-class Mentore
+class Mentore extends BaseUser
 {
     /**
      * @var int
@@ -19,104 +20,64 @@ class Mentore
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="firstname", type="string", length=255)
      */
-    private $firstname;
+    protected $firstname;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="lastname", type="string", length=255)
      */
-    private $lastname;
+    protected $lastname;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
-    private $address;
+    protected $address;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="zipcode", type="string", length=25, nullable=true)
+     * @ORM\Column(name="zipcode", type="string", length=255, nullable=true)
      */
-    private $zipcode;
+    protected $zipcode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     * @ORM\Column(name="city", type="string", length=150, nullable=true)
      */
-    private $city;
+    protected $city;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="country", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Country", inversedBy="mentores")
      */
     private $country;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255)
-     */
-    private $email;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="phone", type="string", length=40, nullable=true)
      */
     private $phone;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="resume", type="text", nullable=true)
      */
     private $resume;
 
     /**
      * @var bool
-     * @ORM\Column(name="financement", type="boolean", nullable=true)
-     */
-    private $financement;
-
-    /**
-     * @var string
-     * @ORM\Column(name="financeur", type="string", length=150, nullable=true)
-     */
-    private $financeur;
-
-    /**
-     * @var string
-     * @ORM\Column(name="duree_financement", type="string", length=100, nullable=true)
-     */
-    private $duree_financement;
-
-    /**
-     * @var \DateTime
      *
-     * @ORM\Column(name="date_start", type="date")
+     * @ORM\Column(name="archived", type="boolean")
      */
-    private $date_start;
+    private $archived;
 
     /**
-     * @var string
-     * @ORM\Column(name="status", type="string", length=100)
-     */
-    private $status;
-
-    /**
-     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="mentore", cascade={ "persist"})
+     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="mentore", cascade={ "persist", "remove" })
      */
     private $suivi;
 
@@ -126,19 +87,18 @@ class Mentore
     private $sessions;
 
     /**
-     * @var boolean
-     * @ORM\Column(name="archived", type="boolean")
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Soutenance", mappedBy="mentore")
      */
-    private $archived;
+    private $soutenances;
 
     /**
-     * Get id.
-     *
-     * @return int
+     * Mentore constructor.
      */
-    public function getId()
+    public function __construct()
     {
-        return $this->id;
+        parent::__construct();
+        $this->sessions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->soutenances = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -262,54 +222,6 @@ class Mentore
     }
 
     /**
-     * Set country.
-     *
-     * @param string $country
-     *
-     * @return Mentore
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country.
-     *
-     * @return string
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * Set email.
-     *
-     * @param string $email
-     *
-     * @return Mentore
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email.
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
      * Set phone.
      *
      * @param string $phone
@@ -358,147 +270,51 @@ class Mentore
     }
 
     /**
-     * Set financement.
+     * Set archived.
      *
-     * @param bool $financement
+     * @param bool $archived
      *
      * @return Mentore
      */
-    public function setFinancement($financement)
+    public function setArchived($archived)
     {
-        $this->financement = $financement;
+        $this->archived = $archived;
 
         return $this;
     }
 
     /**
-     * Get financement.
+     * Get archived.
      *
      * @return bool
      */
-    public function getFinancement()
+    public function getArchived()
     {
-        return $this->financement;
+        return $this->archived;
     }
 
     /**
-     * Set financeur.
+     * Set country.
      *
-     * @param string $financeur
+     * @param \AdminBundle\Entity\Country $country
      *
      * @return Mentore
      */
-    public function setFinanceur($financeur)
+    public function setCountry(\AdminBundle\Entity\Country $country = null)
     {
-        $this->financeur = $financeur;
+        $this->country = $country;
 
         return $this;
     }
 
     /**
-     * Get financeur.
+     * Get country.
      *
-     * @return string
+     * @return \AdminBundle\Entity\Country
      */
-    public function getFinanceur()
+    public function getCountry()
     {
-        return $this->financeur;
-    }
-
-    /**
-     * Set dureeFinancement.
-     *
-     * @param string $dureeFinancement
-     *
-     * @return Mentore
-     */
-    public function setDureeFinancement($dureeFinancement)
-    {
-        $this->duree_financement = $dureeFinancement;
-
-        return $this;
-    }
-
-    /**
-     * Get dureeFinancement.
-     *
-     * @return string
-     */
-    public function getDureeFinancement()
-    {
-        return $this->duree_financement;
-    }
-
-    /**
-     * Set dateStart.
-     *
-     * @param \DateTime $dateStart
-     *
-     * @return Mentore
-     */
-    public function setDateStart($dateStart)
-    {
-        $this->date_start = $dateStart;
-
-        return $this;
-    }
-
-    /**
-     * Get dateStart.
-     *
-     * @return \DateTime
-     */
-    public function getDateStart()
-    {
-        return $this->date_start;
-    }
-
-    /**
-     * Set status.
-     *
-     * @param string $status
-     *
-     * @return Mentore
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status.
-     *
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * Set parcours.
-     *
-     * @param \BackendBundle\Entity\Parcours $parcours
-     *
-     * @return Mentore
-     */
-    public function setParcours(\BackendBundle\Entity\Parcours $parcours = null)
-    {
-        $this->parcours = $parcours;
-
-        return $this;
-    }
-
-    /**
-     * Get parcours.
-     *
-     * @return \BackendBundle\Entity\Parcours
-     */
-    public function getParcours()
-    {
-        return $this->parcours;
+        return $this->country;
     }
 
     /**
@@ -523,13 +339,6 @@ class Mentore
     public function getSuivi()
     {
         return $this->suivi;
-    }
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->sessions = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -567,26 +376,36 @@ class Mentore
     }
 
     /**
-     * Set archived
+     * Add soutenance.
      *
-     * @param boolean $archived
+     * @param \MentoratBundle\Entity\Soutenance $soutenance
      *
      * @return Mentore
      */
-    public function setArchived($archived)
+    public function addSoutenance(\MentoratBundle\Entity\Soutenance $soutenance)
     {
-        $this->archived = $archived;
+        $this->soutenances[] = $soutenance;
 
         return $this;
     }
 
     /**
-     * Get archived
+     * Remove soutenance.
      *
-     * @return boolean
+     * @param \MentoratBundle\Entity\Soutenance $soutenance
      */
-    public function getArchived()
+    public function removeSoutenance(\MentoratBundle\Entity\Soutenance $soutenance)
     {
-        return $this->archived;
+        $this->soutenances->removeElement($soutenance);
+    }
+
+    /**
+     * Get soutenances.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSoutenances()
+    {
+        return $this->soutenances;
     }
 }

@@ -1,0 +1,33 @@
+<div class="box-body">
+    <div class="table-responsive">
+        <table class="table no-margin">
+            <thead>
+            <tr>
+                <th>Nom du parcours</th>
+                <th>Niveau diplôme</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for path in path %}
+                <tr>
+                    <td>
+                        <b><a href="{{ path('show_parcours', {'id': path.id}) }}">{{ path.libelle }}</a></b>
+                    </td>
+                    <td>
+                        {{ path.diplome }}
+                    </td>
+                    <td>
+                        <a href="{{ path('update_parcours', {'id': path.id}) }}">
+                            <button type="button" class="btn btn-flat btn-warning">Modifier <span class="ion ion-wrench"></span> </button>
+                        </a>
+                        <a type="button" class="btn btn-flat btn-danger" href="{{ path('out_archive_path', {'id': path.id }) }}">
+                            Désarchiver <span class="ion ion-folder"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

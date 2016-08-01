@@ -1,52 +1,25 @@
 <?php
 
-namespace BackendBundle\Controller;
+namespace AdminBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ArchiveBackController extends Controller
+class ArchiveController extends Controller
 {
     /**
-     * @param $id
-     *
-     * @return array
-     *
-     * @Route("/archived/mentor/{id}", name="archive_mentor")
+     * @Route("/archives", name="home_archives")
+     * @Template("AdminBundle/Index/archives.html.twig")
      */
-    public function archiveMentorAction($id)
+    public function indexAction()
     {
-        $this->get('core.archive')->archiveMentor($id);
+        $mentor = $this->get('core.archive')->getMentorArchived();
+        $mentores = $this->get('core.archive')->getMentoresArchived();
+        $path = $this->get('core.archive')->getParcoursArchived();
 
-        return $this->redirectToRoute('home_backend');
-    }
-
-    /**
-     * @param $id
-     *
-     * @return array
-     *
-     * @Route("/archived/mentore/{id}", name="archive_mentore")
-     */
-    public function archiveMentoreAction($id)
-    {
-        $this->get('core.archive')->archiveMentore($id);
-
-        return $this->redirectToRoute('home_backend');
-    }
-
-    /**
-     * @param $id
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @Route("/archived/path/{id}", name="archive_path")
-     */
-    public function archiveParcoursAction($id)
-    {
-        $this->get('core.archive')->archiveParcours($id);
-
-        return $this->redirectToRoute('gestion_parcours');
+        return array('controller' => 'archives', 'mentor' => $mentor,
+                     'path' => $path, 'mentores' => $mentores, );
     }
 
     /**
@@ -88,6 +61,6 @@ class ArchiveBackController extends Controller
     {
         $this->get('core.archive')->outArchiveParcours($id);
 
-        return $this->redirectToRoute('gestion_parcours');
+        return $this->redirectToRoute('home_admin');
     }
 }

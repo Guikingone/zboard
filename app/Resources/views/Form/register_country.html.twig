@@ -1,0 +1,30 @@
+<!-- Modal used in order to add a note -->
+<div class="modal fade" id="myModalCountry" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center" id="myModalLabel">Ajouter un pays</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        {{ form_start(country) }}
+                        <div class="form-group">
+                            {{ form_errors(country.libelle) }}
+                            {{ form_label(country.libelle, 'Nom du pays') }}
+                            {{ form_widget(country.libelle, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <br />
+                        <button type="submit" class="btn btn-warning">
+                            Enregistrer
+                        </button>
+                        {{ form_end(country) }}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -28,36 +28,6 @@ class Statistiques
     }
 
     /**
-     * Allow to get the students waiting for a teacher.
-     *
-     * @return array
-     */
-    public function getMentoresWaiting()
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getMentoresWaiting();
-    }
-
-    /**
-     * Allow to return the students learning a path in Premium Plusabonnements.
-     *
-     * @return array
-     */
-    public function getMentoresPlus()
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getMentoresPPlus();
-    }
-
-    /**
-     * Allow to return the students learning a path in Premium Class abonnements.
-     *
-     * @return array
-     */
-    public function getMentoreClass()
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getMentorePClass();
-    }
-
-    /**
      * Allow the back to get all the paths made for the PPlus students.
      *
      * @return array|\BackendBundle\Entity\Parcours[]

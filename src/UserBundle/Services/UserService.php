@@ -3,21 +3,23 @@
  * Created by PhpStorm.
  * User: Guillaume
  * Date: 27/07/2016
- * Time: 15:42
+ * Time: 15:42.
  */
 
 namespace UserBundle\Services;
 
-
 use Doctrine\ORM\EntityManager;
+use MentoratBundle\Entity\Suivi;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use UserBundle\Entity\Competences;
+use UserBundle\Entity\Mentore;
 use UserBundle\Entity\User;
 use UserBundle\Form\CompetencesType;
+use UserBundle\Form\RegistrationMentoreType;
 use UserBundle\Form\RegistrationType;
 
 class UserService
@@ -68,6 +70,46 @@ class UserService
     }
 
     /**
+     * Allow the back to get all the mentores.
+     *
+     * @return array|\UserBundle\Entity\User[]
+     */
+    public function getMentores()
+    {
+        return $this->doctrine->getRepository('UserBundle:Mentore')->findAll();
+    }
+
+    /**
+     * Allow to get all the student who's on the waiting status.
+     *
+     * @return array
+     */
+    public function getMentoresWaiting()
+    {
+        return $this->doctrine->getRepository('UserBundle:Mentore')->getMentoresWaiting();
+    }
+
+    /**
+     * Allow to get all the student who use the Premium Plus abonnement.
+     *
+     * @return array
+     */
+    public function getMentoresPPlus()
+    {
+        return $this->doctrine->getRepository('UserBundle:Mentore')->getMentoresPPlus();
+    }
+
+    /**
+     * Allow to get all the student who use the Premium Class abonnement.
+     *
+     * @return array
+     */
+    public function getMentoresPClass()
+    {
+        return $this->doctrine->getRepository('UserBundle:Mentore')->getMentoresPClass();
+    }
+
+    /**
      * Allow to get all the competences linked to a teacher.
      *
      * @param $id
@@ -93,14 +135,47 @@ class UserService
         $form = $this->form->create(RegistrationType::class, $mentor);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $mentor->setUsername($mentor->getFirstName().'_'.$mentor->getLastName());
-            $mentor->setPlainPassword(strtolower($mentor->getFirstName().'_'.$mentor->getLastName()));
+        if ($form->isSubmitted() && $form->isValid()) {
+            $mentor->setUsername($mentor->getFirstname().'_'.$mentor->getLastname());
+            $mentor->setPlainPassword(mb_strtolower($mentor->getFirstname().'_'.$mentor->getLastname()));
             $mentor->setRoles(array('ROLE_MENTOR'));
             $mentor->setArchived(false);
             $this->doctrine->persist($mentor);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to create a student using the User entity.
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addMentore(Request $request)
+    {
+        $mentore = new Mentore();
+        $suivi = new Suivi();
+
+        $mentore->setSuivi($suivi);
+        $suivi->setMentore($mentore);
+        $suivi->setLibelle('Suivi Premium Plus');
+
+        $form = $this->form->create(RegistrationMentoreType::class, $mentore);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $mentore->setUsername($mentore->getFirstname().'_'.$mentore->getLastname());
+            $mentore->setPlainPassword(mb_strtolower($mentore->getFirstname().'_'.$mentore->getLastname()));
+            $mentore->setRoles(array('ROLE_MENTORE'));
+            $mentore->setArchived(false);
+            $this->doctrine->persist($mentore);
+            $this->doctrine->persist($suivi);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Elève enregistré.');
         }
 
         return $form;

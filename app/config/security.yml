@@ -8,6 +8,7 @@ security:
         ROLE_ADMIN: [ROLE_OC, ROLE_USER, ROLE_SUPERVISEUR_MENTOR]
         ROLE_OC: ROLE_SUPERVISEUR_MENTOR
         ROLE_SUPERVISEUR_MENTOR: ROLE_MENTOR
+        ROLE_MENTOR: ROLE_USER
 
     providers:
         fos_userbundle:

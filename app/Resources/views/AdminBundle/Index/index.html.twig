@@ -1,4 +1,4 @@
-{% extends ':Layout:administration.html.twig' %}
+{% extends ':AdminBundle/Layout:administration.html.twig' %}
 
 {% block admin_body %}
     <div class="row">
@@ -34,7 +34,7 @@
                     <span class="info-box-icon"><i class="ion ion-ios-clock-outline"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Elèves en attente</span>
-                        <span class="info-box-number">{{ mentoresW|length }}</span>
+                        <span class="info-box-number">{{ mentoresWaiting|length }}</span>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                 <span class="info-box-icon bg-green"><i class="ion ion-ios-people"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Eleves Premium Class</span>
-                    <span class="info-box-number">{{ mentoresPClass|length }}</span>
+                    <span class="info-box-number">{{ mentoresClass|length }}</span>
                 </div>
             </div>
         </div>

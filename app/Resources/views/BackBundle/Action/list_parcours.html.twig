@@ -1,4 +1,4 @@
-{% extends ':BackBundle/Layout:admin.html.twig' %}
+{% extends ':AdminBundle/Layout:administration.html.twig' %}
 
 {% block title %} - Parcours{% endblock %}
 
@@ -34,17 +34,6 @@
                 <button type="button" class="btn btn-flat btn-warning" data-toggle="modal" data-target="#myModalAbonnements">
                     Ajouter un abonnement
                 </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box box-warning">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Liste des parcours archivés</h3>
-                </div>
-                {% include 'BackBundle/Elements/Archivage/box_parcours_archive.html.twig' %}
             </div>
         </div>
     </div>

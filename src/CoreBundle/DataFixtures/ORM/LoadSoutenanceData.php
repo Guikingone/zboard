@@ -26,18 +26,18 @@ class LoadSoutenanceData implements FixtureInterface, ContainerAwareInterface, O
     public function load(ObjectManager $manager)
     {
         $mentor = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
-            ->findOneBy(array('lastName' => 'Chan'));
+                                         ->findOneBy(array('lastname' => 'Chan'));
 
-        $mentore = $this->privateContainer->get('doctrine')->getManager()->getRepository('MentoratBundle:Mentore')
-            ->findOneBy(array('lastname' => 'Gaucher'));
+        $mentore = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:Mentore')
+                                          ->findOneBy(array('lastname' => 'Gaucher'));
 
         $projet = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Projet')
-            ->findOneBy(array('libelle' => '[PROJET] Développez un back-end pour un client'));
+                       ->findOneBy(array('libelle' => '[PROJET] Développez un back-end pour un client'));
 
         $soutenance = new Soutenance();
-        $soutenance->setMentor($mentor);
         $soutenance->setMentore($mentore);
         $soutenance->setProjet($projet);
+        $soutenance->setMentor($mentor);
         $soutenance->setStatus('En attente');
 
         $manager->persist($soutenance);

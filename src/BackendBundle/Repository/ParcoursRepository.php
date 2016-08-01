@@ -10,7 +10,6 @@ namespace BackendBundle\Repository;
  */
 class ParcoursRepository extends \Doctrine\ORM\EntityRepository
 {
-
     public function getParcours()
     {
         return $this->createQueryBuilder('p')

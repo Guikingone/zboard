@@ -28,7 +28,7 @@ class UtilsBackController extends Controller
 
         return array(
             'controller' => 'users',
-            'mentor' => $mentor->createView()
+            'mentor' => $mentor->createView(),
         );
     }
 
@@ -51,7 +51,7 @@ class UtilsBackController extends Controller
 
         return array(
             'controller' => 'mentore',
-            'mentore' => $mentore->createView()
+            'mentore' => $mentore->createView(),
         );
     }
 
@@ -74,7 +74,7 @@ class UtilsBackController extends Controller
 
         return array(
             'controller' => 'parcours',
-            'parcours' => $parcours->createView()
+            'parcours' => $parcours->createView(),
         );
     }
 
@@ -97,7 +97,7 @@ class UtilsBackController extends Controller
 
         return array(
             'controller' => 'cours',
-            'cours' => $cours->createView()
+            'cours' => $cours->createView(),
         );
     }
 
@@ -120,7 +120,7 @@ class UtilsBackController extends Controller
 
         return array(
             'controller' => 'projet',
-            'projet' => $projet->createView()
+            'projet' => $projet->createView(),
         );
     }
 
@@ -143,7 +143,7 @@ class UtilsBackController extends Controller
 
         return array(
             'controller' => 'competences',
-            'competence' => $competence->createView()
+            'competence' => $competence->createView(),
         );
     }
 
@@ -166,7 +166,49 @@ class UtilsBackController extends Controller
 
         return array(
             'controller' => 'soutenance',
-            'soutenance' => $soutenance->createView()
+            'soutenance' => $soutenance->createView(),
         );
+    }
+
+    /**
+     * @param $id
+     *
+     * @return array
+     *
+     * @Route("/archived/mentor/{id}", name="archive_mentor")
+     */
+    public function archiveMentorAction($id)
+    {
+        $this->get('core.archive')->archiveMentor($id);
+
+        return $this->redirectToRoute('home_backend');
+    }
+
+    /**
+     * @param $id
+     *
+     * @return array
+     *
+     * @Route("/archived/mentore/{id}", name="archive_mentore")
+     */
+    public function archiveMentoreAction($id)
+    {
+        $this->get('core.archive')->archiveMentore($id);
+
+        return $this->redirectToRoute('home_backend');
+    }
+
+    /**
+     * @param $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @Route("/archived/path/{id}", name="archive_path")
+     */
+    public function archiveParcoursAction($id)
+    {
+        $this->get('core.archive')->archiveParcours($id);
+
+        return $this->redirectToRoute('home_admin');
     }
 }

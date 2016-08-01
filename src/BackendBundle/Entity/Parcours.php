@@ -55,7 +55,7 @@ class Parcours
     private $suivi;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(name="archived", type="boolean")
      */
     private $archived;
@@ -255,9 +255,9 @@ class Parcours
     }
 
     /**
-     * Set archived
+     * Set archived.
      *
-     * @param boolean $archived
+     * @param bool $archived
      *
      * @return Parcours
      */
@@ -269,9 +269,9 @@ class Parcours
     }
 
     /**
-     * Get archived
+     * Get archived.
      *
-     * @return boolean
+     * @return bool
      */
     public function getArchived()
     {

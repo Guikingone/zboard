@@ -17,10 +17,14 @@
                 {% for soutenances in soutenances %}
                 <tr>
                     <td>
-                        {{ soutenances.mentore.firstname }} {{ soutenances.mentore.lastname }}
+                        <a href="{{ path('show_details_mentore', {'id': soutenances.mentore.id}) }}">
+                            {{ soutenances.mentore.lastname }} {{ soutenances.mentore.firstname }}
+                        </a>
                     </td>
                     <td>
-                        {{ soutenances.mentor.firstname }} {{ soutenances.mentor.lastname }}
+                        <a href="{{ path('show_details_mentor', {'id': soutenances.mentor.id}) }}">
+                            {{ soutenances.mentor.lastname }} {{ soutenances.mentor.firstname }}
+                        </a>
                     </td>
                     <td>
                         {{ soutenances.passedAt|date("d-M-Y", "Europe/Paris") }}

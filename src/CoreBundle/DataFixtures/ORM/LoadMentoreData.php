@@ -1,14 +1,21 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Audrophe
+ * Date: 11/07/2016
+ * Time: 22:53.
+ */
 
 namespace CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use MentoratBundle\Entity\Mentore;
 use MentoratBundle\Entity\Suivi;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use UserBundle\Entity\Mentore;
+use UserBundle\Entity\User;
 
 class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
@@ -21,55 +28,60 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
 
     public function load(ObjectManager $manager)
     {
-        $parcours = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
-                         ->findOneBy(array('id' => 1));
+        $country = $this->privateContainer->get('doctrine')->getManager()->getRepository('AdminBundle:Country')
+                                                           ->findOneBy(array('libelle' => 'France'));
 
-        $parcoursC = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
-            ->findOneBy(array('libelle' => 'Développeur PHP/Symfony'));
+        $parcours = $this->privateContainer->get('doctrine')->getManager()->getRepository('BackendBundle:Parcours')
+                                           ->findOneBy(array('libelle' => 'Chef de projet Multimédia - Développement'));
 
         $mentor = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
-                       ->findOneBy(array('firstName' => 'Jacky'));
+                                         ->findOneBy(array('firstname' => 'Jacky'));
 
         $mentore = new Mentore();
-        $suivi = new Suivi();
-        $suiviC = new Suivi();
 
+        $mentore->setUsername('Aurore');
         $mentore->setFirstname('Aurore');
         $mentore->setLastname('Gaucher');
         $mentore->setEmail('aurore.gaucher@gmail.com');
-        $mentore->setAddress('Somewhere');
-        $mentore->setCity('Don\'t say, somewhere near by');
-        $mentore->setCountry('FR');
+        $mentore->setCountry($country);
         $mentore->setPhone('00.00.00.00.00');
-        $mentore->setDateStart(new \DateTime());
+        $mentore->setPlainPassword('aurore');
         $mentore->setResume('Something');
-        $mentore->setSuivi($suivi);
         $mentore->setArchived(false);
-        $suivi->setMentor($mentor);
-        $suivi->setState('En cours');
-        $suivi->setMentore($mentore);
-        $suivi->setParcours($parcours);
-        $mentore->setStatus('En formation');
-        $mentore->setFinancement(true);
+        $mentore->setRoles(array('ROLE_MENTORE'));
 
         $mentoreC = new Mentore();
+
+        $mentoreC->setUsername('toto');
         $mentoreC->setFirstname('Toto');
         $mentoreC->setLastname('Toto');
         $mentoreC->setEmail('tyoto.toto@gmail.com');
-        $mentoreC->setAddress('Somewhere');
-        $mentoreC->setCity('Don\'t say, somewhere near by');
-        $mentoreC->setCountry('FR');
+        $mentoreC->setCountry($country);
         $mentoreC->setPhone('00.00.00.00.00');
-        $mentoreC->setDateStart(new \DateTime());
+        $mentoreC->setPlainPassword('toto');
         $mentoreC->setResume('Something');
-        $mentoreC->setSuivi($suiviC);
         $mentoreC->setArchived(false);
+        $mentoreC->setRoles(array('ROLE_MENTORE'));
+
+        $suivi = new Suivi();
+
+        $suivi->setMentor($mentor);
+        $suivi->setMentore($mentore);
+        $suivi->setLibelle('Suivi Premium Plus');
+        $suivi->setParcours($parcours);
+        $suivi->setSuiviState('En cours');
+        $suivi->setDateStart(new\DateTime());
+        $suivi->setMentoreStatus('En formation');
+
+        $suiviC = new Suivi();
+
         $suiviC->setMentor($mentor);
-        $suiviC->setState('En cours');
         $suiviC->setMentore($mentoreC);
-        $suiviC->setParcours($parcoursC);
-        $mentore->setFinancement(false);
-        $mentoreC->setStatus('En formation');
+        $suiviC->setLibelle('Suivi Premium Plus');
+        $suiviC->setParcours($parcours);
+        $suiviC->setSuiviState('En cours');
+        $suiviC->setDateStart(new\DateTime());
+        $suiviC->setMentoreStatus('En attente');
 
         $manager->persist($mentore);
         $manager->persist($mentoreC);
@@ -80,8 +92,6 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
 
     public function getOrder()
     {
-        // the order in which fixtures will be loaded
-        // the lower the number, the sooner that this fixture is loaded
-        return 4;
+        return 6;
     }
 }

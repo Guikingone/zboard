@@ -1,4 +1,4 @@
-{% extends ':Layout:administration.html.twig' %}
+{% extends ':AdminBundle/Layout:administration.html.twig' %}
 
 {% block title %} - Abonnements{% endblock %}
 
@@ -11,10 +11,12 @@
         </div>
     {% endfor %}
     <div class="row">
-        <div class="col-xs-12">
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalAbonnements">
-                Ajouter un abonnement
-            </button>
+        <div class="col-xs-12 col-md-12">
+            <div class="well">
+                <button type="button" class="btn btn-flat btn-warning" data-toggle="modal" data-target="#myModalAbonnements">
+                    Ajouter un abonnement
+                </button>
+            </div>
         </div>
     </div>
     <br>

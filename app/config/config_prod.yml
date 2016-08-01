@@ -9,6 +9,22 @@ imports:
 
 monolog:
     handlers:
+        mail:
+            type: fingers_crossed
+            action_level: critical
+            handler: deduplicated
+        deduplicated:
+            type: deduplication
+            handler: swift
+        swift:
+            type: swift_mailer
+            from_email: 'zboard@example.fr'
+            to_email: 'zboard_admin@exeample.fr'
+            subject: 'Une erreur est survenue ! %%message%%'
+            level: debug
+            formatter: monolog.formatter.html
+            content_type: text/html
+
         main:
             type:         fingers_crossed
             action_level: error

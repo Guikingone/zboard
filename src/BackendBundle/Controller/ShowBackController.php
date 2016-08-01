@@ -20,9 +20,9 @@ class ShowBackController extends Controller
         $mentors = $this->get('core.user')->getMentors();
 
         return array(
-            'controller'    => "users",
-            'mentors'       => $mentors,
-            'mentor'        => $mentor->createView()
+            'controller' => 'users',
+            'mentors' => $mentors,
+            'mentor' => $mentor->createView(),
         );
     }
 
@@ -33,13 +33,13 @@ class ShowBackController extends Controller
      */
     public function showMentoreAction(Request $request)
     {
-        $nMentore = $this->get('core.admin')->addMentore($request);
-        $mentores = $this->get('core.admin')->getMentores();
+        $mentore = $this->get('core.user')->addMentore($request);
+        $mentores = $this->get('core.user')->getMentores();
 
         return array(
-            'controller'    => "users",
-            'mentores'      => $mentores,
-            'nMentore'      => $nMentore->createView()
+            'controller' => 'users',
+            'mentores' => $mentores,
+            'mentore' => $mentore->createView(),
         );
     }
 
@@ -50,13 +50,13 @@ class ShowBackController extends Controller
      */
     public function showSoutenancesMentorsAction(Request $request)
     {
-        $soutenance = $this->get('core.back')->addSoutenance($request);
         $soutenances = $this->get('core.back')->getSoutenances();
+        $soutenance = $this->get('core.back')->addSoutenance($request);
 
         return array(
-            'controller'    => "soutenances",
-            'soutenances'   => $soutenances,
-            'soutenance'    => $soutenance->createView()
+            'controller' => 'soutenances',
+            'soutenances' => $soutenances,
+            'soutenance' => $soutenance->createView(),
         );
     }
 
@@ -73,11 +73,11 @@ class ShowBackController extends Controller
         $pathArchived = $this->get('core.back')->getParcoursArchived();
 
         return array(
-            'controller'    => "parcours",
-            'parcours'      => $parcours->createView(),
-            'path'          => $path,
-            'pathArchived'  => $pathArchived,
-            'abonnement'    => $abonnement->createView()
+            'controller' => 'parcours',
+            'parcours' => $parcours->createView(),
+            'path' => $path,
+            'pathArchived' => $pathArchived,
+            'abonnement' => $abonnement->createView(),
         );
     }
 
@@ -104,13 +104,13 @@ class ShowBackController extends Controller
                            ->findBy(array('projet' => $projets));
 
         return array(
-            'controller'    => "parcours",
-            'parcours'      => $parcours,
-            'projet'        => $projet->createView(),
-            'projets'       => $projets,
-            'competence'    => $competence,
-            'competences'   => $competences->createView(),
-            'cours'         => $cours->createView(),
-            'coursP'        => $coursP, );
+            'controller' => 'parcours',
+            'parcours' => $parcours,
+            'projet' => $projet->createView(),
+            'projets' => $projets,
+            'competence' => $competence,
+            'competences' => $competences->createView(),
+            'cours' => $cours->createView(),
+            'coursP' => $coursP, );
     }
 }

@@ -55,7 +55,7 @@ class Sessions
     private $mentor;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\Mentore", inversedBy="sessions")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Mentore", inversedBy="sessions")
      */
     private $mentore;
 
@@ -192,11 +192,11 @@ class Sessions
     /**
      * Set mentore.
      *
-     * @param \MentoratBundle\Entity\Mentore $mentore
+     * @param \UserBundle\Entity\Mentore $mentore
      *
      * @return Sessions
      */
-    public function setMentore(\MentoratBundle\Entity\Mentore $mentore = null)
+    public function setMentore(\UserBundle\Entity\Mentore $mentore = null)
     {
         $this->mentore = $mentore;
 
@@ -206,7 +206,7 @@ class Sessions
     /**
      * Get mentore.
      *
-     * @return \MentoratBundle\Entity\Mentore
+     * @return \UserBundle\Entity\Mentore
      */
     public function getMentore()
     {

@@ -1,0 +1,104 @@
+<?php
+
+namespace UserBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Mentore.
+ *
+ * @ORM\Table(name="zboard_mentore")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\MentoreRepository")
+ */
+class Mentore extends BaseUser
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string
+     * @ORM\Column(name="firstname", type="string", length=255)
+     */
+    protected $firstname;
+
+    /**
+     * @var string
+     * @ORM\Column(name="lastname", type="string", length=255)
+     */
+    protected $lastname;
+
+    /**
+     * @var string
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
+     */
+    protected $address;
+
+    /**
+     * @var string
+     * @ORM\Column(name="zipcode", type="string", length=255, nullable=true)
+     */
+    protected $zipcode;
+
+    /**
+     * @var string
+     * @ORM\Column(name="city", type="string", length=150, nullable=true)
+     */
+    protected $city;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Country", inversedBy="mentores")
+     */
+    private $country;
+
+    /**
+     * @var string
+     * @ORM\Column(name="phone", type="string", length=40, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @var string
+     * @ORM\Column(name="resume", type="text", nullable=true)
+     */
+    private $resume;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="archived", type="boolean")
+     */
+    private $archived;
+
+    /**
+     * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="mentore")
+     */
+    private $suivi;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Sessions", mappedBy="mentore")
+     */
+    private $sessions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Soutenance", mappedBy="mentore")
+     */
+    private $soutenances;
+
+    /**
+     * Mentore constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->sessions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->soutenances = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

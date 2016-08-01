@@ -20,8 +20,8 @@ class UserAdminController extends Controller
         $users = $this->get('core.user_admin')->getUsers();
 
         return array(
-            'controller'    => 'users_admin',
-            'users'         => $users,
+            'controller' => 'users_admin',
+            'users' => $users,
         );
     }
 }

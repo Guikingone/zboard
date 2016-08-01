@@ -3,10 +3,10 @@
  * Created by PhpStorm.
  * User: Guillaume
  * Date: 27/07/2016
- * Time: 13:30
+ * Time: 13:30.
  */
 
-namespace BackendBundle\Services;
+namespace AdminBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -30,10 +30,40 @@ class Archive
      * @param EntityManager $doctrine
      * @param Session       $session
      */
-    public function __construct(EntityManager $doctrine,Session $session)
+    public function __construct(EntityManager $doctrine, Session $session)
     {
         $this->doctrine = $doctrine;
         $this->session = $session;
+    }
+
+    /**
+     * Allow to get all the mentors archived.
+     *
+     * @return array|\UserBundle\Entity\User[]
+     */
+    public function getMentorArchived()
+    {
+        return $this->doctrine->getRepository('UserBundle:User')->findBy(array('archived' => true));
+    }
+
+    /**
+     * Allow to get all the students archived.
+     *
+     * @return array|\UserBundle\Entity\Mentore[]
+     */
+    public function getMentoresArchived()
+    {
+        return $this->doctrine->getRepository('UserBundle:Mentore')->findBy(array('archived' => true));
+    }
+
+    /**
+     * Allow to get all the path archived.
+     *
+     * @return array|\BackendBundle\Entity\Parcours[]
+     */
+    public function getParcoursArchived()
+    {
+        return $this->doctrine->getRepository('BackendBundle:Parcours')->findBy(array('archived' => true));
     }
 
     /**
@@ -79,6 +109,66 @@ class Archive
     }
 
     /**
+     * Allow to archive a path using is $id.
+     *
+     * @param $id
+     */
+    public function archiveParcours($id)
+    {
+        $parcours = $this->doctrine->getRepository('BackendBundle:Parcours')->findOneBy(array('id' => $id));
+
+        if (null === $parcours) {
+            throw new NotFoundHttpException('Le parcours ne semble pas exister ou a déjà été archiver.');
+        }
+
+        $parcours->setArchived(true);
+
+        $this->doctrine->flush();
+
+        $this->session->getFlashBag()->add('success', 'Le parcours a bien été archivé.');
+    }
+
+    /**
+     * Allow to archive a courses using id $id.
+     *
+     * @param $id
+     */
+    public function archiveCourses($id)
+    {
+        $courses = $this->doctrine->getRepository('BackendBundle:Cours')->findOneBy(array('id' => $id));
+
+        if (null === $courses) {
+            throw new NotFoundHttpException('Le cours ne semble pas exister ou a déjà été archivé.');
+        }
+
+        $courses->setArchived(true);
+
+        $this->doctrine->flush();
+
+        $this->session->getFlashBag()->add('success', 'Le cours a bien été archivé.');
+    }
+
+    /**
+     * Allow to archive a project using id $id.
+     *
+     * @param $id
+     */
+    public function archiveProject($id)
+    {
+        $projet = $this->doctrine->getRepository('BackendBundle:Projet')->findOneBy(array('id' => $id));
+
+        if (null === $projet) {
+            throw new NotFoundHttpException('Le projet ne semble pas exister ou a déjà été archivé.');
+        }
+
+        $projet->setArchived(true);
+
+        $this->doctrine->flush();
+
+        $this->session->getFlashBag()->add('success', 'Le projet a bien été archivé.');
+    }
+
+    /**
      * Allow to get out of the archives the teacher using is $id.
      *
      * @param $id
@@ -116,26 +206,6 @@ class Archive
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le mentore a bien été sorti des archives.');
-    }
-
-    /**
-     * Allow to archive a path using is $id.
-     *
-     * @param $id
-     */
-    public function archiveParcours($id)
-    {
-        $parcours = $this->doctrine->getRepository('BackendBundle:Parcours')->findOneBy(array('id' => $id));
-
-        if (null === $parcours) {
-            throw new NotFoundHttpException('Le parcours ne semble pas exister ou a déjà été archiver.');
-        }
-
-        $parcours->setArchived(true);
-
-        $this->doctrine->flush();
-
-        $this->session->getFlashBag()->add('success', 'Le parcours a bien été archivé.');
     }
 
     /**

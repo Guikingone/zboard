@@ -3,7 +3,7 @@
 namespace MentoratBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use MentoratBundle\Entity\Mentore;
+use UserBundle\Entity\Mentore;
 use MentoratBundle\Entity\Notes;
 use MentoratBundle\Entity\Sessions;
 use MentoratBundle\Form\SessionsType;
@@ -47,33 +47,9 @@ class MentoreService
     }
 
     /**
-     * Allow to get the sessions planified by the teacher into the teacher profil using is $id.
-     *
-     * @param $id
-     *
-     * @return array
-     */
-    public function getSessionsByMentor($id)
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Sessions')->getSessionsbyMentor($id);
-    }
-
-    /**
-     * Allow to get all the student followed by a teacher.
-     *
-     * @param $id
-     *
-     * @return array
-     */
-    public function getMentoresbyTeacher($id)
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->getStudentsByMentor($id);
-    }
-
-    /**
      * Display the mentores who are attributed to the connected user.
      *
-     * @return array|\MentoratBundle\Entity\Mentore[]
+     * @return array|\UserBundle\Entity\Mentore[]
      */
     public function getMentores($user)
     {
@@ -87,7 +63,7 @@ class MentoreService
      * Display the mentore which are waiting to have the first
      * show and which are attributing to the connected user.
      *
-     * @return array|\MentoratBundle\Entity\Mentore[]
+     * @return array|\UserBundle\Entity\Mentore[]
      */
     public function getMyWaitingMentore($user)
     {
@@ -101,13 +77,13 @@ class MentoreService
      * Display the mentore which are waiting to have the first
      * show and which are attributing to the connected user.
      *
-     * @return array|\MentoratBundle\Entity\Mentore[]
+     * @return array|\UserBundle\Entity\Mentore[]
      */
     public function getMentoratFinished($user)
     {
         return $this->doctrine->getRepository('MentoratBundle:Suivi')->findBy(array(
             'mentor' => $user,
-            'state' => 'MENTORAT_FINISHED',
+            'state' => 'ENDED',
         ));
     }
 
@@ -153,7 +129,7 @@ class MentoreService
      */
     public function addSessionMentorat(Request $request, $id)
     {
-        $mentore = $this->doctrine->getRepository('MentoratBundle:Mentore')->findOneBy(array('id' => $id));
+        $mentore = $this->doctrine->getRepository('UserBundle:Mentore')->findOneBy(array('id' => $id));
 
         $mentor = $this->user->getToken()->getUser();
 
@@ -175,15 +151,15 @@ class MentoreService
     }
 
     /**
-     * Allow to find a student by is $id in order to show details.
+     * Allow to find a student using is $id.
      *
      * @param $id
      *
-     * @return array|\MentoratBundle\Entity\Mentore[]
+     * @return null|object|\UserBundle\Entity\Mentore
      */
     public function viewMentore($id)
     {
-        return $this->doctrine->getRepository('MentoratBundle:Mentore')->find($id);
+        return $this->doctrine->getRepository('UserBundle:Mentore')->find($id);
     }
 
     /**

@@ -4,9 +4,6 @@ namespace AdminBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use UserBundle\Entity\User;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class UserAdmin
 {
