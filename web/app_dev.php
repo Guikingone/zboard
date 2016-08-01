@@ -26,6 +26,8 @@ Debug::enable();
 
 $kernel = new AppKernel('dev', true);
 $kernel->loadClassCache();
+$kernel = new AppCache($kernel);
+
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();

@@ -92,6 +92,15 @@ class Mentore extends BaseUser
     private $soutenances;
 
     /**
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\Group_User")
+     * @ORM\JoinTable(name="zboard_mentore_group_user",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
+
+    /**
      * Mentore constructor.
      */
     public function __construct()

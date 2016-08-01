@@ -21,6 +21,7 @@ use UserBundle\Entity\User;
 use UserBundle\Form\CompetencesType;
 use UserBundle\Form\RegistrationMentoreType;
 use UserBundle\Form\RegistrationType;
+use UserBundle\Form\UpdateUserType;
 
 class UserService
 {
@@ -203,6 +204,33 @@ class UserService
             $this->doctrine->persist($competence);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La compétence a bien été ajoutée.');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to update the roles of a user using is $id.
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addRoleToUser(Request $request, $id)
+    {
+        $user = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
+
+        if (null === $user) {
+            throw new NotFoundHttpException("L'utilisateur ne semble pas exister.");
+        }
+
+        $form = $this->form->create(UpdateUserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->persist($user);
+            $this->session->getFlashBag()->add('success', "Le rôle de l'utilisateur a bien été mis à jour");
         }
 
         return $form;

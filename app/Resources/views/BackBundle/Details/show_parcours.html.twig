@@ -32,6 +32,10 @@
                                     <b>Technologies utilisées :</b>
                                     <p class="pull-right"></p>
                                 </li>
+                                <li class="list-group-item">
+                                    <b>Abonnement requis :</b>
+                                    <p class="pull-right">{{ parcours.abonnement.libelle }}</p>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -49,16 +53,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for coursP in coursP %}
+                                    {% for cours in parcours.cours %}
                                         <tr>
                                             <td>
-                                                {{ coursP.libelle }}
+                                                {{ cours.libelle }}
                                             </td>
                                             <td>
-                                                {{ coursP.duree }}
+                                                {{ cours.duree }}
                                             </td>
                                             <td>
-                                                <a href="{{ path('update_courses', {'id': coursP.id}) }}"><span class="ion ion-wrench"></span></a>
+                                                <a href="{{ path('update_courses', {'id': cours.id}) }}"><span class="ion ion-wrench"></span></a>
                                             </td>
                                             <td>
                                                 <a href="#"><span class="ion ion-trash-b"></span></a>
@@ -87,7 +91,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for projets in projets %}
+                                    {% for projets in parcours.projet %}
                                         <tr>
                                             <td>
                                                 {{ projets.libelle }}

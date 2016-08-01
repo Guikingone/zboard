@@ -1,3 +1,8 @@
+notification:
+    resource: "@NotificationBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 core:
     resource: "@CoreBundle/Controller/"
     type:     annotation
@@ -26,3 +31,7 @@ admin:
 # FOS Routes
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_user_group:
+    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+    prefix: /group

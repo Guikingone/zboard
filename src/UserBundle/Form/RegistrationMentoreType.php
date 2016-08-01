@@ -46,6 +46,7 @@ class RegistrationMentoreType extends AbstractType
             ->remove('plainPassword')
             ->remove('plainPassword_confirmation')
             ->remove('archived')
+            ->remove('group')
         ;
     }
 
