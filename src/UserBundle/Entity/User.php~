@@ -108,7 +108,7 @@ class User extends BaseUser
     protected $groups;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NotificationBundle\Entity\Events", inversedBy="user")
+     * @ORM\OneToMany(targetEntity="NotificationBundle\Entity\Events", mappedBy="user")
      */
     private $events;
 
@@ -127,6 +127,7 @@ class User extends BaseUser
         $this->competences = new ArrayCollection();
         $this->suivi = new ArrayCollection();
         $this->soutenances = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
-
+    
 }

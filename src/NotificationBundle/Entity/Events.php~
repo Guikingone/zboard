@@ -43,7 +43,7 @@ class Events
     private $categorie;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="events")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="events")
      */
     private $user;
 

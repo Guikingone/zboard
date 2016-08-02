@@ -143,7 +143,7 @@ class Back
             $this->doctrine->persist($soutenance);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La soutenance a bien été enregistrée.');
-            $this->events->createEvents("Création d'un nouveau parcours", "Important", $this->user->getToken()->getUser());
+            $this->events->createEvents("Création d'une nouvelle soutenance", 'Important', $this->user->getToken()->getUser());
         }
 
         return $form;
@@ -174,6 +174,7 @@ class Back
             $this->doctrine->persist($information);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Information ajouté.');
+            $this->events->createEvents("Création d'une nouvelle information", 'Important', $this->user->getToken()->getUser());
         }
 
         return $form;
@@ -201,6 +202,7 @@ class Back
                 $this->doctrine->persist($tutoriel);
                 $this->doctrine->flush();
                 $this->session->getFlashBag()->add('success', 'Tutoriel ajouté.');
+                $this->events->createEvents("Création d'un nouveau tutoriel", 'Important', $this->user->getToken()->getUser());
             }
 
             return $form;

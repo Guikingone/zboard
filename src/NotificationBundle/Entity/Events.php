@@ -43,22 +43,14 @@ class Events
     private $categorie;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="events")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="events")
      */
     private $user;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -66,7 +58,7 @@ class Events
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -80,7 +72,7 @@ class Events
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */
@@ -90,7 +82,7 @@ class Events
     }
 
     /**
-     * Set date
+     * Set date.
      *
      * @param \DateTime $date
      *
@@ -104,7 +96,7 @@ class Events
     }
 
     /**
-     * Get date
+     * Get date.
      *
      * @return \DateTime
      */
@@ -114,7 +106,7 @@ class Events
     }
 
     /**
-     * Set categorie
+     * Set categorie.
      *
      * @param string $categorie
      *
@@ -128,7 +120,7 @@ class Events
     }
 
     /**
-     * Get categorie
+     * Get categorie.
      *
      * @return string
      */
@@ -138,33 +130,23 @@ class Events
     }
 
     /**
-     * Add user
+     * Set user.
      *
      * @param \UserBundle\Entity\User $user
      *
      * @return Events
      */
-    public function addUser(\UserBundle\Entity\User $user)
+    public function setUser(\UserBundle\Entity\User $user = null)
     {
-        $this->user[] = $user;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Remove user
+     * Get user.
      *
-     * @param \UserBundle\Entity\User $user
-     */
-    public function removeUser(\UserBundle\Entity\User $user)
-    {
-        $this->user->removeElement($user);
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \UserBundle\Entity\User
      */
     public function getUser()
     {

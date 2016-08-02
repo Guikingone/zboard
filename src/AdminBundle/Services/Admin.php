@@ -168,7 +168,7 @@ class Admin
             $this->doctrine->persist($parcours);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Parcours ajouté !');
-            $this->events->createEvents("Création d'un nouveau parcours", "Important", 'ROLE_MENTOR');
+            $this->events->createEvents("Création d'un nouveau parcours", 'Important', 'ROLE_MENTOR');
         }
 
         return $form;
@@ -195,7 +195,7 @@ class Admin
             $this->doctrine->persist($projet);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Projet ajouté !');
-            $this->events->createEvents("Création d'un nouveau parcours", "Important", 'ROLE_MENTOR');
+            $this->events->createEvents("Création d'un nouveau parcours", 'Important', 'ROLE_MENTOR');
         }
 
         return $form;
@@ -219,7 +219,7 @@ class Admin
             $this->doctrine->persist($competencesProject);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Competences ajouté !');
-            $this->events->createEvents("Création d'un nouveau parcours", "Important", 'ROLE_MENTOR');
+            $this->events->createEvents("Création d'un nouveau parcours", 'Important', 'ROLE_MENTOR');
         }
 
         return $form;

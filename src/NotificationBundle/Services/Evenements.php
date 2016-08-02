@@ -60,12 +60,11 @@ class Evenements
         $event->setDate(new \DateTime());
         $event->setLibelle($libelle);
         $event->setCategorie($categorie);
-        $event->addUser($user);
+        $event->setUser($user);
 
         $this->doctrine->persist($event);
         $this->doctrine->flush();
     }
-
 
     /**
      * Allow to delete all the events linekd to a user.
