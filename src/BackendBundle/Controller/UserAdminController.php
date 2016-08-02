@@ -22,6 +22,22 @@ class UserAdminController extends Controller
     {
         $user = $this->get('core.user')->addRoleToUser($request, $id);
 
-        return array('controller' => 'gestion_roles', 'user' => $user);
+        return array('controller' => 'gestion_roles', 'user' => $user->createView());
+    }
+
+    /**
+     * @Route("/update/roles/mentore/{id}", name="update_roles_mentore")
+     * @Template("AdminBundle/Action/Update/roles_mentores.html.twig")
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return array
+     */
+    public function updateMentoreAction(Request $request, $id)
+    {
+        $mentore = $this->get('core.user')->addRoleToMentore($request, $id);
+
+        return array('controller' => 'gestion_roles', 'mentore' => $mentore->createView());
     }
 }

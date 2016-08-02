@@ -1,13 +1,13 @@
 <?php
 
-namespace UserBundle\Form;
+namespace UserBundle\Form\Mentore;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UpdateUserType extends AbstractType
+class UpdateMentoreType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -26,28 +26,19 @@ class UpdateUserType extends AbstractType
             ->remove('plainPassword_confirmation')
             ->remove('archived')
             ->remove('group')
-            ->add('roles', ChoiceType::class, array(
-                'choices' => array(
-                    'Mentore en formation' => 'ROLE_MENTOR_FORMATION',
-                    'Mentor' => 'ROLE_MENTOR',
-                    'Mentore expérimenté' => 'ROLE_MENTOR_EXP',
-                    'Superviseur Mentors' => 'ROLE_SUPERVISEUR_MENTOR',
-                    'Mentore' => 'ROLE_MENTORE',
-                    'OpenClassrooms' => 'ROLE_OC',
-                ),
-            ))
+            ->add('roles', CollectionType::class)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'UserBundle\Entity\User',
+            'data_class' => 'UserBundle\Entity\Mentore',
         ));
     }
 
     public function getName()
     {
-        return 'user_bundle_update_user_type';
+        return 'user_bundle_update_mentore_type';
     }
 }

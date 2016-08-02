@@ -27,6 +27,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use UserBundle\Form\RegistrationMentoreType;
 
 class Admin
 {
@@ -301,7 +302,7 @@ class Admin
             throw new NotFoundHttpException('Le mentore ne semble pas exister.');
         }
 
-        $form = $this->form->create(MentoreType::class, $mentore);
+        $form = $this->form->create(RegistrationMentoreType::class, $mentore);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

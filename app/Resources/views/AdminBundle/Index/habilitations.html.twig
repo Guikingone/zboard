@@ -3,5 +3,108 @@
 {% block title %} - Habilitations{% endblock %}
 
 {% block admin_body %}
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Liste des mentors</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table no-margin">
+                            <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>Roles</th>
+                                <th>Modifier les rôles</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for users in users %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('show_details_mentor', {'id': users.id}) }}">{{ users.lastname }}</a>
+                                    </td>
+                                    <td>
+                                        {{ users.firstname }}
+                                    </td>
+                                    <td>
+                                        {% for roles in users.roles %}
+                                            {{ roles }}
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        <a type="button" class="btn btn-flat btn-danger" href="{{ path('update_roles_users', {'id': users.id }) }}">
+                                            Modifier
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="box-footer clearfix">
+                    <a href="{{ path('gestion_mentors') }}" class="btn btn-sm btn-default btn-flat pull-right">Voir tout les mentors</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Liste des mentores</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table no-margin">
+                            <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>Roles</th>
+                                <th>Modifier les rôles</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for mentores in mentores %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('show_details_mentore', {'id': mentores.id}) }}">{{ mentores.lastname }}</a>
+                                    </td>
+                                    <td>
+                                        {{ mentores.firstname }}
+                                    </td>
+                                    <td>
+                                        {% for roles in mentores.roles %}
+                                            {{ roles }}
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        <a type="button" class="btn btn-flat btn-danger" href="{{ path('update_roles_mentore', {'id': mentores.id }) }}">
+                                            Modifier
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="box-footer clearfix">
+                    <a href="{{ path('gestion_mentors') }}" class="btn btn-sm btn-default btn-flat pull-right">Voir tout les mentores</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

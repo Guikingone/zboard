@@ -11,6 +11,9 @@ class ShowBackController extends Controller
 {
     /**
      * @param Request $request
+     *
+     * @return array
+     *
      * @Route("/list/mentors", name="gestion_mentors")
      * @Template("BackBundle/Action/list_mentors.html.twig")
      */
@@ -28,6 +31,9 @@ class ShowBackController extends Controller
 
     /**
      * @param Request $request
+     *
+     * @return array
+     *
      * @Route("/list/mentore", name="gestion_mentores")
      * @Template("BackBundle/Action/list_mentores.html.twig")
      */
@@ -45,6 +51,9 @@ class ShowBackController extends Controller
 
     /**
      * @param Request $request
+     *
+     * @return array
+     *
      * @Route("/list/soutenances", name="gestion_soutenances")
      * @Template("BackBundle/Action/list_soutenances.html.twig")
      */
@@ -62,6 +71,9 @@ class ShowBackController extends Controller
 
     /**
      * @param Request $request
+     *
+     * @return array
+     *
      * @Route("/list/parcours", name="gestion_parcours")
      * @template("BackBundle/Action/list_parcours.html.twig")
      */
@@ -83,6 +95,7 @@ class ShowBackController extends Controller
      * @param $id
      *
      * @return array
+     *
      * @Route("/show/path/{id}/details", name="show_parcours")
      * @Template("BackBundle/Details/show_parcours.html.twig")
      */

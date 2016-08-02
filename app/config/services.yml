@@ -12,6 +12,10 @@ services:
         class: AdminBundle\Services\UserAdmin
         arguments: ["@doctrine.orm.entity_manager"]
 
+    core.archive:
+        class: AdminBundle\Services\Archive
+        arguments: ["@doctrine.orm.entity_manager", "@session"]
+
     core.statistiques:
         class: AdminBundle\Services\Statistiques
         arguments: ["@doctrine.orm.entity_manager"]
@@ -19,10 +23,6 @@ services:
     core.back:
         class: BackendBundle\Services\Back
         arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session","@security.token_storage","@security.authorization_checker"]
-
-    core.archive:
-        class: AdminBundle\Services\Archive
-        arguments: ["@doctrine.orm.entity_manager", "@session"]
 
     core.mentore:
         class: MentoratBundle\Services\MentoreService
@@ -32,9 +32,14 @@ services:
         class: MentoratBundle\Services\SoutenanceService
         arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
 
+    core.events:
+        class: NotificationBundle\Services\Evenements
+        arguments: ["@doctrine.orm.entity_manager"]
+
     core.user:
         class: UserBundle\Services\UserService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events"]
+
 
 
     # Used to registrer the users with FOS !
