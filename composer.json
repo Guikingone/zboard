@@ -10,6 +10,7 @@
             "BackendBundle\\": "src/",
             "CoreBundle\\": "src/",
             "MentoratBundle\\": "src/",
+            "NotificationBundle\\": "src/",
             "UserBundle\\": "src/"
         },
         "classmap": [
@@ -24,6 +25,7 @@
             "BackendBundle\\": "src/",
             "CoreBundle\\": "src/",
             "MentoratBundle\\": "src/",
+            "NotificationBundle\\": "src/",
             "UserBundle\\": "src/"
         }
     },

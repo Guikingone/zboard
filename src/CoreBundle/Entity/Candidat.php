@@ -5,7 +5,7 @@ namespace CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Candidat
+ * Candidat.
  *
  * @ORM\Table(name="candidat")
  * @ORM\Entity(repositoryClass="CoreBundle\Repository\CandidatRepository")
@@ -56,9 +56,8 @@ class Candidat
      */
     private $motivation;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -68,7 +67,7 @@ class Candidat
     }
 
     /**
-     * Set nom
+     * Set nom.
      *
      * @param string $nom
      *
@@ -82,7 +81,7 @@ class Candidat
     }
 
     /**
-     * Get nom
+     * Get nom.
      *
      * @return string
      */
@@ -92,7 +91,7 @@ class Candidat
     }
 
     /**
-     * Set email
+     * Set email.
      *
      * @param string $email
      *
@@ -106,7 +105,7 @@ class Candidat
     }
 
     /**
-     * Get email
+     * Get email.
      *
      * @return string
      */
@@ -116,7 +115,7 @@ class Candidat
     }
 
     /**
-     * Set dateCandidature
+     * Set dateCandidature.
      *
      * @param \DateTime $dateCandidature
      *
@@ -130,7 +129,7 @@ class Candidat
     }
 
     /**
-     * Get dateCandidature
+     * Get dateCandidature.
      *
      * @return \DateTime
      */
@@ -140,7 +139,7 @@ class Candidat
     }
 
     /**
-     * Set competences
+     * Set competences.
      *
      * @param array $competences
      *
@@ -154,7 +153,7 @@ class Candidat
     }
 
     /**
-     * Get competences
+     * Get competences.
      *
      * @return array
      */
@@ -164,7 +163,7 @@ class Candidat
     }
 
     /**
-     * Set motivation
+     * Set motivation.
      *
      * @param string $motivation
      *
@@ -178,7 +177,7 @@ class Candidat
     }
 
     /**
-     * Get motivation
+     * Get motivation.
      *
      * @return string
      */
@@ -187,4 +186,3 @@ class Candidat
         return $this->motivation;
     }
 }
-

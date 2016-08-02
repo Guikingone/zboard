@@ -1,8 +1,3 @@
-notification:
-    resource: "@NotificationBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 core:
     resource: "@CoreBundle/Controller/"
     type:     annotation
@@ -27,6 +22,11 @@ admin:
     resource: "@AdminBundle/Controller/"
     type:     annotation
     prefix:   /admin3744
+
+notification:
+    resource: "@NotificationBundle/Controller/"
+    type:     annotation
+    prefix:   /notifications
 
 # FOS Routes
 fos_user:

@@ -108,6 +108,11 @@ class User extends BaseUser
     protected $groups;
 
     /**
+     * @ORM\OneToMany(targetEntity="NotificationBundle\Entity\Events", mappedBy="user")
+     */
+    private $events;
+
+    /**
      * @var bool
      * @ORM\Column(name="archived", type="boolean")
      */

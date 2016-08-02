@@ -5,7 +5,7 @@ namespace BackendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Tutoriel
+ * Tutoriel.
  *
  * @ORM\Table(name="zboard_tutoriels")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\TutorielRepository")
@@ -36,7 +36,7 @@ class Tutoriel
     private $link;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -45,9 +45,8 @@ class Tutoriel
         return $this->id;
     }
 
-
     /**
-     * Get the value of Title
+     * Get the value of Title.
      *
      * @return string
      */
@@ -57,7 +56,7 @@ class Tutoriel
     }
 
     /**
-     * Set the value of Title
+     * Set the value of Title.
      *
      * @param string title
      *
@@ -71,7 +70,7 @@ class Tutoriel
     }
 
     /**
-     * Get the value of Link
+     * Get the value of Link.
      *
      * @return string
      */
@@ -81,7 +80,7 @@ class Tutoriel
     }
 
     /**
-     * Set the value of Link
+     * Set the value of Link.
      *
      * @param string link
      *
@@ -93,5 +92,4 @@ class Tutoriel
 
         return $this;
     }
-
 }

@@ -21,8 +21,8 @@ class LoadTutorielsData implements FixtureInterface, ContainerAwareInterface, Or
     public function load(ObjectManager $manager)
     {
         $tutoriel = new Tutoriel();
-        $tutoriel->setTitle("Devenez mentor");
-        $tutoriel->setLink("https://openclassrooms.com/courses/devenez-mentor-sur-openclassrooms/");
+        $tutoriel->setTitle('Devenez mentor');
+        $tutoriel->setLink('https://openclassrooms.com/courses/devenez-mentor-sur-openclassrooms/');
 
         $manager->persist($tutoriel);
 

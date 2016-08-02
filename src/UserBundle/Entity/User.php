@@ -108,6 +108,11 @@ class User extends BaseUser
     protected $groups;
 
     /**
+     * @ORM\OneToMany(targetEntity="NotificationBundle\Entity\Events", mappedBy="user")
+     */
+    private $events;
+
+    /**
      * @var bool
      * @ORM\Column(name="archived", type="boolean")
      */
@@ -498,5 +503,39 @@ class User extends BaseUser
     public function getCompetences()
     {
         return $this->competences;
+    }
+
+    /**
+     * Add event.
+     *
+     * @param \NotificationBundle\Entity\Events $event
+     *
+     * @return User
+     */
+    public function addEvent(\NotificationBundle\Entity\Events $event)
+    {
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    /**
+     * Remove event.
+     *
+     * @param \NotificationBundle\Entity\Events $event
+     */
+    public function removeEvent(\NotificationBundle\Entity\Events $event)
+    {
+        $this->events->removeElement($event);
+    }
+
+    /**
+     * Get events.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }

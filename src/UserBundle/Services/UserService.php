@@ -149,7 +149,7 @@ class UserService
             $mentor->setPlainPassword(mb_strtolower($mentor->getFirstname().'_'.$mentor->getLastname()));
             $mentor->setRoles(array('ROLE_MENTOR'));
             $mentor->setArchived(false);
-            $this->events->createEvents("Création d'un nouveau mentor", "Important");
+            $this->events->createEvents("Création d'un nouveau mentor", 'Important', $this->user->getToken()->getUser());
             $this->doctrine->persist($mentor);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
@@ -182,7 +182,7 @@ class UserService
             $mentore->setPlainPassword(mb_strtolower($mentore->getFirstname().'_'.$mentore->getLastname()));
             $mentore->setRoles(array('ROLE_MENTORE'));
             $mentore->setArchived(false);
-            $this->events->createEvents("Création d'un nouvel élève", "Important");
+            $this->events->createEvents("Création d'un nouvel élève", 'Important', $this->user->getToken()->getUser());
             $this->doctrine->persist($mentore);
             $this->doctrine->persist($suivi);
             $this->doctrine->flush();
@@ -259,7 +259,7 @@ class UserService
         $mentore = $this->doctrine->getRepository('UserBundle:Mentore')->findOneBy(array('id' => $id));
 
         if (null === $mentore) {
-            throw new NotFoundHttpException("Le mentoré ne semble pas exister.");
+            throw new NotFoundHttpException('Le mentoré ne semble pas exister.');
         }
 
         $form = $this->form->create(UpdateMentoreType::class, $mentore);
@@ -267,7 +267,7 @@ class UserService
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', "Le rôle du mentoré a bien été mis à jour");
+            $this->session->getFlashBag()->add('success', 'Le rôle du mentoré a bien été mis à jour');
         }
 
         return $form;

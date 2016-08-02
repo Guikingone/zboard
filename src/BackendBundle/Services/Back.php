@@ -47,7 +47,7 @@ class Back
      * @param FormFactory   $formFactory
      * @param Session       $session
      */
-    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Session $session, TokenStorage $user,AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Session $session, TokenStorage $user, AuthorizationCheckerInterface $authorizationChecker)
     {
         $this->doctrine = $doctrine;
         $this->formFactory = $formFactory;
@@ -150,8 +150,7 @@ class Back
      */
     public function addMentoratInformation(Request $request)
     {
-        if (false === $this->authorizationChecker->isGranted('ROLE_ADMIN'))
-        {
+        if (false === $this->authorizationChecker->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException();
         }
 
@@ -181,8 +180,7 @@ class Back
          */
         public function addTutorial(Request $request)
         {
-            if (false === $this->authorizationChecker->isGranted('ROLE_ADMIN'))
-            {
+            if (false === $this->authorizationChecker->isGranted('ROLE_ADMIN')) {
                 throw new AccessDeniedException();
             }
 

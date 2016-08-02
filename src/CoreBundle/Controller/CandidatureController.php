@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class CandidatureController extends Controller
 {
-  /**
+    /**
    * @Route("/join",name="join")
    */
   public function indexAction()
