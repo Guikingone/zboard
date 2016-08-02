@@ -43,31 +43,22 @@ class Events
     private $categorie;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="events")
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="events")
      */
     private $user;
 
     /**
-     * List of constantes used to create a events.
+     * Constructor
      */
-    const IMPORTANT = 'Important';
-    const INFORMATION = 'Information';
-    const DANGER = 'Danger';
+    public function __construct()
+    {
+        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
-     * List of constantes linked to a profil.
-     */
-    const ADMIN = 'Admin';
-    const STAFF = 'Staff';
-    const SUPERVISEUR = 'Superviseur Mentor';
-    const MENTOR = 'Mentor';
-    const MENTORE = 'Mentore';
-    const USER = 'User';
-
-    /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -75,7 +66,7 @@ class Events
     }
 
     /**
-     * Set libelle.
+     * Set libelle
      *
      * @param string $libelle
      *
@@ -89,7 +80,7 @@ class Events
     }
 
     /**
-     * Get libelle.
+     * Get libelle
      *
      * @return string
      */
@@ -99,7 +90,7 @@ class Events
     }
 
     /**
-     * Set date.
+     * Set date
      *
      * @param \DateTime $date
      *
@@ -113,7 +104,7 @@ class Events
     }
 
     /**
-     * Get date.
+     * Get date
      *
      * @return \DateTime
      */
@@ -123,7 +114,7 @@ class Events
     }
 
     /**
-     * Set categorie.
+     * Set categorie
      *
      * @param string $categorie
      *
@@ -137,7 +128,7 @@ class Events
     }
 
     /**
-     * Get categorie.
+     * Get categorie
      *
      * @return string
      */
@@ -147,23 +138,33 @@ class Events
     }
 
     /**
-     * Set user.
+     * Add user
      *
      * @param \UserBundle\Entity\User $user
      *
      * @return Events
      */
-    public function setUser(\UserBundle\Entity\User $user = null)
+    public function addUser(\UserBundle\Entity\User $user)
     {
-        $this->user = $user;
+        $this->user[] = $user;
 
         return $this;
     }
 
     /**
-     * Get user.
+     * Remove user
      *
-     * @return \UserBundle\Entity\User
+     * @param \UserBundle\Entity\User $user
+     */
+    public function removeUser(\UserBundle\Entity\User $user)
+    {
+        $this->user->removeElement($user);
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUser()
     {

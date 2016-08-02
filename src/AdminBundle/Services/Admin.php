@@ -22,6 +22,7 @@ use BackendBundle\Form\_UpdateType\UpdateCoursType;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Sessions;
 use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
+use NotificationBundle\Services\Evenements;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -52,18 +53,24 @@ class Admin
     private $user;
 
     /**
+     * @var Evenements
+     */
+    private $events;
+
+    /**
      * Admin constructor.
      *
      * @param EntityManager $doctrine
      * @param FormFactory   $form
      * @param Session       $session
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
         $this->session = $session;
         $this->user = $user;
+        $this->events = $events;
     }
 
     /**
@@ -157,9 +164,11 @@ class Admin
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $parcours->setArchived(false);
             $this->doctrine->persist($parcours);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Parcours ajouté !');
+            $this->events->createEvents("Création d'un nouveau parcours", "Important", 'ROLE_MENTOR');
         }
 
         return $form;
@@ -186,6 +195,7 @@ class Admin
             $this->doctrine->persist($projet);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Projet ajouté !');
+            $this->events->createEvents("Création d'un nouveau parcours", "Important", 'ROLE_MENTOR');
         }
 
         return $form;
@@ -209,6 +219,7 @@ class Admin
             $this->doctrine->persist($competencesProject);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Competences ajouté !');
+            $this->events->createEvents("Création d'un nouveau parcours", "Important", 'ROLE_MENTOR');
         }
 
         return $form;

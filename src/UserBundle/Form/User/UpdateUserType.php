@@ -2,6 +2,7 @@
 
 namespace UserBundle\Form\User;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +27,10 @@ class UpdateUserType extends AbstractType
             ->remove('plainPassword_confirmation')
             ->remove('archived')
             ->remove('group')
-            ->add('roles', CollectionType::class)
+            ->add('roles', CollectionType::class, array(
+                'allow_add' => true,
+                'allow_delete' => true,
+            ))
         ;
     }
 

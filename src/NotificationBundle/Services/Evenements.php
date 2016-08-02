@@ -10,6 +10,7 @@ namespace NotificationBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use NotificationBundle\Entity\Events;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class Evenements
@@ -53,15 +54,32 @@ class Evenements
      * @param $libelle
      * @param $categorie
      */
-    public function createEvents($libelle, $categorie, $user = array())
+    public function createEvents($libelle, $categorie, $user)
     {
         $event = new Events();
         $event->setDate(new \DateTime());
         $event->setLibelle($libelle);
         $event->setCategorie($categorie);
-        $event->setUser($user);
+        $event->addUser($user);
 
         $this->doctrine->persist($event);
         $this->doctrine->flush();
+    }
+
+
+    /**
+     * Allow to delete all the events linekd to a user.
+     */
+    public function purgeEvents()
+    {
+        $events = $this->doctrine->getRepository('NotificationBundle:Events')
+                                 ->findBy(array('user' => $this->user->getToken()->getUser()));
+        if (null === $events) {
+            throw new NotFoundHttpException('Les évènements semble ne pas exister');
+        }
+
+        foreach ($events as $event) {
+            $this->doctrine->remove($event);
+        }
     }
 }

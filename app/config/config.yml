@@ -80,3 +80,5 @@ fos_user:
        form:
            type: UserBundle\Form\RegistrationType
            type: UserBundle\Form\RegistrationMentoreType
+       confirmation:
+           enabled: true

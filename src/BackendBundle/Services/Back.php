@@ -6,6 +6,7 @@ use BackendBundle\Entity\InformationMentorat;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Soutenance;
 use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
+use NotificationBundle\Services\Evenements;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -36,9 +37,14 @@ class Back
     protected $session;
 
     /**
-     * @var authorizationChecker
+     * @var AuthorizationCheckerInterface
      */
     protected $authorizationChecker;
+
+    /**
+     * @var Evenements
+     */
+    private $events;
 
     /**
      * Back constructor.
@@ -47,13 +53,14 @@ class Back
      * @param FormFactory   $formFactory
      * @param Session       $session
      */
-    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Session $session, TokenStorage $user, AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Session $session, TokenStorage $user, AuthorizationCheckerInterface $authorizationChecker, Evenements $events)
     {
         $this->doctrine = $doctrine;
         $this->formFactory = $formFactory;
         $this->session = $session;
         $this->user = $user;
         $this->authorizationChecker = $authorizationChecker;
+        $this->events = $events;
     }
 
     /**
@@ -119,7 +126,7 @@ class Back
     }
 
     /**
-     * Allow to add a soutenance between a teacher dans a student.
+     * Allow to add a soutenance between a teacher and a student.
      *
      * @param Request $request
      *
@@ -136,6 +143,7 @@ class Back
             $this->doctrine->persist($soutenance);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La soutenance a bien été enregistrée.');
+            $this->events->createEvents("Création d'un nouveau parcours", "Important", $this->user->getToken()->getUser());
         }
 
         return $form;

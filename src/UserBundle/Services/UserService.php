@@ -182,11 +182,11 @@ class UserService
             $mentore->setPlainPassword(mb_strtolower($mentore->getFirstname().'_'.$mentore->getLastname()));
             $mentore->setRoles(array('ROLE_MENTORE'));
             $mentore->setArchived(false);
-            $this->events->createEvents("Création d'un nouvel élève", 'Important', $this->user->getToken()->getUser());
             $this->doctrine->persist($mentore);
             $this->doctrine->persist($suivi);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Elève enregistré.');
+            $this->events->createEvents("Création d'un nouvel élève", 'Important', $this->user->getToken()->getUser());
         }
 
         return $form;

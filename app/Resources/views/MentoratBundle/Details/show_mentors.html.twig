@@ -256,16 +256,16 @@
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    {% if mentores.suiviState == 'En formation' %}
-                                                        <span class="label label-success">{{ mentores.suiviState }}</span>
-                                                    {% elseif mentores.suiviState == 'Contacté' %}
-                                                        <span class="label label-warning">{{ mentores.suiviState }}</span>
-                                                    {% elseif mentores.suiviState == 'En pause' %}
-                                                        <span class="label label-danger">{{ mentores.suiviState }}</span>
-                                                    {% elseif mentores.suiviState == 'En attente' %}
-                                                        <span class="label label-warning">{{ mentores.suiviState }}</span>
-                                                    {% elseif mentores.suiviState == 'Formation terminé' %}
-                                                        <span class="label label-success">{{ mentores.suiviState }}</span>
+                                                    {% if mentores.mentoreStatus == 'En formation' %}
+                                                        <span class="label label-success">{{ mentores.mentoreStatus }}</span>
+                                                    {% elseif mentores.mentoreStatus == 'Contacté' %}
+                                                        <span class="label label-warning">{{ mentores.mentoreStatus }}</span>
+                                                    {% elseif mentores.mentoreStatus == 'En pause' %}
+                                                        <span class="label label-danger">{{ mentores.mentoreStatus }}</span>
+                                                    {% elseif mentores.mentoreStatus == 'En attente' %}
+                                                        <span class="label label-warning">{{ mentores.mentoreStatus }}</span>
+                                                    {% elseif mentores.mentoreStatus == 'Formation terminé' %}
+                                                        <span class="label label-success">{{ mentores.mentoreStatus }}</span>
                                                     {% endif %}
                                                 </td>
                                             </tr>
