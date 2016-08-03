@@ -83,10 +83,29 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $supervisteurMentor->setRoles(array('ROLE_SUPERVISEUR_MENTOR'));
         $supervisteurMentor->setAvailable(true);
 
+
+        // Création de notre utilisateur MENTOR_DEBUTANT
+        $mentorDebutant = $userManager->createUser();
+        $mentorDebutant->setUsername('michael');
+        $mentorDebutant->setFirstname('Michael');
+        $mentorDebutant->setLastname('Jackson');
+        $mentorDebutant->setEmail('michaeljackson@zboard.fr');
+        $mentorDebutant->setPlainPassword('michael');
+        $mentorDebutant->setAddress('5 rue LABAS');
+        $mentorDebutant->setZipCode('44290');
+        $mentorDebutant->setCity('Panam');
+        $mentorDebutant->setCountry($country);
+        $mentorDebutant->setEnabled(true);
+        $mentorDebutant->setArchived(false);
+        $mentorDebutant->setPhone('07.46.12.06.07');
+        $mentorDebutant->setRoles(array('ROLE_MENTOR_DEBUTANT'));
+        $mentorDebutant->setAvailable(true);
+
         // Update the user
         $userManager->updateUser($userAdmin, true);
         $userManager->updateUser($mentor, true);
         $userManager->updateUser($supervisteurMentor, true);
+        $userManager->updateUser($mentorDebutant, true);
     }
 
     public function getOrder()
