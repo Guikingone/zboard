@@ -43,9 +43,17 @@ class Events
     private $categorie;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="events")
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="events")
      */
-    private $user;
+    private $users;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id.
@@ -130,26 +138,36 @@ class Events
     }
 
     /**
-     * Set user.
+     * Add user.
      *
      * @param \UserBundle\Entity\User $user
      *
      * @return Events
      */
-    public function setUser(\UserBundle\Entity\User $user = null)
+    public function addUser(\UserBundle\Entity\User $user)
     {
-        $this->user = $user;
+        $this->users[] = $user;
 
         return $this;
     }
 
     /**
-     * Get user.
+     * Remove user.
      *
-     * @return \UserBundle\Entity\User
+     * @param \UserBundle\Entity\User $user
      */
-    public function getUser()
+    public function removeUser(\UserBundle\Entity\User $user)
     {
-        return $this->user;
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

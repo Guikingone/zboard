@@ -54,14 +54,19 @@ class Evenements
      * @param $libelle
      * @param $categorie
      */
-    public function createEvents($libelle, $categorie, $user)
+    public function createEvents($libelle, $categorie)
     {
-        $event = new Events();
-        $event->setDate(new \DateTime());
-        $event->setLibelle($libelle);
-        $event->setCategorie($categorie);
-        $event->setUser($user);
+        $users = $this->doctrine->getRepository('UserBundle:User')->findAll();
 
+        $event = new Events();
+
+        foreach ($users as $user) {
+            $event->setDate(new \DateTime());
+            $event->setLibelle($libelle);
+            $event->setCategorie($categorie);
+            $event->addUser($user);
+            $user->addEvent($event);
+        }
         $this->doctrine->persist($event);
         $this->doctrine->flush();
     }

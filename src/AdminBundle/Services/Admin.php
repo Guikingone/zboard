@@ -168,7 +168,7 @@ class Admin
             $this->doctrine->persist($parcours);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Parcours ajouté !');
-            $this->events->createEvents("Création d'un nouveau parcours", 'Important', 'ROLE_MENTOR');
+            $this->events->createEvents("Création d'un nouveau parcours", 'Important');
         }
 
         return $form;
@@ -195,7 +195,7 @@ class Admin
             $this->doctrine->persist($projet);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Projet ajouté !');
-            $this->events->createEvents("Création d'un nouveau parcours", 'Important', 'ROLE_MENTOR');
+            $this->events->createEvents("Création d'un nouveau projet lié au parcours ".$parcours->getLibelle(), 'Information');
         }
 
         return $form;
@@ -219,7 +219,7 @@ class Admin
             $this->doctrine->persist($competencesProject);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Competences ajouté !');
-            $this->events->createEvents("Création d'un nouveau parcours", 'Important', 'ROLE_MENTOR');
+            $this->events->createEvents("Création d'un nouveau parcours", 'Important');
         }
 
         return $form;
@@ -247,6 +247,7 @@ class Admin
             $this->doctrine->persist($cours);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le cours a bien été ajouté.');
+            $this->events->createEvents("Ajout d'un nouveau cours sur le parcours ".$parcours->getLibelle(), 'Information');
         }
 
         return $form;
@@ -397,6 +398,14 @@ class Admin
         return $form;
     }
 
+    /**
+     * Allow to update the competences linked to a project.
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
     public function updateCompetencesProjet(Request $request, $id)
     {
         $competences = $this->doctrine->getRepository('BackendBundle:Competences')->findOneBy(array('id' => $id));

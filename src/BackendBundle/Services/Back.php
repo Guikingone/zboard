@@ -143,7 +143,7 @@ class Back
             $this->doctrine->persist($soutenance);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La soutenance a bien été enregistrée.');
-            $this->events->createEvents("Création d'une nouvelle soutenance", 'Important', $this->user->getToken()->getUser());
+            $this->events->createEvents("Création d'une nouvelle soutenance", 'Important');
         }
 
         return $form;
@@ -158,7 +158,7 @@ class Back
      */
     public function addMentoratInformation(Request $request)
     {
-        if (false === $this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+        if (false === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
             throw new AccessDeniedException();
         }
 
@@ -174,37 +174,37 @@ class Back
             $this->doctrine->persist($information);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Information ajouté.');
-            $this->events->createEvents("Création d'une nouvelle information", 'Important', $this->user->getToken()->getUser());
+            $this->events->createEvents("Création d'une nouvelle information", 'Information');
         }
 
         return $form;
     }
 
-        /**
-         * Creates a new tutorial.
-         *
-         * @param Request $request
-         *
-         * @return \Symfony\Component\Form\FormInterface
-         */
-        public function addTutorial(Request $request)
-        {
-            if (false === $this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-                throw new AccessDeniedException();
-            }
-
-            $tutoriel = new Tutoriel();
-
-            $form = $this->formFactory->create(TutorielType::class, $tutoriel);
-            $form->handleRequest($request);
-
-            if ($form->isValid()) {
-                $this->doctrine->persist($tutoriel);
-                $this->doctrine->flush();
-                $this->session->getFlashBag()->add('success', 'Tutoriel ajouté.');
-                $this->events->createEvents("Création d'un nouveau tutoriel", 'Important', $this->user->getToken()->getUser());
-            }
-
-            return $form;
+    /**
+     * Creates a new tutorial.
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addTutorial(Request $request)
+    {
+        if (false === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+            throw new AccessDeniedException();
         }
+
+        $tutoriel = new Tutoriel();
+
+        $form = $this->formFactory->create(TutorielType::class, $tutoriel);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->doctrine->persist($tutoriel);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Tutoriel ajouté.');
+            $this->events->createEvents("Création d'un nouveau tutoriel", 'Important');
+        }
+
+        return $form;
+    }
 }

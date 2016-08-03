@@ -105,18 +105,19 @@ class User extends BaseUser
      *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
      * )
      */
-    protected $groups;
-
-    /**
-     * @ORM\OneToMany(targetEntity="NotificationBundle\Entity\Events", mappedBy="user")
-     */
-    private $events;
+    protected $user_groups;
 
     /**
      * @var bool
      * @ORM\Column(name="archived", type="boolean")
      */
     private $archived;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="NotificationBundle\Entity\Events", inversedBy="users")
+     * @ORM\JoinTable(name="zboard_users_events")
+     */
+    private $events;
 
     /**
      * User constructor.
@@ -504,6 +505,40 @@ class User extends BaseUser
     public function getCompetences()
     {
         return $this->competences;
+    }
+
+    /**
+     * Add userGroup.
+     *
+     * @param \UserBundle\Entity\Group_User $userGroup
+     *
+     * @return User
+     */
+    public function addUserGroup(\UserBundle\Entity\Group_User $userGroup)
+    {
+        $this->user_groups[] = $userGroup;
+
+        return $this;
+    }
+
+    /**
+     * Remove userGroup.
+     *
+     * @param \UserBundle\Entity\Group_User $userGroup
+     */
+    public function removeUserGroup(\UserBundle\Entity\Group_User $userGroup)
+    {
+        $this->user_groups->removeElement($userGroup);
+    }
+
+    /**
+     * Get userGroups.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserGroups()
+    {
+        return $this->user_groups;
     }
 
     /**
