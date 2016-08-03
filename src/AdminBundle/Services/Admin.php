@@ -28,7 +28,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-use UserBundle\Form\RegistrationMentoreType;
 
 class Admin
 {
@@ -299,33 +298,6 @@ class Admin
     }
 
     /**
-     * Allow to update the informations about a student.
-     *
-     * @param Request $request
-     * @param $id
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function updateMentores(Request $request, $id)
-    {
-        $mentore = $this->doctrine->getRepository('MentoratBundle:Mentore')->find($id);
-
-        if (null === $mentore) {
-            throw new NotFoundHttpException('Le mentore ne semble pas exister.');
-        }
-
-        $form = $this->form->create(RegistrationMentoreType::class, $mentore);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'Le mentore a bien été mis à jour');
-        }
-
-        return $form;
-    }
-
-    /**
      * Allow to update the path using is $id.
      *
      * @param Request $request
@@ -352,6 +324,14 @@ class Admin
         return $form;
     }
 
+    /**
+     * Allow to update a courses linked to a path.
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
     public function updateCours(Request $request, $id)
     {
         $cours = $this->doctrine->getRepository('BackendBundle:Cours')->findOneBy(array('id' => $id));

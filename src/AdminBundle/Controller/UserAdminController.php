@@ -18,11 +18,13 @@ class UserAdminController extends Controller
      */
     public function indexAction()
     {
-        $users = $this->get('core.user_admin')->getUsers();
+        $users = $this->get('core.user')->getMentors();
+        $mentores = $this->get('core.user')->getMentores();
 
         return array(
             'controller' => 'users_admin',
             'users' => $users,
+            'mentores' => $mentores,
         );
     }
 

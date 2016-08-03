@@ -156,18 +156,18 @@
                                     <li><a href="{{ path('gestion_country') }}"><i class="fa fa-circle-o"></i>Gestion des pays</a></li>
                                 </ul>
                             </li>
-                                <li class="{{ (controller == "archives")? "active" : "" }} treeview">
-                                    <a href="#">
-                                        <i class="fa fa-folder-open-o"></i>
-                                        <span>Les archives</span>
-                                        <span class="pull-right-container">
+                            <li class="{{ (controller == "archives")? "active" : "" }} treeview">
+                                <a href="#">
+                                    <i class="fa fa-folder-open-o"></i>
+                                    <span>Les archives</span>
+                                    <span class="pull-right-container">
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </span>
-                                    </a>
-                                    <ul class="treeview-menu">
-                                        <li><a href="{{ path('home_archives') }}"><i class="fa fa-circle-o"></i>Gestion des archives</a></li>
-                                    </ul>
-                                </li>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ path('home_archives') }}"><i class="fa fa-circle-o"></i>Gestion des archives</a></li>
+                                </ul>
+                            </li>
                             <li class="{{ (controller == "habilitations")? "active" : "" }} treeview">
                                 <a href="#">
                                     <i class="fa fa-lock"></i> <span>Gestion des habilitations</span>
@@ -200,6 +200,7 @@
                                 </a>
                                 <ul class="treeview-menu">
                                     <li><a href="{{ path('home_backend') }}"><i class="fa fa-circle-o"></i>Accès au backend</a></li>
+                                    <li><a href="{{ path('mentorat_dashboard_index') }}"><i class="fa fa-circle-o"></i>Accès au dashboard</a></li>
                                 </ul>
                             </li>
                         </ul>

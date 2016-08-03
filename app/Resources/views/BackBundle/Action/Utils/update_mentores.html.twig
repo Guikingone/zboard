@@ -71,41 +71,41 @@
                                 </div>
                                 <hr />
                                 <div class="form-group">
-                                    {{ form_errors(mentore.date_start) }}
-                                    {{ form_label(mentore.date_start, 'Date de commencement') }}
-                                    {{ form_widget(mentore.date_start, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_errors(mentore.suivi.date_start) }}
+                                    {{ form_label(mentore.suivi.date_start, 'Date de commencement') }}
+                                    {{ form_widget(mentore.suivi.date_start, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                                 <hr />
                                 <div class="form-group">
-                                    {{ form_errors(mentore.financement) }}
-                                    {{ form_label(mentore.financement, 'Financé') }}
-                                    {{ form_widget(mentore.financement, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_errors(mentore.suivi.financement) }}
+                                    {{ form_label(mentore.suivi.financement, 'Financé') }}
+                                    {{ form_widget(mentore.suivi.financement, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                                 <div class="form-group">
-                                    {{ form_errors(mentore.financeur) }}
-                                    {{ form_label(mentore.financeur, 'Nom du financeur') }}
-                                    {{ form_widget(mentore.financeur, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_errors(mentore.suivi.financeur) }}
+                                    {{ form_label(mentore.suivi.financeur, 'Nom du financeur') }}
+                                    {{ form_widget(mentore.suivi.financeur, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                                 <div class="form-group">
-                                    {{ form_errors(mentore.duree_financement) }}
-                                    {{ form_label(mentore.duree_financement, 'Durée de financement') }}
-                                    {{ form_widget(mentore.duree_financement, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_errors(mentore.suivi.duree_financement) }}
+                                    {{ form_label(mentore.suivi.duree_financement, 'Durée de financement') }}
+                                    {{ form_widget(mentore.suivi.duree_financement, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                                 <hr />
-                                <div class="form-group">
-                                    {{ form_errors(mentore.status) }}
-                                    {{ form_label(mentore.status, 'Statut') }}
-                                    {{ form_widget(mentore.status, {'attr': {'class': 'form-control'}}) }}
-                                </div>
                                 <div class="form-group">
                                     {{ form_errors(mentore.suivi.mentor) }}
-                                    {{ form_label(mentore.suivi.mentor, 'Mentor') }}
+                                    {{ form_label(mentore.suivi.mentor, 'Mentor affilié')}}
                                     {{ form_widget(mentore.suivi.mentor, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                                 <div class="form-group">
-                                    {{ form_errors(mentore.suivi.state) }}
-                                    {{ form_label(mentore.suivi.state, 'Statut du suivi') }}
-                                    {{ form_widget(mentore.suivi.state, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_errors(mentore.suivi.suivi_state) }}
+                                    {{ form_label(mentore.suivi.suivi_state, 'Statut du mentorat')}}
+                                    {{ form_widget(mentore.suivi.suivi_state, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_errors(mentore.suivi.mentore_status) }}
+                                    {{ form_label(mentore.suivi.mentore_status, 'Statut de la formation')}}
+                                    {{ form_widget(mentore.suivi.mentore_status, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                                 <div class="form-group">
                                     {{ form_errors(mentore.suivi.parcours) }}

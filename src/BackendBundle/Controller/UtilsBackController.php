@@ -43,7 +43,7 @@ class UtilsBackController extends Controller
      */
     public function updateMentoresAction(Request $request, $id)
     {
-        $mentore = $this->get('core.admin')->updateMentores($request, $id);
+        $mentore = $this->get('core.user')->updateMentores($request, $id);
 
         if ($mentore->isValid()) {
             return $this->redirectToRoute('show_details_mentore', array('id' => $id));

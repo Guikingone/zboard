@@ -1,35 +1,37 @@
-<!-- Modal used in order to add a abonnement -->
+<!-- Modal used in order to add a new teacher -->
 <div class="modal fade" id="myModalInformation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            {{ form_start(information) }}
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Ajouter une information</h4>
             </div>
             <div class="modal-body">
-                {{ form_start(information) }}
-                <div class="input-group">
-                    {{ form_errors(information.title) }}
-                    {{ form_label(information.title, 'Titre :')}}
-                    {{ form_widget(information.title, {'attr': {'class': 'form-control'}}) }}
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            {{ form_errors(information.title) }}
+                            {{ form_label(information.title, 'Titre')}}
+                            {{ form_widget(information.title, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_errors(information.body) }}
+                            {{ form_label(information.body, 'Contenu')}}
+                            {{ form_widget(information.body, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_errors(information.enabled) }}
+                            {{ form_label(information.enabled, 'Visible')}}
+                            {{ form_widget(information.enabled, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
                 </div>
-                <div class="input-group">
-                  {{ form_errors(information.body) }}
-                  {{ form_label(information.body, 'Contenu :')}}
-                  {{ form_widget(information.body, {'attr': {'class': 'form-control'}}) }}
-                </div>
-                <div class="input-group">
-                  {{ form_errors(information.enabled) }}
-                  {{ form_label(information.enabled, 'Visible :')}}
-                  {{ form_widget(information.enabled, {'attr': {'class': 'form-control'}}) }}
-                </div>
-                <br>
-                <button type="submit" class="btn btn-warning">Enregistrer</button>
-                {{ form_end(information) }}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <input class="btn btn-flat btn-warning" type="submit" value="Enregistrer l'information" />
+                <button type="button" class="btn btn-flat btn-default" data-dismiss="modal">Annuler</button>
             </div>
+            {{ form_end(information) }}
         </div>
     </div>
 </div>

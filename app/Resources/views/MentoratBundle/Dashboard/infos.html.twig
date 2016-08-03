@@ -1,24 +1,27 @@
 {% extends "::layout_mentor.html.twig" %}
 
+{% block title %} - Informations{% endblock %}
+
 {% block body %}
-Infos mentorat
 
-{% if is_granted('ROLE_ADMIN') %}
-<div class="row">
-    <div class="col-xs-12">
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalInformation">
-            Ajouter une information
-        </button>
-    </div>
-</div>
-{% endif %}
+    {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="well">
+                    <button type="button" class="btn btn-flat btn-warning" data-toggle="modal" data-target="#myModalInformation">
+                        Ajouter une Information
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 
-{% for info in informations %}
-  <h3>{{ info.title|e }}</h3>
-  <p>{{ info.body|e }}</p>
-  <hr />
-{% endfor %}
+    {% for info in informations %}
+      <h3>{{ info.title|e }}</h3>
+      <p>{{ info.body|e }}</p>
+      <hr />
+    {% endfor %}
 
-{% include ':Form:register_information.html.twig' %}
+    {% include ':Form:register_information.html.twig' %}
 
 {% endblock %}

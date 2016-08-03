@@ -4,6 +4,7 @@ namespace UserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Mentore.
@@ -25,12 +26,14 @@ class Mentore extends BaseUser
     /**
      * @var string
      * @ORM\Column(name="firstname", type="string", length=255)
+     * @Assert\NotNull()
      */
     protected $firstname;
 
     /**
      * @var string
      * @ORM\Column(name="lastname", type="string", length=255)
+     * @Assert\NotNull()
      */
     protected $lastname;
 
@@ -54,6 +57,7 @@ class Mentore extends BaseUser
 
     /**
      * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Country", inversedBy="mentores")
+     * @Assert\NotNull()
      */
     private $country;
 

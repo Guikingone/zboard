@@ -299,4 +299,31 @@ class UserService
 
         return $form;
     }
+
+    /**
+     * Allow to update the informations about a student.
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function updateMentores(Request $request, $id)
+    {
+        $mentore = $this->doctrine->getRepository('UserBundle:Mentore')->find($id);
+
+        if (null === $mentore) {
+            throw new NotFoundHttpException('Le mentore ne semble pas exister.');
+        }
+
+        $form = $this->form->create(RegistrationMentoreType::class, $mentore);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Le mentore a bien été mis à jour');
+        }
+
+        return $form;
+    }
 }

@@ -17,9 +17,23 @@
                     <h3 class="box-title">Liste des utilisateurs de ZBoard</h3>
                 </div>
                 {% include ':AdminBundle/Elements:box_list_users.html.twig' %}
+
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Liste des utilisateurs de ZBoard</h3>
+                </div>
+                {% include ':BackBundle/Elements:box_mentores.html.twig' %}
+
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-xs-12 col-md-12">
             <div class="well">
@@ -31,4 +45,5 @@
     </div>
 
     {% include ':Form:register_user_staff.html.twig' %}
+
 {% endblock %}

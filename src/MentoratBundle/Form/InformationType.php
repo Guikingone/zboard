@@ -22,8 +22,8 @@ class InformationType extends AbstractType
             ->add('body', TextareaType::class)
             ->add('enabled', ChoiceType::class, array(
                 'choices' => [
-                    'true' => 'true',
-                    'false' => 'false',
+                    'Oui' => 'true',
+                    'Non' => 'false',
                 ],
             ))
         ;
