@@ -1,0 +1,14 @@
+{% extends "::layout_mentor.html.twig" %}
+
+{% block title %} - Formation{% endblock %}
+
+{% block body %}
+
+{% if is_granted('ROLE_MENTOR') %}
+<div class="alert alert-info">Votre formation est terminée ! Félicitations, vous êtes donc un Jedi de niveau 1 !</div>
+{% else %}
+Allons y !
+{% endif %}
+
+
+{% endblock %}

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Candidat.
  *
- * @ORM\Table(name="candidat")
+ * @ORM\Table(name="zboard_candidatures")
  * @ORM\Entity(repositoryClass="CoreBundle\Repository\CandidatRepository")
  */
 class Candidat
