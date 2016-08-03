@@ -46,6 +46,32 @@ class FormationService
 
    public function getFormation()
    {
-     return [];
+     $etapesUser = array();
+     $etapes = $this->doctrine->getRepository('MentoratBundle:FormationEtape')->findAll();
+     $idUser = $this->user->getToken()->getUser()->getId();
+     $userAd = $this->doctrine->getRepository('MentoratBundle:FormationEtapeUser')->findBy(array('idUser'=>$idUser));
+
+     foreach($etapes as $etape)
+     {
+       $validate = false;
+       $hasContent = $etape->getRequiresInput();
+       $content = null;
+
+       foreach($userAd as $etp)
+       {
+           if($etp->getIdEtape()==$etape->getId())
+           {
+             $validate = true;
+             $content = $etp->getContent();
+           }
+       }
+       
+       array_push($etapesUser,array("etape"=>$etape->getEtape(),
+                  "validate"=>$validate,
+                  "hasContent"=>$hasContent,
+                  "content"=>$content
+                ));
+     }
+     return $etapesUser;
    }
 }

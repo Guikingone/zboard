@@ -37,7 +37,9 @@
                 </ul>
             </li>
             <li class="treeview"><a href="{{ path('mentorat_infos_index') }}"><i class='fa fa-info-circle'></i> <span>Informations mentorat</span></a></li>
-            {% if is_granted('ROLE_ADMIN') %}
+            {% if is_granted('ROLE_MENTOR_DEBUTANT') %}
+            <li class="treeview"><a href="{{ path('mentorat_formation_index') }}"><i class='fa fa-level-up'></i> <span>Ma formation</span></a></li>
+            {% elseif is_granted('ROLE_ADMIN') %}
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-dashboard"></i>

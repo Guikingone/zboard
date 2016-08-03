@@ -24,16 +24,10 @@ class FormationEtape
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="etape", type="string", length=255)
      */
-    private $name;
+    private $etape;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text")
-     */
-    private $description;
 
     /**
      * @var bool
@@ -44,7 +38,7 @@ class FormationEtape
 
 
     /**
-     * Get id
+     * Get the value of Id
      *
      * @return int
      */
@@ -54,59 +48,59 @@ class FormationEtape
     }
 
     /**
-     * Set name
+     * Set the value of Id
      *
-     * @param string $name
+     * @param int id
      *
-     * @return FormationEtape
+     * @return self
      */
-    public function setName($name)
+    public function setId($id)
     {
-        $this->name = $name;
+        $this->id = $id;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get the value of Etape
      *
      * @return string
      */
-    public function getName()
+    public function getEtape()
     {
-        return $this->name;
+        return $this->etape;
     }
 
     /**
-     * Set description
+     * Set the value of Etape
      *
-     * @param string $description
+     * @param string etape
      *
-     * @return FormationEtape
+     * @return self
      */
-    public function setDescription($description)
+    public function setEtape($etape)
     {
-        $this->description = $description;
+        $this->etape = $etape;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get the value of Requires Input
      *
-     * @return string
+     * @return bool
      */
-    public function getDescription()
+    public function getRequiresInput()
     {
-        return $this->description;
+        return $this->requiresInput;
     }
 
     /**
-     * Set requiresInput
+     * Set the value of Requires Input
      *
-     * @param boolean $requiresInput
+     * @param bool requiresInput
      *
-     * @return FormationEtape
+     * @return self
      */
     public function setRequiresInput($requiresInput)
     {
@@ -115,13 +109,4 @@ class FormationEtape
         return $this;
     }
 
-    /**
-     * Get requiresInput
-     *
-     * @return bool
-     */
-    public function getRequiresInput()
-    {
-        return $this->requiresInput;
-    }
 }

@@ -7,7 +7,14 @@
 {% if is_granted('ROLE_MENTOR') %}
 <div class="alert alert-info">Votre formation est terminée ! Félicitations, vous êtes donc un Jedi de niveau 1 !</div>
 {% else %}
-Allons y !
+Bonjour et bienvenue à toi nouveau mentor ! <br /> Voici les étapes à remplir pour te faire confirmer :
+
+{% for etape in formation %}
+<div class="checkbox">
+  <label><input type="checkbox" {% if etape.validate == true %}checked=""{% endif %} value="">{{ etape.etape|e }}</label>
+</div>
+{% endfor %}
+
 {% endif %}
 
 
