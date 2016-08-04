@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new BackendBundle\BackendBundle(),
             new CoreBundle\CoreBundle(),
             new NotificationBundle\NotificationBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
