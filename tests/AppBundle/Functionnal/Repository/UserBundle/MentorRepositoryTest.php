@@ -1,16 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Guillaume
- * Date: 31/07/2016
- * Time: 19:03
+
+/*
+ * This file is part of the Zboard project.
+ *
+ * (c) Guillaume Loulier <guillaume.loulier@hotmail.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Functionnal\Repository;
+namespace tests\AppBundle\Functionnal\Repository\UserBundle;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class MentoreRepositoryTest extends KernelTestCase
+class MentorRepositoryTest extends KernelTestCase
 {
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -29,11 +32,13 @@ class MentoreRepositoryTest extends KernelTestCase
 
     public function testSearchByLastname()
     {
-        $mentore = $this->em->getRepository('UserBundle:Mentore')
-                            ->findOneBy(array('lastname' => 'Gaucher'));
-        $this->assertCount(1, $mentore);
+        $mentor = $this->em->getRepository('UserBundle:User')
+                           ->findOneBy(array('lastname' => 'Chan'));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function tearDown()
     {
         parent::tearDown();
