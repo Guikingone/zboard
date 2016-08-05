@@ -44,14 +44,12 @@ class LoadFormationEtapesData implements FixtureInterface, ContainerAwareInterfa
         $etape6->setEtape("J'ai ajouté une photo de profil sur slack et sur Zboard");
         $etape6->setRequiresInput(false);
 
-
         $manager->persist($etape1);
         $manager->persist($etape2);
         $manager->persist($etape3);
         $manager->persist($etape4);
         $manager->persist($etape5);
         $manager->persist($etape6);
-
 
         $manager->flush();
     }

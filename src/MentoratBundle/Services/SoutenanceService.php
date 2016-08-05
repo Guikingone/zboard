@@ -41,7 +41,9 @@ class SoutenanceService
     }
 
     /**
-     * @return array|\MentoratBundle\Entity\Mentore[]
+     * @param $user
+     *
+     * @return array|\MentoratBundle\Entity\Soutenance[]
      */
     public function getSoutenanceWaiting($user)
     {
@@ -52,7 +54,9 @@ class SoutenanceService
     }
 
     /**
-     * @return array|\MentoratBundle\Entity\Mentore[]
+     * @param $user
+     *
+     * @return array|\MentoratBundle\Entity\Soutenance[]
      */
     public function getSoutenanceDone($user)
     {

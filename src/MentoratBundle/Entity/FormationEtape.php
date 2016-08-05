@@ -5,7 +5,7 @@ namespace MentoratBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * FormationEtape
+ * FormationEtape.
  *
  * @ORM\Table(name="zboard_formation_etapes")
  * @ORM\Entity(repositoryClass="MentoratBundle\Repository\FormationEtapeRepository")
@@ -28,7 +28,6 @@ class FormationEtape
      */
     private $etape;
 
-
     /**
      * @var bool
      *
@@ -36,9 +35,8 @@ class FormationEtape
      */
     private $requiresInput;
 
-
     /**
-     * Get the value of Id
+     * Get the value of Id.
      *
      * @return int
      */
@@ -48,7 +46,7 @@ class FormationEtape
     }
 
     /**
-     * Set the value of Id
+     * Set the value of Id.
      *
      * @param int id
      *
@@ -62,7 +60,7 @@ class FormationEtape
     }
 
     /**
-     * Get the value of Etape
+     * Get the value of Etape.
      *
      * @return string
      */
@@ -72,7 +70,7 @@ class FormationEtape
     }
 
     /**
-     * Set the value of Etape
+     * Set the value of Etape.
      *
      * @param string etape
      *
@@ -86,7 +84,7 @@ class FormationEtape
     }
 
     /**
-     * Get the value of Requires Input
+     * Get the value of Requires Input.
      *
      * @return bool
      */
@@ -96,7 +94,7 @@ class FormationEtape
     }
 
     /**
-     * Set the value of Requires Input
+     * Set the value of Requires Input.
      *
      * @param bool requiresInput
      *
@@ -108,5 +106,4 @@ class FormationEtape
 
         return $this;
     }
-
 }

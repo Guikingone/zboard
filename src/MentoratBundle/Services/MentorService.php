@@ -63,7 +63,7 @@ class MentorService
      */
     public function getUserByRoleMentor($page, $maxResult)
     {
-        return $this->doctrine->getRepository('UserBundle:User')->getUsersByRole($page,$maxResult);
+        return $this->doctrine->getRepository('UserBundle:User')->getUsersByRole($page, $maxResult);
     }
 
     /**

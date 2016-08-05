@@ -20,9 +20,9 @@ class SoutenanceController extends Controller
         $soutenances = $this->get('core.soutenance')->getSoutenanceWaiting($this->getUser());
 
         return array(
-            'controller'    => 'soutenances',
-            'soutenances'   => $soutenances,
-            'title_action'  => "Mes soutenances en attentes"
+            'controller' => 'soutenances',
+            'soutenances' => $soutenances,
+            'title_action' => 'Mes soutenances en attentes',
         );
     }
 
@@ -35,9 +35,9 @@ class SoutenanceController extends Controller
         $soutenances = $this->get('core.soutenance')->getSoutenanceDone($this->getUser());
 
         return array(
-            'controller'    => 'soutenances',
-            'soutenances'   => $soutenances,
-            'title_action'  => "Mes soutenances terminées"
+            'controller' => 'soutenances',
+            'soutenances' => $soutenances,
+            'title_action' => 'Mes soutenances terminées',
         );
     }
 }
