@@ -58,26 +58,14 @@ class RecrutementService
 
       foreach($allCandidatures as $candid)
       {
-        $votes_for = 0;
-        $votes_against = 0;
-        foreach($candid->getVotes() as $vote)
+        $candid->countVotes();
+        if($candid->getForVotes()>1&&$candid->getAgainstVotes()>1)
         {
-          if($vote->getVote() == 1)
-          {
-            $votes_for++;
-          }
-          else
-          {
-            $votes_against++;
-          }
-        }
-        if($votes_for>1&&$votes_against>1)
-        {
-          array_push($candidaturesAArbitrer,array("candidature"=>$candid,"votes_for"=>$votes_for,"votes_against"=>$votes_against));
+          array_push($candidaturesAArbitrer,$candid);
         }
         else
         {
-          array_push($candidaturesSimple,array("candidature"=>$candid,"votes_for"=>$votes_for,"votes_against"=>$votes_against));
+          array_push($candidaturesSimple,$candid);
         }
       }
 
@@ -86,6 +74,15 @@ class RecrutementService
 
       return $candidatures;
     }
+
+    public function getCandidature($id)
+    {
+      $candid = $this->doctrine->getRepository('MentoratBundle:Candidat')->find($id);
+      $candid->countVotes($candid);
+      return $candid;
+    }
+
+
 }
 
 ?>

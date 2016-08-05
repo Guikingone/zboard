@@ -61,6 +61,9 @@ class Candidat
      */
      protected $votes;
 
+     protected $forVotes;
+     protected $againstVotes;
+
      public function __construct()
      {
        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
@@ -205,6 +208,45 @@ class Candidat
     public function getVotes()
     {
         return $this->votes;
+    }
+
+    public function countVotes()
+    {
+      $this->forVotes = 0;
+      $this->againstVotes = 0;
+      foreach($this->getVotes() as $vote)
+      {
+        if($vote->getVote() == 1)
+        {
+          $this->forVotes++;
+        }
+        else
+        {
+          $this->againstVotes++;
+        }
+      }
+      return;
+    }
+
+
+    /**
+     * Get the value of For Votes
+     *
+     * @return mixed
+     */
+    public function getForVotes()
+    {
+        return $this->forVotes;
+    }
+
+    /**
+     * Get the value of Against Votes
+     *
+     * @return mixed
+     */
+    public function getAgainstVotes()
+    {
+        return $this->againstVotes;
     }
 
 }

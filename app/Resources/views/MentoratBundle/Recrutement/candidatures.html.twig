@@ -27,11 +27,11 @@
             </tr>
             {% for candidature in candidatures_dispute %}
               <tr>
-                <td>{{ candidature.candidature.nom }}</td>
-                <td>{{ candidature.candidature.dateCandidature|date('d/m/Y') }}</td>
-                <td>{{ candidature.votes_for }} Pour, {{ candidature.votes_against }} Contre</td>
+                <td>{{ candidature.nom }}</td>
+                <td>{{ candidature.dateCandidature|date('d/m/Y') }}</td>
+                <td>{{ candidature.forVotes }} Pour, {{ candidature.againstVotes }} Contre</td>
                 <td>
-                  <button type="button" class="btn btn-flat btn-error">Voir</button>
+                  <a href="{{ path('recrutement_candidature') }}/show/{{ candidature.id }}"><button type="button" class="btn btn-flat btn-error">Voir</button></a>
                 </td>
               </tr>
             {% endfor %}
@@ -69,11 +69,11 @@
           </tr>
           {% for candidature in candidatures %}
             <tr>
-              <td>{{ candidature.candidature.nom }}</td>
-              <td>{{ candidature.candidature.dateCandidature|date('d/m/Y') }}</td>
-              <td>{{ candidature.votes_for }} Pour, {{ candidature.votes_against }} Contre</td>
+              <td>{{ candidature.nom }}</td>
+              <td>{{ candidature.dateCandidature|date('d/m/Y') }}</td>
+              <td>{{ candidature.forVotes }} Pour, {{ candidature.againstVotes }} Contre</td>
               <td>
-                <button type="button" class="btn btn-flat btn-success">Voir</button>
+                <a href="{{ path('recrutement_candidature') }}/show/{{ candidature.id }}"><button type="button" class="btn btn-flat btn-success">Voir</button></a>
               </td>
             </tr>
           {% endfor %}

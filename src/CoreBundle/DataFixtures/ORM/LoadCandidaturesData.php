@@ -27,7 +27,15 @@ class LoadCandidaturesData implements FixtureInterface, ContainerAwareInterface,
         $candidature1->setCompetences(array("Julia","Batch"));
         $candidature1->setMotivation("Je suis motivé et c'est tout");
 
+        $candidature2 = new Candidat();
+        $candidature2->setNom("Lolita");
+        $candidature2->setEmail("lolita@yopmail.fr");
+        $candidature2->setDateCandidature(new \DateTime());
+        $candidature2->setCompetences(array("C++","C--"));
+        $candidature2->setMotivation("Je suis !");
+
         $manager->persist($candidature1);
+        $manager->persist($candidature2);
 
         $manager->flush();
     }

@@ -28,11 +28,14 @@ class RecrutementController extends Controller
      * @Route("/recrutement/candidatures/show/{id}",name="recrutement_candidature_show")
      * @Template("MentoratBundle/Recrutement/candidature.html.twig")
      */
-    public function showCandidature()
+    public function showCandidature($id)
     {
+      $candidature = $this->get('core.recrutement')->getCandidature($id);
+
       $this->denyAccessUnlessGranted('ROLE_MENTOR_EXPERIMENTE', null, 'Accès refusé');
       return array('controller'=>'recrutement',
-      'title_action'    => "Candidature",
+      'candidature'=>$candidature,
+      'title_action'=> "Candidature",
 );
 
     }
