@@ -102,11 +102,11 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
 
         // Création de notre utilisateur ROLE_MENTOR_EXPERIMENTE
         $mentorExpr = $userManager->createUser();
-        $mentorExpr->setUsername('alex');
-        $mentorExpr->setFirstname('Alex');
+        $mentorExpr->setUsername('alec');
+        $mentorExpr->setFirstname('Alec');
         $mentorExpr->setLastname('Sadler');
-        $mentorExpr->setEmail('alexsadler@zboard.fr');
-        $mentorExpr->setPlainPassword('alex');
+        $mentorExpr->setEmail('alecsadler@zboard.fr');
+        $mentorExpr->setPlainPassword('alec');
         $mentorExpr->setAddress('6 rue LABAS');
         $mentorExpr->setZipCode('44290');
         $mentorExpr->setCity('Panam');
