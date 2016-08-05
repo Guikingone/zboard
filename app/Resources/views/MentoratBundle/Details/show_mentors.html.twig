@@ -54,8 +54,10 @@
                     <hr>
                     <strong><i class="fa fa-pencil margin-r-5"></i> Compétences</strong>
                     <p>
-                        {% for competences in mentor.competences %}
-                            <span class="label label-warning">{{ competences.libelle }}</span>
+                        {% for competence in mentor.competences %}
+                            {% for label in competence.libelle %}
+                                <span class="label label-warning">{{ label }}</span>
+                            {% endfor %}
                         {% endfor %}
                     </p>
                 </div>

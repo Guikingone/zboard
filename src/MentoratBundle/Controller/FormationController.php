@@ -18,8 +18,9 @@ public function indexAction(Request $request)
     $formation = $this->get('core.formation')->getFormation();
 
     return array(
-        'controller' => 'formation',
-        'formation' => $formation,
+        'controller'    => 'formation',
+        'formation'     => $formation,
+        'title_action'  => "Formation"
     );
 }
 }

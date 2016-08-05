@@ -1,0 +1,33 @@
+{% extends "::layout_mentor.html.twig" %}
+{% block body %}
+    {% if mentors %}
+        <div class="row">
+        {% for mentor in mentors %}
+            <a href="{{ path('show_details_mentor', {'id' : mentor.id}) }}">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-number">{{ mentor.firstname }} {{ mentor.lastname }}</span>
+                            <span class="info-box-text">
+                                {% for competence in mentor.competences %}
+                                    {% for label in competence.libelle %}
+                                        <span class="label label-default">{{ label }}</span>
+                                    {% endfor %}
+                                {% endfor %}
+                            </span>
+                        </div>
+                    </div>
+                  </div>
+            </a>
+        {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                {% include ':Elements:pagination.html.twig' %}
+            </div>
+        </div>
+    {% else %}
+      <div class="alert alert-info">Il n'existe aucun mentor dans ZBoard.</div>
+    {% endif %}
+{% endblock %}
