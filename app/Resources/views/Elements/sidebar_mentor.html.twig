@@ -9,6 +9,18 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MENU PRINCIPAL</li>
+            <li class="{{ (controller == 'mentors') ? 'active' : '' }} treeview">
+                <a href="#">
+                    <i class="ion ion-person-stalker"></i>
+                    <span>Les mentors</span>
+                    <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ path('list_mentors') }}"><i class="fa fa-circle-o"></i> Liste des mentors</a></li>
+                </ul>
+            </li>
             <li class="{{ (controller == 'mentorat') ? 'active' : '' }} treeview">
                 <a href="#">
                     <i class="ion ion-person-stalker"></i>

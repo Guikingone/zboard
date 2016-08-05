@@ -26,7 +26,10 @@ class UtilsController extends Controller
             return $this->redirectToRoute('mentorat_dashboard_index');
         }
 
-        return array('cours' => $cours->createView());
+        return array(
+            'cours'         => $cours->createView(),
+            'title_action'  => "Mise à jour"
+        );
     }
 
     /**
@@ -46,6 +49,9 @@ class UtilsController extends Controller
             return $this->redirectToRoute('mentorat_dashboard_index');
         }
 
-        return array('projet' => $projet->createView());
+        return array(
+            'projet'        => $projet->createView(),
+            'title_action'  => "Mise à jour"
+        );
     }
 }

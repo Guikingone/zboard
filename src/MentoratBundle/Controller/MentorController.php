@@ -7,27 +7,35 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/mentor")
+ * Class MentorController
+ * @package MentoratBundle\Controller
+ */
 class MentorController extends Controller
 {
+
     /**
-     * @param Request $request
-     * @param $id
-     *
-     * @return array
-     * @Route("/mentore/details/{id}", name="show_details_mentore")
-     * @Template("MentoratBundle/Details/show_mentores.html.twig")
+     * @Route("/{page}",name="list_mentors",defaults={"page" = 1})
+     * @Template("MentoratBundle/Mentors/list_mentors.html.twig")
      */
-    public function showProfilMentoreAction(Request $request, $id)
+    public function listAction($page)
     {
-        $mentore = $this->get('core.mentore')->viewMentore($id);
-        $note = $this->get('core.mentore')->addNote($request, $id);
-        $sessions = $this->get('core.mentore')->addSessionMentorat($request, $id);
+        $mentors = $this->get('core.mentor')->getUserByRoleMentor($page,20);
+        $nbMentors = $this->get('core.mentor')->countMentors();
+
+        $pagination = array(
+            'page' => $page,
+            'route' => 'list_mentors',
+            'pages_count' => ceil($nbMentors / 20),
+            'route_params' => array()
+        );
 
         return array(
-            'controller'    => 'mentore',
-            'mentore'       => $mentore,
-            'note'          => $note->createView(),
-            'sessions'      => $sessions->createView(),
+            'controller'    => 'mentors',
+            'mentors'       => $mentors,
+            'pagination'    => $pagination,
+            'title_action'  => "Liste des mentors"
         );
     }
 
@@ -36,7 +44,7 @@ class MentorController extends Controller
      * @param $id
      *
      * @return array
-     * @Route("/mentor/details/{id}", name="show_details_mentor")
+     * @Route("/details/{id}", name="show_details_mentor")
      * @Template("MentoratBundle/Details/show_mentors.html.twig")
      */
     public function showProfilMentorAction(Request $request, $id)
@@ -48,6 +56,7 @@ class MentorController extends Controller
             'controller'    => 'mentor',
             'mentor'        => $mentor,
             'competence'    => $competence->createView(),
+            'title_action'  => "Détails du mentor :" . $mentor->getFirstname() . " " . $mentor->getLastname()
         );
     }
 }

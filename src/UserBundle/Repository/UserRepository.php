@@ -2,6 +2,8 @@
 
 namespace UserBundle\Repository;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * UserRepository.
  *
@@ -13,9 +15,46 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
     public function getMentors()
     {
         return $this->createQueryBuilder('m')
-                    ->where('m.roles = :role')
-                        ->setParameter('role', $role = 'ROLE_MENTOR')
+                    ->where('m.roles LIKE :role')
+                    ->setParameter('role', '%ROLE_MENTOR%')
                     ->getQuery()
                     ->getResult();
+    }
+
+    /**
+     * @return mixed
+     * Count used by pagination
+     */
+    public function countMentorTotal() {
+
+        return $this->createQueryBuilder('m')
+            ->select('COUNT(m)')
+            ->where('m.roles LIKE :role')
+            ->setParameter('role', '%ROLE_MENTOR%')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * Avec cette fonction on obtient la liste des user en la paginant
+     * et en filtrant par rôle (ou par "catégorie")
+     * @param int $page
+     * @param $maxResultPerPage
+     * @return Paginator
+     */
+    public function getUsersByRole($page = 1, $maxResultPerPage ) {
+
+        $query = $this->createQueryBuilder('m')
+            ->select('m')
+            ->where('m.enabled = true')
+            ->andWhere('m.roles LIKE :roles')
+            ->andWhere('m.locked = false')
+            ->setParameter('roles', '%ROLE_MENTOR%');
+
+
+        $query->setFirstResult(($page-1) * $maxResultPerPage)
+            ->setMaxResults($maxResultPerPage);
+
+        return new Paginator($query);
     }
 }
