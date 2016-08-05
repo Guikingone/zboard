@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Guillaume
- * Date: 27/07/2016
- * Time: 15:42.
+
+/*
+ * This file is part of the Zboard project.
+ *
+ * (c) Guillaume Loulier <guillaume.loulier@hotmail.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace UserBundle\Services;
@@ -149,6 +152,7 @@ class UserService
             $mentor->setPlainPassword(mb_strtolower($mentor->getFirstname().'_'.$mentor->getLastname()));
             $mentor->setRoles(array('ROLE_MENTOR'));
             $mentor->setArchived(false);
+            $mentor->setEnabled(true);
             $this->doctrine->persist($mentor);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
@@ -182,6 +186,7 @@ class UserService
             $mentore->setPlainPassword(mb_strtolower($mentore->getFirstname().'_'.$mentore->getLastname()));
             $mentore->setRoles(array('ROLE_MENTORE'));
             $mentore->setArchived(false);
+            $mentore->setEnabled(true);
             $this->doctrine->persist($mentore);
             $this->doctrine->persist($suivi);
             $this->doctrine->flush();

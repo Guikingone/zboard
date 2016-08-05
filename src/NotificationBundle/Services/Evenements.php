@@ -10,6 +10,7 @@ namespace NotificationBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use NotificationBundle\Entity\Events;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
@@ -29,7 +30,7 @@ class Evenements
      * Evenements constructor.
      *
      * @param EntityManager $doctrine
-     * @param TokenStorage  $user
+     * @param TokenStorage $user
      */
     public function __construct(EntityManager $doctrine, TokenStorage $user)
     {
@@ -45,7 +46,7 @@ class Evenements
     public function getEvents()
     {
         return $this->doctrine->getRepository('NotificationBundle:Events')
-                              ->findBy(array('user' => $this->user->getToken()->getUser()));
+            ->findBy(array('user' => $this->user->getToken()->getUser()));
     }
 
     /**
@@ -72,7 +73,34 @@ class Evenements
     }
 
     /**
-     * Allow to delete all the events linekd to a user.
+     * Allow to create and link a event to a simple user.
+     *
+     * @param $user
+     * @param $libelle
+     * @param $categorie
+     */
+    public function createEventsToUser($user, $libelle, $categorie)
+    {
+        $users = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $user));
+
+        if (null === $users) {
+            throw new Exception("L'utilisateur ne semble pas exister.");
+        }
+
+        $event = new Events();
+
+        $event->setLibelle($libelle);
+        $event->setCategorie($categorie);
+        $event->setDate(new \Datetime());
+        $event->addUser($users);
+        $users->addEvent($event);
+
+        $this->doctrine->persist($event);
+        $this->doctrine->flush();
+    }
+
+    /**
+     * Allow to delete all the events linked to a user.
      */
     public function purgeEvents()
     {
@@ -84,6 +112,7 @@ class Evenements
 
         foreach ($events as $event) {
             $this->doctrine->remove($event);
+            $this->doctrine->flush();
         }
     }
 }

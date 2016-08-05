@@ -239,6 +239,9 @@
                             </div>
                             <div class="tab-pane" id="student">
                                 <!-- Suivi elèves -->
+                                {% if mentor.suivi is empty %}
+                                    <p>hello !</p>
+                                    {% else %}
                                 <div class="table-responsive">
                                     <table class="table no-margin">
                                         <thead>
@@ -273,6 +276,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                {% endif %}
                             </div>
                             <div class="tab-pane" id="sessions">
                                 <!-- Suivi sessions -->
