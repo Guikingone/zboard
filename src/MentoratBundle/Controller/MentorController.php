@@ -7,14 +7,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ShowDashboardController extends Controller
+class MentorController extends Controller
 {
     /**
      * @param Request $request
      * @param $id
      *
      * @return array
-     * @Route("/show/{id}/mentore/details", name="show_details_mentore")
+     * @Route("/mentore/details/{id}", name="show_details_mentore")
      * @Template("MentoratBundle/Details/show_mentores.html.twig")
      */
     public function showProfilMentoreAction(Request $request, $id)
@@ -23,8 +23,12 @@ class ShowDashboardController extends Controller
         $note = $this->get('core.mentore')->addNote($request, $id);
         $sessions = $this->get('core.mentore')->addSessionMentorat($request, $id);
 
-        return array('controller' => 'mentore', 'mentore' => $mentore,
-                     'note' => $note->createView(), 'sessions' => $sessions->createView(), );
+        return array(
+            'controller'    => 'mentore',
+            'mentore'       => $mentore,
+            'note'          => $note->createView(),
+            'sessions'      => $sessions->createView(),
+        );
     }
 
     /**
@@ -32,7 +36,7 @@ class ShowDashboardController extends Controller
      * @param $id
      *
      * @return array
-     * @Route("/show/{id}/mentor/details", name="show_details_mentor")
+     * @Route("/mentor/details/{id}", name="show_details_mentor")
      * @Template("MentoratBundle/Details/show_mentors.html.twig")
      */
     public function showProfilMentorAction(Request $request, $id)
@@ -40,7 +44,10 @@ class ShowDashboardController extends Controller
         $competence = $this->get('core.user')->addCompetencesMentor($request, $id);
         $mentor = $this->get('core.mentore')->viewMentor($id);
 
-        return array('controller' => 'mentor', 'mentor' => $mentor,
-                     'competence' => $competence->createView(), );
+        return array(
+            'controller'    => 'mentor',
+            'mentor'        => $mentor,
+            'competence'    => $competence->createView(),
+        );
     }
 }
