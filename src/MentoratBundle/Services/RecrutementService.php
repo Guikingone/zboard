@@ -62,13 +62,13 @@ class RecrutementService
         $votes_against = 0;
         foreach($candid->getVotes() as $vote)
         {
-          if($vote.vote == 1)
+          if($vote->getVote() == 1)
           {
-            $vote_for++;
+            $votes_for++;
           }
           else
           {
-            $vote_against++;
+            $votes_against++;
           }
         }
         if($votes_for>1&&$votes_against>1)
