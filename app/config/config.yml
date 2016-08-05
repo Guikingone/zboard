@@ -66,6 +66,8 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
+    port:      "mailer_port"
+    auth_mode: "cram-md5"
     spool:     { type: memory }
 
 # FOS User Configuration

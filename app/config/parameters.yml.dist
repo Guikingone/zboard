@@ -15,9 +15,10 @@ parameters:
     database_user: b323641de1e937
     database_password: 4377f7fe
     mailer_transport:  smtp
-    mailer_host:       127.0.0.1
-    mailer_user:       ~
-    mailer_password:   ~
+    mailer_host:       mailtrap.io
+    mailer_user:       e34245b3df5d40
+    mailer_password:   2394b6d4d6bcd3
+    mailer_port:       2525
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
