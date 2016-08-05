@@ -157,6 +157,7 @@ class UserService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
             $this->events->createEvents("Création d'un nouveau mentor", 'Important');
+            $this->events->createUserEvents($mentor, 'Création de votre profil.', 'Important');
         }
 
         return $form;
@@ -191,7 +192,7 @@ class UserService
             $this->doctrine->persist($suivi);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Elève enregistré.');
-            $this->events->createEvents("Création d'un nouvel élève", 'Important');
+            $this->events->createUserEvents($mentore, 'Création de votre profil.', 'Important');
         }
 
         return $form;
@@ -246,6 +247,7 @@ class UserService
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', "Le rôle de l'utilisateur a bien été mis à jour");
+            $this->events->createUserEvents($user, 'Modifications de vos accès', 'Important');
         }
 
         return $form;
@@ -273,6 +275,7 @@ class UserService
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le rôle du mentoré a bien été mis à jour');
+            $this->events->createUserEvents($mentore, 'Modifications de vos accès', 'Important');
         }
 
         return $form;
@@ -300,6 +303,7 @@ class UserService
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le mentor a bien été mis à jour');
+            $this->events->createUserEvents($mentor, 'Modifications de votre profil', 'Important');
         }
 
         return $form;
@@ -327,6 +331,7 @@ class UserService
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le mentore a bien été mis à jour');
+            $this->events->createUserEvents($mentore, 'Modifications de votre profil', 'Important');
         }
 
         return $form;

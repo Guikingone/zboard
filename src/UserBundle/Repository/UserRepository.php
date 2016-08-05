@@ -23,10 +23,10 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
 
     /**
      * @return mixed
-     * Count used by pagination
+     *               Count used by pagination
      */
-    public function countMentorTotal() {
-
+    public function countMentorTotal()
+    {
         return $this->createQueryBuilder('m')
             ->select('COUNT(m)')
             ->where('m.roles LIKE :role')
@@ -37,13 +37,15 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
 
     /**
      * Avec cette fonction on obtient la liste des user en la paginant
-     * et en filtrant par rôle (ou par "catégorie")
+     * et en filtrant par rôle (ou par "catégorie").
+     *
      * @param int $page
      * @param $maxResultPerPage
+     *
      * @return Paginator
      */
-    public function getUsersByRole($page = 1, $maxResultPerPage ) {
-
+    public function getUsersByRole($page = 1, $maxResultPerPage)
+    {
         $query = $this->createQueryBuilder('m')
             ->select('m')
             ->where('m.enabled = true')
@@ -51,8 +53,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere('m.locked = false')
             ->setParameter('roles', '%ROLE_MENTOR%');
 
-
-        $query->setFirstResult(($page-1) * $maxResultPerPage)
+        $query->setFirstResult(($page - 1) * $maxResultPerPage)
             ->setMaxResults($maxResultPerPage);
 
         return new Paginator($query);

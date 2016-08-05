@@ -27,7 +27,7 @@ class LoadFormationEtapesUserData implements FixtureInterface, ContainerAwareInt
         $etape4 = new FormationEtapeUser();
         $etape4->setIdUser(4);
         $etape4->setIdEtape(4);
-        $etape4->setContent("http://openclassrooms.com");
+        $etape4->setContent('http://openclassrooms.com');
 
         $manager->persist($etape1);
         $manager->persist($etape4);

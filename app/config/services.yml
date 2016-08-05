@@ -10,7 +10,7 @@ services:
 
     core.archive:
         class: AdminBundle\Services\Archive
-        arguments: ["@doctrine.orm.entity_manager", "@session"]
+        arguments: ["@doctrine.orm.entity_manager", "@session", "@core.events"]
 
     core.statistiques:
         class: AdminBundle\Services\Statistiques

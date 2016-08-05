@@ -14,7 +14,8 @@ class CandidatureController extends Controller
    */
   public function indexAction()
   {
-    return array(
+      return array(
         'controller' => 'candidature',
-    );  }
+    );
+  }
 }

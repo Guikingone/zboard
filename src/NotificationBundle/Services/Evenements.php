@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Guillaume
- * Date: 02/08/2016
- * Time: 09:14.
+
+/*
+ * This file is part of the Zboard project.
+ *
+ * (c) Guillaume Loulier <guillaume.loulier@hotmail.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace NotificationBundle\Services;
@@ -30,7 +33,7 @@ class Evenements
      * Evenements constructor.
      *
      * @param EntityManager $doctrine
-     * @param TokenStorage $user
+     * @param TokenStorage  $user
      */
     public function __construct(EntityManager $doctrine, TokenStorage $user)
     {
@@ -46,7 +49,7 @@ class Evenements
     public function getEvents()
     {
         return $this->doctrine->getRepository('NotificationBundle:Events')
-            ->findBy(array('user' => $this->user->getToken()->getUser()));
+                              ->findBy(array('users' => $this->user->getToken()->getUser()));
     }
 
     /**
@@ -79,7 +82,7 @@ class Evenements
      * @param $libelle
      * @param $categorie
      */
-    public function createEventsToUser($user, $libelle, $categorie)
+    public function createUserEvents($user, $libelle, $categorie)
     {
         $users = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $user));
 

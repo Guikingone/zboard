@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Zboard project.
+ *
+ * (c) Guillaume Loulier <guillaume.loulier@hotmail.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace BackendBundle\Services;
 
 use BackendBundle\Entity\InformationMentorat;
@@ -163,10 +172,9 @@ class Back
         $form = $this->formFactory->create(InformationType::class, $information);
         $form->handleRequest($request);
 
-        if ($form->isValid())
-        {
+        if ($form->isValid()) {
             if (false === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
-              throw new AccessDeniedException();
+                throw new AccessDeniedException();
             }
             $information->setDCreated(new \DateTime('now'));
             $information->setUpdated(new \DateTime('now'));

@@ -83,7 +83,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $supervisteurMentor->setRoles(array('ROLE_SUPERVISEUR_MENTOR'));
         $supervisteurMentor->setAvailable(true);
 
-
         // Création de notre utilisateur MENTOR_DEBUTANT
         $mentorDebutant = $userManager->createUser();
         $mentorDebutant->setUsername('michael');
