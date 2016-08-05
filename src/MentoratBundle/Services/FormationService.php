@@ -65,13 +65,19 @@ class FormationService
              $content = $etp->getContent();
            }
        }
-       
+
        array_push($etapesUser,array("etape"=>$etape->getEtape(),
+                  "id"=>$etape->getId(),
                   "validate"=>$validate,
                   "hasContent"=>$hasContent,
                   "content"=>$content
                 ));
      }
      return $etapesUser;
+   }
+
+   public function updateFormation(Request $request)
+   {
+     //Start by checking if line already exists
    }
 }
