@@ -1,6 +1,6 @@
 <?php
 
-namespace CoreBundle\Entity;
+namespace MentoratBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Candidat.
  *
  * @ORM\Table(name="zboard_candidatures")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\CandidatRepository")
+ * @ORM\Entity(repositoryClass="MentoratBundle\Repository\CandidatRepository")
  */
 class Candidat
 {
@@ -55,6 +55,16 @@ class Candidat
      * @ORM\Column(name="motivation", type="text")
      */
     private $motivation;
+
+    /**
+     * @ORM\OneToMany(targetEntity="RecrutementVote", mappedBy="idCandidature")
+     */
+     protected $votes;
+
+     public function __construct()
+     {
+       $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
+     }
 
     /**
      * Get id.
@@ -185,4 +195,16 @@ class Candidat
     {
         return $this->motivation;
     }
+
+
+    /**
+     * Get the value of Votes
+     *
+     * @return mixed
+     */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
 }

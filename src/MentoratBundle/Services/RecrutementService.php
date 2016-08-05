@@ -44,6 +44,48 @@ class RecrutementService
         $this->user = $user;
     }
 
+    /**
+     * Donne les candidatures
+     * @return array with all applications
+     */
+    public function getCandidatures()
+    {
+      $candidatures = array();
+      $candidaturesSimple = array();
+      $candidaturesAArbitrer = array();
+
+      $allCandidatures = $this->doctrine->getRepository('MentoratBundle:Candidat')->findAll();
+
+      foreach($allCandidatures as $candid)
+      {
+        $votes_for = 0;
+        $votes_against = 0;
+        foreach($candid->getVotes() as $vote)
+        {
+          if($vote.vote == 1)
+          {
+            $vote_for++;
+          }
+          else
+          {
+            $vote_against++;
+          }
+        }
+        if($votes_for>1&&$votes_against>1)
+        {
+          array_push($candidaturesAArbitrer,$candid);
+        }
+        else
+        {
+          array_push($candidaturesSimple,$candid);
+        }
+      }
+
+      $candidatures['candidatures_simples'] = $candidaturesSimple;
+      $candidatures['candidatures_a_arbitrer'] = $candidaturesAArbitrer;
+
+      return $candidatures;
+    }
 }
 
 ?>

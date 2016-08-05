@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * RecrutementVote
  *
- * @ORM\Table(name="recrutement_vote")
+ * @ORM\Table(name="zboard_recrutement_vote")
  * @ORM\Entity(repositoryClass="MentoratBundle\Repository\RecrutementVoteRepository")
  */
 class RecrutementVote
@@ -32,7 +32,8 @@ class RecrutementVote
     /**
      * @var int
      * Cet id sera soit celui d'une nouvelle candidature soit celle de la formation d'un mentor
-     * @ORM\Column(name="id_candidature", type="integer")
+     * @ORM\JoinColumn(name="id_candidature")
+     * @ORM\ManyToOne(targetEntity="Candidat", inversedBy="votes")
      */
     private $idCandidature;
 

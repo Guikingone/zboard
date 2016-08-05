@@ -1,6 +1,6 @@
 <?php
 
-namespace CoreBundle\Repository;
+namespace MentoratBundle\Repository;
 
 /**
  * CandidatRepository.
