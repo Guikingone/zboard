@@ -27,13 +27,11 @@
             </tr>
             {% for candidature in candidatures_dispute %}
               <tr>
-                <td>{{ candidature.nom }}</td>
-                <td>{{ candidature.nom }}</td>
-                <td><span class="badge bg-aqua">En attente</span></td>
+                <td>{{ candidature.candidature.nom }}</td>
+                <td>{{ candidature.candidature.dateCandidature|date('d/m/Y') }}</td>
+                <td>{{ candidature.votes_for }} Pour, {{ candidature.votes_against }} Contre</td>
                 <td>
-                  <button type="button" class="btn btn-flat btn-primary">Ajouter des documents</button>
-                  <button type="button" class="btn btn-flat btn-info">Voir le détail</button>
-                  <button type="button" class="btn btn-flat btn-success">Valider le projet</button>
+                  <button type="button" class="btn btn-flat btn-error">Voir</button>
                 </td>
               </tr>
             {% endfor %}
@@ -71,9 +69,9 @@
           </tr>
           {% for candidature in candidatures %}
             <tr>
-              <td>{{ candidature.nom }}</td>
-              <td>{{ candidature.nom }}</td>
-              <td><span class="badge bg-aqua">En attente</span></td>
+              <td>{{ candidature.candidature.nom }}</td>
+              <td>{{ candidature.candidature.dateCandidature|date('d/m/Y') }}</td>
+              <td>{{ candidature.votes_for }} Pour, {{ candidature.votes_against }} Contre</td>
               <td>
                 <button type="button" class="btn btn-flat btn-success">Voir</button>
               </td>

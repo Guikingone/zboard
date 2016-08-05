@@ -73,11 +73,11 @@ class RecrutementService
         }
         if($votes_for>1&&$votes_against>1)
         {
-          array_push($candidaturesAArbitrer,$candid);
+          array_push($candidaturesAArbitrer,array("candidature"=>$candid,"votes_for"=>$votes_for,"votes_against"=>$votes_against));
         }
         else
         {
-          array_push($candidaturesSimple,$candid);
+          array_push($candidaturesSimple,array("candidature"=>$candid,"votes_for"=>$votes_for,"votes_against"=>$votes_against));
         }
       }
 
