@@ -189,10 +189,6 @@ class Back
      */
     public function addTutorial(Request $request)
     {
-        if (false === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
-            throw new AccessDeniedException();
-        }
-
         $tutoriel = new Tutoriel();
 
         $form = $this->formFactory->create(TutorielType::class, $tutoriel);
