@@ -32,6 +32,10 @@ services:
       class: MentoratBundle\Services\FormationService
       arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
 
+    core.recrutement:
+      class: MentoratBundle\Services\RecrutementService
+      arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
+
     core.soutenance:
         class: MentoratBundle\Services\SoutenanceService
         arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]

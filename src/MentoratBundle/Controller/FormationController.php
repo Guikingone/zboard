@@ -23,4 +23,16 @@ public function indexAction(Request $request)
         'title_action' => 'Formation',
     );
 }
+
+/**
+ * @Route("/formation/update")
+ * @return rien
+ */
+public function updateAction(Request $request)
+{
+  $formation = $this->get('core.formation')->updateFormation($request);
+
+  return new Response("OK",200);
+}
+
 }

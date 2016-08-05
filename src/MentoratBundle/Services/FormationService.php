@@ -62,6 +62,7 @@ class FormationService
                 }
             }
 
+<<<<<<< HEAD
             array_push($etapesUser, array('etape' => $etape->getEtape(),
                   'validate' => $validate,
                   'hasContent' => $hasContent,
@@ -71,4 +72,29 @@ class FormationService
 
         return $etapesUser;
     }
+=======
+       foreach($userAd as $etp)
+       {
+           if($etp->getIdEtape()==$etape->getId())
+           {
+             $validate = true;
+             $content = $etp->getContent();
+           }
+       }
+
+       array_push($etapesUser,array("etape"=>$etape->getEtape(),
+                  "id"=>$etape->getId(),
+                  "validate"=>$validate,
+                  "hasContent"=>$hasContent,
+                  "content"=>$content
+                ));
+     }
+     return $etapesUser;
+   }
+
+   public function updateFormation(Request $request)
+   {
+     //Start by checking if line already exists
+   }
+>>>>>>> 7bdaf8b2f44fb4a3337b8269605637c2cae45462
 }
