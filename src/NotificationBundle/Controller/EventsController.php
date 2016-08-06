@@ -16,7 +16,8 @@ class EventsController extends Controller
     {
         $events = $this->get('core.events')->getEvents();
 
-        return array('controller' => 'notifications', 'events' => $events);
+        return array('controller' => 'notifications', 'title_action' => 'notifications',
+                     'events' => $events, );
     }
 
     /**

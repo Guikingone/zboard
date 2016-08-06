@@ -5,7 +5,7 @@ namespace MentoratBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * RecrutementVote
+ * RecrutementVote.
  *
  * @ORM\Table(name="zboard_recrutement_vote")
  * @ORM\Entity(repositoryClass="MentoratBundle\Repository\RecrutementVoteRepository")
@@ -31,7 +31,7 @@ class RecrutementVote
 
     /**
      * @var int
-     * Cet id sera soit celui d'une nouvelle candidature soit celle de la formation d'un mentor
+     *          Cet id sera soit celui d'une nouvelle candidature soit celle de la formation d'un mentor
      * @ORM\JoinColumn(name="id_candidature")
      * @ORM\ManyToOne(targetEntity="Candidat", inversedBy="votes")
      */
@@ -39,7 +39,7 @@ class RecrutementVote
 
     /**
      * @var bool
-     * Si true c'est une candidature, si false c'est un mentor en formation
+     *           Si true c'est une candidature, si false c'est un mentor en formation
      * @ORM\Column(name="isCandidature", type="boolean")
      */
     private $isCandidature;
@@ -58,9 +58,8 @@ class RecrutementVote
      */
     private $commentaire;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -70,9 +69,9 @@ class RecrutementVote
     }
 
     /**
-     * Set idUser
+     * Set idUser.
      *
-     * @param integer $idUser
+     * @param int $idUser
      *
      * @return RecrutementVote
      */
@@ -84,7 +83,7 @@ class RecrutementVote
     }
 
     /**
-     * Get idUser
+     * Get idUser.
      *
      * @return int
      */
@@ -94,9 +93,9 @@ class RecrutementVote
     }
 
     /**
-     * Set idCandidature
+     * Set idCandidature.
      *
-     * @param integer $idCandidature
+     * @param int $idCandidature
      *
      * @return RecrutementVote
      */
@@ -108,7 +107,7 @@ class RecrutementVote
     }
 
     /**
-     * Get idCandidature
+     * Get idCandidature.
      *
      * @return int
      */
@@ -118,9 +117,9 @@ class RecrutementVote
     }
 
     /**
-     * Set isCandidature
+     * Set isCandidature.
      *
-     * @param boolean $isCandidature
+     * @param bool $isCandidature
      *
      * @return RecrutementVote
      */
@@ -132,7 +131,7 @@ class RecrutementVote
     }
 
     /**
-     * Get isCandidature
+     * Get isCandidature.
      *
      * @return bool
      */
@@ -142,9 +141,9 @@ class RecrutementVote
     }
 
     /**
-     * Set vote
+     * Set vote.
      *
-     * @param integer $vote
+     * @param int $vote
      *
      * @return RecrutementVote
      */
@@ -156,7 +155,7 @@ class RecrutementVote
     }
 
     /**
-     * Get vote
+     * Get vote.
      *
      * @return int
      */
@@ -166,7 +165,7 @@ class RecrutementVote
     }
 
     /**
-     * Set commentaire
+     * Set commentaire.
      *
      * @param string $commentaire
      *
@@ -180,7 +179,7 @@ class RecrutementVote
     }
 
     /**
-     * Get commentaire
+     * Get commentaire.
      *
      * @return string
      */

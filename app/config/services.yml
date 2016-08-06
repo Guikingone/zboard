@@ -42,7 +42,7 @@ services:
 
     core.events:
         class: NotificationBundle\Services\Evenements
-        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage"]
+        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage", "@session"]
 
     core.user:
         class: UserBundle\Services\UserService

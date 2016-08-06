@@ -73,8 +73,8 @@ class FormationService
         return $etapesUser;
     }
 
-   public function updateFormation(Request $request)
-   {
-     //Start by checking if line already exists
-   }
+    public function updateFormation(Request $request)
+    {
+        //Start by checking if line already exists
+    }
 }

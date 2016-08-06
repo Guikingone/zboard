@@ -19,5 +19,4 @@ class RecrutementControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/formations');
     }
-
 }

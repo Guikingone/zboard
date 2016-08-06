@@ -26,13 +26,13 @@ public function indexAction(Request $request)
 
 /**
  * @Route("/formation/update")
+ *
  * @return rien
  */
 public function updateAction(Request $request)
 {
-  $formation = $this->get('core.formation')->updateFormation($request);
+    $formation = $this->get('core.formation')->updateFormation($request);
 
-  return new Response("OK",200);
+    return new Response('OK', 200);
 }
-
 }

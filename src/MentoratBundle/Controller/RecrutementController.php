@@ -14,14 +14,14 @@ class RecrutementController extends Controller
      */
     public function candidatureAction()
     {
-      $this->denyAccessUnlessGranted('ROLE_MENTOR_EXPERIMENTE', null, 'Accès refusé');
+        $this->denyAccessUnlessGranted('ROLE_MENTOR_EXPERIMENTE', null, 'Accès refusé');
 
-      $candidatures = $this->get('core.recrutement')->getCandidatures();
+        $candidatures = $this->get('core.recrutement')->getCandidatures();
 
-      return array('controller'=>'recrutement',
-                  'title_action'    => "Recrutement de nouveaux mentors",
-                   'candidatures'=>$candidatures['candidatures_simples'],
-                   'candidatures_dispute'=>$candidatures['candidatures_a_arbitrer']);
+        return array('controller' => 'recrutement',
+                  'title_action' => 'Recrutement de nouveaux mentors',
+                   'candidatures' => $candidatures['candidatures_simples'],
+                   'candidatures_dispute' => $candidatures['candidatures_a_arbitrer'], );
     }
 
     /**
@@ -30,14 +30,14 @@ class RecrutementController extends Controller
      */
     public function showCandidature($id)
     {
-      $candidature = $this->get('core.recrutement')->getCandidature($id);
+        $candidature = $this->get('core.recrutement')->getCandidature($id);
 
-      $this->denyAccessUnlessGranted('ROLE_MENTOR_EXPERIMENTE', null, 'Accès refusé');
-      return array('controller'=>'recrutement',
-      'candidature'=>$candidature,
-      'title_action'=> "Candidature",
+        $this->denyAccessUnlessGranted('ROLE_MENTOR_EXPERIMENTE', null, 'Accès refusé');
+
+        return array('controller' => 'recrutement',
+      'candidature' => $candidature,
+      'title_action' => 'Candidature',
 );
-
     }
 
     /**
@@ -46,10 +46,9 @@ class RecrutementController extends Controller
      */
     public function formationAction()
     {
-      $this->denyAccessUnlessGranted('ROLE_MENTOR_EXPERIMENTE', null, 'Accès refusé');
+        $this->denyAccessUnlessGranted('ROLE_MENTOR_EXPERIMENTE', null, 'Accès refusé');
 
-        return array('controller'=>'recrutement',
-        'title_action'    => "Validation des nouveaux mentors");
+        return array('controller' => 'recrutement',
+        'title_action' => 'Validation des nouveaux mentors', );
     }
-
 }
