@@ -4,6 +4,7 @@ namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use AbstractBundle\Model\User\CountryInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Country.
@@ -44,8 +45,8 @@ class Country implements CountryInterface
      */
     public function __construct()
     {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->mentores = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->mentores = new ArrayCollection();
     }
 
     /**

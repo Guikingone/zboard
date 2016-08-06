@@ -16,5 +16,9 @@ interface CountryInterface
     /**
      * @return mixed
      */
+    public function getId();
+    /**
+     * @return mixed
+     */
     public function getLibelle();
 }

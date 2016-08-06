@@ -2,11 +2,11 @@
 
 namespace UserBundle\Entity;
 
-use AbstractBundle\Model\EventsInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use AbstractBundle\Model\UserEventsInterface;
+use AbstractBundle\Model\EventsInterface;
+use AbstractBundle\Model\User\UserInterface;
 
 /**
  * User.
@@ -14,7 +14,7 @@ use AbstractBundle\Model\UserEventsInterface;
  * @ORM\Table(name="zboard_user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  */
-class User extends BaseUser implements UserEventsInterface
+class User extends BaseUser implements UserInterface
 {
     /**
      * @var int

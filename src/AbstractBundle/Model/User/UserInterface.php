@@ -9,10 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace AbstractBundle\Model;
+namespace AbstractBundle\Model\User;
 
-interface UserEventsInterface
+interface UserInterface
 {
+    /**
+     * @return mixed
+     */
+    public function getId();
+
     /**
      * @return mixed
      */

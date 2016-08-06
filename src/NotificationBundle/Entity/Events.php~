@@ -3,8 +3,9 @@
 namespace NotificationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 use AbstractBundle\Model\EventsInterface;
-use AbstractBundle\Model\UserEventsInterface;
+use AbstractBundle\Model\UserInterface;
 
 /**
  * Events.
@@ -45,9 +46,9 @@ class Events implements EventsInterface
     private $categorie;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AbstractBundle\Model\UserEventsInterface")
+     * @ORM\ManyToMany(targetEntity="AbstractBundle\Model\User\UserInterface")
      *
-     * @var UserEventsInterface
+     * @var UserInterface
      */
     private $users;
 
@@ -139,39 +140,5 @@ class Events implements EventsInterface
     public function getCategorie()
     {
         return $this->categorie;
-    }
-
-    /**
-     * Add user.
-     *
-     * @param \UserBundle\Entity\User $user
-     *
-     * @return Events
-     */
-    public function addUser(\UserBundle\Entity\User $user)
-    {
-        $this->users[] = $user;
-
-        return $this;
-    }
-
-    /**
-     * Remove user.
-     *
-     * @param \UserBundle\Entity\User $user
-     */
-    public function removeUser(\UserBundle\Entity\User $user)
-    {
-        $this->users->removeElement($user);
-    }
-
-    /**
-     * Get users.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsers()
-    {
-        return $this->users;
     }
 }

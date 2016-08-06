@@ -62,7 +62,7 @@ doctrine:
 
         # Used in order to map the entity.
         resolve_target_entities:
-            AbstractBundle\Model\UserEventsInterface: UserBundle\Entity\User
+            AbstractBundle\Model\User\UserInterface: UserBundle\Entity\User
             AbstractBundle\Model\EventsInterface: NotificationBundle\Entity\Events
 
 # Swiftmailer Configuration

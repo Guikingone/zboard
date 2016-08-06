@@ -2,7 +2,10 @@
 
 namespace AdminBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use AbstractBundle\Model\User\CountryInterface;
+use AbstractBundle\Model\UserEventsInterface;
 
 /**
  * Country.
@@ -10,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="zboard_country")
  * @ORM\Entity(repositoryClass="AdminBundle\Repository\CountryRepository")
  */
-class Country
+class Country implements CountryInterface
 {
     /**
      * @var int
@@ -29,12 +32,49 @@ class Country
     private $libelle;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="country")
-     */
-    private $users;
-
-    /**
      * @ORM\OneToMany(targetEntity="UserBundle\Entity\Mentore", mappedBy="country")
      */
     private $mentores;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->mentores = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set libelle.
+     *
+     * @param string $libelle
+     *
+     * @return Country
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get libelle.
+     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
 }
