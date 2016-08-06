@@ -3,6 +3,7 @@
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AbstractBundle\Model\User\CountryInterface;
 
 /**
  * Country.
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="zboard_country")
  * @ORM\Entity(repositoryClass="AdminBundle\Repository\CountryRepository")
  */
-class Country
+class Country implements CountryInterface
 {
     /**
      * @var int

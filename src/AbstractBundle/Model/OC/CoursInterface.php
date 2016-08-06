@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace AbstractBundle\Model;
+namespace AbstractBundle\Model\OC;
 
-interface EventsUserInterface
+interface CoursInterface
 {
     /**
      * @return mixed
@@ -21,10 +21,10 @@ interface EventsUserInterface
     /**
      * @return mixed
      */
-    public function getDate();
+    public function getDuree();
 
     /**
      * @return mixed
      */
-    public function getCategorie();
+    public function getStatus();
 }

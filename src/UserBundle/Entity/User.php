@@ -2,11 +2,11 @@
 
 namespace UserBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use AbstractBundle\Model\EventsInterface;
 use FOS\UserBundle\Model\User as BaseUser;
-use AbstractBundle\Model\EventsUserInterface;
-use AbstractBundle\Model\UserEventsInterface;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use AbstractBundle\Model\UserEventsInterface;
 
 /**
  * User.
@@ -116,9 +116,9 @@ class User extends BaseUser implements UserEventsInterface
     private $archived;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AbstractBundle\Model\EventsUserInterface")
+     * @ORM\ManyToMany(targetEntity="AbstractBundle\Model\EventsInterface")
      *
-     * @var EventsUserInterface
+     * @var EventsInterface
      */
     private $events;
 
@@ -131,6 +131,7 @@ class User extends BaseUser implements UserEventsInterface
         $this->competences = new ArrayCollection();
         $this->suivi = new ArrayCollection();
         $this->soutenances = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     /**
@@ -546,11 +547,11 @@ class User extends BaseUser implements UserEventsInterface
     /**
      * Add event.
      *
-     * @param \AbstractBundle\Model\EventsUserInterface $event
+     * @param \NotificationBundle\Entity\Events $event
      *
      * @return User
      */
-    public function addEvent(\AbstractBundle\Model\EventsUserInterface $event)
+    public function addEvent(\NotificationBundle\Entity\Events $event)
     {
         $this->events[] = $event;
 
@@ -560,9 +561,9 @@ class User extends BaseUser implements UserEventsInterface
     /**
      * Remove event.
      *
-     * @param \AbstractBundle\Model\EventsUserInterface $event
+     * @param \NotificationBundle\Entity\Events $event
      */
-    public function removeEvent(\AbstractBundle\Model\EventsUserInterface $event)
+    public function removeEvent(\NotificationBundle\Entity\Events $event)
     {
         $this->events->removeElement($event);
     }

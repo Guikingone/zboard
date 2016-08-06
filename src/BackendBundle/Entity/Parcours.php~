@@ -3,6 +3,7 @@
 namespace BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AbstractBundle\Model\OC\ParcoursInterface;
 
 /**
  * Parcours.
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="zboard_parcours")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\ParcoursRepository")
  */
-class Parcours
+class Parcours implements ParcoursInterface
 {
     /**
      * @var int
@@ -55,7 +56,7 @@ class Parcours
     private $suivi;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(name="archived", type="boolean")
      */
     private $archived;
@@ -252,5 +253,29 @@ class Parcours
     public function getSuivi()
     {
         return $this->suivi;
+    }
+
+    /**
+     * Set archived.
+     *
+     * @param bool $archived
+     *
+     * @return Parcours
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+
+        return $this;
+    }
+
+    /**
+     * Get archived.
+     *
+     * @return bool
+     */
+    public function getArchived()
+    {
+        return $this->archived;
     }
 }

@@ -12,12 +12,12 @@
 namespace NotificationBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use NotificationBundle\Entity\Events;
-use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\HttpFoundation\Session\Session;
 use AdminBundle\Services\Mail;
+use NotificationBundle\Entity\Events;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class Evenements
 {
@@ -112,11 +112,6 @@ class Evenements
         $event->setDate(new \Datetime());
         $event->addUser($users);
         $users->addEvent($event);
-
-        if ($event->getCategorie() === 'Important') {
-            $message = $this->mail->importantMessage($users);
-            $this->mail->sendMessage($message);
-        }
 
         $this->doctrine->persist($event);
         $this->doctrine->flush();

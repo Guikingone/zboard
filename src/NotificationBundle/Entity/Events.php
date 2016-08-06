@@ -3,7 +3,7 @@
 namespace NotificationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AbstractBundle\Model\EventsUserInterface;
+use AbstractBundle\Model\EventsInterface;
 use AbstractBundle\Model\UserEventsInterface;
 
 /**
@@ -12,7 +12,7 @@ use AbstractBundle\Model\UserEventsInterface;
  * @ORM\Table(name="zboard_events")
  * @ORM\Entity(repositoryClass="NotificationBundle\Repository\EventsRepository")
  */
-class Events implements EventsUserInterface
+class Events implements EventsInterface
 {
     /**
      * @var int

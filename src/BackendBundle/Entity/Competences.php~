@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Competences.
  *
- * @ORM\Table(name="competences")
+ * @ORM\Table(name="zboard_projets_competences")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\CompetencesRepository")
  */
 class Competences
