@@ -2,9 +2,11 @@
 
 namespace UserBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
+use AbstractBundle\Model\EventsUserInterface;
+use AbstractBundle\Model\UserEventsInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User.
@@ -12,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="zboard_user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  */
-class User extends BaseUser
+class User extends BaseUser implements UserEventsInterface
 {
     /**
      * @var int
@@ -114,8 +116,9 @@ class User extends BaseUser
     private $archived;
 
     /**
-     * @ORM\ManyToMany(targetEntity="NotificationBundle\Entity\Events", inversedBy="users")
-     * @ORM\JoinTable(name="zboard_users_events")
+     * @ORM\ManyToMany(targetEntity="AbstractBundle\Model\EventsUserInterface")
+     *
+     * @var EventsUserInterface
      */
     private $events;
 
@@ -128,7 +131,6 @@ class User extends BaseUser
         $this->competences = new ArrayCollection();
         $this->suivi = new ArrayCollection();
         $this->soutenances = new ArrayCollection();
-        $this->events = new ArrayCollection();
     }
 
     /**
@@ -544,11 +546,11 @@ class User extends BaseUser
     /**
      * Add event.
      *
-     * @param \NotificationBundle\Entity\Events $event
+     * @param \AbstractBundle\Model\EventsUserInterface $event
      *
      * @return User
      */
-    public function addEvent(\NotificationBundle\Entity\Events $event)
+    public function addEvent(\AbstractBundle\Model\EventsUserInterface $event)
     {
         $this->events[] = $event;
 
@@ -558,9 +560,9 @@ class User extends BaseUser
     /**
      * Remove event.
      *
-     * @param \NotificationBundle\Entity\Events $event
+     * @param \AbstractBundle\Model\EventsUserInterface $event
      */
-    public function removeEvent(\NotificationBundle\Entity\Events $event)
+    public function removeEvent(\AbstractBundle\Model\EventsUserInterface $event)
     {
         $this->events->removeElement($event);
     }

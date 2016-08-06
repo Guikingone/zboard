@@ -3,6 +3,8 @@
 namespace NotificationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AbstractBundle\Model\EventsUserInterface;
+use AbstractBundle\Model\UserEventsInterface;
 
 /**
  * Events.
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="zboard_events")
  * @ORM\Entity(repositoryClass="NotificationBundle\Repository\EventsRepository")
  */
-class Events
+class Events implements EventsUserInterface
 {
     /**
      * @var int
@@ -43,7 +45,9 @@ class Events
     private $categorie;
 
     /**
-     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="events")
+     * @ORM\ManyToMany(targetEntity="AbstractBundle\Model\UserEventsInterface")
+     *
+     * @var UserEventsInterface
      */
     private $users;
 

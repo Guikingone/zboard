@@ -1,0 +1,25 @@
+<!HTML>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Nouveau mail reçu !</title>
+    </head>
+    <style>
+        .text-center {
+            text-align: center;
+        }
+    </style>
+    <body>
+        <h1 class="text-center">Bonjour {{ user.firstname }} {{ user.lastname }}</h1>
+        <hr />
+        <section class="text-center">
+            <p>Nous sommes heureux de vous informer que vous avez reçu un nouveau mail !</p>
+            <p>Voici le contenu du mail :</p>
+            <br />
+            <article>
+                {{ message.contenu }}
+            </article>
+            <p>Ce mail vous a été envoyé par {{ mail.expediteur }} le {{ mail.date|date('d-M-y', 'Europe/Paris') }}</p>
+        </section>
+    </body>
+</html>

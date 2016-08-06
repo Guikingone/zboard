@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManager;
 use NotificationBundle\Entity\Events;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Session\Session;
+use AdminBundle\Services\Mail;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
@@ -36,16 +37,22 @@ class Evenements
     private $session;
 
     /**
+     * @var Mail
+     */
+    private $mail;
+
+    /**
      * Evenements constructor.
      *
      * @param EntityManager $doctrine
      * @param TokenStorage  $user
      */
-    public function __construct(EntityManager $doctrine, TokenStorage $user, Session $session)
+    public function __construct(EntityManager $doctrine, TokenStorage $user, Session $session, Mail $mail)
     {
         $this->doctrine = $doctrine;
         $this->user = $user;
         $this->session = $session;
+        $this->mail = $mail;
     }
 
     /**
@@ -105,6 +112,11 @@ class Evenements
         $event->setDate(new \Datetime());
         $event->addUser($users);
         $users->addEvent($event);
+
+        if ($event->getCategorie() === 'Important') {
+            $message = $this->mail->importantMessage($users);
+            $this->mail->sendMessage($message);
+        }
 
         $this->doctrine->persist($event);
         $this->doctrine->flush();

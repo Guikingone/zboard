@@ -43,15 +43,16 @@ class Mail
      *
      * @param $objet        | The object of the message
      * @param $destinataire | The destinataire of the message
+     * @param $expediteur   | The expediteur of the message
      * @param $body         | The body of the message
      *
      * @return \Swift_Mime_MimePart
      */
-    public function buildMessage($objet, $destinataire, $body)
+    public function buildMessage($objet, $expediteur, $destinataire, $body)
     {
         return \Swift_Message::newInstance()
                     ->setSubject($objet)
-                    ->setFrom('no-reply@zboard.fr')
+                    ->setFrom($expediteur)
                     ->setTo($destinataire)
                     ->setBody($body);
     }
@@ -75,6 +76,7 @@ class Mail
     {
         $this->buildMessage(
             '[ADMIN][ZBOARD] || Information admin',
+            'no-reply@zboard.fr',
             $destinataire,
             $this->templating->render(':Emails/Administration:administration.html.twig'));
     }
@@ -88,6 +90,7 @@ class Mail
     {
         $this->buildMessage(
             '[IMPORTANT][ZBOARD] || Information importante',
+            'no-reply@zboard.fr',
             $destinataire,
             $this->templating->render('Emails/Important/important.html.twig'));
     }
@@ -101,6 +104,7 @@ class Mail
     {
         $this->buildMessage(
             '[INFORMATION][ZBOARD] || Information',
+            'no-reply@zboard.fr',
             $destinataire,
             $this->templating->render(':Emails/Information:information.html.twig'));
     }
@@ -114,7 +118,25 @@ class Mail
     {
         $this->buildMessage(
             '[STAFF][ZBOARD] || Information staff',
+            'no-reply@zboard.fr',
             $destinataire,
             $this->templating->render(':Emails/Staff:staff.html.twig'));
+    }
+
+    /**
+     * Create a message between two users.
+     *
+     * @param $objet        | The object of the message
+     * @param $expediteur   | The expediteur of the message
+     * @param $destinataire | The destinataire of the message
+     * @param $user         | The user linked to this message
+     */
+    public function userMessage($objet, $destinataire, $user)
+    {
+        $this->buildMessage(
+            '[ZBOARD] || '.$objet,
+            'no-reply@zboard.fr',
+            $destinataire,
+            $this->templating->render(':Emails/Users:user_email.html.twig', array('user' => $user)));
     }
 }
