@@ -4,21 +4,20 @@ parameters:
 #    parameter_name: value
 
 services:
+
+    # List of services used in the principal environnement.
+
     core.admin:
         class: AdminBundle\Services\Admin
         arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events"]
 
-    core.archive:
-        class: AdminBundle\Services\Archive
-        arguments: ["@doctrine.orm.entity_manager", "@session", "@core.events"]
-
-    core.statistiques:
-        class: AdminBundle\Services\Statistiques
-        arguments: ["@doctrine.orm.entity_manager"]
-
     core.back:
         class: BackendBundle\Services\Back
         arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session","@security.token_storage","@security.authorization_checker", "@core.events"]
+
+    core.user:
+        class: UserBundle\Services\UserService
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events"]
 
     core.mentore:
         class: MentoratBundle\Services\MentoreService
@@ -27,6 +26,16 @@ services:
     core.mentor:
         class: MentoratBundle\Services\MentorService
         arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
+
+    # list of services used in addition to perform global actions.
+
+    core.archive:
+        class: AdminBundle\Services\Archive
+        arguments: ["@doctrine.orm.entity_manager", "@session", "@core.events"]
+
+    core.statistiques:
+        class: AdminBundle\Services\Statistiques
+        arguments: ["@doctrine.orm.entity_manager"]
 
     core.formation:
       class: MentoratBundle\Services\FormationService
@@ -40,17 +49,21 @@ services:
         class: MentoratBundle\Services\SoutenanceService
         arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
 
+    # List of services used in order to perform a specific action.
+
     core.events:
         class: NotificationBundle\Services\Evenements
         arguments: ["@doctrine.orm.entity_manager", "@security.token_storage", "@session"]
 
-    core.user:
-        class: UserBundle\Services\UserService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events"]
+    core.mail:
+        class: AdminBundle\Services\Mail
+        arguments: ["@templating", "@mailer"]
 
 
 
-    # Used to registrer the users with FOS !
+    # List of services used to registrer the users with FOS.
+    # Dont delete this services !
+
     core.user_register:
         class: UserBundle\Form\RegistrationType
         tags:
