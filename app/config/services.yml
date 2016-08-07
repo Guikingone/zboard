@@ -54,6 +54,7 @@ services:
     core.events:
         class: NotificationBundle\Services\Evenements
         arguments: ["@doctrine.orm.entity_manager", "@security.token_storage", "@session", "@core.mail"]
+        lazy: true
 
     core.mail:
         class: AdminBundle\Services\Mail
