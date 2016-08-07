@@ -96,6 +96,8 @@
                                 </ul>
                             </li>
                         {% endif %}
+                        <li class="{{ (controller == 'settings') ? 'active' : '' }} treeview"><a href="{{ path('settings') }}"><i class='fa fa-info-circle'></i> <span>Paramètres</span></a></li>
+
                         <li class="{{ (controller == "cms")? "active" : "" }} treeview">
                             <a href="#">
                                 <i class="fa fa-laptop"></i>
