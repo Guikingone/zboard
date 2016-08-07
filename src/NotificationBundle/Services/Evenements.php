@@ -12,10 +12,12 @@
 namespace NotificationBundle\Services;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\HttpFoundation\Session\Session;
+use AdminBundle\Services\Mail;
 use NotificationBundle\Entity\Events;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class Evenements
 {
@@ -30,15 +32,27 @@ class Evenements
     private $user;
 
     /**
+     * @var Session
+     */
+    private $session;
+
+    /**
+     * @var Mail
+     */
+    private $mail;
+
+    /**
      * Evenements constructor.
      *
      * @param EntityManager $doctrine
      * @param TokenStorage  $user
      */
-    public function __construct(EntityManager $doctrine, TokenStorage $user)
+    public function __construct(EntityManager $doctrine, TokenStorage $user, Session $session, Mail $mail)
     {
         $this->doctrine = $doctrine;
         $this->user = $user;
+        $this->session = $session;
+        $this->mail = $mail;
     }
 
     /**
@@ -49,7 +63,7 @@ class Evenements
     public function getEvents()
     {
         return $this->doctrine->getRepository('NotificationBundle:Events')
-                              ->findBy(array('users' => $this->user->getToken()->getUser()));
+                              ->getEventsByUser($this->user->getToken()->getUser());
     }
 
     /**
@@ -71,6 +85,7 @@ class Evenements
             $event->addUser($user);
             $user->addEvent($event);
         }
+
         $this->doctrine->persist($event);
         $this->doctrine->flush();
     }
@@ -108,7 +123,7 @@ class Evenements
     public function purgeEvents()
     {
         $events = $this->doctrine->getRepository('NotificationBundle:Events')
-                                 ->findBy(array('user' => $this->user->getToken()->getUser()));
+                                 ->getEventsByUser($this->user->getToken()->getUser());
         if (null === $events) {
             throw new NotFoundHttpException('Les évènements semble ne pas exister');
         }
@@ -117,5 +132,7 @@ class Evenements
             $this->doctrine->remove($event);
             $this->doctrine->flush();
         }
+
+        $this->session->getFlashBag()->add('success', 'Les notifications ont bien été supprimées.');
     }
 }

@@ -95,6 +95,30 @@ class Projet
     }
 
     /**
+     * Set duree.
+     *
+     * @param string $duree
+     *
+     * @return Projet
+     */
+    public function setDuree($duree)
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    /**
+     * Get duree.
+     *
+     * @return string
+     */
+    public function getDuree()
+    {
+        return $this->duree;
+    }
+
+    /**
      * Set status.
      *
      * @param string $status

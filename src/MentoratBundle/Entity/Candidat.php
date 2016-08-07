@@ -57,18 +57,18 @@ class Candidat
      */
     private $reponses;
 
-    /**
-     * @ORM\OneToMany(targetEntity="RecrutementVote", mappedBy="idCandidature")
-     */
+     /**
+      * @ORM\OneToMany(targetEntity="RecrutementVote", mappedBy="idCandidature")
+      */
      protected $votes;
 
-     protected $forVotes;
-     protected $againstVotes;
+    protected $forVotes;
+    protected $againstVotes;
 
-     public function __construct()
-     {
-       $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
-     }
+    public function __construct()
+    {
+        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id.
@@ -164,25 +164,21 @@ class Candidat
 
     public function countVotes()
     {
-      $this->forVotes = 0;
-      $this->againstVotes = 0;
-      foreach($this->getVotes() as $vote)
-      {
-        if($vote->getVote() == 1)
-        {
-          $this->forVotes++;
+        $this->forVotes = 0;
+        $this->againstVotes = 0;
+        foreach ($this->getVotes() as $vote) {
+            if ($vote->getVote() == 1) {
+                ++$this->forVotes;
+            } else {
+                ++$this->againstVotes;
+            }
         }
-        else
-        {
-          $this->againstVotes++;
-        }
-      }
-      return;
+
+        return;
     }
 
-
     /**
-     * Get the value of For Votes
+     * Get the value of For Votes.
      *
      * @return mixed
      */
@@ -192,7 +188,7 @@ class Candidat
     }
 
     /**
-     * Get the value of Against Votes
+     * Get the value of Against Votes.
      *
      * @return mixed
      */

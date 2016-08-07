@@ -10,4 +10,14 @@ namespace NotificationBundle\Repository;
  */
 class EventsRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getEventsByUser($id)
+    {
+        return $this->createQueryBuilder('e')
+                    ->innerJoin('e.users', 'u')
+                        ->addSelect('u')
+                    ->where('u.id = :id')
+                        ->setParameter('id', $id)
+                    ->getQuery()
+                    ->getResult();
+    }
 }

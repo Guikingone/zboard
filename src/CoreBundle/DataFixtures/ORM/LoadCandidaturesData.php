@@ -21,14 +21,14 @@ class LoadCandidaturesData implements FixtureInterface, ContainerAwareInterface,
     public function load(ObjectManager $manager)
     {
         $candidature1 = new Candidat();
-        $candidature1->setNom("Chuck Norris");
-        $candidature1->setEmail("chucknorris@yopmail.fr");
+        $candidature1->setNom('Chuck Norris');
+        $candidature1->setEmail('chucknorris@yopmail.fr');
         $candidature1->setDateCandidature(new \DateTime());
         $candidature1->setIsCandidature(true);
 
         $candidature2 = new Candidat();
-        $candidature2->setNom("Lolita");
-        $candidature2->setEmail("lolita@yopmail.fr");
+        $candidature2->setNom('Lolita');
+        $candidature2->setEmail('lolita@yopmail.fr');
         $candidature2->setDateCandidature(new \DateTime());
         $candidature2->setIsCandidature(true);
 

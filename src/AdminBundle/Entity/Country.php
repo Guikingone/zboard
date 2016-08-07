@@ -3,6 +3,8 @@
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AbstractBundle\Model\User\CountryInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Country.
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="zboard_country")
  * @ORM\Entity(repositoryClass="AdminBundle\Repository\CountryRepository")
  */
-class Country
+class Country implements CountryInterface
 {
     /**
      * @var int
@@ -43,8 +45,8 @@ class Country
      */
     public function __construct()
     {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->mentores = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->mentores = new ArrayCollection();
     }
 
     /**

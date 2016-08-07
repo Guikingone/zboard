@@ -4,7 +4,6 @@ namespace MentoratBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormFactory;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
@@ -31,11 +30,11 @@ class RecrutementService
     private $user;
 
     /**
-   * @param EntityManager $doctrine
-   * @param FormFactory   $form
-   * @param Session       $session
-   * @param TokenStorage  $user
-   */
+     * @param EntityManager $doctrine
+     * @param FormFactory   $form
+     * @param Session       $session
+     * @param TokenStorage  $user
+     */
     public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user)
     {
         $this->doctrine = $doctrine;
@@ -45,7 +44,8 @@ class RecrutementService
     }
 
     /**
-     * Donne les candidatures
+     * Donne les candidatures.
+     *
      * @return array with all applications
      */
     public function getCandidatures()
@@ -67,12 +67,11 @@ class RecrutementService
         {
           array_push($candidaturesSimple,$candid);
         }
-      }
 
-      $candidatures['candidatures_simples'] = $candidaturesSimple;
-      $candidatures['candidatures_a_arbitrer'] = $candidaturesAArbitrer;
+        $candidatures['candidatures_simples'] = $candidaturesSimple;
+        $candidatures['candidatures_a_arbitrer'] = $candidaturesAArbitrer;
 
-      return $candidatures;
+        return $candidatures;
     }
 
     public function getCandidature($id)
@@ -113,7 +112,6 @@ class RecrutementService
       return $candidatures;
     }
 
-
+        return $candid;
+    }
 }
-
-?>

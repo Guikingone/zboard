@@ -123,7 +123,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $userManager->updateUser($supervisteurMentor, true);
         $userManager->updateUser($mentorDebutant, true);
         $userManager->updateUser($mentorExpr, true);
-
     }
 
     public function getOrder()

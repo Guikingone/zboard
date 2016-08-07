@@ -2,9 +2,11 @@
 
 namespace UserBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use AbstractBundle\Model\EventsInterface;
+use AbstractBundle\Model\User\UserInterface;
 
 /**
  * User.
@@ -12,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="zboard_user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  */
-class User extends BaseUser
+class User extends BaseUser implements UserInterface
 {
     /**
      * @var int
@@ -114,8 +116,9 @@ class User extends BaseUser
     private $archived;
 
     /**
-     * @ORM\ManyToMany(targetEntity="NotificationBundle\Entity\Events", inversedBy="users")
-     * @ORM\JoinTable(name="zboard_users_events")
+     * @ORM\ManyToMany(targetEntity="AbstractBundle\Model\EventsInterface")
+     *
+     * @var EventsInterface
      */
     private $events;
 
