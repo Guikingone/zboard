@@ -29,6 +29,13 @@ class Candidat
     private $nom;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_candidature", type="boolean")
+     */
+    private $isCandidature;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
@@ -42,19 +49,13 @@ class Candidat
      */
     private $dateCandidature;
 
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="competences", type="array")
-     */
-    private $competences;
+
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="motivation", type="text")
+     * @ORM\OneToMany(targetEntity="RecrutementReponse", mappedBy="idCandidature")
      */
-    private $motivation;
+    private $reponses;
 
     /**
      * @ORM\OneToMany(targetEntity="RecrutementVote", mappedBy="idCandidature")
@@ -152,55 +153,6 @@ class Candidat
     }
 
     /**
-     * Set competences.
-     *
-     * @param array $competences
-     *
-     * @return Candidat
-     */
-    public function setCompetences($competences)
-    {
-        $this->competences = $competences;
-
-        return $this;
-    }
-
-    /**
-     * Get competences.
-     *
-     * @return array
-     */
-    public function getCompetences()
-    {
-        return $this->competences;
-    }
-
-    /**
-     * Set motivation.
-     *
-     * @param string $motivation
-     *
-     * @return Candidat
-     */
-    public function setMotivation($motivation)
-    {
-        $this->motivation = $motivation;
-
-        return $this;
-    }
-
-    /**
-     * Get motivation.
-     *
-     * @return string
-     */
-    public function getMotivation()
-    {
-        return $this->motivation;
-    }
-
-
-    /**
      * Get the value of Votes
      *
      * @return mixed
@@ -247,6 +199,57 @@ class Candidat
     public function getAgainstVotes()
     {
         return $this->againstVotes;
+    }
+
+
+    /**
+     * Set the value of Id
+     *
+     * @param int id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of Reponses
+     *
+     * @return string
+     */
+    public function getReponses()
+    {
+        return $this->reponses;
+    }
+
+
+
+    /**
+     * Get the value of Is Candidature
+     *
+     * @return boolean
+     */
+    public function getIsCandidature()
+    {
+        return $this->isCandidature;
+    }
+
+    /**
+     * Set the value of Is Candidature
+     *
+     * @param boolean isCandidature
+     *
+     * @return self
+     */
+    public function setIsCandidature($isCandidature)
+    {
+        $this->isCandidature = $isCandidature;
+
+        return $this;
     }
 
 }

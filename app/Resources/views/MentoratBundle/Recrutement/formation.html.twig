@@ -1,9 +1,90 @@
 {% extends "::layout_mentor.html.twig" %}
 
-{% block title %} - Validation mentors{% endblock %}
+{% block title %} - Confirmation formation mentors{% endblock %}
 
 {% block body %}
 
-  Yop
+{% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Validations de formations à arbitrer</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        {% if candidatures_dispute %}
+          <table class="table table-bordered">
+            <tr>
+              <th style="width: 50%">Nom</th>
+              <th>Date soumission</th>
+              <th>Etat</th>
+              <th>Actions</th>
+            </tr>
+            {% for candidature in candidatures_dispute %}
+              <tr>
+                <td>{{ candidature.nom }}</td>
+                <td>{{ candidature.dateCandidature|date('d/m/Y') }}</td>
+                <td>{{ candidature.forVotes }} Pour, {{ candidature.againstVotes }} Contre</td>
+                <td>
+                  <a href="{{ path('recrutement_candidature') }}/show/{{ candidature.id }}"><button type="button" class="btn btn-flat btn-error">Voir</button></a>
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
+        {% else %}
+          <div class="alert alert-warning">Il n'y a aucune validation de formation à arbitrer</div>
+        {% endif %}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+{% endif %}
 
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Validations de candidatures en attente</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        {% if candidatures %}
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 50%">Nom</th>
+            <th>Date soumission</th>
+            <th>Etat</th>
+            <th>Actions</th>
+          </tr>
+          {% for candidature in candidatures %}
+            <tr>
+              <td>{{ candidature.nom }}</td>
+              <td>{{ candidature.dateCandidature|date('d/m/Y') }}</td>
+              <td>{{ candidature.forVotes }} Pour, {{ candidature.againstVotes }} Contre</td>
+              <td>
+                <a href="{{ path('recrutement_candidature') }}/show/{{ candidature.id }}"><button type="button" class="btn btn-flat btn-success">Voir</button></a>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+          <div class="alert alert-info">Il n'y a aucune validation de formation en attente</div>
+        {% endif %}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
 {% endblock %}
