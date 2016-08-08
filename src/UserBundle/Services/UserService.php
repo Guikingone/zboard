@@ -14,6 +14,7 @@ namespace UserBundle\Services;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Suivi;
 use NotificationBundle\Services\Evenements;
+use AdminBundle\Services\Mail;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -56,19 +57,25 @@ class UserService
     private $events;
 
     /**
+     * @var Mail
+     */
+    private $mail;
+
+    /**
      * Admin constructor.
      *
      * @param EntityManager $doctrine
      * @param FormFactory   $form
      * @param Session       $session
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, Mail $mail)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
         $this->session = $session;
         $this->user = $user;
         $this->events = $events;
+        $this->mail = $mail;
     }
 
     /**
@@ -135,7 +142,8 @@ class UserService
 
     /**
      * Allow to create a new instance of Mentor, in order to be fast and effective, the registration of a new mentor
-     * doesn't require that the back enter a Username or a Password, this tasks are handled by the system.
+     * doesn't require that the back enter a Username or a Password, this tasks are handled by the system, after the
+     * registration, an email is sent to the user in order to remember him the creation of his profile.
      *
      * @param Request $request
      *
@@ -157,6 +165,7 @@ class UserService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
             $this->events->createEvents("Création d'un nouveau mentor", 'Important');
+            $this->mail->inscriptionMessage($mentor->getEmail());
         }
 
         return $form;
@@ -191,7 +200,7 @@ class UserService
             $this->doctrine->persist($suivi);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Elève enregistré.');
-            $this->events->createEvents("Création d'un nouvel élève", 'Important');
+            $this->events->createUserEvents($mentore, 'Création de votre profil.', 'Important');
         }
 
         return $form;
@@ -246,6 +255,7 @@ class UserService
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', "Le rôle de l'utilisateur a bien été mis à jour");
+            $this->events->createUserEvents($user, 'Modifications de vos accès', 'Important');
         }
 
         return $form;
@@ -273,6 +283,7 @@ class UserService
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le rôle du mentoré a bien été mis à jour');
+            $this->events->createUserEvents($mentore, 'Modifications de vos accès', 'Important');
         }
 
         return $form;
@@ -300,6 +311,7 @@ class UserService
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le mentor a bien été mis à jour');
+            $this->events->createUserEvents($mentor, 'Modifications de votre profil', 'Important');
         }
 
         return $form;
@@ -327,6 +339,7 @@ class UserService
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le mentore a bien été mis à jour');
+            $this->events->createUserEvents($mentore, 'Modifications de votre profil', 'Important');
         }
 
         return $form;

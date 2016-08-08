@@ -44,6 +44,7 @@ class Events
 
     /**
      * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="events")
+     * @ORM\JoinTable(name="zboard_user_events")
      */
     private $users;
 }

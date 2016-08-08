@@ -1,18 +1,23 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Guillaume
- * Date: 02/08/2016
- * Time: 09:14.
+
+/*
+ * This file is part of the Zboard project.
+ *
+ * (c) Guillaume Loulier <guillaume.loulier@hotmail.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace NotificationBundle\Services;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\HttpFoundation\Session\Session;
+use AdminBundle\Services\Mail;
 use NotificationBundle\Entity\Events;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class Evenements
 {
@@ -27,15 +32,27 @@ class Evenements
     private $user;
 
     /**
+     * @var Session
+     */
+    private $session;
+
+    /**
+     * @var Mail
+     */
+    private $mail;
+
+    /**
      * Evenements constructor.
      *
      * @param EntityManager $doctrine
-     * @param TokenStorage $user
+     * @param TokenStorage  $user
      */
-    public function __construct(EntityManager $doctrine, TokenStorage $user)
+    public function __construct(EntityManager $doctrine, TokenStorage $user, Session $session, Mail $mail)
     {
         $this->doctrine = $doctrine;
         $this->user = $user;
+        $this->session = $session;
+        $this->mail = $mail;
     }
 
     /**
@@ -46,7 +63,7 @@ class Evenements
     public function getEvents()
     {
         return $this->doctrine->getRepository('NotificationBundle:Events')
-            ->findBy(array('user' => $this->user->getToken()->getUser()));
+                              ->getEventsByUser($this->user->getToken()->getUser());
     }
 
     /**
@@ -68,6 +85,7 @@ class Evenements
             $event->addUser($user);
             $user->addEvent($event);
         }
+
         $this->doctrine->persist($event);
         $this->doctrine->flush();
     }
@@ -79,7 +97,7 @@ class Evenements
      * @param $libelle
      * @param $categorie
      */
-    public function createEventsToUser($user, $libelle, $categorie)
+    public function createUserEvents($user, $libelle, $categorie)
     {
         $users = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $user));
 
@@ -95,6 +113,11 @@ class Evenements
         $event->addUser($users);
         $users->addEvent($event);
 
+        if ($event->getCategorie() === 'Important') {
+            $message = $this->mail->importantMessage($user);
+            $this->mail->sendMessage($message);
+        }
+
         $this->doctrine->persist($event);
         $this->doctrine->flush();
     }
@@ -105,7 +128,7 @@ class Evenements
     public function purgeEvents()
     {
         $events = $this->doctrine->getRepository('NotificationBundle:Events')
-                                 ->findBy(array('user' => $this->user->getToken()->getUser()));
+                                 ->getEventsByUser($this->user->getToken()->getUser());
         if (null === $events) {
             throw new NotFoundHttpException('Les évènements semble ne pas exister');
         }
@@ -114,5 +137,7 @@ class Evenements
             $this->doctrine->remove($event);
             $this->doctrine->flush();
         }
+
+        $this->session->getFlashBag()->add('success', 'Les notifications ont bien été supprimées.');
     }
 }

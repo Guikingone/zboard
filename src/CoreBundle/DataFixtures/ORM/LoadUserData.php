@@ -83,7 +83,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $supervisteurMentor->setRoles(array('ROLE_SUPERVISEUR_MENTOR'));
         $supervisteurMentor->setAvailable(true);
 
-
         // Création de notre utilisateur MENTOR_DEBUTANT
         $mentorDebutant = $userManager->createUser();
         $mentorDebutant->setUsername('michael');
@@ -101,11 +100,29 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
         $mentorDebutant->setRoles(array('ROLE_MENTOR_DEBUTANT'));
         $mentorDebutant->setAvailable(true);
 
+        // Création de notre utilisateur ROLE_MENTOR_EXPERIMENTE
+        $mentorExpr = $userManager->createUser();
+        $mentorExpr->setUsername('alec');
+        $mentorExpr->setFirstname('Alec');
+        $mentorExpr->setLastname('Sadler');
+        $mentorExpr->setEmail('alecsadler@zboard.fr');
+        $mentorExpr->setPlainPassword('alec');
+        $mentorExpr->setAddress('6 rue LABAS');
+        $mentorExpr->setZipCode('44290');
+        $mentorExpr->setCity('Panam');
+        $mentorExpr->setCountry($country);
+        $mentorExpr->setEnabled(true);
+        $mentorExpr->setArchived(false);
+        $mentorExpr->setPhone('09.46.12.06.07');
+        $mentorExpr->setRoles(array('ROLE_MENTOR_EXPERIMENTE'));
+        $mentorExpr->setAvailable(true);
+
         // Update the user
         $userManager->updateUser($userAdmin, true);
         $userManager->updateUser($mentor, true);
         $userManager->updateUser($supervisteurMentor, true);
         $userManager->updateUser($mentorDebutant, true);
+        $userManager->updateUser($mentorExpr, true);
     }
 
     public function getOrder()

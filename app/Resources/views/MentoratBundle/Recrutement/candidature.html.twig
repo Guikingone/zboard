@@ -1,0 +1,49 @@
+{% extends "::layout_mentor.html.twig" %}
+
+{% block title %} - Recrutement{% endblock %}
+
+{% block body %}
+
+
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+          <div class="box box-primary">
+              <div class="box-body box-profile">
+                  <h3 class="profile-username text-center"><p>Candidature de {{ candidature.nom }}</p></h3>
+                  <ul class="list-group list-group-unbordered">
+
+                      <li class="list-group-item">
+                          <b>Date d'envoi : </b>{{ candidature.dateCandidature|date('d/m/Y') }}
+                      </li>
+                      {% for reponse in candidature.reponses %}
+                      <li class="list-group-item">
+                          <b>{{reponse.idQuestion.contenu}} :</b><br /> {{ reponse.contenu }}
+                      </li>
+                      {% endfor %}
+
+                  </ul>
+              </div>
+          </div>
+
+            <div class="well">
+              {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                <button type="button" class="btn btn-flat btn-success" data-toggle="modal" data-target="#myModalInformation">
+                    Accepter
+                </button>
+                <button type="button" class="btn btn-flat btn-danger" data-toggle="modal" data-target="#myModalInformation">
+                    Refuser
+                </button>
+                {% else %}
+                <button type="button" class="btn btn-flat btn-success" data-toggle="modal" data-target="#myModalInformation">
+                    Voter pour
+                </button>
+                <button type="button" class="btn btn-flat btn-danger" data-toggle="modal" data-target="#myModalInformation">
+                    Voter contre
+                </button>
+              {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

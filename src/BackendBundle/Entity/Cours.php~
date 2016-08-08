@@ -46,5 +46,109 @@ class Cours
      */
     private $parcours;
 
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * Set libelle.
+     *
+     * @param string $libelle
+     *
+     * @return Cours
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get libelle.
+     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * Set duree.
+     *
+     * @param string $duree
+     *
+     * @return Cours
+     */
+    public function setDuree($duree)
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    /**
+     * Get duree.
+     *
+     * @return string
+     */
+    public function getDuree()
+    {
+        return $this->duree;
+    }
+
+    /**
+     * Set status.
+     *
+     * @param string $status
+     *
+     * @return Cours
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status.
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set parcours.
+     *
+     * @param \BackendBundle\Entity\Parcours $parcours
+     *
+     * @return Cours
+     */
+    public function setParcours(\BackendBundle\Entity\Parcours $parcours = null)
+    {
+        $this->parcours = $parcours;
+
+        return $this;
+    }
+
+    /**
+     * Get parcours.
+     *
+     * @return \BackendBundle\Entity\Parcours
+     */
+    public function getParcours()
+    {
+        return $this->parcours;
+    }
 }

@@ -5,7 +5,7 @@ namespace MentoratBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * FormationEtapeUser
+ * FormationEtapeUser.
  *
  * @ORM\Table(name="zboard_formation_etape_user")
  * @ORM\Entity(repositoryClass="MentoratBundle\Repository\FormationEtapeUserRepository")
@@ -44,9 +44,8 @@ class FormationEtapeUser
      */
     private $content;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -56,9 +55,9 @@ class FormationEtapeUser
     }
 
     /**
-     * Set idUser
+     * Set idUser.
      *
-     * @param integer $idUser
+     * @param int $idUser
      *
      * @return FormationEtapeUser
      */
@@ -70,7 +69,7 @@ class FormationEtapeUser
     }
 
     /**
-     * Get idUser
+     * Get idUser.
      *
      * @return int
      */
@@ -80,9 +79,9 @@ class FormationEtapeUser
     }
 
     /**
-     * Set idEtape
+     * Set idEtape.
      *
-     * @param integer $idEtape
+     * @param int $idEtape
      *
      * @return FormationEtapeUser
      */
@@ -94,7 +93,7 @@ class FormationEtapeUser
     }
 
     /**
-     * Get idEtape
+     * Get idEtape.
      *
      * @return int
      */
@@ -104,7 +103,7 @@ class FormationEtapeUser
     }
 
     /**
-     * Set content
+     * Set content.
      *
      * @param string $content
      *
@@ -118,7 +117,7 @@ class FormationEtapeUser
     }
 
     /**
-     * Get content
+     * Get content.
      *
      * @return string
      */

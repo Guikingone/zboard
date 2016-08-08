@@ -10,32 +10,30 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/mentor")
  * Class MentorController
- * @package MentoratBundle\Controller
  */
 class MentorController extends Controller
 {
-
     /**
      * @Route("/{page}",name="list_mentors",defaults={"page" = 1})
      * @Template("MentoratBundle/Mentors/list_mentors.html.twig")
      */
     public function listAction($page)
     {
-        $mentors = $this->get('core.mentor')->getUserByRoleMentor($page,20);
+        $mentors = $this->get('core.mentor')->getUserByRoleMentor($page, 20);
         $nbMentors = $this->get('core.mentor')->countMentors();
 
         $pagination = array(
             'page' => $page,
             'route' => 'list_mentors',
             'pages_count' => ceil($nbMentors / 20),
-            'route_params' => array()
+            'route_params' => array(),
         );
 
         return array(
-            'controller'    => 'mentors',
-            'mentors'       => $mentors,
-            'pagination'    => $pagination,
-            'title_action'  => "Liste des mentors"
+            'controller' => 'mentors',
+            'mentors' => $mentors,
+            'pagination' => $pagination,
+            'title_action' => 'Liste des mentors',
         );
     }
 
@@ -53,10 +51,10 @@ class MentorController extends Controller
         $mentor = $this->get('core.mentore')->viewMentor($id);
 
         return array(
-            'controller'    => 'mentor',
-            'mentor'        => $mentor,
-            'competence'    => $competence->createView(),
-            'title_action'  => "Détails du mentor :" . $mentor->getFirstname() . " " . $mentor->getLastname()
+            'controller' => 'mentor',
+            'mentor' => $mentor,
+            'competence' => $competence->createView(),
+            'title_action' => 'Détails du mentor :'.$mentor->getFirstname().' '.$mentor->getLastname(),
         );
     }
 }

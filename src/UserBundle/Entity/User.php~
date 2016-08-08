@@ -2,9 +2,9 @@
 
 namespace UserBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User.
@@ -115,7 +115,7 @@ class User extends BaseUser
 
     /**
      * @ORM\ManyToMany(targetEntity="NotificationBundle\Entity\Events", inversedBy="users")
-     * @ORM\JoinTable(name="zboard_users_events")
+     * @ORM\JoinTable(name="zboard_user_events")
      */
     private $events;
 

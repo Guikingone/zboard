@@ -1,6 +1,6 @@
 <?php
 
-namespace CoreBundle\Entity;
+namespace MentoratBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Candidat.
  *
  * @ORM\Table(name="zboard_candidatures")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\CandidatRepository")
+ * @ORM\Entity(repositoryClass="MentoratBundle\Repository\CandidatRepository")
  */
 class Candidat
 {
@@ -29,6 +29,13 @@ class Candidat
     private $nom;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_candidature", type="boolean")
+     */
+    private $isCandidature;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
@@ -42,19 +49,26 @@ class Candidat
      */
     private $dateCandidature;
 
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="competences", type="array")
-     */
-    private $competences;
+
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="motivation", type="text")
+     * @ORM\OneToMany(targetEntity="RecrutementReponse", mappedBy="idCandidature")
      */
-    private $motivation;
+    private $reponses;
+
+     /**
+      * @ORM\OneToMany(targetEntity="RecrutementVote", mappedBy="idCandidature")
+      */
+     protected $votes;
+
+    protected $forVotes;
+    protected $againstVotes;
+
+    public function __construct()
+    {
+        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id.
@@ -139,50 +153,99 @@ class Candidat
     }
 
     /**
-     * Set competences.
+     * Get the value of Votes
      *
-     * @param array $competences
-     *
-     * @return Candidat
+     * @return mixed
      */
-    public function setCompetences($competences)
+    public function getVotes()
     {
-        $this->competences = $competences;
+        return $this->votes;
+    }
+
+    public function countVotes()
+    {
+        $this->forVotes = 0;
+        $this->againstVotes = 0;
+        foreach ($this->getVotes() as $vote) {
+            if ($vote->getVote() == 1) {
+                ++$this->forVotes;
+            } else {
+                ++$this->againstVotes;
+            }
+        }
+
+        return;
+    }
+
+    /**
+     * Get the value of For Votes.
+     *
+     * @return mixed
+     */
+    public function getForVotes()
+    {
+        return $this->forVotes;
+    }
+
+    /**
+     * Get the value of Against Votes.
+     *
+     * @return mixed
+     */
+    public function getAgainstVotes()
+    {
+        return $this->againstVotes;
+    }
+
+
+    /**
+     * Set the value of Id
+     *
+     * @param int id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
 
         return $this;
     }
 
     /**
-     * Get competences.
-     *
-     * @return array
-     */
-    public function getCompetences()
-    {
-        return $this->competences;
-    }
-
-    /**
-     * Set motivation.
-     *
-     * @param string $motivation
-     *
-     * @return Candidat
-     */
-    public function setMotivation($motivation)
-    {
-        $this->motivation = $motivation;
-
-        return $this;
-    }
-
-    /**
-     * Get motivation.
+     * Get the value of Reponses
      *
      * @return string
      */
-    public function getMotivation()
+    public function getReponses()
     {
-        return $this->motivation;
+        return $this->reponses;
     }
+
+
+
+    /**
+     * Get the value of Is Candidature
+     *
+     * @return boolean
+     */
+    public function getIsCandidature()
+    {
+        return $this->isCandidature;
+    }
+
+    /**
+     * Set the value of Is Candidature
+     *
+     * @param boolean isCandidature
+     *
+     * @return self
+     */
+    public function setIsCandidature($isCandidature)
+    {
+        $this->isCandidature = $isCandidature;
+
+        return $this;
+    }
+
 }

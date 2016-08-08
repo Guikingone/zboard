@@ -218,7 +218,7 @@ class Admin
             $this->doctrine->persist($competencesProject);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Competences ajouté !');
-            $this->events->createEvents("Création d'un nouveau parcours", 'Important');
+            $this->events->createEvents("Création d'une compétences à valider.", 'Important');
         }
 
         return $form;
@@ -319,6 +319,7 @@ class Admin
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le parcours a bien été mis à jour.');
+            $this->events->createEvents('Le parcours'.$parcours->getLibelle().' a été modifié.', 'Important');
         }
 
         return $form;
@@ -346,6 +347,7 @@ class Admin
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le cours a bien été mise à jour.');
+            $this->events->createEvents('Le cours'.$cours->getLibelle().' a été modifié.', 'Important');
         }
 
         return $form;
@@ -373,6 +375,7 @@ class Admin
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le projet a bien été mis à jour.');
+            $this->events->createEvents('Le projet'.$projet->getLibelle().' a été modifié.', 'Important');
         }
 
         return $form;
@@ -400,6 +403,7 @@ class Admin
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La compétence a bien été mise à jour');
+            $this->events->createEvents('Une compétence à valider a été mise à jour.', 'Important');
         }
 
         return $form;

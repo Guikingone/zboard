@@ -1,14 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Guillaume
- * Date: 27/07/2016
- * Time: 13:30.
+
+/*
+ * This file is part of the Zboard project.
+ *
+ * (c) Guillaume Loulier <guillaume.loulier@hotmail.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AdminBundle\Services;
 
 use Doctrine\ORM\EntityManager;
+use NotificationBundle\Services\Evenements;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -25,15 +29,21 @@ class Archive
     protected $session;
 
     /**
+     * @var Evenements
+     */
+    private $events;
+
+    /**
      * Archive constructor.
      *
      * @param EntityManager $doctrine
      * @param Session       $session
      */
-    public function __construct(EntityManager $doctrine, Session $session)
+    public function __construct(EntityManager $doctrine, Session $session, Evenements $events)
     {
         $this->doctrine = $doctrine;
         $this->session = $session;
+        $this->events = $events;
     }
 
     /**
@@ -126,6 +136,7 @@ class Archive
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le parcours a bien été archivé.');
+        $this->events->createEvents('Le parcours'.$parcours->getLibelle().' a été archivé.', 'Important');
     }
 
     /**
@@ -146,6 +157,7 @@ class Archive
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le cours a bien été archivé.');
+        $this->events->createEvents('Le cours'.$courses->getLibelle().' a été archivé.', 'Important');
     }
 
     /**
@@ -166,6 +178,7 @@ class Archive
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le projet a bien été archivé.');
+        $this->events->createEvents('Le projet'.$projet->getLibelle().' a été archivé.', 'Important');
     }
 
     /**
@@ -226,5 +239,6 @@ class Archive
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le parcours a bien été sorti des archives.');
+        $this->events->createEvents('Le parcours'.$parcours->getLibelle().' a été désarchivé.', 'Important');
     }
 }

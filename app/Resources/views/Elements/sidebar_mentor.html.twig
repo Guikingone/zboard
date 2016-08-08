@@ -49,6 +49,24 @@
                 </ul>
             </li>
             <li class="{{ (controller == 'infos') ? 'active' : '' }} treeview"><a href="{{ path('mentorat_infos_index') }}"><i class='fa fa-info-circle'></i> <span>Informations mentorat</span></a></li>
+
+            {% if is_granted('ROLE_MENTOR_EXPERIMENTE') %}
+
+            <li class="{{ (controller == 'recrutement') ? 'active' : '' }} treeview">
+                <a href="#">
+                    <i class="ion ion-person-stalker"></i>
+                    <span>Recrutement</span>
+                    <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a href="{{ path('recrutement_candidature') }}"><i class="fa fa-circle-o"></i>Candidatures mentorat</a></li>
+                  <li><a href="{{ path('recrutement_formation') }}"><i class="fa fa-circle-o"></i>Mentors en formation</a></li>
+                </ul>
+            </li>
+            {% endif %}
+
             {% if is_granted('ROLE_MENTOR_DEBUTANT') %}
             <li class="{{ (controller == 'formation') ? 'active' : '' }} treeview"><a href="{{ path('mentorat_formation_index') }}"><i class='fa fa-level-up'></i> <span>Ma formation</span></a></li>
             {% elseif is_granted('ROLE_ADMIN') %}

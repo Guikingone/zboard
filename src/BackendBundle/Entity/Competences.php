@@ -3,6 +3,7 @@
 namespace BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AbstractBundle\Model\OC\CompetencesInterface;
 
 /**
  * Competences.
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="zboard_projets_competences")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\CompetencesRepository")
  */
-class Competences
+class Competences implements CompetencesInterface
 {
     /**
      * @var int

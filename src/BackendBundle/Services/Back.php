@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Zboard project.
+ *
+ * (c) Guillaume Loulier <guillaume.loulier@hotmail.fr>
+ * (c) Nathanaël Langlois <nathanael.langlois@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace BackendBundle\Services;
 
 use BackendBundle\Entity\InformationMentorat;
@@ -126,7 +136,8 @@ class Back
     }
 
     /**
-     * Allow to add a soutenance between a teacher and a student.
+     * Allow to add a soutenance between a teacher and a student, the teacher receive the notifications about the
+     * creation in order to contact the student, the student receive the notification in order to be alert.
      *
      * @param Request $request
      *
@@ -140,10 +151,15 @@ class Back
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $mentor = $data->getMentor();
+            $mentore = $data->getMentore();
+
             $this->doctrine->persist($soutenance);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La soutenance a bien été enregistrée.');
-            $this->events->createEvents("Création d'une nouvelle soutenance", 'Important');
+            $this->events->createUserEvents($mentor, 'Une soutenance a été planifiée.', 'Information');
+            $this->events->createUserEvents($mentore, 'Une soutenance a été planifiée.', 'Information');
         }
 
         return $form;
@@ -163,10 +179,9 @@ class Back
         $form = $this->formFactory->create(InformationType::class, $information);
         $form->handleRequest($request);
 
-        if ($form->isValid())
-        {
+        if ($form->isValid()) {
             if (false === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
-              throw new AccessDeniedException();
+                throw new AccessDeniedException();
             }
             $information->setDCreated(new \DateTime('now'));
             $information->setUpdated(new \DateTime('now'));

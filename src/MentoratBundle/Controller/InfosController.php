@@ -19,10 +19,10 @@ class InfosController extends Controller
       $informations = $this->get('core.back')->getMentoratInformations();
 
       return array(
-          'controller'      => 'infos',
-          'informations'    => $informations,
-          'information'     => $information->createView(),
-          'title_action'    => "Informations sur le mentorat"
+          'controller' => 'infos',
+          'informations' => $informations,
+          'information' => $information->createView(),
+          'title_action' => 'Informations sur le mentorat',
       );
   }
 }

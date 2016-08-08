@@ -11,9 +11,17 @@ Bonjour et bienvenue à toi nouveau mentor ! <br /> Voici les étapes à remplir
 
 {% for etape in formation %}
 <div class="checkbox">
-  <label><input type="checkbox" {% if etape.validate == true %}checked=""{% endif %} value="">{{ etape.etape|e }}</label>
+  <label><input onclick="updateFormation(this)" type="checkbox" id="{{etape.id}}" {% if etape.validate == true %}checked=""{% endif %} value="">{{ etape.etape|e }}</label>
 </div>
 {% endfor %}
+
+<script>
+function updateFormation(element)
+{
+  $.post('{{path('mentorat_formation_update')}}',
+                {data1: 'mydata1', data2:'mydata2'});
+}
+</script>
 
 {% endif %}
 

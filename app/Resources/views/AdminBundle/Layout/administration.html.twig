@@ -16,71 +16,9 @@
                     </a>
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
-                            <li class="dropdown notifications-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-bell-o"></i>
-                                    {% if app.user.events is empty %}
-                                        <!-- Si les notifications sont vides, l'icône reste vide -->
-                                    {% else %}
-                                        <span class="label label-warning">{{ app.user.events|length }}</span>
-                                    {% endif %}
-                                </a>
-                                <ul class="dropdown-menu">
-                                    {% if app.user.events is empty %}
-                                        <li class="header">Aucune notifications</li>
-                                    {% else %}
-                                        <li class="header">Vous avez {{ app.user.events|length }} notifications en attente</li>
-                                    {% endif %}
-                                    <li>
-                                        <ul class="menu">
-                                            {% for events in app.user.events %}
-                                                {% if events.categorie == 'Important' %}
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="fa fa-warning text-orange"></i> {{ events.libelle }}
-                                                        </a>
-                                                    </li>
-                                                {% endif %}
-                                                {% if events.categorie == 'Information' %}
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="fa fa-user text-blue"></i> {{ events.libelle }}
-                                                        </a>
-                                                    </li>
-                                                {% endif %}
-                                                {% if events.categorie == 'Staff' %}
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="fa fa-information text-red"></i> {{ events.libelle }}
-                                                        </a>
-                                                    </li>
-                                                {% endif %}
-                                                {% if events.categorie == 'Danger' %}
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="fa fa-information text-red"></i> {{ events.libelle }}
-                                                        </a>
-                                                    </li>
-                                                {% endif %}
-                                                {% if events.categorie == 'Mentor' %}
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="fa fa-information text-red"></i> {{ events.libelle }}
-                                                        </a>
-                                                    </li>
-                                                {% endif %}
-                                                {% if events.categorie == 'Mentore' %}
-                                                    <li>
-                                                        <a href="#">
-                                                            <i class="fa fa-information text-red"></i> {{ events.libelle }}
-                                                        </a>
-                                                    </li>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
+                            <!-- Show the notifications -->
+                            {% include ':Elements/Navbar:notifications.html.twig' %}
+
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="{{ asset('img/avatars/user-default.png') }}" class="user-image" alt="User Image">

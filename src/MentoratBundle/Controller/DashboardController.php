@@ -15,8 +15,8 @@ class DashboardController extends Controller
     public function indexAction()
     {
         return array(
-            'controller'    => 'dashboard',
-            'title_action'  => "Accueil"
+            'controller' => 'dashboard',
+            'title_action' => 'Accueil',
         );
     }
 }

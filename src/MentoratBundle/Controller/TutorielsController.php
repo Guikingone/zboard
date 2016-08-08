@@ -19,10 +19,10 @@ class TutorielsController extends Controller
       $tutoriels = $this->get('core.back')->getTutorials();
 
       return array(
-          'controller'      => 'tutoriels',
-          'tutoriels'       => $tutoriels,
-          'tutoriel'        => $tutoriel->createView(),
-          'title_action'    => "Tutoriels sur le mentorat"
+          'controller' => 'tutoriels',
+          'tutoriels' => $tutoriels,
+          'tutoriel' => $tutoriel->createView(),
+          'title_action' => 'Tutoriels sur le mentorat',
       );
   }
 }

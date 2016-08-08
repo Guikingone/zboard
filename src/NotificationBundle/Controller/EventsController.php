@@ -16,6 +16,19 @@ class EventsController extends Controller
     {
         $events = $this->get('core.events')->getEvents();
 
-        return array('controller' => 'notifications', 'events' => $events);
+        return array('controller' => 'notifications', 'title_action' => 'notifications',
+                     'events' => $events, );
+    }
+
+    /**
+     * @Route("/notifications/purge", name="purge_notifications")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function purgeEvents()
+    {
+        $this->get('core.events')->purgeEvents();
+
+        return $this->redirectToRoute('show_notifications');
     }
 }

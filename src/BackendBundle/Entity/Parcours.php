@@ -3,6 +3,7 @@
 namespace BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AbstractBundle\Model\OC\ParcoursInterface;
 
 /**
  * Parcours.
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="zboard_parcours")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\ParcoursRepository")
  */
-class Parcours
+class Parcours implements ParcoursInterface
 {
     /**
      * @var int

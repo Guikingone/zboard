@@ -44,11 +44,12 @@ class Events
 
     /**
      * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="events")
+     * @ORM\JoinTable(name="zboard_user_events")
      */
     private $users;
 
     /**
-     * Constructor.
+     * Constructor
      */
     public function __construct()
     {
@@ -56,9 +57,9 @@ class Events
     }
 
     /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -66,7 +67,7 @@ class Events
     }
 
     /**
-     * Set libelle.
+     * Set libelle
      *
      * @param string $libelle
      *
@@ -80,7 +81,7 @@ class Events
     }
 
     /**
-     * Get libelle.
+     * Get libelle
      *
      * @return string
      */
@@ -90,7 +91,7 @@ class Events
     }
 
     /**
-     * Set date.
+     * Set date
      *
      * @param \DateTime $date
      *
@@ -104,7 +105,7 @@ class Events
     }
 
     /**
-     * Get date.
+     * Get date
      *
      * @return \DateTime
      */
@@ -114,7 +115,7 @@ class Events
     }
 
     /**
-     * Set categorie.
+     * Set categorie
      *
      * @param string $categorie
      *
@@ -128,7 +129,7 @@ class Events
     }
 
     /**
-     * Get categorie.
+     * Get categorie
      *
      * @return string
      */
@@ -138,7 +139,7 @@ class Events
     }
 
     /**
-     * Add user.
+     * Add user
      *
      * @param \UserBundle\Entity\User $user
      *
@@ -152,7 +153,7 @@ class Events
     }
 
     /**
-     * Remove user.
+     * Remove user
      *
      * @param \UserBundle\Entity\User $user
      */
@@ -162,7 +163,7 @@ class Events
     }
 
     /**
-     * Get users.
+     * Get users
      *
      * @return \Doctrine\Common\Collections\Collection
      */
