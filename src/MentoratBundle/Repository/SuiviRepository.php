@@ -24,4 +24,20 @@ class SuiviRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()
                     ->getResult();
     }
+
+
+
+    /**
+     * @param $mentor
+     * @return mixed
+     */
+    public function countMentoreByMentorDisplayed($mentor) {
+
+        return $this->createQueryBuilder('s')
+            ->select('COUNT(s)')
+            ->where('s.mentor = :mentor')
+            ->setParameter('mentor', $mentor)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

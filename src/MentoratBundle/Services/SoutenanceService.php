@@ -41,7 +41,8 @@ class SoutenanceService
     }
 
     /**
-     * @return array|\MentoratBundle\Entity\Mentore[]
+     * @param $user
+     * @return array|\MentoratBundle\Entity\Soutenance[]
      */
     public function getSoutenanceWaiting($user)
     {
@@ -52,7 +53,8 @@ class SoutenanceService
     }
 
     /**
-     * @return array|\MentoratBundle\Entity\Mentore[]
+     * @param $user
+     * @return array|\MentoratBundle\Entity\Soutenance[]
      */
     public function getSoutenanceDone($user)
     {
@@ -60,5 +62,15 @@ class SoutenanceService
             'mentor' => $user,
             'status' => 'DONE',
         ));
+    }
+
+    /**
+     * Return the number of soutenances done by the mentor in parameter
+     * @param $mentor
+     * @return mixed
+     */
+    public function countSoutenancesDone($mentor)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->countSoutenancesDone($mentor);
     }
 }

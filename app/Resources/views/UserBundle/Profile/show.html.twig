@@ -2,25 +2,38 @@
 
 {% block fos_user_content %}
     <div class="row">
-        <div class="col-md-3">
-
+        <div class="col-sm-12 col-md-3 col-lg-5">
             <!-- Profile Image -->
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                    <img class="profile-user-img img-responsive img-circle" src="{{ asset('img/avatars/user-default.jpg') }}" alt="User profile picture">
+                    <img class="profile-user-img img-responsive img-circle" src="{{ asset('img/avatars/user-default.png') }}" alt="User profile picture">
 
-                    <h3 class="profile-username text-center">{{ app.user.username }}</h3>
+                    <h3 class="profile-username text-center">{{ app.user.username | capitalize}}</h3>
 
-                    <p class="text-muted text-center">{{ app.user.roles[0] }}</p>
-
+                    <p class="text-muted text-center">
+                        {% for roles in app.user.roles %}
+                            {% for role in roles %}
+                                {% if role[0] == "ROLE_MENTOR" %}
+                                    Mentor
+                                {% elseif role[0] == "ROLE_SUPERVISEUR_MENTOR" %}
+                                    Superviseur
+                                {% elseif role[0] == "ROLE_ADMIN" %}
+                                    Administrateur
+                                {% else %}
+                                    Mentoré - Apprenant
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </p>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Mentorés</b> <a class="pull-right">1,322</a>
+                            <b>Mentorés</b> <a class="pull-right">{{ nbMentores }}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Soutenances (2016)</b> <a class="pull-right">543</a>
+                            <b>Soutenances (2016)</b> <a class="pull-right">{{ nbSoutenances }}</a>
                         </li>
                     </ul>
+                    <a href="{{ path('mon_profil_edit') }}"><button class="btn btn-flat btn-md btn-warning">Modifier mon profil</button></a>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -34,14 +47,19 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <strong><i class="fa fa-map-marker margin-r-5"></i> Lieu de résidence</strong>
-                    <p class="text-muted">Nantes, France</p>
+                    <p class="text-muted">{{ app.user.city | capitalize }}, {{ app.user.country.libelle | capitalize }}</p>
                     <hr>
                     <strong><i class="fa fa-pencil margin-r-5"></i> Compétences</strong>
                     <p>
-                        <span class="label label-danger">PHP</span>
-                        <span class="label label-success">Symfony</span>
-                        <span class="label label-info">Javascript</span>
-                        <span class="label label-warning">Gestion de projet</span>
+                        {% if app.user.competences %}
+                            {% for competence in app.user.competences %}
+                                {% for label in competence.libelle %}
+                                    <span class="label label-warning">{{ label }}</span>
+                                {% endfor %}
+                            {% endfor %}
+                        {% else %}
+                            <span class="label label-danger">Aucune compétence n'est renseignée</span>
+                        {% endif %}
                     </p>
                 </div>
                 <!-- /.box-body -->
@@ -49,7 +67,7 @@
             <!-- /.box -->
         </div>
         <!-- /.col -->
-        <div class="col-md-9">
+        <div class="col-sm-12 col-md-9 col-lg-7">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#activity" data-toggle="tab">Historique d'activité</a></li>
