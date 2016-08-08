@@ -13,6 +13,7 @@ namespace AdminBundle\Services;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Swift_Mailer;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 class Mail
 {
@@ -138,5 +139,19 @@ class Mail
             'no-reply@zboard.fr',
             $destinataire,
             $this->templating->render(':Emails/Users:user_email.html.twig', array('user' => $user)));
+    }
+
+    /**
+     * Create a message sent during the inscription.
+     *
+     * @param $destinataire | The destinataire of the message
+     */
+    public function inscriptionMessage($destinataire)
+    {
+        $this->buildMessage(
+            '[ZBOARD] || Inscription',
+            'no-reply@zboard.fr',
+            $destinataire,
+            $this->templating->render(':Emails/Users:inscription.html.twig'));
     }
 }

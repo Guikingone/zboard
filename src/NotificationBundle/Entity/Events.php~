@@ -4,16 +4,13 @@ namespace NotificationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use AbstractBundle\Model\EventsInterface;
-use AbstractBundle\Model\UserInterface;
-
 /**
  * Events.
  *
  * @ORM\Table(name="zboard_events")
  * @ORM\Entity(repositoryClass="NotificationBundle\Repository\EventsRepository")
  */
-class Events implements EventsInterface
+class Events
 {
     /**
      * @var int
@@ -46,99 +43,8 @@ class Events implements EventsInterface
     private $categorie;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AbstractBundle\Model\User\UserInterface")
-     *
-     * @var UserInterface
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="events")
+     * @ORM\JoinTable(name="zboard_user_events")
      */
     private $users;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set libelle.
-     *
-     * @param string $libelle
-     *
-     * @return Events
-     */
-    public function setLibelle($libelle)
-    {
-        $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    /**
-     * Get libelle.
-     *
-     * @return string
-     */
-    public function getLibelle()
-    {
-        return $this->libelle;
-    }
-
-    /**
-     * Set date.
-     *
-     * @param \DateTime $date
-     *
-     * @return Events
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get date.
-     *
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * Set categorie.
-     *
-     * @param string $categorie
-     *
-     * @return Events
-     */
-    public function setCategorie($categorie)
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
-
-    /**
-     * Get categorie.
-     *
-     * @return string
-     */
-    public function getCategorie()
-    {
-        return $this->categorie;
-    }
 }

@@ -3,8 +3,6 @@
 namespace NotificationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AbstractBundle\Model\EventsInterface;
-use AbstractBundle\Model\UserInterface;
 
 /**
  * Events.
@@ -12,7 +10,7 @@ use AbstractBundle\Model\UserInterface;
  * @ORM\Table(name="zboard_events")
  * @ORM\Entity(repositoryClass="NotificationBundle\Repository\EventsRepository")
  */
-class Events implements EventsInterface
+class Events
 {
     /**
      * @var int
@@ -45,14 +43,13 @@ class Events implements EventsInterface
     private $categorie;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AbstractBundle\Model\User\UserInterface")
-     *
-     * @var UserInterface
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="events")
+     * @ORM\JoinTable(name="zboard_user_events")
      */
     private $users;
 
     /**
-     * Constructor.
+     * Constructor
      */
     public function __construct()
     {
@@ -60,9 +57,9 @@ class Events implements EventsInterface
     }
 
     /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -70,7 +67,7 @@ class Events implements EventsInterface
     }
 
     /**
-     * Set libelle.
+     * Set libelle
      *
      * @param string $libelle
      *
@@ -84,7 +81,7 @@ class Events implements EventsInterface
     }
 
     /**
-     * Get libelle.
+     * Get libelle
      *
      * @return string
      */
@@ -94,7 +91,7 @@ class Events implements EventsInterface
     }
 
     /**
-     * Set date.
+     * Set date
      *
      * @param \DateTime $date
      *
@@ -108,7 +105,7 @@ class Events implements EventsInterface
     }
 
     /**
-     * Get date.
+     * Get date
      *
      * @return \DateTime
      */
@@ -118,7 +115,7 @@ class Events implements EventsInterface
     }
 
     /**
-     * Set categorie.
+     * Set categorie
      *
      * @param string $categorie
      *
@@ -132,7 +129,7 @@ class Events implements EventsInterface
     }
 
     /**
-     * Get categorie.
+     * Get categorie
      *
      * @return string
      */
@@ -142,13 +139,13 @@ class Events implements EventsInterface
     }
 
     /**
-     * Add user.
+     * Add user
      *
-     * @param \AbstractBundle\Model\User\UserInterface $user
+     * @param \UserBundle\Entity\User $user
      *
      * @return Events
      */
-    public function addUser(\AbstractBundle\Model\User\UserInterface $user)
+    public function addUser(\UserBundle\Entity\User $user)
     {
         $this->users[] = $user;
 
@@ -156,17 +153,17 @@ class Events implements EventsInterface
     }
 
     /**
-     * Remove user.
+     * Remove user
      *
-     * @param \AbstractBundle\Model\User\UserInterface $user
+     * @param \UserBundle\Entity\User $user
      */
-    public function removeUser(\AbstractBundle\Model\User\UserInterface $user)
+    public function removeUser(\UserBundle\Entity\User $user)
     {
         $this->users->removeElement($user);
     }
 
     /**
-     * Get users.
+     * Get users
      *
      * @return \Doctrine\Common\Collections\Collection
      */

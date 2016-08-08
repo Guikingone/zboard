@@ -60,11 +60,6 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
-        # Used in order to map the entity.
-        resolve_target_entities:
-            AbstractBundle\Model\User\UserInterface: UserBundle\Entity\User
-            AbstractBundle\Model\EventsInterface: NotificationBundle\Entity\Events
-
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"

@@ -17,7 +17,7 @@ services:
 
     core.user:
         class: UserBundle\Services\UserService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events", "@core.mail"]
 
     core.mentore:
         class: MentoratBundle\Services\MentoreService
