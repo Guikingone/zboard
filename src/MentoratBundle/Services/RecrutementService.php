@@ -70,7 +70,7 @@ class RecrutementService
 
         $candidatures['candidatures_simples'] = $candidaturesSimple;
         $candidatures['candidatures_a_arbitrer'] = $candidaturesAArbitrer;
-
+      }
         return $candidatures;
     }
 
@@ -108,10 +108,7 @@ class RecrutementService
 
       $candidatures['candidatures_simples'] = $candidaturesSimple;
       $candidatures['candidatures_a_arbitrer'] = $candidaturesAArbitrer;
-
+      
       return $candidatures;
-    }
-
-        return $candid;
     }
 }
