@@ -21,12 +21,12 @@ class LoadSettingsData implements FixtureInterface, ContainerAwareInterface, Ord
     public function load(ObjectManager $manager)
     {
         $setting = new Setting();
-        $setting->setNom("RECRUTEMENT_ACTIF");
-        $setting->setValeur("TRUE");
+        $setting->setNom('RECRUTEMENT_ACTIF');
+        $setting->setValeur('TRUE');
 
         $setting_2 = new Setting();
-        $setting_2->setNom("NOMBRE_NOUVEAUX_MENTORS_SOUHAITES");
-        $setting_2->setValeur("10");
+        $setting_2->setNom('NOMBRE_NOUVEAUX_MENTORS_SOUHAITES');
+        $setting_2->setValeur('10');
 
         $manager->persist($setting);
         $manager->persist($setting_2);

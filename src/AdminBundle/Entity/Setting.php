@@ -5,7 +5,7 @@ namespace AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Setting
+ * Setting.
  *
  * @ORM\Table(name="zboard_settings")
  * @ORM\Entity(repositoryClass="AdminBundle\Repository\SettingRepository")
@@ -35,9 +35,8 @@ class Setting
      */
     private $valeur;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -47,7 +46,7 @@ class Setting
     }
 
     /**
-     * Set nom
+     * Set nom.
      *
      * @param string $nom
      *
@@ -61,7 +60,7 @@ class Setting
     }
 
     /**
-     * Get nom
+     * Get nom.
      *
      * @return string
      */
@@ -71,7 +70,7 @@ class Setting
     }
 
     /**
-     * Set valeur
+     * Set valeur.
      *
      * @param string $valeur
      *
@@ -85,7 +84,7 @@ class Setting
     }
 
     /**
-     * Get valeur
+     * Get valeur.
      *
      * @return string
      */

@@ -5,7 +5,7 @@ namespace MentoratBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * RecrutementQuestion
+ * RecrutementQuestion.
  *
  * @ORM\Table(name="zboard_recrutement_questions")
  * @ORM\Entity(repositoryClass="MentoratBundle\Repository\RecrutementQuestionRepository")
@@ -35,11 +35,8 @@ class RecrutementQuestion
      */
     private $typeAnswer;
 
-    
-
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -49,7 +46,7 @@ class RecrutementQuestion
     }
 
     /**
-     * Set contenu
+     * Set contenu.
      *
      * @param string $contenu
      *
@@ -63,7 +60,7 @@ class RecrutementQuestion
     }
 
     /**
-     * Get contenu
+     * Get contenu.
      *
      * @return string
      */
@@ -73,7 +70,7 @@ class RecrutementQuestion
     }
 
     /**
-     * Set typeAnswer
+     * Set typeAnswer.
      *
      * @param string $typeAnswer
      *
@@ -87,7 +84,7 @@ class RecrutementQuestion
     }
 
     /**
-     * Get typeAnswer
+     * Get typeAnswer.
      *
      * @return string
      */

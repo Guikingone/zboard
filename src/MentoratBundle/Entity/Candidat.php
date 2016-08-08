@@ -29,7 +29,7 @@ class Candidat
     private $nom;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_candidature", type="boolean")
      */
@@ -48,8 +48,6 @@ class Candidat
      * @ORM\Column(name="dateCandidature", type="datetime")
      */
     private $dateCandidature;
-
-
 
     /**
      * @var string
@@ -153,7 +151,7 @@ class Candidat
     }
 
     /**
-     * Get the value of Votes
+     * Get the value of Votes.
      *
      * @return mixed
      */
@@ -197,9 +195,8 @@ class Candidat
         return $this->againstVotes;
     }
 
-
     /**
-     * Set the value of Id
+     * Set the value of Id.
      *
      * @param int id
      *
@@ -213,7 +210,7 @@ class Candidat
     }
 
     /**
-     * Get the value of Reponses
+     * Get the value of Reponses.
      *
      * @return string
      */
@@ -222,12 +219,10 @@ class Candidat
         return $this->reponses;
     }
 
-
-
     /**
-     * Get the value of Is Candidature
+     * Get the value of Is Candidature.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsCandidature()
     {
@@ -235,9 +230,9 @@ class Candidat
     }
 
     /**
-     * Set the value of Is Candidature
+     * Set the value of Is Candidature.
      *
-     * @param boolean isCandidature
+     * @param bool isCandidature
      *
      * @return self
      */
@@ -247,5 +242,4 @@ class Candidat
 
         return $this;
     }
-
 }

@@ -41,8 +41,10 @@ class SuiviService
     }
 
     /**
-     * Return the number of mentoré owned by the mentor in parameter
+     * Return the number of mentoré owned by the mentor in parameter.
+     *
      * @param $mentor
+     *
      * @return mixed
      */
     public function countMentoreByMentor($mentor)

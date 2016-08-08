@@ -21,12 +21,12 @@ class LoadRecrutementQuestionsData implements FixtureInterface, ContainerAwareIn
     public function load(ObjectManager $manager)
     {
         $question1 = new RecrutementQuestion();
-        $question1->setContenu("Quelles sont tes compétences ?");
-        $question1->setTypeAnswer("array");
+        $question1->setContenu('Quelles sont tes compétences ?');
+        $question1->setTypeAnswer('array');
 
         $question2 = new RecrutementQuestion();
-        $question2->setContenu("Parles nous un peu de ce qui te motive");
-        $question2->setTypeAnswer("text");
+        $question2->setContenu('Parles nous un peu de ce qui te motive');
+        $question2->setTypeAnswer('text');
 
         $manager->persist($question1);
         $manager->persist($question2);

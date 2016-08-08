@@ -13,7 +13,6 @@ namespace AdminBundle\Services;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Swift_Mailer;
-use Symfony\Component\Config\Definition\Exception\Exception;
 
 class Mail
 {

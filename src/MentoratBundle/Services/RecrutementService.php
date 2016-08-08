@@ -50,65 +50,60 @@ class RecrutementService
      */
     public function getCandidatures()
     {
-      $candidatures = array();
-      $candidaturesSimple = array();
-      $candidaturesAArbitrer = array();
+        $candidatures = array();
+        $candidaturesSimple = array();
+        $candidaturesAArbitrer = array();
 
-      $allCandidatures = $this->doctrine->getRepository('MentoratBundle:Candidat')->findBy(array('isCandidature'=>true));
+        $allCandidatures = $this->doctrine->getRepository('MentoratBundle:Candidat')->findBy(array('isCandidature' => true));
 
-      foreach($allCandidatures as $candid)
-      {
-        $candid->countVotes();
-        if($candid->getForVotes()>1&&$candid->getAgainstVotes()>1)
-        {
-          array_push($candidaturesAArbitrer,$candid);
+        foreach ($allCandidatures as $candid) {
+            $candid->countVotes();
+            if ($candid->getForVotes() > 1 && $candid->getAgainstVotes() > 1) {
+                array_push($candidaturesAArbitrer, $candid);
+            } else {
+                array_push($candidaturesSimple, $candid);
+            }
+
+            $candidatures['candidatures_simples'] = $candidaturesSimple;
+            $candidatures['candidatures_a_arbitrer'] = $candidaturesAArbitrer;
         }
-        else
-        {
-          array_push($candidaturesSimple,$candid);
-        }
 
-        $candidatures['candidatures_simples'] = $candidaturesSimple;
-        $candidatures['candidatures_a_arbitrer'] = $candidaturesAArbitrer;
-      }
         return $candidatures;
     }
 
     public function getCandidature($id)
     {
-      $candid = $this->doctrine->getRepository('MentoratBundle:Candidat')->find($id);
-      $candid->countVotes($candid);
-      return $candid;
+        $candid = $this->doctrine->getRepository('MentoratBundle:Candidat')->find($id);
+        $candid->countVotes($candid);
+
+        return $candid;
     }
 
     /**
-     * Donne les candidatures des mentors débutants
+     * Donne les candidatures des mentors débutants.
+     *
      * @return array with all applications
      */
     public function getFormationCandidatures()
     {
-      $candidatures = array();
-      $candidaturesSimple = array();
-      $candidaturesAArbitrer = array();
+        $candidatures = array();
+        $candidaturesSimple = array();
+        $candidaturesAArbitrer = array();
 
-      $allCandidatures = $this->doctrine->getRepository('MentoratBundle:Candidat')->findBy(array("isCandidature"=>false));
+        $allCandidatures = $this->doctrine->getRepository('MentoratBundle:Candidat')->findBy(array('isCandidature' => false));
 
-      foreach($allCandidatures as $candid)
-      {
-        $candid->countVotes();
-        if($candid->getForVotes()>1&&$candid->getAgainstVotes()>1)
-        {
-          array_push($candidaturesAArbitrer,$candid);
+        foreach ($allCandidatures as $candid) {
+            $candid->countVotes();
+            if ($candid->getForVotes() > 1 && $candid->getAgainstVotes() > 1) {
+                array_push($candidaturesAArbitrer, $candid);
+            } else {
+                array_push($candidaturesSimple, $candid);
+            }
         }
-        else
-        {
-          array_push($candidaturesSimple,$candid);
-        }
-      }
 
-      $candidatures['candidatures_simples'] = $candidaturesSimple;
-      $candidatures['candidatures_a_arbitrer'] = $candidaturesAArbitrer;
-      
-      return $candidatures;
+        $candidatures['candidatures_simples'] = $candidaturesSimple;
+        $candidatures['candidatures_a_arbitrer'] = $candidaturesAArbitrer;
+
+        return $candidatures;
     }
 }

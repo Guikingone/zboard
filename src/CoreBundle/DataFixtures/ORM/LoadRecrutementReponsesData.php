@@ -25,7 +25,6 @@ class LoadRecrutementReponsesData implements FixtureInterface, ContainerAwareInt
         $question2 = $this->privateContainer->get('doctrine')->getRepository('MentoratBundle:RecrutementQuestion')
                                     ->findOneBy(array('contenu' => 'Parles nous un peu de ce qui te motive'));
 
-
         // Candidat 1
         $candidat1 = $this->privateContainer->get('doctrine')->getRepository('MentoratBundle:Candidat')
                                     ->findOneBy(array('nom' => 'Chuck Norris'));
@@ -33,7 +32,7 @@ class LoadRecrutementReponsesData implements FixtureInterface, ContainerAwareInt
         $reponse1 = new RecrutementReponse();
         $reponse1->setIdCandidature($candidat1);
         $reponse1->setIdQuestion($question1);
-        $reponse1->setContenu("Julia;Batch");
+        $reponse1->setContenu('Julia;Batch');
 
         $reponse2 = new RecrutementReponse();
         $reponse2->setIdCandidature($candidat1);
@@ -47,12 +46,12 @@ class LoadRecrutementReponsesData implements FixtureInterface, ContainerAwareInt
         $reponse3 = new RecrutementReponse();
         $reponse3->setIdCandidature($candidat2);
         $reponse3->setIdQuestion($question1);
-        $reponse3->setContenu("C++;C--");
+        $reponse3->setContenu('C++;C--');
 
         $reponse4 = new RecrutementReponse();
         $reponse4->setIdCandidature($candidat2);
         $reponse4->setIdQuestion($question2);
-        $reponse4->setContenu("Je suis !");
+        $reponse4->setContenu('Je suis !');
 
         $manager->persist($reponse1);
         $manager->persist($reponse2);

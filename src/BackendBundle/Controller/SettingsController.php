@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SettingsController extends Controller
 {
-  /**
+    /**
    * @param Request $request
    *
    * @return array

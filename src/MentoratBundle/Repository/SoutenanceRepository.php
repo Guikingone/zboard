@@ -10,13 +10,13 @@ namespace MentoratBundle\Repository;
  */
 class SoutenanceRepository extends \Doctrine\ORM\EntityRepository
 {
-
     /**
      * @param $mentor
+     *
      * @return mixed
      */
-    public function countSoutenancesDone($mentor) {
-
+    public function countSoutenancesDone($mentor)
+    {
         return $this->createQueryBuilder('s')
             ->select('COUNT(s)')
             ->where('s.mentor = :mentor')
@@ -24,5 +24,4 @@ class SoutenanceRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
-
 }

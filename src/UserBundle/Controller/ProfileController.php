@@ -8,7 +8,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
-
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
@@ -35,16 +34,17 @@ class ProfileController extends BaseController
         $nbMentores = $this->get('core.suivi')->countMentoreByMentor($user);
 
         return array(
-            'user'          => $user,
-            'controller'    => 'user',
-            'title_action'  => "Mon profil",
+            'user' => $user,
+            'controller' => 'user',
+            'title_action' => 'Mon profil',
             'nbSoutenances' => $nbSoutenances,
-            'nbMentores'    => $nbMentores
+            'nbMentores' => $nbMentores,
         );
     }
 
     /**
-     * Edit the user
+     * Edit the user.
+     *
      * @Route("/dashboard/profile/edit", name="mon_profil_edit")
      * @Template("UserBundle/Profile/edit.html.twig")
      */
@@ -94,8 +94,8 @@ class ProfileController extends BaseController
 
         return array(
             'form' => $form->createView(),
-            'controller'    => 'user',
-            'title_action'  => "Modifier mon profil",
+            'controller' => 'user',
+            'title_action' => 'Modifier mon profil',
         );
     }
 }

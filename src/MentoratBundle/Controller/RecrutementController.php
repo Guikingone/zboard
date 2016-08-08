@@ -48,12 +48,11 @@ class RecrutementController extends Controller
     {
         $this->denyAccessUnlessGranted('ROLE_MENTOR_EXPERIMENTE', null, 'Accès refusé');
 
-      $candidatures = $this->get('core.recrutement')->getFormationCandidatures();
+        $candidatures = $this->get('core.recrutement')->getFormationCandidatures();
 
-      return array('controller'=>'recrutement',
-                  'title_action'    => "Validation de formation des nouveaux mentors",
-                   'candidatures'=>$candidatures['candidatures_simples'],
-                   'candidatures_dispute'=>$candidatures['candidatures_a_arbitrer']);
-
+        return array('controller' => 'recrutement',
+                  'title_action' => 'Validation de formation des nouveaux mentors',
+                   'candidatures' => $candidatures['candidatures_simples'],
+                   'candidatures_dispute' => $candidatures['candidatures_a_arbitrer'], );
     }
 }

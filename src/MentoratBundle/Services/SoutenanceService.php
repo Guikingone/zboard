@@ -42,6 +42,7 @@ class SoutenanceService
 
     /**
      * @param $user
+     *
      * @return array|\MentoratBundle\Entity\Soutenance[]
      */
     public function getSoutenanceWaiting($user)
@@ -54,6 +55,7 @@ class SoutenanceService
 
     /**
      * @param $user
+     *
      * @return array|\MentoratBundle\Entity\Soutenance[]
      */
     public function getSoutenanceDone($user)
@@ -65,8 +67,10 @@ class SoutenanceService
     }
 
     /**
-     * Return the number of soutenances done by the mentor in parameter
+     * Return the number of soutenances done by the mentor in parameter.
+     *
      * @param $mentor
+     *
      * @return mixed
      */
     public function countSoutenancesDone($mentor)
