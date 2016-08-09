@@ -242,4 +242,33 @@ class Candidat
 
         return $this;
     }
+
+    /**
+     * Set the value of For Votes
+     *
+     * @param mixed forVotes
+     *
+     * @return self
+     */
+    public function setForVotes($forVotes)
+    {
+        $this->forVotes = $forVotes;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of Against Votes
+     *
+     * @param mixed againstVotes
+     *
+     * @return self
+     */
+    public function setAgainstVotes($againstVotes)
+    {
+        $this->againstVotes = $againstVotes;
+
+        return $this;
+    }
+
 }
