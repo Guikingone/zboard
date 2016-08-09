@@ -12,6 +12,15 @@
     {% endfor %}
     <div class="row">
         <div class="col-xs-12 col-md-12">
+            <div class="well">
+                <button type="button" class="btn btn-flat btn-warning" data-toggle="modal" data-target="#myModalUserStaff">
+                    Ajouter un utilisateur
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
             <div class="box box-warning">
                 <div class="box-header with-border">
                     <h3 class="box-title">Liste des utilisateurs de ZBoard</h3>
@@ -30,16 +39,6 @@
                 </div>
                 {% include ':BackBundle/Elements:box_mentores.html.twig' %}
 
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-12 col-md-12">
-            <div class="well">
-                <button type="button" class="btn btn-flat btn-warning" data-toggle="modal" data-target="#myModalUserStaff">
-                    Ajouter un utilisateur
-                </button>
             </div>
         </div>
     </div>

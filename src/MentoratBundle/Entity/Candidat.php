@@ -244,7 +244,7 @@ class Candidat
     }
 
     /**
-     * Set the value of For Votes
+     * Set the value of For Votes.
      *
      * @param mixed forVotes
      *
@@ -258,7 +258,7 @@ class Candidat
     }
 
     /**
-     * Set the value of Against Votes
+     * Set the value of Against Votes.
      *
      * @param mixed againstVotes
      *
@@ -270,5 +270,4 @@ class Candidat
 
         return $this;
     }
-
 }

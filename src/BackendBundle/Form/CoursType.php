@@ -3,6 +3,7 @@
 namespace BackendBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,6 +20,13 @@ class CoursType extends AbstractType
         $builder
             ->add('libelle', TextareaType::class)
             ->add('duree', TextType::class)
+            ->add('difficulty', ChoiceType::class, array(
+                'choices' => array(
+                    'Facile' => 'Facile',
+                    'Moyenne' => 'Moyenne',
+                    'Difficile' => 'Difficile',
+                ),
+            ))
             ->remove('status')
             ->remove('parcours')
         ;

@@ -35,6 +35,11 @@ class Cours
     private $duree;
 
     /**
+     * @ORM\Column(name="difficulty", type="string", length=100, nullable=false)
+     */
+    private $difficulty;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=120, nullable=true)
@@ -102,6 +107,30 @@ class Cours
     public function getDuree()
     {
         return $this->duree;
+    }
+
+    /**
+     * Set difficulty.
+     *
+     * @param string $difficulty
+     *
+     * @return Cours
+     */
+    public function setDifficulty($difficulty)
+    {
+        $this->difficulty = $difficulty;
+
+        return $this;
+    }
+
+    /**
+     * Get difficulty.
+     *
+     * @return string
+     */
+    public function getDifficulty()
+    {
+        return $this->difficulty;
     }
 
     /**

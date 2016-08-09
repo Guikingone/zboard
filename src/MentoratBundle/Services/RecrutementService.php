@@ -107,51 +107,43 @@ class RecrutementService
         return $candidatures;
     }
 
-
     /**
-     * Accept an application
+     * Accept an application.
      */
-    public function acceptApplication($id,$message)
+    public function acceptApplication($id, $message)
     {
-
     }
 
     /**
-     * Reject an application
+     * Reject an application.
      */
-    public function rejectApplication($id,$message)
+    public function rejectApplication($id, $message)
     {
-
     }
     /**
-    * Vote for or against an application
-    * @param $id
-    * @param boolean $isForVote, true if it is a for vote, false otherwise
-    */
-    public function voteApplication($id,boolean $isForVote)
+     * Vote for or against an application.
+     *
+     * @param $id
+     * @param bool $isForVote, true if it is a for vote, false otherwise
+     */
+    public function voteApplication($id, boolean $isForVote)
     {
-      $candidature = $this->getCandidature($id);
-      if($isForVote)
-      {
-        $candidature->setForVotes($candidature->getForVotes()+1);
-      }
-      else
-      {
-        $candidature->setAgainstVotes($candidature->getAgainstVotes()+1);
-      }
+        $candidature = $this->getCandidature($id);
+        if ($isForVote) {
+            $candidature->setForVotes($candidature->getForVotes() + 1);
+        } else {
+            $candidature->setAgainstVotes($candidature->getAgainstVotes() + 1);
+        }
 
       // Check for special operations
 
       // If the application has enough votes to be accepted
-      if( ($candidature->getForVotes()==3 && $candidature->getAgainstVotes()==0) || ($candidature->getForVotes()==5 && $candidature->getAgainstVotes()==1) )
-      {
-        $this->acceptApplication($id,"");
+      if (($candidature->getForVotes() == 3 && $candidature->getAgainstVotes() == 0) || ($candidature->getForVotes() == 5 && $candidature->getAgainstVotes() == 1)) {
+          $this->acceptApplication($id, '');
       }
       // If the application has enough votes to be rejected
-      elseif( ($candidature->getAgainstVotes()==3 && $candidature->getForVotes()==0) || ($candidature->getAgainstVotes()==5 && $candidature->getForVotes()==1) )
-      {
-        $this->rejectApplication($id,"");
+      elseif (($candidature->getAgainstVotes() == 3 && $candidature->getForVotes() == 0) || ($candidature->getAgainstVotes() == 5 && $candidature->getForVotes() == 1)) {
+          $this->rejectApplication($id, '');
       }
-
     }
 }

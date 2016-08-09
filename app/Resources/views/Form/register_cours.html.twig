@@ -19,6 +19,11 @@
                             {{ form_label(cours.duree, 'Duree du cours :')}}
                             {{ form_widget(cours.duree, {'attr': {'class': 'form-control'}}) }}
                         </div>
+                        <div class="form-group">
+                            {{ form_errors(cours.difficulty) }}
+                            {{ form_label(cours.difficulty, 'Difficultée du cours :')}}
+                            {{ form_widget(cours.difficulty, {'attr': {'class': 'form-control'}}) }}
+                        </div>
                         <br>
                         <button type="submit" class="btn btn-flat btn-warning">Enregistrer</button>
                         {{ form_end(cours) }}

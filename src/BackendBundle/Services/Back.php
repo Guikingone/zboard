@@ -80,7 +80,7 @@ class Back
      */
     public function getParcours()
     {
-        return $this->doctrine->getRepository('BackendBundle:Parcours')->getParcours();
+        return $this->doctrine->getRepository('BackendBundle:Parcours')->findBy(array('archived' => false));
     }
 
     /**
@@ -90,7 +90,7 @@ class Back
      */
     public function getParcoursArchived()
     {
-        return $this->doctrine->getRepository('BackendBundle:Parcours')->getParcoursArchived();
+        return $this->doctrine->getRepository('BackendBundle:Parcours')->findBy(array('archived' => true));
     }
 
     /**

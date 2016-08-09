@@ -209,6 +209,6 @@ class UtilsBackController extends Controller
     {
         $this->get('core.archive')->archiveParcours($id);
 
-        return $this->redirectToRoute('home_admin');
+        return $this->redirectToRoute('home_backend');
     }
 }

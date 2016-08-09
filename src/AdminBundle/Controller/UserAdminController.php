@@ -28,7 +28,7 @@ class UserAdminController extends Controller
             'users' => $users,
             'mentores' => $mentores,
             'mentor' => $mentor->createView(),
-            'mentore' => $mentore->createView()
+            'mentore' => $mentore->createView(),
         );
     }
 

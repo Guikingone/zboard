@@ -5,6 +5,7 @@
             <tr>
                 <th>Nom du parcours</th>
                 <th>Niveau diplôme</th>
+                <th>Nombres d'élèves inscrits</th>
                 {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
                     <th>Actions</th>
                 {% endif %}
@@ -19,23 +20,17 @@
                     <td>
                         {{ path.diplome }}
                     </td>
-                    {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                    <td>
+                        {{ path.suivi|length }}
+                    </td>
+                    {% if is_granted('ROLE_OC') %}
                         <td>
                             <a href="{{ path('update_parcours', {'id': path.id}) }}">
                                 <button type="button" class="btn btn-flat btn-warning">Modifier <span class="ion ion-wrench"></span> </button>
                             </a>
-                            {% if path.archived == false %}
-                                <a type="button" class="btn btn-flat btn-danger" data-toggle="modal" data-target="#myModalArchivagePath">
-                                    Archiver <span class="ion ion-folder"></span>
-                                </a>
-
-                                {% include ':BackBundle/Action/Archivage:archivage_path.html.twig' %}
-
-                            {% else %}
-                                <a type="button" class="btn btn-flat btn-danger" href="{{ path('out_archive_path', {'id': path.id }) }}">
-                                    Désarchiver <span class="ion ion-folder"></span>
-                                </a>
-                            {% endif %}
+                            <a type="button" class="btn btn-flat btn-danger" href="{{ path('archive_path', {'id': path.id}) }}">
+                                Archiver <span class="ion ion-folder"></span>
+                            </a>
                         </td>
                     {% endif %}
                 </tr>
