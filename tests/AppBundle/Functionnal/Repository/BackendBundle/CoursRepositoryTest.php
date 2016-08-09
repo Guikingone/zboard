@@ -32,8 +32,8 @@ class CoursRepositoryTest extends KernelTestCase
 
     public function testSearchByLibelle()
     {
-        $cours = $this->em->getRepository('BackendBundle:Cours')
-                          ->findOneBy(array('libelle' => 'Comprendre le web'));
+        return $this->em->getRepository('BackendBundle:Cours')
+                        ->findOneBy(array('libelle' => 'Comprendre le web'));
     }
 
     /**

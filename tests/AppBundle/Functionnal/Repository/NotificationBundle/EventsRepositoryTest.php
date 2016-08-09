@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Functionnal\Repository\BackendBundle;
+namespace tests\AppBundle\Functionnal\Repository\UserBundle;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class CompetencesProjetRepositoryTest extends KernelTestCase
+class EventsRepositoryTest extends KernelTestCase
 {
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -30,10 +30,10 @@ class CompetencesProjetRepositoryTest extends KernelTestCase
         $this->em = static::$kernel->getContainer()->get('doctrine')->getManager();
     }
 
-    public function testSearchByLibelle()
+    public function testSearchByCategory()
     {
-        return $this->em->getRepository('BackendBundle:Competences')
-                        ->findOneBy(array('libelle' => 'Cahier des charges fonctionnels'));
+        return $this->em->getRepository('NotificationBundle:Events')
+                        ->findOneBy(array('categorie' => 'Important'));
     }
 
     /**

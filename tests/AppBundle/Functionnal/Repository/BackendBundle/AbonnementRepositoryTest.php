@@ -32,8 +32,8 @@ class AbonnementRepositoryTest extends KernelTestCase
 
     public function testSearchByLibelle()
     {
-        $abonnement = $this->em->getRepository('BackendBundle:Abonnement')
-                               ->findOneBy(array('libelle' => 'Premium Plus'));
+        return $this->em->getRepository('BackendBundle:Abonnement')
+                        ->findOneBy(array('libelle' => 'Premium Plus'));
     }
 
     /**

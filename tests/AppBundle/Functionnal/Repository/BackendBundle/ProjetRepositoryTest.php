@@ -13,7 +13,7 @@ namespace tests\AppBundle\Functionnal\Repository\BackendBundle;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class CompetencesProjetRepositoryTest extends KernelTestCase
+class ProjetRepositoryTest extends KernelTestCase
 {
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -32,8 +32,8 @@ class CompetencesProjetRepositoryTest extends KernelTestCase
 
     public function testSearchByLibelle()
     {
-        return $this->em->getRepository('BackendBundle:Competences')
-                        ->findOneBy(array('libelle' => 'Cahier des charges fonctionnels'));
+        return $this->em->getRepository('BackendBundle:Projet')
+                        ->findOneBy(array('libelle' => 'Développez un backend pour un client'));
     }
 
     /**

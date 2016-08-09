@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Functionnal\Repository\BackendBundle;
+namespace tests\AppBundle\Functionnal\Repository\UserBundle;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class CompetencesProjetRepositoryTest extends KernelTestCase
+class CompetencesRepositoryTest extends KernelTestCase
 {
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -32,8 +32,8 @@ class CompetencesProjetRepositoryTest extends KernelTestCase
 
     public function testSearchByLibelle()
     {
-        return $this->em->getRepository('BackendBundle:Competences')
-                        ->findOneBy(array('libelle' => 'Cahier des charges fonctionnels'));
+        return $this->em->getRepository('UserBundle:Competences')
+                        ->findOneBy(array('libelle' => 'PHP'));
     }
 
     /**

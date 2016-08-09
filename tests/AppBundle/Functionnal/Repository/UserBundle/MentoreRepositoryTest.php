@@ -32,8 +32,8 @@ class MentoreRepositoryTest extends KernelTestCase
 
     public function testSearchByLastname()
     {
-        $mentore = $this->em->getRepository('UserBundle:Mentore')
-                            ->findOneBy(array('lastname' => 'Gaucher'));
+        return $this->em->getRepository('UserBundle:Mentore')
+                        ->findOneBy(array('lastname' => 'Gaucher'));
     }
 
     /**

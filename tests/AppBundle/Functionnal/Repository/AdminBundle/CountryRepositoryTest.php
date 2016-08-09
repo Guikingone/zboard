@@ -32,8 +32,8 @@ class CountryRepositoryTest extends KernelTestCase
 
     public function testSearchByLastname()
     {
-        $country = $this->em->getRepository('AdminBundle:Country')
-                            ->findOneBy(array('libelle' => 'France'));
+        return $this->em->getRepository('AdminBundle:Country')
+                        ->findOneBy(array('libelle' => 'France'));
     }
 
     /**
