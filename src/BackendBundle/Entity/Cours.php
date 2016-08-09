@@ -3,7 +3,6 @@
 namespace BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AbstractBundle\Model\OC\CoursInterface;
 
 /**
  * Cours.
@@ -11,7 +10,7 @@ use AbstractBundle\Model\OC\CoursInterface;
  * @ORM\Table(name="zboard_parcours_cours")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\CoursRepository")
  */
-class Cours implements CoursInterface
+class Cours
 {
     /**
      * @var int

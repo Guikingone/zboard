@@ -3,7 +3,6 @@
 namespace BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AbstractBundle\Model\OC\AbonnementInterface;
 
 /**
  * Abonnement.
@@ -11,7 +10,7 @@ use AbstractBundle\Model\OC\AbonnementInterface;
  * @ORM\Table(name="zboard_parcours_abonnement")
  * @ORM\Entity(repositoryClass="BackendBundle\Repository\AbonnementRepository")
  */
-class Abonnement implements AbonnementInterface
+class Abonnement
 {
     /**
      * @var int

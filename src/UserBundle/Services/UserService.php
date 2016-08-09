@@ -85,7 +85,7 @@ class UserService
      */
     public function getMentors()
     {
-        return $this->doctrine->getRepository('UserBundle:User')->findAll();
+        return $this->doctrine->getRepository('UserBundle:User')->findBy(array('archived' => false));
     }
 
     /**
@@ -95,7 +95,7 @@ class UserService
      */
     public function getMentores()
     {
-        return $this->doctrine->getRepository('UserBundle:Mentore')->findAll();
+        return $this->doctrine->getRepository('UserBundle:Mentore')->findBy(array('archived' => false));
     }
 
     /**
@@ -164,7 +164,7 @@ class UserService
             $this->doctrine->persist($mentor);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
-            $this->events->createEvents("Création d'un nouveau mentor", 'Important');
+            $this->events->createUserEvents($mentor, "Création d'un nouveau mentor", 'Important');
             $this->mail->inscriptionMessage($mentor->getEmail());
         }
 

@@ -16,15 +16,19 @@ class UserAdminController extends Controller
      * @Route("/list", name="gestion_users_admin")
      * @Template("AdminBundle/Action/list_users.html.twig")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $users = $this->get('core.user')->getMentors();
         $mentores = $this->get('core.user')->getMentores();
+        $mentor = $this->get('core.user')->addMentor($request);
+        $mentore = $this->get('core.user')->addMentore($request);
 
         return array(
             'controller' => 'users_admin',
             'users' => $users,
             'mentores' => $mentores,
+            'mentor' => $mentor->createView(),
+            'mentore' => $mentore->createView()
         );
     }
 
