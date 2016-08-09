@@ -27,26 +27,14 @@
                                 <ul class="dropdown-menu">
                                     <li class="user-header">
                                         <img src="{{ asset('img/avatars/user-default.png') }}" class="img-circle" alt="User Image">
-                                        <p>
-                                            {{ app.user.username }}
-                                        </p>
-                                    </li>
-                                    <li class="user-body">
-                                        <div class="row">
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Compte</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Compétences</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a href="{{ path('fos_user_profile_show') }}">Profil</a>
-                                            </div>
-                                        </div>
+                                        <p>{{ app.user.username }}</p>
                                     </li>
                                     <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a href="{{ path('mon_profil') }}" class="btn btn-default btn-flat">Mon profil</a>
+                                        </div>
                                         <div class="pull-right">
-                                            <a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-flat">Se déconnecter</a>
+                                            <a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-flat">Déconnexion</a>
                                         </div>
                                     </li>
                                 </ul>
