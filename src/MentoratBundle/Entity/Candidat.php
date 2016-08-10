@@ -272,7 +272,7 @@ class Candidat
     }
 
     /**
-     * Add reponse
+     * Add reponse.
      *
      * @param \MentoratBundle\Entity\RecrutementReponse $reponse
      *
@@ -286,7 +286,7 @@ class Candidat
     }
 
     /**
-     * Remove reponse
+     * Remove reponse.
      *
      * @param \MentoratBundle\Entity\RecrutementReponse $reponse
      */
@@ -296,7 +296,7 @@ class Candidat
     }
 
     /**
-     * Add vote
+     * Add vote.
      *
      * @param \MentoratBundle\Entity\RecrutementVote $vote
      *
@@ -310,7 +310,7 @@ class Candidat
     }
 
     /**
-     * Remove vote
+     * Remove vote.
      *
      * @param \MentoratBundle\Entity\RecrutementVote $vote
      */

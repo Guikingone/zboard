@@ -3,6 +3,7 @@
 namespace tests\AppBundle\Unit\Form;
 
 use Symfony\Component\Form\Test\TypeTestCase;
+use UserBundle\Entity\Mentore;
 use UserBundle\Form\RegistrationMentoreType;
 
 class MentoreTypeTest extends TypeTestCase
@@ -30,7 +31,6 @@ class MentoreTypeTest extends TypeTestCase
 
         $object = Mentore::fromArray($formData);
 
-        // submit the data to the form directly
         $form->submit($formData);
 
         $this->assertTrue($form->isSynchronized());

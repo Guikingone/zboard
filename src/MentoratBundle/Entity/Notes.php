@@ -47,9 +47,9 @@ class Notes
     private $suivi;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -57,7 +57,7 @@ class Notes
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -71,7 +71,7 @@ class Notes
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */
@@ -81,7 +81,7 @@ class Notes
     }
 
     /**
-     * Set dateCreated
+     * Set dateCreated.
      *
      * @param \DateTime $dateCreated
      *
@@ -95,7 +95,7 @@ class Notes
     }
 
     /**
-     * Get dateCreated
+     * Get dateCreated.
      *
      * @return \DateTime
      */
@@ -105,7 +105,7 @@ class Notes
     }
 
     /**
-     * Set auteur
+     * Set auteur.
      *
      * @param \UserBundle\Entity\User $auteur
      *
@@ -119,7 +119,7 @@ class Notes
     }
 
     /**
-     * Get auteur
+     * Get auteur.
      *
      * @return \UserBundle\Entity\User
      */
@@ -129,7 +129,7 @@ class Notes
     }
 
     /**
-     * Set suivi
+     * Set suivi.
      *
      * @param \MentoratBundle\Entity\Suivi $suivi
      *
@@ -143,7 +143,7 @@ class Notes
     }
 
     /**
-     * Get suivi
+     * Get suivi.
      *
      * @return \MentoratBundle\Entity\Suivi
      */

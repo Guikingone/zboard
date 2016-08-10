@@ -132,9 +132,6 @@ class MentorService
             $sessions->setMentore($mentore);
             $this->doctrine->persist($sessions);
             $this->doctrine->flush();
-            if ($sessions->getStatus() === 'Planifiée') {
-                $this->session->getFlashBag()->add('success', 'La session a bien été planifiée.');
-            }
             $this->session->getFlashBag()->add('success', 'La session a bien été planifiée.');
         }
 

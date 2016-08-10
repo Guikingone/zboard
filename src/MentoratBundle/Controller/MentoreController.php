@@ -68,7 +68,7 @@ class MentoreController extends Controller
     public function showProfilMentoreAction(Request $request, $id)
     {
         $mentore = $this->get('core.mentore')->viewMentore($id);
-        $note = $this->get('core.mentore')->addNote($request, $id);
+        $note = $this->get('core.mentor')->addNote($request, $id);
         $sessions = $this->get('core.mentore')->addSessionMentorat($request, $id);
 
         return array(

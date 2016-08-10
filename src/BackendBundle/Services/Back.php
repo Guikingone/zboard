@@ -151,6 +151,9 @@ class Back
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (false === $this->authorizationChecker->isGranted('ROLE_MENTOR')) {
+                throw new AccessDeniedException();
+            }
             $data = $form->getData();
             $mentor = $data->getMentor();
             $mentore = $data->getMentore();

@@ -4,10 +4,8 @@ namespace MentoratBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use UserBundle\Entity\Mentore;
-use MentoratBundle\Entity\Notes;
 use MentoratBundle\Entity\Sessions;
 use MentoratBundle\Form\SessionsType;
-use MentoratBundle\Form\TypeAdd\NoteTypeAdd;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -92,39 +90,6 @@ class MentoreService
             'mentor' => $user,
             'suivi_state' => 'ENDED',
         ));
-    }
-
-    /**
-     * Allow to add a new note linked to the suivi and the mentor who follow the student.
-     *
-     * @param Request $request
-     * @param $id
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addNote(Request $request, $id)
-    {
-        $suivi = $this->doctrine->getRepository('MentoratBundle:Suivi')
-                                ->findOneBy(array(
-                                    'id' => $id,
-                                ));
-        $note = new Notes();
-        $user = $this->user->getToken()->getUser();
-
-        $form = $this->form->create(NoteTypeAdd::class, $note);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $note->setSuivi($suivi);
-            $note->setAuteur($user);
-            $note->setDateCreated(new \DateTime());
-            $this->doctrine->persist($note);
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'La note a bien été ajoutée.');
-            $this->event->createUserEvents($user, 'Ajout d\'une note', 'Important');
-        }
-
-        return $form;
     }
 
     /**

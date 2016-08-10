@@ -17,11 +17,11 @@ class SoutenanceService
      */
     protected $form;
 
-
     /**
      * SoutenanceService constructor.
+     *
      * @param EntityManager $doctrine
-     * @param FormFactory $form
+     * @param FormFactory   $form
      */
     public function __construct(EntityManager $doctrine, FormFactory $form)
     {
