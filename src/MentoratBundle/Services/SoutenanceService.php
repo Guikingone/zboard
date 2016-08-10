@@ -4,8 +4,6 @@ namespace MentoratBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormFactory;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class SoutenanceService
 {
@@ -19,25 +17,16 @@ class SoutenanceService
      */
     protected $form;
 
-    /**
-     * @var Session
-     */
-    private $session;
 
     /**
-     * @var TokenStorage
-     */
-    private $user;
-
-    /**
+     * SoutenanceService constructor.
      * @param EntityManager $doctrine
+     * @param FormFactory $form
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user)
+    public function __construct(EntityManager $doctrine, FormFactory $form)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
-        $this->session = $session;
-        $this->user = $user;
     }
 
     /**

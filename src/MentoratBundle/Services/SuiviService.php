@@ -3,9 +3,6 @@
 namespace MentoratBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Form\FormFactory;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class SuiviService
 {
@@ -15,29 +12,11 @@ class SuiviService
     protected $doctrine;
 
     /**
-     * @var FormFactory
-     */
-    protected $form;
-
-    /**
-     * @var Session
-     */
-    private $session;
-
-    /**
-     * @var TokenStorage
-     */
-    private $user;
-
-    /**
      * @param EntityManager $doctrine
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user)
+    public function __construct(EntityManager $doctrine)
     {
         $this->doctrine = $doctrine;
-        $this->form = $form;
-        $this->session = $session;
-        $this->user = $user;
     }
 
     /**

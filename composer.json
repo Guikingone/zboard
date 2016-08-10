@@ -1,5 +1,6 @@
 {
     "name": "audrophe/zboard",
+    "description": "Application destinated to help OpenClassrooms with studends",
     "license": "proprietary",
     "type": "project",
     "autoload": {
