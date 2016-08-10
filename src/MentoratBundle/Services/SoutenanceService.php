@@ -4,8 +4,6 @@ namespace MentoratBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormFactory;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class SoutenanceService
 {

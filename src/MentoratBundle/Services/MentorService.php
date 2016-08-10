@@ -76,20 +76,6 @@ class MentorService
     }
 
     /**
-     * Display the mentore which are waiting to have the first
-     * show and which are attributing to the connected user.
-     *
-     * @return array|\UserBundle\Entity\Mentore[]
-     */
-    public function getMentoratFinished($user)
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Suivi')->findBy(array(
-            'mentor' => $user,
-            'suivi_state' => 'ENDED',
-        ));
-    }
-
-    /**
      * Allow to add a new note linked to the suivi and the mentor who follow the student.
      *
      * @param Request $request
