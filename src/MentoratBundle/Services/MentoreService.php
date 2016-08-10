@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use NotificationBundle\Services\Evenements;
 
 class MentoreService
 {
@@ -36,14 +37,20 @@ class MentoreService
     private $user;
 
     /**
+     * @var Evenements
+     */
+    private $event;
+
+    /**
      * @param EntityManager $doctrine
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $event)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
         $this->session = $session;
         $this->user = $user;
+        $this->event = $event;
     }
 
     /**
@@ -114,6 +121,7 @@ class MentoreService
             $this->doctrine->persist($note);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La note a bien été ajoutée.');
+            $this->event->createUserEvents($user, 'Ajout d\'une note', 'Important');
         }
 
         return $form;
@@ -145,6 +153,8 @@ class MentoreService
             $this->doctrine->persist($sessions);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La session a bien été planifiée.');
+            $this->event->createUserEvents($mentore, 'Planification d\'une session', 'Important');
+            $this->event->createUserEvents($mentor, 'Planification d\'une session', 'Important');
         }
 
         return $form;

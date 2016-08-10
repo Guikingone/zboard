@@ -29,8 +29,7 @@ class Notes
     private $libelle;
 
     /**
-     * @var string
-     * @ORM\Column(name="auteur", type="string", length=255, nullable=false)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="notes")
      */
     private $auteur;
 
@@ -48,9 +47,9 @@ class Notes
     private $suivi;
 
     /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -58,7 +57,7 @@ class Notes
     }
 
     /**
-     * Set libelle.
+     * Set libelle
      *
      * @param string $libelle
      *
@@ -72,7 +71,7 @@ class Notes
     }
 
     /**
-     * Get libelle.
+     * Get libelle
      *
      * @return string
      */
@@ -82,31 +81,7 @@ class Notes
     }
 
     /**
-     * Set auteur.
-     *
-     * @param string $auteur
-     *
-     * @return Notes
-     */
-    public function setAuteur($auteur)
-    {
-        $this->auteur = $auteur;
-
-        return $this;
-    }
-
-    /**
-     * Get auteur.
-     *
-     * @return string
-     */
-    public function getAuteur()
-    {
-        return $this->auteur;
-    }
-
-    /**
-     * Set dateCreated.
+     * Set dateCreated
      *
      * @param \DateTime $dateCreated
      *
@@ -120,7 +95,7 @@ class Notes
     }
 
     /**
-     * Get dateCreated.
+     * Get dateCreated
      *
      * @return \DateTime
      */
@@ -130,7 +105,31 @@ class Notes
     }
 
     /**
-     * Set suivi.
+     * Set auteur
+     *
+     * @param \UserBundle\Entity\User $auteur
+     *
+     * @return Notes
+     */
+    public function setAuteur(\UserBundle\Entity\User $auteur = null)
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    /**
+     * Get auteur
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
+    }
+
+    /**
+     * Set suivi
      *
      * @param \MentoratBundle\Entity\Suivi $suivi
      *
@@ -144,7 +143,7 @@ class Notes
     }
 
     /**
-     * Get suivi.
+     * Get suivi
      *
      * @return \MentoratBundle\Entity\Suivi
      */

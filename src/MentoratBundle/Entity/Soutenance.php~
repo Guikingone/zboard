@@ -51,9 +51,9 @@ class Soutenance
     private $mentore;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -61,7 +61,7 @@ class Soutenance
     }
 
     /**
-     * Set passedAt
+     * Set passedAt.
      *
      * @param \DateTime $passedAt
      *
@@ -75,7 +75,7 @@ class Soutenance
     }
 
     /**
-     * Get passedAt
+     * Get passedAt.
      *
      * @return \DateTime
      */
@@ -85,7 +85,7 @@ class Soutenance
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param string $status
      *
@@ -99,7 +99,7 @@ class Soutenance
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return string
      */
@@ -109,7 +109,7 @@ class Soutenance
     }
 
     /**
-     * Set projet
+     * Set projet.
      *
      * @param \BackendBundle\Entity\Projet $projet
      *
@@ -123,7 +123,7 @@ class Soutenance
     }
 
     /**
-     * Get projet
+     * Get projet.
      *
      * @return \BackendBundle\Entity\Projet
      */
@@ -133,7 +133,7 @@ class Soutenance
     }
 
     /**
-     * Set mentor
+     * Set mentor.
      *
      * @param \UserBundle\Entity\User $mentor
      *
@@ -147,7 +147,7 @@ class Soutenance
     }
 
     /**
-     * Get mentor
+     * Get mentor.
      *
      * @return \UserBundle\Entity\User
      */
@@ -157,7 +157,7 @@ class Soutenance
     }
 
     /**
-     * Set mentore
+     * Set mentore.
      *
      * @param \UserBundle\Entity\Mentore $mentore
      *
@@ -171,7 +171,7 @@ class Soutenance
     }
 
     /**
-     * Get mentore
+     * Get mentore.
      *
      * @return \UserBundle\Entity\Mentore
      */

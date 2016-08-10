@@ -4,9 +4,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "": "src/",
             "Tests\\": "tests/",
-            "AbstractBundle\\": "src/",
             "AdminBundle\\": "src/",
             "BackendBundle\\": "src/",
             "CoreBundle\\": "src/",
@@ -22,7 +20,6 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/",
-            "AbstractBundle\\": "src/",
             "AdminBundle\\": "src/",
             "BackendBundle\\": "src/",
             "CoreBundle\\": "src/",

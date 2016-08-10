@@ -83,6 +83,11 @@ class User extends BaseUser
     private $suivi;
 
     /**
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Notes", mappedBy="auteur")
+     */
+    private $notes;
+
+    /**
      * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Sessions", mappedBy="mentor")
      */
     private $sessions;
@@ -127,12 +132,13 @@ class User extends BaseUser
         parent::__construct();
         $this->competences = new ArrayCollection();
         $this->suivi = new ArrayCollection();
+        $this->notes = new ArrayCollection();
         $this->soutenances = new ArrayCollection();
         $this->events = new ArrayCollection();
     }
 
     /**
-     * Set firstname.
+     * Set firstname
      *
      * @param string $firstname
      *
@@ -146,7 +152,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get firstname.
+     * Get firstname
      *
      * @return string
      */
@@ -156,7 +162,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set lastname.
+     * Set lastname
      *
      * @param string $lastname
      *
@@ -170,7 +176,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get lastname.
+     * Get lastname
      *
      * @return string
      */
@@ -180,7 +186,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set address.
+     * Set address
      *
      * @param string $address
      *
@@ -194,7 +200,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get address.
+     * Get address
      *
      * @return string
      */
@@ -204,7 +210,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set zipcode.
+     * Set zipcode
      *
      * @param string $zipcode
      *
@@ -218,7 +224,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get zipcode.
+     * Get zipcode
      *
      * @return string
      */
@@ -228,7 +234,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set city.
+     * Set city
      *
      * @param string $city
      *
@@ -242,7 +248,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get city.
+     * Get city
      *
      * @return string
      */
@@ -252,7 +258,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set phone.
+     * Set phone
      *
      * @param string $phone
      *
@@ -266,7 +272,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get phone.
+     * Get phone
      *
      * @return string
      */
@@ -276,7 +282,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set resume.
+     * Set resume
      *
      * @param string $resume
      *
@@ -290,7 +296,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get resume.
+     * Get resume
      *
      * @return string
      */
@@ -300,9 +306,9 @@ class User extends BaseUser
     }
 
     /**
-     * Set available.
+     * Set available
      *
-     * @param bool $available
+     * @param boolean $available
      *
      * @return User
      */
@@ -314,9 +320,9 @@ class User extends BaseUser
     }
 
     /**
-     * Get available.
+     * Get available
      *
-     * @return bool
+     * @return boolean
      */
     public function getAvailable()
     {
@@ -324,9 +330,9 @@ class User extends BaseUser
     }
 
     /**
-     * Set archived.
+     * Set archived
      *
-     * @param bool $archived
+     * @param boolean $archived
      *
      * @return User
      */
@@ -338,9 +344,9 @@ class User extends BaseUser
     }
 
     /**
-     * Get archived.
+     * Get archived
      *
-     * @return bool
+     * @return boolean
      */
     public function getArchived()
     {
@@ -348,7 +354,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set country.
+     * Set country
      *
      * @param \AdminBundle\Entity\Country $country
      *
@@ -362,7 +368,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get country.
+     * Get country
      *
      * @return \AdminBundle\Entity\Country
      */
@@ -372,7 +378,7 @@ class User extends BaseUser
     }
 
     /**
-     * Add suivi.
+     * Add suivi
      *
      * @param \MentoratBundle\Entity\Suivi $suivi
      *
@@ -386,7 +392,7 @@ class User extends BaseUser
     }
 
     /**
-     * Remove suivi.
+     * Remove suivi
      *
      * @param \MentoratBundle\Entity\Suivi $suivi
      */
@@ -396,7 +402,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get suivi.
+     * Get suivi
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -406,7 +412,41 @@ class User extends BaseUser
     }
 
     /**
-     * Add session.
+     * Add note
+     *
+     * @param \MentoratBundle\Entity\Notes $note
+     *
+     * @return User
+     */
+    public function addNote(\MentoratBundle\Entity\Notes $note)
+    {
+        $this->notes[] = $note;
+
+        return $this;
+    }
+
+    /**
+     * Remove note
+     *
+     * @param \MentoratBundle\Entity\Notes $note
+     */
+    public function removeNote(\MentoratBundle\Entity\Notes $note)
+    {
+        $this->notes->removeElement($note);
+    }
+
+    /**
+     * Get notes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * Add session
      *
      * @param \MentoratBundle\Entity\Sessions $session
      *
@@ -420,7 +460,7 @@ class User extends BaseUser
     }
 
     /**
-     * Remove session.
+     * Remove session
      *
      * @param \MentoratBundle\Entity\Sessions $session
      */
@@ -430,7 +470,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get sessions.
+     * Get sessions
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -440,7 +480,7 @@ class User extends BaseUser
     }
 
     /**
-     * Add soutenance.
+     * Add soutenance
      *
      * @param \MentoratBundle\Entity\Soutenance $soutenance
      *
@@ -454,7 +494,7 @@ class User extends BaseUser
     }
 
     /**
-     * Remove soutenance.
+     * Remove soutenance
      *
      * @param \MentoratBundle\Entity\Soutenance $soutenance
      */
@@ -464,7 +504,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get soutenances.
+     * Get soutenances
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -474,7 +514,7 @@ class User extends BaseUser
     }
 
     /**
-     * Add competence.
+     * Add competence
      *
      * @param \UserBundle\Entity\Competences $competence
      *
@@ -488,7 +528,7 @@ class User extends BaseUser
     }
 
     /**
-     * Remove competence.
+     * Remove competence
      *
      * @param \UserBundle\Entity\Competences $competence
      */
@@ -498,7 +538,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get competences.
+     * Get competences
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -508,7 +548,7 @@ class User extends BaseUser
     }
 
     /**
-     * Add userGroup.
+     * Add userGroup
      *
      * @param \UserBundle\Entity\Group_User $userGroup
      *
@@ -522,7 +562,7 @@ class User extends BaseUser
     }
 
     /**
-     * Remove userGroup.
+     * Remove userGroup
      *
      * @param \UserBundle\Entity\Group_User $userGroup
      */
@@ -532,7 +572,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get userGroups.
+     * Get userGroups
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -542,7 +582,7 @@ class User extends BaseUser
     }
 
     /**
-     * Add event.
+     * Add event
      *
      * @param \NotificationBundle\Entity\Events $event
      *
@@ -556,7 +596,7 @@ class User extends BaseUser
     }
 
     /**
-     * Remove event.
+     * Remove event
      *
      * @param \NotificationBundle\Entity\Events $event
      */
@@ -566,7 +606,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get events.
+     * Get events
      *
      * @return \Doctrine\Common\Collections\Collection
      */

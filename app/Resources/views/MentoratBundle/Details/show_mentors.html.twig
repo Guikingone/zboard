@@ -35,6 +35,9 @@
                     <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModalContact"><b>Contacter par email</b></a>
                     {% if app.user == mentor %}
                         <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#myModalCompetences"><b>Ajouter une compétences</b></a>
+                        {% if mentor.status == 'Disponible' %}
+                            <a href="#" class="btn btn-flat btn-warning btn-block">Devenir indisponible</a>
+                        {% endif %}
                     {% endif %}
                 </div>
             </div>
@@ -146,7 +149,7 @@
                                 <p>Aucune session planifiée</p>
                             {% else %}
                             <ul class="timeline timeline-inverse">
-                                {% for sessions in mentor.sessions %}
+                                {% for sessions in mentor.sessions|reverse %}
                                     <li class="time-label">
                                         <span class="bg-red">
                                             {{ sessions.dateSession|date('d-m-Y') }}

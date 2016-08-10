@@ -19,6 +19,7 @@ class CoursUpdateType extends AbstractType
             ->remove('libelle')
             ->add('status', ChoiceType::class, array(
                 'choices' => array(
+                    'En attente' => 'En attente',
                     'En cours' => 'En cours',
                     'Terminé' => 'Terminé',
                 ),

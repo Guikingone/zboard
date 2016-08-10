@@ -21,6 +21,10 @@ class ProjetUpdateType extends AbstractType
                 'choices' => array(
                     'En cours' => 'En cours',
                     'Terminé' => 'Terminé',
+                    'Validé' => 'Validé',
+                    'Soutenu' => 'Soutenu',
+                    'A revoir' => 'A revoir',
+                    'En retard' => 'En retard',
                 ),
             ))
             ->remove('parcours')

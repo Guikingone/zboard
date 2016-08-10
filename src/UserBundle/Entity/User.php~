@@ -83,6 +83,11 @@ class User extends BaseUser
     private $suivi;
 
     /**
+     * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Notes", mappedBy="auteur")
+     */
+    private $notes;
+
+    /**
      * @ORM\OneToMany(targetEntity="MentoratBundle\Entity\Sessions", mappedBy="mentor")
      */
     private $sessions;
@@ -127,6 +132,7 @@ class User extends BaseUser
         parent::__construct();
         $this->competences = new ArrayCollection();
         $this->suivi = new ArrayCollection();
+        $this->notes = new ArrayCollection();
         $this->soutenances = new ArrayCollection();
         $this->events = new ArrayCollection();
     }
