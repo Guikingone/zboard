@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Nouveau mail reçu !</title>
-    </head>
-    <style>
-        .text-center {
-            text-align: center;
-        }
-    </style>
-    <body>
+{% extends "::email_main_template.html.twig" %}
+
+
+{% block titre %}Nouvel email{% endblock %}
+
+{% block body %}
         <h1 class="text-center">Bonjour {{ user.firstname }} {{ user.lastname }}</h1>
         <hr />
         <section class="text-center">
@@ -23,3 +17,4 @@
         </section>
     </body>
 </html>
+{% endblock %}

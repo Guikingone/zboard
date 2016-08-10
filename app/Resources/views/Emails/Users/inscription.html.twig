@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-    </head>
-    <body>
-        <header>
-            <p>
-                Rappel : Votre profil Zboard a bien été crée !
-            </p>
-            <hr />
-        </header>
+{% extends "::email_main_template.html.twig" %}
+
+
+{% block titre %}Votre profil a bien été créé{% endblock %}
+
+{% block body %}
         <section>
             <p>
                 Nous sommes fier de vous compter parmis nos membres et nous tenions à porter à votre connaissance
@@ -41,5 +35,4 @@
             <p>L'équipe Zboard.</p>
             <p>Copyright 2016</p>
         </section>
-    </body>
-</html>
+{% endblock %}
