@@ -3,7 +3,6 @@
 namespace MentoratBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use UserBundle\Entity\Mentore;
 use MentoratBundle\Entity\Notes;
 use MentoratBundle\Entity\Sessions;
 use MentoratBundle\Form\SessionsType;
@@ -74,20 +73,6 @@ class MentorService
     public function countMentors()
     {
         return $this->doctrine->getRepository('UserBundle:User')->countMentorTotal();
-    }
-
-    /**
-     * Display the mentore which are waiting to have the first
-     * show and which are attributing to the connected user.
-     *
-     * @return array|\UserBundle\Entity\Mentore[]
-     */
-    public function getMyWaitingMentore($user)
-    {
-        return $this->doctrine->getRepository('MentoratBundle:Suivi')->findBy(array(
-            'mentor' => $user,
-            'suivi_state' => 'WAITING_LIST',
-        ));
     }
 
     /**

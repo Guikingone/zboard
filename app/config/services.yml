@@ -47,11 +47,11 @@ services:
 
     core.soutenance:
         class: MentoratBundle\Services\SoutenanceService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory"]
 
     core.suivi:
         class: MentoratBundle\Services\SuiviService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
+        arguments: ["@doctrine.orm.entity_manager"]
 
     # List of services used in order to perform a specific action.
 

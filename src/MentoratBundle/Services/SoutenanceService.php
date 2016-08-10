@@ -19,25 +19,16 @@ class SoutenanceService
      */
     protected $form;
 
-    /**
-     * @var Session
-     */
-    private $session;
 
     /**
-     * @var TokenStorage
-     */
-    private $user;
-
-    /**
+     * SoutenanceService constructor.
      * @param EntityManager $doctrine
+     * @param FormFactory $form
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user)
+    public function __construct(EntityManager $doctrine, FormFactory $form)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
-        $this->session = $session;
-        $this->user = $user;
     }
 
     /**

@@ -15,29 +15,11 @@ class SuiviService
     protected $doctrine;
 
     /**
-     * @var FormFactory
-     */
-    protected $form;
-
-    /**
-     * @var Session
-     */
-    private $session;
-
-    /**
-     * @var TokenStorage
-     */
-    private $user;
-
-    /**
      * @param EntityManager $doctrine
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user)
+    public function __construct(EntityManager $doctrine)
     {
         $this->doctrine = $doctrine;
-        $this->form = $form;
-        $this->session = $session;
-        $this->user = $user;
     }
 
     /**
