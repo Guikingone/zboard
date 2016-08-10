@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Functionnal\Entity;
+namespace tests\AppBundle\Functionnal\Entity\UserBundle;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class CountryEntityTest extends WebTestCase
+class MentoreEntityTest extends WebTestCase
 {
     /**
      * @var EntityManager
@@ -39,6 +39,6 @@ class CountryEntityTest extends WebTestCase
 
     public function testId()
     {
-        return $this->_em->getRepository('AdminBundle:Country')->find(1);
+        return $this->_em->getRepository('UserBundle:Mentore')->find(1);
     }
 }

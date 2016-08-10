@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Functionnal\Entity;
+namespace tests\AppBundle\Functionnal\Entity\NotificationBundle;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ParcoursEntityTest extends WebTestCase
+class EventsEntityTest extends WebTestCase
 {
     /**
      * @var EntityManager
@@ -39,6 +39,6 @@ class ParcoursEntityTest extends WebTestCase
 
     public function testId()
     {
-        return $this->_em->getRepository('BackendBundle:Parcours')->find(1);
+        return $this->_em->getRepository('NotificationBundle:Events')->find(1);
     }
 }

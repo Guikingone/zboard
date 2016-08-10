@@ -2,8 +2,8 @@
 
 namespace tests\AppBundle\Unit\Form;
 
-use MentoratBundle\Form\MentoreType;
 use Symfony\Component\Form\Test\TypeTestCase;
+use UserBundle\Form\RegistrationMentoreType;
 
 class MentoreTypeTest extends TypeTestCase
 {
@@ -26,7 +26,7 @@ class MentoreTypeTest extends TypeTestCase
             'status' => 'En formation',
         );
 
-        $form = $this->factory->create(MentoreType::class);
+        $form = $this->factory->create(RegistrationMentoreType::class);
 
         $object = Mentore::fromArray($formData);
 

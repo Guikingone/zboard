@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\AppBundle\Functionnal\Entity;
+namespace tests\AppBundle\Functionnal\Entity\MentoratBundle;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class AbonnementEntityTest extends WebTestCase
+class NotesEntityTest extends WebTestCase
 {
     /**
      * @var EntityManager
@@ -39,6 +39,6 @@ class AbonnementEntityTest extends WebTestCase
 
     public function testId()
     {
-        return $this->_em->getRepository('BackendBundle:Abonnement')->find(1);
+        return $this->_em->getRepository('MentoratBundle:Notes')->find(1);
     }
 }
