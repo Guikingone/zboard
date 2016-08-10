@@ -113,10 +113,10 @@ class Evenements
         $event->addUser($users);
         $users->addEvent($event);
 
-        if ($event->getCategorie() === 'Important') {
+        /* if ($event->getCategorie() === 'Important') {
             $message = $this->mail->importantMessage($user);
             $this->mail->sendMessage($message);
-        }
+        } */
 
         $this->doctrine->persist($event);
         $this->doctrine->flush();
