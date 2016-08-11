@@ -11,6 +11,8 @@ class ArchiveController extends Controller
     /**
      * @Route("/archives", name="home_archives")
      * @Template("AdminBundle/Index/archives.html.twig")
+     *
+     * @return array
      */
     public function indexAction()
     {
@@ -23,11 +25,11 @@ class ArchiveController extends Controller
     }
 
     /**
+     * @Route("/archived/out/mentor/{id}", name="out_archive_mentor")
+     *
      * @param $id
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @Route("/archived/out/mentor/{id}", name="out_archive_mentor")
      */
     public function outArchiveMentor($id)
     {
@@ -37,11 +39,11 @@ class ArchiveController extends Controller
     }
 
     /**
+     * @Route("/archived/out/mentore/{id}", name="out_archive_mentore")
+     *
      * @param $id
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @Route("/archived/out/mentore/{id}", name="out_archive_mentore")
      */
     public function outArchiveMentore($id)
     {
@@ -51,11 +53,11 @@ class ArchiveController extends Controller
     }
 
     /**
+     * @Route("/archived/out/path/{id}", name="out_archive_path")
+     *
      * @param $id
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @Route("/archived/out/path/{id}", name="out_archive_path")
      */
     public function outArchivePath($id)
     {

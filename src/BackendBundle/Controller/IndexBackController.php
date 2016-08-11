@@ -11,6 +11,8 @@ class IndexBackController extends Controller
     /**
      * @Route("/", name="home_backend")
      * @Template("BackBundle/Index/index.html.twig")
+     *
+     * @return array
      */
     public function indexAction()
     {

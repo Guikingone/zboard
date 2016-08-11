@@ -16,11 +16,13 @@ class MentorController extends Controller
     /**
      * @Route("/{page}",name="list_mentors",defaults={"page" = 1})
      * @Template("MentoratBundle/Mentors/list_mentors.html.twig")
+     *
+     * @return array
      */
     public function listAction($page)
     {
-        $mentors = $this->get('core.mentor')->getUserByRoleMentor($page, 20);
-        $nbMentors = $this->get('core.mentor')->countMentors();
+        $mentors = $this->get('core.mentorat')->getUserByRoleMentor($page, 20);
+        $nbMentors = $this->get('core.mentorat')->countMentors();
 
         $pagination = array(
             'page' => $page,
@@ -38,17 +40,18 @@ class MentorController extends Controller
     }
 
     /**
+     * @Route("/details/{id}", name="show_details_mentor")
+     * @Template("MentoratBundle/Details/show_mentors.html.twig")
+     *
      * @param Request $request
      * @param $id
      *
      * @return array
-     * @Route("/details/{id}", name="show_details_mentor")
-     * @Template("MentoratBundle/Details/show_mentors.html.twig")
      */
     public function showProfilMentorAction(Request $request, $id)
     {
         $competence = $this->get('core.user')->addCompetencesMentor($request, $id);
-        $mentor = $this->get('core.mentore')->viewMentor($id);
+        $mentor = $this->get('core.mentorat')->viewMentor($id);
 
         return array(
             'controller' => 'mentor',

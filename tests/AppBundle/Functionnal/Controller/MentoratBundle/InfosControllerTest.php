@@ -1,6 +1,6 @@
 <?php
 
-namespace MentoratBundle\Tests\Controller;
+namespace tests\AppBundle\Functionnal\Controller\MentoratBundle;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

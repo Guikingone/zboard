@@ -12,6 +12,10 @@ class InfosController extends Controller
     /**
    * @Route("/infos")
    * @Template("MentoratBundle/Dashboard/infos.html.twig")
+   *
+   * @param Request $request
+   *
+   * @return array
    */
   public function indexAction(Request $request)
   {

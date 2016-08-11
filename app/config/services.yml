@@ -19,14 +19,6 @@ services:
         class: UserBundle\Services\UserService
         arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events", "@core.mail"]
 
-    core.mentore:
-        class: MentoratBundle\Services\MentoreService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events"]
-
-    core.mentor:
-        class: MentoratBundle\Services\MentorService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
-
     # list of services used in addition to perform global actions.
 
     core.archive:
@@ -36,6 +28,10 @@ services:
     core.statistiques:
         class: AdminBundle\Services\Statistiques
         arguments: ["@doctrine.orm.entity_manager"]
+
+    core.mentorat:
+        class: MentoratBundle\Services\MentoratService
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events"]
 
     core.formation:
       class: MentoratBundle\Services\FormationService

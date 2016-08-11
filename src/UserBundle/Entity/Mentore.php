@@ -105,14 +105,9 @@ class Mentore extends BaseUser
     protected $groups;
 
     /**
-     * Mentore constructor.
+     * @ORM\ManyToMany(targetEntity="NotificationBundle\Entity\Events", inversedBy="mentores")
      */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->sessions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->soutenances = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    private $events;
 
     /**
      * Set firstname.
@@ -420,5 +415,39 @@ class Mentore extends BaseUser
     public function getSoutenances()
     {
         return $this->soutenances;
+    }
+
+    /**
+     * Add event.
+     *
+     * @param \NotificationBundle\Entity\Events $event
+     *
+     * @return Mentore
+     */
+    public function addEvent(\NotificationBundle\Entity\Events $event)
+    {
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    /**
+     * Remove event.
+     *
+     * @param \NotificationBundle\Entity\Events $event
+     */
+    public function removeEvent(\NotificationBundle\Entity\Events $event)
+    {
+        $this->events->removeElement($event);
+    }
+
+    /**
+     * Get events.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }

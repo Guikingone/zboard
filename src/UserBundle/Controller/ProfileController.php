@@ -17,10 +17,10 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class ProfileController extends BaseController
 {
     /**
-     * Show the user.
-     *
      * @Route("/dashboard/profile", name="mon_profil")
      * @Template("UserBundle/Profile/show.html.twig")
+     *
+     * return array
      */
     public function showAction()
     {
@@ -43,10 +43,10 @@ class ProfileController extends BaseController
     }
 
     /**
-     * Edit the user.
-     *
      * @Route("/dashboard/profile/edit", name="mon_profil_edit")
      * @Template("UserBundle/Profile/edit.html.twig")
+     *
+     * @return array
      */
     public function editAction(Request $request)
     {

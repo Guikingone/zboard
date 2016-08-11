@@ -11,6 +11,8 @@ class EventsController extends Controller
     /**
      * @Route("/", name="show_notifications")
      * @Template("NotificationBundle/Index/index.html.twig")
+     *
+     * @return array
      */
     public function indexEventsAction()
     {

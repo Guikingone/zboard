@@ -10,13 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class UtilsBackController extends Controller
 {
     /**
+     * @Route("/utils/{id}/mentors", name="update_mentors")
+     * @Template("BackBundle/Action/Utils/update_mentors.html.twig")
+     *
      * @param Request $request
      * @param $id
      *
-     * @return array
-     *
-     * @Route("/utils/{id}/mentors", name="update_mentors")
-     * @Template("BackBundle/Action/Utils/update_mentors.html.twig")
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function updateMentorsAction(Request $request, $id)
     {
@@ -33,13 +33,13 @@ class UtilsBackController extends Controller
     }
 
     /**
+     * @Route("/utils/{id}/mentores", name="update_mentores")
+     * @Template("BackBundle/Action/Utils/update_mentores.html.twig")
+     *
      * @param Request $request
      * @param $id
      *
-     * @return array
-     *
-     * @Route("/utils/{id}/mentores", name="update_mentores")
-     * @Template("BackBundle/Action/Utils/update_mentores.html.twig")
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function updateMentoresAction(Request $request, $id)
     {
@@ -56,13 +56,13 @@ class UtilsBackController extends Controller
     }
 
     /**
+     * @Route("/utils/{id}/path", name="update_parcours")
+     * @Template("BackBundle/Action/Utils/update_parcours.html.twig")
+     *
      * @param Request $request
      * @param $id
      *
-     * @return array
-     *
-     * @Route("/utils/{id}/path", name="update_parcours")
-     * @Template("BackBundle/Action/Utils/update_parcours.html.twig")
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function updateParcoursAction(Request $request, $id)
     {
@@ -79,13 +79,13 @@ class UtilsBackController extends Controller
     }
 
     /**
+     * @Route("/utils/{id}/courses", name="update_courses")
+     * @Template("BackBundle/Action/Utils/update_courses.html.twig")
+     *
      * @param Request $request
      * @param $id
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @Route("/utils/{id}/courses", name="update_courses")
-     * @Template("BackBundle/Action/Utils/update_courses.html.twig")
      */
     public function updateCoursAction(Request $request, $id)
     {
@@ -102,13 +102,13 @@ class UtilsBackController extends Controller
     }
 
     /**
+     * @Route("/utils/{id}/project", name="update_project")
+     * @Template("BackBundle/Action/Utils/update_projet.html.twig")
+     *
      * @param Request $request
      * @param $id
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @Route("/utils/{id}/project", name="update_project")
-     * @Template("BackBundle/Action/Utils/update_projet.html.twig")
      */
     public function updateProjetAction(Request $request, $id)
     {
@@ -125,13 +125,13 @@ class UtilsBackController extends Controller
     }
 
     /**
+     * @Route("/utils/{id}/competence", name="update_competences")
+     * @Template("BackBundle/Action/Utils/update_competences.html.twig")
+     *
      * @param Request $request
      * @param $id
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @Route("/utils/{id}/competence", name="update_competences")
-     * @Template("BackBundle/Action/Utils/update_competences.html.twig")
      */
     public function updateCompetencesAction(Request $request, $id)
     {
@@ -148,13 +148,13 @@ class UtilsBackController extends Controller
     }
 
     /**
+     * @Route("/utils/{id}/soutenance", name="update_soutenances")
+     * @Template("BackBundle/Action/Utils/update_soutenances.html.twig")
+     *
      * @param Request $request
      * @param $id
      *
      * @return array
-     *
-     * @Route("/utils/{id}/soutenance", name="update_soutenances")
-     * @Template("BackBundle/Action/Utils/update_soutenances.html.twig")
      */
     public function updateSoutenancesAction(Request $request, $id)
     {
@@ -171,11 +171,11 @@ class UtilsBackController extends Controller
     }
 
     /**
+     * @Route("/archived/mentor/{id}", name="archive_mentor")
+     *
      * @param $id
      *
      * @return array
-     *
-     * @Route("/archived/mentor/{id}", name="archive_mentor")
      */
     public function archiveMentorAction($id)
     {
@@ -185,11 +185,11 @@ class UtilsBackController extends Controller
     }
 
     /**
+     * @Route("/archived/mentore/{id}", name="archive_mentore")
+     *
      * @param $id
      *
      * @return array
-     *
-     * @Route("/archived/mentore/{id}", name="archive_mentore")
      */
     public function archiveMentoreAction($id)
     {
@@ -199,11 +199,11 @@ class UtilsBackController extends Controller
     }
 
     /**
+     * @Route("/archived/path/{id}", name="archive_path")
+     *
      * @param $id
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @Route("/archived/path/{id}", name="archive_path")
      */
     public function archiveParcoursAction($id)
     {

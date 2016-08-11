@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Zboard project.
+ *
+ * (c) Guillaume Loulier <guillaume.loulier@hotmail.fr>
+ * (c) Christophe Lablancherie <c.lablancherie@live.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace MentoratBundle\Services;
 
 use Doctrine\ORM\EntityManager;
@@ -7,22 +17,25 @@ use MentoratBundle\Entity\Notes;
 use MentoratBundle\Entity\Sessions;
 use MentoratBundle\Form\SessionsType;
 use MentoratBundle\Form\TypeAdd\NoteTypeAdd;
+use MentoratBundle\Form\Update\SuiviUpdateType;
+use NotificationBundle\Services\Evenements;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
-class MentorService
+class MentoratService
 {
     /**
      * @var EntityManager
      */
-    protected $doctrine;
+    private $doctrine;
 
     /**
      * @var FormFactory
      */
-    protected $form;
+    private $form;
 
     /**
      * @var Session
@@ -35,14 +48,25 @@ class MentorService
     private $user;
 
     /**
-     * @param EntityManager $doctrine
+     * @var Evenements
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user)
+    private $events;
+
+    /**
+     * MentoratService constructor.
+     *
+     * @param EntityManager $doctrine
+     * @param FormFactory   $form
+     * @param Session       $session
+     * @param Evenements    $events
+     */
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
-        $this->session = $session;
+        $this->events = $events;
         $this->user = $user;
+        $this->session = $session;
     }
 
     /**
@@ -73,6 +97,47 @@ class MentorService
     public function countMentors()
     {
         return $this->doctrine->getRepository('UserBundle:User')->countMentorTotal();
+    }
+
+    /**
+     * Display the mentores who are attributed to the connected user.
+     *
+     * @return array|\UserBundle\Entity\Mentore[]
+     */
+    public function getMentores($user)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Suivi')->findBy(array(
+            'mentor' => $user,
+            'suivi_state' => 'IN_PROGRESS',
+        ));
+    }
+
+    /**
+     * Display the mentore which are waiting to have the first
+     * show and which are attributing to the connected user.
+     *
+     * @return array|\UserBundle\Entity\Mentore[]
+     */
+    public function getMyWaitingMentore($user)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Suivi')->findBy(array(
+            'mentor' => $user,
+            'suivi_state' => 'WAITING_LIST',
+        ));
+    }
+
+    /**
+     * Display the mentore which are waiting to have the first
+     * show and which are attributing to the connected user.
+     *
+     * @return array|\UserBundle\Entity\Mentore[]
+     */
+    public function getMentoratFinished($user)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Suivi')->findBy(array(
+            'mentor' => $user,
+            'suivi_state' => 'ENDED',
+        ));
     }
 
     /**
@@ -133,6 +198,41 @@ class MentorService
             $this->doctrine->persist($sessions);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La session a bien été planifiée.');
+            $this->events->createUserEvents($mentore, 'Planification d\'une session', 'Important');
+            $this->events->createUserEvents($mentor, 'Planification d\'une session', 'Important');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to change the teacher who follow the student using the id | $id of the suivi.
+     *
+     * @param Request $request | The Request manager
+     * @param $id               | The id of the suivi
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function transfertMentore(Request $request, $id)
+    {
+        $suivi = $this->doctrine->getRepository('MentoratBundle:Suivi')->findOneBy(array('id' => $id));
+
+        if (null === $suivi) {
+            throw new Exception('Le mentore ne semble pas exister ou avoir été archivé.');
+        }
+
+        $form = $this->form->create(SuiviUpdateType::class, $suivi);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Le changement de mentor a été effectué.');
+            $this->events->createUserEvents($suivi->getMentor(), 'Changement de mentor effectué', 'Important');
+            $this->events->createMentoreEvents(
+                $suivi->getMentore(),
+                'Changement de mentor effectué, votre nouveau mentor prendre contact avec vous rapidement',
+                'Important'
+            );
         }
 
         return $form;

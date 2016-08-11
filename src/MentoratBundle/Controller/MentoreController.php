@@ -15,10 +15,12 @@ class MentoreController extends Controller
     /**
      * @Route("/mes-mentores/en-cours",name="en_cours")
      * @Template("MentoratBundle/Mentore/en-cours.html.twig")
+     *
+     * @return array
      */
     public function enCoursAction()
     {
-        $mentores = $this->get('core.mentore')->getMentores($this->getUser());
+        $mentores = $this->get('core.mentorat')->getMentores($this->getUser());
 
         return array(
             'controller' => 'mentorat',
@@ -30,10 +32,12 @@ class MentoreController extends Controller
     /**
      * @Route("/mes-mentores/en-attente",name="en_attente")
      * @Template("MentoratBundle/Mentore/en-attente.html.twig")
+     *
+     * @return array
      */
     public function enAttenteAction()
     {
-        $mentores = $this->get('core.mentore')->getMyWaitingMentore($this->getUser());
+        $mentores = $this->get('core.mentorat')->getMyWaitingMentore($this->getUser());
 
         return array(
             'controller' => 'mentorat',
@@ -45,10 +49,12 @@ class MentoreController extends Controller
     /**
      * @Route("/mes-mentores/mentorat-termine",name="mentorat_termine")
      * @Template("MentoratBundle/Mentore/mentorat-termine.html.twig")
+     *
+     * @return array
      */
     public function mentoratFinishedAction()
     {
-        $mentores = $this->get('core.mentore')->getMentoratFinished($this->getUser());
+        $mentores = $this->get('core.mentorat')->getMentoratFinished($this->getUser());
 
         return array(
             'controller' => 'mentorat',
@@ -58,18 +64,19 @@ class MentoreController extends Controller
     }
 
     /**
+     * @Route("/details/{id}", name="show_details_mentore")
+     * @Template("MentoratBundle/Details/show_mentores.html.twig")
+     *
      * @param Request $request
      * @param $id
      *
      * @return array
-     * @Route("/details/{id}", name="show_details_mentore")
-     * @Template("MentoratBundle/Details/show_mentores.html.twig")
      */
     public function showProfilMentoreAction(Request $request, $id)
     {
-        $mentore = $this->get('core.mentore')->viewMentore($id);
-        $note = $this->get('core.mentor')->addNote($request, $id);
-        $sessions = $this->get('core.mentore')->addSessionMentorat($request, $id);
+        $mentore = $this->get('core.mentorat')->viewMentore($id);
+        $note = $this->get('core.mentorat')->addNote($request, $id);
+        $sessions = $this->get('core.mentorat')->addSessionMentorat($request, $id);
 
         return array(
             'controller' => 'mentore',
@@ -78,5 +85,26 @@ class MentoreController extends Controller
             'sessions' => $sessions->createView(),
             'title_action' => 'Détails du mentoré : '.$mentore->getFirstname().' '.$mentore->getLastname(),
         );
+    }
+
+    /**
+     * @Route("/transfert/mentore/{id}", name="transfert_mentore")
+     * @Template("MentoratBundle/Action/transfert_mentore.html.twig")
+     *
+     * @param Request $request
+     * @param $id
+     *
+     * @return array
+     */
+    public function transfertMentoreAction(Request $request, $id)
+    {
+        $suivi = $this->get('core.mentorat')->transfertMentore($request, $id);
+
+        if ($suivi->isValid()) {
+            return $this->redirectToRoute('show_details_mentore', array('id' => $id));
+        }
+
+        return array('controller' => 'transfert', 'title_action' => 'Transfert de mentore',
+                     'suivi' => $suivi->createView(), );
     }
 }

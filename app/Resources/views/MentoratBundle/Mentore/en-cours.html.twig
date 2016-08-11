@@ -23,10 +23,10 @@
                             <td>{{ unMentore.id }}</td>
                             <td>{{ unMentore.mentore.firstname }} {{ unMentore.mentore.lastname }}</td>
                             <td>{{ unMentore.parcours.libelle }}</td>
-                            <td><span class="badge bg-success">En cours</span></td>
+                            <td><span class="label label-success">En cours</span></td>
                             <td>
-                                <button type="button" class="btn btn-primary">Détails</button>
-                                <button type="button" class="btn btn-warning">Transférer le mentoré</button>
+                                <a type="button" class="btn btn-flat btn-primary" href="{{ path('show_details_mentore', {'id': unMentore.mentore.id}) }}">Détails</a>
+                                <a type="button" class="btn btn-flat btn-warning" href="{{ path('transfert_mentore', {'id': unMentore.id}) }}">Transférer le mentoré</a>
                             </td>
                         </tr>
                         {% endfor %}

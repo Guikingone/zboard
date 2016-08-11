@@ -11,6 +11,8 @@ class DashboardController extends Controller
     /**
      * @Route("/")
      * @Template("MentoratBundle/Dashboard/index.html.twig")
+     *
+     * @return array
      */
     public function indexAction()
     {

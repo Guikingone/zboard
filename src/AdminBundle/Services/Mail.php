@@ -155,7 +155,7 @@ class Mail
     }
 
     /**
-     * Create a message sent when an application is rejected
+     * Create a message sent when an application is rejected.
      *
      * @param $destinataire | The destinataire of the message
      * @param $message the messages justifying why the application has been rejected

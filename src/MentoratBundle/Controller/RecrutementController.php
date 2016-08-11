@@ -11,6 +11,8 @@ class RecrutementController extends Controller
     /**
      * @Route("/recrutement/candidatures",name="recrutement_candidature")
      * @Template("MentoratBundle/Recrutement/candidatures.html.twig")
+     *
+     * @return array
      */
     public function candidatureAction()
     {
@@ -27,6 +29,8 @@ class RecrutementController extends Controller
     /**
      * @Route("/recrutement/candidatures/show/{id}",name="recrutement_candidature_show")
      * @Template("MentoratBundle/Recrutement/candidature.html.twig")
+     *
+     * @return array
      */
     public function showCandidature($id)
     {
@@ -72,6 +76,8 @@ class RecrutementController extends Controller
     /**
      * @Route("/recrutement/formations",name="recrutement_formation")
      * @Template("MentoratBundle/Recrutement/formation.html.twig")
+     *
+     * @return array
      */
     public function formationAction()
     {

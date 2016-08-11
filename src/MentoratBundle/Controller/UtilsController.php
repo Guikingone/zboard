@@ -10,13 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class UtilsController extends Controller
 {
     /**
+     * @Route("/utils/{id}/courses/update", name="update_status_courses")
+     * @Template("MentoratBundle/Action/Utils/update_status_courses.html.twig")
+     *
      * @param Request $request
      * @param $id
      *
      * @return array
-     *
-     * @Route("/utils/{id}/courses/update", name="update_status_courses")
-     * @Template("MentoratBundle/Action/Utils/update_status_courses.html.twig")
      */
     public function updateCoursAction(Request $request, $id)
     {
@@ -34,13 +34,13 @@ class UtilsController extends Controller
     }
 
     /**
+     * @Route("/utils/{id}/project/update", name="update_status_project")
+     * @Template("MentoratBundle/Action/Utils/update_status_project.html.twig")
+     *
      * @param Request $request
      * @param $id
      *
      * @return array
-     *
-     * @Route("/utils/{id}/project/update", name="update_status_project")
-     * @Template("MentoratBundle/Action/Utils/update_status_project.html.twig")
      */
     public function updateProjectStatus(Request $request, $id)
     {

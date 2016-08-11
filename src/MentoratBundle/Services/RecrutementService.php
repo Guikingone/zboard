@@ -58,14 +58,11 @@ class RecrutementService
 
         $allCandidatures = $this->doctrine->getRepository('MentoratBundle:Candidat')->findBy(array('isCandidature' => true));
 
-        foreach ($allCandidatures as $candid)
-        {
+        foreach ($allCandidatures as $candid) {
             $candid->countVotes();
-            if ($candid->getForVotes() > 1 && $candid->getAgainstVotes() > 1)
-            {
+            if ($candid->getForVotes() > 1 && $candid->getAgainstVotes() > 1) {
                 array_push($candidaturesAArbitrer, $candid);
-            } else
-            {
+            } else {
                 array_push($candidaturesSimple, $candid);
             }
 
@@ -97,11 +94,9 @@ class RecrutementService
 
         $allCandidatures = $this->doctrine->getRepository('MentoratBundle:Candidat')->findBy(array('isCandidature' => false));
 
-        foreach ($allCandidatures as $candid)
-        {
+        foreach ($allCandidatures as $candid) {
             $candid->countVotes();
-            if ($candid->getForVotes() > 1 && $candid->getAgainstVotes() > 1)
-            {
+            if ($candid->getForVotes() > 1 && $candid->getAgainstVotes() > 1) {
                 array_push($candidaturesAArbitrer, $candid);
             } else {
                 array_push($candidaturesSimple, $candid);
@@ -117,20 +112,20 @@ class RecrutementService
     /**
      * Accept an application.
      */
-    public function acceptApplication($id, $message = "")
+    public function acceptApplication($id, $message = '')
     {
-      $candidature = $this->getCandidature($id);
+        $candidature = $this->getCandidature($id);
     }
 
     /**
      * Reject an application.
      */
-    public function rejectApplication($id, $message = "")
+    public function rejectApplication($id, $message = '')
     {
-      $candidature = $this->getCandidature($id);
-      $this->get('admin.mail')->rejectApplication($candidature->getEmail(),array());
-      $this->doctrine->remove($candidature);
-      $this->doctrine->flush();
+        $candidature = $this->getCandidature($id);
+        $this->get('admin.mail')->rejectApplication($candidature->getEmail(), array());
+        $this->doctrine->remove($candidature);
+        $this->doctrine->flush();
     }
 
     /**
@@ -140,18 +135,16 @@ class RecrutementService
      * @param bool $isForVote, true if it is a for vote, false otherwise
      * @param $commentaire
      */
-    public function voteApplication($id, boolean $isForVote,$commentaire)
+    public function voteApplication($id, boolean $isForVote, $commentaire)
     {
         $vote = new RecrutementVote();
         $vote->setIdUser($this->user->getToken()->getUser());
         $vote->setIdCandidature($this->doctrine->getRepository('MentoratBundle:Candidat')->find($id));
         $vote->setIsCandidature(true);
         $vote->setCommentaire($commentaire);
-        if ($isForVote)
-        {
+        if ($isForVote) {
             $vote->setVote(1);
-        } else
-        {
+        } else {
             $vote->setVote(-1);
         }
         $this->doctrine->persist($vote);
@@ -162,13 +155,11 @@ class RecrutementService
       // Check for special operations
 
       // If the application has enough votes to be accepted
-      if (($candidature->getForVotes() == 3 && $candidature->getAgainstVotes() == 0) || ($candidature->getForVotes() == 5 && $candidature->getAgainstVotes() == 1))
-      {
+      if (($candidature->getForVotes() == 3 && $candidature->getAgainstVotes() == 0) || ($candidature->getForVotes() == 5 && $candidature->getAgainstVotes() == 1)) {
           $this->acceptApplication($id);
       }
       // If the application has enough votes to be rejected
-      elseif (($candidature->getAgainstVotes() == 3 && $candidature->getForVotes() == 0) || ($candidature->getAgainstVotes() == 5 && $candidature->getForVotes() == 1))
-      {
+      elseif (($candidature->getAgainstVotes() == 3 && $candidature->getForVotes() == 0) || ($candidature->getAgainstVotes() == 5 && $candidature->getForVotes() == 1)) {
           $this->rejectApplication($id);
       }
     }

@@ -67,10 +67,10 @@ class Evenements
     }
 
     /**
-     * Allow to create a events.
+     * Allow to create a event.
      *
-     * @param $libelle
-     * @param $categorie
+     * @param $libelle      | The libelle of the event
+     * @param $categorie    | The category of the event
      */
     public function createEvents($libelle, $categorie)
     {
@@ -91,17 +91,17 @@ class Evenements
     }
 
     /**
-     * Allow to create and link a event to a simple user.
+     * Allow to create and link a event to a simple user || teacher.
      *
-     * @param $user
-     * @param $libelle
-     * @param $categorie
+     * @param $user         | The user who receive the event
+     * @param $libelle      | The libelle of the event
+     * @param $categorie    | The categorie of the event
      */
     public function createUserEvents($user, $libelle, $categorie)
     {
-        $users = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $user));
+        $user = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $user));
 
-        if (null === $users) {
+        if (null === $user) {
             throw new Exception("L'utilisateur ne semble pas exister.");
         }
 
@@ -110,13 +110,35 @@ class Evenements
         $event->setLibelle($libelle);
         $event->setCategorie($categorie);
         $event->setDate(new \Datetime());
-        $event->addUser($users);
-        $users->addEvent($event);
+        $event->addUser($user);
+        $user->addEvent($event);
 
-        /* if ($event->getCategorie() === 'Important') {
-            $message = $this->mail->importantMessage($user);
-            $this->mail->sendMessage($message);
-        } */
+        $this->doctrine->persist($event);
+        $this->doctrine->flush();
+    }
+
+    /**
+     * Allow to create and link a event to a student.
+     *
+     * @param $user         | The student who receive the event
+     * @param $libelle      | The libelle of the event
+     * @param $categorie    | The category of the event
+     */
+    public function createMentoreEvents($user, $libelle, $categorie)
+    {
+        $user = $this->doctrine->getRepository('UserBundle:Mentore')->findOneBy(array('id' => $user));
+
+        if (null === $user) {
+            throw new Exception("L'élève ne semble pas exister.");
+        }
+
+        $event = new Events();
+
+        $event->setLibelle($libelle);
+        $event->setCategorie($categorie);
+        $event->setDate(new \DateTime());
+        $event->addMentore($user);
+        $user->addEvent($event);
 
         $this->doctrine->persist($event);
         $this->doctrine->flush();

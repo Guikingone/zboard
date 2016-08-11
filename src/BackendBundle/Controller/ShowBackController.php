@@ -10,12 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 class ShowBackController extends Controller
 {
     /**
+     * @Route("/list/mentors", name="gestion_mentors")
+     * @Template("BackBundle/Action/list_mentors.html.twig")
+     *
      * @param Request $request
      *
      * @return array
-     *
-     * @Route("/list/mentors", name="gestion_mentors")
-     * @Template("BackBundle/Action/list_mentors.html.twig")
      */
     public function showMentorsAction(Request $request)
     {
@@ -30,12 +30,12 @@ class ShowBackController extends Controller
     }
 
     /**
+     * @Route("/list/mentore", name="gestion_mentores")
+     * @Template("BackBundle/Action/list_mentores.html.twig")
+     *
      * @param Request $request
      *
      * @return array
-     *
-     * @Route("/list/mentore", name="gestion_mentores")
-     * @Template("BackBundle/Action/list_mentores.html.twig")
      */
     public function showMentoreAction(Request $request)
     {
@@ -50,12 +50,12 @@ class ShowBackController extends Controller
     }
 
     /**
+     * @Route("/list/soutenances", name="gestion_soutenances")
+     * @Template("BackBundle/Action/list_soutenances.html.twig")
+     *
      * @param Request $request
      *
      * @return array
-     *
-     * @Route("/list/soutenances", name="gestion_soutenances")
-     * @Template("BackBundle/Action/list_soutenances.html.twig")
      */
     public function showSoutenancesMentorsAction(Request $request)
     {
@@ -70,12 +70,12 @@ class ShowBackController extends Controller
     }
 
     /**
+     * @Route("/list/parcours", name="gestion_parcours")
+     * @template("BackBundle/Action/list_parcours.html.twig")
+     *
      * @param Request $request
      *
      * @return array
-     *
-     * @Route("/list/parcours", name="gestion_parcours")
-     * @template("BackBundle/Action/list_parcours.html.twig")
      */
     public function showParcoursAction(Request $request)
     {
@@ -92,12 +92,12 @@ class ShowBackController extends Controller
     }
 
     /**
+     * @Route("/show/path/{id}/details", name="show_parcours")
+     * @Template("BackBundle/Details/show_parcours.html.twig")
+     *
      * @param $id
      *
      * @return array
-     *
-     * @Route("/show/path/{id}/details", name="show_parcours")
-     * @Template("BackBundle/Details/show_parcours.html.twig")
      */
     public function showParcoursByIdAction(Request $request, $id)
     {

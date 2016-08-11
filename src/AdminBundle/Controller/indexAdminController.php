@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 class indexAdminController extends Controller
 {
     /**
-     * @return array
-     *
      * @Route("/", name="home_admin")
      * @Template("AdminBundle/Index/index.html.twig")
+     *
+     * @return array
      */
     public function indexAction()
     {
@@ -46,12 +46,12 @@ class indexAdminController extends Controller
     }
 
     /**
+     * @Route("/country", name="gestion_country")
+     * @Template("AdminBundle/Action/list_country.html.twig")
+     *
      * @param Request $request
      *
      * @return array
-     *
-     * @Route("/country", name="gestion_country")
-     * @Template("AdminBundle/Action/list_country.html.twig")
      */
     public function addCountryAction(Request $request)
     {
@@ -63,10 +63,10 @@ class indexAdminController extends Controller
     }
 
     /**
-     * @return array
-     *
      * @Route("/habilitations", name="gestion_habilitations")
      * @Template("AdminBundle/Index/habilitations.html.twig")
+     *
+     * @return array
      */
     public function showHabilitationsAction()
     {
@@ -78,12 +78,12 @@ class indexAdminController extends Controller
     }
 
     /**
+     * @Route("/show/abonnements", name="gestion_abonnements")
+     * @Template("AdminBundle/Action/list_abonnements.html.twig")
+     *
      * @param Request $request
      *
      * @return array
-     *
-     * @Route("/show/abonnements", name="gestion_abonnements")
-     * @Template("AdminBundle/Action/list_abonnements.html.twig")
      */
     public function showAbonnementsAction(Request $request)
     {

@@ -50,11 +50,15 @@
                                     <li class="list-group-item">
                                         <b>Date commencement : </b> <p class="pull-right">{{ mentore.suivi.dateStart|date('d-M-y') }}</p>
                                     </li>
+                                    <li class="list-group-item">
+                                        <b>Mentor actuel : </b> <p class="pull-right">{{ mentore.suivi.mentor.firstname }} {{ mentore.suivi.mentor.lastname }}</p>
+                                    </li>
                                 </ul>
-                                {% if is_granted('ROLE_MENTOR') %}
-                                    <a href="#" class="btn btn-primary btn-block"><b>Contacter</b></a>
-                                    <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#myModalNotes"><b>Ecrire une note de suivi</b></a>
-                                    <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#myModalSessions"><b>Planifier une session</b></a>
+                                {% if is_granted('ROLE_SUPERVISEUR_MENTOR') or mentore.suivi.mentor == app.user %}
+                                    <a href="#" class="btn btn-flat btn-primary btn-block"><b>Contacter</b></a>
+                                    <a href="#" class="btn btn-flat btn-warning btn-block" data-toggle="modal" data-target="#myModalNotes"><b>Ecrire une note de suivi</b></a>
+                                    <a href="#" class="btn btn-flat btn-warning btn-block" data-toggle="modal" data-target="#myModalSessions"><b>Planifier une session</b></a>
+                                    <a href="{{ path('transfert_mentore', {'id': mentore.id }) }}" class="btn btn-flat btn-warning btn-block">Changer de mentor</a>
                                 {% endif %}
                             </div>
                         </div>

@@ -12,6 +12,8 @@ class TutorielsController extends Controller
     /**
    * @Route("/tutoriels")
    * @Template("MentoratBundle/Dashboard/tutoriels.html.twig")
+   *
+   * @return array
    */
   public function indexAction(Request $request)
   {

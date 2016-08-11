@@ -49,11 +49,18 @@ class Events
     private $users;
 
     /**
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\Mentore", mappedBy="events")
+     * @ORM\JoinTable(name="zboard_mentore_events")
+     */
+    private $mentores;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->mentores = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -170,5 +177,39 @@ class Events
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Add mentore.
+     *
+     * @param \UserBundle\Entity\Mentore $mentore
+     *
+     * @return Events
+     */
+    public function addMentore(\UserBundle\Entity\Mentore $mentore)
+    {
+        $this->mentores[] = $mentore;
+
+        return $this;
+    }
+
+    /**
+     * Remove mentore.
+     *
+     * @param \UserBundle\Entity\Mentore $mentore
+     */
+    public function removeMentore(\UserBundle\Entity\Mentore $mentore)
+    {
+        $this->mentores->removeElement($mentore);
+    }
+
+    /**
+     * Get mentores.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMentores()
+    {
+        return $this->mentores;
     }
 }

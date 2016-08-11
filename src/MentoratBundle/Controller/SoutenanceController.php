@@ -14,6 +14,8 @@ class SoutenanceController extends Controller
     /**
      * @Route("/en-attente",name="soutenance_waiting")
      * @Template("MentoratBundle/Soutenance/en-attente.html.twig")
+     *
+     * @return array
      */
     public function waitingAction()
     {
@@ -29,6 +31,8 @@ class SoutenanceController extends Controller
     /**
      * @Route("/effectuees",name="soutenance_done")
      * @Template("MentoratBundle/Soutenance/soutenance-terminee.html.twig")
+     *
+     * @return array
      */
     public function soutenanceDoneAction()
     {
