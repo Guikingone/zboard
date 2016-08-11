@@ -239,6 +239,38 @@ class MentoratService
     }
 
     /**
+     * Allow a teacher to become unavailable using is $id.
+     *
+     * @param $id   | The id of the teacher
+     */
+    public function mentorIndispo($id)
+    {
+        $mentor = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
+
+        $mentor->setAvailable(false);
+
+        $this->doctrine->flush();
+
+        return $this->session->getFlashBag()->add('success', 'Votre status est bien passé à "Indisponible", à bientôt !');
+    }
+
+    /**
+     * Allow a teacher to become available using is $id.
+     *
+     * @param $id   | The id of the teacher
+     */
+    public function mentorDispo($id)
+    {
+        $mentor = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
+
+        $mentor->setAvailable(true);
+
+        $this->doctrine->flush();
+
+        return $this->session->getFlashBag()->add('success', 'On est heureux de vous revoir ! Bonnes séances de mentorat !');
+    }
+
+    /**
      * Allow to find a student using is $id.
      *
      * @param $id
@@ -260,33 +292,5 @@ class MentoratService
     public function viewMentor($id)
     {
         return $this->doctrine->getRepository('UserBundle:User')->find($id);
-    }
-
-
-    /**
-     * Function used to put the Available status to false
-     * @param $id
-     */
-    public function mentorIndispo($id)
-    {
-        $mentor = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
-        $mentor->setAvailable(false);
-        $this->doctrine->persist($mentor);
-        $this->doctrine->flush();
-        return $this->session->getFlashBag()->add('success', 'Votre status est bien passé à "Indisponible", à bientôt !');
-    }
-
-
-    /**
-     * Function used to put the Available status to true
-     * @param $id
-     */
-    public function mentorDispo($id)
-    {
-        $mentor = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
-        $mentor->setAvailable(true);
-        $this->doctrine->persist($mentor);
-        $this->doctrine->flush();
-        return $this->session->getFlashBag()->add('success', 'On est heureux de vous revoir ! Bonnes séances de mentorat !');
     }
 }

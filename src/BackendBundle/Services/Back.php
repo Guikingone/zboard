@@ -162,7 +162,7 @@ class Back
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La soutenance a bien été enregistrée.');
             $this->events->createUserEvents($mentor, 'Une soutenance a été planifiée.', 'Information');
-            $this->events->createUserEvents($mentore, 'Une soutenance a été planifiée.', 'Information');
+            $this->events->createMentoreEvents($mentore, 'Une soutenance a été planifiée.', 'Information');
         }
 
         return $form;

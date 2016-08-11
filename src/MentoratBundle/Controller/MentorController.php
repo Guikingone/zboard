@@ -32,10 +32,10 @@ class MentorController extends Controller
         );
 
         return array(
-            'controller'    => 'mentors',
-            'mentors'       => $mentors,
-            'pagination'    => $pagination,
-            'title_action'  => 'Liste des mentors',
+            'controller' => 'mentors',
+            'mentors' => $mentors,
+            'pagination' => $pagination,
+            'title_action' => 'Liste des mentors',
         );
     }
 
@@ -54,28 +54,34 @@ class MentorController extends Controller
         $mentor = $this->get('core.mentorat')->viewMentor($id);
 
         return array(
-            'controller'    => 'mentor',
-            'mentor'        => $mentor,
-            'competence'    => $competence->createView(),
-            'title_action'  => 'Détails du mentor :'.$mentor->getFirstname().' '.$mentor->getLastname(),
+            'controller' => 'mentor',
+            'mentor' => $mentor,
+            'competence' => $competence->createView(),
+            'title_action' => 'Détails du mentor :'.$mentor->getFirstname().' '.$mentor->getLastname(),
         );
     }
 
     /**
      * @Route("/indispo/{id}", name="mentor_indispo")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function mentorIndispoAction($id)
     {
-        $this->get('core.mentor')->mentorIndispo($id);
+        $this->get('core.mentorat')->mentorIndispo($id);
+
         return $this->redirectToRoute('mon_profil');
     }
 
     /**
      * @Route("/dispo/{id}", name="mentor_dispo")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function mentorDispoAction($id)
     {
-        $this->get('core.mentor')->mentorDispo($id);
+        $this->get('core.mentorat')->mentorDispo($id);
+
         return $this->redirectToRoute('mon_profil');
     }
 }
