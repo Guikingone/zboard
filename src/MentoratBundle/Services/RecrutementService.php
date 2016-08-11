@@ -69,6 +69,7 @@ class RecrutementService
             $candidatures['candidatures_simples'] = $candidaturesSimple;
             $candidatures['candidatures_a_arbitrer'] = $candidaturesAArbitrer;
         }
+        return new Redirect
 
         return $candidatures;
     }
