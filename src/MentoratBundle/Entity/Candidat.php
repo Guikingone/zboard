@@ -164,7 +164,8 @@ class Candidat
     {
         $this->forVotes = 0;
         $this->againstVotes = 0;
-        foreach ($this->getVotes() as $vote) {
+        foreach ($this->getVotes() as $vote)
+        {
             if ($vote->getVote() == 1) {
                 ++$this->forVotes;
             } else {
@@ -239,34 +240,6 @@ class Candidat
     public function setIsCandidature($isCandidature)
     {
         $this->isCandidature = $isCandidature;
-
-        return $this;
-    }
-
-    /**
-     * Set the value of For Votes.
-     *
-     * @param mixed forVotes
-     *
-     * @return self
-     */
-    public function setForVotes($forVotes)
-    {
-        $this->forVotes = $forVotes;
-
-        return $this;
-    }
-
-    /**
-     * Set the value of Against Votes.
-     *
-     * @param mixed againstVotes
-     *
-     * @return self
-     */
-    public function setAgainstVotes($againstVotes)
-    {
-        $this->againstVotes = $againstVotes;
 
         return $this;
     }
