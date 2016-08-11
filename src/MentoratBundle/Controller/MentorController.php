@@ -30,10 +30,10 @@ class MentorController extends Controller
         );
 
         return array(
-            'controller' => 'mentors',
-            'mentors' => $mentors,
-            'pagination' => $pagination,
-            'title_action' => 'Liste des mentors',
+            'controller'    => 'mentors',
+            'mentors'       => $mentors,
+            'pagination'    => $pagination,
+            'title_action'  => 'Liste des mentors',
         );
     }
 
@@ -51,10 +51,28 @@ class MentorController extends Controller
         $mentor = $this->get('core.mentore')->viewMentor($id);
 
         return array(
-            'controller' => 'mentor',
-            'mentor' => $mentor,
-            'competence' => $competence->createView(),
-            'title_action' => 'Détails du mentor :'.$mentor->getFirstname().' '.$mentor->getLastname(),
+            'controller'    => 'mentor',
+            'mentor'        => $mentor,
+            'competence'    => $competence->createView(),
+            'title_action'  => 'Détails du mentor :'.$mentor->getFirstname().' '.$mentor->getLastname(),
         );
+    }
+
+    /**
+     * @Route("/indispo/{id}", name="mentor_indispo")
+     */
+    public function mentorIndispoAction($id)
+    {
+        $this->get('core.mentor')->mentorIndispo($id);
+        return $this->redirectToRoute('mon_profil');
+    }
+
+    /**
+     * @Route("/dispo/{id}", name="mentor_dispo")
+     */
+    public function mentorDispoAction($id)
+    {
+        $this->get('core.mentor')->mentorDispo($id);
+        return $this->redirectToRoute('mon_profil');
     }
 }

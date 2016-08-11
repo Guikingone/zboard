@@ -161,4 +161,32 @@ class MentorService
     {
         return $this->doctrine->getRepository('UserBundle:User')->find($id);
     }
+
+
+    /**
+     * Function used to put the Available status to false
+     * @param $id
+     */
+    public function mentorIndispo($id)
+    {
+        $mentor = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
+        $mentor->setAvailable(false);
+        $this->doctrine->persist($mentor);
+        $this->doctrine->flush();
+        return $this->session->getFlashBag()->add('success', 'Votre status est bien passé à "Indisponible", à bientôt !');
+    }
+
+
+    /**
+     * Function used to put the Available status to true
+     * @param $id
+     */
+    public function mentorDispo($id)
+    {
+        $mentor = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
+        $mentor->setAvailable(true);
+        $this->doctrine->persist($mentor);
+        $this->doctrine->flush();
+        return $this->session->getFlashBag()->add('success', 'On est heureux de vous revoir ! Bonnes séances de mentorat !');
+    }
 }

@@ -2,6 +2,12 @@
 
 {% block fos_user_content %}
     <div class="row">
+        {% if(app.user.available == false) %}
+            <div class="col-md-12">
+                <div class="alert alert-info">Vous êtes actuellement indisponible, vous ne pouvez donc pas avoir de soutenances, voire de nouveaux mentorés. Lorsque vous serez
+                    de nouveau disponible, cliquez sur le bouton "Me rendre disponible" ! A bientôt !</div>
+            </div>
+        {% endif %}
         <div class="col-sm-12 col-md-3 col-lg-5">
             <!-- Profile Image -->
             <div class="box box-primary">
@@ -34,6 +40,11 @@
                         </li>
                     </ul>
                     <a href="{{ path('mon_profil_edit') }}"><button class="btn btn-flat btn-md btn-warning">Modifier mon profil</button></a>
+                    {% if(app.user.available == true) %}
+                        <a href="{{ path('mentor_indispo',{'id' : app.user.id }) }}"><button class="btn btn-flat btn-md btn-danger">Me rendre indisponible</button></a>
+                    {% else %}
+                        <a href="{{ path('mentor_dispo',{'id' : app.user.id }) }}"><button class="btn btn-flat btn-md btn-success">Me rendre disponible</button></a>
+                    {% endif %}
                 </div>
                 <!-- /.box-body -->
             </div>
