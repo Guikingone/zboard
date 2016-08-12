@@ -19,6 +19,10 @@ services:
         class: UserBundle\Services\UserService
         arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events", "@core.mail"]
 
+    core.security:
+        class: AdminBundle\Services\SecurityService
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@core.events"]
+
     # list of services used in addition to perform global actions.
 
     core.archive:
@@ -59,7 +63,6 @@ services:
     core.mail:
         class: AdminBundle\Services\Mail
         arguments: ["@templating", "@mailer"]
-
 
 
     # List of services used to registrer the users with FOS.

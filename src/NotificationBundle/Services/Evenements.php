@@ -157,8 +157,8 @@ class Evenements
 
         foreach ($events as $event) {
             $this->doctrine->remove($event);
-            $this->doctrine->flush();
         }
+        $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Les notifications ont bien été supprimées.');
     }

@@ -45,7 +45,7 @@ class UserAdminController extends Controller
      */
     public function updateUserAction(Request $request, $id)
     {
-        $user = $this->get('core.user')->addRoleToUser($request, $id);
+        $user = $this->get('core.security')->addRoleToUser($request, $id);
 
         if ($user->isValid()) {
             return $this->redirectToRoute('gestion_habilitations');
@@ -65,7 +65,7 @@ class UserAdminController extends Controller
      */
     public function updateMentoreAction(Request $request, $id)
     {
-        $mentore = $this->get('core.user')->addRoleToMentore($request, $id);
+        $mentore = $this->get('core.security')->addRoleToMentore($request, $id);
 
         if ($mentore->isValid()) {
             return $this->redirectToRoute('gestion_habilitations');

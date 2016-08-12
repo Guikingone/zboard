@@ -15,19 +15,17 @@ use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Suivi;
 use NotificationBundle\Services\Evenements;
 use AdminBundle\Services\Mail;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use UserBundle\Entity\Competences;
 use UserBundle\Entity\Mentore;
 use UserBundle\Entity\User;
 use UserBundle\Form\CompetencesType;
-use UserBundle\Form\Mentore\UpdateMentoreType;
 use UserBundle\Form\RegistrationMentoreType;
 use UserBundle\Form\RegistrationType;
-use UserBundle\Form\User\UpdateUserType;
 
 class UserService
 {
@@ -160,7 +158,6 @@ class UserService
             $mentor->setPlainPassword(mb_strtolower($mentor->getFirstname().'_'.$mentor->getLastname()));
             $mentor->setRoles(array('ROLE_MENTOR'));
             $mentor->setArchived(false);
-            $mentor->setEnabled(true);
             $this->doctrine->persist($mentor);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
@@ -195,7 +192,6 @@ class UserService
             $mentore->setPlainPassword(mb_strtolower($mentore->getFirstname().'_'.$mentore->getLastname()));
             $mentore->setRoles(array('ROLE_MENTORE'));
             $mentore->setArchived(false);
-            $mentore->setEnabled(true);
             $this->doctrine->persist($mentore);
             $this->doctrine->persist($suivi);
             $this->doctrine->flush();
@@ -234,62 +230,6 @@ class UserService
     }
 
     /**
-     * Allow to update the roles of a user using is $id.
-     *
-     * @param Request $request
-     * @param $id
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addRoleToUser(Request $request, $id)
-    {
-        $user = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
-
-        if (null === $user) {
-            throw new NotFoundHttpException("L'utilisateur ne semble pas exister.");
-        }
-
-        $form = $this->form->create(UpdateUserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', "Le rôle de l'utilisateur a bien été mis à jour");
-            $this->events->createUserEvents($user, 'Modifications de vos accès', 'Important');
-        }
-
-        return $form;
-    }
-
-    /**
-     * Allow to update the roles of a student using is $id.
-     *
-     * @param Request $request
-     * @param $id
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addRoleToMentore(Request $request, $id)
-    {
-        $mentore = $this->doctrine->getRepository('UserBundle:Mentore')->findOneBy(array('id' => $id));
-
-        if (null === $mentore) {
-            throw new NotFoundHttpException('Le mentoré ne semble pas exister.');
-        }
-
-        $form = $this->form->create(UpdateMentoreType::class, $mentore);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'Le rôle du mentoré a bien été mis à jour');
-            $this->events->createUserEvents($mentore, 'Modifications de vos accès', 'Important');
-        }
-
-        return $form;
-    }
-
-    /**
      * Allow to update the informations about a teacher.
      *
      * @param Request $request
@@ -302,7 +242,7 @@ class UserService
         $mentor = $this->doctrine->getRepository('UserBundle:User')->find($id);
 
         if (null === $mentor) {
-            throw new NotFoundHttpException('Le mentor ne semble pas exister');
+            throw new Exception('Le mentor ne semble pas exister');
         }
 
         $form = $this->form->create(RegistrationType::class, $mentor);
@@ -330,7 +270,7 @@ class UserService
         $mentore = $this->doctrine->getRepository('UserBundle:Mentore')->find($id);
 
         if (null === $mentore) {
-            throw new NotFoundHttpException('Le mentore ne semble pas exister.');
+            throw new Exception('Le mentore ne semble pas exister.');
         }
 
         $form = $this->form->create(RegistrationMentoreType::class, $mentore);
