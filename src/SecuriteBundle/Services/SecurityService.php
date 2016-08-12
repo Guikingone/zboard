@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace AdminBundle\Services;
+namespace SecuriteBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use NotificationBundle\Services\Evenements;

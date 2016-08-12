@@ -1,17 +1,17 @@
-securite:
-    resource: "@SecuriteBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 core:
     resource: "@CoreBundle/Controller/"
     type:     annotation
     prefix:   /
 
+securite:
+    resource: "@SecuriteBundle/Controller/"
+    type:     annotation
+    prefix:   /security
+
 user:
     resource: "@UserBundle/Controller/"
     type:     annotation
-    prefix: /user
+    prefix:   /user
 
 backend:
     resource: "@BackendBundle/Controller/"
