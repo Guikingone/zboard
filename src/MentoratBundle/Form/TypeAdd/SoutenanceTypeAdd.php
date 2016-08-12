@@ -38,6 +38,7 @@ class SoutenanceTypeAdd extends AbstractType
                     'A revoir' => 'A revoir',
                 ),
             ))
+            ->remove('duree_demande')
         ;
     }
 

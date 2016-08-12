@@ -77,12 +77,14 @@ class MentoreController extends Controller
         $mentore = $this->get('core.mentorat')->viewMentore($id);
         $note = $this->get('core.mentorat')->addNote($request, $id);
         $sessions = $this->get('core.mentorat')->addSessionMentorat($request, $id);
+        $soutenance = $this->get('core.mentorat')->askSoutenance($request, $id);
 
         return array(
             'controller' => 'mentore',
             'mentore' => $mentore,
             'note' => $note->createView(),
             'sessions' => $sessions->createView(),
+            'soutenance' => $soutenance->createView(),
             'title_action' => 'Détails du mentoré : '.$mentore->getFirstname().' '.$mentore->getLastname(),
         );
     }

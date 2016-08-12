@@ -15,6 +15,8 @@ namespace MentoratBundle\Services;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Notes;
 use MentoratBundle\Entity\Sessions;
+use MentoratBundle\Entity\Soutenance;
+use MentoratBundle\Form\Ask\AskSoutenanceType;
 use MentoratBundle\Form\SessionsType;
 use MentoratBundle\Form\TypeAdd\NoteTypeAdd;
 use MentoratBundle\Form\Update\SuiviUpdateType;
@@ -231,6 +233,46 @@ class MentoratService
             $this->events->createMentoreEvents(
                 $suivi->getMentore(),
                 'Changement de mentor effectué, votre nouveau mentor prendre contact avec vous rapidement',
+                'Important'
+            );
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow a teacher to ask for a new soutenance linked to a student using is $id.
+     *
+     * @param Request $request
+     * @param $id               | The id of the student
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function askSoutenance(Request $request, $id)
+    {
+        $mentore = $this->doctrine->getRepository('UserBundle:Mentore')->findOneBy(array('id' => $id));
+
+        if (null === $mentore) {
+            throw new Exception("L'élève semble ne pas exister.");
+        }
+
+        $soutenance = new Soutenance();
+
+        $form = $this->form->create(AskSoutenanceType::class, $soutenance);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $soutenance->setMentore($mentore);
+            $soutenance->setMentor($this->user->getToken()->getUser());
+            $soutenance->setStatus('Demande');
+            $soutenance->setDateDemande(new \DateTime());
+            $this->doctrine->persist($soutenance);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'La demande de soutenance a bien été envoyée.');
+            $this->events->createMentoreEvents($mentore, 'Une demande de soutenance a été effectuée.', 'Information');
+            $this->events->createUserEvents(
+                $this->user->getToken()->getUser(),
+                'La demande de soutenance a bien été envoyée.',
                 'Important'
             );
         }

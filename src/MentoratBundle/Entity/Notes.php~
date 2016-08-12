@@ -46,5 +46,109 @@ class Notes
      */
     private $suivi;
 
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * Set libelle.
+     *
+     * @param string $libelle
+     *
+     * @return Notes
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get libelle.
+     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * Set dateCreated.
+     *
+     * @param \DateTime $dateCreated
+     *
+     * @return Notes
+     */
+    public function setDateCreated($dateCreated)
+    {
+        $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreated.
+     *
+     * @return \DateTime
+     */
+    public function getDateCreated()
+    {
+        return $this->dateCreated;
+    }
+
+    /**
+     * Set auteur.
+     *
+     * @param \UserBundle\Entity\User $auteur
+     *
+     * @return Notes
+     */
+    public function setAuteur(\UserBundle\Entity\User $auteur = null)
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    /**
+     * Get auteur.
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
+    }
+
+    /**
+     * Set suivi.
+     *
+     * @param \MentoratBundle\Entity\Suivi $suivi
+     *
+     * @return Notes
+     */
+    public function setSuivi(\MentoratBundle\Entity\Suivi $suivi = null)
+    {
+        $this->suivi = $suivi;
+
+        return $this;
+    }
+
+    /**
+     * Get suivi.
+     *
+     * @return \MentoratBundle\Entity\Suivi
+     */
+    public function getSuivi()
+    {
+        return $this->suivi;
+    }
 }

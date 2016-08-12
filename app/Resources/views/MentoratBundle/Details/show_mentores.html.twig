@@ -59,6 +59,7 @@
                                     <a href="#" class="btn btn-flat btn-warning btn-block" data-toggle="modal" data-target="#myModalNotes"><b>Ecrire une note de suivi</b></a>
                                     <a href="#" class="btn btn-flat btn-warning btn-block" data-toggle="modal" data-target="#myModalSessions"><b>Planifier une session</b></a>
                                     <a href="{{ path('transfert_mentore', {'id': mentore.id }) }}" class="btn btn-flat btn-warning btn-block">Changer de mentor</a>
+                                    <a href="#" class="btn btn-flat btn-warning btn-block" data-toggle="modal" data-target="#myModalSoutenances">Demande de soutenance</a>
                                 {% endif %}
                             </div>
                         </div>
@@ -259,5 +260,7 @@
     {% include ':Form:register_sessions.html.twig' %}
 
     {% include ':MentoratBundle/Form:update_cours.html.twig' %}
+
+    {% include ':Form/Parcours:ask_soutenance.html.twig' %}
 
 {% endblock %}

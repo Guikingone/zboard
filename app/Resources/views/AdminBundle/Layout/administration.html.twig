@@ -59,7 +59,7 @@
                                     <li><a href="{{ path('gestion_users_admin') }}"><i class="fa fa-circle-o"></i>Gestion des utilisateurs</a></li>
                                 </ul>
                             </li>
-                            <!-- <li class="{{ (controller == "statistiques")? "active" : "" }} treeview">
+                            <li class="{{ (controller == "statistiques")? "active" : "" }} treeview">
                                 <a href="#">
                                     <i class="fa fa-bar-chart"></i> <span>Statistiques de ZBoard</span>
                                     <span class="pull-right-container">
@@ -70,7 +70,7 @@
                                     <li><a href="#"><i class="fa fa-circle-o"></i>Utilisateurs</a></li>
                                     <li><a href="#"><i class="fa fa-circle-o"></i>Fonctionnalités</a></li>
                                 </ul>
-                            </li> -->
+                            </li>
                             <li class="{{ (controller == "cms")? "active" : "" }} treeview">
                                 <a href="#">
                                     <i class="fa fa-file"></i> <span>Gestion du contenu</span>
@@ -119,13 +119,24 @@
                             <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-dashboard"></i>
-                                    <span>Accès au site</span>
+                                    <span>Backend</span>
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
                                     <li><a href="{{ path('home_backend') }}"><i class="fa fa-circle-o"></i>Accès au backend</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-user"></i>
+                                    <span>Dashboard</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
                                     <li><a href="{{ path('mentorat_dashboard_index') }}"><i class="fa fa-circle-o"></i>Accès au dashboard</a></li>
                                 </ul>
                             </li>

@@ -112,7 +112,17 @@ class Back
      */
     public function getSoutenances()
     {
-        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findAll();
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findBy(array('status' => 'En attente'));
+    }
+
+    /**
+     * Allow to get the soutenances asked by teachers.
+     *
+     * @return array|\MentoratBundle\Entity\Soutenance[]
+     */
+    public function getDemandesSoutenances()
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findBy(array('status' => 'Demande'));
     }
 
     /**

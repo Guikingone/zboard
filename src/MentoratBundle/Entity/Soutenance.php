@@ -36,7 +36,7 @@ class Soutenance
 
     /**
      * @var string
-     * @ORM\Column(name="status", type="string", length=255, nullable=false)
+     * @ORM\Column(name="status", type="string", length=255, nullable=true)
      */
     private $status;
 
@@ -49,6 +49,18 @@ class Soutenance
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Mentore", inversedBy="soutenances")
      */
     private $mentore;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="date_demande", type="datetime", nullable=true)
+     */
+    private $dateDemande;
+
+    /**
+     * @var string
+     * @ORM\Column(name="duree_demande", type="string", length=200, nullable=true)
+     */
+    private $dureeDemande;
 
     /**
      * Get id.
@@ -106,6 +118,54 @@ class Soutenance
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set dateDemande.
+     *
+     * @param \DateTime $dateDemande
+     *
+     * @return Soutenance
+     */
+    public function setDateDemande($dateDemande)
+    {
+        $this->dateDemande = $dateDemande;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDemande.
+     *
+     * @return \DateTime
+     */
+    public function getDateDemande()
+    {
+        return $this->dateDemande;
+    }
+
+    /**
+     * Set dureeDemande.
+     *
+     * @param string $dureeDemande
+     *
+     * @return Soutenance
+     */
+    public function setDureeDemande($dureeDemande)
+    {
+        $this->dureeDemande = $dureeDemande;
+
+        return $this;
+    }
+
+    /**
+     * Get dureeDemande.
+     *
+     * @return string
+     */
+    public function getDureeDemande()
+    {
+        return $this->dureeDemande;
     }
 
     /**

@@ -1,0 +1,35 @@
+<!-- Modal used in order to ask for a new soutenance -->
+<div class="modal fade" id="myModalSoutenances" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            {{ form_start(soutenance) }}
+            <div class="modal-header">
+                <h4 class="modal-title text-center" id="myModalLabel">Demande de soutenance</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <div class="form-group">
+                                {{ form_errors(soutenance.projet) }}
+                                {{ form_label(soutenance.projet, 'Projet à soutenir :')}}
+                                {{ form_widget(soutenance.projet, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_errors(soutenance.duree_demande) }}
+                                {{ form_label(soutenance.duree_demande, 'Durée de la demande :')}}
+                                {{ form_widget(soutenance.duree_demande, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-flat btn-warning">Enregistrer</button>
+                <button type="button" class="btn btn-flat btn-default" data-dismiss="modal">Annuler</button>
+            </div>
+            {{ form_end(soutenance) }}
+        </div>
+    </div>
+</div>

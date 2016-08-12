@@ -84,8 +84,6 @@
                                 </ul>
                             </li>
                         {% endif %}
-                        <li class="{{ (controller == 'settings') ? 'active' : '' }} treeview"><a href="{{ path('settings') }}"><i class='fa fa-info-circle'></i> <span>Paramètres</span></a></li>
-
                         <li class="{{ (controller == "cms")? "active" : "" }} treeview">
                             <a href="#">
                                 <i class="fa fa-laptop"></i>
@@ -102,6 +100,18 @@
                         {% if is_granted('ROLE_ADMIN') %}
                             <li class="treeview">
                                 <a href="#">
+                                    <i class="fa fa-tachometer"></i>
+                                    <span>Dashboard</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ path('mentorat_dashboard_index') }}"><i class="fa fa-circle-o"></i>Accès au dashboard</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#">
                                     <i class="fa fa-lock"></i>
                                     <span>Administration</span>
                                     <span class="pull-right-container">
@@ -110,8 +120,13 @@
                                 </a>
                                 <ul class="treeview-menu">
                                     <li><a href="{{ path('home_admin') }}"><i class="fa fa-circle-o"></i>Accès à l'administration</a></li>
-                                    <li><a href="{{ path('mentorat_dashboard_index') }}"><i class="fa fa-circle-o"></i>Accès au dashboard</a></li>
                                 </ul>
+                            </li>
+                            <li class="{{ (controller == 'settings') ? 'active' : '' }} treeview">
+                                <a href="{{ path('settings') }}">
+                                    <i class='fa fa-info-circle'></i>
+                                    <span>Paramètres</span>
+                                </a>
                             </li>
                         {% endif %}
                         <li class="header">LABELS</li>

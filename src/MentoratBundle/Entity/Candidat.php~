@@ -244,30 +244,50 @@ class Candidat
     }
 
     /**
-     * Set the value of For Votes.
+     * Add reponse.
      *
-     * @param mixed forVotes
+     * @param \MentoratBundle\Entity\RecrutementReponse $reponse
      *
-     * @return self
+     * @return Candidat
      */
-    public function setForVotes($forVotes)
+    public function addReponse(\MentoratBundle\Entity\RecrutementReponse $reponse)
     {
-        $this->forVotes = $forVotes;
+        $this->reponses[] = $reponse;
 
         return $this;
     }
 
     /**
-     * Set the value of Against Votes.
+     * Remove reponse.
      *
-     * @param mixed againstVotes
-     *
-     * @return self
+     * @param \MentoratBundle\Entity\RecrutementReponse $reponse
      */
-    public function setAgainstVotes($againstVotes)
+    public function removeReponse(\MentoratBundle\Entity\RecrutementReponse $reponse)
     {
-        $this->againstVotes = $againstVotes;
+        $this->reponses->removeElement($reponse);
+    }
+
+    /**
+     * Add vote.
+     *
+     * @param \MentoratBundle\Entity\RecrutementVote $vote
+     *
+     * @return Candidat
+     */
+    public function addVote(\MentoratBundle\Entity\RecrutementVote $vote)
+    {
+        $this->votes[] = $vote;
 
         return $this;
+    }
+
+    /**
+     * Remove vote.
+     *
+     * @param \MentoratBundle\Entity\RecrutementVote $vote
+     */
+    public function removeVote(\MentoratBundle\Entity\RecrutementVote $vote)
+    {
+        $this->votes->removeElement($vote);
     }
 }

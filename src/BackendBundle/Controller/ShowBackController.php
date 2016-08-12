@@ -61,11 +61,13 @@ class ShowBackController extends Controller
     {
         $soutenance = $this->get('core.back')->addSoutenance($request);
         $soutenances = $this->get('core.back')->getSoutenances();
+        $soutenancesAsked = $this->get('core.back')->getDemandesSoutenances();
 
         return array(
             'controller' => 'soutenances',
             'soutenances' => $soutenances,
             'soutenance' => $soutenance->createView(),
+            'soutenancesAsked' => $soutenancesAsked,
         );
     }
 
