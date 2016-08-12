@@ -1,7 +1,17 @@
+securite:
+    resource: "@SecuriteBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 core:
     resource: "@CoreBundle/Controller/"
     type:     annotation
     prefix:   /
+
+user:
+    resource: "@UserBundle/Controller/"
+    type:     annotation
+    prefix: /user
 
 backend:
     resource: "@BackendBundle/Controller/"
@@ -12,11 +22,6 @@ mentorat:
     resource: "@MentoratBundle/Controller/"
     type:     annotation
     prefix:   /dashboard
-
-user:
-    resource: "@UserBundle/Controller/"
-    type:     annotation
-    prefix:   /user
 
 admin:
     resource: "@AdminBundle/Controller/"

@@ -5,13 +5,14 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Tests\\": "tests/AppBundle",
-            "AdminBundle\\": "src/AdminBundle",
-            "BackendBundle\\": "src/BackendBundle",
-            "CoreBundle\\": "src/CoreBundle",
-            "MentoratBundle\\": "src/MentoratBundle",
-            "NotificationBundle\\": "src/NotificationBundle",
-            "UserBundle\\": "src/UserBundle"
+            "Tests\\": "tests/",
+            "AdminBundle\\": "src/",
+            "BackendBundle\\": "src/",
+            "CoreBundle\\": "src/",
+            "MentoratBundle\\": "src/",
+            "NotificationBundle\\": "src/",
+            "UserBundle\\": "src/",
+            "SecuriteBundle\\": "src/"
         },
         "classmap": [
             "app/AppKernel.php",
@@ -20,13 +21,14 @@
     },
     "autoload-dev": {
         "psr-4": {
-          "Tests\\": "tests/AppBundle",
-          "AdminBundle\\": "src/AdminBundle",
-          "BackendBundle\\": "src/BackendBundle",
-          "CoreBundle\\": "src/CoreBundle",
-          "MentoratBundle\\": "src/MentoratBundle",
-          "NotificationBundle\\": "src/NotificationBundle",
-          "UserBundle\\": "src/UserBundle"
+          "Tests\\": "tests/",
+          "AdminBundle\\": "src/",
+          "BackendBundle\\": "src/",
+          "CoreBundle\\": "src/",
+          "MentoratBundle\\": "src/",
+          "NotificationBundle\\": "src/",
+          "UserBundle\\": "src/",
+          "SecuriteBundle\\": "src/"
         }
     },
     "require": {
