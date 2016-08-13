@@ -17,6 +17,8 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use UserBundle\Form\Mentore\UpdateMentoreType;
 use UserBundle\Form\User\UpdateUserType;
 
@@ -43,22 +45,29 @@ class SecurityService
     private $events;
 
     /**
+     * @var AuthorizationChecker
+     */
+    private $security;
+
+    /**
      * SecurityService constructor.
      *
-     * @param EntityManager $doctrine
-     * @param Session $session
-     * @param FormFactory $form
+     * @param EntityManager        $doctrine
+     * @param Session              $session
+     * @param FormFactory          $form
+     * @param AuthorizationChecker $security
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, Evenements $events)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, Evenements $events, AuthorizationChecker $security)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
         $this->session = $session;
         $this->events = $events;
+        $this->security = $security;
     }
 
     /**
-     * Allow to active a teacher account.
+     * Allow to activate a teacher account.
      *
      * @param $id   | The id of the teacher
      */
@@ -70,11 +79,39 @@ class SecurityService
             throw new Exception('L\'utilisateur semble ne pas exister.');
         }
 
+        if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+            throw new AccessDeniedException();
+        }
+
         $mentor->setEnabled(true);
 
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le compte utilisateur a bien été activé.');
+    }
+
+    /**
+     * Allow to activate a student account.
+     *
+     * @param $id   | The id of the student
+     */
+    public function validateStudent($id)
+    {
+        $student = $this->doctrine->getRepository('UserBundle:Mentore')->findOneBy(array('id' => $id));
+
+        if (null === $student) {
+            throw new Exception('L\'élève ne semble pas exister');
+        }
+
+        if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+            throw new AccessDeniedException();
+        }
+
+        $student->setEnabled(true);
+
+        $this->doctrine->flush();
+
+        $this->session->getFlashBag()->add('success', 'Le compte élève a bien été activé.');
     }
 
     /**
@@ -91,6 +128,10 @@ class SecurityService
 
         if (null === $user) {
             throw new Exception("L'utilisateur ne semble pas exister.");
+        }
+
+        if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+            throw new AccessDeniedException();
         }
 
         $form = $this->form->create(UpdateUserType::class, $user);
@@ -121,6 +162,10 @@ class SecurityService
             throw new Exception('Le mentoré ne semble pas exister.');
         }
 
+        if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+            throw new AccessDeniedException();
+        }
+
         $form = $this->form->create(UpdateMentoreType::class, $mentore);
         $form->handleRequest($request);
 
@@ -132,5 +177,4 @@ class SecurityService
 
         return $form;
     }
-
 }

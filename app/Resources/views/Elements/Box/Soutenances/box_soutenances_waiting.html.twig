@@ -1,0 +1,50 @@
+<div class="box-body">
+    <div class="table-responsive">
+        <table class="table no-margin">
+            <thead>
+            <tr>
+                <th>Nom de l'élève</th>
+                <th>Nom du mentor</th>
+                <th>Date de création</th>
+                <th>Projet</th>
+                <th>Statut</th>
+                {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                    <th>Actions</th>
+                {% endif %}
+            </tr>
+            </thead>
+            <tbody>
+                {% for soutenances in soutenancesWaiting %}
+                <tr>
+                    <td>
+                        <a href="{{ path('show_details_mentore', {'id': soutenances.mentore.id}) }}">
+                            {{ soutenances.mentore.lastname }} {{ soutenances.mentore.firstname }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ path('show_details_mentor', {'id': soutenances.mentor.id}) }}">
+                            {{ soutenances.mentor.lastname }} {{ soutenances.mentor.firstname }}
+                        </a>
+                    </td>
+                    <td>
+                        {{ soutenances.passedAt|date("d-M-Y", "Europe/Paris") }}
+                    </td>
+                    <td>
+                        {{ soutenances.projet.libelle }}
+                    </td>
+                    <td>
+                        <span class="label label-warning">{{ soutenances.status }}</span>
+                    </td>
+                    {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
+                        <td>
+                            <a href="{{ path('update_soutenances', {'id': soutenances.id}) }}">
+                                <button type="button" class="btn btn-flat btn-warning">Modifier <span class="ion ion-wrench"></span> </button>
+                            </a>
+                        </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

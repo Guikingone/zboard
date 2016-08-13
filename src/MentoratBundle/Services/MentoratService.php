@@ -26,6 +26,8 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class MentoratService
 {
@@ -55,20 +57,28 @@ class MentoratService
     private $events;
 
     /**
+     * @var AuthorizationChecker
+     */
+    private $security;
+
+    /**
      * MentoratService constructor.
      *
      * @param EntityManager $doctrine
-     * @param FormFactory   $form
-     * @param Session       $session
-     * @param Evenements    $events
+     * @param FormFactory $form
+     * @param Session $session
+     * @param TokenStorage $user
+     * @param Evenements $events
+     * @param AuthorizationChecker $security
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, AuthorizationChecker $security)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
         $this->events = $events;
         $this->user = $user;
         $this->session = $session;
+        $this->security = $security;
     }
 
     /**
@@ -163,6 +173,11 @@ class MentoratService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (false === $this->security->isGranted('ROLE_MENTOR')) {
+                throw new AccessDeniedException('Vous ne disposez pas des droits d\'accès sur cette section.');
+            }
+
             $note->setSuivi($suivi);
             $note->setAuteur($user);
             $note->setDateCreated(new \DateTime());
@@ -194,6 +209,11 @@ class MentoratService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (false === $this->security->isGranted('ROLE_MENTOR')) {
+                throw new AccessDeniedException('Vous ne disposez pas des droits d\'accès sur cette section.');
+            }
+
             $sessions->setLibelle('Session de mentorat Premium Plus');
             $sessions->setMentor($mentor);
             $sessions->setMentore($mentore);
@@ -227,6 +247,11 @@ class MentoratService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (false === $this->security->isGranted('ROLE_MENTOR')) {
+                throw new AccessDeniedException('Vous ne disposez pas des droits d\'accès sur cette section.');
+            }
+
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le changement de mentor a été effectué.');
             $this->events->createUserEvents($suivi->getMentor(), 'Changement de mentor effectué', 'Important');
@@ -262,6 +287,11 @@ class MentoratService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (false === $this->security->isGranted('ROLE_MENTOR')) {
+                throw new AccessDeniedException('Vous ne disposez pas des droits d\'accès sur cette section.');
+            }
+
             $soutenance->setMentore($mentore);
             $soutenance->setMentor($this->user->getToken()->getUser());
             $soutenance->setStatus('Demande');
@@ -287,6 +317,10 @@ class MentoratService
      */
     public function mentorIndispo($id)
     {
+        if (false === $this->security->isGranted('ROLE_MENTOR')) {
+            throw new AccessDeniedException('Vous ne disposez pas des droits d\'accès sur cette section.');
+        }
+
         $mentor = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
 
         $mentor->setAvailable(false);
@@ -303,6 +337,10 @@ class MentoratService
      */
     public function mentorDispo($id)
     {
+        if (false === $this->security->isGranted('ROLE_MENTOR')) {
+            throw new AccessDeniedException('Vous ne disposez pas des droits d\'accès sur cette section.');
+        }
+
         $mentor = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
 
         $mentor->setAvailable(true);
@@ -321,6 +359,10 @@ class MentoratService
      */
     public function viewMentore($id)
     {
+        if (false === $this->security->isGranted('ROLE_MENTOR') || $this->security->isGranted('ROLE_MENTORE')) {
+            throw new AccessDeniedException('Vous ne disposez pas des droits d\'accès sur cette section.');
+        }
+
         return $this->doctrine->getRepository('UserBundle:Mentore')->find($id);
     }
 
@@ -333,6 +375,10 @@ class MentoratService
      */
     public function viewMentor($id)
     {
+        if (false === $this->security->isGranted('ROLE_MENTOR') || $this->security->isGranted('ROLE_MENTORE')) {
+            throw new AccessDeniedException('Vous ne disposez pas des droits d\'accès sur cette section.');
+        }
+
         return $this->doctrine->getRepository('UserBundle:User')->find($id);
     }
 }

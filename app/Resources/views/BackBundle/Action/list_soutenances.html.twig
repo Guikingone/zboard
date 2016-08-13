@@ -27,10 +27,10 @@
         <div class="col-xs-12">
             <div class="box box-warning">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Liste des soutenances</h3>
+                    <h3 class="box-title">Liste des demandes de soutenances</h3>
                 </div>
 
-                {% include 'BackBundle/Elements/box_soutenances.html.twig' %}
+                {% include ':Elements/Box/Soutenances:box_demandes_soutenances.html.twig' %}
 
             </div>
         </div>
@@ -39,10 +39,34 @@
         <div class="col-xs-12">
             <div class="box box-warning">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Liste des demandes de soutenances</h3>
+                    <h3 class="box-title">Liste des soutenances validées</h3>
                 </div>
 
-                {% include ':BackBundle/Elements:box_demandes_soutenances.html.twig' %}
+                {% include ':Elements/Box/Soutenances:box_soutenances_finished.html.twig' %}
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Liste des soutenances en cours</h3>
+                </div>
+
+                {% include ':Elements/Box/Soutenances:box_soutenances_progress.html.twig' %}
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Liste des soutenances en attente</h3>
+                </div>
+
+                {% include ':Elements/Box/Soutenances:box_soutenances_waiting.html.twig' %}
 
             </div>
         </div>

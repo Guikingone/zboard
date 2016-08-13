@@ -17,11 +17,11 @@ services:
 
     core.user:
         class: UserBundle\Services\UserService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events", "@core.mail"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events", "@core.mail", "@security.authorization_checker"]
 
     core.security:
         class: SecuriteBundle\Services\SecurityService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@core.events"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@core.events", "@security.authorization_checker"]
 
     # list of services used in addition to perform global actions.
 
@@ -32,10 +32,11 @@ services:
     core.statistiques:
         class: AdminBundle\Services\Statistiques
         arguments: ["@doctrine.orm.entity_manager"]
+        lazy: true
 
     core.mentorat:
         class: MentoratBundle\Services\MentoratService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events", "@security.authorization_checker"]
 
     core.formation:
       class: MentoratBundle\Services\FormationService
@@ -63,6 +64,7 @@ services:
     core.mail:
         class: AdminBundle\Services\Mail
         arguments: ["@templating", "@mailer"]
+        lazy: true
 
 
     # List of services used to registrer the users with FOS.

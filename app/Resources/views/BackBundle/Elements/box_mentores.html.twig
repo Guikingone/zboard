@@ -79,6 +79,11 @@
                             {% include ':BackBundle/Action/Archivage:archivage_mentore.html.twig' %}
 
                         {% endif %}
+                        {% if mentores.enabled == false %}
+                            <a href="{{ path('security_validate_student', {'id': mentores.id }) }}" class="btn btn-flat btn-success">
+                                Activer <span class="ion ion-checkmark"></span>
+                            </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

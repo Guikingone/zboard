@@ -20,6 +20,8 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use UserBundle\Entity\Competences;
 use UserBundle\Entity\Mentore;
 use UserBundle\Entity\User;
@@ -60,13 +62,22 @@ class UserService
     private $mail;
 
     /**
-     * Admin constructor.
+     * @var AuthorizationChecker
+     */
+    private $security;
+
+    /**
+     * UserService constructor.
      *
      * @param EntityManager $doctrine
-     * @param FormFactory   $form
-     * @param Session       $session
+     * @param FormFactory $form
+     * @param Session $session
+     * @param TokenStorage $user
+     * @param Evenements $events
+     * @param Mail $mail
+     * @param AuthorizationChecker $security
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, Mail $mail)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, Mail $mail, AuthorizationChecker $security)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
@@ -74,6 +85,7 @@ class UserService
         $this->user = $user;
         $this->events = $events;
         $this->mail = $mail;
+        $this->security = $security;
     }
 
     /**
@@ -154,6 +166,11 @@ class UserService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+                throw new AccessDeniedException('Vos droits ne vous permettent pas d\'accéder à cette section.');
+            }
+
             $mentor->setUsername($mentor->getFirstname().'_'.$mentor->getLastname());
             $mentor->setPlainPassword(mb_strtolower($mentor->getFirstname().'_'.$mentor->getLastname()));
             $mentor->setRoles(array('ROLE_MENTOR'));
@@ -188,6 +205,11 @@ class UserService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+                throw new AccessDeniedException('Vos droits ne vous permettent pas d\'accéder à cette section.');
+            }
+
             $mentore->setUsername($mentore->getFirstname().'_'.$mentore->getLastname());
             $mentore->setPlainPassword(mb_strtolower($mentore->getFirstname().'_'.$mentore->getLastname()));
             $mentore->setRoles(array('ROLE_MENTORE'));
@@ -220,6 +242,11 @@ class UserService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (false === $this->security->isGranted('ROLE_MENTOR')) {
+                throw new AccessDeniedException('Vos droits ne vous permettent pas d\'accéder à cette section.');
+            }
+
             $competence->setUser($mentor);
             $this->doctrine->persist($competence);
             $this->doctrine->flush();
@@ -249,6 +276,11 @@ class UserService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+                throw new AccessDeniedException('Vos droits ne vous permettent pas d\'accéder à cette section.');
+            }
+
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le mentor a bien été mis à jour');
             $this->events->createUserEvents($mentor, 'Modifications de votre profil', 'Important');
@@ -277,6 +309,11 @@ class UserService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+                throw new AccessDeniedException('Vos droits ne vous permettent pas d\'accéder à cette section.');
+            }
+
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le mentore a bien été mis à jour');
             $this->events->createUserEvents($mentore, 'Modifications de votre profil', 'Important');

@@ -106,11 +106,31 @@ class Back
     }
 
     /**
-     * Allow to get all the soutenances.
+     * Allow to get all the soutenances finished.
      *
      * @return array|\MentoratBundle\Entity\Soutenance[]
      */
-    public function getSoutenances()
+    public function getSoutenancesFinished()
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findBy(array('status' => 'Validé'));
+    }
+
+    /**
+     * Allow to get all the soutenances in progress.
+     *
+     * @return array|\MentoratBundle\Entity\Soutenance[]
+     */
+    public function getSoutenancesInProgress()
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findBy(array('status' => 'En cours'));
+    }
+
+    /**
+     * Allow to get all the soutenances waiting.
+     *
+     * @return array|\MentoratBundle\Entity\Soutenance[]
+     */
+    public function getSoutenancesWaiting()
     {
         return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findBy(array('status' => 'En attente'));
     }
@@ -161,9 +181,11 @@ class Back
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (false === $this->authorizationChecker->isGranted('ROLE_MENTOR')) {
+
+            if (false === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
                 throw new AccessDeniedException();
             }
+
             $data = $form->getData();
             $mentor = $data->getMentor();
             $mentore = $data->getMentore();
@@ -193,9 +215,11 @@ class Back
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
             if (false === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
                 throw new AccessDeniedException();
             }
+
             $information->setDCreated(new \DateTime('now'));
             $information->setUpdated(new \DateTime('now'));
             $information->setAuthor($this->user->getToken()->getUser());
@@ -223,6 +247,11 @@ class Back
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
+            if (false === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+                throw new AccessDeniedException('Vos droits ne vous permettent pas d\'accéder à cette section.');
+            }
+
             $this->doctrine->persist($tutoriel);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Tutoriel ajouté.');

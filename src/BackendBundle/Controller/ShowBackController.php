@@ -60,14 +60,18 @@ class ShowBackController extends Controller
     public function showSoutenancesMentorsAction(Request $request)
     {
         $soutenance = $this->get('core.back')->addSoutenance($request);
-        $soutenances = $this->get('core.back')->getSoutenances();
+        $soutenancesWaiting = $this->get('core.back')->getSoutenancesWaiting();
         $soutenancesAsked = $this->get('core.back')->getDemandesSoutenances();
+        $soutenancesInProgress = $this->get('core.back')->getSoutenancesInProgress();
+        $soutenancesFinished = $this->get('core.back')->getSoutenancesFinished();
 
         return array(
             'controller' => 'soutenances',
-            'soutenances' => $soutenances,
+            'soutenancesWaiting' => $soutenancesWaiting,
             'soutenance' => $soutenance->createView(),
             'soutenancesAsked' => $soutenancesAsked,
+            'soutenancesInProgress' => $soutenancesInProgress,
+            'soutenancesFinished' => $soutenancesFinished,
         );
     }
 

@@ -5,7 +5,6 @@
             <tr>
                 <th>Nom de l'élève</th>
                 <th>Nom du mentor</th>
-                <th>Date de création</th>
                 <th>Projet</th>
                 <th>Statut</th>
                 {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
@@ -14,7 +13,7 @@
             </tr>
             </thead>
             <tbody>
-                {% for soutenances in soutenances %}
+            {% for soutenances in soutenancesInProgress %}
                 <tr>
                     <td>
                         <a href="{{ path('show_details_mentore', {'id': soutenances.mentore.id}) }}">
@@ -27,21 +26,10 @@
                         </a>
                     </td>
                     <td>
-                        {{ soutenances.passedAt|date("d-M-Y", "Europe/Paris") }}
-                    </td>
-                    <td>
                         {{ soutenances.projet.libelle }}
                     </td>
                     <td>
-                        {% if soutenances.status == 'En attente' %}
-                            <span class="label label-warning">{{ soutenances.status }}</span>
-                        {% elseif soutenances.status == 'En cours' %}
-                            <span class="label label-success">{{ soutenances.status }}</span>
-                        {% elseif soutenances.status == 'Validé' %}
-                            <span class="label label-success">{{ soutenances.status }}</span>
-                        {% elseif soutenances.status == 'A revoir' %}
-                            <span class="label label-danger">{{ soutenances.status }}</span>
-                        {% endif %}
+                        <span class="label label-success">{{ soutenances.status }}</span>
                     </td>
                     {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
                         <td>
@@ -51,7 +39,7 @@
                         </td>
                     {% endif %}
                 </tr>
-                {% endfor %}
+            {% endfor %}
             </tbody>
         </table>
     </div>
