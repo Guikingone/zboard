@@ -69,12 +69,12 @@ class UserService
     /**
      * UserService constructor.
      *
-     * @param EntityManager $doctrine
-     * @param FormFactory $form
-     * @param Session $session
-     * @param TokenStorage $user
-     * @param Evenements $events
-     * @param Mail $mail
+     * @param EntityManager        $doctrine
+     * @param FormFactory          $form
+     * @param Session              $session
+     * @param TokenStorage         $user
+     * @param Evenements           $events
+     * @param Mail                 $mail
      * @param AuthorizationChecker $security
      */
     public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, Mail $mail, AuthorizationChecker $security)
@@ -166,7 +166,6 @@ class UserService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
                 throw new AccessDeniedException('Vos droits ne vous permettent pas d\'accéder à cette section.');
             }
@@ -205,7 +204,6 @@ class UserService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
                 throw new AccessDeniedException('Vos droits ne vous permettent pas d\'accéder à cette section.');
             }
@@ -242,7 +240,6 @@ class UserService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if (false === $this->security->isGranted('ROLE_MENTOR')) {
                 throw new AccessDeniedException('Vos droits ne vous permettent pas d\'accéder à cette section.');
             }
@@ -276,7 +273,6 @@ class UserService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
                 throw new AccessDeniedException('Vos droits ne vous permettent pas d\'accéder à cette section.');
             }
@@ -309,7 +305,6 @@ class UserService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
                 throw new AccessDeniedException('Vos droits ne vous permettent pas d\'accéder à cette section.');
             }

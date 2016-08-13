@@ -91,6 +91,7 @@ class Archive
         }
 
         $mentor->setArchived(true);
+        $mentor->setAvailable(false);
 
         $this->doctrine->flush();
 
@@ -112,6 +113,7 @@ class Archive
         }
 
         $mentore->setArchived(true);
+        $mentore->setAvailable(false);
 
         $this->doctrine->flush();
 

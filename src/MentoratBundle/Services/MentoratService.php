@@ -64,11 +64,11 @@ class MentoratService
     /**
      * MentoratService constructor.
      *
-     * @param EntityManager $doctrine
-     * @param FormFactory $form
-     * @param Session $session
-     * @param TokenStorage $user
-     * @param Evenements $events
+     * @param EntityManager        $doctrine
+     * @param FormFactory          $form
+     * @param Session              $session
+     * @param TokenStorage         $user
+     * @param Evenements           $events
      * @param AuthorizationChecker $security
      */
     public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, AuthorizationChecker $security)
@@ -173,7 +173,6 @@ class MentoratService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if (false === $this->security->isGranted('ROLE_MENTOR')) {
                 throw new AccessDeniedException('Vous ne disposez pas des droits d\'accès sur cette section.');
             }
@@ -209,7 +208,6 @@ class MentoratService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if (false === $this->security->isGranted('ROLE_MENTOR')) {
                 throw new AccessDeniedException('Vous ne disposez pas des droits d\'accès sur cette section.');
             }
@@ -247,7 +245,6 @@ class MentoratService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if (false === $this->security->isGranted('ROLE_MENTOR')) {
                 throw new AccessDeniedException('Vous ne disposez pas des droits d\'accès sur cette section.');
             }
@@ -287,7 +284,6 @@ class MentoratService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             if (false === $this->security->isGranted('ROLE_MENTOR')) {
                 throw new AccessDeniedException('Vous ne disposez pas des droits d\'accès sur cette section.');
             }

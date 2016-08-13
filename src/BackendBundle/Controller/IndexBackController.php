@@ -18,8 +18,8 @@ class IndexBackController extends Controller
     {
         $mentors = $this->get('core.user')->getMentors();
         $mentores = $this->get('core.user')->getMentores();
-        $soutenances = $this->get('core.back')->getSoutenancesInProgress();
-        $parcours = $this->get('core.back')->getParcours();
+        $soutenances = $this->get('core.statistiques')->getSoutenancesWaiting();
+        $parcours = $this->get('core.statistiques')->getParcours();
         $notes = $this->get('core.statistiques')->getNotesSuivi();
         $projets = $this->get('core.statistiques')->getProjetsFinished();
         $sessions = $this->get('core.statistiques')->getSessionsCancelled();

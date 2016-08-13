@@ -31,6 +31,26 @@ class Statistiques
     }
 
     /**
+     * Allow to get all the paths.
+     *
+     * @return array|\BackendBundle\Entity\Parcours[]
+     */
+    public function getParcours()
+    {
+        return $this->doctrine->getRepository('BackendBundle:Parcours')->findBy(array('archived' => false));
+    }
+
+    /**
+     * Allow to get all the paths who's been archived.
+     *
+     * @return array
+     */
+    public function getParcoursArchived()
+    {
+        return $this->doctrine->getRepository('BackendBundle:Parcours')->findBy(array('archived' => true));
+    }
+
+    /**
      * Allow the back to get all the paths made for the PPlus students.
      *
      * @return array|\BackendBundle\Entity\Parcours[]
@@ -68,6 +88,46 @@ class Statistiques
     public function getProjetsFinished()
     {
         return $this->doctrine->getRepository('BackendBundle:Projet')->getProjetTermine();
+    }
+
+    /**
+     * Allow to get all the soutenances finished.
+     *
+     * @return array|\MentoratBundle\Entity\Soutenance[]
+     */
+    public function getSoutenancesFinished()
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findBy(array('status' => 'Validé'));
+    }
+
+    /**
+     * Allow to get all the soutenances in progress.
+     *
+     * @return array|\MentoratBundle\Entity\Soutenance[]
+     */
+    public function getSoutenancesInProgress()
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findBy(array('status' => 'En cours'));
+    }
+
+    /**
+     * Allow to get all the soutenances waiting.
+     *
+     * @return array|\MentoratBundle\Entity\Soutenance[]
+     */
+    public function getSoutenancesWaiting()
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findBy(array('status' => 'En attente'));
+    }
+
+    /**
+     * Allow to get the soutenances asked by teachers.
+     *
+     * @return array|\MentoratBundle\Entity\Soutenance[]
+     */
+    public function getDemandesSoutenances()
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findBy(array('status' => 'Demande'));
     }
 
     /**
