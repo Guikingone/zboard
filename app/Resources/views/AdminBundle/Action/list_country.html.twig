@@ -29,13 +29,63 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Liste des pays disponibles sur Zboard</h3>
                 </div>
-
-                {% include ':AdminBundle/Elements:box_country.html.twig' %}
-
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table no-margin">
+                            <thead>
+                            <tr>
+                                <th>Nom du pays</th>
+                                <th>Membre étant lié à ce pays</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for countrys in countrys %}
+                                <tr>
+                                    <td>
+                                        {{ countrys.libelle }}
+                                    </td>
+                                    <td>
+                                        {{ countrys.users|length }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    {% include ':Form:register_country.html.twig' %}
+    <!-- Modal used in order to add a country -->
+    <div class="modal fade" id="myModalCountry" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="myModalLabel">Ajouter un pays</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            {{ form_start(country) }}
+                            <div class="form-group">
+                                {{ form_errors(country.libelle) }}
+                                {{ form_label(country.libelle, 'Nom du pays') }}
+                                {{ form_widget(country.libelle, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <br />
+                            <button type="submit" class="btn btn-flat btn-warning">
+                                Enregistrer
+                            </button>
+                            {{ form_end(country) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

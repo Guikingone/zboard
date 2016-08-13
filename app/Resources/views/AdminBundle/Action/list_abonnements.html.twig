@@ -26,12 +26,34 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Liste des abonnements</h3>
                 </div>
-
-                {% include ':AdminBundle/Elements:box_abonnements.html.twig' %}
-
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table no-margin">
+                            <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Prix</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for abonnements in abonnements %}
+                                <tr>
+                                    <td>
+                                        {{ abonnements.libelle }}
+                                    </td>
+                                    <td>
+                                        {{ abonnements.prix }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     {% include ':Form:register_abonnement.html.twig' %}
+
 {% endblock %}
