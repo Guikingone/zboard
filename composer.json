@@ -1,6 +1,6 @@
 {
     "name": "audrophe/zboard",
-    "description": "Application destinated to help OpenClassrooms with studends",
+    "description": "Application destinated to help OpenClassrooms with students",
     "license": "proprietary",
     "type": "project",
     "autoload": {
@@ -21,7 +21,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/",
+            "Tests\\": "tests/"
             "AdminBundle\\": "src/",
             "BackendBundle\\": "src/",
             "CoreBundle\\": "src/",
