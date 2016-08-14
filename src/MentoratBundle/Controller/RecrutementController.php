@@ -51,27 +51,12 @@ class RecrutementController extends Controller
      */
     public function actOnApplication(Request $request, $id, $action)
     {
-        // We first check the user is at least a mentor exp, and we'll later check if they're supervisors if they try to accept or refuse directly an application
+      // We first check the user is at least a mentor exp, and we'll later check if they're supervisors if they try to accept or refuse directly an application
       $this->denyAccessUnlessGranted('ROLE_MENTOR_EXPERIMENTE', null, 'Accès refusé');
 
-        switch ($action) {
-        case 'accept':
-          $this->denyAccessUnlessGranted('ROLE_SUPERVISEUR_MENTOR', null, 'Accès refusé');
-          $this->get('core.recrutement')->acceptApplication($id, '');
-          break;
-        case 'refuse':
-          $this->denyAccessUnlessGranted('ROLE_SUPERVISEUR_MENTOR', null, 'Accès refusé');
-          $this->get('core.recrutement')->rejectApplication($id, '');
-          break;
-        case 'votefor':
-          $this->get('core.recrutement')->voteApplication($id, true);
-          break;
-        case 'voteagainst':
-          $this->get('core.recrutement')->voteApplication($id, false);
-          break;
-      }
+      $this->get('core.recrutement')->action($action);
 
-        return $this->redirectToRoute('recrutement_candidature');
+      return $this->redirectToRoute('recrutement_candidature');
     }
 
     /**

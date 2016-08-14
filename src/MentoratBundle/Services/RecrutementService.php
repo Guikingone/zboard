@@ -163,4 +163,29 @@ class RecrutementService
           $this->rejectApplication($id);
       }
     }
+
+    /**
+    * All recruitment actions
+    * @param action the action to execute
+    */
+    public function action($action)
+    {
+      switch ($action)
+      {
+        case 'accept':
+          $this->denyAccessUnlessGranted('ROLE_SUPERVISEUR_MENTOR', null, 'Accès refusé');
+          $this->acceptApplication($id);
+          break;
+        case 'refuse':
+          $this->denyAccessUnlessGranted('ROLE_SUPERVISEUR_MENTOR', null, 'Accès refusé');
+          $this->rejectApplication($id);
+          break;
+        case 'votefor':
+          $this->voteApplication($id, true);
+          break;
+        case 'voteagainst':
+          $this->voteApplication($id, false);
+          break;
+      }
+    }
 }
