@@ -16,9 +16,12 @@ class DashboardController extends Controller
      */
     public function indexAction()
     {
+        $mentores = $this->get('core.user')->getMentores();
+
         return array(
             'controller' => 'dashboard',
             'title_action' => 'Accueil',
+            'mentores' => $mentores,
         );
     }
 }
