@@ -20,13 +20,13 @@ class InfosController extends Controller
   public function indexAction(Request $request,$page)
   {
       $information = $this->get('core.back')->addMentoratInformation($request);
-      $informations = $this->get('core.back')->getMentoratInformations($page,5);
+      $informations = $this->get('core.back')->getMentoratInformations($page,3);
       $nbInfos = $this->get('core.back')->countInfos();
 
       $pagination = array(
           'page' => $page,
           'route' => 'infos',
-          'pages_count' => ceil($nbInfos / 5),
+          'pages_count' => ceil($nbInfos / 3),
           'route_params' => array(),
       );
 
