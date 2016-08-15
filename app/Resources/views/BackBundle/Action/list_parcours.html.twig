@@ -152,18 +152,3 @@
     </div>
 
 {% endblock %}
-
-
-{% block javascripts %}
-    {{ parent() }}
-
-    <script type="text/babel" src="{{ asset('js/ReactJs/paths.react.js') }}"></script>
-    <script type="text/babel">
-        var pathUrl = '{{ path('get_paths_api') }}';
-
-        ReactDOM.render(
-                <PathSection url={pathUrl} />,
-                document.getElementById('path_bloc')
-        );
-    </script>
-{% endblock %}

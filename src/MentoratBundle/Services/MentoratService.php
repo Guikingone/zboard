@@ -226,9 +226,44 @@ class MentoratService
     }
 
     /**
+     * Allow to change the status of a session.
+     *
+     * @param $id       | The id of the session.
+     * @param $choice   | The choice used by the teacher.
+     */
+    public function changeStatutSession($id, $choice)
+    {
+        $session = $this->doctrine->getRepository('MentoratBundle:Sessions')->findOneBy(array('id' => $id));
+
+        if (null === $session) {
+            throw new Exception('La session ne semble pas exister.');
+        }
+
+        switch ($choice) {
+            case $choice === 'Validation':
+                $session->setStatus('Present');
+                break;
+            case $choice === 'Annulation':
+                $session->setStatus('Annulee');
+                break;
+            case $choice === 'Absent':
+                $session->setStatus('Absent');
+                break;
+            case $choice === 'No Show':
+                $session->setStatus('No Show');
+                break;
+            default:
+                throw new Exception('Le statut doit être valide !');
+        }
+
+        $this->doctrine->flush();
+        $this->session->getFlashBag()->add('success', 'Le statut de la session a bien été changé.');
+    }
+
+    /**
      * Allow to change the teacher who follow the student using the id | $id of the suivi.
      *
-     * @param Request $request | The Request manager
+     * @param Request $request
      * @param $id               | The id of the suivi
      *
      * @return \Symfony\Component\Form\FormInterface
@@ -254,7 +289,7 @@ class MentoratService
             $this->events->createUserEvents($suivi->getMentor(), 'Changement de mentor effectué', 'Important');
             $this->events->createMentoreEvents(
                 $suivi->getMentore(),
-                'Changement de mentor effectué, votre nouveau mentor prendre contact avec vous rapidement',
+                'Changement de mentor effectué, votre nouveau mentor va prendre contact avec vous rapidement',
                 'Important'
             );
         }

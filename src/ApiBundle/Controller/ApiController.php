@@ -2,27 +2,24 @@
 
 namespace ApiBundle\Controller;
 
-use BackendBundle\Entity\Parcours;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 class ApiController extends Controller
 {
     /**
-     * @Route("/get/teachers", name="get_mentors_api")
+     * @Route("/get/teachers", name="get_teachers_api")
      * @Method("GET")
      *
      * @return JsonResponse
      */
     public function getMentorsAction()
     {
-        $mentors = $this->get('core.user')->getMentors();
+        $mentors = [
+            'firstname' => 'Guillaume', 'lastname' => 'Loulier',
+        ];
 
         $data = [
             'mentors' => $mentors,
@@ -39,7 +36,9 @@ class ApiController extends Controller
      */
     public function getMentoresAction()
     {
-        $mentores = $this->get('core.user')->getMentores();
+        $mentores = [
+            'firstname' => 'Toto', 'lastname' => 'From mexico',
+        ];
 
         $data = [
             'mentores' => $mentores,
@@ -56,10 +55,12 @@ class ApiController extends Controller
      */
     public function getPathAction()
     {
-        $paths = $this->get('core.statistiques')->getParcours();
+        $path = [
+            'libelle' => 'Android developper', 'certificate' => null,
+        ];
 
         $data = [
-            'path' => $paths,
+            'path' => $path,
         ];
 
         return new JsonResponse($data);

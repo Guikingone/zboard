@@ -165,13 +165,13 @@ class RecrutementService
     }
 
     /**
-    * All recruitment actions
-    * @param action the action to execute
-    */
+     * All recruitment actions.
+     *
+     * @param action the action to execute
+     */
     public function action($action)
     {
-      switch ($action)
-      {
+        switch ($action) {
         case 'accept':
           $this->denyAccessUnlessGranted('ROLE_SUPERVISEUR_MENTOR', null, 'Accès refusé');
           $this->acceptApplication($id);

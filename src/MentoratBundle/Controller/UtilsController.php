@@ -56,4 +56,19 @@ class UtilsController extends Controller
             'title_action' => 'Mise à jour',
         );
     }
+
+    /**
+     * @Route("/sessions/update", name="update_status_sessions")
+     *
+     * @param $id
+     * @param $choice
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function updateSessionsStatus($id, $choice)
+    {
+        $this->get('core.mentorat')->changeStatutSession($id, $choice);
+
+        return $this->redirectToRoute('mentorat_dashboard_index');
+    }
 }

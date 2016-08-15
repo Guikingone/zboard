@@ -242,8 +242,17 @@
                                                         {% elseif sessions.status == 'No Show' %}
                                                             Statut : <span class="label label-danger">{{ sessions.status }}</span>
                                                         {% endif %}
+                                                        <br />
+                                                        <br />
+                                                        {% if sessions.mentor == app.user %}
+                                                            <a href="#" class="fa fa-cog"></a>
+                                                            <a href="#" class="fa fa-edit"></a>
+                                                            <a href="#" class="fa fa-check"></a>
+                                                            <a href="#" class="fa fa-times"></a>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
+                                                <br />
                                             </li>
                                         {% endfor %}
                                     </ul>
