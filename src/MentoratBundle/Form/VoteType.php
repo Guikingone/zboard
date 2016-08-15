@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class InformationType extends AbstractType
+class VoteType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -18,12 +18,11 @@ class InformationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('body', TextareaType::class)
+            ->add('message', TextareaType::class)
             ->add('enabled', ChoiceType::class, array(
-                'choices' => [
-                    'Oui' => '1',
-                    'Non' => '0',
+                'vote' => [
+                    'Pour (+1)' => 'true',
+                    'Contre (-1)' => 'false',
                 ],
             ))
         ;
@@ -35,7 +34,7 @@ class InformationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackendBundle\Entity\InformationMentorat',
+            'data_class' => 'MentoratBundle\Entity\RecrutementVote',
         ));
     }
 }

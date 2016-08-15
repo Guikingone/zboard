@@ -10,22 +10,31 @@ use Symfony\Component\HttpFoundation\Request;
 class InfosController extends Controller
 {
     /**
-   * @Route("/infos")
+   * @Route("/infos/{page}",defaults={"page" = 1},name="infos")
    * @Template("MentoratBundle/Dashboard/infos.html.twig")
    *
    * @param Request $request
    *
    * @return array
    */
-  public function indexAction(Request $request)
+  public function indexAction(Request $request,$page)
   {
       $information = $this->get('core.back')->addMentoratInformation($request);
-      $informations = $this->get('core.back')->getMentoratInformations();
+      $informations = $this->get('core.back')->getMentoratInformations($page,3);
+      $nbInfos = $this->get('core.back')->countInfos();
+
+      $pagination = array(
+          'page' => $page,
+          'route' => 'infos',
+          'pages_count' => ceil($nbInfos / 3),
+          'route_params' => array(),
+      );
 
       return array(
           'controller' => 'infos',
           'informations' => $informations,
           'information' => $information->createView(),
+          'pagination' => $pagination,
           'title_action' => 'Informations sur le mentorat',
       );
   }
