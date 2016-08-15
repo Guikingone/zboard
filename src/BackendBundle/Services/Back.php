@@ -76,9 +76,9 @@ class Back
      *
      * @return array|\BackendBundle\Entity\InformationMentorat[]
      */
-    public function getMentoratInformations()
+    public function getMentoratInformations($page,$maxPerPage)
     {
-        return $this->doctrine->getRepository('BackendBundle:InformationMentorat')->findAll();
+        return $this->doctrine->getRepository('BackendBundle:InformationMentorat')->findBy(array('enabled'=>true),array('id' => 'DESC'), $maxPerPage, $page-1);
     }
 
     /**
@@ -182,5 +182,13 @@ class Back
         }
 
         return $form;
+    }
+    /**
+    * Counts the number of visible infos
+    * @return infos
+    */
+    public function countInfos()
+    {
+      return count($this->doctrine->getRepository('BackendBundle:InformationMentorat')->findBy(array('enabled'=>true)));
     }
 }
