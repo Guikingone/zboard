@@ -213,6 +213,7 @@ class RecrutementService
             {
               $this->rejectApplication($id,$vote);
             }
+            return null;
         }
         // Otherwise it's a simple vote
         else
