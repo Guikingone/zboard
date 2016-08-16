@@ -23,9 +23,9 @@ class RecrutementVote
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity="UserBundle/Entity/User")
-     * @ORM\JoinColumn(nullable=false)
-     * @ORM\Column(name="id_user", type="integer")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="id_user")
+     * @ORM\ManyToOne(targetEntity="User")
      */
     private $idUser;
 
@@ -36,13 +36,6 @@ class RecrutementVote
      * @ORM\ManyToOne(targetEntity="Candidat", inversedBy="votes")
      */
     private $idCandidature;
-
-    /**
-     * @var bool
-     *           Si true c'est une candidature, si false c'est un mentor en formation
-     * @ORM\Column(name="isCandidature", type="boolean")
-     */
-    private $isCandidature;
 
     /**
      * @var int

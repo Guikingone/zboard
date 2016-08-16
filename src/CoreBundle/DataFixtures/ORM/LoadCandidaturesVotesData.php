@@ -22,10 +22,11 @@ class LoadCandidaturesVotesData implements FixtureInterface, ContainerAwareInter
     {
         $candidat = $this->privateContainer->get('doctrine')->getRepository('MentoratBundle:Candidat')
                                      ->findOneBy(array('nom' => 'Chuck Norris'));
+        $user = $this->privateContainer->get('doctrine')->getRepository('UserBundle:User')
+                                     ->findOneBy(array('username' => 'admin'));
         $vote1 = new RecrutementVote();
-        $vote1->setIdUser(5);
+        $vote1->setIdUser($user);
         $vote1->setIdCandidature($candidat);
-        $vote1->setIsCandidature(true);
         $vote1->setVote(1);
         $vote1->setCommentaire('La candidature est solide.');
 

@@ -12,6 +12,7 @@ use MentoratBundle\Entity\Candidat;
 use MentoratBundle\Entity\RecrutementVote;
 use MentoratBundle\Form\VoteType;
 use AdminBundle\Services\Mail;
+use UserBundle\Entity\User;
 
 class RecrutementService
 {
@@ -95,7 +96,7 @@ class RecrutementService
         //If the application does not exist, return null
         if(!$candid) return null;
         //Otherwise count votes and return.
-        $candid->countVotes($candid);
+        $candid->countVotes();
         return $candid;
     }
 
@@ -136,6 +137,30 @@ class RecrutementService
     public function acceptApplication($id, $message = '')
     {
         $candidature = $this->getCandidature($id);
+        $country = $this->doctrine->getRepository('AdminBundle:Country')
+                                           ->findOneBy(array('libelle' => 'France'));
+        $user = new User();
+        $user->setUsername(strtolower($candidature->getNom()));
+        $user->setFirstname($candidature->getNom());
+        $user->setLastname('');
+        $user->setEmail($candidature->getEmail());
+        $user->setPlainPassword(strtolower($candidature->getNom()));
+        $user->setAddress('');
+        $user->setZipCode('');
+        $user->setCity('');
+        $user->setCountry($country);
+        $user->setEnabled(true);
+        $user->setArchived(false);
+        $user->setPhone('');
+        $user->setRoles(array('ROLE_MENTOR_DEBUTANT'));
+        $user->setAvailable(true);
+        $this->doctrine->persist($user);
+
+        $this->doctrine->remove($candidature);
+
+        $this->doctrine->flush();
+        $this->mail->acceptApplication($candidature->getEmail(), array());
+
     }
 
     /**
@@ -166,7 +191,7 @@ class RecrutementService
         {
           return null;
         }
-        $vote->setIdUser($this->user->getToken()->getUser()->getId());
+        $vote->setIdUser($this->user->getToken()->getUser());
         $vote->setIdCandidature($this->doctrine->getRepository('MentoratBundle:Candidat')->find($id));
         $vote->setIsCandidature(true);
 

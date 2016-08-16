@@ -168,4 +168,19 @@ class Mail
             $destinataire,
             $this->templating->render(':Emails/Users:mentor_rejete.html.twig', array('messages' => $messages)));
     }
+
+    /**
+     * Create a message sent when an application is accepted.
+     *
+     * @param $destinataire | The destinataire of the message
+     * @param $message      | The added messages
+     */
+    public function acceptApplication($destinataire, $messages)
+    {
+        $this->buildMessage(
+            '[ZBOARD] || Candidature acceptée',
+            'no-reply@zboard.fr',
+            $destinataire,
+            $this->templating->render(':Emails/Users:mentor_accepte.html.twig', array('messages' => $messages)));
+    }
 }
