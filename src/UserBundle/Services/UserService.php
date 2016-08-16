@@ -29,6 +29,7 @@ use UserBundle\Entity\User;
 use UserBundle\Form\CompetencesType;
 use UserBundle\Form\RegistrationMentoreType;
 use UserBundle\Form\RegistrationType;
+use UserBundle\Form\User\UpdateUserType;
 
 class UserService
 {
@@ -320,6 +321,36 @@ class UserService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le mentore a bien été mis à jour');
             $this->events->createUserEvents($mentore, 'Modifications de votre profil', 'Important');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow a user to update is profile.
+     *
+     * @param Request $request
+     * @param $id               | The id of the user.
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function updateUserProfile(Request $request, $id)
+    {
+        $user = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
+
+        if (null === $user) {
+            throw new Exception('L\'utilisateur ne semble pas exister.');
+        } elseif ($user != $this->user->getToken()->getUser()) {
+            throw new AccessDeniedException('Vous ne passerez pas !');
+        }
+
+        $form = $this->form->create(UpdateUserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Votre profil a bien été mis à jour.');
+            $this->events->createUserEvents($user, 'Votre profil a bien été mis à jour.', 'Important');
         }
 
         return $form;

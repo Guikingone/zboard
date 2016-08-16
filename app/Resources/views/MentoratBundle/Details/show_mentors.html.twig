@@ -36,11 +36,13 @@
                             <b>Nombre d'élèves : </b> <p class="pull-right">{{ mentor.suivi|length }}</p>
                         </li>
                     </ul>
-                    <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModalContact"><b>Contacter par email</b></a>
+                    <a href="#" class="btn btn-primary btn-flat btn-block" data-toggle="modal" data-target="#myModalContact"><b>Contacter par email</b></a>
                     {% if app.user == mentor %}
-                        <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#myModalCompetences"><b>Ajouter une compétences</b></a>
-                        {% if mentor.available == false %}
-                            <a href="#" class="btn btn-flat btn-success btn-block">Devenir indisponible</a>
+                        <a href="{{ path('mon_profil_edit') }}"><button class="btn btn-flat btn-block btn-warning">Modifier mon profil</button></a>
+                        {% if app.user.available == false %}
+                            <a href="{{ path('mentor_dispo',{'id' : app.user.id }) }}" class="btn btn-flat btn-block btn-success">Me rendre disponible</a>
+                        {% else %}
+                            <a href="{{ path('mentor_indispo', {'id': app.user.id}) }}" class="btn btn-flat btn-block btn-danger btn-block">Devenir indisponible</a>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -200,9 +202,5 @@
     </div>
 
     {% include ':Form/Contact:register_mentor_contact.html.twig' %}
-
-    {% include ':Form/Contact:register_mentor_message.html.twig' %}
-
-    {% include ':Form:register_competences_mentor.html.twig' %}
 
 {% endblock %}

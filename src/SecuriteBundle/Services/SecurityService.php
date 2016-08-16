@@ -19,8 +19,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use UserBundle\Form\Mentore\UpdateMentoreType;
-use UserBundle\Form\User\UpdateUserType;
+use UserBundle\Form\Mentore\UpdateRolesMentoreType;
+use UserBundle\Form\User\UpdateRolesUserType;
 
 class SecurityService
 {
@@ -136,7 +136,7 @@ class SecurityService
             throw new AccessDeniedException();
         }
 
-        $form = $this->form->create(UpdateUserType::class, $user);
+        $form = $this->form->create(UpdateRolesUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -168,7 +168,7 @@ class SecurityService
             throw new AccessDeniedException();
         }
 
-        $form = $this->form->create(UpdateMentoreType::class, $mentore);
+        $form = $this->form->create(UpdateRolesMentoreType::class, $mentore);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

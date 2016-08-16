@@ -2,34 +2,46 @@
 
 namespace UserBundle\Form\User;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use UserBundle\Form\CompetencesTypeAdd;
 
 class UpdateUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->remove('username')
-            ->remove('firstname')
-            ->remove('lastname')
-            ->remove('address')
-            ->remove('zipcode')
-            ->remove('city')
-            ->remove('phone')
-            ->remove('email')
-            ->remove('available')
-            ->remove('country')
-            ->remove('plainPassword')
-            ->remove('plainPassword_confirmation')
-            ->remove('archived')
-            ->remove('group')
-            ->add('roles', CollectionType::class, array(
-                'allow_add' => true,
-                'allow_delete' => true,
-            ))
+            ->add('username', TextType::class)
+            ->add('firstname', TextType::class)
+            ->add('lastname', TextType::class)
+            ->add('address', TextareaType::class)
+            ->add('zipcode')
+            ->add('city')
+            ->add('phone')
+            ->add('email', EmailType::class)
+            ->add('available', ChoiceType::class, [
+                'choices' => [
+                    'Oui' => true,
+                    'Non' => false,
+                ],
+            ])
+            ->add('country', EntityType::class, [
+                'class' => 'AdminBundle\Entity\Country',
+                'choice_label' => 'libelle',
+            ])
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => 'Symfony\Component\Form\Extension\Core\Type\PasswordType',
+            ])
+            ->add('profileImage', FileType::class)
+            ->add('competences', CompetencesTypeAdd::class)
         ;
     }
 

@@ -2,7 +2,7 @@
 
 {% block fos_user_content %}
     <div class="row">
-        <div class="col-xs-12 col-md-12">
+        <div class="col-xs-12">
             {% for message in app.session.flashbag.get('success') %}
                 <div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -50,11 +50,12 @@
                             <b>Soutenances (2016)</b> <a class="pull-right">{{ nbSoutenances }}</a>
                         </li>
                     </ul>
-                    <a href="{{ path('mon_profil_edit') }}"><button class="btn btn-flat btn-md btn-warning">Modifier mon profil</button></a>
+                    <a href="{{ path('mon_profil_edit') }}"><button class="btn btn-flat btn-block btn-warning">Modifier mon profil</button></a>
+                    <br />
                     {% if(app.user.available == true) %}
-                        <a href="{{ path('mentor_indispo',{'id' : app.user.id }) }}"><button class="btn btn-flat btn-md btn-danger">Me rendre indisponible</button></a>
+                        <a href="{{ path('mentor_indispo',{'id' : app.user.id }) }}"><button class="btn btn-flat btn-block btn-danger">Me rendre indisponible</button></a>
                     {% else %}
-                        <a href="{{ path('mentor_dispo',{'id' : app.user.id }) }}"><button class="btn btn-flat btn-md btn-success">Me rendre disponible</button></a>
+                        <a href="{{ path('mentor_dispo',{'id' : app.user.id }) }}"><button class="btn btn-flat btn-block btn-success">Me rendre disponible</button></a>
                     {% endif %}
                 </div>
                 <!-- /.box-body -->
