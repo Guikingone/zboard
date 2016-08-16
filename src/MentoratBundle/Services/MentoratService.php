@@ -19,6 +19,7 @@ use MentoratBundle\Entity\Soutenance;
 use MentoratBundle\Form\Ask\AskSoutenanceType;
 use MentoratBundle\Form\SessionsType;
 use MentoratBundle\Form\TypeAdd\NoteTypeAdd;
+use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
 use MentoratBundle\Form\Update\SuiviUpdateType;
 use NotificationBundle\Services\Evenements;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -292,6 +293,40 @@ class MentoratService
                 'Changement de mentor effectué, votre nouveau mentor va prendre contact avec vous rapidement',
                 'Important'
             );
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to add a soutenance between a teacher and a student, the teacher receive the notifications about the
+     * creation in order to contact the student, the student receive the notification in order to be alerted.
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addSoutenance(Request $request)
+    {
+        $soutenance = new Soutenance();
+
+        $form = $this->form->create(SoutenanceTypeAdd::class, $soutenance);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+                throw new AccessDeniedException();
+            }
+
+            $data = $form->getData();
+            $mentor = $data->getMentor()->getId();
+            $mentore = $data->getMentore()->getId();
+
+            $this->doctrine->persist($soutenance);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'La soutenance a bien été enregistrée.');
+            $this->events->createUserEvents($mentor, 'Une soutenance a été planifiée.', 'Information');
+            $this->events->createMentoreEvents($mentore, 'Une soutenance a été planifiée.', 'Information');
         }
 
         return $form;

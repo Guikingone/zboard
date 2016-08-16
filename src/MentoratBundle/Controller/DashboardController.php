@@ -16,7 +16,7 @@ class DashboardController extends Controller
      */
     public function indexAction()
     {
-        $lastInformation = $this->get('core.back')->getMentoratInformations(1,1);
+        $lastInformation = $this->get('core.back')->getMentoratInformations(1, 1);
         $mentores = $this->get('core.user')->getMentores();
 
         return array(

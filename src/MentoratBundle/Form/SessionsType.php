@@ -4,7 +4,7 @@ namespace MentoratBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,11 +18,10 @@ class SessionsType extends AbstractType
     {
         $builder
             ->remove('libelle')
-            ->add('dateSession', DateType::class, array(
-                'format' => 'dd-MM-yyyy',
+            ->add('dateSession', DateTimeType::class, array(
+                'format' => 'dd-MM-yyyy hh-mm',
                 'html5' => false,
                 'widget' => 'single_text',
-                'placeholder' => 'Ex : 31-05-2016',
             ))
             ->add('status', ChoiceType::class, array(
                 'choices' => array(

@@ -74,6 +74,16 @@ class Mentore extends BaseUser
     private $resume;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     * @Assert\Image(
+     *     minHeight="250",
+     *     maxHeight="250"
+     * )
+     */
+    private $profileImage;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="archived", type="boolean")
@@ -275,6 +285,18 @@ class Mentore extends BaseUser
     public function getResume()
     {
         return $this->resume;
+    }
+
+    public function setProfileImage($profileImage)
+    {
+        $this->profileImage = $profileImage;
+
+        return $this;
+    }
+
+    public function getProfileImage()
+    {
+        return $this->profileImage;
     }
 
     /**
