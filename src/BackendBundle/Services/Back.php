@@ -103,8 +103,10 @@ class Back
         $form = $this->formFactory->create(InformationType::class, $information);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            if (false === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+        if ($form->isValid())
+        {
+            if (false === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR'))
+            {
                 throw new AccessDeniedException();
             }
 
