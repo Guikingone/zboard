@@ -88,6 +88,7 @@ class SecurityService
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le compte utilisateur a bien été activé.');
+        $this->events->createUserEvents($mentor, 'Votre compte a bien été activé.', 'Important');
     }
 
     /**
@@ -112,6 +113,7 @@ class SecurityService
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le compte élève a bien été activé.');
+        $this->events->createMentoreEvents($student, 'Votre compte a bien été crée.', 'Important');
     }
 
     /**

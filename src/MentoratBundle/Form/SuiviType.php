@@ -52,8 +52,6 @@ class SuiviType extends AbstractType
                     'En attente' => 'WAITING_LIST',
                     'En cours' => 'IN_PROGRESS',
                     'Mentorat terminé' => 'ENDED',
-                    'Transfert en cours' => 'TRANSFERT_IN_PROGRESS',
-                    'Transfert terminé' => 'TRANSFERT_FINISHED',
                 ),
             ))
             ->add('mentore_status', ChoiceType::class, array(

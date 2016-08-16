@@ -14,8 +14,6 @@ namespace BackendBundle\Services;
 
 use BackendBundle\Entity\InformationMentorat;
 use Doctrine\ORM\EntityManager;
-use MentoratBundle\Entity\Soutenance;
-use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
 use NotificationBundle\Services\Evenements;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
@@ -76,9 +74,9 @@ class Back
      *
      * @return array|\BackendBundle\Entity\InformationMentorat[]
      */
-    public function getMentoratInformations($page,$maxPerPage)
+    public function getMentoratInformations($page, $maxPerPage)
     {
-        return $this->doctrine->getRepository('BackendBundle:InformationMentorat')->findBy(array('enabled'=>true),array('id' => 'DESC'), $maxPerPage, $page-1);
+        return $this->doctrine->getRepository('BackendBundle:InformationMentorat')->findBy(array('enabled' => true), array('id' => 'DESC'), $maxPerPage, $page - 1);
     }
 
     /**
@@ -89,40 +87,6 @@ class Back
     public function getTutorials()
     {
         return $this->doctrine->getRepository('BackendBundle:Tutoriel')->findAll();
-    }
-
-    /**
-     * Allow to add a soutenance between a teacher and a student, the teacher receive the notifications about the
-     * creation in order to contact the student, the student receive the notification in order to be alert.
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    public function addSoutenance(Request $request)
-    {
-        $soutenance = new Soutenance();
-
-        $form = $this->formFactory->create(SoutenanceTypeAdd::class, $soutenance);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            if (false === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
-                throw new AccessDeniedException();
-            }
-
-            $data = $form->getData();
-            $mentor = $data->getMentor();
-            $mentore = $data->getMentore();
-
-            $this->doctrine->persist($soutenance);
-            $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'La soutenance a bien été enregistrée.');
-            $this->events->createUserEvents($mentor, 'Une soutenance a été planifiée.', 'Information');
-            $this->events->createMentoreEvents($mentore, 'Une soutenance a été planifiée.', 'Information');
-        }
-
-        return $form;
     }
 
     /**
@@ -185,12 +149,14 @@ class Back
 
         return $form;
     }
+
     /**
-    * Counts the number of visible infos
-    * @return infos
-    */
+     * Counts the number of visible informations.
+     *
+     * @return int | The numbrer of informations published.
+     */
     public function countInfos()
     {
-      return count($this->doctrine->getRepository('BackendBundle:InformationMentorat')->findBy(array('enabled'=>true)));
+        return count($this->doctrine->getRepository('BackendBundle:InformationMentorat')->findBy(array('enabled' => true)));
     }
 }

@@ -11,6 +11,7 @@
 
 namespace UserBundle\Services;
 
+use AdminBundle\Services\Uploader;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Suivi;
 use NotificationBundle\Services\Evenements;
@@ -67,6 +68,11 @@ class UserService
     private $security;
 
     /**
+     * @var Uploader
+     */
+    private $uploader;
+
+    /**
      * UserService constructor.
      *
      * @param EntityManager        $doctrine
@@ -76,8 +82,9 @@ class UserService
      * @param Evenements           $events
      * @param Mail                 $mail
      * @param AuthorizationChecker $security
+     * @param Uploader             $uploader
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, Mail $mail, AuthorizationChecker $security)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, Mail $mail, AuthorizationChecker $security, Uploader $uploader)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
@@ -86,6 +93,7 @@ class UserService
         $this->events = $events;
         $this->mail = $mail;
         $this->security = $security;
+        $this->uploader = $uploader;
     }
 
     /**
@@ -177,7 +185,7 @@ class UserService
             $this->doctrine->persist($mentor);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
-            $this->events->createUserEvents($mentor, "Création d'un nouveau mentor", 'Important');
+            $this->events->createUserEvents($mentor, 'Création de votre profil Mentor', 'Important');
             $this->mail->inscriptionMessage($mentor->getEmail());
         }
 
@@ -216,7 +224,7 @@ class UserService
             $this->doctrine->persist($suivi);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Elève enregistré.');
-            $this->events->createUserEvents($mentore, 'Création de votre profil.', 'Important');
+            $this->events->createUserEvents($mentore, 'Création de votre profil Elève.', 'Important');
         }
 
         return $form;

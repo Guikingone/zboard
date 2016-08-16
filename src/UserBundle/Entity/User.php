@@ -5,6 +5,7 @@ namespace UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User.
@@ -70,6 +71,16 @@ class User extends BaseUser
      * @ORM\Column(name="resume", type="text", nullable=true)
      */
     private $resume;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     * @Assert\Image(
+     *     minHeight="250",
+     *     maxHeight="250"
+     * )
+     */
+    private $profileImage;
 
     /**
      * @var bool
@@ -613,5 +624,20 @@ class User extends BaseUser
     public function getEvents()
     {
         return $this->events;
+    }
+
+    /**
+     * Getters/Setters used in order to upload files.
+     */
+    public function setProfileImage($profileImage)
+    {
+        $this->profileImage = $profileImage;
+
+        return $this;
+    }
+
+    public function getProfileImage()
+    {
+        return $this->profileImage;
     }
 }

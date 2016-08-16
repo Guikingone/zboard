@@ -17,10 +17,10 @@ class InfosController extends Controller
    *
    * @return array
    */
-  public function indexAction(Request $request,$page)
+  public function indexAction(Request $request, $page)
   {
       $information = $this->get('core.back')->addMentoratInformation($request);
-      $informations = $this->get('core.back')->getMentoratInformations($page,3);
+      $informations = $this->get('core.back')->getMentoratInformations($page, 3);
       $nbInfos = $this->get('core.back')->countInfos();
 
       $pagination = array(
