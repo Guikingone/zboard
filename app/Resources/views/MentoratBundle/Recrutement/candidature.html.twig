@@ -27,23 +27,18 @@
 
             <div class="well">
               {% if is_granted('ROLE_SUPERVISEUR_MENTOR') %}
-                <button type="button" class="btn btn-flat btn-success" data-toggle="modal" data-target="#myModalInformation">
-                    Accepter
-                </button>
-                <button type="button" class="btn btn-flat btn-danger" data-toggle="modal" data-target="#myModalInformation">
-                    Refuser
-                </button>
+              <button type="button" class="btn btn-flat btn-success" data-toggle="modal" data-target="#myModalVote">
+                  Agir
+              </button>
                 {% else %}
-                <button type="button" class="btn btn-flat btn-success" data-toggle="modal" data-target="#myModalInformation">
-                    Voter pour
-                </button>
-                <button type="button" class="btn btn-flat btn-danger" data-toggle="modal" data-target="#myModalInformation">
-                    Voter contre
+                <button type="button" class="btn btn-flat btn-success" data-toggle="modal" data-target="#myModalVote">
+                    Voter
                 </button>
               {% endif %}
 
             </div>
         </div>
     </div>
+{% include ':Form:register_vote.html.twig' %}
 
 {% endblock %}

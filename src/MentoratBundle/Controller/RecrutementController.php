@@ -33,16 +33,22 @@ class RecrutementController extends Controller
      *
      * @return array
      */
-    public function showCandidature($id)
+    public function showCandidature(Request $request,$id)
     {
         $candidature = $this->get('core.recrutement')->getCandidature($id);
+        if($candidature==null)
+        {
+             return $this->redirectToRoute('recrutement_candidature');
+        }
+        $vote = $this->get('core.recrutement')->addVote($request,$id);
 
         $this->denyAccessUnlessGranted('ROLE_MENTOR_EXPERIMENTE', null, 'Accès refusé');
 
         return array('controller' => 'recrutement',
-      'candidature' => $candidature,
-      'title_action' => 'Candidature',
-);
+                    'candidature' => $candidature,
+                    'vote' => $vote->createView(),
+                    'title_action' => 'Candidature',
+                    );
     }
 
     /**

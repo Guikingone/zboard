@@ -51,12 +51,12 @@ class Candidat
 
     /**
      * @var string
-     * @ORM\OneToMany(targetEntity="RecrutementReponse", mappedBy="idCandidature")
+     * @ORM\OneToMany(targetEntity="RecrutementReponse", mappedBy="idCandidature", cascade={"remove"})
      */
     private $reponses;
 
      /**
-      * @ORM\OneToMany(targetEntity="RecrutementVote", mappedBy="idCandidature")
+      * @ORM\OneToMany(targetEntity="RecrutementVote", mappedBy="idCandidature", cascade={"remove"})
       */
      protected $votes;
 

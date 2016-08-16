@@ -18,11 +18,11 @@ class VoteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('message', TextareaType::class)
-            ->add('enabled', ChoiceType::class, array(
-                'vote' => [
-                    'Pour (+1)' => 'true',
-                    'Contre (-1)' => 'false',
+            ->add('commentaire', TextareaType::class)
+            ->add('vote', ChoiceType::class, array(
+                'choices' => [
+                    'Pour (+1)' => '1',
+                    'Contre (-1)' => '0',
                 ],
             ))
         ;
