@@ -31,7 +31,7 @@ class ArchiveController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function outArchiveMentor($id)
+    public function outArchiveMentorAction($id)
     {
         $this->get('core.archive')->outArchiveMentor($id);
 
@@ -45,7 +45,7 @@ class ArchiveController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function outArchiveMentore($id)
+    public function outArchiveMentoreAction($id)
     {
         $this->get('core.archive')->outArchiveMentore($id);
 
@@ -59,7 +59,7 @@ class ArchiveController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function outArchivePath($id)
+    public function outArchivePathAction($id)
     {
         $this->get('core.archive')->outArchiveParcours($id);
 

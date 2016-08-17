@@ -27,7 +27,7 @@ class EventsController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function purgeEvents()
+    public function purgeEventsAction()
     {
         $this->get('core.events')->purgeEvents();
 
