@@ -1,10 +1,10 @@
 {
     "name": "audrophe/zboard",
+    "description": "A Symfony project create in order to manage teacher and student at OpenClassrooms",
     "license": "proprietary",
     "type": "project",
     "autoload": {
         "psr-4": {
-            "": "src/",
             "Tests\\": "tests/",
             "AdminBundle\\": "src/",
             "BackendBundle\\": "src/",

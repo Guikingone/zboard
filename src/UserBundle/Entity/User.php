@@ -136,6 +136,12 @@ class User extends BaseUser
     private $events;
 
     /**
+     * @ORM\ManyToMany(targetEntity="AdminBundle\Entity\Activity", mappedBy="user")
+     * @ORM\JoinTable(name="zboard_user_activity")
+     */
+    private $activity;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -146,6 +152,7 @@ class User extends BaseUser
         $this->notes = new ArrayCollection();
         $this->soutenances = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->activity = new ArrayCollection();
     }
 
     /**
@@ -639,5 +646,39 @@ class User extends BaseUser
     public function getProfileImage()
     {
         return $this->profileImage;
+    }
+
+    /**
+     * Add activity.
+     *
+     * @param \AdminBundle\Entity\Activity $activity
+     *
+     * @return User
+     */
+    public function addActivity(\AdminBundle\Entity\Activity $activity)
+    {
+        $this->activity[] = $activity;
+
+        return $this;
+    }
+
+    /**
+     * Remove activity.
+     *
+     * @param \AdminBundle\Entity\Activity $activity
+     */
+    public function removeActivity(\AdminBundle\Entity\Activity $activity)
+    {
+        $this->activity->removeElement($activity);
+    }
+
+    /**
+     * Get activity.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActivity()
+    {
+        return $this->activity;
     }
 }

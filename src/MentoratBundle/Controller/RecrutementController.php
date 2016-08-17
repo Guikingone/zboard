@@ -41,12 +41,12 @@ class RecrutementController extends Controller
     public function showCandidature(Request $request, $id)
     {
         $candidature = $this->get('core.recrutement')->getCandidature($id);
-        if ($candidature == null) {
+        if ($candidature === null) {
             return $this->redirectToRoute('recrutement_candidature');
         }
 
         $vote = $this->get('core.recrutement')->addVote($request, $id);
-        if ($vote == null) {
+        if ($vote === null) {
             return $this->redirectToRoute('recrutement_candidature');
         }
 
