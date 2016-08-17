@@ -38,15 +38,15 @@ class RecrutementController extends Controller
      *
      * @return array
      */
-    public function showCandidature(Request $request, $id)
+    public function showCandidatureAction(Request $request, $id)
     {
         $candidature = $this->get('core.recrutement')->getCandidature($id);
-        if ($candidature == null) {
+        if ($candidature === null) {
             return $this->redirectToRoute('recrutement_candidature');
         }
 
         $vote = $this->get('core.recrutement')->addVote($request, $id);
-        if ($vote == null) {
+        if ($vote === null) {
             return $this->redirectToRoute('recrutement_candidature');
         }
 
@@ -63,7 +63,7 @@ class RecrutementController extends Controller
      * @Route("/recrutement/candidatures/{id}/{action}",name="recrutement_candidature_action")
      * @Template("MentoratBundle/Recrutement/candidature.html.twig")
      */
-    public function actOnApplication(Request $request, $id, $action)
+    public function actOnApplicationAction(Request $request, $id, $action)
     {
         // We first check the user is at least a mentor exp, and we'll later check if they're supervisors if they try to accept or refuse directly an application
       $this->denyAccessUnlessGranted('ROLE_MENTOR_EXPERIMENTE', null, 'Accès refusé');

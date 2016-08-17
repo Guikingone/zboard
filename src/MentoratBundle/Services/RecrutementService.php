@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use MentoratBundle\Entity\Candidat;
 use MentoratBundle\Entity\RecrutementVote;
 use MentoratBundle\Form\VoteType;
 use AdminBundle\Services\Mail;
@@ -214,7 +213,10 @@ class RecrutementService
     /**
      * All recruitment actions.
      *
-     * @param action the action to execute
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\FormInterface|void
      */
     public function addVote(Request $request, $id)
     {

@@ -73,9 +73,8 @@ class User extends BaseUser
     private $resume;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      *
-     * @Assert\NotBlank(message="Une photo de profil est obligatoire pour continuer sur Zboard")
      * @Assert\Image(
      *     minHeight="250",
      *     maxHeight="250"
@@ -137,6 +136,11 @@ class User extends BaseUser
     private $events;
 
     /**
+     * @ORM\ManyToMany(targetEntity="AdminBundle\Entity\Activity", mappedBy="user")
+     */
+    private $activity;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -147,6 +151,7 @@ class User extends BaseUser
         $this->notes = new ArrayCollection();
         $this->soutenances = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->activity = new ArrayCollection();
     }
 
     /**
@@ -625,5 +630,20 @@ class User extends BaseUser
     public function getEvents()
     {
         return $this->events;
+    }
+
+    /**
+     * Getters/Setters used in order to upload files.
+     */
+    public function setProfileImage($profileImage)
+    {
+        $this->profileImage = $profileImage;
+
+        return $this;
+    }
+
+    public function getProfileImage()
+    {
+        return $this->profileImage;
     }
 }

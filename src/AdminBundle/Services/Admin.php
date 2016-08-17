@@ -29,7 +29,6 @@ use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
 use BackendBundle\Form\UpdateAdd\CoursUpdateType;
 use BackendBundle\Form\_UpdateType\UpdateCoursType;
 use Doctrine\ORM\EntityManager;
-use MentoratBundle\Entity\Sessions;
 use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
 use NotificationBundle\Services\Evenements;
 use Symfony\Component\Form\FormFactory;

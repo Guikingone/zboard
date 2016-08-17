@@ -33,6 +33,10 @@ services:
         class: SecuriteBundle\Services\SecurityService
         arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@core.events", "@security.authorization_checker"]
 
+    core.activity:
+        class: AdminBundle\Services\ActivityManager
+        arguments: ["@doctrine.orm.entity_manager"]
+
     # list of services used in addition to perform global actions.
 
     core.archive:

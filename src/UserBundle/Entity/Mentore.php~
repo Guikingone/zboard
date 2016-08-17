@@ -74,8 +74,8 @@ class Mentore extends BaseUser
     private $resume;
 
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Une photo de profil est obligatoire pour continuer sur Zboard")
+     * @ORM\Column(type="string", nullable=true)
+     *
      * @Assert\Image(
      *     minHeight="250",
      *     maxHeight="250"

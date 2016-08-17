@@ -21,4 +21,4 @@ parameters:
     mailer_port:       2525
 
     # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            a6042532396363da6472d3a7f236d9fa223d6e9d

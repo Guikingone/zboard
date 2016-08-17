@@ -66,12 +66,12 @@ class MentorController extends Controller
     }
 
     /**
-     * @Route("/dashboard/profile/edit", name="zboard_teacher_profile_edit")
+     * @Route("/profile/edit", name="zboard_teacher_profile_edit")
      * @Template("UserBundle/Profile/edit.html.twig")
      *
      * @return array
      */
-    public function editAction(Request $request)
+    public function editProfilMentorAction(Request $request)
     {
         $user = $this->get('core.user')->updateUserProfile($request, $this->getUser());
         $competence = $this->get('core.user')->addCompetencesMentor($request, $this->getUser());
