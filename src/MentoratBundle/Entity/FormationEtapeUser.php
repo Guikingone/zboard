@@ -31,7 +31,7 @@ class FormationEtapeUser
     /**
      * @var int
      * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\FormationEtape")
-     * @ORM\JoinColumn(name="id_user")
+     * @ORM\JoinColumn(name="id_etape")
      */
     private $idEtape;
 

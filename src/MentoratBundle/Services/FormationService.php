@@ -57,7 +57,7 @@ class FormationService
             $content = null;
 
             foreach ($userAd as $etp) {
-                if ($etp->getIdEtape() == $etape->getId()) {
+                if ($etp->getIdEtape()->getId() == $etape->getId()) {
                     $validate = true;
                     $content = $etp->getContent();
                 }

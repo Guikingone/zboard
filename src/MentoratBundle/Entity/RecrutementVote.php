@@ -25,7 +25,6 @@ class RecrutementVote
      * @var int
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
      * @ORM\JoinColumn(name="id_user")
-     * @ORM\ManyToOne(targetEntity="User")
      */
     private $idUser;
 

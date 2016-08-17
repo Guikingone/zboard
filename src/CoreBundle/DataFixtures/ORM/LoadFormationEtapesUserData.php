@@ -20,11 +20,11 @@ class LoadFormationEtapesUserData implements FixtureInterface, ContainerAwareInt
 
     public function load(ObjectManager $manager)
     {
-      $user = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
+        $user = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
                                       ->findOneBy(array('username' => 'michael'));
-      $etape = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
+        $etape = $this->privateContainer->get('doctrine')->getManager()->getRepository('MentoratBundle:FormationEtape')
                                     ->findOneBy(array('etape' => 'J\'ai accès aux channels slack'));
-      $etape_2 = $this->privateContainer->get('doctrine')->getManager()->getRepository('UserBundle:User')
+        $etape_2 = $this->privateContainer->get('doctrine')->getManager()->getRepository('MentoratBundle:FormationEtape')
                                    ->findOneBy(array('etape' => 'J\'ai listé mes compétences dans l\'onglet profil'));
         $etape1 = new FormationEtapeUser();
         $etape1->setIdUser($user);
