@@ -26,10 +26,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use UserBundle\Entity\Competences;
 use UserBundle\Entity\Mentore;
 use UserBundle\Entity\User;
-use UserBundle\Form\CompetencesType;
-use UserBundle\Form\RegistrationMentoreType;
-use UserBundle\Form\RegistrationType;
-use UserBundle\Form\User\UpdateUserType;
+use UserBundle\Form\Type\CompetencesType;
+use UserBundle\Form\Type\Mentore\RegistrationMentoreType;
+use UserBundle\Form\Type\RegistrationType;
+use UserBundle\Form\Type\User\UpdateUserType;
 
 class UserService
 {

@@ -6,12 +6,12 @@ use FOS\UserBundle\Model\Group as BaseGroup;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Group_User.
+ * UserGroup.
  *
  * @ORM\Table(name="zboard_group_user")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\Group_UserRepository")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\UserGroupRepository")
  */
-class Group_User extends BaseGroup
+class UserGroup extends BaseGroup
 {
     /**
      * @var int

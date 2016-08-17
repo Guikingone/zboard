@@ -1,6 +1,6 @@
 <?php
 
-namespace UserBundle\Form;
+namespace UserBundle\Form\Type\Mentore;
 
 use MentoratBundle\Form\SuiviType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

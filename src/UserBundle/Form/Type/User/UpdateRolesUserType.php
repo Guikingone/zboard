@@ -1,27 +1,30 @@
 <?php
 
-namespace UserBundle\Form;
+namespace UserBundle\Form\Type\User;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CompetencesTypeAdd extends AbstractType
+class UpdateRolesUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle', TextareaType::class)
-            ;
+            ->add('roles', CollectionType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setDefaults(array(
+            'data_class' => 'UserBundle\Entity\User',
+        ));
     }
 
     public function getName()
     {
-        return 'user_bundle_competences_type_add';
+        return 'user_bundle_update_roles_type';
     }
 }

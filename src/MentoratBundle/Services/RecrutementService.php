@@ -93,12 +93,9 @@ class RecrutementService
             return;
         }
         //Otherwise count votes and return.
-<<<<<<< HEAD
         $candid->countVotes();
-=======
         $candid->countVotes($candid);
 
->>>>>>> e2a6ca92fbfe7ff7bd54fd0a4b6d865f0e595b8c
         return $candid;
     }
 
