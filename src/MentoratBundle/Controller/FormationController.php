@@ -36,7 +36,8 @@ class FormationController extends Controller
      */
     public function updateAction(Request $request)
     {
-        $formation = $this->get('core.formation')->updateFormation($request);
+        if($request->request->get('id')!=null)
+          $formation = $this->get('core.formation')->updateFormation($request);
 
         return new Response('OK', 200);
     }

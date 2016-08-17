@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-
+use MentoratBundle\Entity\FormationEtapeUser;
 class FormationService
 {
     /**
@@ -76,7 +76,29 @@ class FormationService
 
     public function updateFormation(Request $request)
     {
+        $etapeID = $request->request->get('id');
+        $userID = $this->user->getToken()->getUser();
         //Start by checking if line already exists
-        $exists = (count($this->doctrine->getRepository('MentoratBundle:FormationEtapeUser')->findBy(array('idUser' => 4,'idEtape'=>5)))==1);
+        $exists = (count($this->doctrine->getRepository('MentoratBundle:FormationEtapeUser')->findBy(array('idUser' => $userID,'idEtape'=>$etapeID)))==1);
+
+        // If there's already a line, it means the mentor has unchecked the button, so delete the formationetapeuser associated row
+        if($exists)
+        {
+          $etapeUser = $this->doctrine->getRepository('MentoratBundle:FormationEtapeUser')->findOneBy(array('idUser' => $userID,'idEtape'=>$etapeID));
+          $this->doctrine->remove($etapeUser);
+        }
+        // Otherwise the mentor has finished a step, so add it
+        else
+        {
+          // If the etape does not exist, quit
+          if((count($this->doctrine->getRepository('MentoratBundle:FormationEtape')->findBy(array('id'=>$etapeID)))==0)) return;
+          $etape = new FormationEtapeUser();
+          $etape->setIdUser($userID);
+          $etape->setIdEtape($this->doctrine->getRepository('MentoratBundle:FormationEtape')
+                                     ->findOneBy(array('id' => $etapeID)));
+          $etape->setContent("");
+          $this->doctrine->persist($etape);
+        }
+        $this->doctrine->flush();
     }
 }
