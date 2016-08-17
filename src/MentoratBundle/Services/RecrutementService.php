@@ -46,7 +46,7 @@ class RecrutementService
      * @param Session       $session
      * @param TokenStorage  $user
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, FormFactory $form, AuthorizationCheckerInterface $authorizationChecker,Mail $mail)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, FormFactory $form, AuthorizationCheckerInterface $authorizationChecker, Mail $mail)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
@@ -70,15 +70,11 @@ class RecrutementService
 
         $allCandidatures = $this->doctrine->getRepository('MentoratBundle:Candidat')->findBy(array('isCandidature' => true));
 
-        foreach ($allCandidatures as $candid)
-        {
+        foreach ($allCandidatures as $candid) {
             $candid->countVotes();
-            if ($candid->getForVotes() > 1 && $candid->getAgainstVotes() > 1)
-            {
+            if ($candid->getForVotes() > 1 && $candid->getAgainstVotes() > 1) {
                 array_push($candidaturesAArbitrer, $candid);
-            }
-            else
-            {
+            } else {
                 array_push($candidaturesSimple, $candid);
             }
 
@@ -93,9 +89,12 @@ class RecrutementService
     {
         $candid = $this->doctrine->getRepository('MentoratBundle:Candidat')->find($id);
         //If the application does not exist, return null
-        if(!$candid) return null;
+        if (!$candid) {
+            return;
+        }
         //Otherwise count votes and return.
         $candid->countVotes($candid);
+
         return $candid;
     }
 
@@ -112,14 +111,11 @@ class RecrutementService
 
         $allCandidatures = $this->doctrine->getRepository('MentoratBundle:Candidat')->findBy(array('isCandidature' => false));
 
-        foreach ($allCandidatures as $candid)
-        {
+        foreach ($allCandidatures as $candid) {
             $candid->countVotes();
-            if ($candid->getForVotes() > 1 && $candid->getAgainstVotes() > 1)
-            {
+            if ($candid->getForVotes() > 1 && $candid->getAgainstVotes() > 1) {
                 array_push($candidaturesAArbitrer, $candid);
-            } else
-            {
+            } else {
                 array_push($candidaturesSimple, $candid);
             }
         }
@@ -159,12 +155,11 @@ class RecrutementService
     public function voteApplication($id, RecrutementVote $vote)
     {
         // Check if the user has already voted
-        $currentVote = $this->doctrine->getRepository('MentoratBundle:RecrutementVote')->findBy(array('idCandidature'=>$id,'idUser' => $this->user->getToken()->getUser()->getId()));
+        $currentVote = $this->doctrine->getRepository('MentoratBundle:RecrutementVote')->findBy(array('idCandidature' => $id, 'idUser' => $this->user->getToken()->getUser()->getId()));
 
         // If it exists, the user has already voted return null
-        if($currentVote)
-        {
-          return null;
+        if ($currentVote) {
+            return;
         }
         $vote->setIdUser($this->user->getToken()->getUser()->getId());
         $vote->setIdCandidature($this->doctrine->getRepository('MentoratBundle:Candidat')->find($id));
@@ -178,50 +173,44 @@ class RecrutementService
       // Check for special operations
 
       // If the application has enough votes to be accepted
-      if (($candidature->getForVotes() == 3 && $candidature->getAgainstVotes() == 0) || ($candidature->getForVotes() == 5 && $candidature->getAgainstVotes() == 1))
-      {
+      if (($candidature->getForVotes() == 3 && $candidature->getAgainstVotes() == 0) || ($candidature->getForVotes() == 5 && $candidature->getAgainstVotes() == 1)) {
           $this->acceptApplication($id);
       }
       // If the application has enough votes to be rejected
-      elseif (($candidature->getAgainstVotes() == 3 && $candidature->getForVotes() == 0) || ($candidature->getAgainstVotes() == 5 && $candidature->getForVotes() == 1))
-      {
+      elseif (($candidature->getAgainstVotes() == 3 && $candidature->getForVotes() == 0) || ($candidature->getAgainstVotes() == 5 && $candidature->getForVotes() == 1)) {
           $this->rejectApplication($id);
       }
     }
 
     /**
-    * All recruitment actions
-    * @param action the action to execute
-    */
-    public function addVote(Request $request,$id)
+     * All recruitment actions.
+     *
+     * @param action the action to execute
+     */
+    public function addVote(Request $request, $id)
     {
-      $vote = new RecrutementVote();
+        $vote = new RecrutementVote();
 
-      $form = $this->formFactory->create(VoteType::class, $vote);
-      $form->handleRequest($request);
+        $form = $this->formFactory->create(VoteType::class, $vote);
+        $form->handleRequest($request);
 
-      if ($form->isValid())
-      {
-        // If the user is more than an MENTOR_EXPERIMENTE, his vote will be final.
-        if (true === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR'))
-        {
-            if($vote->getVote()==1)
-            {
-                $this->acceptApplication($id,$vote);
+        if ($form->isValid()) {
+            // If the user is more than an MENTOR_EXPERIMENTE, his vote will be final.
+        if (true === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+            if ($vote->getVote() == 1) {
+                $this->acceptApplication($id, $vote);
+            } else {
+                $this->rejectApplication($id, $vote);
             }
-            else
-            {
-              $this->rejectApplication($id,$vote);
-            }
-            return null;
+
+            return;
         }
         // Otherwise it's a simple vote
-        else
-        {
-            $this->voteApplication($id,$vote);
+        else {
+            $this->voteApplication($id, $vote);
         }
-      }
+        }
 
-      return $form;
+        return $form;
     }
 }

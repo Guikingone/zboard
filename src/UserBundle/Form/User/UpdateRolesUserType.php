@@ -19,7 +19,7 @@ class UpdateRolesUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'UserBundle\Entity\User'
+            'data_class' => 'UserBundle\Entity\User',
         ));
     }
 

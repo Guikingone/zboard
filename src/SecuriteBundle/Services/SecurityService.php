@@ -77,9 +77,7 @@ class SecurityService
 
         if (null === $mentor) {
             throw new Exception('L\'utilisateur semble ne pas exister.');
-        }
-
-        if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+        } elseif (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
             throw new AccessDeniedException();
         }
 
@@ -102,9 +100,7 @@ class SecurityService
 
         if (null === $student) {
             throw new Exception('L\'élève ne semble pas exister');
-        }
-
-        if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+        } elseif (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
             throw new AccessDeniedException();
         }
 
@@ -130,9 +126,7 @@ class SecurityService
 
         if (null === $user) {
             throw new Exception("L'utilisateur ne semble pas exister.");
-        }
-
-        if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+        } elseif (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
             throw new AccessDeniedException();
         }
 
@@ -162,9 +156,7 @@ class SecurityService
 
         if (null === $mentore) {
             throw new Exception('Le mentoré ne semble pas exister.');
-        }
-
-        if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+        } elseif (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
             throw new AccessDeniedException();
         }
 

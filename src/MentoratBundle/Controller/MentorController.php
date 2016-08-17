@@ -52,12 +52,35 @@ class MentorController extends Controller
     {
         $competence = $this->get('core.user')->addCompetencesMentor($request, $id);
         $mentor = $this->get('core.mentorat')->viewMentor($id);
+        $nbSoutenances = $this->get('core.soutenance')->countSoutenancesDone($this->getUser());
+        $nbMentores = $this->get('core.suivi')->countMentoreByMentor($this->getUser());
 
         return array(
             'controller' => 'mentor',
             'mentor' => $mentor,
             'competence' => $competence->createView(),
+            'nbSoutenances' => $nbSoutenances,
+            'nbMentores' => $nbMentores,
             'title_action' => 'Détails du mentor :'.$mentor->getFirstname().' '.$mentor->getLastname(),
+        );
+    }
+
+    /**
+     * @Route("/dashboard/profile/edit", name="zboard_teacher_profile_edit")
+     * @Template("UserBundle/Profile/edit.html.twig")
+     *
+     * @return array
+     */
+    public function editAction(Request $request)
+    {
+        $user = $this->get('core.user')->updateUserProfile($request, $this->getUser());
+        $competence = $this->get('core.user')->addCompetencesMentor($request, $this->getUser());
+
+        return array(
+            'user' => $user->createView(),
+            'competence' => $competence->createView(),
+            'controller' => 'user',
+            'title_action' => 'Mon profil',
         );
     }
 
@@ -70,7 +93,7 @@ class MentorController extends Controller
     {
         $this->get('core.mentorat')->mentorIndispo($id);
 
-        return $this->redirectToRoute('mon_profil');
+        return $this->redirectToRoute('show_details_mentor', array('id' => $id));
     }
 
     /**
@@ -82,6 +105,6 @@ class MentorController extends Controller
     {
         $this->get('core.mentorat')->mentorDispo($id);
 
-        return $this->redirectToRoute('mon_profil');
+        return $this->redirectToRoute('show_details_mentor', array('id' => $id));
     }
 }
