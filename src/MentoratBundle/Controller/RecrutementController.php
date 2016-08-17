@@ -21,16 +21,15 @@ class RecrutementController extends Controller
 
         $candidatures = $this->get('core.recrutement')->getCandidatures();
 
-        if(empty($candidatures))
-        {
-        $candidatures['candidatures_simples'] = array();
-        $candidatures['candidatures_a_arbitrer'] = array();
+        if (empty($candidatures)) {
+            $candidatures['candidatures_simples'] = array();
+            $candidatures['candidatures_a_arbitrer'] = array();
         }
-        
+
         return array('controller' => 'recrutement',
                   'title_action' => 'Recrutement de nouveaux mentors',
                    'candidatures' => $candidatures['candidatures_simples'],
-                   'candidatures_dispute' => $candidatures['candidatures_a_arbitrer']);
+                   'candidatures_dispute' => $candidatures['candidatures_a_arbitrer'], );
     }
 
     /**
@@ -39,13 +38,17 @@ class RecrutementController extends Controller
      *
      * @return array
      */
-    public function showCandidature(Request $request,$id)
+    public function showCandidature(Request $request, $id)
     {
         $candidature = $this->get('core.recrutement')->getCandidature($id);
-        if($candidature==null) return $this->redirectToRoute('recrutement_candidature');
+        if ($candidature == null) {
+            return $this->redirectToRoute('recrutement_candidature');
+        }
 
-        $vote = $this->get('core.recrutement')->addVote($request,$id);
-        if($vote==null) return $this->redirectToRoute('recrutement_candidature');
+        $vote = $this->get('core.recrutement')->addVote($request, $id);
+        if ($vote == null) {
+            return $this->redirectToRoute('recrutement_candidature');
+        }
 
         $this->denyAccessUnlessGranted('ROLE_MENTOR_EXPERIMENTE', null, 'Accès refusé');
 

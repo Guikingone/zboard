@@ -43,7 +43,7 @@ class UserAdminController extends Controller
      *
      * @return array
      */
-    public function updateUserAction(Request $request, $id)
+    public function updateUserRolesAction(Request $request, $id)
     {
         $user = $this->get('core.security')->addRoleToUser($request, $id);
 
@@ -63,7 +63,7 @@ class UserAdminController extends Controller
      *
      * @return array
      */
-    public function updateMentoreAction(Request $request, $id)
+    public function updateMentoreRolesAction(Request $request, $id)
     {
         $mentore = $this->get('core.security')->addRoleToMentore($request, $id);
 

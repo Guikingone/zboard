@@ -11,6 +11,12 @@
             {{ message }}
         </div>
     {% endfor %}
+    {% if(app.user.available == false) %}
+        <div class="col-md-12">
+            <div class="alert alert-info">Vous êtes actuellement indisponible, vous ne pouvez donc pas avoir de soutenances, voire de nouveaux mentorés. Lorsque vous serez
+                de nouveau disponible, cliquez sur le bouton "Me rendre disponible" ! A bientôt !</div>
+        </div>
+    {% endif %}
     <div class="row">
         <div class="col-sm-4 col-md-5">
             <div class="box box-primary">
@@ -33,15 +39,17 @@
                             </p>
                         </li>
                         <li class="list-group-item">
-                            <b>Nombre d'élèves : </b> <p class="pull-right">{{ mentor.suivi|length }}</p>
+                            <b>Nombre d'élèves maximum souhaité : </b> <p class="pull-right">0</p>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Nombre d'élèves : </b> <p class="pull-right">{{ nbMentores|length }}</p>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Nombre de soutenances effectuées : </b> <p class="pull-right">{{ nbSoutenances|length }}</p>
                         </li>
                     </ul>
-                    <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModalContact"><b>Contacter par email</b></a>
-                    {% if app.user == mentor %}
-                        <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#myModalCompetences"><b>Ajouter une compétences</b></a>
-                        {% if mentor.available == false %}
-                            <a href="#" class="btn btn-flat btn-success btn-block">Devenir indisponible</a>
-                        {% endif %}
+                    {% if app.user.id != mentor.id %}
+                        <a href="#" class="btn btn-primary btn-flat btn-block" data-toggle="modal" data-target="#myModalContact"><b>Contacter par email</b></a>
                     {% endif %}
                 </div>
             </div>
@@ -61,11 +69,13 @@
                     <hr>
                     <strong><i class="fa fa-pencil margin-r-5"></i> Compétences</strong>
                     <p>
+                    {% if app.user.competences %}
                         {% for competence in mentor.competences %}
                             {% for label in competence.libelle %}
                                 <span class="label label-warning">{{ label }}</span>
                             {% endfor %}
                         {% endfor %}
+                    {% endif %}
                     </p>
                 </div>
             </div>
@@ -77,8 +87,9 @@
                     <li><a href="#student" data-toggle="tab">Suivi Elèves</a></li>
                     {% if app.user.id == mentor.id %}
                         <li><a href="#sessions" data-toggle="tab">Suivi sessions</a></li>
+                        <li><a href="#facturation" data-toggle="tab">Suivi facturation</a></li>
                     {% endif %}
-                    {% if is_granted('ROLE_ADMIN') %}
+                    {% if is_granted('ROLE_ADMIN') or app.user == mentor.id %}
                         <li><a href="#settings" data-toggle="tab">Options</a></li>
                     {% endif %}
                 </ul>
@@ -191,18 +202,46 @@
                             {% endif %}
                         </div>
                     {% endif %}
-                    <div class="tab-pane" id="settings">
-                        <!-- Options -->
-                    </div>
+                    {% if app.user.id == mentor.id %}
+                        <div class="tab-pane" id="facturation">
+                            <!-- Suivi facturation -->
+                            <div class="table-responsive">
+                                <table class="table no-margin">
+                                    <thead>
+                                    <tr>
+                                        <th>Date de facturation</th>
+                                        <th>Nombre de sessions facturées</th>
+                                        <th>Statut</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="settings">
+                            <!-- Options -->
+                            <a href="{{ path('zboard_teacher_profile_edit') }}">
+                                <button class="btn btn-flat btn-block btn-warning">
+                                    Modifier mon profil
+                                </button>
+                            </a>
+                            {% if app.user.available == false %}
+                                <a href="{{ path('mentor_dispo',{'id' : app.user.id }) }}" class="btn btn-flat btn-block btn-success">
+                                    Me rendre disponible
+                                </a>
+                            {% else %}
+                                <a href="{{ path('mentor_indispo', {'id': app.user.id}) }}" class="btn btn-flat btn-block btn-danger btn-block">
+                                    Devenir indisponible
+                                </a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 
     {% include ':Form/Contact:register_mentor_contact.html.twig' %}
-
-    {% include ':Form/Contact:register_mentor_message.html.twig' %}
-
-    {% include ':Form:register_competences_mentor.html.twig' %}
 
 {% endblock %}
