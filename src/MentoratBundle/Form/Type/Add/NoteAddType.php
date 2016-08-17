@@ -1,13 +1,12 @@
 <?php
 
-namespace BackendBundle\Form;
+namespace MentoratBundle\Form\Type\Add;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CompetencesType extends AbstractType
+class NotesType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,10 +15,9 @@ class CompetencesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle', EntityType::class, array(
-                'class' => 'BackendBundle\Entity\Competences',
-                'choice_label' => 'libelle',
-            ))
+            ->add('libelle')
+            ->add('dateCreated', 'datetime')
+            ->add('suivi')
         ;
     }
 
@@ -29,7 +27,7 @@ class CompetencesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackendBundle\Entity\Competences',
+            'data_class' => 'MentoratBundle\Entity\Notes',
         ));
     }
 }

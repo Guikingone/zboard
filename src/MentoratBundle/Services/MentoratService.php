@@ -16,11 +16,11 @@ use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Notes;
 use MentoratBundle\Entity\Sessions;
 use MentoratBundle\Entity\Soutenance;
-use MentoratBundle\Form\Ask\AskSoutenanceType;
-use MentoratBundle\Form\SessionsType;
-use MentoratBundle\Form\TypeAdd\NoteTypeAdd;
-use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
-use MentoratBundle\Form\Update\SuiviUpdateType;
+use MentoratBundle\Form\Add\NoteAddType;
+use MentoratBundle\Form\Add\SoutenanceAddType;
+use MentoratBundle\Form\Type\Ask\AskSoutenanceType;
+use MentoratBundle\Form\Type\Add\SessionsType;
+use MentoratBundle\Form\Type\Update\SuiviUpdateType;
 use NotificationBundle\Services\Evenements;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\FormFactory;
@@ -170,7 +170,7 @@ class MentoratService
         $note = new Notes();
         $user = $this->user->getToken()->getUser();
 
-        $form = $this->form->create(NoteTypeAdd::class, $note);
+        $form = $this->form->create(NoteAddType::class, $note);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -310,7 +310,7 @@ class MentoratService
     {
         $soutenance = new Soutenance();
 
-        $form = $this->form->create(SoutenanceTypeAdd::class, $soutenance);
+        $form = $this->form->create(SoutenanceAddType::class, $soutenance);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

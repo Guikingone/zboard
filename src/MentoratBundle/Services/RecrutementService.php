@@ -3,13 +3,13 @@
 namespace MentoratBundle\Services;
 
 use Doctrine\ORM\EntityManager;
+use MentoratBundle\Form\Type\Add\VoteType;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use MentoratBundle\Entity\RecrutementVote;
-use MentoratBundle\Form\VoteType;
 use AdminBundle\Services\Mail;
 
 class RecrutementService

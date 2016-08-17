@@ -1,31 +1,32 @@
 <?php
 
-namespace BackendBundle\Form\TypeAdd;
+namespace AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AbonnementTypeAdd extends AbstractType
+class CountryType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array                $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('libelle', TextType::class)
-            ->add('prix', TextType::class)
         ;
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackendBundle\Entity\Abonnement',
+            'data_class' => 'AdminBundle\Entity\Country',
         ));
-    }
-
-    public function getName()
-    {
-        return 'backend_bundle_abonnement_type_add';
     }
 }

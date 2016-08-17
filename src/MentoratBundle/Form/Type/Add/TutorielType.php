@@ -1,13 +1,13 @@
 <?php
 
-namespace BackendBundle\Form;
+namespace MentoratBundle\Form\Type\Add;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AbonnementType extends AbstractType
+class TutorielType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,8 +16,8 @@ class AbonnementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle', TextType::class)
-            ->add('prix', TextType::class)
+            ->add('title', TextType::class)
+            ->add('link', TextType::class)
         ;
     }
 
@@ -27,7 +27,7 @@ class AbonnementType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackendBundle\Entity\Abonnement',
+            'data_class' => 'BackendBundle\Entity\Tutoriel',
         ));
     }
 }

@@ -12,24 +12,24 @@
 namespace AdminBundle\Services;
 
 use AdminBundle\Entity\Country;
-use AdminBundle\Form\CountryType;
+use AdminBundle\Form\Type\CountryType;
 use BackendBundle\Entity\Abonnement;
 use BackendBundle\Entity\Competences;
 use BackendBundle\Entity\Cours;
 use BackendBundle\Entity\Parcours;
 use BackendBundle\Entity\Projet;
-use BackendBundle\Form\_UpdateType\UpdateCompetencesType;
-use BackendBundle\Form\_UpdateType\UpdateProjetType;
-use BackendBundle\Form\CoursType;
-use BackendBundle\Form\TypeAdd\CompetencesTypeAdd;
-use BackendBundle\Form\TypeAdd\ProjetTypeAdd;
+use BackendBundle\Form\Type\Add\CoursAddType;
+use BackendBundle\Form\Type\Update\UpdateCompetencesType;
+use BackendBundle\Form\Type\Update\UpdateProjetType;
+use BackendBundle\Form\add\CompetencesAddType;
+use BackendBundle\Form\add\ProjetAddType;
 use BackendBundle\Form\UpdateAdd\ProjetUpdateType;
-use BackendBundle\Form\TypeAdd\AbonnementTypeAdd;
-use BackendBundle\Form\TypeAdd\ParcoursTypeAdd;
+use BackendBundle\Form\add\AbonnementAddType;
+use BackendBundle\Form\add\ParcoursAddType;
 use BackendBundle\Form\UpdateAdd\CoursUpdateType;
-use BackendBundle\Form\_UpdateType\UpdateCoursType;
+use BackendBundle\Form\Type\Update\UpdateCoursType;
 use Doctrine\ORM\EntityManager;
-use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
+use MentoratBundle\Form\Add\SoutenanceAddType;
 use NotificationBundle\Services\Evenements;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
@@ -167,7 +167,7 @@ class Admin
     {
         $parcours = new Parcours();
 
-        $form = $this->form->create(ParcoursTypeAdd::class, $parcours);
+        $form = $this->form->create(ParcoursAddType::class, $parcours);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -194,7 +194,7 @@ class Admin
 
         $projet = new Projet();
 
-        $form = $this->form->create(ProjetTypeAdd::class, $projet);
+        $form = $this->form->create(ProjetAddType::class, $projet);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -219,7 +219,7 @@ class Admin
     {
         $competencesProject = new Competences();
 
-        $form = $this->form->create(CompetencesTypeAdd::class, $competencesProject);
+        $form = $this->form->create(CompetencesAddType::class, $competencesProject);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -246,7 +246,7 @@ class Admin
 
         $cours = new Cours();
 
-        $form = $this->form->create(CoursType::class, $cours);
+        $form = $this->form->create(CoursAddType::class, $cours);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -270,7 +270,7 @@ class Admin
     public function addAbonnement(Request $request)
     {
         $abonnement = new Abonnement();
-        $form = $this->form->create(AbonnementTypeAdd::class, $abonnement);
+        $form = $this->form->create(AbonnementAddType::class, $abonnement);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -321,7 +321,7 @@ class Admin
             throw new NotFoundHttpException('Le parcours ne semble pas exister.');
         }
 
-        $form = $this->form->create(ParcoursTypeAdd::class, $parcours);
+        $form = $this->form->create(ParcoursAddType::class, $parcours);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -433,7 +433,7 @@ class Admin
             throw new NotFoundHttpException('Il semble que la soutenance n\'existe pas');
         }
 
-        $form = $this->form->create(SoutenanceTypeAdd::class, $soutenances);
+        $form = $this->form->create(SoutenanceAddType::class, $soutenances);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

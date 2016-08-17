@@ -1,13 +1,14 @@
 <?php
 
-namespace AdminBundle\Form;
+namespace BackendBundle\Form\Type\Update;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CountryType extends AbstractType
+class UpdateProjetType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,8 +17,13 @@ class CountryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle', TextType::class)
-        ;
+        ->add('libelle', TextType::class)
+        ->remove('status')
+        ->add('parcours', EntityType::class, array(
+            'class' => 'BackendBundle\Entity\Parcours',
+            'choice_label' => 'libelle',
+        ))
+    ;
     }
 
     /**
@@ -26,7 +32,12 @@ class CountryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AdminBundle\Entity\Country',
-        ));
+        'data_class' => 'BackendBundle\Entity\Projet',
+    ));
+    }
+
+    public function getName()
+    {
+        return 'backend_bundle_update_projet_tyoe';
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace MentoratBundle\Form;
+namespace MentoratBundle\Form\Type\Add;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

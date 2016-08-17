@@ -1,14 +1,15 @@
 <?php
 
-namespace BackendBundle\Form;
+namespace BackendBundle\Form\Type\Update;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ParcoursType extends AbstractType
+class UpdateCoursType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -17,15 +18,12 @@ class ParcoursType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle', EntityType::class, array(
+            ->add('libelle', TextareaType::class)
+            ->add('duree', TextType::class)
+            ->remove('status')
+            ->add('parcours', EntityType::class, array(
                 'class' => 'BackendBundle\Entity\Parcours',
                 'choice_label' => 'libelle',
-            ))
-            ->add('date_start', DateType::class, array(
-                'widget' => 'single_text',
-                'html5' => false,
-                'format' => 'yyyy-MM-dd',
-                'attr' => ['class' => 'js-datepicker'],
             ))
         ;
     }
@@ -36,7 +34,12 @@ class ParcoursType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackendBundle\Entity\Parcours',
+            'data_class' => 'BackendBundle\Entity\Cours',
         ));
+    }
+
+    public function getName()
+    {
+        return 'backend_bundle_update_cours_type';
     }
 }

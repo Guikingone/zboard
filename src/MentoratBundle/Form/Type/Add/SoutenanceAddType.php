@@ -1,6 +1,6 @@
 <?php
 
-namespace MentoratBundle\Form\TypeAdd;
+namespace MentoratBundle\Form\Add;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SoutenanceTypeAdd extends AbstractType
+class SoutenanceAddType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder

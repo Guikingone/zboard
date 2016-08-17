@@ -1,13 +1,15 @@
 <?php
 
-namespace MentoratBundle\Form\TypeAdd;
+namespace MentoratBundle\Form\Type\Add;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class NoteTypeAdd extends AbstractType
+class InformationType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,9 +18,14 @@ class NoteTypeAdd extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle', TextareaType::class)
-            ->remove('dateCreated')
-            ->remove('suivi')
+            ->add('title', TextType::class)
+            ->add('body', TextareaType::class)
+            ->add('enabled', ChoiceType::class, array(
+                'choices' => [
+                    'Oui' => '1',
+                    'Non' => '0',
+                ],
+            ))
         ;
     }
 
@@ -28,12 +35,7 @@ class NoteTypeAdd extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'MentoratBundle\Entity\Notes',
+            'data_class' => 'BackendBundle\Entity\InformationMentorat',
         ));
-    }
-
-    public function getName()
-    {
-        return 'mentorat_bundle_note_type_add';
     }
 }

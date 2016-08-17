@@ -1,6 +1,6 @@
 <?php
 
-namespace MentoratBundle\Form\Update;
+namespace MentoratBundle\Form\Type\Update;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
