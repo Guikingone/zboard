@@ -65,7 +65,7 @@ class UtilsController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function updateSessionsStatus($id, $choice)
+    public function updateSessionsStatusAction($id, $choice)
     {
         $this->get('core.mentorat')->changeStatutSession($id, $choice);
 
