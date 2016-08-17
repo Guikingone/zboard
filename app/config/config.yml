@@ -27,6 +27,7 @@ framework:
     trusted_proxies: ~
     session:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        name: zboard_cookie_55d7420e898d12e88
         handler_id:  session.handler.native_file
         save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments:       ~
@@ -91,4 +92,4 @@ fos_user:
            type: UserBundle\Form\RegistrationType
            type: UserBundle\Form\RegistrationMentoreType
        confirmation:
-           enabled: true
+           enabled: false
