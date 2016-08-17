@@ -27,9 +27,9 @@ class UtilsController extends Controller
         }
 
         return array(
-            'controller' => 'cours',
-            'cours' => $cours->createView(),
-            'title_action' => 'Mise à jour',
+            'controller'    => 'cours',
+            'cours'         => $cours->createView(),
+            'title_action'  => 'Mise à jour',
         );
     }
 
@@ -42,7 +42,7 @@ class UtilsController extends Controller
      *
      * @return array
      */
-    public function updateProjectStatus(Request $request, $id)
+    public function updateProjectStatusAction(Request $request, $id)
     {
         $projet = $this->get('core.admin')->updateStatusProject($request, $id);
 
@@ -51,9 +51,9 @@ class UtilsController extends Controller
         }
 
         return array(
-            'controller' => 'projet',
-            'projet' => $projet->createView(),
-            'title_action' => 'Mise à jour',
+            'controller'    => 'projet',
+            'projet'        => $projet->createView(),
+            'title_action'  => 'Mise à jour',
         );
     }
 }
