@@ -23,17 +23,15 @@ class FormationEtapeUser
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity="UserBundle/Entity/User")
-     * @ORM\JoinColumn(nullable=false)
-     * @ORM\Column(name="id_user", type="integer")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="id_user")
      */
     private $idUser;
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity="MentoratBundle/Entity/FormationEtape")
-     * @ORM\JoinColumn(nullable=false)
-     * @ORM\Column(name="id_etape", type="integer")
+     * @ORM\ManyToOne(targetEntity="MentoratBundle\Entity\FormationEtape")
+     * @ORM\JoinColumn(name="id_etape")
      */
     private $idEtape;
 

@@ -57,13 +57,14 @@ class FormationService
             $content = null;
 
             foreach ($userAd as $etp) {
-                if ($etp->getIdEtape() == $etape->getId()) {
+                if ($etp->getIdEtape()->getId() == $etape->getId()) {
                     $validate = true;
                     $content = $etp->getContent();
                 }
             }
 
             array_push($etapesUser, array('etape' => $etape->getEtape(),
+                  'id'=>$etape->getId(),
                   'validate' => $validate,
                   'hasContent' => $hasContent,
                   'content' => $content,
@@ -76,5 +77,6 @@ class FormationService
     public function updateFormation(Request $request)
     {
         //Start by checking if line already exists
+        $exists = (count($this->doctrine->getRepository('MentoratBundle:FormationEtapeUser')->findBy(array('idUser' => 4,'idEtape'=>5)))==1);
     }
 }
