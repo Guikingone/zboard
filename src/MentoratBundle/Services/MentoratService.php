@@ -19,6 +19,7 @@ use MentoratBundle\Entity\Soutenance;
 use MentoratBundle\Form\Ask\AskSoutenanceType;
 use MentoratBundle\Form\SessionsType;
 use MentoratBundle\Form\TypeAdd\NoteTypeAdd;
+use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
 use MentoratBundle\Form\Update\SuiviUpdateType;
 use NotificationBundle\Services\Evenements;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -226,9 +227,44 @@ class MentoratService
     }
 
     /**
+     * Allow to change the status of a session.
+     *
+     * @param $id       | The id of the session.
+     * @param $choice   | The choice used by the teacher.
+     */
+    public function changeStatutSession($id, $choice)
+    {
+        $session = $this->doctrine->getRepository('MentoratBundle:Sessions')->findOneBy(array('id' => $id));
+
+        if (null === $session) {
+            throw new Exception('La session ne semble pas exister.');
+        }
+
+        switch ($choice) {
+            case $choice === 'Validation':
+                $session->setStatus('Present');
+                break;
+            case $choice === 'Annulation':
+                $session->setStatus('Annulee');
+                break;
+            case $choice === 'Absent':
+                $session->setStatus('Absent');
+                break;
+            case $choice === 'No Show':
+                $session->setStatus('No Show');
+                break;
+            default:
+                throw new Exception('Le statut doit être valide !');
+        }
+
+        $this->doctrine->flush();
+        $this->session->getFlashBag()->add('success', 'Le statut de la session a bien été changé.');
+    }
+
+    /**
      * Allow to change the teacher who follow the student using the id | $id of the suivi.
      *
-     * @param Request $request | The Request manager
+     * @param Request $request
      * @param $id               | The id of the suivi
      *
      * @return \Symfony\Component\Form\FormInterface
@@ -254,9 +290,43 @@ class MentoratService
             $this->events->createUserEvents($suivi->getMentor(), 'Changement de mentor effectué', 'Important');
             $this->events->createMentoreEvents(
                 $suivi->getMentore(),
-                'Changement de mentor effectué, votre nouveau mentor prendre contact avec vous rapidement',
+                'Changement de mentor effectué, votre nouveau mentor va prendre contact avec vous rapidement',
                 'Important'
             );
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow to add a soutenance between a teacher and a student, the teacher receive the notifications about the
+     * creation in order to contact the student, the student receive the notification in order to be alerted.
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addSoutenance(Request $request)
+    {
+        $soutenance = new Soutenance();
+
+        $form = $this->form->create(SoutenanceTypeAdd::class, $soutenance);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+                throw new AccessDeniedException();
+            }
+
+            $data = $form->getData();
+            $mentor = $data->getMentor()->getId();
+            $mentore = $data->getMentore()->getId();
+
+            $this->doctrine->persist($soutenance);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'La soutenance a bien été enregistrée.');
+            $this->events->createUserEvents($mentor, 'Une soutenance a été planifiée.', 'Information');
+            $this->events->createMentoreEvents($mentore, 'Une soutenance a été planifiée.', 'Information');
         }
 
         return $form;

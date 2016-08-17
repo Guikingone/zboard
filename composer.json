@@ -1,14 +1,15 @@
 {
-    "name": "zboard/zboard",
-    "description": "Application destinated to help OpenClassrooms with students",
+    "name": "audrophe/zboard",
     "license": "proprietary",
     "type": "project",
     "autoload": {
         "psr-4": {
+            "": "src/",
             "Tests\\": "tests/",
             "AdminBundle\\": "src/",
             "BackendBundle\\": "src/",
             "CoreBundle\\": "src/",
+            "FacturationBundle\\": "src/",
             "MentoratBundle\\": "src/",
             "NotificationBundle\\": "src/",
             "UserBundle\\": "src/",
@@ -25,6 +26,7 @@
             "AdminBundle\\": "src/",
             "BackendBundle\\": "src/",
             "CoreBundle\\": "src/",
+            "FacturationBundle\\": "src/",
             "MentoratBundle\\": "src/",
             "NotificationBundle\\": "src/",
             "UserBundle\\": "src/",
@@ -44,7 +46,10 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "ocramius/proxy-manager": "^1.0"
+        "ensepar/html2pdf-bundle": "^2.0",
+        "doctrine/doctrine-migrations-bundle": "^1.1",
+        "symfony/serializer": "^3.1",
+        "symfony/property-access": "^3.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

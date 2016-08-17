@@ -21,6 +21,11 @@ class RecrutementController extends Controller
 
         $candidatures = $this->get('core.recrutement')->getCandidatures();
 
+        if (empty($candidatures)) {
+            $candidatures['candidatures_simples'] = array();
+            $candidatures['candidatures_a_arbitrer'] = array();
+        }
+
         return array('controller' => 'recrutement',
                   'title_action' => 'Recrutement de nouveaux mentors',
                    'candidatures' => $candidatures['candidatures_simples'],
@@ -33,43 +38,37 @@ class RecrutementController extends Controller
      *
      * @return array
      */
-    public function showCandidatureAction($id)
+    public function showCandidature(Request $request, $id)
     {
         $candidature = $this->get('core.recrutement')->getCandidature($id);
+        if ($candidature == null) {
+            return $this->redirectToRoute('recrutement_candidature');
+        }
+
+        $vote = $this->get('core.recrutement')->addVote($request, $id);
+        if ($vote == null) {
+            return $this->redirectToRoute('recrutement_candidature');
+        }
 
         $this->denyAccessUnlessGranted('ROLE_MENTOR_EXPERIMENTE', null, 'Accès refusé');
 
         return array('controller' => 'recrutement',
-      'candidature' => $candidature,
-      'title_action' => 'Candidature',
-);
+                    'candidature' => $candidature,
+                    'vote' => $vote->createView(),
+                    'title_action' => 'Candidature',
+                    );
     }
 
     /**
      * @Route("/recrutement/candidatures/{id}/{action}",name="recrutement_candidature_action")
      * @Template("MentoratBundle/Recrutement/candidature.html.twig")
      */
-    public function actOnApplicationAction(Request $request, $id, $action)
+    public function actOnApplication(Request $request, $id, $action)
     {
         // We first check the user is at least a mentor exp, and we'll later check if they're supervisors if they try to accept or refuse directly an application
       $this->denyAccessUnlessGranted('ROLE_MENTOR_EXPERIMENTE', null, 'Accès refusé');
 
-        switch ($action) {
-        case 'accept':
-          $this->denyAccessUnlessGranted('ROLE_SUPERVISEUR_MENTOR', null, 'Accès refusé');
-          $this->get('core.recrutement')->acceptApplication($id, '');
-          break;
-        case 'refuse':
-          $this->denyAccessUnlessGranted('ROLE_SUPERVISEUR_MENTOR', null, 'Accès refusé');
-          $this->get('core.recrutement')->rejectApplication($id, '');
-          break;
-        case 'votefor':
-          $this->get('core.recrutement')->voteApplication($id, true);
-          break;
-        case 'voteagainst':
-          $this->get('core.recrutement')->voteApplication($id, false);
-          break;
-      }
+        $this->get('core.recrutement')->action($action);
 
         return $this->redirectToRoute('recrutement_candidature');
     }

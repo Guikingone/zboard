@@ -29,7 +29,7 @@
                                 </li>
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="{{ path('mon_profil') }}" class="btn btn-default btn-flat">Mon profil</a>
+                                        <a href="{{ path('show_details_mentor', {'id': app.user.id}) }}" class="btn btn-default btn-flat">Mon profil</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-flat">Déconnexion</a>
@@ -94,7 +94,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="{{ path('mentorat_tutoriels_index') }}"><i class="fa fa-circle-o"></i>Liste des tutoriels</a></li>
-                                <li><a href="{{ path('mentorat_infos_index') }}"><i class="fa fa-circle-o"></i>Informations mentorat</a></li>
+                                <li><a href="{{ path('infos') }}"><i class="fa fa-circle-o"></i>Informations mentorat</a></li>
                             </ul>
                         </li>
                         {% if is_granted('ROLE_ADMIN') %}

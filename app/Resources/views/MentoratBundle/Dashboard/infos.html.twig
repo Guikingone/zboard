@@ -15,13 +15,28 @@
             </div>
         </div>
     {% endif %}
-
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            {% include ':Elements:pagination.html.twig' %}
+        </div>
+    </div>
     {% for info in informations %}
-      <h3>{{ info.title|e }}</h3>
-      <p>{{ info.body|e }}</p>
-      <hr />
+    <div class="row">
+    		<div class="col-xs-12 col-md-12">
+    				<div class="well">
+              <h3>{{ info.title|e }}</h3>
+              <i>{{ info.dcreated|date('d/m/Y') }}</i>
+    					<br />
+              <p>{{ info.body|e }}</p>
+    				</div>
+    		</div>
+    </div>
     {% endfor %}
-
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            {% include ':Elements:pagination.html.twig' %}
+        </div>
+    </div>
     {% include ':Form:register_information.html.twig' %}
 
 {% endblock %}

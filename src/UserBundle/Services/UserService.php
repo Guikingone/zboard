@@ -11,6 +11,7 @@
 
 namespace UserBundle\Services;
 
+use AdminBundle\Services\Uploader;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Suivi;
 use NotificationBundle\Services\Evenements;
@@ -28,6 +29,7 @@ use UserBundle\Entity\User;
 use UserBundle\Form\CompetencesType;
 use UserBundle\Form\RegistrationMentoreType;
 use UserBundle\Form\RegistrationType;
+use UserBundle\Form\User\UpdateUserType;
 
 class UserService
 {
@@ -67,6 +69,11 @@ class UserService
     private $security;
 
     /**
+     * @var Uploader
+     */
+    private $uploader;
+
+    /**
      * UserService constructor.
      *
      * @param EntityManager        $doctrine
@@ -76,8 +83,9 @@ class UserService
      * @param Evenements           $events
      * @param Mail                 $mail
      * @param AuthorizationChecker $security
+     * @param Uploader             $uploader
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, Mail $mail, AuthorizationChecker $security)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, Mail $mail, AuthorizationChecker $security, Uploader $uploader)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
@@ -86,6 +94,7 @@ class UserService
         $this->events = $events;
         $this->mail = $mail;
         $this->security = $security;
+        $this->uploader = $uploader;
     }
 
     /**
@@ -177,7 +186,7 @@ class UserService
             $this->doctrine->persist($mentor);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
-            $this->events->createUserEvents($mentor, "Création d'un nouveau mentor", 'Important');
+            $this->events->createUserEvents($mentor, 'Création de votre profil Mentor', 'Important');
             $this->mail->inscriptionMessage($mentor->getEmail());
         }
 
@@ -216,7 +225,7 @@ class UserService
             $this->doctrine->persist($suivi);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Elève enregistré.');
-            $this->events->createUserEvents($mentore, 'Création de votre profil.', 'Important');
+            $this->events->createUserEvents($mentore, 'Création de votre profil Elève.', 'Important');
         }
 
         return $form;
@@ -312,6 +321,36 @@ class UserService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le mentore a bien été mis à jour');
             $this->events->createUserEvents($mentore, 'Modifications de votre profil', 'Important');
+        }
+
+        return $form;
+    }
+
+    /**
+     * Allow a user to update is profile.
+     *
+     * @param Request $request
+     * @param $id               | The id of the user.
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function updateUserProfile(Request $request, $id)
+    {
+        $user = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
+
+        if (null === $user) {
+            throw new Exception('L\'utilisateur ne semble pas exister.');
+        } elseif ($user != $this->user->getToken()->getUser()) {
+            throw new AccessDeniedException('Vous ne passerez pas !');
+        }
+
+        $form = $this->form->create(UpdateUserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Votre profil a bien été mis à jour.');
+            $this->events->createUserEvents($user, 'Votre profil a bien été mis à jour.', 'Important');
         }
 
         return $form;

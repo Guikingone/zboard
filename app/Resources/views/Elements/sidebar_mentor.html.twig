@@ -48,7 +48,7 @@
                     <li><a href="{{ path('soutenance_done') }}"><i class="fa fa-circle-o"></i> Effectuées</a></li>
                 </ul>
             </li>
-            <li class="{{ (controller == 'infos') ? 'active' : '' }} treeview"><a href="{{ path('mentorat_infos_index') }}"><i class='fa fa-info-circle'></i> <span>Informations mentorat</span></a></li>
+            <li class="{{ (controller == 'infos') ? 'active' : '' }} treeview"><a href="{{ path('infos') }}"><i class='fa fa-info-circle'></i> <span>Informations mentorat</span></a></li>
 
             {% if is_granted('ROLE_MENTOR_EXPERIMENTE') %}
 

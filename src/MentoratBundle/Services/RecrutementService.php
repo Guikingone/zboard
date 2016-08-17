@@ -5,9 +5,13 @@ namespace MentoratBundle\Services;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use MentoratBundle\Entity\Candidat;
 use MentoratBundle\Entity\RecrutementVote;
+use MentoratBundle\Form\VoteType;
+use AdminBundle\Services\Mail;
 
 class RecrutementService
 {
@@ -32,17 +36,25 @@ class RecrutementService
     private $user;
 
     /**
+     * @var Mail
+     */
+    private $mail;
+
+    /**
      * @param EntityManager $doctrine
      * @param FormFactory   $form
      * @param Session       $session
      * @param TokenStorage  $user
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, FormFactory $form, AuthorizationCheckerInterface $authorizationChecker, Mail $mail)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
         $this->session = $session;
         $this->user = $user;
+        $this->formFactory = $form;
+        $this->authorizationChecker = $authorizationChecker;
+        $this->mail = $mail;
     }
 
     /**
@@ -76,6 +88,11 @@ class RecrutementService
     public function getCandidature($id)
     {
         $candid = $this->doctrine->getRepository('MentoratBundle:Candidat')->find($id);
+        //If the application does not exist, return null
+        if (!$candid) {
+            return;
+        }
+        //Otherwise count votes and return.
         $candid->countVotes($candid);
 
         return $candid;
@@ -123,7 +140,7 @@ class RecrutementService
     public function rejectApplication($id, $message = '')
     {
         $candidature = $this->getCandidature($id);
-        $this->get('admin.mail')->rejectApplication($candidature->getEmail(), array());
+        $this->mail->rejectApplication($candidature->getEmail(), array());
         $this->doctrine->remove($candidature);
         $this->doctrine->flush();
     }
@@ -135,18 +152,19 @@ class RecrutementService
      * @param bool $isForVote, true if it is a for vote, false otherwise
      * @param $commentaire
      */
-    public function voteApplication($id, boolean $isForVote, $commentaire)
+    public function voteApplication($id, RecrutementVote $vote)
     {
-        $vote = new RecrutementVote();
-        $vote->setIdUser($this->user->getToken()->getUser());
+        // Check if the user has already voted
+        $currentVote = $this->doctrine->getRepository('MentoratBundle:RecrutementVote')->findBy(array('idCandidature' => $id, 'idUser' => $this->user->getToken()->getUser()->getId()));
+
+        // If it exists, the user has already voted return null
+        if ($currentVote) {
+            return;
+        }
+        $vote->setIdUser($this->user->getToken()->getUser()->getId());
         $vote->setIdCandidature($this->doctrine->getRepository('MentoratBundle:Candidat')->find($id));
         $vote->setIsCandidature(true);
-        $vote->setCommentaire($commentaire);
-        if ($isForVote) {
-            $vote->setVote(1);
-        } else {
-            $vote->setVote(-1);
-        }
+
         $this->doctrine->persist($vote);
         $this->doctrine->flush();
 
@@ -162,5 +180,37 @@ class RecrutementService
       elseif (($candidature->getAgainstVotes() == 3 && $candidature->getForVotes() == 0) || ($candidature->getAgainstVotes() == 5 && $candidature->getForVotes() == 1)) {
           $this->rejectApplication($id);
       }
+    }
+
+    /**
+     * All recruitment actions.
+     *
+     * @param action the action to execute
+     */
+    public function addVote(Request $request, $id)
+    {
+        $vote = new RecrutementVote();
+
+        $form = $this->formFactory->create(VoteType::class, $vote);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            // If the user is more than an MENTOR_EXPERIMENTE, his vote will be final.
+        if (true === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+            if ($vote->getVote() == 1) {
+                $this->acceptApplication($id, $vote);
+            } else {
+                $this->rejectApplication($id, $vote);
+            }
+
+            return;
+        }
+        // Otherwise it's a simple vote
+        else {
+            $this->voteApplication($id, $vote);
+        }
+        }
+
+        return $form;
     }
 }

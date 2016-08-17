@@ -5,6 +5,16 @@ parameters:
 
 services:
 
+    # List of events listener
+
+    core.doctrine_image_listener:
+        class: AdminBundle\EventListener\ProfileImageListener
+        arguments: ["@core.uploader", "%profile_image_directory%"]
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: postLoad }
+
     # List of services used in the principal environnement.
 
     core.admin:
@@ -17,7 +27,7 @@ services:
 
     core.user:
         class: UserBundle\Services\UserService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events", "@core.mail", "@security.authorization_checker"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events", "@core.mail", "@security.authorization_checker", "@core.uploader"]
 
     core.security:
         class: SecuriteBundle\Services\SecurityService
@@ -44,7 +54,7 @@ services:
 
     core.recrutement:
       class: MentoratBundle\Services\RecrutementService
-      arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
+      arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage","@form.factory","@security.authorization_checker","@core.mail"]
 
     core.soutenance:
         class: MentoratBundle\Services\SoutenanceService
@@ -56,6 +66,11 @@ services:
 
     # List of services used in order to perform a specific action.
 
+    core.uploader:
+        class: AdminBundle\Services\Uploader
+        arguments: ["%profile_image_directory%"]
+        lazy: true
+
     core.events:
         class: NotificationBundle\Services\Evenements
         arguments: ["@doctrine.orm.entity_manager", "@security.token_storage", "@session", "@core.mail"]
@@ -65,7 +80,6 @@ services:
         class: AdminBundle\Services\Mail
         arguments: ["@templating", "@mailer"]
         lazy: true
-
 
     # List of services used to registrer the users with FOS.
     # Dont delete this services !

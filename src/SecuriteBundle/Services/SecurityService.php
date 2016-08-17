@@ -19,8 +19,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use UserBundle\Form\Mentore\UpdateMentoreType;
-use UserBundle\Form\User\UpdateUserType;
+use UserBundle\Form\Mentore\UpdateRolesMentoreType;
+use UserBundle\Form\User\UpdateRolesUserType;
 
 class SecurityService
 {
@@ -77,9 +77,7 @@ class SecurityService
 
         if (null === $mentor) {
             throw new Exception('L\'utilisateur semble ne pas exister.');
-        }
-
-        if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+        } elseif (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
             throw new AccessDeniedException();
         }
 
@@ -88,6 +86,7 @@ class SecurityService
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le compte utilisateur a bien été activé.');
+        $this->events->createUserEvents($mentor, 'Votre compte a bien été activé.', 'Important');
     }
 
     /**
@@ -101,9 +100,7 @@ class SecurityService
 
         if (null === $student) {
             throw new Exception('L\'élève ne semble pas exister');
-        }
-
-        if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+        } elseif (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
             throw new AccessDeniedException();
         }
 
@@ -112,6 +109,7 @@ class SecurityService
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le compte élève a bien été activé.');
+        $this->events->createMentoreEvents($student, 'Votre compte a bien été crée.', 'Important');
     }
 
     /**
@@ -128,13 +126,11 @@ class SecurityService
 
         if (null === $user) {
             throw new Exception("L'utilisateur ne semble pas exister.");
-        }
-
-        if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+        } elseif (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
             throw new AccessDeniedException();
         }
 
-        $form = $this->form->create(UpdateUserType::class, $user);
+        $form = $this->form->create(UpdateRolesUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -160,13 +156,11 @@ class SecurityService
 
         if (null === $mentore) {
             throw new Exception('Le mentoré ne semble pas exister.');
-        }
-
-        if (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+        } elseif (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
             throw new AccessDeniedException();
         }
 
-        $form = $this->form->create(UpdateMentoreType::class, $mentore);
+        $form = $this->form->create(UpdateRolesMentoreType::class, $mentore);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

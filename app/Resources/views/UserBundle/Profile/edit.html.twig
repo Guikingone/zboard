@@ -1,9 +1,107 @@
 {% extends "::layout_mentor.html.twig" %}
-{% block fos_user_content %}
-    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-        {{ form_widget(form) }}
-        <div>
-            <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+
+{% block body %}
+    {% for message in app.session.flashbag.get('success') %}
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i>Information</h4>
+            {{ message }}
         </div>
-    {{ form_end(form) }}
-{% endblock fos_user_content %}
+    {% endfor %}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="well">
+                    {{ form_start(user) }}
+                    <div class="form-group">
+                        {{ form_errors(user.username) }}
+                        {{ form_label(user.username, 'Pseudonyme :')}}
+                        {{ form_widget(user.username, {'attr': {
+                            'class': 'form-control',
+                            'placeholder': 'Par défaut : Prenom_Nom'
+                        }}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(user.firstname) }}
+                        {{ form_label(user.firstname, 'Prénom :')}}
+                        {{ form_widget(user.firstname, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(user.lastname) }}
+                        {{ form_label(user.lastname, 'Nom :')}}
+                        {{ form_widget(user.lastname, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(user.email) }}
+                        {{ form_label(user.email, 'Adresse email :')}}
+                        {{ form_widget(user.email, {'attr': {
+                            'class': 'form-control',
+                            'placeholder': 'Obligatoire !'
+                        }}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(user.address) }}
+                        {{ form_label(user.address, 'Addresse :')}}
+                        {{ form_widget(user.address, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(user.zipcode) }}
+                        {{ form_label(user.zipcode, 'Code postal :')}}
+                        {{ form_widget(user.zipcode, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(user.city) }}
+                        {{ form_label(user.city, 'Ville :')}}
+                        {{ form_widget(user.city, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(user.phone) }}
+                        {{ form_label(user.phone, 'Téléphone :')}}
+                        {{ form_widget(user.phone, {'attr': {
+                            'class': 'form-control', 'placeholder': 'Veuillez ne pas ajouter de préfix'
+                        }}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(user.available) }}
+                        {{ form_label(user.available, 'Disponible :')}}
+                        {{ form_widget(user.available, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(user.country) }}
+                        {{ form_label(user.country, 'Pays :')}}
+                        {{ form_widget(user.country, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(user.plainPassword.first) }}
+                        {{ form_label(user.plainPassword.first, 'Mot de passe :')}}
+                        {{ form_widget(user.plainPassword.first, {'attr': {
+                            'class': 'form-control',
+                            'placeholder': 'A re-remplir avec votre mot de passe actuel.'
+                        }}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_errors(user.plainPassword.second) }}
+                        {{ form_label(user.plainPassword.second, 'Confirmation du mot de passe :')}}
+                        {{ form_widget(user.plainPassword.second, {'attr': {
+                            'class': 'form-control',
+                            'placeholder': 'A re-remplir avec votre mot de passe actuel.'
+                        }}) }}
+                    </div>
+                        {{ form_errors(user.profileImage) }}
+                        {{ form_label(user.profileImage, 'Photo de profil (250x250px max) :')}}
+                        {{ form_widget(user.profileImage) }}
+                    <br />
+                    <input class="btn btn-flat btn-warning" type="submit" value="Enregistrer les changements" />
+                    <a href="{{ path('show_details_mentor', {'id': app.user.id}) }}" class="btn btn-default btn-flat">Annuler</a>
+                    {{ form_end(user) }}
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <button type="button" class="btn btn-flat btn-warning" data-toggle="modal" data-target="#myModalCompetences">
+                    Ajouter des compétences
+                </button>
+            </div>
+        </div>
+
+    {% include ':Form:register_competences_mentor.html.twig' %}
+
+{% endblock %}
