@@ -18,22 +18,14 @@
                             </a>
                         </td>
                         <td>
-                            {% if mentores.mentoreStatus == 'En formation' %}
-                                <span class="label label-success">{{ mentores.mentoreStatus }}</span>
-                            {% elseif mentores.mentoreStatus == 'Contacté' %}
-                                <span class="label label-warning">{{ mentores.mentoreStatus }}</span>
-                            {% elseif mentores.mentoreStatus == 'En pause' %}
-                                <span class="label label-danger">{{ mentores.mentoreStatus }}</span>
-                            {% elseif mentores.mentoreStatus == 'En attente' %}
-                                <span class="label label-warning">{{ mentores.mentoreStatus }}</span>
-                            {% elseif mentores.mentoreStatus == 'Formation terminé' %}
-                                <span class="label label-success">{{ mentores.mentoreStatus }}</span>
-                            {% endif %}
+
+                            {% include ':Elements/Box/Suivi:status_student.html.twig' %}
+
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
-            </table>
+            </table>S
         </div>
     {% else %}
         <div class="alert alert-info alert-dismissible">

@@ -23,17 +23,9 @@
                             {{ sessions.libelle }}
                         </div>
                         <div class="timeline-footer">
-                            {% if sessions.status == 'Planifiee' %}
-                                Statut : <span class="label label-warning">{{ sessions.status }}</span>
-                            {% elseif sessions.status == 'Present' %}
-                                Statut : <span class="label label-success">{{ sessions.status }}</span>
-                            {% elseif sessions.status == 'Absent' %}
-                                Statut : <span class="label label-danger">{{ sessions.status }}</span>
-                            {% elseif sessions.status == 'Annulee' %}
-                                Statut : <span class="label label-danger">{{ sessions.status }}</span>
-                            {% elseif sessions.status == 'No Show' %}
-                                Statut : <span class="label label-danger">{{ sessions.status }}</span>
-                            {% endif %}
+
+                            {% include ':Elements/Box/Suivi:status.html.twig' %}
+
                         </div>
                     </div>
                 </li>
