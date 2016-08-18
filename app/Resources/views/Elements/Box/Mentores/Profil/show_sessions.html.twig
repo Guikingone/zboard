@@ -1,0 +1,51 @@
+<div class="tab-pane" id="sessions">
+    <!-- Suivi sessions -->
+    <ul class="timeline timeline-inverse">
+        {% for sessions in mentore.sessions|reverse %}
+            <li class="time-label">
+                                <span class="bg-red">
+                                    {{ sessions.dateSession|date('d-m-Y H:i') }}
+                                </span>
+            </li>
+            <li>
+                <i class="ion ion-clock bg-yellow"></i>
+                <div class="timeline-item">
+                    <h3 class="timeline-header">
+                        <a href="{{ path('show_details_mentor', {'id': sessions.mentor.id}) }}">
+                            {{ sessions.mentor.firstname }} {{ sessions.mentor.lastname }}
+                        </a>
+                        a planifié une session
+                    </h3>
+                    <div class="timeline-body">
+                        <strong>
+                            {{ sessions.libelle }}
+                        </strong>
+                        <br />
+                    </div>
+                    <div class="timeline-footer">
+                        {% if sessions.status == 'Planifiee' %}
+                            Statut : <span class="label label-warning">{{ sessions.status }}</span>
+                        {% elseif sessions.status == 'Present' %}
+                            Statut : <span class="label label-success">{{ sessions.status }}</span>
+                        {% elseif sessions.status == 'Absent' %}
+                            Statut : <span class="label label-danger">{{ sessions.status }}</span>
+                        {% elseif sessions.status == 'Annulee' %}
+                            Statut : <span class="label label-danger">{{ sessions.status }}</span>
+                        {% elseif sessions.status == 'No Show' %}
+                            Statut : <span class="label label-danger">{{ sessions.status }}</span>
+                        {% endif %}
+                        <br />
+                        <br />
+                        {% if sessions.mentor == app.user %}
+                            <a href="#" class="fa fa-cog"></a>
+                            <a href="#" class="fa fa-edit"></a>
+                            <a href="#" class="fa fa-check"></a>
+                            <a href="#" class="fa fa-times"></a>
+                        {% endif %}
+                    </div>
+                </div>
+                <br />
+            </li>
+        {% endfor %}
+    </ul>
+</div>

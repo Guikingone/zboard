@@ -3,10 +3,11 @@
 namespace MentoratBundle\Form\Type\Add;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class NotesType extends AbstractType
+class NoteAddType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,8 +17,8 @@ class NotesType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('dateCreated', 'datetime')
-            ->add('suivi')
+            ->remove('dateCreated')
+            ->remove('suivi')
         ;
     }
 

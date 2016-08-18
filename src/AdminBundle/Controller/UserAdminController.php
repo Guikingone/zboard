@@ -16,7 +16,7 @@ class UserAdminController extends Controller
     /**
      * @Route("/list", name="gestion_users_admin")
      * @Template("AdminBundle/Action/list_users.html.twig")
-     * @Method({"GET", "POST})
+     * @Method({"GET", "POST"})
      * @return array
      */
     public function indexAction(Request $request)

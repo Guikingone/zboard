@@ -1,0 +1,47 @@
+<div class="tab-pane" id="projets">
+    <!-- Suivi projets -->
+    <div class="box-body">
+        <div class="table-responsive">
+            <table class="table no-margin">
+                <thead>
+                <tr>
+                    <th>Intitulé du projet</th>
+                    <th>Status</th>
+                    {% if is_granted('ROLE_MENTOR') %}
+                        <th>Modifier</th>
+                    {% endif %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for projets in mentore.suivi.parcours.projet %}
+                    <tr>
+                        <td>
+                            {{ projets.libelle }}
+                        </td>
+                        <td>
+                            {% if projets.status == null %}
+                                <span class="label label-info">En attente</span>
+                            {% elseif projets.status == 'En cours' %}
+                                <span class="label label-warning">{{ projets.status }}</span>
+                            {% elseif projets.status == 'Validé' %}
+                                <span class="label label-">{{ projets.status }}</span>
+                            {% elseif projets.status == 'Terminé' %}
+                                <span class="label label-success">{{ projets.status }}</span>
+                            {% elseif projets.status == 'Soutenu' %}
+                                <span class="label label-success">{{ projets.status }}</span>
+                            {% elseif projets.status == 'En retard' %}
+                                <span class="label label-danger">{{ projets.status }}</span>
+                            {% endif %}
+                        </td>
+                        {% if is_granted('ROLE_MENTOR') %}
+                            <td>
+                                <a href="{{ path('update_status_project', {'id': projets.id}) }}"><span class="ion ion-wrench"></span></a>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

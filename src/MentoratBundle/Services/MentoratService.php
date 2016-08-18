@@ -16,7 +16,7 @@ use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Notes;
 use MentoratBundle\Entity\Sessions;
 use MentoratBundle\Entity\Soutenance;
-use MentoratBundle\Form\Add\NoteAddType;
+use MentoratBundle\Form\Type\Add\NoteAddType;
 use MentoratBundle\Form\Type\Add\SoutenanceAddType;
 use MentoratBundle\Form\Type\Ask\AskSoutenanceType;
 use MentoratBundle\Form\Type\Add\SessionsType;

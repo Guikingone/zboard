@@ -39,101 +39,11 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="box box-primary">
-                        <div class="box-body box-profile">
-                            <h3 class="profile-username text-center"><p>Liste des cours</p></h3>
-                            <div class="table-responsive">
-                                <table class="table no-margin">
-                                    <thead>
-                                    <tr>
-                                        <th>Intitulé du cours</th>
-                                        <th>Difficultée</th>
-                                        <th>Durée</th>
-                                        <th>Modifier</th>
-                                        <th>Supprimer</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for cours in parcours.cours %}
-                                        <tr>
-                                            <td>
-                                                {{ cours.libelle }}
-                                            </td>
-                                            <td>
-                                                {% if cours.difficulty is empty %}
-                                                        <p>Non définie</p>
-                                                    {% else %}
-                                                        {{ cours.difficulty }}
-                                                {% endif %}
-                                            </td>
-                                            <td>
-                                                {% if cours.duree is empty %}
-                                                    <p>Non définie</p>
-                                                {% else %}
-                                                    {{ cours.duree }}
-                                                {% endif %}
-                                            </td>
-                                            <td>
-                                                <a href="{{ path('update_courses', {'id': cours.id}) }}"><span class="ion ion-wrench"></span></a>
-                                            </td>
-                                            <td>
-                                                <a href="#"><span class="ion ion-trash-b"></span></a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <hr />
-                            <a href="#" data-toggle="modal" data-target="#myModalCours" class="btn btn-flat btn-warning btn-block"><b>Ajouter un cours</b></a>
-                        </div>
-                    </div>
-                    <div class="box box-primary">
-                        <div class="box-body box-profile">
-                            <h3 class="profile-username text-center"><p>Liste des projets</p></h3>
-                            <div class="table-responsive">
-                                <table class="table no-margin">
-                                    <thead>
-                                    <tr>
-                                        <th>Intitulé du projets</th>
-                                        <th>Durée</th>
-                                        <th>Compétences</th>
-                                        <th>Modifier</th>
-                                        <th>Supprimer</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for projets in parcours.projet %}
-                                        <tr>
-                                            <td>
-                                                {{ projets.libelle }}
-                                            </td>
-                                            <td>
-                                                {{ projets.duree }}
-                                            </td>
-                                            <td>
-                                                <ul>
-                                                {% for competences in projets.competences %}
-                                                    <li> <a href="{{ path('update_competences', {'id': competences.id}) }}">{{ competences.libelle }}</a></li>
-                                                {% endfor %}
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <a href="{{ path('update_project', {'id': projets.id}) }}"><span class="ion ion-wrench"></span></a>
-                                            </td>
-                                            <td>
-                                                <a href="#"><span class="ion ion-trash-b"></span></a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <hr />
-                            <a href="#" data-toggle="modal" data-target="#myModalProjet" class="btn btn-flat btn-warning btn-block"><b>Ajouter un projet</b></a>
-                            <a href="#" data-toggle="modal" data-target="#myModalCompetences" class="btn btn-flat btn-warning btn-block"><b>Ajouter des compétences</b></a>
-                        </div>
-                    </div>
+
+                    {% include ':Elements/Box/Parcours:cours.html.twig' %}
+
+                    {% include ':Elements/Box/Parcours:projet.html.twig' %}
+
                 </div>
             </div>
         </section>

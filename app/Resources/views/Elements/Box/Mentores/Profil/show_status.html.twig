@@ -1,0 +1,11 @@
+{% if mentore.suivi.mentoreStatus == 'En formation' %}
+    <p class="pull-right label label-success">{{ mentore.suivi.mentoreStatus }}</p>
+{% elseif mentore.suivi.mentoreStatus == 'Contacté' %}
+    <p class="pull-right label label-warning">{{ mentore.status }}</p>
+{% elseif mentore.suivi.mentoreStatus == 'En pause' %}
+    <p class="pull-right label label-danger">{{ mentore.suivi.mentoreStatus }}</p>
+{% elseif mentore.suivi.mentoreStatus == 'En attente' %}
+    <p class="pull-right label label-warning">{{ mentore.suivi.mentoreStatus }}</p>
+{% elseif mentore.suivi.mentoreStatus == 'Formation terminé' %}
+    <p class="pull-right label label-success">{{ mentore.suivi.mentoreStatus }}</p>
+{% endif %}

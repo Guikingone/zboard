@@ -11,6 +11,7 @@
             {{ message }}
         </div>
     {% endfor %}
+
     {% if(app.user.available == false) %}
         <div class="col-md-12">
             <div class="alert alert-info">Vous êtes actuellement indisponible, vous ne pouvez donc pas avoir de soutenances, voire de nouveaux mentorés. Lorsque vous serez
@@ -112,95 +113,13 @@
                             </p>
                         </div>
                     </div>
-                    <div class="tab-pane" id="student">
-                        <!-- Suivi elèves -->
-                        {% if mentor.suivi is not empty %}
-                        <div class="table-responsive">
-                            <table class="table no-margin">
-                                <thead>
-                                <tr>
-                                    <th>Nom Prenom</th>
-                                    <th>Status</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for mentores in mentor.suivi %}
-                                    <tr>
-                                        <td>
-                                            <a href="{{ path('show_details_mentore', {'id': mentores.mentore.id}) }}">
-                                                {{ mentores.mentore.lastname }} {{ mentores.mentore.firstname }}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            {% if mentores.mentoreStatus == 'En formation' %}
-                                                <span class="label label-success">{{ mentores.mentoreStatus }}</span>
-                                            {% elseif mentores.mentoreStatus == 'Contacté' %}
-                                                <span class="label label-warning">{{ mentores.mentoreStatus }}</span>
-                                            {% elseif mentores.mentoreStatus == 'En pause' %}
-                                                <span class="label label-danger">{{ mentores.mentoreStatus }}</span>
-                                            {% elseif mentores.mentoreStatus == 'En attente' %}
-                                                <span class="label label-warning">{{ mentores.mentoreStatus }}</span>
-                                            {% elseif mentores.mentoreStatus == 'Formation terminé' %}
-                                                <span class="label label-success">{{ mentores.mentoreStatus }}</span>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        {% else %}
-                            <div class="alert alert-info alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h4><i class="icon fa fa-check"></i>Information</h4>
-                                Aucun mentoré d'affecter.
-                            </div>
-                        {% endif %}
-                    </div>
+
+                    {% include ':Elements/Box/Teacher/Profile:show_student.html.twig' %}
+
                     {% if app.user.id == mentor.id %}
-                        <div class="tab-pane" id="sessions">
-                            <!-- Suivi sessions -->
-                            {% if mentor.sessions is empty %}
-                                <p>Aucune session planifiée</p>
-                            {% else %}
-                            <ul class="timeline timeline-inverse">
-                                {% for sessions in mentor.sessions|reverse %}
-                                    <li class="time-label">
-                                        <span class="bg-red">
-                                            {{ sessions.dateSession|date('d-m-Y') }}
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <i class="ion ion-clock bg-yellow"></i>
-                                        <div class="timeline-item">
-                                            <h3 class="timeline-header">
-                                                Session planifiée avec
-                                                <a href="{{ path('show_details_mentore', {'id': sessions.mentore.id}) }}">
-                                                    {{ sessions.mentore.lastname }} {{ sessions.mentore.firstname }}
-                                                </a>
-                                            </h3>
-                                            <div class="timeline-body">
-                                                {{ sessions.libelle }}
-                                            </div>
-                                            <div class="timeline-footer">
-                                                {% if sessions.status == 'Planifiee' %}
-                                                    Statut : <span class="label label-warning">{{ sessions.status }}</span>
-                                                {% elseif sessions.status == 'Present' %}
-                                                    Statut : <span class="label label-success">{{ sessions.status }}</span>
-                                                {% elseif sessions.status == 'Absent' %}
-                                                    Statut : <span class="label label-danger">{{ sessions.status }}</span>
-                                                {% elseif sessions.status == 'Annulee' %}
-                                                    Statut : <span class="label label-danger">{{ sessions.status }}</span>
-                                                {% elseif sessions.status == 'No Show' %}
-                                                    Statut : <span class="label label-danger">{{ sessions.status }}</span>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                            {% endif %}
-                        </div>
+
+                        {% include ':Elements/Box/Teacher/Profile:show_sessions.html.twig' %}
+
                     {% endif %}
                     {% if app.user.id == mentor.id %}
                         <div class="tab-pane" id="facturation">
@@ -219,23 +138,9 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane" id="settings">
-                            <!-- Options -->
-                            <a href="{{ path('zboard_teacher_profile_edit') }}">
-                                <button class="btn btn-flat btn-block btn-warning">
-                                    Modifier mon profil
-                                </button>
-                            </a>
-                            {% if app.user.available == false %}
-                                <a href="{{ path('mentor_dispo',{'id' : app.user.id }) }}" class="btn btn-flat btn-block btn-success">
-                                    Me rendre disponible
-                                </a>
-                            {% else %}
-                                <a href="{{ path('mentor_indispo', {'id': app.user.id}) }}" class="btn btn-flat btn-block btn-danger btn-block">
-                                    Devenir indisponible
-                                </a>
-                            {% endif %}
-                        </div>
+
+                        {% include ':Elements/Box/Teacher/Profile:show_settings.html.twig' %}
+
                     {% endif %}
                 </div>
             </div>

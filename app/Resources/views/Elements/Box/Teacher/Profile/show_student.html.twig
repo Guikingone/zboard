@@ -1,0 +1,45 @@
+<div class="tab-pane" id="student">
+    <!-- Suivi elèves -->
+    {% if mentor.suivi is not empty %}
+        <div class="table-responsive">
+            <table class="table no-margin">
+                <thead>
+                <tr>
+                    <th>Nom Prenom</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for mentores in mentor.suivi %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('show_details_mentore', {'id': mentores.mentore.id}) }}">
+                                {{ mentores.mentore.lastname }} {{ mentores.mentore.firstname }}
+                            </a>
+                        </td>
+                        <td>
+                            {% if mentores.mentoreStatus == 'En formation' %}
+                                <span class="label label-success">{{ mentores.mentoreStatus }}</span>
+                            {% elseif mentores.mentoreStatus == 'Contacté' %}
+                                <span class="label label-warning">{{ mentores.mentoreStatus }}</span>
+                            {% elseif mentores.mentoreStatus == 'En pause' %}
+                                <span class="label label-danger">{{ mentores.mentoreStatus }}</span>
+                            {% elseif mentores.mentoreStatus == 'En attente' %}
+                                <span class="label label-warning">{{ mentores.mentoreStatus }}</span>
+                            {% elseif mentores.mentoreStatus == 'Formation terminé' %}
+                                <span class="label label-success">{{ mentores.mentoreStatus }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i>Information</h4>
+            Aucun mentoré d'affecter.
+        </div>
+    {% endif %}
+</div>

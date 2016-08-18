@@ -1,0 +1,17 @@
+<div class="tab-pane" id="settings">
+    <!-- Options -->
+    <a href="{{ path('zboard_teacher_profile_edit') }}">
+        <button class="btn btn-flat btn-block btn-warning">
+            Modifier mon profil
+        </button>
+    </a>
+    {% if app.user.available == false %}
+        <a href="{{ path('mentor_dispo',{'id' : app.user.id }) }}" class="btn btn-flat btn-block btn-success">
+            Me rendre disponible
+        </a>
+    {% else %}
+        <a href="{{ path('mentor_indispo', {'id': app.user.id}) }}" class="btn btn-flat btn-block btn-danger btn-block">
+            Devenir indisponible
+        </a>
+    {% endif %}
+</div>

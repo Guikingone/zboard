@@ -29,17 +29,8 @@
                                     <li class="list-group-item">
                                         <b>Statut : </b>
 
-                                        {% if mentore.suivi.mentoreStatus == 'En formation' %}
-                                            <p class="pull-right label label-success">{{ mentore.suivi.mentoreStatus }}</p>
-                                        {% elseif mentore.suivi.mentoreStatus == 'Contacté' %}
-                                            <p class="pull-right label label-warning">{{ mentore.status }}</p>
-                                        {% elseif mentore.suivi.mentoreStatus == 'En pause' %}
-                                            <p class="pull-right label label-danger">{{ mentore.suivi.mentoreStatus }}</p>
-                                        {% elseif mentore.suivi.mentoreStatus == 'En attente' %}
-                                            <p class="pull-right label label-warning">{{ mentore.suivi.mentoreStatus }}</p>
-                                        {% elseif mentore.suivi.mentoreStatus == 'Formation terminé' %}
-                                            <p class="pull-right label label-success">{{ mentore.suivi.mentoreStatus }}</p>
-                                        {% endif %}
+                                        {% include ':Elements/Box/Mentores/Profil:show_status.html.twig' %}
+
                                     </li>
                                     <li class="list-group-item">
                                         <b>Financement : </b>
@@ -93,174 +84,15 @@
                                 <li><a href="#sessions" data-toggle="tab">Suivi sessions</a></li>
                             </ul>
                             <div class="tab-content">
-                                <div class="active tab-pane" id="parcours">
-                                    <!-- Suivi parcours -->
-                                    <div class="box-body">
-                                        <div class="table-responsive">
-                                            <table class="table no-margin">
-                                                <thead>
-                                                <tr>
-                                                    <th>Intitulé du cours</th>
-                                                    <th>Status</th>
-                                                    {% if is_granted('ROLE_MENTOR') %}
-                                                        <th>Modifier</th>
-                                                    {% endif %}
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                {% for cours in mentore.suivi.parcours.cours %}
-                                                    <tr>
-                                                        <td>
-                                                            {{ cours.libelle }}
-                                                        </td>
-                                                        <td>
-                                                            {% if cours.status == null %}
-                                                                <span class="label label-info">En attente</span>
-                                                            {% elseif cours.status == 'En cours' %}
-                                                                <span class="label label-warning">{{ cours.status }}</span>
-                                                            {% elseif cours.status == 'Terminé' %}
-                                                                <span class="label label-success">{{ cours.status }}</span>
-                                                            {% endif %}
-                                                        </td>
-                                                        {% if is_granted('ROLE_MENTOR') %}
-                                                            <td>
-                                                                <a href="{{ path('update_status_courses', {'id': cours.id}) }}"><span class="ion ion-wrench"></span></a>
-                                                            </td>
-                                                        {% endif %}
-                                                    </tr>
-                                                {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="projets">
-                                    <!-- Suivi projets -->
-                                    <div class="box-body">
-                                        <div class="table-responsive">
-                                            <table class="table no-margin">
-                                                <thead>
-                                                <tr>
-                                                    <th>Intitulé du projet</th>
-                                                    <th>Status</th>
-                                                    {% if is_granted('ROLE_MENTOR') %}
-                                                        <th>Modifier</th>
-                                                    {% endif %}
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                {% for projets in mentore.suivi.parcours.projet %}
-                                                    <tr>
-                                                        <td>
-                                                            {{ projets.libelle }}
-                                                        </td>
-                                                        <td>
-                                                            {% if projets.status == null %}
-                                                                <span class="label label-info">En attente</span>
-                                                            {% elseif projets.status == 'En cours' %}
-                                                                <span class="label label-warning">{{ projets.status }}</span>
-                                                            {% elseif projets.status == 'Validé' %}
-                                                                <span class="label label-">{{ projets.status }}</span>
-                                                            {% elseif projets.status == 'Terminé' %}
-                                                                <span class="label label-success">{{ projets.status }}</span>
-                                                            {% elseif projets.status == 'Soutenu' %}
-                                                                <span class="label label-success">{{ projets.status }}</span>
-                                                            {% elseif projets.status == 'En retard' %}
-                                                                <span class="label label-danger">{{ projets.status }}</span>
-                                                            {% endif %}
-                                                        </td>
-                                                        {% if is_granted('ROLE_MENTOR') %}
-                                                            <td>
-                                                                <a href="{{ path('update_status_project', {'id': projets.id}) }}"><span class="ion ion-wrench"></span></a>
-                                                            </td>
-                                                        {% endif %}
-                                                    </tr>
-                                                {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="notes">
-                                    <!-- Suivi notes -->
-                                    <ul class="timeline timeline-inverse">
-                                        {% for notes in mentore.suivi.notes|reverse %}
-                                            <li class="time-label">
-                            <span class="bg-red">
-                                {{ notes.dateCreated|date('d-m-Y', 'Europe/Paris') }}
-                            </span>
-                                            </li>
-                                            <li>
-                                                <i class="ion ion-document bg-yellow"></i>
-                                                <div class="timeline-item">
-                                                    <div class="timeline-header">
-                                                        <a href="{{ path('show_details_mentor', {'id': notes.auteur.id}) }}">
-                                                            {{ notes.auteur.lastname }} {{ notes.auteur.firstname }}
-                                                        </a>
-                                                        a laissé une note :
-                                                    </div>
-                                                    <div class="timeline-body">
-                                                        {{ notes.libelle }}
-                                                    </div>
-                                                    <div class="timeline-footer">
 
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                                <div class="tab-pane" id="sessions">
-                                    <!-- Suivi sessions -->
-                                    <ul class="timeline timeline-inverse">
-                                        {% for sessions in mentore.sessions|reverse %}
-                                            <li class="time-label">
-                                <span class="bg-red">
-                                    {{ sessions.dateSession|date('d-m-Y H:i') }}
-                                </span>
-                                            </li>
-                                            <li>
-                                                <i class="ion ion-clock bg-yellow"></i>
-                                                <div class="timeline-item">
-                                                    <h3 class="timeline-header">
-                                                        <a href="{{ path('show_details_mentor', {'id': sessions.mentor.id}) }}">
-                                                            {{ sessions.mentor.firstname }} {{ sessions.mentor.lastname }}
-                                                        </a>
-                                                        a planifié une session
-                                                    </h3>
-                                                    <div class="timeline-body">
-                                                        <strong>
-                                                            {{ sessions.libelle }}
-                                                        </strong>
-                                                        <br />
-                                                    </div>
-                                                    <div class="timeline-footer">
-                                                        {% if sessions.status == 'Planifiee' %}
-                                                            Statut : <span class="label label-warning">{{ sessions.status }}</span>
-                                                        {% elseif sessions.status == 'Present' %}
-                                                            Statut : <span class="label label-success">{{ sessions.status }}</span>
-                                                        {% elseif sessions.status == 'Absent' %}
-                                                            Statut : <span class="label label-danger">{{ sessions.status }}</span>
-                                                        {% elseif sessions.status == 'Annulee' %}
-                                                            Statut : <span class="label label-danger">{{ sessions.status }}</span>
-                                                        {% elseif sessions.status == 'No Show' %}
-                                                            Statut : <span class="label label-danger">{{ sessions.status }}</span>
-                                                        {% endif %}
-                                                        <br />
-                                                        <br />
-                                                        {% if sessions.mentor == app.user %}
-                                                            <a href="#" class="fa fa-cog"></a>
-                                                            <a href="#" class="fa fa-edit"></a>
-                                                            <a href="#" class="fa fa-check"></a>
-                                                            <a href="#" class="fa fa-times"></a>
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
-                                                <br />
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
+                                {% include ':Elements/Box/Mentores/Profil:show_paths.html.twig' %}
+
+                                {% include ':Elements/Box/Mentores/Profil:show_projets.html.twig' %}
+
+                                {% include ':Elements/Box/Mentores/Profil:show_notes.html.twig' %}
+
+                                {% include ':Elements/Box/Mentores/Profil:show_sessions.html.twig' %}
+
                             </div>
                         </div>
                     </div>

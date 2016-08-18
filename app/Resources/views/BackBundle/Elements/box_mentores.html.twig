@@ -22,23 +22,9 @@
                     <td>
                         {{ mentores.firstname }}
                     </td>
-                    <td>
-                        {% if mentores.suivi.mentoreStatus is empty %}
-                            <p>Aucun statut actuel</p>
-                        {% else %}
-                            {% if mentores.suivi.mentoreStatus == 'En formation' %}
-                                <span class="label label-success">{{ mentores.suivi.mentoreStatus }}</span>
-                            {% elseif mentores.suivi.mentoreStatus == 'Contacté' %}
-                                <span class="label label-warning">{{ mentores.suivi.mentoreStatus }}</span>
-                            {% elseif mentores.suivi.mentoreStatus == 'En pause' %}
-                                <span class="label label-danger">{{ mentores.suivi.mentoreStatus }}</span>
-                            {% elseif mentores.suivi.mentoreStatus == 'En attente' %}
-                                <span class="label label-warning">{{ mentores.suivi.mentoreStatus }}</span>
-                            {% elseif mentores.suivi.mentoreStatus == 'Formation terminé' %}
-                                <span class="label label-success">{{ mentores.suivi.mentoreStatus }}</span>
-                            {% endif %}
-                        {% endif %}
-                    </td>
+
+                    {% include ':Elements/Box/Mentores:suivi.html.twig' %}
+
                     <td>
                         <a href="{{ path('show_details_mentor', {'id': mentores.suivi.mentor.id}) }}">
                             {{ mentores.suivi.mentor.firstname }} {{ mentores.suivi.mentor.lastname }}
@@ -63,21 +49,9 @@
                                 {{ mentores.suivi.parcours.libelle }}
                             </td>
                     {% endif %}
-                    <td>
-                        <a href="{{ path('update_mentores', {'id': mentores.id}) }}">
-                            <button type="button" class="btn btn-flat btn-warning">Modifier <span class="ion ion-wrench"></span> </button>
-                        </a>
-                        {% if mentores.archived == false %}
-                            <a type="button" class="btn btn-flat btn-danger" href="{{ path('archive_mentore', {'id': mentores.id}) }}">
-                                Archiver <span class="ion ion-folder"></span>
-                            </a>
-                        {% endif %}
-                        {% if mentores.enabled == false %}
-                            <a href="{{ path('security_validate_student', {'id': mentores.id }) }}" class="btn btn-flat btn-success">
-                                Activer <span class="ion ion-checkmark"></span>
-                            </a>
-                        {% endif %}
-                    </td>
+
+                    {% include ':Elements/Box/Mentores:outils.html.twig' %}
+
                 </tr>
             {% endfor %}
             </tbody>

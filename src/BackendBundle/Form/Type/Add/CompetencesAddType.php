@@ -1,6 +1,6 @@
 <?php
 
-namespace BackendBundle\Form\Add;
+namespace BackendBundle\Form\Type\Add;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;

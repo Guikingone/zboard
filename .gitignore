@@ -30,5 +30,6 @@ var/sessions/.gitkeep
 # Assets and user uploads
 /web/bundles/
 /web/uploads/
+/web/PDF/*
 /web/assets/vendor/
 /node_modules
