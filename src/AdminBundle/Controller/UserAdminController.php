@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * @Route("/users")
@@ -15,7 +16,7 @@ class UserAdminController extends Controller
     /**
      * @Route("/list", name="gestion_users_admin")
      * @Template("AdminBundle/Action/list_users.html.twig")
-     *
+     * @Method({"GET", "POST})
      * @return array
      */
     public function indexAction(Request $request)
@@ -26,18 +27,18 @@ class UserAdminController extends Controller
         $mentore = $this->get('core.user')->addMentore($request);
 
         return array(
-            'controller' => 'users_admin',
-            'users' => $users,
-            'mentores' => $mentores,
-            'mentor' => $mentor->createView(),
-            'mentore' => $mentore->createView(),
+            'controller'    => 'users_admin',
+            'users'         => $users,
+            'mentores'      => $mentores,
+            'mentor'        => $mentor->createView(),
+            'mentore'       => $mentore->createView(),
         );
     }
 
     /**
      * @Route("/update/roles/users/{id}", name="update_roles_users")
      * @Template("AdminBundle/Action/Update/roles_users.html.twig")
-     *
+     * @Method({"GET","PUT"})
      * @param Request $request
      * @param $id
      *
@@ -57,7 +58,7 @@ class UserAdminController extends Controller
     /**
      * @Route("/update/roles/mentore/{id}", name="update_roles_mentore")
      * @Template("AdminBundle/Action/Update/roles_mentores.html.twig")
-     *
+     * @Method({"GET","PUT"})
      * @param Request $request
      * @param $id
      *

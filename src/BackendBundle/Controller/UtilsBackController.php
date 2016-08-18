@@ -6,13 +6,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class UtilsBackController extends Controller
 {
     /**
      * @Route("/utils/{id}/mentors", name="update_mentors")
      * @Template("BackBundle/Action/Utils/update_mentors.html.twig")
-     *
+     * @Method({"GET","PUT"})
      * @param Request $request
      * @param $id
      *
@@ -35,7 +36,7 @@ class UtilsBackController extends Controller
     /**
      * @Route("/utils/{id}/mentores", name="update_mentores")
      * @Template("BackBundle/Action/Utils/update_mentores.html.twig")
-     *
+     * @Method({"GET","PUT"})
      * @param Request $request
      * @param $id
      *
@@ -58,7 +59,7 @@ class UtilsBackController extends Controller
     /**
      * @Route("/utils/{id}/path", name="update_parcours")
      * @Template("BackBundle/Action/Utils/update_parcours.html.twig")
-     *
+     * @Method({"GET","PUT"})
      * @param Request $request
      * @param $id
      *
@@ -81,7 +82,7 @@ class UtilsBackController extends Controller
     /**
      * @Route("/utils/{id}/courses", name="update_courses")
      * @Template("BackBundle/Action/Utils/update_courses.html.twig")
-     *
+     * @Method({"GET","PUT"})
      * @param Request $request
      * @param $id
      *
@@ -104,7 +105,7 @@ class UtilsBackController extends Controller
     /**
      * @Route("/utils/{id}/project", name="update_project")
      * @Template("BackBundle/Action/Utils/update_projet.html.twig")
-     *
+     * @Method({"GET","PUT"})
      * @param Request $request
      * @param $id
      *
@@ -127,7 +128,7 @@ class UtilsBackController extends Controller
     /**
      * @Route("/utils/{id}/competence", name="update_competences")
      * @Template("BackBundle/Action/Utils/update_competences.html.twig")
-     *
+     * @Method({"GET","PUT"})
      * @param Request $request
      * @param $id
      *
@@ -150,7 +151,7 @@ class UtilsBackController extends Controller
     /**
      * @Route("/utils/{id}/soutenance", name="update_soutenances")
      * @Template("BackBundle/Action/Utils/update_soutenances.html.twig")
-     *
+     * @Method({"GET","PUT"})
      * @param Request $request
      * @param $id
      *
@@ -172,7 +173,7 @@ class UtilsBackController extends Controller
 
     /**
      * @Route("/archived/mentor/{id}", name="archive_mentor")
-     *
+     * @Method({"GET","PUT"})
      * @param $id
      *
      * @return array
@@ -200,7 +201,7 @@ class UtilsBackController extends Controller
 
     /**
      * @Route("/archived/path/{id}", name="archive_path")
-     *
+     * @Method({"GET","PUT"})
      * @param $id
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse

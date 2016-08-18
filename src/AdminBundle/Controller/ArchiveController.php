@@ -5,13 +5,14 @@ namespace AdminBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class ArchiveController extends Controller
 {
     /**
      * @Route("/archives", name="home_archives")
      * @Template("AdminBundle/Index/archives.html.twig")
-     *
+     * @Method({"GET"})
      * @return array
      */
     public function indexAction()
@@ -28,7 +29,7 @@ class ArchiveController extends Controller
      * @Route("/archived/out/mentor/{id}", name="out_archive_mentor")
      *
      * @param $id
-     *
+     * @Method({"GET","PUT"})
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function outArchiveMentorAction($id)
@@ -40,7 +41,7 @@ class ArchiveController extends Controller
 
     /**
      * @Route("/archived/out/mentore/{id}", name="out_archive_mentore")
-     *
+     * @Method({"GET","PUT"})
      * @param $id
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -54,7 +55,7 @@ class ArchiveController extends Controller
 
     /**
      * @Route("/archived/out/path/{id}", name="out_archive_path")
-     *
+     * @Method({"GET","PUT"})
      * @param $id
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
