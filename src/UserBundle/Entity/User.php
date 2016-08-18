@@ -115,7 +115,7 @@ class User extends BaseUser
     private $competences;
 
     /**
-     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\Group_User")
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\UserGroup")
      * @ORM\JoinTable(name="zboard_user_group_user",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
@@ -568,11 +568,11 @@ class User extends BaseUser
     /**
      * Add userGroup.
      *
-     * @param \UserBundle\Entity\Group_User $userGroup
+     * @param \UserBundle\Entity\UserGroup $userGroup
      *
      * @return User
      */
-    public function addUserGroup(\UserBundle\Entity\Group_User $userGroup)
+    public function addUserGroup(\UserBundle\Entity\UserGroup $userGroup)
     {
         $this->user_groups[] = $userGroup;
 
@@ -582,9 +582,9 @@ class User extends BaseUser
     /**
      * Remove userGroup.
      *
-     * @param \UserBundle\Entity\Group_User $userGroup
+     * @param \UserBundle\Entity\UserGroup $userGroup
      */
-    public function removeUserGroup(\UserBundle\Entity\Group_User $userGroup)
+    public function removeUserGroup(\UserBundle\Entity\UserGroup $userGroup)
     {
         $this->user_groups->removeElement($userGroup);
     }

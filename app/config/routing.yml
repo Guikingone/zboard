@@ -3,11 +3,6 @@ core:
     type:     annotation
     prefix:   /
 
-api:
-    resource: "@ApiBundle/Controller/"
-    type:     annotation
-    prefix:   /api
-
 securite:
     resource: "@SecuriteBundle/Controller/"
     type:     annotation

@@ -16,11 +16,11 @@ use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Notes;
 use MentoratBundle\Entity\Sessions;
 use MentoratBundle\Entity\Soutenance;
-use MentoratBundle\Form\Ask\AskSoutenanceType;
-use MentoratBundle\Form\SessionsType;
-use MentoratBundle\Form\TypeAdd\NoteTypeAdd;
-use MentoratBundle\Form\TypeAdd\SoutenanceTypeAdd;
-use MentoratBundle\Form\Update\SuiviUpdateType;
+use MentoratBundle\Form\Add\NoteAddType;
+use MentoratBundle\Form\Type\Add\SoutenanceAddType;
+use MentoratBundle\Form\Type\Ask\AskSoutenanceType;
+use MentoratBundle\Form\Type\Add\SessionsType;
+use MentoratBundle\Form\Type\Update\SuiviUpdateType;
 use NotificationBundle\Services\Evenements;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\FormFactory;
@@ -126,6 +126,18 @@ class MentoratService
     }
 
     /**
+     * Return the number of mentoré owned by the mentor in parameter.
+     *
+     * @param $mentor
+     *
+     * @return mixed
+     */
+    public function countMentoreByMentor($mentor)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Suivi')->countMentoreByMentorDisplayed($mentor);
+    }
+
+    /**
      * Display the mentore which are waiting to have the first
      * show and which are attributing to the connected user.
      *
@@ -154,6 +166,44 @@ class MentoratService
     }
 
     /**
+     * @param $user
+     *
+     * @return array|\MentoratBundle\Entity\Soutenance[]
+     */
+    public function getSoutenanceWaiting($user)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findBy(array(
+            'mentor' => $user,
+            'status' => 'WAITING',
+        ));
+    }
+
+    /**
+     * @param $user
+     *
+     * @return array|\MentoratBundle\Entity\Soutenance[]
+     */
+    public function getSoutenanceDone($user)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findBy(array(
+            'mentor' => $user,
+            'status' => 'DONE',
+        ));
+    }
+
+    /**
+     * Return the number of soutenances done by the mentor in parameter.
+     *
+     * @param $mentor
+     *
+     * @return mixed
+     */
+    public function countSoutenancesDone($mentor)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->countSoutenancesDone($mentor);
+    }
+
+    /**
      * Allow to add a new note linked to the suivi and the mentor who follow the student.
      *
      * @param Request $request
@@ -170,7 +220,7 @@ class MentoratService
         $note = new Notes();
         $user = $this->user->getToken()->getUser();
 
-        $form = $this->form->create(NoteTypeAdd::class, $note);
+        $form = $this->form->create(NoteAddType::class, $note);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -310,7 +360,7 @@ class MentoratService
     {
         $soutenance = new Soutenance();
 
-        $form = $this->form->create(SoutenanceTypeAdd::class, $soutenance);
+        $form = $this->form->create(SoutenanceAddType::class, $soutenance);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

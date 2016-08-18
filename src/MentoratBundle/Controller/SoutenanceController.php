@@ -19,7 +19,7 @@ class SoutenanceController extends Controller
      */
     public function waitingAction()
     {
-        $soutenances = $this->get('core.soutenance')->getSoutenanceWaiting($this->getUser());
+        $soutenances = $this->get('core.mentorat')->getSoutenanceWaiting($this->getUser());
 
         return array(
             'controller' => 'soutenances',
@@ -36,7 +36,7 @@ class SoutenanceController extends Controller
      */
     public function soutenanceDoneAction()
     {
-        $soutenances = $this->get('core.soutenance')->getSoutenanceDone($this->getUser());
+        $soutenances = $this->get('core.mentorat')->getSoutenanceDone($this->getUser());
 
         return array(
             'controller' => 'soutenances',

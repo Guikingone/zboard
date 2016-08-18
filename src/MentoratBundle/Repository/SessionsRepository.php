@@ -34,7 +34,7 @@ class SessionsRepository extends \Doctrine\ORM\EntityRepository
     {
         return $this->createQueryBuilder('s')
                     ->where('s.status = :status')
-                        ->setParameter('status', $status = 'Annulee')
+                        ->setParameter('status', 'Annulee')
                     ->getQuery()
                     ->getResult();
     }

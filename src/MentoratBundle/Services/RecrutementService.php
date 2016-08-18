@@ -3,13 +3,13 @@
 namespace MentoratBundle\Services;
 
 use Doctrine\ORM\EntityManager;
+use MentoratBundle\Form\Type\Add\VoteType;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use MentoratBundle\Entity\RecrutementVote;
-use MentoratBundle\Form\VoteType;
 use AdminBundle\Services\Mail;
 use UserBundle\Entity\User;
 
@@ -24,11 +24,6 @@ class RecrutementService
      * @var FormFactory
      */
     protected $form;
-
-    /**
-     * @var Session
-     */
-    private $session;
 
     /**
      * @var TokenStorage
@@ -46,11 +41,10 @@ class RecrutementService
      * @param Session       $session
      * @param TokenStorage  $user
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, FormFactory $form, AuthorizationCheckerInterface $authorizationChecker, Mail $mail)
+    public function __construct(EntityManager $doctrine, FormFactory $form, TokenStorage $user, FormFactory $form, AuthorizationCheckerInterface $authorizationChecker, Mail $mail)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
-        $this->session = $session;
         $this->user = $user;
         $this->formFactory = $form;
         $this->authorizationChecker = $authorizationChecker;
@@ -94,6 +88,10 @@ class RecrutementService
         }
         //Otherwise count votes and return.
         $candid->countVotes();
+<<<<<<< HEAD
+=======
+        $candid->countVotes($candid);
+>>>>>>> e06c3665d310af3b08feb75df33755aa4fd659fb
 
         return $candid;
     }

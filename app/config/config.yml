@@ -89,7 +89,7 @@ fos_user:
     # Allow to surcharge the basic FOS RegisterForm
     registration:
        form:
-           type: UserBundle\Form\RegistrationType
-           type: UserBundle\Form\RegistrationMentoreType
+           type: UserBundle\Form\Type\User\RegistrationType
+           type: UserBundle\Form\Type\Mentore\RegistrationMentoreType
        confirmation:
            enabled: false

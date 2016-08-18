@@ -23,7 +23,7 @@ class ProjetRepository extends \Doctrine\ORM\EntityRepository
     {
         return $this->createQueryBuilder('p')
                     ->where('p.status = :status')
-                        ->setParameter('status', $status = 'Soutenu')
+                        ->setParameter('status', 'Soutenu')
                     ->getQuery()
                     ->getResult();
     }

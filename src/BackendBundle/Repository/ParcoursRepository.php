@@ -16,7 +16,7 @@ class ParcoursRepository extends \Doctrine\ORM\EntityRepository
                     ->innerJoin('pp.abonnement', 'a')
                         ->addSelect('a')
                     ->where('a.libelle = :abonnement')
-                        ->setParameter('abonnement', $abonnement = 'Premium Plus')
+                        ->setParameter('abonnement', 'Premium Plus')
                     ->getQuery()
                     ->getResult();
     }
@@ -27,7 +27,7 @@ class ParcoursRepository extends \Doctrine\ORM\EntityRepository
                     ->innerJoin('pp.abonnement', 'a')
                         ->addSelect('a')
                     ->where('a.libelle = :abonnement')
-                        ->setParameter('abonnement', $abonnement = 'Premium Class')
+                        ->setParameter('abonnement', 'Premium Class')
                     ->getQuery()
                     ->getResult();
     }

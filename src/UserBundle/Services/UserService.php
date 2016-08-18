@@ -26,10 +26,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use UserBundle\Entity\Competences;
 use UserBundle\Entity\Mentore;
 use UserBundle\Entity\User;
-use UserBundle\Form\CompetencesType;
-use UserBundle\Form\RegistrationMentoreType;
-use UserBundle\Form\RegistrationType;
-use UserBundle\Form\User\UpdateUserType;
+use UserBundle\Form\Type\User\CompetencesType;
+use UserBundle\Form\Type\Mentore\RegistrationMentoreType;
+use UserBundle\Form\Type\User\RegistrationType;
+use UserBundle\Form\Type\User\UpdateUserType;
 
 class UserService
 {
@@ -69,11 +69,6 @@ class UserService
     private $security;
 
     /**
-     * @var Uploader
-     */
-    private $uploader;
-
-    /**
      * UserService constructor.
      *
      * @param EntityManager        $doctrine
@@ -83,9 +78,8 @@ class UserService
      * @param Evenements           $events
      * @param Mail                 $mail
      * @param AuthorizationChecker $security
-     * @param Uploader             $uploader
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, Mail $mail, AuthorizationChecker $security, Uploader $uploader)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, Mail $mail, AuthorizationChecker $security)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
@@ -94,7 +88,6 @@ class UserService
         $this->events = $events;
         $this->mail = $mail;
         $this->security = $security;
-        $this->uploader = $uploader;
     }
 
     /**

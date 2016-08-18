@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Guillaume
- * Date: 15/08/2016
- * Time: 10:24.
+
+/*
+ * This file is part of the Zboard project.
+ *
+ * (c) Guillaume Loulier <guillaume.loulier@hotmail.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace ApiBundle\Services;

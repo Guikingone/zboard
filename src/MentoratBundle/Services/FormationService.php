@@ -21,11 +21,6 @@ class FormationService
     protected $form;
 
     /**
-     * @var Session
-     */
-    private $session;
-
-    /**
      * @var TokenStorage
      */
     private $user;
@@ -36,11 +31,10 @@ class FormationService
      * @param Session       $session
      * @param TokenStorage  $user
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user)
+    public function __construct(EntityManager $doctrine, FormFactory $form, TokenStorage $user)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
-        $this->session = $session;
         $this->user = $user;
     }
 
