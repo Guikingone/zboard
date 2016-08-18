@@ -1,0 +1,9 @@
+<p>
+    {% if app.user.competences %}
+        {% for competence in mentor.competences %}
+            {% for label in competence.libelle %}
+                <span class="label label-warning">{{ label }}</span>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+</p>

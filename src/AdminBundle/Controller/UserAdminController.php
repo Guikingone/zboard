@@ -16,7 +16,7 @@ class UserAdminController extends Controller
     /**
      * @Route("/list", name="gestion_users_admin")
      * @Template("AdminBundle/Action/list_users.html.twig")
-     * @Method({"GET", "POST"})
+     *
      * @return array
      */
     public function indexAction(Request $request)
@@ -38,7 +38,7 @@ class UserAdminController extends Controller
     /**
      * @Route("/update/roles/users/{id}", name="update_roles_users")
      * @Template("AdminBundle/Action/Update/roles_users.html.twig")
-     * @Method({"GET","PUT"})
+     *
      * @param Request $request
      * @param $id
      *
@@ -58,7 +58,7 @@ class UserAdminController extends Controller
     /**
      * @Route("/update/roles/mentore/{id}", name="update_roles_mentore")
      * @Template("AdminBundle/Action/Update/roles_mentores.html.twig")
-     * @Method({"GET","PUT"})
+     *
      * @param Request $request
      * @param $id
      *
