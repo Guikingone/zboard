@@ -88,10 +88,10 @@ class FormationService
           if((count($this->doctrine->getRepository('MentoratBundle:FormationEtape')->findBy(array('id'=>$etapeID)))==0)) return;
           $etape = new FormationEtapeUser();
           $etape->setIdUser($userID);
-          $etape->setIdEtape($this->doctrine->getRepository('MentoratBundle:FormationEtape')
-                                     ->findOneBy(array('id' => $etapeID)));
-          if(null!=$request->request->get('content'))
+          $etape->setIdEtape($this->doctrine->getRepository('MentoratBundle:FormationEtape')->findOneBy(array('id' => $etapeID)));
+          if(null !== $request->request->get('content')){
               $etape->setContent($content);
+          }
 
           $this->doctrine->persist($etape);
         }

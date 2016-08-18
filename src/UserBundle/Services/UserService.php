@@ -11,7 +11,6 @@
 
 namespace UserBundle\Services;
 
-use AdminBundle\Services\Uploader;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Entity\Suivi;
 use NotificationBundle\Services\Evenements;

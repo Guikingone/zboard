@@ -22,9 +22,9 @@ class FormationController extends Controller
         $formation = $this->get('core.formation')->getFormation();
 
         return array(
-            'controller' => 'formation',
-            'formation' => $formation,
-            'title_action' => 'Formation',
+            'controller'    => 'formation',
+            'formation'     => $formation,
+            'title_action'  => 'Formation',
         );
     }
 
@@ -37,9 +37,9 @@ class FormationController extends Controller
      */
     public function updateAction(Request $request)
     {
-        if($request->request->get('id')!=null)
-          $formation = $this->get('core.formation')->updateFormation($request);
-
+        if($request->request->get('id')!== null){
+            $this->get('core.formation')->updateFormation($request);
+        }
         return new Response('OK', 200);
     }
 }
