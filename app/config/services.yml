@@ -19,7 +19,7 @@ services:
 
     core.admin:
         class: AdminBundle\Services\Admin
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@core.events"]
 
     core.back:
         class: BackendBundle\Services\Back
@@ -27,7 +27,7 @@ services:
 
     core.user:
         class: UserBundle\Services\UserService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events", "@core.mail", "@security.authorization_checker", "@core.uploader"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events", "@core.mail", "@security.authorization_checker"]
 
     core.security:
         class: SecuriteBundle\Services\SecurityService
@@ -54,19 +54,11 @@ services:
 
     core.formation:
       class: MentoratBundle\Services\FormationService
-      arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage"]
+      arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@security.token_storage"]
 
     core.recrutement:
       class: MentoratBundle\Services\RecrutementService
       arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage","@form.factory","@security.authorization_checker","@core.mail"]
-
-    core.soutenance:
-        class: MentoratBundle\Services\SoutenanceService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory"]
-
-    core.suivi:
-        class: MentoratBundle\Services\SuiviService
-        arguments: ["@doctrine.orm.entity_manager"]
 
     # List of services used in order to perform a specific action.
 
@@ -89,11 +81,11 @@ services:
     # Dont delete this services !
 
     core.user_register:
-        class: UserBundle\Form\RegistrationType
+        class: UserBundle\Form\Type\User\RegistrationType
         tags:
         - { name: form.type, alias: app_user_registration }
 
     core.mentore_register:
-        class: UserBundle\Form\RegistrationMentoreType
+        class: UserBundle\Form\Type\Mentore\RegistrationMentoreType
         tags:
         - { name: form.type, alias: app_mentore_registration }

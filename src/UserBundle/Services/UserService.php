@@ -69,11 +69,6 @@ class UserService
     private $security;
 
     /**
-     * @var Uploader
-     */
-    private $uploader;
-
-    /**
      * UserService constructor.
      *
      * @param EntityManager        $doctrine
@@ -83,9 +78,8 @@ class UserService
      * @param Evenements           $events
      * @param Mail                 $mail
      * @param AuthorizationChecker $security
-     * @param Uploader             $uploader
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, Mail $mail, AuthorizationChecker $security, Uploader $uploader)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, Mail $mail, AuthorizationChecker $security)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
@@ -94,7 +88,6 @@ class UserService
         $this->events = $events;
         $this->mail = $mail;
         $this->security = $security;
-        $this->uploader = $uploader;
     }
 
     /**

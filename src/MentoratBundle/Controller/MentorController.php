@@ -52,8 +52,8 @@ class MentorController extends Controller
     {
         $competence = $this->get('core.user')->addCompetencesMentor($request, $id);
         $mentor = $this->get('core.mentorat')->viewMentor($id);
-        $nbSoutenances = $this->get('core.soutenance')->countSoutenancesDone($this->getUser());
-        $nbMentores = $this->get('core.suivi')->countMentoreByMentor($this->getUser());
+        $nbSoutenances = $this->get('core.mentorat')->countSoutenancesDone($this->getUser());
+        $nbMentores = $this->get('core.mentorat')->countMentoreByMentor($this->getUser());
 
         return array(
             'controller' => 'mentor',

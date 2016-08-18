@@ -16,7 +16,7 @@ class MentoreRepository extends \Doctrine\ORM\EntityRepository
                     ->innerJoin('m.suivi', 's')
                         ->addSelect('s')
                     ->where('s.mentore_status = :status')
-                        ->setParameter('status', $status = 'En attente')
+                        ->setParameter('status', 'En attente')
                     ->getQuery()
                     ->getResult();
     }
@@ -30,7 +30,7 @@ class MentoreRepository extends \Doctrine\ORM\EntityRepository
                         ->addSelect('p')
                     ->innerJoin('p.abonnement', 'a')
                     ->where('a.libelle = :abonnement')
-                        ->setParameter('abonnement', $abonnement = 'Premium Plus')
+                        ->setParameter('abonnement', 'Premium Plus')
                     ->getQuery()
                     ->getResult();
     }
@@ -44,7 +44,7 @@ class MentoreRepository extends \Doctrine\ORM\EntityRepository
                         ->addSelect('p')
                     ->innerJoin('p.abonnement', 'a')
                     ->where('a.libelle = :abonnement')
-                        ->setParameter('abonnement', $abonnement = 'Premium Class')
+                        ->setParameter('abonnement', 'Premium Class')
                     ->getQuery()
                     ->getResult();
     }

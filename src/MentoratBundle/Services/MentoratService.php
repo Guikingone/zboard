@@ -126,6 +126,18 @@ class MentoratService
     }
 
     /**
+     * Return the number of mentoré owned by the mentor in parameter.
+     *
+     * @param $mentor
+     *
+     * @return mixed
+     */
+    public function countMentoreByMentor($mentor)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Suivi')->countMentoreByMentorDisplayed($mentor);
+    }
+
+    /**
      * Display the mentore which are waiting to have the first
      * show and which are attributing to the connected user.
      *
@@ -151,6 +163,44 @@ class MentoratService
             'mentor' => $user,
             'suivi_state' => 'ENDED',
         ));
+    }
+
+    /**
+     * @param $user
+     *
+     * @return array|\MentoratBundle\Entity\Soutenance[]
+     */
+    public function getSoutenanceWaiting($user)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findBy(array(
+            'mentor' => $user,
+            'status' => 'WAITING',
+        ));
+    }
+
+    /**
+     * @param $user
+     *
+     * @return array|\MentoratBundle\Entity\Soutenance[]
+     */
+    public function getSoutenanceDone($user)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->findBy(array(
+            'mentor' => $user,
+            'status' => 'DONE',
+        ));
+    }
+
+    /**
+     * Return the number of soutenances done by the mentor in parameter.
+     *
+     * @param $mentor
+     *
+     * @return mixed
+     */
+    public function countSoutenancesDone($mentor)
+    {
+        return $this->doctrine->getRepository('MentoratBundle:Soutenance')->countSoutenancesDone($mentor);
     }
 
     /**

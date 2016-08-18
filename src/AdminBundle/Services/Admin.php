@@ -35,7 +35,6 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class Admin
 {
@@ -55,11 +54,6 @@ class Admin
     private $session;
 
     /**
-     * @var TokenStorage
-     */
-    private $user;
-
-    /**
      * @var Evenements
      */
     private $events;
@@ -71,12 +65,11 @@ class Admin
      * @param FormFactory   $form
      * @param Session       $session
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, Evenements $events)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
         $this->session = $session;
-        $this->user = $user;
         $this->events = $events;
     }
 
