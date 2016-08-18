@@ -58,7 +58,7 @@ services:
 
     core.recrutement:
       class: MentoratBundle\Services\RecrutementService
-      arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@security.authorization_checker","@core.mail"]
+      arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@security.token_storage", "@security.authorization_checker","@core.mail"]
 
     # List of services used in order to perform a specific action.
 

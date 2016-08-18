@@ -5,7 +5,6 @@ namespace MentoratBundle\Services;
 use Doctrine\ORM\EntityManager;
 use MentoratBundle\Form\Type\Add\VoteType;
 use Symfony\Component\Form\FormFactory;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -26,11 +25,6 @@ class RecrutementService
     protected $form;
 
     /**
-     * @var Session
-     */
-    private $session;
-
-    /**
      * @var TokenStorage
      */
     private $user;
@@ -48,16 +42,14 @@ class RecrutementService
     /**
      * @param EntityManager $doctrine
      * @param FormFactory   $form
-     * @param Session       $session
      * @param TokenStorage  $user
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param Mail $mail
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, AuthorizationCheckerInterface $authorizationChecker, Mail $mail)
+    public function __construct(EntityManager $doctrine, FormFactory $form, TokenStorage $user, AuthorizationCheckerInterface $authorizationChecker, Mail $mail)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
-        $this->session = $session;
         $this->user = $user;
         $this->formFactory = $form;
         $this->authorizationChecker = $authorizationChecker;
