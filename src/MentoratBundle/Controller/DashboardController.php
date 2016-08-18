@@ -5,13 +5,14 @@ namespace MentoratBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class DashboardController extends Controller
 {
     /**
      * @Route("/")
      * @Template("MentoratBundle/Dashboard/index.html.twig")
-     *
+     * @Method({"GET"})
      * @return array
      */
     public function indexAction()

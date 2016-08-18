@@ -24,9 +24,9 @@ class MentoreController extends Controller
         $mentores = $this->get('core.mentorat')->getMentores($this->getUser());
 
         return array(
-            'controller' => 'mentorat',
-            'mentores' => $mentores,
-            'title_action' => 'Mes mentorés en cours',
+            'controller'    => 'mentorat',
+            'mentores'      => $mentores,
+            'title_action'  => 'Mes mentorés en cours',
         );
     }
 
@@ -41,9 +41,9 @@ class MentoreController extends Controller
         $mentores = $this->get('core.mentorat')->getMyWaitingMentore($this->getUser());
 
         return array(
-            'controller' => 'mentorat',
-            'mentores' => $mentores,
-            'title_action' => 'Mes mentorés en attente',
+            'controller'    => 'mentorat',
+            'mentores'      => $mentores,
+            'title_action'  => 'Mes mentorés en attente',
         );
     }
 
@@ -58,9 +58,9 @@ class MentoreController extends Controller
         $mentores = $this->get('core.mentorat')->getMentoratFinished($this->getUser());
 
         return array(
-            'controller' => 'mentorat',
-            'mentores' => $mentores,
-            'title_action' => 'Mes mentorés terminés',
+            'controller'    => 'mentorat',
+            'mentores'      => $mentores,
+            'title_action'  => 'Mes mentorés terminés',
         );
     }
 
@@ -81,12 +81,12 @@ class MentoreController extends Controller
         $soutenance = $this->get('core.mentorat')->askSoutenance($request, $id);
 
         return array(
-            'controller' => 'mentore',
-            'mentore' => $mentore,
-            'note' => $note->createView(),
-            'sessions' => $sessions->createView(),
-            'soutenance' => $soutenance->createView(),
-            'title_action' => 'Détails du mentoré : '.$mentore->getFirstname().' '.$mentore->getLastname(),
+            'controller'    => 'mentore',
+            'mentore'       => $mentore,
+            'note'          => $note->createView(),
+            'sessions'      => $sessions->createView(),
+            'soutenance'    => $soutenance->createView(),
+            'title_action'  => 'Détails du mentoré : '.$mentore->getFirstname().' '.$mentore->getLastname(),
         );
     }
 

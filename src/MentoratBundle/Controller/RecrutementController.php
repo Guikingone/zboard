@@ -6,13 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class RecrutementController extends Controller
 {
     /**
      * @Route("/recrutement/candidatures",name="recrutement_candidature")
      * @Template("MentoratBundle/Recrutement/candidatures.html.twig")
-     *
+     * @Method({"GET"})
      * @return array
      */
     public function candidatureAction()
@@ -26,16 +27,18 @@ class RecrutementController extends Controller
             $candidatures['candidatures_a_arbitrer'] = array();
         }
 
-        return array('controller' => 'recrutement',
-                  'title_action' => 'Recrutement de nouveaux mentors',
-                   'candidatures' => $candidatures['candidatures_simples'],
-                   'candidatures_dispute' => $candidatures['candidatures_a_arbitrer'], );
+        return array(
+            'controller'            => 'recrutement',
+            'title_action'          => 'Recrutement de nouveaux mentors',
+            'candidatures'          => $candidatures['candidatures_simples'],
+            'candidatures_dispute'  => $candidatures['candidatures_a_arbitrer']
+        );
     }
 
     /**
      * @Route("/recrutement/candidatures/show/{id}",name="recrutement_candidature_show")
      * @Template("MentoratBundle/Recrutement/candidature.html.twig")
-     *
+     * @Method({"GET"})
      * @return array
      */
     public function showCandidatureAction(Request $request, $id)
@@ -52,16 +55,18 @@ class RecrutementController extends Controller
 
         $this->denyAccessUnlessGranted('ROLE_MENTOR_EXPERIMENTE', null, 'Accès refusé');
 
-        return array('controller' => 'recrutement',
-                    'candidature' => $candidature,
-                    'vote' => $vote->createView(),
-                    'title_action' => 'Candidature',
-                    );
+        return array(
+            'controller'    => 'recrutement',
+            'candidature'   => $candidature,
+            'vote'          => $vote->createView(),
+            'title_action'  => 'Candidature',
+        );
     }
 
     /**
      * @Route("/recrutement/candidatures/{id}/{action}",name="recrutement_candidature_action")
      * @Template("MentoratBundle/Recrutement/candidature.html.twig")
+     * @Method({"GET", "POST"})
      */
     public function actOnApplicationAction(Request $request, $id, $action)
     {
@@ -76,7 +81,7 @@ class RecrutementController extends Controller
     /**
      * @Route("/recrutement/formations",name="recrutement_formation")
      * @Template("MentoratBundle/Recrutement/formation.html.twig")
-     *
+     * @Method({"GET"})
      * @return array
      */
     public function formationAction()
@@ -85,9 +90,10 @@ class RecrutementController extends Controller
 
         $candidatures = $this->get('core.recrutement')->getFormationCandidatures();
 
-        return array('controller' => 'recrutement',
-                  'title_action' => 'Validation de formation des nouveaux mentors',
-                   'candidatures' => $candidatures['candidatures_simples'],
-                   'candidatures_dispute' => $candidatures['candidatures_a_arbitrer'], );
+        return array(
+            'controller'            => 'recrutement',
+            'title_action'          => 'Validation de formation des nouveaux mentors',
+            'candidatures'          => $candidatures['candidatures_simples'],
+            'candidatures_dispute'  => $candidatures['candidatures_a_arbitrer'], );
     }
 }

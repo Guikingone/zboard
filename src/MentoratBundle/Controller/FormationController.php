@@ -7,13 +7,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class FormationController extends Controller
 {
     /**
      * @Route("/formation")
      * @Template("MentoratBundle/Dashboard/formation.html.twig")
-     *
+     * @Method({"GET"})
      * @return array
      */
     public function indexAction()
@@ -31,7 +32,7 @@ class FormationController extends Controller
      * @Route("/formation/update")
      *
      * @param Request $request
-     *
+     * @Method({"GET", "PUT"})
      * @return Response
      */
     public function updateAction(Request $request)
