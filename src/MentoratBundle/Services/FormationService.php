@@ -96,7 +96,9 @@ class FormationService
           $etape->setIdUser($userID);
           $etape->setIdEtape($this->doctrine->getRepository('MentoratBundle:FormationEtape')
                                      ->findOneBy(array('id' => $etapeID)));
-          $etape->setContent("");
+          if(null!=$request->request->get('content'))
+              $etape->setContent($content);
+
           $this->doctrine->persist($etape);
         }
         $this->doctrine->flush();
