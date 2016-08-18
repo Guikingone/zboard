@@ -1,6 +1,6 @@
 <?php
 
-namespace BackendBundle\Form\Add;
+namespace BackendBundle\Form\Type\Add;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

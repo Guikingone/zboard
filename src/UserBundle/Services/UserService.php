@@ -26,9 +26,9 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use UserBundle\Entity\Competences;
 use UserBundle\Entity\Mentore;
 use UserBundle\Entity\User;
-use UserBundle\Form\Type\CompetencesType;
+use UserBundle\Form\Type\User\CompetencesType;
 use UserBundle\Form\Type\Mentore\RegistrationMentoreType;
-use UserBundle\Form\Type\RegistrationType;
+use UserBundle\Form\Type\User\RegistrationType;
 use UserBundle\Form\Type\User\UpdateUserType;
 
 class UserService

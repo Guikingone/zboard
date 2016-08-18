@@ -2,7 +2,7 @@
 
 namespace UserBundle\Form\Type\Mentore;
 
-use MentoratBundle\Form\SuiviType;
+use MentoratBundle\Form\Type\Add\SuiviType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
