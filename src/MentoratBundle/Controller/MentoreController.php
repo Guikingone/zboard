@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * @Route("/mentore")
@@ -15,7 +16,7 @@ class MentoreController extends Controller
     /**
      * @Route("/mes-mentores/en-cours",name="en_cours")
      * @Template("MentoratBundle/Mentore/en-cours.html.twig")
-     *
+     * @Method({"GET"})
      * @return array
      */
     public function enCoursAction()
@@ -32,7 +33,7 @@ class MentoreController extends Controller
     /**
      * @Route("/mes-mentores/en-attente",name="en_attente")
      * @Template("MentoratBundle/Mentore/en-attente.html.twig")
-     *
+     * @Method({"GET"})
      * @return array
      */
     public function enAttenteAction()
@@ -49,7 +50,7 @@ class MentoreController extends Controller
     /**
      * @Route("/mes-mentores/mentorat-termine",name="mentorat_termine")
      * @Template("MentoratBundle/Mentore/mentorat-termine.html.twig")
-     *
+     * @Method({"GET"})
      * @return array
      */
     public function mentoratFinishedAction()
@@ -66,7 +67,7 @@ class MentoreController extends Controller
     /**
      * @Route("/details/{id}", name="show_details_mentore")
      * @Template("MentoratBundle/Details/show_mentores.html.twig")
-     *
+     * @Method({"GET"})
      * @param Request $request
      * @param $id
      *
@@ -92,7 +93,7 @@ class MentoreController extends Controller
     /**
      * @Route("/transfert/mentore/{id}", name="transfert_mentore")
      * @Template("MentoratBundle/Action/transfert_mentore.html.twig")
-     *
+     * @Method({"GET"})
      * @param Request $request
      * @param $id
      *
