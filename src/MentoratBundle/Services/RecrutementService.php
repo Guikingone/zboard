@@ -88,7 +88,10 @@ class RecrutementService
         }
         //Otherwise count votes and return.
         $candid->countVotes();
+<<<<<<< HEAD
+=======
         $candid->countVotes($candid);
+>>>>>>> e06c3665d310af3b08feb75df33755aa4fd659fb
 
         return $candid;
     }
