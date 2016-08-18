@@ -13,7 +13,7 @@ class IndexAdminController extends Controller
     /**
      * @Route("/", name="home_admin")
      * @Template("AdminBundle/Index/index.html.twig")
-     * @Method({"GET"})
+     *
      * @return array
      */
     public function indexAction()
@@ -49,7 +49,7 @@ class IndexAdminController extends Controller
     /**
      * @Route("/country", name="gestion_country")
      * @Template("AdminBundle/Action/list_country.html.twig")
-     * @Method({"GET","POST"})
+     *
      * @param Request $request
      *
      * @return array
@@ -69,7 +69,7 @@ class IndexAdminController extends Controller
     /**
      * @Route("/habilitations", name="gestion_habilitations")
      * @Template("AdminBundle/Index/habilitations.html.twig")
-     * @Method({"GET"})
+     *
      * @return array
      */
     public function showHabilitationsAction()
@@ -87,7 +87,7 @@ class IndexAdminController extends Controller
     /**
      * @Route("/show/abonnements", name="gestion_abonnements")
      * @Template("AdminBundle/Action/list_abonnements.html.twig")
-     * @Method({"GET","POST"})
+     *
      * @param Request $request
      *
      * @return array
