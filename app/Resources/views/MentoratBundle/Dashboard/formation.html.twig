@@ -3,23 +3,37 @@
 {% block title %} - Formation{% endblock %}
 
 {% block body %}
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+      <div class="well">
 
 {% if is_granted('ROLE_MENTOR') %}
 <div class="alert alert-info">Votre formation est terminée ! Félicitations, vous êtes donc un Jedi de niveau 1 !</div>
 {% else %}
-Bonjour et bienvenue à toi nouveau mentor ! <br /> Voici les étapes à remplir pour te faire confirmer :
+<p>Bonjour et bienvenue à toi, Ô nouveau mentor !</p>
+<p>Voici les étapes à remplir pour te faire confirmer :</p>
 
 {% for etape in formation %}
 <div class="checkbox">
   <label><input onclick="updateFormation({{etape.id}})" type="checkbox" id="{{etape.id}}" {% if etape.validate == true %}checked=""{% endif %} value="">{{ etape.etape|e }}</label>
+  {% if etape.hasContent %}
+  <input type="text" onChange="document.getElementById('{{etape.id}}').checked = false;" id="{{etape.id}}-content" name="{{etape.id}}-content" value="{{etape.content}}"/>
+  {% endif %}
+
 </div>
 {% endfor %}
 
+</div></div></div>
 <script>
 function updateFormation(id)
 {
+  if(document.getElementById(id+'-content') !== null)
+  {
+    content = document.getElementById(id+'-content').value;
+  }
   $.post('{{path('mentorat_formation_update')}}',
-                {id: id});
+                {id: id,
+                content: content});
 }
 </script>
 
