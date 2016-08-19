@@ -1,0 +1,14 @@
+{% if events.categorie == 'Important' %}
+    <i class="ion ion-alert bg-red"></i>
+{% elseif events.categorie == 'Information' %}
+    <i class="ion ion-chatbox-working bg-yellow"></i>
+{% elseif events.categorie == 'Mentor' %}
+    <i class="ion ion-person-stalker bg-white"></i>
+{% elseif events.categorie == 'Mentore' %}
+    <i class="ion ion-chatboxes bg-blue"></i>
+
+    {% include ':Elements/UI/Notifications/Suppression:suppression_admin.html.twig' %}
+
+{% elseif events.categorie == 'Maintenance' %}
+    <i class="ion ion-settings bg-red"></i>
+{% endif %}

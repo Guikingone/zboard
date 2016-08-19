@@ -6,13 +6,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 col-md-12">
-                {% for message in app.session.flashbag.get('success') %}
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h4><i class="icon fa fa-check"></i>Information</h4>
-                        {{ message }}
-                    </div>
-                {% endfor %}
+
+                {% include ':Elements/UI/Flash:list_flash.html.twig' %}
+
             </div>
             <div class="col-xs-12">
                 <!-- Allow to purge the notifications -->
@@ -32,23 +28,9 @@
                             </span>
                         </li>
                         <li>
-                        {% if events.categorie == 'Important' %}
-                            <i class="ion ion-alert bg-red"></i>
-                        {% elseif events.categorie == 'Information' %}
-                            <i class="ion ion-chatbox-working bg-yellow"></i>
-                        {% elseif events.categorie == 'Staff' %}
-                            <i class="ion ion-monitor bg-orange"></i>
-                        {% elseif events.categorie == 'Danger' %}
-                            <i class="ion ion-alert-circled bg-red"></i>
-                        {% elseif events.categorie == 'Mentor' %}
-                            <i class="ion ion-person-stalker bg-white"></i>
-                        {% elseif events.categorie == 'Mentore' %}
-                            <i class="ion ion-chatboxes bg-blue"></i>
-                        {% elseif events.categorie == 'Facturation' %}
-                            <i class="ion ion-card bg-green"></i>
-                        {% elseif events.categorie == 'Maintenance' %}
-                            <i class="ion ion-settings bg-red"></i>
-                        {% endif %}
+
+                            {% include ':Elements/UI/Notifications/Suppression:supression_globales.html.twig' %}
+
                             <div class="timeline-item">
                                 <div class="timeline-body">
                                     {{ events.libelle }}

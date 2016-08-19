@@ -1,0 +1,5 @@
+{% if app.user.events is empty %}
+    <!-- Si les notifications sont vides, l'icône reste vide -->
+{% else %}
+    <span class="label label-warning">{{ app.user.events|length }}</span>
+{% endif %}

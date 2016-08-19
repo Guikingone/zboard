@@ -1,0 +1,24 @@
+{% if events.categorie == 'Important' %}
+    <li>
+        <a href="#">
+            <i class="fa fa-warning text-orange"></i> {{ events.libelle }}
+        </a>
+    </li>
+{% elseif events.categorie == 'Information' %}
+    <li>
+        <a href="#">
+            <i class="fa fa-user text-blue"></i> {{ events.libelle }}
+        </a>
+    </li>
+{% elseif events.categorie == 'Mentor' %}
+    <li>
+        <a href="#">
+            <i class="fa fa-information text-red"></i> {{ events.libelle }}
+        </a>
+    </li>
+{% elseif events.categorie == 'Mentore' %}
+    <li>
+        <a href="#">
+            <i class="fa fa-information text-red"></i> {{ events.libelle }}
+        </a>
+    </li>
