@@ -4,26 +4,32 @@
 
 {% block body %}
 <div class="row">
-    <div class="col-xs-12 col-md-12">
-      <div class="well">
+  <div class="col-xs-12 col-md-12">
+    <div class="well">
 
-{% if is_granted('ROLE_MENTOR') %}
-<div class="alert alert-info">Votre formation est terminée ! Félicitations, vous êtes donc un Jedi de niveau 1 !</div>
-{% else %}
-<p>Bonjour et bienvenue à toi, Ô nouveau mentor !</p>
-<p>Voici les étapes à remplir pour te faire confirmer :</p>
+      {% if is_granted('ROLE_MENTOR') %}
+      <div class="alert alert-info">Votre formation est terminée ! Félicitations, vous êtes donc un Jedi de niveau 1 !</div>
+      {% else %}
+      <p>Bonjour et bienvenue à toi, Ô nouveau mentor !</p>
+      <p>Voici les étapes à remplir pour te faire confirmer :</p>
 
-{% for etape in formation %}
-<div class="checkbox">
-  <label><input onclick="updateFormation({{etape.id}})" type="checkbox" id="{{etape.id}}" {% if etape.validate == true %}checked=""{% endif %} value="">{{ etape.etape|e }}</label>
-  {% if etape.hasContent %}
-  <input type="text" onChange="document.getElementById('{{etape.id}}').checked = false;" id="{{etape.id}}-content" name="{{etape.id}}-content" value="{{etape.content}}"/>
-  {% endif %}
+      {% for etape in formation %}
+      <div class="checkbox">
+        <label><input onclick="updateFormation({{etape.id}})" type="checkbox" id="{{etape.id}}" {% if etape.validate == true %}checked=""{% endif %} value="">{{ etape.etape|e }}</label>
+        {% if etape.hasContent %}
+        <input type="text" onChange="document.getElementById('{{etape.id}}').checked = false;" id="{{etape.id}}-content" name="{{etape.id}}-content" value="{{etape.content}}"/>
+        {% endif %}
 
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="well">
+    <button type="button" class="btn btn-flat btn-success">Faire valider ma formation</button>
+    </div>
+
+  </div>
 </div>
-{% endfor %}
-
-</div></div></div>
 <script>
 function updateFormation(id)
 {
