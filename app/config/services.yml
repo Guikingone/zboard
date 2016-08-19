@@ -8,7 +8,7 @@ services:
     # List of events listener
 
     core.doctrine_image_listener:
-        class: EventListener\ProfileImageListener
+        class: EventListenerBundle\EventListener\ProfileImageListener
         arguments: ["@core.uploader", "%profile_image_directory%"]
         tags:
             - { name: doctrine.event_listener, event: prePersist }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace AdminBundle\EventListener;
+namespace EventListenerBundle\EventListener;
 
 use AdminBundle\Entity\Activity;
 use Doctrine\ORM\Event\LifecycleEventArgs;

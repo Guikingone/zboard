@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace EventListener;
+namespace EventListenerBundle\EventListener;
 
 use AdminBundle\Services\Uploader;
 use Doctrine\ORM\Event\LifecycleEventArgs;

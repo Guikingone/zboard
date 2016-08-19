@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new SecuriteBundle\SecuriteBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new ApiBundle\ApiBundle(),
+            new EventListenerBundle\EventListenerBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
