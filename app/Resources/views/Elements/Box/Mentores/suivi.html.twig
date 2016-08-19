@@ -2,16 +2,8 @@
     {% if mentores.suivi.mentoreStatus is empty %}
         <p>Aucun statut actuel</p>
     {% else %}
-        {% if mentores.suivi.mentoreStatus == 'En formation' %}
-            <span class="label label-success">{{ mentores.suivi.mentoreStatus }}</span>
-        {% elseif mentores.suivi.mentoreStatus == 'Contacté' %}
-            <span class="label label-warning">{{ mentores.suivi.mentoreStatus }}</span>
-        {% elseif mentores.suivi.mentoreStatus == 'En pause' %}
-            <span class="label label-danger">{{ mentores.suivi.mentoreStatus }}</span>
-        {% elseif mentores.suivi.mentoreStatus == 'En attente' %}
-            <span class="label label-warning">{{ mentores.suivi.mentoreStatus }}</span>
-        {% elseif mentores.suivi.mentoreStatus == 'Formation terminé' %}
-            <span class="label label-success">{{ mentores.suivi.mentoreStatus }}</span>
-        {% endif %}
+
+        {% include ':Elements/Box/Mentores/Status_Suivi:status_formation.html.twig' %}
+
     {% endif %}
 </td>

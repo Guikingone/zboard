@@ -1,10 +1,11 @@
+{% if projets.status == null %}
+    <span class="label label-info">En attente</span>
 {% elseif projets.status == 'En cours' %}
     <span class="label label-warning">{{ projets.status }}</span>
-{% elseif projets.status == 'Validé' %}
-    <span class="label label-">{{ projets.status }}</span>
 {% elseif projets.status == 'Terminé' %}
     <span class="label label-success">{{ projets.status }}</span>
 {% elseif projets.status == 'Soutenu' %}
     <span class="label label-success">{{ projets.status }}</span>
 {% elseif projets.status == 'En retard' %}
     <span class="label label-danger">{{ projets.status }}</span>
+{% endif %}
