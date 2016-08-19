@@ -5,7 +5,7 @@ parameters:
 
 services:
 
-    # List of events listener
+    # List of Doctrine EventListeners
 
     core.doctrine_image_listener:
         class: EventListenerBundle\EventListener\ProfileImageListener
@@ -14,6 +14,14 @@ services:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpdate }
             - { name: doctrine.event_listener, event: postLoad }
+
+    # List of Symfony EventListeners
+
+    core.notification_listener:
+        class: EventListenerBundle\Listener\NotificationListener
+        arguments: ["@core.events"]
+        tags:
+            - { name: kernel.event_listener, event: core.notification_event, method: createEvent }
 
     # List of services used in the principal environnement.
 
