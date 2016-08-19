@@ -69,7 +69,6 @@ class MentorController extends Controller
     /**
      * @Route("/profile/edit", name="zboard_teacher_profile_edit")
      * @Template("UserBundle/Profile/edit.html.twig")
-     * @Method({"GET", "POST"})
      *
      * @return array
      */
