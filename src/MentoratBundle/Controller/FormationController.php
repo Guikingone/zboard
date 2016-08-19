@@ -32,7 +32,7 @@ class FormationController extends Controller
      * @Route("/formation/update")
      *
      * @param Request $request
-     * @Method({"GET", "PUT"})
+     * @Method({"POST", "PUT"})
      * @return Response
      */
     public function updateAction(Request $request)

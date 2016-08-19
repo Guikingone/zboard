@@ -187,8 +187,10 @@ class RecrutementService
         $vote->setIdUser($this->user->getToken()->getUser());
         $vote->setIdCandidature($this->doctrine->getRepository('MentoratBundle:Candidat')->find($id));
         $vote->setIsCandidature(true);
-
         $this->doctrine->persist($vote);
+
+        $candidature = $this->getCandidature($id);
+        $candidature->addVote($vote);
         $this->doctrine->flush();
 
         $candidature = $this->getCandidature($id);
