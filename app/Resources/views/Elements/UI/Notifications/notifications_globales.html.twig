@@ -22,3 +22,10 @@
             <i class="fa fa-information text-red"></i> {{ events.libelle }}
         </a>
     </li>
+{% elseif events.categorie == 'Danger' %}
+    <li>
+        <a href="#">
+            <i class="fa fa-information text-red"></i> {{ events.libelle }}
+        </a>
+    </li>
+{% endif %}

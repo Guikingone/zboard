@@ -19,12 +19,9 @@
                             {{ projets.libelle }}
                         </td>
                         <td>
-                            {% if projets.status == null %}
-                                <span class="label label-info">En attente</span>
 
-                                {% include ':Elements/Box/Mentores/Status_Suivi:status_projets.html.twig' %}
+                            {% include ':Elements/Box/Mentores/Status_Suivi:status_projets.html.twig' %}
 
-                            {% endif %}
                         </td>
                         {% if is_granted('ROLE_MENTOR') %}
                             <td>
