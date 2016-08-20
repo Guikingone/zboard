@@ -44,6 +44,9 @@ class NotificationEvent extends Event
         $this->user = $user;
     }
 
+    /**
+     * @return User
+     */
     public function getUser()
     {
         return $this->user;

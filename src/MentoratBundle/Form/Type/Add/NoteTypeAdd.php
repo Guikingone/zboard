@@ -7,7 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class NoteAddType extends AbstractType
+class NoteTypeAdd extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder

@@ -12,7 +12,7 @@ class TutorielsController extends Controller
     /**
    * @Route("/tutoriels")
    * @Template("MentoratBundle/Dashboard/tutoriels.html.twig")
-     *
+   *
    * @return array
    */
   public function indexAction(Request $request)
@@ -21,10 +21,10 @@ class TutorielsController extends Controller
       $tutoriels = $this->get('core.back')->getTutorials();
 
       return array(
-          'controller'      => 'tutoriels',
-          'tutoriels'       => $tutoriels,
-          'tutoriel'        => $tutoriel->createView(),
-          'title_action'    => 'Tutoriels sur le mentorat',
+          'controller' => 'tutoriels',
+          'tutoriels' => $tutoriels,
+          'tutoriel' => $tutoriel->createView(),
+          'title_action' => 'Tutoriels sur le mentorat',
       );
   }
 }

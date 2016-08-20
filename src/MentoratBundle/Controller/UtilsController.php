@@ -27,9 +27,9 @@ class UtilsController extends Controller
         }
 
         return array(
-            'controller'    => 'cours',
-            'cours'         => $cours->createView(),
-            'title_action'  => 'Mise à jour',
+            'controller' => 'cours',
+            'cours' => $cours->createView(),
+            'title_action' => 'Mise à jour',
         );
     }
 
@@ -51,9 +51,9 @@ class UtilsController extends Controller
         }
 
         return array(
-            'controller'    => 'projet',
-            'projet'        => $projet->createView(),
-            'title_action'  => 'Mise à jour',
+            'controller' => 'projet',
+            'projet' => $projet->createView(),
+            'title_action' => 'Mise à jour',
         );
     }
 

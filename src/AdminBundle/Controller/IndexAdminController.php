@@ -30,18 +30,18 @@ class IndexAdminController extends Controller
         $mentoresClass = $this->get('core.user')->getMentoresPClass();
 
         return array(
-            'controller'        => 'home',
-            'mentors'           => $mentors,
-            'parcoursPlus'      => $parcoursPlus,
-            'parcoursClass'     => $parcoursClass,
-            'projetsF'          => $projetsF,
-            'projets'           => $projets,
-            'soutenances'       => $soutenances,
-            'notes'             => $notes,
-            'sessionsC'         => $sessionsC,
-            'mentoresWaiting'   => $mentoresWaiting,
-            'mentoresPlus'      => $mentoresPlus,
-            'mentoresClass'     => $mentoresClass,
+            'controller' => 'home',
+            'mentors' => $mentors,
+            'parcoursPlus' => $parcoursPlus,
+            'parcoursClass' => $parcoursClass,
+            'projetsF' => $projetsF,
+            'projets' => $projets,
+            'soutenances' => $soutenances,
+            'notes' => $notes,
+            'sessionsC' => $sessionsC,
+            'mentoresWaiting' => $mentoresWaiting,
+            'mentoresPlus' => $mentoresPlus,
+            'mentoresClass' => $mentoresClass,
         );
     }
 
@@ -59,9 +59,9 @@ class IndexAdminController extends Controller
         $countrys = $this->get('core.admin')->getCountry();
 
         return array(
-            'controller'    => 'cms',
-            'country'       => $country->createView(),
-            'countrys'      => $countrys,
+            'controller' => 'cms',
+            'country' => $country->createView(),
+            'countrys' => $countrys,
         );
     }
 
@@ -77,9 +77,9 @@ class IndexAdminController extends Controller
         $mentores = $this->get('core.user')->getMentores();
 
         return array(
-            'controller'    => 'habilitations',
-            'users'         => $users,
-            'mentores'      => $mentores,
+            'controller' => 'habilitations',
+            'users' => $users,
+            'mentores' => $mentores,
         );
     }
 
@@ -97,9 +97,9 @@ class IndexAdminController extends Controller
         $abonnements = $this->get('core.admin')->getAbonnements();
 
         return array(
-            'controller'    => 'parcours',
-            'abonnements'   => $abonnements,
-            'abonnement'    => $abonnement->createView(),
+            'controller' => 'parcours',
+            'abonnements' => $abonnements,
+            'abonnement' => $abonnement->createView(),
         );
     }
 }

@@ -16,6 +16,7 @@ class SoutenanceController extends Controller
      * @Route("/en-attente",name="soutenance_waiting")
      * @Template("MentoratBundle/Soutenance/en-attente.html.twig")
      * @Method({"GET"})
+     *
      * @return array
      */
     public function waitingAction()
@@ -23,9 +24,9 @@ class SoutenanceController extends Controller
         $soutenances = $this->get('core.mentorat')->getSoutenanceWaiting($this->getUser());
 
         return array(
-            'controller'    => 'soutenances',
-            'soutenances'   => $soutenances,
-            'title_action'  => 'Mes soutenances en attentes',
+            'controller' => 'soutenances',
+            'soutenances' => $soutenances,
+            'title_action' => 'Mes soutenances en attentes',
         );
     }
 
@@ -33,6 +34,7 @@ class SoutenanceController extends Controller
      * @Route("/effectuees",name="soutenance_done")
      * @Template("MentoratBundle/Soutenance/soutenance-terminee.html.twig")
      * @Method({"GET"})
+     *
      * @return array
      */
     public function soutenanceDoneAction()
@@ -40,9 +42,9 @@ class SoutenanceController extends Controller
         $soutenances = $this->get('core.mentorat')->getSoutenanceDone($this->getUser());
 
         return array(
-            'controller'    => 'soutenances',
-            'soutenances'   => $soutenances,
-            'title_action'  => 'Mes soutenances terminées',
+            'controller' => 'soutenances',
+            'soutenances' => $soutenances,
+            'title_action' => 'Mes soutenances terminées',
         );
     }
 }

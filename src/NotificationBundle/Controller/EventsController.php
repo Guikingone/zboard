@@ -13,6 +13,7 @@ class EventsController extends Controller
      * @Route("/", name="show_notifications")
      * @Template("NotificationBundle/Index/index.html.twig")
      * @Method({"GET"})
+     *
      * @return array
      */
     public function indexEventsAction()
@@ -26,6 +27,7 @@ class EventsController extends Controller
     /**
      * @Route("/notifications/purge", name="purge_notifications")
      * @Method({"GET"})
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function purgeEventsAction()

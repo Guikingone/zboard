@@ -13,6 +13,7 @@ class SettingsController extends Controller
      * @Route("/settings", name="settings")
      * @Template("BackBundle/Index/settings.html.twig")
      * @Method({"GET"})
+     *
      * @return array
      */
     public function showMentorsAction()

@@ -48,6 +48,7 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $mentore->setPlainPassword('aurore');
         $mentore->setResume('Something');
         $mentore->setArchived(false);
+        $mentore->setAvailable(true);
         $mentore->setRoles(array('ROLE_MENTORE'));
 
         $mentoreC = new Mentore();
@@ -61,6 +62,7 @@ class LoadMentoreData implements FixtureInterface, ContainerAwareInterface, Orde
         $mentoreC->setPlainPassword('toto');
         $mentoreC->setResume('Something');
         $mentoreC->setArchived(false);
+        $mentoreC->setAvailable(true);
         $mentoreC->setRoles(array('ROLE_MENTORE'));
 
         $suivi = new Suivi();

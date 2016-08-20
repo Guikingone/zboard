@@ -12,13 +12,16 @@
 namespace UserBundle\Services;
 
 use Doctrine\ORM\EntityManager;
+use EventListenerBundle\Event\NotificationEvent;
 use MentoratBundle\Entity\Suivi;
 use NotificationBundle\Services\Evenements;
 use AdminBundle\Services\Mail;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -68,6 +71,11 @@ class UserService
     private $security;
 
     /**
+     * @var TraceableEventDispatcher
+     */
+    private $evet;
+
+    /**
      * UserService constructor.
      *
      * @param EntityManager        $doctrine
@@ -78,7 +86,7 @@ class UserService
      * @param Mail                 $mail
      * @param AuthorizationChecker $security
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, Mail $mail, AuthorizationChecker $security)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Evenements $events, Mail $mail, AuthorizationChecker $security, TraceableEventDispatcher $evet)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
@@ -87,6 +95,7 @@ class UserService
         $this->events = $events;
         $this->mail = $mail;
         $this->security = $security;
+        $this->evet = $evet;
     }
 
     /**
@@ -175,11 +184,14 @@ class UserService
             $mentor->setPlainPassword(mb_strtolower($mentor->getFirstname().'_'.$mentor->getLastname()));
             $mentor->setRoles(array('ROLE_MENTOR'));
             $mentor->setArchived(false);
+
             $this->doctrine->persist($mentor);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
-            $this->events->createUserEvents($mentor, 'Création de votre profil Mentor', 'Important');
             $this->mail->inscriptionMessage($mentor->getEmail());
+
+            $event = new NotificationEvent('Bonjour', 'Hello World !', $mentor);
+            $this->evet->dispatch($event);
         }
 
         return $form;

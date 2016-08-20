@@ -26,17 +26,17 @@ class MentorController extends Controller
         $nbMentors = $this->get('core.mentorat')->countMentors();
 
         $pagination = array(
-            'page'          => $page,
-            'route'         => 'list_mentors',
-            'pages_count'   => ceil($nbMentors / 20),
-            'route_params'  => array(),
+            'page' => $page,
+            'route' => 'list_mentors',
+            'pages_count' => ceil($nbMentors / 20),
+            'route_params' => array(),
         );
 
         return array(
-            'controller'    => 'mentors',
-            'mentors'       => $mentors,
-            'pagination'    => $pagination,
-            'title_action'  => 'Liste des mentors',
+            'controller' => 'mentors',
+            'mentors' => $mentors,
+            'pagination' => $pagination,
+            'title_action' => 'Liste des mentors',
         );
     }
 
@@ -57,12 +57,12 @@ class MentorController extends Controller
         $nbMentores = $this->get('core.mentorat')->countMentoreByMentor($this->getUser());
 
         return array(
-            'controller'    => 'mentor',
-            'mentor'        => $mentor,
-            'competence'    => $competence->createView(),
+            'controller' => 'mentor',
+            'mentor' => $mentor,
+            'competence' => $competence->createView(),
             'nbSoutenances' => $nbSoutenances,
-            'nbMentores'    => $nbMentores,
-            'title_action'  => 'Détails du mentor :'.$mentor->getFirstname().' '.$mentor->getLastname(),
+            'nbMentores' => $nbMentores,
+            'title_action' => 'Détails du mentor :'.$mentor->getFirstname().' '.$mentor->getLastname(),
         );
     }
 
@@ -78,10 +78,10 @@ class MentorController extends Controller
         $competence = $this->get('core.user')->addCompetencesMentor($request, $this->getUser());
 
         return array(
-            'user'          => $user->createView(),
-            'competence'    => $competence->createView(),
-            'controller'    => 'user',
-            'title_action'  => 'Mon profil',
+            'user' => $user->createView(),
+            'competence' => $competence->createView(),
+            'controller' => 'user',
+            'title_action' => 'Mon profil',
         );
     }
 
@@ -100,6 +100,7 @@ class MentorController extends Controller
     /**
      * @Route("/dispo/{id}", name="mentor_dispo")
      * @Method({"GET"})
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function mentorDispoAction($id)

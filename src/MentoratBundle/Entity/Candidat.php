@@ -164,13 +164,10 @@ class Candidat
     {
         $this->forVotes = 0;
         $this->againstVotes = 0;
-        foreach ($this->getVotes() as $vote)
-        {
-            if ($vote->getVote() == 1)
-            {
+        foreach ($this->getVotes() as $vote) {
+            if ($vote->getVote() == 1) {
                 ++$this->forVotes;
-            } else
-            {
+            } else {
                 ++$this->againstVotes;
             }
         }

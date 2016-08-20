@@ -26,11 +26,11 @@ class UserAdminController extends Controller
         $mentore = $this->get('core.user')->addMentore($request);
 
         return array(
-            'controller'    => 'users_admin',
-            'users'         => $users,
-            'mentores'      => $mentores,
-            'mentor'        => $mentor->createView(),
-            'mentore'       => $mentore->createView(),
+            'controller' => 'users_admin',
+            'users' => $users,
+            'mentores' => $mentores,
+            'mentor' => $mentor->createView(),
+            'mentore' => $mentore->createView(),
         );
     }
 

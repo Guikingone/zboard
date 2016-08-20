@@ -40,11 +40,11 @@ class RecrutementService
     private $mail;
 
     /**
-     * @param EntityManager $doctrine
-     * @param FormFactory   $form
-     * @param TokenStorage  $user
+     * @param EntityManager                 $doctrine
+     * @param FormFactory                   $form
+     * @param TokenStorage                  $user
      * @param AuthorizationCheckerInterface $authorizationChecker
-     * @param Mail $mail
+     * @param Mail                          $mail
      */
     public function __construct(EntityManager $doctrine, FormFactory $form, TokenStorage $user, AuthorizationCheckerInterface $authorizationChecker, Mail $mail)
     {
@@ -154,7 +154,6 @@ class RecrutementService
 
         $this->doctrine->flush();
         $this->mail->acceptApplication($candidature->getEmail(), array());
-
     }
 
     /**

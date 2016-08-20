@@ -19,16 +19,16 @@ class NotificationListener
     /**
      * @var NotificationEvent
      */
-    private $event;
+    private $notif;
 
     /**
      * NotificationListener constructor.
      *
      * @param NotificationEvent $event
      */
-    public function __construct(Evenements $event)
+    public function __construct(Evenements $notif)
     {
-        $this->event = $event;
+        $this->notif = $notif;
     }
 
     /**
@@ -38,8 +38,8 @@ class NotificationListener
      */
     public function createEvent(NotificationEvent $evet)
     {
-        if(in_array($evet->getContenu(),$evet->getCategorie(), $evet->getUser())) {
-            $this->event->createUserEvents($evet->getUser(), $evet->getContenu(), $evet->getCategorie());
+        if (in_array($evet->getContenu(), $evet->getCategorie(), $evet->getUser())) {
+            $this->notif->createUserEvents($evet->getUser(), $evet->getContenu(), $evet->getCategorie());
         }
     }
 }

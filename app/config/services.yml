@@ -35,7 +35,7 @@ services:
 
     core.user:
         class: UserBundle\Services\UserService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events", "@core.mail", "@security.authorization_checker"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events", "@core.mail", "@security.authorization_checker", "@event_dispatcher"]
 
     core.security:
         class: SecuriteBundle\Services\SecurityService

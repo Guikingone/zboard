@@ -13,6 +13,7 @@ class IndexBackController extends Controller
      * @Route("/", name="home_backend")
      * @Template("BackBundle/Index/index.html.twig")
      * @Method({"GET"})
+     *
      * @return array
      */
     public function indexAction()
@@ -27,15 +28,15 @@ class IndexBackController extends Controller
         $mentoresWaiting = $this->get('core.user')->getMentoresWaiting();
 
         return array(
-            'controller'        => 'home_back',
-            'mentors'           => $mentors,
-            'mentores'          => $mentores,
-            'soutenances'       => $soutenances,
-            'parcours'          => $parcours,
-            'notes'             => $notes,
-            'sessions'          => $sessions,
-            'projets'           => $projets,
-            'mentoresWaiting'   => $mentoresWaiting,
+            'controller' => 'home_back',
+            'mentors' => $mentors,
+            'mentores' => $mentores,
+            'soutenances' => $soutenances,
+            'parcours' => $parcours,
+            'notes' => $notes,
+            'sessions' => $sessions,
+            'projets' => $projets,
+            'mentoresWaiting' => $mentoresWaiting,
         );
     }
 }
