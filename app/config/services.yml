@@ -21,7 +21,7 @@ services:
         class: EventListenerBundle\Listener\NotificationListener
         arguments: ["@core.events"]
         tags:
-            - { name: kernel.event_listener, event: core.notification_event, method: createEvent }
+            - { name: kernel.event_listener, event: zboard.create_user, method: createUserEvent }
 
     # List of services used in the principal environnement.
 

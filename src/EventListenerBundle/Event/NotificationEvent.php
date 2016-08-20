@@ -16,71 +16,48 @@ use UserBundle\Entity\User;
 
 class NotificationEvent extends Event
 {
-    /**
-     * @var string
-     */
-    private $categorie;
+    protected $user;
 
-    /**
-     * @var string
-     */
-    private $contenu;
+    protected $contenu;
 
-    /**
-     * @var User
-     */
-    private $user;
+    protected $categorie;
 
     /**
      * NotificationEvent constructor.
      *
-     * @param $contenu
-     * @param $categorie
+     * @param User $user    | The user linked who receive the notification.
+     * @param $contenu      | The content of the notification.
+     * @param $categorie    | The categorie of the notification.
      */
-    public function __construct($contenu, $categorie, User $user)
+    public function __construct(User $user, $contenu, $categorie)
     {
+        $this->user = $user;
         $this->contenu = $contenu;
         $this->categorie = $categorie;
-        $this->user = $user;
     }
 
-    /**
-     * @return User
-     */
-    public function getUser()
+    public function setContenu($contenu)
     {
-        return $this->user;
+        $this->contenu = $contenu;
     }
 
-    /**
-     * @return string
-     */
-    public function getCategorie()
-    {
-        return $this->categorie;
-    }
-
-    /**
-     * @return string
-     */
-    public function getContenu()
-    {
-        return $this->contenu;
-    }
-
-    /**
-     * @param string $categorie
-     */
     public function setCategorie($categorie)
     {
         $this->categorie = $categorie;
     }
 
-    /**
-     * @param string $contenu
-     */
-    public function setContenu($contenu)
+    public function getContenu()
     {
-        $this->contenu = $contenu;
+        return $this->contenu;
+    }
+
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
     }
 }

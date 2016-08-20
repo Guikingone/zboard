@@ -34,12 +34,10 @@ class NotificationListener
     /**
      * Allow to create a new notification.
      *
-     * @param NotificationEvent $evet
+     * @param NotificationEvent $event
      */
-    public function createEvent(NotificationEvent $evet)
+    public function createUserEvent(NotificationEvent $event)
     {
-        if (in_array($evet->getContenu(), $evet->getCategorie(), $evet->getUser())) {
-            $this->notif->createUserEvents($evet->getUser(), $evet->getContenu(), $evet->getCategorie());
-        }
+        $this->notif->createUserEvents($event->getUser(), $event->getContenu(), $event->getCategorie());
     }
 }

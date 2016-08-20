@@ -13,11 +13,11 @@ namespace UserBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use EventListenerBundle\Event\NotificationEvent;
+use EventListenerBundle\Event\ZboardEvents;
 use MentoratBundle\Entity\Suivi;
 use NotificationBundle\Services\Evenements;
 use AdminBundle\Services\Mail;
 use Symfony\Component\Config\Definition\Exception\Exception;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -190,8 +190,8 @@ class UserService
             $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
             $this->mail->inscriptionMessage($mentor->getEmail());
 
-            $event = new NotificationEvent('Bonjour', 'Hello World !', $mentor);
-            $this->evet->dispatch($event);
+            $event = new NotificationEvent($mentor, 'Création de votre compte', 'Important');
+            $this->evet->dispatch(ZboardEvents::CREATE_USER, $event);
         }
 
         return $form;
