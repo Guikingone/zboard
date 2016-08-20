@@ -19,9 +19,10 @@ class SessionsType extends AbstractType
         $builder
             ->remove('libelle')
             ->add('dateSession', DateTimeType::class, array(
-                'format' => 'dd-MM-yyyy hh-mm',
-                'html5' => false,
-                'widget' => 'single_text',
+                'date_widget' => 'choice',
+                'format' => 'dd-MM-yyyy hh:mm',
+                'model_timezone' => 'Europe/Paris',
+                'invalid_message' => 'Les valeurs rentrées ne correspondent pas au format attendu !',
             ))
             ->add('status', ChoiceType::class, array(
                 'choices' => array(

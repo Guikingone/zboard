@@ -67,7 +67,7 @@ class MentoreController extends Controller
     /**
      * @Route("/details/{id}", name="show_details_mentore")
      * @Template("MentoratBundle/Details/show_mentores.html.twig")
-     * @Method({"GET"})
+     * @Method({"GET", "POST"})
      * @param Request $request
      * @param $id
      *
@@ -93,7 +93,7 @@ class MentoreController extends Controller
     /**
      * @Route("/transfert/mentore/{id}", name="transfert_mentore")
      * @Template("MentoratBundle/Action/transfert_mentore.html.twig")
-     * @Method({"GET"})
+     * @Method({"GET", "POST"})
      * @param Request $request
      * @param $id
      *

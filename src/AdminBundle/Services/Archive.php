@@ -106,7 +106,7 @@ class Archive
      */
     public function archiveMentore($id)
     {
-        $mentore = $this->doctrine->getRepository('MentoratBundle:Mentore')->findOneBy(array('id' => $id));
+        $mentore = $this->doctrine->getRepository('UserBundle:Mentore')->findOneBy(array('id' => $id));
 
         if (null === $mentore) {
             throw new NotFoundHttpException('Le mentore ne semble pas exister ou être déjà archivé.');
@@ -197,6 +197,7 @@ class Archive
         }
 
         $mentor->setArchived(false);
+        $mentor->setAvailable(true);
 
         $this->doctrine->flush();
 
@@ -210,13 +211,14 @@ class Archive
      */
     public function outArchiveMentore($id)
     {
-        $mentore = $this->doctrine->getRepository('MentoratBundle:Mentore')->findOneBy(array('id' => $id));
+        $mentore = $this->doctrine->getRepository('UserBundle:Mentore')->findOneBy(array('id' => $id));
 
         if (null === $mentore) {
             throw new NotFoundHttpException('Le mentore ne semble pas exister ou a déjà été désarchivé.');
         }
 
         $mentore->setArchived(false);
+        $mentore->setAvailable(true);
 
         $this->doctrine->flush();
 

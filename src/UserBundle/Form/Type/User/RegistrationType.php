@@ -17,10 +17,18 @@ class RegistrationType extends AbstractType
             ->remove('username')
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
-            ->add('address', TextType::class)
-            ->add('zipcode', TextType::class)
-            ->add('city', TextType::class)
-            ->add('phone', TextType::class)
+            ->add('address', TextType::class, [
+                'required' => false,
+            ])
+            ->add('zipcode', TextType::class, [
+                'required' => false,
+            ])
+            ->add('city', TextType::class, [
+                'required' => false,
+            ])
+            ->add('phone', TextType::class, [
+                'required' => false,
+            ])
             ->add('email', EmailType::class)
             ->add('available', ChoiceType::class, array(
                 'choices' => array(

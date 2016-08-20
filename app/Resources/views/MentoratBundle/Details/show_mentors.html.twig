@@ -4,13 +4,7 @@
 
 {% block body %}
 
-    {% for message in app.session.flashbag.get('success') %}
-        <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-check"></i>Information</h4>
-            {{ message }}
-        </div>
-    {% endfor %}
+    {% include ':Elements/UI/Flash:list_flash.html.twig' %}
 
     {% if(app.user.available == false) %}
         <div class="col-md-12">
@@ -26,12 +20,11 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#activity" data-toggle="tab">Activités récentes</a></li>
-                    <li><a href="#student" data-toggle="tab">Suivi Elèves</a></li>
-                    {% if app.user.id == mentor.id %}
+
+                    {% if app.user.id == mentor.id or is_granted('ROLE_ADMIN')%}
+                        <li><a href="#student" data-toggle="tab">Suivi Elèves</a></li>
                         <li><a href="#sessions" data-toggle="tab">Suivi sessions</a></li>
                         <li><a href="#facturation" data-toggle="tab">Suivi facturation</a></li>
-                    {% endif %}
-                    {% if is_granted('ROLE_ADMIN') or app.user == mentor.id %}
                         <li><a href="#settings" data-toggle="tab">Options</a></li>
                     {% endif %}
                 </ul>

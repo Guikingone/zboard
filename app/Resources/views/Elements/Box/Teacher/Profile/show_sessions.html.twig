@@ -7,7 +7,7 @@
             {% for sessions in mentor.sessions|reverse %}
                 <li class="time-label">
                                         <span class="bg-red">
-                                            {{ sessions.dateSession|date('d-m-Y') }}
+                                            {{ sessions.dateSession|date('d-m-Y H:i') }}
                                         </span>
                 </li>
                 <li>

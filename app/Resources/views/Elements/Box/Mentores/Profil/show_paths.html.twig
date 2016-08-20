@@ -7,7 +7,7 @@
                 <tr>
                     <th>Intitulé du cours</th>
                     <th>Status</th>
-                    {% if is_granted('ROLE_MENTOR') %}
+                    {% if is_granted('ROLE_SUPERVISEUR_ADMIN') or mentore.suivi.mentor.id == app.user.id %}
                         <th>Modifier</th>
                     {% endif %}
                 </tr>

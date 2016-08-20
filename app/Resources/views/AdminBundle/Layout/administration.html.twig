@@ -117,6 +117,17 @@
                                     <li><a href="{{ path('gestion_abonnements') }}"><i class="fa fa-circle-o"></i>Gestion des abonnements</a></li>
                                 </ul>
                             </li>
+                            <li class="{{ (controller == "facturation")? "active" : "" }} treeview">
+                                <a href="#">
+                                    <i class="fa fa-credit-card"></i> <span>Facturation</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#"><i class="fa fa-circle-o"></i>Gestion de la facturation</a></li>
+                                </ul>
+                            </li>
                             <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-dashboard"></i>

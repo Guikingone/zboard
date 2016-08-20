@@ -91,6 +91,13 @@ class Mentore extends BaseUser
     private $archived;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="available", type="boolean")
+     */
+    private $available;
+
+    /**
      * @ORM\OneToOne(targetEntity="MentoratBundle\Entity\Suivi", mappedBy="mentore", cascade={ "persist", "remove" })
      */
     private $suivi;
@@ -333,6 +340,30 @@ class Mentore extends BaseUser
     public function getArchived()
     {
         return $this->archived;
+    }
+
+    /**
+     * Set available
+     *
+     * @param boolean $available
+     *
+     * @return Mentore
+     */
+    public function setAvailable($available)
+    {
+        $this->available = $available;
+
+        return $this;
+    }
+
+    /**
+     * Get available
+     *
+     * @return boolean
+     */
+    public function getAvailable()
+    {
+        return $this->available;
     }
 
     /**
