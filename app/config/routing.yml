@@ -28,6 +28,11 @@ admin:
     type:     annotation
     prefix:   /admin3744
 
+facturation:
+    resource: "@FacturationBundle/Controller/"
+    type:     annotation
+    prefix:   /facturation
+
 notification:
     resource: "@NotificationBundle/Controller/"
     type:     annotation
