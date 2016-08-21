@@ -291,13 +291,18 @@ class MentoratService
      *
      * @param $id       | The id of the session.
      * @param $choice   | The choice used by the teacher.
+     * @param $mentore  | The mentore linked to this session.
      */
-    public function changeStatutSession($id, $choice)
+    public function changeStatutSession($id, $choice, $mentore)
     {
         $session = $this->doctrine->getRepository('MentoratBundle:Sessions')->findOneBy(array('id' => $id));
 
+        $mentore = $this->doctrine->getRepository('UserBundle:Mentore')->findOneBy(array('id' => $mentore));
+
         if (null === $session) {
             throw new Exception('La session ne semble pas exister.');
+        } elseif ($mentore != $session->getMentore()) {
+            throw new Exception('Le mentore ne semble pas être du coin, veuillez trouver charlie !');
         }
 
         switch ($choice) {
@@ -322,6 +327,9 @@ class MentoratService
 
         $event = new StudentNotificationEvent($session->getMentore(), 'La session a changer de statut.', 'Information');
         $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
+
+        $eventUser = new UserNotificationEvent($session->getMentor(), 'La session a changer de statut', 'Information');
+        $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $eventUser);
     }
 
     /**

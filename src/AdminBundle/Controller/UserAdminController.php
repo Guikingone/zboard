@@ -18,6 +18,8 @@ class UserAdminController extends Controller
      * @Template("AdminBundle/Action/list_users.html.twig")
      * @Method({"GET", "POST"})
      *
+     * @param Request $request
+     *
      * @return array
      */
     public function indexAction(Request $request)

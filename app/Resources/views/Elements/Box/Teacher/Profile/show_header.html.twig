@@ -22,10 +22,10 @@
                     <b>Nombre d'élèves maximum souhaité : </b> <p class="pull-right">0</p>
                 </li>
                 <li class="list-group-item">
-                    <b>Nombre d'élèves : </b> <p class="pull-right">{{ nbMentores|length }}</p>
+                    <b>Nombre d'élèves : </b> <p class="pull-right">{{ mentor.suivi|length }}</p>
                 </li>
                 <li class="list-group-item">
-                    <b>Nombre de soutenances effectuées : </b> <p class="pull-right">{{ nbSoutenances|length }}</p>
+                    <b>Nombre de soutenances effectuées : </b> <p class="pull-right">{{ mentor.soutenances|length }}</p>
                 </li>
             </ul>
             {% if app.user.id != mentor.id %}

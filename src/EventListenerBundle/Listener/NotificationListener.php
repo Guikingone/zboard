@@ -11,6 +11,7 @@
 
 namespace EventListenerBundle\Listener;
 
+use EventListenerBundle\Event\GlobalNotificationEvent;
 use EventListenerBundle\Event\StudentNotificationEvent;
 use EventListenerBundle\Event\UserNotificationEvent;
 use NotificationBundle\Services\Evenements;
@@ -32,8 +33,14 @@ class NotificationListener
         $this->notif = $notif;
     }
 
-    public function createGlobalEvent()
+    /**
+     * Allow to create a new global notification linked to all the users.
+     *
+     * @param GlobalNotificationEvent $event
+     */
+    public function createGlobalEvent(GlobalNotificationEvent $event)
     {
+        $this->notif->createEvents($event->getLibelle(), $event->getCategorie());
     }
 
     /**

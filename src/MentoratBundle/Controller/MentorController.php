@@ -19,6 +19,8 @@ class MentorController extends Controller
      * @Template("MentoratBundle/Mentors/list_mentors.html.twig")
      * @Method("GET")
      *
+     * @param $page
+     *
      * @return array
      */
     public function listAction($page)
@@ -46,7 +48,6 @@ class MentorController extends Controller
      * @Template("MentoratBundle/Details/show_mentors.html.twig")
      * @Method("GET")
      *
-     * @param Request $request
      * @param $id
      *
      * @return array
@@ -71,6 +72,8 @@ class MentorController extends Controller
      * @Template("UserBundle/Profile/edit.html.twig")
      * @Method("POST")
      *
+     * @param Request $request
+     *
      * @return array
      */
     public function editProfilMentorAction(Request $request)
@@ -94,6 +97,8 @@ class MentorController extends Controller
      * @Route("/indispo/{id}", name="mentor_indispo")
      * @Method("GET")
      *
+     * @param $id
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function mentorIndispoAction($id)
@@ -106,6 +111,8 @@ class MentorController extends Controller
     /**
      * @Route("/dispo/{id}", name="mentor_dispo")
      * @Method({"GET"})
+     *
+     * @param $id
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

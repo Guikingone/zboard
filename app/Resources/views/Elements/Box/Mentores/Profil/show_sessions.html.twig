@@ -29,10 +29,10 @@
                         <br />
                         <br />
                         {% if sessions.mentor == app.user %}
-                            <a href="#" class="fa fa-cog"></a>
-                            <a href="#" class="fa fa-edit"></a>
-                            <a href="#" class="fa fa-check"></a>
-                            <a href="#" class="fa fa-times"></a>
+                            <a href="{{ path('update_status_sessions', {'id': sessions.id, 'choice': 'Validation', 'mentore': sessions.mentore.id}) }}" class="ion-checkmark-circled"></a>
+                            <a href="{{ path('update_status_sessions', {'id': sessions.id, 'choice': 'Annulation', 'mentore': sessions.mentore.id}) }}" class="ion-close-circled"></a>
+                            <a href="{{ path('update_status_sessions', {'id': sessions.id, 'choice': 'Absent', 'mentore': sessions.mentore.id }) }}" class="ion-help-circled"></a>
+                            <a href="{{ path('update_status_sessions', {'id': sessions.id, 'choice': 'No Show', 'mentore': sessions.mentore.id}) }}" class="ion-alert-circled"></a>
                         {% endif %}
                     </div>
                 </div>

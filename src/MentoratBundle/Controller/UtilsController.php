@@ -61,7 +61,7 @@ class UtilsController extends Controller
     }
 
     /**
-     * @Route("/sessions/update/{id}/{choice}", name="update_status_sessions")
+     * @Route("/sessions/update/{id}/{choice}/{mentore}", name="update_status_sessions")
      * @Method({"GET", "POST"})
      *
      * @param $id
@@ -69,10 +69,10 @@ class UtilsController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function updateSessionsStatusAction($id, $choice)
+    public function updateSessionsStatusAction($id, $choice, $mentore)
     {
-        $this->get('core.mentorat')->changeStatutSession($id, $choice);
+        $this->get('core.mentorat')->changeStatutSession($id, $choice, $mentore);
 
-        return $this->redirectToRoute('mentorat_dashboard_index');
+        return $this->redirectToRoute('show_details_mentore', array('id' => $mentore));
     }
 }
