@@ -70,6 +70,7 @@ class MentoreController extends Controller
     /**
      * @Route("/details/{id}", name="show_details_mentore")
      * @Template("MentoratBundle/Details/show_mentores.html.twig")
+     * @Method({"GET", "POST"})
      *
      * @param Request $request
      * @param $id
@@ -82,6 +83,10 @@ class MentoreController extends Controller
         $note = $this->get('core.mentorat')->addNote($request, $id);
         $sessions = $this->get('core.mentorat')->addSessionMentorat($request, $id);
         $soutenance = $this->get('core.mentorat')->askSoutenance($request, $id);
+
+        if ($note->isValid() || $sessions->isValid() || $soutenance->isValid()) {
+            return $this->redirectToRoute("show_details_mentore", array('id' => $id));
+        }
 
         return array(
             'controller' => 'mentore',

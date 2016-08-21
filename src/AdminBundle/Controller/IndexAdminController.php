@@ -50,6 +50,7 @@ class IndexAdminController extends Controller
     /**
      * @Route("/country", name="gestion_country")
      * @Template("AdminBundle/Action/list_country.html.twig")
+     * @Method({"GET", "POST"})
      *
      * @param Request $request
      *
@@ -58,6 +59,11 @@ class IndexAdminController extends Controller
     public function addCountryAction(Request $request)
     {
         $country = $this->get('core.admin')->addCountry($request);
+
+        if ($country->isValid()) {
+            return $this->redirectToRoute('gestion_country');
+        }
+
         $countrys = $this->get('core.admin')->getCountry();
 
         return array(
@@ -89,6 +95,7 @@ class IndexAdminController extends Controller
     /**
      * @Route("/show/abonnements", name="gestion_abonnements")
      * @Template("AdminBundle/Action/list_abonnements.html.twig")
+     * @Method({"GET", "POST"})
      *
      * @param Request $request
      *
@@ -97,6 +104,11 @@ class IndexAdminController extends Controller
     public function showAbonnementsAction(Request $request)
     {
         $abonnement = $this->get('core.admin')->addAbonnement($request);
+
+        if($abonnement->isValid()) {
+            return $this->redirectToRoute('gestion_abonnements');
+        }
+
         $abonnements = $this->get('core.admin')->getAbonnements();
 
         return array(

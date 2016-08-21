@@ -70,6 +70,7 @@ class MentorController extends Controller
     /**
      * @Route("/profile/edit", name="zboard_teacher_profile_edit")
      * @Template("UserBundle/Profile/edit.html.twig")
+     * @Method("POST")
      *
      * @return array
      */
@@ -77,6 +78,10 @@ class MentorController extends Controller
     {
         $user = $this->get('core.user')->updateUserProfile($request, $this->getUser());
         $competence = $this->get('core.user')->addCompetencesMentor($request, $this->getUser());
+
+        if($user->isValid() || $competence->isValid()) {
+            return $this->redirectToRoute("show_details_mentor", array('id' => $this->getUser()));
+        }
 
         return array(
             'user' => $user->createView(),
@@ -88,6 +93,7 @@ class MentorController extends Controller
 
     /**
      * @Route("/indispo/{id}", name="mentor_indispo")
+     * @Method("GET")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

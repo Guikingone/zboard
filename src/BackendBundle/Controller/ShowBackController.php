@@ -22,6 +22,11 @@ class ShowBackController extends Controller
     public function showMentorsAction(Request $request)
     {
         $mentor = $this->get('core.user')->addMentor($request);
+
+        if ($mentor->isValid()) {
+            return $this->redirectToRoute('gestion_mentors');
+        }
+
         $mentors = $this->get('core.user')->getMentors();
 
         return array(
@@ -43,6 +48,11 @@ class ShowBackController extends Controller
     public function showMentoreAction(Request $request)
     {
         $mentore = $this->get('core.user')->addMentore($request);
+
+        if($mentore->isValid()) {
+            return $this->redirectToRoute('gestion_mentores');
+        }
+
         $mentores = $this->get('core.user')->getMentores();
 
         return array(
@@ -127,6 +137,10 @@ class ShowBackController extends Controller
         $projet = $this->get('core.admin')->addProject($request, $id);
         $cours = $this->get('core.admin')->addCours($request, $id);
         $competences = $this->get('core.admin')->addCompetences($request);
+
+        if ($cours->isValid() || $competences->isValid()) {
+            return $this->redirectToRoute('show_parcours', array('id' => $id));
+        }
 
         return array(
             'controller' => 'parcours',

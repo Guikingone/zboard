@@ -27,6 +27,10 @@ class UserAdminController extends Controller
         $mentor = $this->get('core.user')->addMentor($request);
         $mentore = $this->get('core.user')->addMentore($request);
 
+        if ($mentor->isValid() || $mentore->isValid()) {
+            return $this->redirectToRoute('gestion_users_admin');
+        }
+
         return array(
             'controller' => 'users_admin',
             'users' => $users,
