@@ -21,25 +21,27 @@ services:
         class: EventListenerBundle\Listener\NotificationListener
         arguments: ["@core.events"]
         tags:
-            - { name: kernel.event_listener, event: zboard.create_user, method: createUserEvent }
+            - { name: kernel.event_listener, event: zboard.user_notifications, method: createUserEvent }
+            - { name: kernel.event_listener, event: zboard.student_notification, method: createStudentEvent }
+            - { name: kernel.event_listener, event: zboard.global_notification, method: createGlobalEvent }
 
     # List of services used in the principal environnement.
 
     core.admin:
         class: AdminBundle\Services\Admin
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@core.events"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@event_dispatcher"]
 
     core.back:
         class: BackendBundle\Services\Back
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session","@security.token_storage","@security.authorization_checker", "@core.events"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session","@security.token_storage","@security.authorization_checker", "@event_dispatcher"]
 
     core.user:
         class: UserBundle\Services\UserService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events", "@core.mail", "@security.authorization_checker", "@event_dispatcher"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.mail", "@security.authorization_checker", "@event_dispatcher"]
 
     core.security:
         class: SecuriteBundle\Services\SecurityService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@core.events", "@security.authorization_checker"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.authorization_checker", "@event_dispatcher"]
 
     core.activity:
         class: AdminBundle\Services\ActivityManager
@@ -49,7 +51,7 @@ services:
 
     core.archive:
         class: AdminBundle\Services\Archive
-        arguments: ["@doctrine.orm.entity_manager", "@session", "@core.events"]
+        arguments: ["@doctrine.orm.entity_manager", "@session", "@event_dispatcher"]
 
     core.statistiques:
         class: AdminBundle\Services\Statistiques
@@ -58,7 +60,7 @@ services:
 
     core.mentorat:
         class: MentoratBundle\Services\MentoratService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.events", "@security.authorization_checker"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@security.authorization_checker", "@event_dispatcher"]
 
     core.formation:
       class: MentoratBundle\Services\FormationService
@@ -66,7 +68,7 @@ services:
 
     core.recrutement:
       class: MentoratBundle\Services\RecrutementService
-      arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@security.token_storage", "@security.authorization_checker","@core.mail"]
+      arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@security.token_storage", "@security.authorization_checker", "@core.mail"]
 
     # List of services used in order to perform a specific action.
 
@@ -86,7 +88,7 @@ services:
         lazy: true
 
     # List of services used to registrer the users with FOS.
-    # Dont delete this services !
+    # Don't delete this services !
 
     core.user_register:
         class: UserBundle\Form\Type\User\RegistrationType

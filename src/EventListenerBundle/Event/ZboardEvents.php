@@ -14,11 +14,25 @@ namespace EventListenerBundle\Event;
 final class ZboardEvents
 {
     /**
-     * Allow to notify the user when his account is created and activated.
+     * Allow to notify the user.
      *
-     * @Event("EventListenerBundle\Event\NotificationEvent")
+     * @Event("EventListenerBundle\Event\UserNotificationEvent")
      */
-    const CREATE_USER = 'zboard.create_user';
+    const USER_NOTIFICATION = 'zboard.user_notifications';
+
+    /**
+     * Allow to notify the student.
+     *
+     * @Event("EventListenerBundle\Event\StudentNotificationEvent")
+     */
+    const STUDENT_NOTIFICATION = 'zboard.student_notification';
+
+    /**
+     * Allow to notify all the teachers and students about something.
+     *
+     * @Event("EventListenerBundle\Event\GlobalNotificationEvent")
+     */
+    const GLOBAL_NOTIFICATION = 'zboard.global_notification';
 
     /**
      * Allow to notify all the teacher and admin's that the process of facturation has been launched.
@@ -26,11 +40,6 @@ final class ZboardEvents
      * @Event("/EventListenerBundle\Event\FacturationEvent")
      */
     const FACTURATION_LAUNCHED = 'zboard.facturation_launched';
-
-    /**
-     * Allow to notify the student when his account is created and activated.
-     */
-    const CREATE_STUDENT = 'zboard.create_student';
 
     /**
      * Allow to notify the teacher and the student that a new soutenance has been created.

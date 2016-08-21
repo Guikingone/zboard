@@ -47,6 +47,13 @@ class Cours
     private $status;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="archived", type="boolean")
+     */
+    private $archived;
+
+    /**
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours", inversedBy="cours")
      */
     private $parcours;
@@ -155,6 +162,30 @@ class Cours
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set archived.
+     *
+     * @param bool $archived
+     *
+     * @return Cours
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+
+        return $this;
+    }
+
+    /**
+     * Get archived.
+     *
+     * @return bool
+     */
+    public function getArchived()
+    {
+        return $this->archived;
     }
 
     /**

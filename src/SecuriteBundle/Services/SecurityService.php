@@ -12,15 +12,18 @@
 namespace SecuriteBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use NotificationBundle\Services\Evenements;
+use EventListenerBundle\Event\StudentNotificationEvent;
+use EventListenerBundle\Event\UserNotificationEvent;
+use EventListenerBundle\Event\ZboardEvents;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use UserBundle\Form\Mentore\UpdateRolesMentoreType;
-use UserBundle\Form\User\UpdateRolesUserType;
+use UserBundle\Form\Type\Mentore\UpdateRolesMentoreType;
+use UserBundle\Form\Type\User\UpdateRolesUserType;
 
 class SecurityService
 {
@@ -40,30 +43,31 @@ class SecurityService
     private $session;
 
     /**
-     * @var Evenements
-     */
-    private $events;
-
-    /**
      * @var AuthorizationChecker
      */
     private $security;
 
     /**
+     * @var TraceableEventDispatcher
+     */
+    private $evet;
+
+    /**
      * SecurityService constructor.
      *
-     * @param EntityManager        $doctrine
-     * @param Session              $session
-     * @param FormFactory          $form
-     * @param AuthorizationChecker $security
+     * @param EntityManager            $doctrine
+     * @param Session                  $session
+     * @param FormFactory              $form
+     * @param AuthorizationChecker     $security
+     * @param TraceableEventDispatcher $evet
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, Evenements $events, AuthorizationChecker $security)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, AuthorizationChecker $security, TraceableEventDispatcher $evet)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
         $this->session = $session;
-        $this->events = $events;
         $this->security = $security;
+        $this->evet = $evet;
     }
 
     /**
@@ -78,7 +82,7 @@ class SecurityService
         if (null === $mentor) {
             throw new Exception('L\'utilisateur semble ne pas exister.');
         } elseif (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedException('Vous ne passerez pas !');
         }
 
         $mentor->setEnabled(true);
@@ -86,7 +90,9 @@ class SecurityService
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le compte utilisateur a bien été activé.');
-        $this->events->createUserEvents($mentor, 'Votre compte a bien été activé.', 'Important');
+
+        $event = new UserNotificationEvent($mentor, 'Activation de votre compte Zboard', 'Information');
+        $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $event);
     }
 
     /**
@@ -101,7 +107,7 @@ class SecurityService
         if (null === $student) {
             throw new Exception('L\'élève ne semble pas exister');
         } elseif (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedException('Vous ne passerez pas !');
         }
 
         $student->setEnabled(true);
@@ -109,7 +115,9 @@ class SecurityService
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le compte élève a bien été activé.');
-        $this->events->createMentoreEvents($student, 'Votre compte a bien été crée.', 'Important');
+
+        $event = new StudentNotificationEvent($student, 'Activation de votre compte', 'Information');
+        $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
     }
 
     /**
@@ -127,7 +135,7 @@ class SecurityService
         if (null === $user) {
             throw new Exception("L'utilisateur ne semble pas exister.");
         } elseif (false === $this->security->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedException('Vous ne passerez pas !');
         }
 
         $form = $this->form->create(UpdateRolesUserType::class, $user);
@@ -136,7 +144,9 @@ class SecurityService
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', "Le rôle de l'utilisateur a bien été mis à jour");
-            $this->events->createUserEvents($user, 'Modifications de vos accès', 'Important');
+
+            $event = new UserNotificationEvent($user, 'Vos accès ont été modifiés.', 'Important');
+            $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $event);
         }
 
         return $form;
@@ -166,7 +176,9 @@ class SecurityService
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le rôle du mentoré a bien été mis à jour');
-            $this->events->createUserEvents($mentore, 'Modifications de vos accès', 'Important');
+
+            $event = new StudentNotificationEvent($mentore, 'Vos accès ont été modifiés.', 'Important');
+            $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
         }
 
         return $form;

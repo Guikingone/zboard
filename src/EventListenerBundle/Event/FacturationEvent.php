@@ -12,9 +12,7 @@
 namespace EventListenerBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use UserBundle\Entity\User;
 
 class FacturationEvent extends Event
 {
-
 }

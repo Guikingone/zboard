@@ -2,6 +2,7 @@
 
 namespace BackendBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -52,6 +53,7 @@ class ShowBackController extends Controller
     /**
      * @Route("/list/soutenances", name="gestion_soutenances")
      * @Template("BackBundle/Action/list_soutenances.html.twig")
+     * @Method({"GET", "POST"})
      *
      * @param Request $request
      *
@@ -60,6 +62,11 @@ class ShowBackController extends Controller
     public function showSoutenancesMentorsAction(Request $request)
     {
         $soutenance = $this->get('core.mentorat')->addSoutenance($request);
+
+        if ($soutenance->isValid()) {
+            return $this->redirectToRoute('gestion_soutenances');
+        }
+
         $soutenancesWaiting = $this->get('core.statistiques')->getSoutenancesWaiting();
         $soutenancesAsked = $this->get('core.statistiques')->getDemandesSoutenances();
         $soutenancesInProgress = $this->get('core.statistiques')->getSoutenancesInProgress();
@@ -78,6 +85,7 @@ class ShowBackController extends Controller
     /**
      * @Route("/list/parcours", name="gestion_parcours")
      * @template("BackBundle/Action/list_parcours.html.twig")
+     * @Method({"GET", "POST"})
      *
      * @param Request $request
      *
@@ -87,6 +95,11 @@ class ShowBackController extends Controller
     {
         $parcours = $this->get('core.admin')->addParcours($request);
         $abonnement = $this->get('core.admin')->addAbonnement($request);
+
+        if ($parcours->isValid() || $abonnement->isValid()) {
+            return $this->redirectToRoute('gestion_parcours');
+        }
+
         $path = $this->get('core.statistiques')->getParcours();
 
         return array(

@@ -14,13 +14,15 @@ namespace BackendBundle\Services;
 
 use BackendBundle\Entity\InformationMentorat;
 use Doctrine\ORM\EntityManager;
-use NotificationBundle\Services\Evenements;
+use EventListenerBundle\Event\GlobalNotificationEvent;
+use EventListenerBundle\Event\ZboardEvents;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use BackendBundle\Entity\Tutoriel;
 use MentoratBundle\Form\Type\Add\InformationType;
 use MentoratBundle\Form\Type\Add\TutorielType;
+use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -48,25 +50,26 @@ class Back
     protected $authorizationChecker;
 
     /**
-     * @var Evenements
+     * @var TraceableEventDispatcher
      */
-    private $events;
+    private $evet;
 
     /**
      * Back constructor.
      *
-     * @param EntityManager $doctrine
-     * @param FormFactory   $formFactory
-     * @param Session       $session
+     * @param EntityManager            $doctrine
+     * @param FormFactory              $formFactory
+     * @param Session                  $session
+     * @param TraceableEventDispatcher $evet
      */
-    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Session $session, TokenStorage $user, AuthorizationCheckerInterface $authorizationChecker, Evenements $events)
+    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Session $session, TokenStorage $user, AuthorizationCheckerInterface $authorizationChecker, TraceableEventDispatcher $evet)
     {
         $this->doctrine = $doctrine;
         $this->formFactory = $formFactory;
         $this->session = $session;
         $this->user = $user;
         $this->authorizationChecker = $authorizationChecker;
-        $this->events = $events;
+        $this->evet = $evet;
     }
 
     /**
@@ -105,7 +108,7 @@ class Back
 
         if ($form->isValid()) {
             if (false === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
-                throw new AccessDeniedException();
+                throw new AccessDeniedException('Vous ne passerez pas !');
             }
 
             $information->setDCreated(new \DateTime('now'));
@@ -114,7 +117,9 @@ class Back
             $this->doctrine->persist($information);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Information ajouté.');
-            $this->events->createEvents("Création d'une nouvelle information", 'Information');
+
+            $event = new GlobalNotificationEvent('Nouvelle information créée !', 'Important');
+            $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
         }
 
         return $form;
@@ -142,7 +147,9 @@ class Back
             $this->doctrine->persist($tutoriel);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Tutoriel ajouté.');
-            $this->events->createEvents("Création d'un nouveau tutoriel", 'Important');
+
+            $event = new GlobalNotificationEvent('Nouveau tutoriel.', 'Important');
+            $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
         }
 
         return $form;
@@ -151,7 +158,7 @@ class Back
     /**
      * Counts the number of visible informations.
      *
-     * @return int | The numbrer of informations published.
+     * @return int
      */
     public function countInfos()
     {

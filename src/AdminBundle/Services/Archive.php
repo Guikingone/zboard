@@ -12,9 +12,13 @@
 namespace AdminBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use NotificationBundle\Services\Evenements;
+use EventListenerBundle\Event\GlobalNotificationEvent;
+use EventListenerBundle\Event\StudentNotificationEvent;
+use EventListenerBundle\Event\UserNotificationEvent;
+use EventListenerBundle\Event\ZboardEvents;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 
 class Archive
 {
@@ -29,9 +33,9 @@ class Archive
     protected $session;
 
     /**
-     * @var Evenements
+     * @var TraceableEventDispatcher
      */
-    private $events;
+    private $evet;
 
     /**
      * Archive constructor.
@@ -39,11 +43,11 @@ class Archive
      * @param EntityManager $doctrine
      * @param Session       $session
      */
-    public function __construct(EntityManager $doctrine, Session $session, Evenements $events)
+    public function __construct(EntityManager $doctrine, Session $session, TraceableEventDispatcher $evet)
     {
         $this->doctrine = $doctrine;
         $this->session = $session;
-        $this->events = $events;
+        $this->evet = $evet;
     }
 
     /**
@@ -87,15 +91,19 @@ class Archive
         $mentor = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
 
         if (null === $mentor) {
-            throw new NotFoundHttpException('Le mentor ne semble pas exister ou être déjà archivé.');
+            throw new Exception('Le mentor ne semble pas exister ou être déjà archivé.');
         }
 
         $mentor->setArchived(true);
         $mentor->setAvailable(false);
+        $mentor->setEnabled(false);
 
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le mentor a bien été archivé.');
+
+        $event = new UserNotificationEvent($mentor, 'Votre compte a été archivé et vos accès coupés.', 'Important');
+        $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $event);
     }
 
     /**
@@ -109,15 +117,19 @@ class Archive
         $mentore = $this->doctrine->getRepository('UserBundle:Mentore')->findOneBy(array('id' => $id));
 
         if (null === $mentore) {
-            throw new NotFoundHttpException('Le mentore ne semble pas exister ou être déjà archivé.');
+            throw new Exception('Le mentore ne semble pas exister ou être déjà archivé.');
         }
 
         $mentore->setArchived(true);
         $mentore->setAvailable(false);
+        $mentore->setEnabled(false);
 
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le mentore a bien été archivé.');
+
+        $event = new StudentNotificationEvent($mentore, 'Votre compte a été archivé et vos accès coupés.', 'Important');
+        $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
     }
 
     /**
@@ -130,7 +142,7 @@ class Archive
         $parcours = $this->doctrine->getRepository('BackendBundle:Parcours')->findOneBy(array('id' => $id));
 
         if (null === $parcours) {
-            throw new NotFoundHttpException('Le parcours ne semble pas exister ou a déjà été archiver.');
+            throw new Exception('Le parcours ne semble pas exister ou a déjà été archiver.');
         }
 
         $parcours->setArchived(true);
@@ -138,7 +150,9 @@ class Archive
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le parcours a bien été archivé.');
-        $this->events->createEvents('Le parcours '.$parcours->getLibelle().' a été archivé.', 'Important');
+
+        $event = new GlobalNotificationEvent('Le parcours '.$parcours->getLibelle().' a été archivé.', 'Important');
+        $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
     }
 
     /**
@@ -151,7 +165,7 @@ class Archive
         $courses = $this->doctrine->getRepository('BackendBundle:Cours')->findOneBy(array('id' => $id));
 
         if (null === $courses) {
-            throw new NotFoundHttpException('Le cours ne semble pas exister ou a déjà été archivé.');
+            throw new Exception('Le cours ne semble pas exister ou a déjà été archivé.');
         }
 
         $courses->setArchived(true);
@@ -159,7 +173,9 @@ class Archive
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le cours a bien été archivé.');
-        $this->events->createEvents('Le cours '.$courses->getLibelle().' a été archivé.', 'Important');
+
+        $event = new GlobalNotificationEvent('Le cours '.$courses->getLibelle().' du parcours '.$courses->getParcours()->getLibelle().' a été archivé.', 'Important');
+        $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
     }
 
     /**
@@ -172,7 +188,7 @@ class Archive
         $projet = $this->doctrine->getRepository('BackendBundle:Projet')->findOneBy(array('id' => $id));
 
         if (null === $projet) {
-            throw new NotFoundHttpException('Le projet ne semble pas exister ou a déjà été archivé.');
+            throw new Exception('Le projet ne semble pas exister ou a déjà été archivé.');
         }
 
         $projet->setArchived(true);
@@ -180,7 +196,9 @@ class Archive
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le projet a bien été archivé.');
-        $this->events->createEvents('Le projet '.$projet->getLibelle().' a été archivé.', 'Important');
+
+        $event = new GlobalNotificationEvent('Le projet '.$projet->getLibelle().' du parcours '.$projet->getParcours()->getLibelle().' a été archivé.', 'Important');
+        $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
     }
 
     /**
@@ -193,7 +211,7 @@ class Archive
         $mentor = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
 
         if (null === $mentor) {
-            throw new NotFoundHttpException('Le mentor ne semble pas exister ou être déjà désarchivé.');
+            throw new Exception('Le mentor ne semble pas exister ou être déjà désarchivé.');
         }
 
         $mentor->setArchived(false);
@@ -202,6 +220,9 @@ class Archive
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le mentor a bien été sorti des archives.');
+
+        $event = new UserNotificationEvent($mentor, 'Votre compte a été désarchivé et vos accès activés.', 'Important');
+        $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $event);
     }
 
     /**
@@ -214,7 +235,7 @@ class Archive
         $mentore = $this->doctrine->getRepository('UserBundle:Mentore')->findOneBy(array('id' => $id));
 
         if (null === $mentore) {
-            throw new NotFoundHttpException('Le mentore ne semble pas exister ou a déjà été désarchivé.');
+            throw new Exception('Le mentore ne semble pas exister ou a déjà été désarchivé.');
         }
 
         $mentore->setArchived(false);
@@ -223,6 +244,9 @@ class Archive
         $this->doctrine->flush();
 
         $this->session->getFlashBag()->add('success', 'Le mentore a bien été sorti des archives.');
+
+        $event = new StudentNotificationEvent($mentore, 'Votre compte a été désarchivé et vos accès activés', 'Important');
+        $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
     }
 
     /**
@@ -234,15 +258,31 @@ class Archive
     {
         $parcours = $this->doctrine->getRepository('BackendBundle:Parcours')->findOneBy(array('id' => $id));
 
+        $projets = $this->doctrine->getRepository('BackendBundle:Projet')
+                                  ->findBy(array('parcours' => $id, 'archived' => true));
+
+        $cours = $this->doctrine->getRepository('BackendBundle:Cours')
+                                ->findBy(array('parcours' => $id, 'archived' => true));
+
         if (null === $parcours) {
-            throw new NotFoundHttpException('Le parcours ne semble pas exister ou a déjà été désarchiver.');
+            throw new Exception('Le parcours ne semble pas exister ou a déjà été désarchiver.');
         }
 
         $parcours->setArchived(false);
 
+        foreach ($projets as $projet) {
+            $projet->setArchived(false);
+        }
+
+        foreach ($cours as $courses) {
+            $courses->setArchived(false);
+        }
+
         $this->doctrine->flush();
 
-        $this->session->getFlashBag()->add('success', 'Le parcours a bien été sorti des archives.');
-        $this->events->createEvents('Le parcours '.$parcours->getLibelle().' a été désarchivé.', 'Important');
+        $this->session->getFlashBag()->add('success', 'Le parcours ainsi que les cours et projets liés ont bien été sorti des archives.');
+
+        $event = new GlobalNotificationEvent('Le parcours '.$parcours->getLibelle().' ainsi que les cours et projets liés ont bien été désarchivé.', 'Important');
+        $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
     }
 }

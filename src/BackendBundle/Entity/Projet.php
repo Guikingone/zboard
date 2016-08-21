@@ -42,6 +42,13 @@ class Projet
     private $status;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="archived", type="boolean")
+     */
+    private $archived;
+
+    /**
      * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Parcours", inversedBy="projet")
      * @ORM\JoinColumn(name="parcours_id", referencedColumnName="id")
      */
@@ -140,6 +147,30 @@ class Projet
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set archived.
+     *
+     * @param bool $archived
+     *
+     * @return Projet
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+
+        return $this;
+    }
+
+    /**
+     * Get archived.
+     *
+     * @return bool
+     */
+    public function getArchived()
+    {
+        return $this->archived;
     }
 
     /**

@@ -14,18 +14,27 @@ namespace EventListenerBundle\Event;
 use Symfony\Component\EventDispatcher\Event;
 use UserBundle\Entity\User;
 
-class NotificationEvent extends Event
+class UserNotificationEvent extends Event
 {
+    /**
+     * @var User
+     */
     protected $user;
 
+    /**
+     * @var string
+     */
     protected $contenu;
 
+    /**
+     * @var string
+     */
     protected $categorie;
 
     /**
      * NotificationEvent constructor.
      *
-     * @param User $user    | The user linked who receive the notification.
+     * @param User $user | The user linked who receive the notification.
      * @param $contenu      | The content of the notification.
      * @param $categorie    | The categorie of the notification.
      */
@@ -36,26 +45,41 @@ class NotificationEvent extends Event
         $this->categorie = $categorie;
     }
 
+    /**
+     * @param $contenu
+     */
     public function setContenu($contenu)
     {
         $this->contenu = $contenu;
     }
 
+    /**
+     * @param $categorie
+     */
     public function setCategorie($categorie)
     {
         $this->categorie = $categorie;
     }
 
+    /**
+     * @return mixed
+     */
     public function getContenu()
     {
         return $this->contenu;
     }
 
+    /**
+     * @return mixed
+     */
     public function getCategorie()
     {
         return $this->categorie;
     }
 
+    /**
+     * @return User
+     */
     public function getUser()
     {
         return $this->user;

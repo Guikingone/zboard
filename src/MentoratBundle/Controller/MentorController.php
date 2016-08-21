@@ -17,6 +17,7 @@ class MentorController extends Controller
     /**
      * @Route("/{page}",name="list_mentors",defaults={"page" = 1})
      * @Template("MentoratBundle/Mentors/list_mentors.html.twig")
+     * @Method("GET")
      *
      * @return array
      */

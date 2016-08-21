@@ -67,7 +67,7 @@ class Evenements
     }
 
     /**
-     * Allow to create a event.
+     * Allow to create a event who's gonna be linked to all teachers|users and students.
      *
      * @param $libelle      | The libelle of the event
      * @param $categorie    | The category of the event
@@ -75,6 +75,8 @@ class Evenements
     public function createEvents($libelle, $categorie)
     {
         $users = $this->doctrine->getRepository('UserBundle:User')->findAll();
+
+        $students = $this->doctrine->getRepository('UserBundle:Mentore')->findAll();
 
         $event = new Events();
 
@@ -84,6 +86,14 @@ class Evenements
             $event->setCategorie($categorie);
             $event->addUser($user);
             $user->addEvent($event);
+        }
+
+        foreach ($students as $student) {
+            $event->setDate(new \DateTime());
+            $event->setLibelle($libelle);
+            $event->setCategorie($categorie);
+            $event->addMentore($student);
+            $student->addEvent($event);
         }
 
         $this->doctrine->persist($event);
