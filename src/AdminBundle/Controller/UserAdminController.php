@@ -45,7 +45,7 @@ class UserAdminController extends Controller
     /**
      * @Route("/update/roles/users/{id}", name="update_roles_users")
      * @Template("AdminBundle/Action/Update/roles_users.html.twig")
-     * @Method("POST")
+     * @Method({"GET", "POST"})
      *
      * @param Request $request
      * @param $id
@@ -66,7 +66,7 @@ class UserAdminController extends Controller
     /**
      * @Route("/update/roles/mentore/{id}", name="update_roles_mentore")
      * @Template("AdminBundle/Action/Update/roles_mentores.html.twig")
-     * @Method("POST")
+     * @Method({"GET", "POST"})
      *
      * @param Request $request
      * @param $id

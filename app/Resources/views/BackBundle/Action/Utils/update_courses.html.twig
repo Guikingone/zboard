@@ -29,7 +29,7 @@
                             </div>
                             <div class="form-group">
                                 {{ form_errors(cours.duree) }}
-                                {{ form_label(cours.duree, 'Durée du projet :')}}
+                                {{ form_label(cours.duree, 'Durée du cours :')}}
                                 {{ form_widget(cours.duree, {'attr': {'class': 'form-control'}}) }}
                             </div>
                             <div class="form-group">
@@ -40,7 +40,7 @@
                         </div>
                         <br>
                         <div class="text-center">
-                            <input class="btn btn-warning" type="submit" value="Enregistrer" />
+                            <input class="btn btn-flat btn-warning" type="submit" value="Enregistrer" />
                         </div>
                         {{ form_end(cours) }}
                     </div>

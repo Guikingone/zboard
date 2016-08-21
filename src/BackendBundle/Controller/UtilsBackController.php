@@ -25,7 +25,7 @@ class UtilsBackController extends Controller
         $mentor = $this->get('core.user')->updateMentors($request, $id);
 
         if ($mentor->isValid()) {
-            return $this->redirectToRoute('show_details_mentor', array('id' => $id));
+            return $this->redirectToRoute('home_backend');
         }
 
         return array(
@@ -49,7 +49,7 @@ class UtilsBackController extends Controller
         $mentore = $this->get('core.user')->updateMentores($request, $id);
 
         if ($mentore->isValid()) {
-            return $this->redirectToRoute('show_details_mentore', array('id' => $id));
+            return $this->redirectToRoute('home_backend');
         }
 
         return array(
@@ -73,7 +73,7 @@ class UtilsBackController extends Controller
         $parcours = $this->get('core.admin')->updateParcours($request, $id);
 
         if ($parcours->isValid()) {
-            return $this->redirectToRoute('show_parcours', array('id' => $id));
+            return $this->redirectToRoute('gestion_parcours');
         }
 
         return array(
@@ -97,7 +97,7 @@ class UtilsBackController extends Controller
         $cours = $this->get('core.admin')->updateCours($request, $id);
 
         if ($cours->isValid()) {
-            return $this->redirectToRoute('show_parcours');
+            return $this->redirectToRoute('gestion_parcours');
         }
 
         return array(
