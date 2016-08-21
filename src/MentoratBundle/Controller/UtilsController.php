@@ -2,6 +2,7 @@
 
 namespace MentoratBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +13,7 @@ class UtilsController extends Controller
     /**
      * @Route("/utils/{id}/courses/update", name="update_status_courses")
      * @Template("MentoratBundle/Action/Utils/update_status_courses.html.twig")
+     * @Method({"GET", "POST"})
      *
      * @param Request $request
      * @param $id
@@ -36,6 +38,7 @@ class UtilsController extends Controller
     /**
      * @Route("/utils/{id}/project/update", name="update_status_project")
      * @Template("MentoratBundle/Action/Utils/update_status_project.html.twig")
+     * @Method({"GET", "POST"})
      *
      * @param Request $request
      * @param $id
@@ -58,7 +61,8 @@ class UtilsController extends Controller
     }
 
     /**
-     * @Route("/sessions/update", name="update_status_sessions")
+     * @Route("/sessions/update/{id}/{choice}", name="update_status_sessions")
+     * @Method({"GET", "POST"})
      *
      * @param $id
      * @param $choice

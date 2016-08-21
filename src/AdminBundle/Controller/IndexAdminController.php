@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,6 +13,7 @@ class IndexAdminController extends Controller
     /**
      * @Route("/", name="home_admin")
      * @Template("AdminBundle/Index/index.html.twig")
+     * @Method("GET")
      *
      * @return array
      */
@@ -68,6 +70,7 @@ class IndexAdminController extends Controller
     /**
      * @Route("/habilitations", name="gestion_habilitations")
      * @Template("AdminBundle/Index/habilitations.html.twig")
+     * @Method("GET")
      *
      * @return array
      */

@@ -13,6 +13,7 @@ class ShowBackController extends Controller
     /**
      * @Route("/list/mentors", name="gestion_mentors")
      * @Template("BackBundle/Action/list_mentors.html.twig")
+     * @Method({"GET", "POST"})
      *
      * @param Request $request
      *
@@ -33,6 +34,7 @@ class ShowBackController extends Controller
     /**
      * @Route("/list/mentore", name="gestion_mentores")
      * @Template("BackBundle/Action/list_mentores.html.twig")
+     * @Method({"GET", "POST"})
      *
      * @param Request $request
      *
@@ -113,6 +115,7 @@ class ShowBackController extends Controller
     /**
      * @Route("/show/path/{id}/details", name="show_parcours")
      * @Template("BackBundle/Details/show_parcours.html.twig")
+     * @Method({"GET", "POST"})
      *
      * @param $id
      *

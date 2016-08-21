@@ -28,9 +28,9 @@ class ArchiveController extends Controller
 
     /**
      * @Route("/archived/out/mentor/{id}", name="out_archive_mentor")
+     * @Method({"GET","PUT"})
      *
      * @param $id
-     * @Method({"GET","PUT"})
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

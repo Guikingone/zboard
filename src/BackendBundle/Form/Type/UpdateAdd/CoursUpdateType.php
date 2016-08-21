@@ -1,6 +1,6 @@
 <?php
 
-namespace BackendBundle\Form\UpdateAdd;
+namespace BackendBundle\Form\Type\UpdateAdd;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

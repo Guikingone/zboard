@@ -23,10 +23,10 @@ use BackendBundle\Form\Type\Update\UpdateCompetencesType;
 use BackendBundle\Form\Type\Update\UpdateProjetType;
 use BackendBundle\Form\Type\Add\CompetencesAddType;
 use BackendBundle\Form\Type\Add\ProjetAddType;
-use BackendBundle\Form\UpdateAdd\ProjetUpdateType;
+use BackendBundle\Form\Type\UpdateAdd\ProjetUpdateType;
 use BackendBundle\Form\Type\Add\AbonnementAddType;
 use BackendBundle\Form\Type\Add\ParcoursAddType;
-use BackendBundle\Form\UpdateAdd\CoursUpdateType;
+use BackendBundle\Form\Type\UpdateAdd\CoursUpdateType;
 use BackendBundle\Form\Type\Update\UpdateCoursType;
 use Doctrine\ORM\EntityManager;
 use EventListenerBundle\Event\GlobalNotificationEvent;
@@ -196,6 +196,7 @@ class Admin
 
         if ($form->isSubmitted() && $form->isValid()) {
             $projet->setParcours($parcours);
+            $projet->setArchived(false);
             $this->doctrine->persist($projet);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Projet ajouté !');
@@ -252,6 +253,7 @@ class Admin
 
         if ($form->isSubmitted() && $form->isValid()) {
             $cours->setParcours($parcours);
+            $cours->setArchived(false);
             $this->doctrine->persist($cours);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le cours a bien été ajouté.');
