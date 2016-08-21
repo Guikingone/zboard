@@ -33,6 +33,7 @@ class LoadProjetsData implements FixtureInterface, ContainerAwareInterface, Orde
 
         $projet->setParcours($parcours);
         $projet->setLibelle('[PROJET] Développez un back-end pour un client');
+        $projet->setArchived(false);
 
         $manager->persist($projet);
         $manager->flush();

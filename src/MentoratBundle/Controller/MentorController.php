@@ -44,15 +44,15 @@ class MentorController extends Controller
     /**
      * @Route("/details/{id}", name="show_details_mentor")
      * @Template("MentoratBundle/Details/show_mentors.html.twig")
+     * @Method("GET")
      *
      * @param Request $request
      * @param $id
      *
      * @return array
      */
-    public function showProfilMentorAction(Request $request, $id)
+    public function showProfilMentorAction($id)
     {
-        $competence = $this->get('core.user')->addCompetencesMentor($request, $id);
         $mentor = $this->get('core.mentorat')->viewMentor($id);
         $nbSoutenances = $this->get('core.mentorat')->countSoutenancesDone($this->getUser());
         $nbMentores = $this->get('core.mentorat')->countMentoreByMentor($this->getUser());
@@ -60,7 +60,6 @@ class MentorController extends Controller
         return array(
             'controller' => 'mentor',
             'mentor' => $mentor,
-            'competence' => $competence->createView(),
             'nbSoutenances' => $nbSoutenances,
             'nbMentores' => $nbMentores,
             'title_action' => 'Détails du mentor :'.$mentor->getFirstname().' '.$mentor->getLastname(),
@@ -79,8 +78,8 @@ class MentorController extends Controller
         $user = $this->get('core.user')->updateUserProfile($request, $this->getUser());
         $competence = $this->get('core.user')->addCompetencesMentor($request, $this->getUser());
 
-        if($user->isValid() || $competence->isValid()) {
-            return $this->redirectToRoute("show_details_mentor", array('id' => $this->getUser()));
+        if ($user->isValid() || $competence->isValid()) {
+            return $this->redirectToRoute('show_details_mentor', array('id' => $this->getUser()));
         }
 
         return array(

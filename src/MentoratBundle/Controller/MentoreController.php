@@ -85,7 +85,7 @@ class MentoreController extends Controller
         $soutenance = $this->get('core.mentorat')->askSoutenance($request, $id);
 
         if ($note->isValid() || $sessions->isValid() || $soutenance->isValid()) {
-            return $this->redirectToRoute("show_details_mentore", array('id' => $id));
+            return $this->redirectToRoute('show_details_mentore', array('id' => $id));
         }
 
         return array(

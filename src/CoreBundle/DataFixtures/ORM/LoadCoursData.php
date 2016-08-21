@@ -35,6 +35,7 @@ class LoadCoursData implements FixtureInterface, ContainerAwareInterface, Ordere
         $cours->setLibelle('Comprendre le web');
         $cours->setStatus(null);
         $cours->setDifficulty('Facile');
+        $cours->setArchived(false);
 
         $manager->persist($cours);
         $manager->flush();

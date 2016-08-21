@@ -16,6 +16,7 @@ class TutorielsController extends Controller
      * @Method({"GET", "POST"})
      *
      * @param Request $request
+     *
      * @return array
      */
     public function indexAction(Request $request)

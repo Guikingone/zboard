@@ -49,7 +49,7 @@ class ShowBackController extends Controller
     {
         $mentore = $this->get('core.user')->addMentore($request);
 
-        if($mentore->isValid()) {
+        if ($mentore->isValid()) {
             return $this->redirectToRoute('gestion_mentores');
         }
 

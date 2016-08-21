@@ -105,7 +105,7 @@ class IndexAdminController extends Controller
     {
         $abonnement = $this->get('core.admin')->addAbonnement($request);
 
-        if($abonnement->isValid()) {
+        if ($abonnement->isValid()) {
             return $this->redirectToRoute('gestion_abonnements');
         }
 

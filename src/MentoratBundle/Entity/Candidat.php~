@@ -31,9 +31,9 @@ class Candidat
     /**
      * @var bool
      *
-     * @ORM\Column(name="is_candidature", type="boolean")
+     * @ORM\Column(name="candidature", type="boolean")
      */
-    private $isCandidature;
+    private $candidature;
 
     /**
      * @var string
@@ -51,12 +51,12 @@ class Candidat
 
     /**
      * @var string
-     * @ORM\OneToMany(targetEntity="RecrutementReponse", mappedBy="idCandidature")
+     * @ORM\OneToMany(targetEntity="RecrutementReponse", mappedBy="idCandidature", cascade={"remove"})
      */
     private $reponses;
 
      /**
-      * @ORM\OneToMany(targetEntity="RecrutementVote", mappedBy="idCandidature")
+      * @ORM\OneToMany(targetEntity="RecrutementVote", mappedBy="candidature", cascade={"remove"})
       */
      protected $votes;
 
@@ -100,6 +100,30 @@ class Candidat
     public function getNom()
     {
         return $this->nom;
+    }
+
+    /**
+     * Set candidature
+     *
+     * @param boolean $candidature
+     *
+     * @return Candidat
+     */
+    public function setCandidature($candidature)
+    {
+        $this->candidature = $candidature;
+
+        return $this;
+    }
+
+    /**
+     * Get candidature
+     *
+     * @return boolean
+     */
+    public function getCandidature()
+    {
+        return $this->candidature;
     }
 
     /**
@@ -148,16 +172,6 @@ class Candidat
     public function getDateCandidature()
     {
         return $this->dateCandidature;
-    }
-
-    /**
-     * Get the value of Votes.
-     *
-     * @return mixed
-     */
-    public function getVotes()
-    {
-        return $this->votes;
     }
 
     public function countVotes()
@@ -220,30 +234,6 @@ class Candidat
     }
 
     /**
-     * Get the value of Is Candidature.
-     *
-     * @return bool
-     */
-    public function getIsCandidature()
-    {
-        return $this->isCandidature;
-    }
-
-    /**
-     * Set the value of Is Candidature.
-     *
-     * @param bool isCandidature
-     *
-     * @return self
-     */
-    public function setIsCandidature($isCandidature)
-    {
-        $this->isCandidature = $isCandidature;
-
-        return $this;
-    }
-
-    /**
      * Add reponse.
      *
      * @param \MentoratBundle\Entity\RecrutementReponse $reponse
@@ -265,29 +255,5 @@ class Candidat
     public function removeReponse(\MentoratBundle\Entity\RecrutementReponse $reponse)
     {
         $this->reponses->removeElement($reponse);
-    }
-
-    /**
-     * Add vote.
-     *
-     * @param \MentoratBundle\Entity\RecrutementVote $vote
-     *
-     * @return Candidat
-     */
-    public function addVote(\MentoratBundle\Entity\RecrutementVote $vote)
-    {
-        $this->votes[] = $vote;
-
-        return $this;
-    }
-
-    /**
-     * Remove vote.
-     *
-     * @param \MentoratBundle\Entity\RecrutementVote $vote
-     */
-    public function removeVote(\MentoratBundle\Entity\RecrutementVote $vote)
-    {
-        $this->votes->removeElement($vote);
     }
 }

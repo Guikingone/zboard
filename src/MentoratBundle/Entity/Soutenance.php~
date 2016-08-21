@@ -61,4 +61,182 @@ class Soutenance
      * @ORM\Column(name="duree_demande", type="string", length=200, nullable=true)
      */
     private $dureeDemande;
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set passedAt.
+     *
+     * @param \DateTime $passedAt
+     *
+     * @return Soutenance
+     */
+    public function setPassedAt($passedAt)
+    {
+        $this->passedAt = $passedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get passedAt.
+     *
+     * @return \DateTime
+     */
+    public function getPassedAt()
+    {
+        return $this->passedAt;
+    }
+
+    /**
+     * Set status.
+     *
+     * @param string $status
+     *
+     * @return Soutenance
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status.
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set dateDemande.
+     *
+     * @param \DateTime $dateDemande
+     *
+     * @return Soutenance
+     */
+    public function setDateDemande($dateDemande)
+    {
+        $this->dateDemande = $dateDemande;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDemande.
+     *
+     * @return \DateTime
+     */
+    public function getDateDemande()
+    {
+        return $this->dateDemande;
+    }
+
+    /**
+     * Set dureeDemande.
+     *
+     * @param string $dureeDemande
+     *
+     * @return Soutenance
+     */
+    public function setDureeDemande($dureeDemande)
+    {
+        $this->dureeDemande = $dureeDemande;
+
+        return $this;
+    }
+
+    /**
+     * Get dureeDemande.
+     *
+     * @return string
+     */
+    public function getDureeDemande()
+    {
+        return $this->dureeDemande;
+    }
+
+    /**
+     * Set projet.
+     *
+     * @param \BackendBundle\Entity\Projet $projet
+     *
+     * @return Soutenance
+     */
+    public function setProjet(\BackendBundle\Entity\Projet $projet = null)
+    {
+        $this->projet = $projet;
+
+        return $this;
+    }
+
+    /**
+     * Get projet.
+     *
+     * @return \BackendBundle\Entity\Projet
+     */
+    public function getProjet()
+    {
+        return $this->projet;
+    }
+
+    /**
+     * Set mentor.
+     *
+     * @param \UserBundle\Entity\User $mentor
+     *
+     * @return Soutenance
+     */
+    public function setMentor(\UserBundle\Entity\User $mentor = null)
+    {
+        $this->mentor = $mentor;
+
+        return $this;
+    }
+
+    /**
+     * Get mentor.
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getMentor()
+    {
+        return $this->mentor;
+    }
+
+    /**
+     * Set mentore.
+     *
+     * @param \UserBundle\Entity\Mentore $mentore
+     *
+     * @return Soutenance
+     */
+    public function setMentore(\UserBundle\Entity\Mentore $mentore = null)
+    {
+        $this->mentore = $mentore;
+
+        return $this;
+    }
+
+    /**
+     * Get mentore.
+     *
+     * @return \UserBundle\Entity\Mentore
+     */
+    public function getMentore()
+    {
+        return $this->mentore;
+    }
 }

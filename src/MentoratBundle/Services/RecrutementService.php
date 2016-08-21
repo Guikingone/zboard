@@ -67,7 +67,7 @@ class RecrutementService
         $candidaturesSimple = array();
         $candidaturesAArbitrer = array();
 
-        $allCandidatures = $this->doctrine->getRepository('MentoratBundle:Candidat')->findBy(array('isCandidature' => true));
+        $allCandidatures = $this->doctrine->getRepository('MentoratBundle:Candidat')->findBy(array('candidature' => true));
 
         foreach ($allCandidatures as $candid) {
             $candid->countVotes();
@@ -108,7 +108,7 @@ class RecrutementService
         $candidaturesSimple = array();
         $candidaturesAArbitrer = array();
 
-        $allCandidatures = $this->doctrine->getRepository('MentoratBundle:Candidat')->findBy(array('isCandidature' => false));
+        $allCandidatures = $this->doctrine->getRepository('MentoratBundle:Candidat')->findBy(array('candidature' => false));
 
         foreach ($allCandidatures as $candid) {
             $candid->countVotes();
@@ -184,8 +184,7 @@ class RecrutementService
             return;
         }
         $vote->setIdUser($this->user->getToken()->getUser());
-        $vote->setIdCandidature($this->doctrine->getRepository('MentoratBundle:Candidat')->find($id));
-        $vote->setIsCandidature(true);
+        $vote->setCandidature($this->doctrine->getRepository('MentoratBundle:Candidat')->find($id));
         $this->doctrine->persist($vote);
 
         $candidature = $this->getCandidature($id);
