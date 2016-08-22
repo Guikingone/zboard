@@ -142,6 +142,11 @@ class User extends BaseUser
     private $activity;
 
     /**
+     * @ORM\OneToMany(targetEntity="FacturationBundle\Entity\Facture", mappedBy="user")
+     */
+    private $factures;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -153,6 +158,7 @@ class User extends BaseUser
         $this->soutenances = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->activity = new ArrayCollection();
+        $this->factures = new ArrayCollection();
     }
 
     /**

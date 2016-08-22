@@ -5,7 +5,7 @@ namespace FacturationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Facture
+ * Facture.
  *
  * @ORM\Table(name="facture")
  * @ORM\Entity(repositoryClass="FacturationBundle\Repository\FactureRepository")
@@ -54,9 +54,8 @@ class Facture
      */
     private $user;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -66,7 +65,7 @@ class Facture
     }
 
     /**
-     * Set libelle
+     * Set libelle.
      *
      * @param string $libelle
      *
@@ -80,7 +79,7 @@ class Facture
     }
 
     /**
-     * Get libelle
+     * Get libelle.
      *
      * @return string
      */
@@ -90,7 +89,7 @@ class Facture
     }
 
     /**
-     * Set dateCreation
+     * Set dateCreation.
      *
      * @param \DateTime $dateCreation
      *
@@ -104,7 +103,7 @@ class Facture
     }
 
     /**
-     * Get dateCreation
+     * Get dateCreation.
      *
      * @return \DateTime
      */
@@ -114,7 +113,7 @@ class Facture
     }
 
     /**
-     * Set dateFacturation
+     * Set dateFacturation.
      *
      * @param \DateTime $dateFacturation
      *
@@ -128,7 +127,7 @@ class Facture
     }
 
     /**
-     * Get dateFacturation
+     * Get dateFacturation.
      *
      * @return \DateTime
      */
@@ -138,7 +137,7 @@ class Facture
     }
 
     /**
-     * Set dateValiditee
+     * Set dateValiditee.
      *
      * @param \DateTime $dateValiditee
      *
@@ -152,7 +151,7 @@ class Facture
     }
 
     /**
-     * Get dateValiditee
+     * Get dateValiditee.
      *
      * @return \DateTime
      */
@@ -162,7 +161,7 @@ class Facture
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param \UserBundle\Entity\User $user
      *
@@ -176,7 +175,7 @@ class Facture
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return \UserBundle\Entity\User
      */

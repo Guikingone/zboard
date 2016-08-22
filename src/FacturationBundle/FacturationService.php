@@ -12,6 +12,7 @@
 namespace FacturationBundle;
 
 use Doctrine\ORM\EntityManager;
+use FacturationBundle\Entity\Facture;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 class FacturationService
@@ -54,6 +55,13 @@ class FacturationService
                         throw new Exception('Aucune session n\'a été trouvée.');
                 }
             }
+
+            $facture = new Facture();
+
+            $facture->setDateCreation(new \DateTime());
+            $facture->setDateValiditee($facture->getDateCreation()->add(new \DateInterval('P8D')));
+            $facture->setUser($user);
+            $user->addFacture($facture);
         }
     }
 }

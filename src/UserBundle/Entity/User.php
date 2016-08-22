@@ -142,6 +142,11 @@ class User extends BaseUser
     private $activity;
 
     /**
+     * @ORM\OneToMany(targetEntity="FacturationBundle\Entity\Facture", mappedBy="user")
+     */
+    private $factures;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -153,6 +158,7 @@ class User extends BaseUser
         $this->soutenances = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->activity = new ArrayCollection();
+        $this->factures = new ArrayCollection();
     }
 
     /**
@@ -680,5 +686,39 @@ class User extends BaseUser
     public function getActivity()
     {
         return $this->activity;
+    }
+
+    /**
+     * Add facture.
+     *
+     * @param \FacturationBundle\Entity\Facture $facture
+     *
+     * @return User
+     */
+    public function addFacture(\FacturationBundle\Entity\Facture $facture)
+    {
+        $this->factures[] = $facture;
+
+        return $this;
+    }
+
+    /**
+     * Remove facture.
+     *
+     * @param \FacturationBundle\Entity\Facture $facture
+     */
+    public function removeFacture(\FacturationBundle\Entity\Facture $facture)
+    {
+        $this->factures->removeElement($facture);
+    }
+
+    /**
+     * Get factures.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFactures()
+    {
+        return $this->factures;
     }
 }
