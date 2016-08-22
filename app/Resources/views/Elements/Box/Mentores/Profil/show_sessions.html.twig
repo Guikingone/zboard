@@ -29,10 +29,35 @@
                         <br />
                         <br />
                         {% if sessions.mentor == app.user %}
-                            <a href="{{ path('update_status_sessions', {'id': sessions.id, 'choice': 'Validation', 'mentore': sessions.mentore.id}) }}" class="ion-checkmark-circled"></a>
-                            <a href="{{ path('update_status_sessions', {'id': sessions.id, 'choice': 'Annulation', 'mentore': sessions.mentore.id}) }}" class="ion-close-circled"></a>
-                            <a href="{{ path('update_status_sessions', {'id': sessions.id, 'choice': 'Absent', 'mentore': sessions.mentore.id }) }}" class="ion-help-circled"></a>
-                            <a href="{{ path('update_status_sessions', {'id': sessions.id, 'choice': 'No Show', 'mentore': sessions.mentore.id}) }}" class="ion-alert-circled"></a>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default">Action</button>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ path('update_status_sessions', {'id': sessions.id, 'choice': 'Validation', 'mentore': sessions.mentore.id}) }}" class="ion-checkmark-circled">
+                                            Valider la présence
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('update_status_sessions', {'id': sessions.id, 'choice': 'Annulation', 'mentore': sessions.mentore.id}) }}" class="ion-close-circled">
+                                            Annuler la session
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('update_status_sessions', {'id': sessions.id, 'choice': 'Absent', 'mentore': sessions.mentore.id }) }}" class="ion-help-circled">
+                                            Absence
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('update_status_sessions', {'id': sessions.id, 'choice': 'No Show', 'mentore': sessions.mentore.id}) }}" class="ion-alert-circled">
+                                            No Show
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         {% endif %}
                     </div>
                 </div>

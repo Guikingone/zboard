@@ -33,10 +33,10 @@ class SuiviRepository extends \Doctrine\ORM\EntityRepository
     public function countMentoreByMentorDisplayed($mentor)
     {
         return $this->createQueryBuilder('s')
-            ->select('COUNT(s)')
-            ->where('s.mentor = :mentor')
-            ->setParameter('mentor', $mentor)
-            ->getQuery()
-            ->getSingleScalarResult();
+                    ->select('COUNT(s)')
+                    ->where('s.mentor = :mentor')
+                        ->setParameter('mentor', $mentor)
+                    ->getQuery()
+                    ->getSingleScalarResult();
     }
 }
