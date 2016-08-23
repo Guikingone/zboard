@@ -45,6 +45,7 @@
                 </ul>
             </li>
             <li class="{{ (controller == 'infos') ? 'active' : '' }} treeview"><a href="{{ path('infos') }}"><i class='fa fa-info-circle'></i> <span>Informations mentorat</span></a></li>
+            <li class="{{ (controller == 'tutorials') ? 'active' : '' }} treeview"><a href="{{ path('mentorat_tutorials_index') }}"><i class='fa fa-folder'></i> <span>Tutoriels</span></a></li>
 
             {% if is_granted('ROLE_MENTOR_EXPERIMENTE') %}
 
