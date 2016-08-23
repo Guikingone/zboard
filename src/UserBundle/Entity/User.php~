@@ -77,7 +77,9 @@ class User extends BaseUser
      *
      * @Assert\Image(
      *     minHeight="250",
-     *     maxHeight="250"
+     *     maxHeight="1000",
+     *     minWidth="250",
+     *     maxWidth="1000"
      * )
      */
     private $profileImage;
@@ -686,5 +688,39 @@ class User extends BaseUser
     public function getActivity()
     {
         return $this->activity;
+    }
+
+    /**
+     * Add facture.
+     *
+     * @param \FacturationBundle\Entity\Facture $facture
+     *
+     * @return User
+     */
+    public function addFacture(\FacturationBundle\Entity\Facture $facture)
+    {
+        $this->factures[] = $facture;
+
+        return $this;
+    }
+
+    /**
+     * Remove facture.
+     *
+     * @param \FacturationBundle\Entity\Facture $facture
+     */
+    public function removeFacture(\FacturationBundle\Entity\Facture $facture)
+    {
+        $this->factures->removeElement($facture);
+    }
+
+    /**
+     * Get factures.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFactures()
+    {
+        return $this->factures;
     }
 }

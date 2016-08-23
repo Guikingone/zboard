@@ -29,6 +29,13 @@ class Facture
     private $libelle;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="state", type="string", length=150, nullable=false)
+     */
+    private $state;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_creation", type="datetime")
@@ -86,6 +93,30 @@ class Facture
     public function getLibelle()
     {
         return $this->libelle;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     *
+     * @return Facture
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 
     /**

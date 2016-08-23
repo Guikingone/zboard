@@ -13,7 +13,7 @@ class UtilsBackController extends Controller
     /**
      * @Route("/utils/{id}/mentors", name="update_mentors")
      * @Template("BackBundle/Action/Utils/update_mentors.html.twig")
-     * @Method({"GET","POST"})
+     * @Method({"GET", "POST"})
      *
      * @param Request $request
      * @param $id
@@ -37,7 +37,7 @@ class UtilsBackController extends Controller
     /**
      * @Route("/utils/{id}/mentores", name="update_mentores")
      * @Template("BackBundle/Action/Utils/update_mentores.html.twig")
-     * @Method({"GET","POST"})
+     * @Method({"GET", "POST"})
      *
      * @param Request $request
      * @param $id

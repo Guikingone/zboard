@@ -1,31 +1,25 @@
 {% if events.categorie == 'Important' %}
     <li>
         <a href="#">
-            <i class="fa fa-warning text-orange"></i> {{ events.libelle }}
+            <i class="ion ion-alert"></i> {{ events.libelle }}
         </a>
     </li>
 {% elseif events.categorie == 'Information' %}
     <li>
         <a href="#">
-            <i class="fa fa-user text-blue"></i> {{ events.libelle }}
-        </a>
-    </li>
-{% elseif events.categorie == 'Mentor' %}
-    <li>
-        <a href="#">
-            <i class="fa fa-information text-red"></i> {{ events.libelle }}
-        </a>
-    </li>
-{% elseif events.categorie == 'Mentore' %}
-    <li>
-        <a href="#">
-            <i class="fa fa-information text-red"></i> {{ events.libelle }}
+            <i class="ion ion-information-circled"></i> {{ events.libelle }}
         </a>
     </li>
 {% elseif events.categorie == 'Danger' %}
     <li>
         <a href="#">
-            <i class="fa fa-information text-red"></i> {{ events.libelle }}
+            <i class="ion ion-alert-circled"></i> {{ events.libelle }}
+        </a>
+    </li>
+{% elseif events.categorie == 'Maintenance' %}
+    <li>
+        <a href="#">
+            <i class="ion ion-wrench"></i> {{ events.libelle }}
         </a>
     </li>
 {% endif %}
