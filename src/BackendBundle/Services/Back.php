@@ -173,8 +173,8 @@ class Back
 
             $this->doctrine->persist($category);
             $this->doctrine->flush();
-            $this->session->getFlashBag()->add('success', 'Catégorie ajouté.');
-            $this->events->createEvents('Nouvelle catégorie ajouté.', 'Information');
+            $this->session->getFlashBag()->add('success', 'Catégorie ajoutée.');
+            $this->events->createEvents('Nouvelle catégorie ajoutée.', 'Information');
         }
 
         return $form;
