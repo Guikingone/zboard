@@ -128,7 +128,7 @@ class RecrutementService
     /**
      * Accept an application.
      */
-    public function acceptApplication($id, $message = '')
+    public function acceptApplication($id)
     {
         $candidature = $this->getCandidature($id);
         $country = $this->doctrine->getRepository('AdminBundle:Country')
@@ -159,7 +159,7 @@ class RecrutementService
     /**
      * Reject an application.
      */
-    public function rejectApplication($id, $message = '')
+    public function rejectApplication($id)
     {
         $candidature = $this->getCandidature($id);
         $this->mail->rejectApplication($candidature->getEmail(), array());
