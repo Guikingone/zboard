@@ -128,7 +128,7 @@ class RecrutementService
     /**
      * Accept an application.
      */
-    public function acceptApplication($id, $message = '')
+    public function acceptApplication($id)
     {
         $candidature = $this->getCandidature($id);
         $country = $this->doctrine->getRepository('AdminBundle:Country')
