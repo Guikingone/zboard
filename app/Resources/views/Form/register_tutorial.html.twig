@@ -18,7 +18,12 @@
                   {{ form_label(tutoriel.link, 'Lien :')}}
                   {{ form_widget(tutoriel.link, {'attr': {'class': 'form-control'}}) }}
                 </div>
-                <br>
+                <div class="form-group">
+                    {{ form_errors(tutoriel.category) }}
+                    {{ form_label(tutoriel.category, 'Categorie :')}}
+                    {{ form_widget(tutoriel.category, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <br />
                 <button type="submit" class="btn btn-flat btn-warning">Ajouter</button>
                 {{ form_end(tutoriel) }}
             </div>

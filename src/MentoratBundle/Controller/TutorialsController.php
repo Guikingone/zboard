@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
-class TutorielsController extends Controller
+class TutorialsController extends Controller
 {
     /**
      * @Route("/tutoriels")
@@ -21,18 +21,20 @@ class TutorielsController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $tutoriel = $this->get('core.back')->addTutorial($request);
+        $tutorial = $this->get('core.back')->addTutorial($request);
+        $category = $this->get('core.back')->addCategory($request);
 
-        if ($tutoriel->isValid()) {
-            return $this->redirectToRoute('mentorat_tutoriels_index');
+        if ($tutorial->isValid()||$category->isValid()) {
+            return $this->redirectToRoute('mentorat_tutorials_index');
         }
 
-        $tutoriels = $this->get('core.back')->getTutorials();
+        $tutorialCategories = $this->get('core.back')->getTutorialCategories();
 
         return array(
             'controller' => 'tutoriels',
-            'tutoriels' => $tutoriels,
-            'tutoriel' => $tutoriel->createView(),
+            'tutorialCategories' => $tutorialCategories,
+            'tutoriel' => $tutorial->createView(),
+            'category' => $category->createView(),
             'title_action' => 'Tutoriels sur le mentorat',
         );
     }

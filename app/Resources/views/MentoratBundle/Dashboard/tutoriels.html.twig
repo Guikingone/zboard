@@ -7,18 +7,31 @@
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalInformation">
             Ajouter un lien vers un tutoriel
         </button>
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalCategory">
+            Créer une catégorie
+        </button>
     </div>
 </div>
 {% endif %}
+<div class="row">
 
-Tutoriels mentorat
-
-<ul>
-{% for tuto in tutoriels %}
-  <a href="{{ tuto.link|e }}"><li>{{ tuto.title|e }}</li></a>
+{% for tutorialCategory in tutorialCategories %}
+  <div class="col-xs-12 col-md-6">
+    <div class="well">
+      <h4>{{tutorialCategory.name}}</h4>
+      <ul>
+        {% for tuto in tutorialCategory.links %}
+        <a href="{{ tuto.link|e }}"><li>{{ tuto.title|e }}</li></a>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 {% endfor %}
-</ul>
+</div>
 
-{% include ':Form:register_tutoriel.html.twig' %}
+
+
+{% include ':Form:register_tutorial.html.twig' %}
+{% include ':Form:register_category.html.twig' %}
 
 {% endblock %}

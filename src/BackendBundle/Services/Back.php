@@ -18,9 +18,11 @@ use NotificationBundle\Services\Evenements;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use BackendBundle\Entity\Tutoriel;
+use MentoratBundle\Entity\Tutorial;
+use MentoratBundle\Entity\TutorialCategory;
 use MentoratBundle\Form\Type\Add\InformationType;
-use MentoratBundle\Form\Type\Add\TutorielType;
+use MentoratBundle\Form\Type\Add\CategoryType;
+use MentoratBundle\Form\Type\Add\TutorialType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -84,11 +86,11 @@ class Back
     /**
      * Allow the back to get all the tutorials.
      *
-     * @return array|\BackendBundle\Entity\InformationMentorat[]
+     * @return array|\Mentorat\Entity\TutorialCategory[]
      */
-    public function getTutorials()
+    public function getTutorialCategories()
     {
-        return $this->doctrine->getRepository('BackendBundle:Tutoriel')->findAll();
+        return $this->doctrine->getRepository('MentoratBundle:TutorialCategory')->findAll();
     }
 
     /**
@@ -131,9 +133,9 @@ class Back
      */
     public function addTutorial(Request $request)
     {
-        $tutoriel = new Tutoriel();
+        $tutoriel = new Tutorial();
 
-        $form = $this->formFactory->create(TutorielType::class, $tutoriel);
+        $form = $this->formFactory->create(TutorialType::class, $tutoriel);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -149,6 +151,35 @@ class Back
 
         return $form;
     }
+
+    /**
+     * Creates a new tutorial category.
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    public function addCategory(Request $request)
+    {
+        $category = new TutorialCategory();
+
+        $form = $this->formFactory->create(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            if (false === $this->authorizationChecker->isGranted('ROLE_SUPERVISEUR_MENTOR')) {
+                throw new AccessDeniedException('Vos droits ne vous permettent pas d\'accéder à cette section.');
+            }
+
+            $this->doctrine->persist($category);
+            $this->doctrine->flush();
+            $this->session->getFlashBag()->add('success', 'Catégorie ajouté.');
+            $this->events->createEvents('Nouvelle catégorie ajouté.', 'Information');
+        }
+
+        return $form;
+    }
+
 
     /**
      * Counts the number of visible informations.

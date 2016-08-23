@@ -1,16 +1,16 @@
 <?php
 
-namespace BackendBundle\Entity;
+namespace MentoratBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Tutoriel.
  *
- * @ORM\Table(name="zboard_tutoriels")
- * @ORM\Entity(repositoryClass="BackendBundle\Repository\TutorielRepository")
+ * @ORM\Table(name="zboard_tutorials")
+ * @ORM\Entity(repositoryClass="MentoratBundle\Repository\TutorialRepository")
  */
-class Tutoriel
+class Tutorial
 {
     /**
      * @var int
@@ -34,6 +34,13 @@ class Tutoriel
      * @ORM\Column(name="link", type="string", length=150)
      */
     private $link;
+
+    /**
+     * @var int
+     * @ORM\JoinColumn(name="category")
+     * @ORM\ManyToOne(targetEntity="TutorialCategory", inversedBy="links")
+     */
+    private $category;
 
     /**
      * Get id.
@@ -92,4 +99,43 @@ class Tutoriel
 
         return $this;
     }
+
+    /**
+     * Set the value of Id
+     *
+     * @param int id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of Category
+     *
+     * @return int
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set the value of Category
+     *
+     * @param int category
+     *
+     * @return self
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
 }
