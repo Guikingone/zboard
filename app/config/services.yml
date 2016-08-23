@@ -90,7 +90,7 @@ services:
     # List of services used in order to perform hard tasks.
 
     core.facturation:
-        class: FacturationBundle\FacturationService
+        class: FacturationBundle\Service\FacturationService
         arguments: ["@doctrine.orm.entity_manager"]
 
     # List of services used to registrer the users with FOS.

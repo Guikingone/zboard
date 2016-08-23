@@ -77,7 +77,9 @@ class User extends BaseUser
      *
      * @Assert\Image(
      *     minHeight="250",
-     *     maxHeight="250"
+     *     maxHeight="1000",
+     *     minWidth="250",
+     *     maxWidth="1000"
      * )
      */
     private $profileImage;

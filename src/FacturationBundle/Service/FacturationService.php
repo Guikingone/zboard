@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace FacturationBundle;
+namespace FacturationBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use FacturationBundle\Entity\Facture;
@@ -36,9 +36,10 @@ class FacturationService
     {
         $mentor = $this->doctrine->getRepository('UserBundle:User')->findAll();
 
+        $sessionFacturables = [];
+
         foreach ($mentor as $user) {
             $sessions = $this->doctrine->getRepository('MentoratBundle:Sessions')->getSessionsbyMentor($user);
-            $sessionFacturables = [];
 
             foreach ($sessions as $session) {
                 switch ($session) {

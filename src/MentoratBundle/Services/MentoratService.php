@@ -235,8 +235,8 @@ class MentoratService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La note a bien été ajoutée.');
 
-            $this->events->createUserEvents($user, 'Une note a bien été ajoutée.', 'information');
-            $this->events->createMentoreEvents($suivi->getMentore(), 'Une note a bien été ajoutée.', 'information');
+            $this->events->createUserEvents($user, 'Une note a bien été ajoutée.', 'Information');
+            $this->events->createMentoreEvents($suivi->getMentore(), 'Une note a bien été ajoutée.', 'Information');
         }
 
         return $form;
@@ -273,8 +273,8 @@ class MentoratService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La session a bien été planifiée.');
 
-            $this->events->createUserEvents($mentor, 'Une session a bien été planifiée.', 'information');
-            $this->events->createMentoreEvents($mentore, 'Une session a bien été planifiée.', 'information');
+            $this->events->createUserEvents($mentor, 'Une session a bien été planifiée.', 'Information');
+            $this->events->createMentoreEvents($mentore, 'Une session a bien été planifiée.', 'Information');
         }
 
         return $form;
@@ -319,8 +319,8 @@ class MentoratService
         $this->doctrine->flush();
         $this->session->getFlashBag()->add('success', 'Le statut de la session a bien été changé.');
 
-        $this->events->createUserEvents($session->getMentor(), 'Le statut de la session a changé.', 'information');
-        $this->events->createMentoreEvents($session->getMentore(), 'Le statut de la session a changé.', 'information');
+        $this->events->createUserEvents($session->getMentor(), 'Le statut de la session a changé.', 'Information');
+        $this->events->createMentoreEvents($session->getMentore(), 'Le statut de la session a changé.', 'Information');
     }
 
     /**
@@ -350,8 +350,8 @@ class MentoratService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le changement de mentor a été effectué.');
 
-            $this->events->createUserEvents($suivi->getMentor(), 'Le transfert de mentor a bien été effectué.', 'information');
-            $this->events->createMentoreEvents($suivi->getMentore(), 'Le transfert de mentor a bien été effectué.', 'information');
+            $this->events->createUserEvents($suivi->getMentor(), 'Le transfert de mentor a bien été effectué.', 'Information');
+            $this->events->createMentoreEvents($suivi->getMentore(), 'Le transfert de mentor a bien été effectué.', 'Information');
         }
 
         return $form;
@@ -381,8 +381,8 @@ class MentoratService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La soutenance a bien été enregistrée.');
 
-            $this->events->createUserEvents($soutenance->getMentor(), 'Une soutenance a bien été planifiée.', 'information');
-            $this->events->createMentoreEvents($soutenance->getMentore(), 'Une soutenance a bien été planifiée.', 'information');
+            $this->events->createUserEvents($soutenance->getMentor(), 'Une soutenance a bien été planifiée.', 'Information');
+            $this->events->createMentoreEvents($soutenance->getMentore(), 'Une soutenance a bien été planifiée.', 'Information');
         }
 
         return $form;
@@ -422,8 +422,8 @@ class MentoratService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La demande de soutenance a bien été envoyée.');
 
-            $this->events->createUserEvents($this->user->getToken()->getUser(), 'Une demande de soutenance a bien été envoyée.', 'information');
-            $this->events->createMentoreEvents($mentore, 'Une demande de soutenance a bien été envoyée.', 'information');
+            $this->events->createUserEvents($this->user->getToken()->getUser(), 'Une demande de soutenance a bien été envoyée.', 'Information');
+            $this->events->createMentoreEvents($mentore, 'Une demande de soutenance a bien été envoyée.', 'Information');
         }
 
         return $form;
