@@ -10,7 +10,6 @@
             <li class="header">Aucune notifications</li>
         {% else %}
             <li class="header">Vous avez {{ app.user.events|length }} notifications en attente</li>
-        {% endif %}
         <li>
             <ul class="menu">
                 {% for events in app.user.events %}
@@ -18,12 +17,9 @@
                     {% include ':Elements/UI/Notifications:notifications_globales.html.twig' %}
 
                 {% endfor %}
-                {% if app.user.events is empty %}
-                    <!-- The footer stay empty -->
-                {% else %}
-                    <li class="footer"><a href="{{ path('show_notifications') }}">Voir les notifications</a></li>
-                {% endif %}
+                <li class="footer"><a href="{{ path('show_notifications') }}">Voir les notifications</a></li>
             </ul>
         </li>
+        {% endif %}
     </ul>
 </li>

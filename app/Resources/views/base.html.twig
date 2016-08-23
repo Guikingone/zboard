@@ -6,13 +6,14 @@
     <title>Zboard{% block title %}{% endblock %}</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     {% block stylesheets %}
-      <link rel="stylesheet" href="{{ asset('css/Boostrap/bootstrap.min.css') }}">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-      <link rel="stylesheet" href="{{ asset('jvectormap/jquery-jvectormap-1.2.2.css') }}">
-      <link rel="stylesheet" href="{{ asset('css/_dist_css/AdminLTE.min.css') }}">
-      <link rel="stylesheet" href="{{ asset('css/_dist_css/skins/_all-skins.min.css') }}">
-      <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+        <!-- Stylesheet -->
+        <link rel="stylesheet" href="{{ asset('css/Boostrap/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" href="{{ asset('jvectormap/jquery-jvectormap-1.2.2.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/_dist_css/AdminLTE.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/_dist_css/skins/_all-skins.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     {% endblock %}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -25,13 +26,16 @@
   <body>
     {% block body %}{% endblock %}
     {% block javascripts %}
-      <script src="{{ asset('js/jquery-2.2.3.min.js') }}"></script>
-      <script src="{{ asset('js/boostrap/bootstrap.min.js') }}"></script>
-      <script src="{{ asset('js/fastclick/fastclick.min.js') }}"></script>
-      <script src="{{ asset('js/_dist_js/app.min.js') }}"></script>
-      <script src="{{ asset('jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
-      <script src="{{ asset('jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
-      <script src="{{ asset('js/slimScroll/jquery.slimscroll.min.js') }}"></script>
+        <!-- Javascript -->
+        <script src="{{ asset('js/jquery-2.2.3.min.js') }}"></script>
+        <script src="{{ asset('js/boostrap/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/fastclick/fastclick.min.js') }}"></script>
+        <script src="{{ asset('js/_dist_js/app.min.js') }}"></script>
+        <script src="{{ asset('js/chartjs/Chart.min.js') }}"></script>
+        <script src="{{ asset('js/sparkline/jquery.sparkline.min.js') }}"></script>
+        <script src="{{ asset('jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
+        <script src="{{ asset('jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+        <script src="{{ asset('js/slimScroll/jquery.slimscroll.min.js') }}"></script>
     {% endblock %}
   </body>
 </html>
