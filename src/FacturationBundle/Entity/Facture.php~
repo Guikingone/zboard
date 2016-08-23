@@ -29,11 +29,11 @@ class Facture
     private $libelle;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="nbr_sessions", type="integer", nullable=false)
+     * @ORM\Column(name="state", type="string", length=150, nullable=false)
      */
-    private $nbrSessions;
+    private $state;
 
     /**
      * @var \DateTime

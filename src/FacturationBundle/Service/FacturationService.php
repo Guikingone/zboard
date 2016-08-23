@@ -71,6 +71,7 @@ class FacturationService
 
             $facture->setDateCreation(new \DateTime());
             $facture->setDateValiditee($facture->getDateCreation()->add(new \DateInterval('P8D')));
+            $facture->setState('En facturationj');
             $facture->setUser($user);
             $user->addFacture($facture);
 
