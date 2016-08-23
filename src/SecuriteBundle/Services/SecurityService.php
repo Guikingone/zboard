@@ -12,9 +12,7 @@
 namespace SecuriteBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use EventListenerBundle\Event\StudentNotificationEvent;
-use EventListenerBundle\Event\UserNotificationEvent;
-use EventListenerBundle\Event\ZboardEvents;
+use NotificationBundle\Services\Evenements;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,7 +48,7 @@ class SecurityService
     /**
      * @var TraceableEventDispatcher
      */
-    private $evet;
+    private $events;
 
     /**
      * SecurityService constructor.
@@ -59,15 +57,15 @@ class SecurityService
      * @param Session                  $session
      * @param FormFactory              $form
      * @param AuthorizationChecker     $security
-     * @param TraceableEventDispatcher $evet
+     * @param Evenements               $events
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, AuthorizationChecker $security, TraceableEventDispatcher $evet)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, AuthorizationChecker $security, Evenements $events)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
         $this->session = $session;
         $this->security = $security;
-        $this->evet = $evet;
+        $this->events = $events;
     }
 
     /**
@@ -91,8 +89,7 @@ class SecurityService
 
         $this->session->getFlashBag()->add('success', 'Le compte utilisateur a bien été activé.');
 
-        $event = new UserNotificationEvent($mentor, 'Activation de votre compte Zboard', 'Information');
-        $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $event);
+        $this->events->createUserEvents($mentor, 'Activation de votre profil.', 'Important');
     }
 
     /**
@@ -116,8 +113,7 @@ class SecurityService
 
         $this->session->getFlashBag()->add('success', 'Le compte élève a bien été activé.');
 
-        $event = new StudentNotificationEvent($student, 'Activation de votre compte', 'Information');
-        $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
+        $this->events->createMentoreEvents($student, 'Activation de votre profil.', 'Important');
     }
 
     /**
@@ -145,8 +141,7 @@ class SecurityService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', "Le rôle de l'utilisateur a bien été mis à jour");
 
-            $event = new UserNotificationEvent($user, 'Vos accès ont été modifiés.', 'Important');
-            $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $event);
+            $this->events->createUserEvents($user, 'Vos accès ont été modifiés.', 'Important');
         }
 
         return $form;
@@ -177,8 +172,7 @@ class SecurityService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le rôle du mentoré a bien été mis à jour');
 
-            $event = new StudentNotificationEvent($mentore, 'Vos accès ont été modifiés.', 'Important');
-            $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
+            $this->events->createMentoreEvents($mentore, 'Vos accès ont été modifiés.', 'Important');
         }
 
         return $form;

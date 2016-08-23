@@ -29,13 +29,11 @@ use BackendBundle\Form\Type\Add\ParcoursAddType;
 use BackendBundle\Form\Type\UpdateAdd\CoursUpdateType;
 use BackendBundle\Form\Type\Update\UpdateCoursType;
 use Doctrine\ORM\EntityManager;
-use EventListenerBundle\Event\GlobalNotificationEvent;
-use EventListenerBundle\Event\ZboardEvents;
 use MentoratBundle\Form\Type\Add\SoutenanceAddType;
+use NotificationBundle\Services\Evenements;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Admin
@@ -56,9 +54,9 @@ class Admin
     private $session;
 
     /**
-     * @var TraceableEventDispatcher
+     * @var Evenements
      */
-    private $evet;
+    private $events;
 
     /**
      * Admin constructor.
@@ -67,12 +65,12 @@ class Admin
      * @param FormFactory   $form
      * @param Session       $session
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TraceableEventDispatcher $evet)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, Evenements $events)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
         $this->session = $session;
-        $this->evet = $evet;
+        $this->events = $events;
     }
 
     /**
@@ -171,8 +169,7 @@ class Admin
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Parcours ajouté !');
 
-            $event = new GlobalNotificationEvent('Création d\'un nouveau parcours.', 'Information');
-            $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
+            $this->events->createEvents('Création d\'un nouveau parcours', 'Information');
         }
 
         return $form;
@@ -201,8 +198,7 @@ class Admin
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Projet ajouté !');
 
-            $event = new GlobalNotificationEvent("Création d'un nouveau projet lié au parcours ".$parcours->getLibelle(), 'Information');
-            $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
+            $this->events->createEvents('Création d\'un nouveau projet lié au parcours ' . $parcours->getLibelle(), 'Information');
         }
 
         return $form;
@@ -227,8 +223,7 @@ class Admin
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Competences ajouté !');
 
-            $event = new GlobalNotificationEvent('Ajout d\'une compétence à valider', 'Information');
-            $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
+            $this->events->createEvents('Création d\'une nouvelle compétence à valider.', 'Information');
         }
 
         return $form;
@@ -258,8 +253,7 @@ class Admin
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le cours a bien été ajouté.');
 
-            $event = new GlobalNotificationEvent('Ajout d\'un cours sur le parcours '.$parcours->getLibelle(), 'Information');
-            $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
+            $this->events->createEvents('Création d\'un nouveau cours sur le parcours ' . $parcours->getLibelle(), 'Information');
         }
 
         return $form;
@@ -333,8 +327,7 @@ class Admin
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le parcours a bien été mis à jour.');
 
-            $event = new GlobalNotificationEvent('Le parcours '.$parcours->getLibelle().' a bien été modifié.', 'Information');
-            $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
+            $this->events->createEvents('Le parcours ' . $parcours->getLibelle() . ' a bien été mis à jour.', 'Information');
         }
 
         return $form;
@@ -363,8 +356,7 @@ class Admin
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le cours a bien été mise à jour.');
 
-            $event = new GlobalNotificationEvent('Le cours '.$cours->getLibelle().' a bien été modifié.', 'Information');
-            $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
+            $this->events->createEvents('Le cours ' . $cours->getLibelle() . ' a bien été mis à jour.', 'Information');
         }
 
         return $form;
@@ -392,9 +384,8 @@ class Admin
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le projet a bien été mis à jour.');
+            $this->events->createEvents('Le projet ' . $projet->getLibelle() . ' a bien été mis à jour.', 'Information');
 
-            $event = new GlobalNotificationEvent('Le projet '.$projet->getLibelle().' a bien été modifié.', 'Information');
-            $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
         }
 
         return $form;
@@ -423,8 +414,7 @@ class Admin
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La compétence a bien été mise à jour');
 
-            $event = new GlobalNotificationEvent('La compétence '.$competences->getLibelle().' a été modifiée.', 'Information');
-            $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
+            $this->events->createEvents('La compétence à valider ' . $competences->getLibelle() . ' a bien été mise à jour.', 'Information');
         }
 
         return $form;

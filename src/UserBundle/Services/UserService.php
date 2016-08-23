@@ -12,16 +12,13 @@
 namespace UserBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use EventListenerBundle\Event\StudentNotificationEvent;
-use EventListenerBundle\Event\UserNotificationEvent;
-use EventListenerBundle\Event\ZboardEvents;
 use MentoratBundle\Entity\Suivi;
 use AdminBundle\Services\Mail;
+use NotificationBundle\Services\Evenements;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -66,9 +63,9 @@ class UserService
     private $security;
 
     /**
-     * @var TraceableEventDispatcher
+     * @var Evenements
      */
-    private $evet;
+    private $events;
 
     /**
      * UserService constructor.
@@ -79,9 +76,9 @@ class UserService
      * @param TokenStorage             $user
      * @param Mail                     $mail
      * @param AuthorizationChecker     $security
-     * @param TraceableEventDispatcher $evet
+     * @param Evenements               $events
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Mail $mail, AuthorizationChecker $security, TraceableEventDispatcher $evet)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Mail $mail, AuthorizationChecker $security, Evenements $events)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
@@ -89,7 +86,7 @@ class UserService
         $this->user = $user;
         $this->mail = $mail;
         $this->security = $security;
-        $this->evet = $evet;
+        $this->events = $events;
     }
 
     /**
@@ -184,8 +181,7 @@ class UserService
             $this->session->getFlashBag()->add('success', 'Mentor enregistré.');
             $this->mail->inscriptionMessage($mentor->getEmail());
 
-            $event = new UserNotificationEvent($mentor, 'Création de votre compte', 'Important');
-            $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $event);
+            $this->events->createUserEvents($mentor, 'Création de votre profil.', 'Important');
         }
 
         return $form;
@@ -225,8 +221,7 @@ class UserService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Elève enregistré.');
 
-            $event = new StudentNotificationEvent($mentore, 'Création de votre profil', 'Important');
-            $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
+            $this->events->createMentoreEvents($mentore, 'Création de votre profil.', 'Important');
         }
 
         return $form;
@@ -259,8 +254,7 @@ class UserService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La compétence a bien été ajoutée.');
 
-            $event = new UserNotificationEvent($mentor, 'Ajout d\'une compétence sur votre profil', 'Important');
-            $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $event);
+            $this->events->createUserEvents($mentor, 'Ajout de la compétence sur votre profil.', 'Important');
         }
 
         return $form;
@@ -293,8 +287,7 @@ class UserService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le mentor a bien été mis à jour');
 
-            $event = new UserNotificationEvent($mentor, 'Modification de votre profil', 'Important');
-            $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $event);
+            $this->events->createUserEvents($mentor, 'Modification de votre profil.', 'Important');
         }
 
         return $form;
@@ -327,8 +320,7 @@ class UserService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le mentore a bien été mis à jour');
 
-            $event = new StudentNotificationEvent($mentore, 'Modification de votre profil', 'Important');
-            $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
+            $this->events->createMentoreEvents($mentore, 'Modification de votre profil.', 'Important');
         }
 
         return $form;
@@ -359,8 +351,7 @@ class UserService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Votre profil a bien été mis à jour.');
 
-            $event = new UserNotificationEvent($user, 'Modification de votre profil enregistré.', 'Important');
-            $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $event);
+            $this->events->createUserEvents($user, 'Modification de votre profil.', 'Important');
         }
 
         return $form;

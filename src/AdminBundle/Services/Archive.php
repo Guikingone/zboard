@@ -12,13 +12,9 @@
 namespace AdminBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use EventListenerBundle\Event\GlobalNotificationEvent;
-use EventListenerBundle\Event\StudentNotificationEvent;
-use EventListenerBundle\Event\UserNotificationEvent;
-use EventListenerBundle\Event\ZboardEvents;
+use NotificationBundle\Services\Evenements;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 
 class Archive
 {
@@ -33,21 +29,22 @@ class Archive
     protected $session;
 
     /**
-     * @var TraceableEventDispatcher
+     * @var Evenements
      */
-    private $evet;
+    private $events;
 
     /**
      * Archive constructor.
      *
      * @param EntityManager $doctrine
      * @param Session       $session
+     * @param Evenements    $events
      */
-    public function __construct(EntityManager $doctrine, Session $session, TraceableEventDispatcher $evet)
+    public function __construct(EntityManager $doctrine, Session $session, Evenements $events)
     {
         $this->doctrine = $doctrine;
         $this->session = $session;
-        $this->evet = $evet;
+        $this->events = $events;
     }
 
     /**
@@ -102,8 +99,7 @@ class Archive
 
         $this->session->getFlashBag()->add('success', 'Le mentor a bien été archivé.');
 
-        $event = new UserNotificationEvent($mentor, 'Votre compte a été archivé et vos accès coupés.', 'Important');
-        $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $event);
+        $this->events->createUserEvents($mentor, 'Votre compte a été archivé et vos accès coupés.', 'Important');
     }
 
     /**
@@ -128,8 +124,7 @@ class Archive
 
         $this->session->getFlashBag()->add('success', 'Le mentore a bien été archivé.');
 
-        $event = new StudentNotificationEvent($mentore, 'Votre compte a été archivé et vos accès coupés.', 'Important');
-        $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
+        $this->events->createMentoreEvents($mentore, 'Votre compte a été archivé et vos accès coupés.', 'Important');
     }
 
     /**
@@ -151,8 +146,7 @@ class Archive
 
         $this->session->getFlashBag()->add('success', 'Le parcours a bien été archivé.');
 
-        $event = new GlobalNotificationEvent('Le parcours '.$parcours->getLibelle().' a été archivé.', 'Important');
-        $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
+        $this->events->createEvents('Le parcours ' . $parcours->getLibelle() . ' a été archivé.', 'information');
     }
 
     /**
@@ -174,8 +168,7 @@ class Archive
 
         $this->session->getFlashBag()->add('success', 'Le cours a bien été archivé.');
 
-        $event = new GlobalNotificationEvent('Le cours '.$courses->getLibelle().' du parcours '.$courses->getParcours()->getLibelle().' a été archivé.', 'Important');
-        $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
+        $this->events->createEvents('Le cours ' . $courses->getLibelle() . ' a été archivé.', 'information');
     }
 
     /**
@@ -197,8 +190,7 @@ class Archive
 
         $this->session->getFlashBag()->add('success', 'Le projet a bien été archivé.');
 
-        $event = new GlobalNotificationEvent('Le projet '.$projet->getLibelle().' du parcours '.$projet->getParcours()->getLibelle().' a été archivé.', 'Important');
-        $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
+        $this->events->createEvents('Le projet ' . $projet->getLibelle() . ' a été archivé.', 'information');
     }
 
     /**
@@ -221,8 +213,7 @@ class Archive
 
         $this->session->getFlashBag()->add('success', 'Le mentor a bien été sorti des archives.');
 
-        $event = new UserNotificationEvent($mentor, 'Votre compte a été désarchivé et vos accès activés.', 'Important');
-        $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $event);
+        $this->events->createUserEvents($mentor, 'Votre compte a été désarchivé et vos accès rouverts', 'information');
     }
 
     /**
@@ -245,8 +236,7 @@ class Archive
 
         $this->session->getFlashBag()->add('success', 'Le mentore a bien été sorti des archives.');
 
-        $event = new StudentNotificationEvent($mentore, 'Votre compte a été désarchivé et vos accès activés', 'Important');
-        $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
+        $this->events->createMentoreEvents($mentore, 'Votre compte a été désarchivé et vos accès rouverts', 'information');
     }
 
     /**
@@ -282,7 +272,6 @@ class Archive
 
         $this->session->getFlashBag()->add('success', 'Le parcours ainsi que les cours et projets liés ont bien été sorti des archives.');
 
-        $event = new GlobalNotificationEvent('Le parcours '.$parcours->getLibelle().' ainsi que les cours et projets liés ont bien été désarchivé.', 'Important');
-        $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
+        $this->events->createEvents('Le parcours ' . $parcours->getLibelle() . ' a été désarchivé ainsi que tout les projet et cours liés.', 'information');
     }
 }

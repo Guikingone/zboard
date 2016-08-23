@@ -27,7 +27,7 @@ class IndexController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function generateFacturation()
+    public function generateFacturationAction()
     {
         return $this->redirectToRoute('home_facturation');
     }

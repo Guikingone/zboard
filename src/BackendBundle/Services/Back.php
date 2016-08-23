@@ -16,6 +16,7 @@ use BackendBundle\Entity\InformationMentorat;
 use Doctrine\ORM\EntityManager;
 use EventListenerBundle\Event\GlobalNotificationEvent;
 use EventListenerBundle\Event\ZboardEvents;
+use NotificationBundle\Services\Evenements;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -50,9 +51,9 @@ class Back
     protected $authorizationChecker;
 
     /**
-     * @var TraceableEventDispatcher
+     * @var Evenements
      */
-    private $evet;
+    private $events;
 
     /**
      * Back constructor.
@@ -60,16 +61,17 @@ class Back
      * @param EntityManager            $doctrine
      * @param FormFactory              $formFactory
      * @param Session                  $session
-     * @param TraceableEventDispatcher $evet
+     * @param TokenStorage             $user
+     * @param AuthorizationCheckerInterface $authorizationChecker
      */
-    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Session $session, TokenStorage $user, AuthorizationCheckerInterface $authorizationChecker, TraceableEventDispatcher $evet)
+    public function __construct(EntityManager $doctrine, FormFactory $formFactory, Session $session, TokenStorage $user, AuthorizationCheckerInterface $authorizationChecker, Evenements $events)
     {
         $this->doctrine = $doctrine;
         $this->formFactory = $formFactory;
         $this->session = $session;
         $this->user = $user;
         $this->authorizationChecker = $authorizationChecker;
-        $this->evet = $evet;
+        $this->events = $events;
     }
 
     /**
@@ -117,9 +119,7 @@ class Back
             $this->doctrine->persist($information);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Information ajouté.');
-
-            $event = new GlobalNotificationEvent('Nouvelle information créée !', 'Important');
-            $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
+            $this->events->createEvents('Nouvelle information ajoutée.', 'Information');
         }
 
         return $form;
@@ -147,9 +147,7 @@ class Back
             $this->doctrine->persist($tutoriel);
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Tutoriel ajouté.');
-
-            $event = new GlobalNotificationEvent('Nouveau tutoriel.', 'Important');
-            $this->evet->dispatch(ZboardEvents::GLOBAL_NOTIFICATION, $event);
+            $this->events->createEvents('Nouveau tutoriel ajouté.', 'Information');
         }
 
         return $form;

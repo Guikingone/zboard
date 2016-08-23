@@ -13,9 +13,6 @@
 namespace MentoratBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use EventListenerBundle\Event\StudentNotificationEvent;
-use EventListenerBundle\Event\UserNotificationEvent;
-use EventListenerBundle\Event\ZboardEvents;
 use MentoratBundle\Entity\Notes;
 use MentoratBundle\Entity\Sessions;
 use MentoratBundle\Entity\Soutenance;
@@ -24,11 +21,11 @@ use MentoratBundle\Form\Type\Add\SoutenanceAddType;
 use MentoratBundle\Form\Type\Ask\AskSoutenanceType;
 use MentoratBundle\Form\Type\Add\SessionsType;
 use MentoratBundle\Form\Type\Update\SuiviUpdateType;
+use NotificationBundle\Services\Evenements;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -61,9 +58,9 @@ class MentoratService
     private $security;
 
     /**
-     * @var TraceableEventDispatcher
+     * @var Evenements
      */
-    private $evet;
+    private $events;
 
     /**
      * MentoratService constructor.
@@ -73,16 +70,16 @@ class MentoratService
      * @param Session                  $session
      * @param TokenStorage             $user
      * @param AuthorizationChecker     $security
-     * @param TraceableEventDispatcher $evet
+     * @param Evenements $events
      */
-    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, AuthorizationChecker $security, TraceableEventDispatcher $evet)
+    public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, AuthorizationChecker $security, Evenements $events)
     {
         $this->doctrine = $doctrine;
         $this->form = $form;
         $this->user = $user;
         $this->session = $session;
         $this->security = $security;
-        $this->evet = $evet;
+        $this->events = $events;
     }
 
     /**
@@ -238,8 +235,8 @@ class MentoratService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La note a bien été ajoutée.');
 
-            $event = new StudentNotificationEvent($suivi->getMentore(), 'Une note a été ajoutée sur votre suivi', 'Important');
-            $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
+            $this->events->createUserEvents($user, 'Une note a bien été ajoutée.', 'information');
+            $this->events->createMentoreEvents($suivi->getMentore(), 'Une note a bien été ajoutée.', 'information');
         }
 
         return $form;
@@ -276,11 +273,8 @@ class MentoratService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La session a bien été planifiée.');
 
-            $eventStudent = new StudentNotificationEvent($mentore, 'Une session a été planifiée.', 'Important');
-            $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $eventStudent);
-
-            $eventUser = new UserNotificationEvent($mentor, 'Une session a été planifiée.', 'Information');
-            $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $eventUser);
+            $this->events->createUserEvents($mentor, 'Une session a bien été planifiée.', 'information');
+            $this->events->createMentoreEvents($mentore, 'Une session a bien été planifiée.', 'information');
         }
 
         return $form;
@@ -325,11 +319,8 @@ class MentoratService
         $this->doctrine->flush();
         $this->session->getFlashBag()->add('success', 'Le statut de la session a bien été changé.');
 
-        $event = new StudentNotificationEvent($session->getMentore(), 'La session a changer de statut.', 'Information');
-        $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
-
-        $eventUser = new UserNotificationEvent($session->getMentor(), 'La session a changer de statut', 'Information');
-        $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $eventUser);
+        $this->events->createUserEvents($session->getMentor(), 'Le statut de la session a changé.', 'information');
+        $this->events->createMentoreEvents($session->getMentore(), 'Le statut de la session a changé.', 'information');
     }
 
     /**
@@ -359,11 +350,8 @@ class MentoratService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le changement de mentor a été effectué.');
 
-            $event = new StudentNotificationEvent($suivi->getMentore(), 'Le changement de mentor a été effectué.', 'Important');
-            $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
-
-            $eventUser = new UserNotificationEvent($suivi->getMentor(), 'Le changement de mentor a été effectué.', 'Important');
-            $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $eventUser);
+            $this->events->createUserEvents($suivi->getMentor(), 'Le transfert de mentor a bien été effectué.', 'information');
+            $this->events->createMentoreEvents($suivi->getMentore(), 'Le transfert de mentor a bien été effectué.', 'information');
         }
 
         return $form;
@@ -393,11 +381,8 @@ class MentoratService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La soutenance a bien été enregistrée.');
 
-            $event = new StudentNotificationEvent($soutenance->getMentore(), 'Une soutenance a été planifiée.', 'Important');
-            $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
-
-            $eventUser = new UserNotificationEvent($soutenance->getMentor(), 'Une soutenance a été planifiée.', 'Important');
-            $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $eventUser);
+            $this->events->createUserEvents($soutenance->getMentor(), 'Une soutenance a bien été planifiée.', 'information');
+            $this->events->createMentoreEvents($soutenance->getMentore(), 'Une soutenance a bien été planifiée.', 'information');
         }
 
         return $form;
@@ -437,11 +422,8 @@ class MentoratService
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La demande de soutenance a bien été envoyée.');
 
-            $event = new StudentNotificationEvent($mentore, 'Une demande de soutenance a été envoyée.', 'Important');
-            $this->evet->dispatch(ZboardEvents::STUDENT_NOTIFICATION, $event);
-
-            $eventUser = new UserNotificationEvent($this->user->getToken()->getUser(), 'Une demande de soutenance a été envoyée.', 'Important');
-            $this->evet->dispatch(ZboardEvents::USER_NOTIFICATION, $eventUser);
+            $this->events->createUserEvents($this->user->getToken()->getUser(), 'Une demande de soutenance a bien été envoyée.', 'information');
+            $this->events->createMentoreEvents($mentore, 'Une demande de soutenance a bien été envoyée.', 'information');
         }
 
         return $form;

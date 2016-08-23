@@ -29,19 +29,19 @@ services:
 
     core.admin:
         class: AdminBundle\Services\Admin
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@event_dispatcher"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@core.events"]
 
     core.back:
         class: BackendBundle\Services\Back
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session","@security.token_storage","@security.authorization_checker", "@event_dispatcher"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage","@security.authorization_checker", "@core.events"]
 
     core.user:
         class: UserBundle\Services\UserService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.mail", "@security.authorization_checker", "@event_dispatcher"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@core.mail", "@security.authorization_checker", "@core.events"]
 
     core.security:
         class: SecuriteBundle\Services\SecurityService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.authorization_checker", "@event_dispatcher"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.authorization_checker", "@core.events"]
 
     core.activity:
         class: AdminBundle\Services\ActivityManager
@@ -51,7 +51,7 @@ services:
 
     core.archive:
         class: AdminBundle\Services\Archive
-        arguments: ["@doctrine.orm.entity_manager", "@session", "@event_dispatcher"]
+        arguments: ["@doctrine.orm.entity_manager", "@session", "@core.events"]
 
     core.statistiques:
         class: AdminBundle\Services\Statistiques
@@ -60,7 +60,7 @@ services:
 
     core.mentorat:
         class: MentoratBundle\Services\MentoratService
-        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@security.authorization_checker", "@event_dispatcher"]
+        arguments: ["@doctrine.orm.entity_manager", "@form.factory", "@session", "@security.token_storage", "@security.authorization_checker", "@core.events"]
 
     core.formation:
       class: MentoratBundle\Services\FormationService
