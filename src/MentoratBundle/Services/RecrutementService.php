@@ -159,7 +159,7 @@ class RecrutementService
     /**
      * Reject an application.
      */
-    public function rejectApplication($id, $message = '')
+    public function rejectApplication($id)
     {
         $candidature = $this->getCandidature($id);
         $this->mail->rejectApplication($candidature->getEmail(), array());
