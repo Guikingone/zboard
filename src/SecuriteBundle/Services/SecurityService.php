@@ -53,11 +53,11 @@ class SecurityService
     /**
      * SecurityService constructor.
      *
-     * @param EntityManager            $doctrine
-     * @param Session                  $session
-     * @param FormFactory              $form
-     * @param AuthorizationChecker     $security
-     * @param Evenements               $events
+     * @param EntityManager        $doctrine
+     * @param Session              $session
+     * @param FormFactory          $form
+     * @param AuthorizationChecker $security
+     * @param Evenements           $events
      */
     public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, AuthorizationChecker $security, Evenements $events)
     {

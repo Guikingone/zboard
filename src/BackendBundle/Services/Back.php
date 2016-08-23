@@ -14,8 +14,6 @@ namespace BackendBundle\Services;
 
 use BackendBundle\Entity\InformationMentorat;
 use Doctrine\ORM\EntityManager;
-use EventListenerBundle\Event\GlobalNotificationEvent;
-use EventListenerBundle\Event\ZboardEvents;
 use NotificationBundle\Services\Evenements;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +21,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use BackendBundle\Entity\Tutoriel;
 use MentoratBundle\Form\Type\Add\InformationType;
 use MentoratBundle\Form\Type\Add\TutorielType;
-use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -58,10 +55,10 @@ class Back
     /**
      * Back constructor.
      *
-     * @param EntityManager            $doctrine
-     * @param FormFactory              $formFactory
-     * @param Session                  $session
-     * @param TokenStorage             $user
+     * @param EntityManager                 $doctrine
+     * @param FormFactory                   $formFactory
+     * @param Session                       $session
+     * @param TokenStorage                  $user
      * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(EntityManager $doctrine, FormFactory $formFactory, Session $session, TokenStorage $user, AuthorizationCheckerInterface $authorizationChecker, Evenements $events)

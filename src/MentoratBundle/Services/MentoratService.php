@@ -65,12 +65,12 @@ class MentoratService
     /**
      * MentoratService constructor.
      *
-     * @param EntityManager            $doctrine
-     * @param FormFactory              $form
-     * @param Session                  $session
-     * @param TokenStorage             $user
-     * @param AuthorizationChecker     $security
-     * @param Evenements $events
+     * @param EntityManager        $doctrine
+     * @param FormFactory          $form
+     * @param Session              $session
+     * @param TokenStorage         $user
+     * @param AuthorizationChecker $security
+     * @param Evenements           $events
      */
     public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, AuthorizationChecker $security, Evenements $events)
     {

@@ -70,13 +70,13 @@ class UserService
     /**
      * UserService constructor.
      *
-     * @param EntityManager            $doctrine
-     * @param FormFactory              $form
-     * @param Session                  $session
-     * @param TokenStorage             $user
-     * @param Mail                     $mail
-     * @param AuthorizationChecker     $security
-     * @param Evenements               $events
+     * @param EntityManager        $doctrine
+     * @param FormFactory          $form
+     * @param Session              $session
+     * @param TokenStorage         $user
+     * @param Mail                 $mail
+     * @param AuthorizationChecker $security
+     * @param Evenements           $events
      */
     public function __construct(EntityManager $doctrine, FormFactory $form, Session $session, TokenStorage $user, Mail $mail, AuthorizationChecker $security, Evenements $events)
     {

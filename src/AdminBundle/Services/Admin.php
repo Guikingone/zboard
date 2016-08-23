@@ -198,7 +198,7 @@ class Admin
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Projet ajouté !');
 
-            $this->events->createEvents('Création d\'un nouveau projet lié au parcours ' . $parcours->getLibelle(), 'Information');
+            $this->events->createEvents('Création d\'un nouveau projet lié au parcours '.$parcours->getLibelle(), 'Information');
         }
 
         return $form;
@@ -253,7 +253,7 @@ class Admin
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le cours a bien été ajouté.');
 
-            $this->events->createEvents('Création d\'un nouveau cours sur le parcours ' . $parcours->getLibelle(), 'Information');
+            $this->events->createEvents('Création d\'un nouveau cours sur le parcours '.$parcours->getLibelle(), 'Information');
         }
 
         return $form;
@@ -327,7 +327,7 @@ class Admin
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le parcours a bien été mis à jour.');
 
-            $this->events->createEvents('Le parcours ' . $parcours->getLibelle() . ' a bien été mis à jour.', 'Information');
+            $this->events->createEvents('Le parcours '.$parcours->getLibelle().' a bien été mis à jour.', 'Information');
         }
 
         return $form;
@@ -356,7 +356,7 @@ class Admin
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le cours a bien été mise à jour.');
 
-            $this->events->createEvents('Le cours ' . $cours->getLibelle() . ' a bien été mis à jour.', 'Information');
+            $this->events->createEvents('Le cours '.$cours->getLibelle().' a bien été mis à jour.', 'Information');
         }
 
         return $form;
@@ -384,8 +384,7 @@ class Admin
         if ($form->isSubmitted() && $form->isValid()) {
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'Le projet a bien été mis à jour.');
-            $this->events->createEvents('Le projet ' . $projet->getLibelle() . ' a bien été mis à jour.', 'Information');
-
+            $this->events->createEvents('Le projet '.$projet->getLibelle().' a bien été mis à jour.', 'Information');
         }
 
         return $form;
@@ -414,7 +413,7 @@ class Admin
             $this->doctrine->flush();
             $this->session->getFlashBag()->add('success', 'La compétence a bien été mise à jour');
 
-            $this->events->createEvents('La compétence à valider ' . $competences->getLibelle() . ' a bien été mise à jour.', 'Information');
+            $this->events->createEvents('La compétence à valider '.$competences->getLibelle().' a bien été mise à jour.', 'Information');
         }
 
         return $form;

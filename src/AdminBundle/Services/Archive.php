@@ -146,7 +146,7 @@ class Archive
 
         $this->session->getFlashBag()->add('success', 'Le parcours a bien été archivé.');
 
-        $this->events->createEvents('Le parcours ' . $parcours->getLibelle() . ' a été archivé.', 'information');
+        $this->events->createEvents('Le parcours '.$parcours->getLibelle().' a été archivé.', 'information');
     }
 
     /**
@@ -168,7 +168,7 @@ class Archive
 
         $this->session->getFlashBag()->add('success', 'Le cours a bien été archivé.');
 
-        $this->events->createEvents('Le cours ' . $courses->getLibelle() . ' a été archivé.', 'information');
+        $this->events->createEvents('Le cours '.$courses->getLibelle().' a été archivé.', 'information');
     }
 
     /**
@@ -190,7 +190,7 @@ class Archive
 
         $this->session->getFlashBag()->add('success', 'Le projet a bien été archivé.');
 
-        $this->events->createEvents('Le projet ' . $projet->getLibelle() . ' a été archivé.', 'information');
+        $this->events->createEvents('Le projet '.$projet->getLibelle().' a été archivé.', 'information');
     }
 
     /**
@@ -272,6 +272,6 @@ class Archive
 
         $this->session->getFlashBag()->add('success', 'Le parcours ainsi que les cours et projets liés ont bien été sorti des archives.');
 
-        $this->events->createEvents('Le parcours ' . $parcours->getLibelle() . ' a été désarchivé ainsi que tout les projet et cours liés.', 'information');
+        $this->events->createEvents('Le parcours '.$parcours->getLibelle().' a été désarchivé ainsi que tout les projet et cours liés.', 'information');
     }
 }
