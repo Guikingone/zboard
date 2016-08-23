@@ -13,6 +13,7 @@ namespace FacturationBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use FacturationBundle\Entity\Facture;
+use NotificationBundle\Services\Evenements;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 class FacturationService
@@ -23,15 +24,24 @@ class FacturationService
     private $doctrine;
 
     /**
+     * @var Evenements
+     */
+    private $events;
+
+    /**
      * FacturationService constructor.
      *
      * @param EntityManager $doctrine
      */
-    public function __construct(EntityManager $doctrine)
+    public function __construct(EntityManager $doctrine, Evenements $events)
     {
         $this->doctrine = $doctrine;
+        $this->events = $events;
     }
 
+    /**
+     * Allow to generate the factures linked to all the teachers.
+     */
     public function generateFactures()
     {
         $mentor = $this->doctrine->getRepository('UserBundle:User')->findAll();
@@ -63,6 +73,8 @@ class FacturationService
             $facture->setDateValiditee($facture->getDateCreation()->add(new \DateInterval('P8D')));
             $facture->setUser($user);
             $user->addFacture($facture);
+
+            $this->events->createUserEvents($user, 'Facturation effectuée, vous recevrez une copie par email.', 'Important');
         }
     }
 }

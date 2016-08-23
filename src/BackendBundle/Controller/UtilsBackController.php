@@ -13,6 +13,7 @@ class UtilsBackController extends Controller
     /**
      * @Route("/utils/{id}/mentors", name="update_mentors")
      * @Template("BackBundle/Action/Utils/update_mentors.html.twig")
+     * @Method({"GET", "POST"})
      *
      * @param Request $request
      * @param $id
