@@ -40,3 +40,4 @@ security:
         - { path: ^/backend, roles: [ROLE_ADMIN, ROLE_OC, ROLE_SUPERVISEUR_MENTOR] }
         - { path: ^/dashboard, roles: [ROLE_ADMIN, ROLE_OC, ROLE_SUPERVISEUR_MENTOR, ROLE_MENTOR, ROLE_MENTOR_DEBUTANT, ROLE_MENTOR_EXPERIMENTE] }
         - { path: ^/security, roles: [ROLE_ADMIN, ROLE_OC, ROLE_SUPERVISEUR_MENTOR] }
+        - { path: ^/facturation, role: ROLE_MENTOR }

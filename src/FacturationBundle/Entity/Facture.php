@@ -36,6 +36,11 @@ class Facture
     private $state;
 
     /**
+     * @ORM\Column(name="nbr_sessions", type="integer")
+     */
+    private $nbrSessions;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_creation", type="datetime")
@@ -117,6 +122,30 @@ class Facture
     public function getState()
     {
         return $this->state;
+    }
+
+    /**
+     * Set nbrSessions.
+     *
+     * @param int $nbrSessions
+     *
+     * @return Facture
+     */
+    public function setNbrSessions($nbrSessions)
+    {
+        $this->nbrSessions = $nbrSessions;
+
+        return $this;
+    }
+
+    /**
+     * Get nbrSessions.
+     *
+     * @return int
+     */
+    public function getNbrSessions()
+    {
+        return $this->nbrSessions;
     }
 
     /**

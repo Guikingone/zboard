@@ -60,6 +60,11 @@ class Sessions
     private $mentore;
 
     /**
+     * @ORM\ManyToOne(targetEntity="FacturationBundle\Entity\Facture", inversedBy="sessions")
+     */
+    private $facture;
+
+    /**
      * Get id.
      *
      * @return int

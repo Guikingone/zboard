@@ -108,28 +108,4 @@ class TutorialCategory
 
         return $this;
     }
-
-    /**
-     * Add link.
-     *
-     * @param \MentoratBundle\Entity\Tutorial $link
-     *
-     * @return TutorialCategory
-     */
-    public function addLink(\MentoratBundle\Entity\Tutorial $link)
-    {
-        $this->links[] = $link;
-
-        return $this;
-    }
-
-    /**
-     * Remove link.
-     *
-     * @param \MentoratBundle\Entity\Tutorial $link
-     */
-    public function removeLink(\MentoratBundle\Entity\Tutorial $link)
-    {
-        $this->links->removeElement($link);
-    }
 }

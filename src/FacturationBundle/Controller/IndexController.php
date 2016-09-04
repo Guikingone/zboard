@@ -22,6 +22,19 @@ class IndexController extends Controller
     }
 
     /**
+     * @Route("/facturation/mentor", name="home_facturation_mentor")
+     * @Method("GET")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function generateFactureMentorAction()
+    {
+        $this->get('core.facturation')->generateMentorFacture($this->getUser()->getId());
+
+        return $this->redirectToRoute('show_details_mentor', array('id' => $this->getUser()->getId()));
+    }
+
+    /**
      * @Route("/generate/facturation", name="facturation_generation")
      * @Method({"GET", "POST"})
      *

@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManager;
 use FacturationBundle\Entity\Facture;
 use NotificationBundle\Services\Evenements;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class FacturationService
 {
@@ -22,6 +23,11 @@ class FacturationService
      * @var EntityManager
      */
     private $doctrine;
+
+    /**
+     * @var Session
+     */
+    private $session;
 
     /**
      * @var Evenements
@@ -33,10 +39,47 @@ class FacturationService
      *
      * @param EntityManager $doctrine
      */
-    public function __construct(EntityManager $doctrine, Evenements $events)
+    public function __construct(EntityManager $doctrine, Session $session, Evenements $events)
     {
         $this->doctrine = $doctrine;
+        $this->session = $session;
         $this->events = $events;
+    }
+
+    /**
+     * Allow to generate a new facture linked to a teacher.
+     *
+     * @param $id
+     */
+    public function generateMentorFacture($id)
+    {
+        $user = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
+
+        if (null === $user) {
+            throw new Exception("L'utilisateur semble ne pas exister !");
+        }
+
+        $sessions = $this->doctrine->getRepository('MentoratBundle:Sessions')->findBy(array('mentor' => $id));
+
+        if (null === $sessions) {
+            throw new Exception("Vous n'avez pas effectuer de sessions récemment");
+        }
+
+        $facture = new Facture();
+        $facture->setLibelle('Facture du mentor '.$user->getFirstname().' '.$user->getLastname());
+        $facture->setState('En facturation');
+        $facture->setNbrSessions(count($sessions));
+        $facture->setDateCreation(new \DateTime());
+        $facture->setDateValiditee($facture->getDateCreation()->add(new \DateInterval('P8D')));
+        $facture->setDateFacturation($facture->getDateCreation()->add(new\DateInterval('P8D')));
+        $facture->setUser($user);
+        $user->addFacture($facture);
+
+        $this->doctrine->persist($facture);
+        $this->doctrine->flush();
+
+        $this->session->getFlashBag()->add('success', 'Votre facture a bien été générée.');
+        $this->events->createUserEvents($user, 'Génération de votre facture mensuelle', 'Information');
     }
 
     /**

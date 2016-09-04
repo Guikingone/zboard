@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Facture.
  *
- * @ORM\Table(name="facture")
+ * @ORM\Table(name="zboard_mentors_facture")
  * @ORM\Entity(repositoryClass="FacturationBundle\Repository\FactureRepository")
  */
 class Facture
@@ -34,6 +34,11 @@ class Facture
      * @ORM\Column(name="state", type="string", length=150, nullable=false)
      */
     private $state;
+
+    /**
+     * @ORM\Column(name="nbr_sessions", type="integer")
+     */
+    private $nbrSessions;
 
     /**
      * @var \DateTime
@@ -93,6 +98,30 @@ class Facture
     public function getLibelle()
     {
         return $this->libelle;
+    }
+
+    /**
+     * Set state.
+     *
+     * @param string $state
+     *
+     * @return Facture
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state.
+     *
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 
     /**

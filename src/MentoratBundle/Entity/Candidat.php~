@@ -103,9 +103,9 @@ class Candidat
     }
 
     /**
-     * Set candidature
+     * Set candidature.
      *
-     * @param boolean $candidature
+     * @param bool $candidature
      *
      * @return Candidat
      */
@@ -117,9 +117,9 @@ class Candidat
     }
 
     /**
-     * Get candidature
+     * Get candidature.
      *
-     * @return boolean
+     * @return bool
      */
     public function getCandidature()
     {
@@ -255,5 +255,39 @@ class Candidat
     public function removeReponse(\MentoratBundle\Entity\RecrutementReponse $reponse)
     {
         $this->reponses->removeElement($reponse);
+    }
+
+    /**
+     * Add vote.
+     *
+     * @param \MentoratBundle\Entity\RecrutementVote $vote
+     *
+     * @return Candidat
+     */
+    public function addVote(\MentoratBundle\Entity\RecrutementVote $vote)
+    {
+        $this->votes[] = $vote;
+
+        return $this;
+    }
+
+    /**
+     * Remove vote.
+     *
+     * @param \MentoratBundle\Entity\RecrutementVote $vote
+     */
+    public function removeVote(\MentoratBundle\Entity\RecrutementVote $vote)
+    {
+        $this->votes->removeElement($vote);
+    }
+
+    /**
+     * Get votes.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVotes()
+    {
+        return $this->votes;
     }
 }

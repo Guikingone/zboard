@@ -91,7 +91,7 @@ services:
 
     core.facturation:
         class: FacturationBundle\Service\FacturationService
-        arguments: ["@doctrine.orm.entity_manager"]
+        arguments: ["@doctrine.orm.entity_manager", "@session", "@core.events"]
 
     # List of services used to registrer the users with FOS.
     # Don't delete this services !

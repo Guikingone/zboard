@@ -51,9 +51,9 @@ class RecrutementVote
     private $commentaire;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -61,9 +61,9 @@ class RecrutementVote
     }
 
     /**
-     * Set vote
+     * Set vote.
      *
-     * @param integer $vote
+     * @param int $vote
      *
      * @return RecrutementVote
      */
@@ -75,9 +75,9 @@ class RecrutementVote
     }
 
     /**
-     * Get vote
+     * Get vote.
      *
-     * @return integer
+     * @return int
      */
     public function getVote()
     {
@@ -85,7 +85,7 @@ class RecrutementVote
     }
 
     /**
-     * Set commentaire
+     * Set commentaire.
      *
      * @param string $commentaire
      *
@@ -99,7 +99,7 @@ class RecrutementVote
     }
 
     /**
-     * Get commentaire
+     * Get commentaire.
      *
      * @return string
      */
@@ -109,7 +109,7 @@ class RecrutementVote
     }
 
     /**
-     * Set idUser
+     * Set idUser.
      *
      * @param \UserBundle\Entity\User $idUser
      *
@@ -123,7 +123,7 @@ class RecrutementVote
     }
 
     /**
-     * Get idUser
+     * Get idUser.
      *
      * @return \UserBundle\Entity\User
      */
@@ -133,7 +133,7 @@ class RecrutementVote
     }
 
     /**
-     * Set candidature
+     * Set candidature.
      *
      * @param \MentoratBundle\Entity\Candidat $candidature
      *
@@ -147,7 +147,7 @@ class RecrutementVote
     }
 
     /**
-     * Get candidature
+     * Get candidature.
      *
      * @return \MentoratBundle\Entity\Candidat
      */

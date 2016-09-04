@@ -1,6 +1,10 @@
 <div class="tab-pane" id="facturation">
     <!-- Suivi facturation -->
     <div class="table-responsive">
+        <div class="text-center">
+            <a href="{{ path('home_facturation_mentor') }}" class="btn btn-flat btn-warning">Facturer vos sessions</a>
+        </div>
+        <hr />
         <table class="table no-margin">
             <thead>
             <tr>
@@ -10,6 +14,19 @@
             </tr>
             </thead>
             <tbody>
+            {% for factures in mentor.factures %}
+                <tr>
+                    <td>
+                        {{ factures.dateFacturation|date('d-m-Y', 'Europe/Paris') }}
+                    </td>
+                    <td>
+                        {{ factures.nbrSessions }}
+                    </td>
+                    <td>
+                        {{ factures.state }}
+                    </td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
