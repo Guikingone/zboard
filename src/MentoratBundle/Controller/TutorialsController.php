@@ -24,7 +24,7 @@ class TutorialsController extends Controller
         $tutorial = $this->get('core.back')->addTutorial($request);
         $category = $this->get('core.back')->addCategory($request);
 
-        if ($tutorial->isValid()||$category->isValid()) {
+        if ($tutorial->isValid() || $category->isValid()) {
             return $this->redirectToRoute('mentorat_tutorials_index');
         }
 

@@ -5,7 +5,7 @@ namespace MentoratBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TutorialCategory
+ * TutorialCategory.
  *
  * @ORM\Table(name="zboard_tutorial_category")
  * @ORM\Entity(repositoryClass="MentoratBundle\Repository\TutorialCategoryRepository")
@@ -33,15 +33,13 @@ class TutorialCategory
      */
     private $links;
 
-
-
     public function __construct()
     {
         $this->links = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -50,7 +48,7 @@ class TutorialCategory
         return $this->id;
     }
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -64,7 +62,7 @@ class TutorialCategory
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -74,7 +72,7 @@ class TutorialCategory
     }
 
     /**
-     * Set the value of Id
+     * Set the value of Id.
      *
      * @param int id
      *
@@ -88,7 +86,7 @@ class TutorialCategory
     }
 
     /**
-     * Get the value of Links
+     * Get the value of Links.
      *
      * @return mixed
      */
@@ -98,7 +96,7 @@ class TutorialCategory
     }
 
     /**
-     * Set the value of Links
+     * Set the value of Links.
      *
      * @param mixed links
      *
@@ -110,5 +108,4 @@ class TutorialCategory
 
         return $this;
     }
-
 }

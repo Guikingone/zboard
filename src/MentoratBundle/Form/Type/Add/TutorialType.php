@@ -21,7 +21,7 @@ class TutorialType extends AbstractType
             ->add('link', TextType::class)
             ->add('category', EntityType::class, array(
                 'class' => 'MentoratBundle\Entity\TutorialCategory',
-                'choice_label' => 'name' ))
+                'choice_label' => 'name', ))
         ;
     }
 

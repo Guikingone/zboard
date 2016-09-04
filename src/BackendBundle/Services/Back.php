@@ -180,7 +180,6 @@ class Back
         return $form;
     }
 
-
     /**
      * Counts the number of visible informations.
      *

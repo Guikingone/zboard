@@ -22,9 +22,9 @@ class LoadTutorialsData implements FixtureInterface, ContainerAwareInterface, Or
     public function load(ObjectManager $manager)
     {
         $category = new TutorialCategory();
-        $category->setName("Le Mentorat");
+        $category->setName('Le Mentorat');
         $category_2 = new TutorialCategory();
-        $category_2->setName("CDPM - Marketing");
+        $category_2->setName('CDPM - Marketing');
 
         $tutoriel = new Tutorial();
         $tutoriel->setTitle('Cours devenez mentor');

@@ -71,9 +71,12 @@ class FacturationService
 
             $facture->setDateCreation(new \DateTime());
             $facture->setDateValiditee($facture->getDateCreation()->add(new \DateInterval('P8D')));
-            $facture->setState('En facturationj');
+            $facture->setState('En facturation');
             $facture->setUser($user);
             $user->addFacture($facture);
+
+            $this->doctrine->persist($facture);
+            $this->doctrine->flush();
 
             $this->events->createUserEvents($user, 'Facturation effectuée, vous recevrez une copie par email.', 'Important');
         }

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Facture.
  *
- * @ORM\Table(name="facture")
+ * @ORM\Table(name="zboard_mentors_facture")
  * @ORM\Entity(repositoryClass="FacturationBundle\Repository\FactureRepository")
  */
 class Facture
@@ -96,7 +96,7 @@ class Facture
     }
 
     /**
-     * Set state
+     * Set state.
      *
      * @param string $state
      *
@@ -110,7 +110,7 @@ class Facture
     }
 
     /**
-     * Get state
+     * Get state.
      *
      * @return string
      */

@@ -101,7 +101,7 @@ class Tutorial
     }
 
     /**
-     * Set the value of Id
+     * Set the value of Id.
      *
      * @param int id
      *
@@ -115,7 +115,7 @@ class Tutorial
     }
 
     /**
-     * Get the value of Category
+     * Get the value of Category.
      *
      * @return int
      */
@@ -125,7 +125,7 @@ class Tutorial
     }
 
     /**
-     * Set the value of Category
+     * Set the value of Category.
      *
      * @param int category
      *
@@ -137,5 +137,4 @@ class Tutorial
 
         return $this;
     }
-
 }
