@@ -6,16 +6,17 @@
   "autoload": {
     "psr-4": {
       "Tests\\": "tests/",
-      "AdminBundle\\": "src/",
-      "ApiBundle\\": "src/",
-      "BackendBundle\\": "src/",
-      "CoreBundle\\": "src/",
-      "EventListenerBundle\\": "src/",
-      "FacturationBundle\\": "src/",
-      "MentoratBundle\\": "src/",
-      "NotificationBundle\\": "src/",
-      "UserBundle\\": "src/",
-      "SecuriteBundle\\": "src/"
+      "AbstractBundle\\": "src/AbstractBundle",
+      "AdminBundle\\": "src/AdminBundle",
+      "ApiBundle\\": "src/ApiBundle",
+      "BackendBundle\\": "src/BackendBundle",
+      "CoreBundle\\": "src/CoreBundle",
+      "EventListenerBundle\\": "src/EventListenerBundle",
+      "FacturationBundle\\": "src/FacturationBundle",
+      "MentoratBundle\\": "src/MentoratBundle",
+      "NotificationBundle\\": "src/NotificationBundle",
+      "UserBundle\\": "src/UserBundle",
+      "SecuriteBundle\\": "src/SecuriteBundle"
     },
     "classmap": [
       "app/AppKernel.php",
@@ -25,16 +26,17 @@
   "autoload-dev": {
     "psr-4": {
       "Tests\\": "tests/",
-      "AdminBundle\\": "src/",
-      "ApiBundle\\": "src/",
-      "BackendBundle\\": "src/",
-      "CoreBundle\\": "src/",
-      "EventListenerBundle\\": "src/",
-      "FacturationBundle\\": "src/",
-      "MentoratBundle\\": "src/",
-      "NotificationBundle\\": "src/",
-      "UserBundle\\": "src/",
-      "SecuriteBundle\\": "src/"
+      "AbstractBundle\\": "src/AbstractBundle",
+      "AdminBundle\\": "src/AdminBundle",
+      "ApiBundle\\": "src/ApiBundle",
+      "BackendBundle\\": "src/BackendBundle",
+      "CoreBundle\\": "src/CoreBundle",
+      "EventListenerBundle\\": "src/EventListenerBundle",
+      "FacturationBundle\\": "src/FacturationBundle",
+      "MentoratBundle\\": "src/MentoratBundle",
+      "NotificationBundle\\": "src/NotificationBundle",
+      "UserBundle\\": "src/UserBundle",
+      "SecuriteBundle\\": "src/SecuriteBundle"
     }
   },
   "require": {

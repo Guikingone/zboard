@@ -53,33 +53,29 @@ class FacturationService
      */
     public function generateMentorFacture($id)
     {
-        $user = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
+        try {
+            $user = $this->doctrine->getRepository('UserBundle:User')->findOneBy(array('id' => $id));
 
-        if (null === $user) {
-            throw new Exception("L'utilisateur semble ne pas exister !");
+            $sessions = $this->doctrine->getRepository('MentoratBundle:Sessions')->findBy(array('mentor' => $id));
+
+            $facture = new Facture();
+            $facture->setLibelle('Facture du mentor '.$user->getFirstname().' '.$user->getLastname());
+            $facture->setState('En facturation');
+            $facture->setNbrSessions(count($sessions));
+            $facture->setDateCreation(new \DateTime());
+            $facture->setDateValiditee($facture->getDateCreation()->add(new \DateInterval('P8D')));
+            $facture->setDateFacturation($facture->getDateCreation()->add(new\DateInterval('P8D')));
+            $facture->setUser($user);
+            $user->addFacture($facture);
+
+            $this->doctrine->persist($facture);
+            $this->doctrine->flush();
+
+            $this->session->getFlashBag()->add('success', 'Votre facture a bien été générée.');
+            $this->events->createUserEvents($user, 'Génération de votre facture mensuelle', 'Information');
+        } catch (Exception $e) {
+            $e->getMessage();
         }
-
-        $sessions = $this->doctrine->getRepository('MentoratBundle:Sessions')->findBy(array('mentor' => $id));
-
-        if (null === $sessions) {
-            throw new Exception("Vous n'avez pas effectuer de sessions récemment");
-        }
-
-        $facture = new Facture();
-        $facture->setLibelle('Facture du mentor '.$user->getFirstname().' '.$user->getLastname());
-        $facture->setState('En facturation');
-        $facture->setNbrSessions(count($sessions));
-        $facture->setDateCreation(new \DateTime());
-        $facture->setDateValiditee($facture->getDateCreation()->add(new \DateInterval('P8D')));
-        $facture->setDateFacturation($facture->getDateCreation()->add(new\DateInterval('P8D')));
-        $facture->setUser($user);
-        $user->addFacture($facture);
-
-        $this->doctrine->persist($facture);
-        $this->doctrine->flush();
-
-        $this->session->getFlashBag()->add('success', 'Votre facture a bien été générée.');
-        $this->events->createUserEvents($user, 'Génération de votre facture mensuelle', 'Information');
     }
 
     /**
@@ -97,13 +93,13 @@ class FacturationService
             foreach ($sessions as $session) {
                 switch ($session) {
                     case $session->getStatus() === 'Présent':
-                        array_push($sessionFacturables, $session);
+                        $sessionFacturables[$session];
                         break;
                     case $session->getStatus() === 'Absent':
-                        array_push($sessionFacturables, $session);
+                        $sessionFacturables[$session];
                         break;
                     case $session->getStatus() === 'No Show':
-                        array_push($sessionFacturables, $session);
+                        $sessionFacturables[$session];
                         break;
                     default:
                         throw new Exception('Aucune session n\'a été trouvée.');

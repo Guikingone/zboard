@@ -11,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class InfosController extends Controller
 {
     /**
-   * @Route("/infos/{page}",defaults={"page" = 1},name="infos")
+   * @Route("/infos/{page}", defaults={"page" = 1}, name="infos")
    * @Template("MentoratBundle/Dashboard/infos.html.twig")
    * @Method({"GET"})
    *
