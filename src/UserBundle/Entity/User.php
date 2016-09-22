@@ -34,14 +34,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User extends BaseUser implements UserInterface
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", length=11)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="UserBundle\Entity\Informations", mappedBy="author")
-     */
-    private static $id;
+      * @var int
+      *
+      * @ORM\Column(name="id", type="integer", length=11)
+      * @ORM\Id
+      * @ORM\GeneratedValue(strategy="AUTO")
+      * @ORM\OneToMany(targetEntity="UserBundle\Entity\Informations", mappedBy="author")
+      */
+     protected $id;
 
     /**
      * @var string
@@ -172,13 +172,10 @@ class User extends BaseUser implements UserInterface
 
     /**
      * User constructor.
-     *
-     * @param $id
      */
-    public function __construct($id)
+    public function __construct()
     {
         parent::__construct();
-        self::$id = $id;
         $this->competences = new ArrayCollection();
         $this->suivi = new ArrayCollection();
         $this->notes = new ArrayCollection();
