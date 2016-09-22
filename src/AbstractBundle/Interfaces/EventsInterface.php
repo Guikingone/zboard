@@ -12,9 +12,9 @@
 namespace AbstractBundle\Interfaces;
 
 /**
- * Interface CountryInterface.
+ * Interface EventsInterface.
  */
-interface CountryInterface
+interface EventsInterface
 {
     /**
      * @return mixed
@@ -32,4 +32,28 @@ interface CountryInterface
      * @return mixed
      */
     public function setLibelle($libelle);
+
+    /**
+     * @return mixed
+     */
+    public function getDate();
+
+    /**
+     * @param $date
+     *
+     * @return mixed
+     */
+    public function setDate($date);
+
+    /**
+     * @return mixed
+     */
+    public function getCategorie();
+
+    /**
+     * @param $categorie
+     *
+     * @return mixed
+     */
+    public function setCategorie($categorie);
 }

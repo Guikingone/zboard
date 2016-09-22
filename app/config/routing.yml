@@ -1,12 +1,12 @@
-abstract:
-    resource: "@AbstractBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 core:
     resource: "@CoreBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:    /
+
+api:
+    resource: "@ApiBundle/Controller/"
+    type:     annotation
+    prefix:    /api
 
 securite:
     resource: "@SecuriteBundle/Controller/"
@@ -33,15 +33,15 @@ admin:
     type:     annotation
     prefix:   /admin3744
 
-facturation:
-    resource: "@FacturationBundle/Controller/"
-    type:     annotation
-    prefix:   /facturation
-
 notification:
     resource: "@NotificationBundle/Controller/"
     type:     annotation
     prefix:   /notifications
+
+facturation:
+    resource: "@FacturationBundle/Controller/"
+    type:     annotation
+    prefix:   /facturation
 
 # FOS Routes
 fos_user_security:

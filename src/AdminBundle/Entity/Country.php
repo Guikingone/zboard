@@ -4,6 +4,9 @@ namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use AbstractBundle\Interfaces\CountryInterface;
+use UserBundle\Entity\Mentore;
+use UserBundle\Entity\User;
 
 /**
  * Country.
@@ -11,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="zboard_country")
  * @ORM\Entity(repositoryClass="AdminBundle\Repository\CountryRepository")
  */
-class Country
+class Country implements CountryInterface
 {
     /**
      * @var int
@@ -89,7 +92,7 @@ class Country
      *
      * @return Country
      */
-    public function addUser(\UserBundle\Entity\User $user)
+    public function addUser(User $user)
     {
         $this->users[] = $user;
 
@@ -101,7 +104,7 @@ class Country
      *
      * @param \UserBundle\Entity\User $user
      */
-    public function removeUser(\UserBundle\Entity\User $user)
+    public function removeUser(User $user)
     {
         $this->users->removeElement($user);
     }
@@ -123,7 +126,7 @@ class Country
      *
      * @return Country
      */
-    public function addMentore(\UserBundle\Entity\Mentore $mentore)
+    public function addMentore(Mentore $mentore)
     {
         $this->mentores[] = $mentore;
 
@@ -135,7 +138,7 @@ class Country
      *
      * @param \UserBundle\Entity\Mentore $mentore
      */
-    public function removeMentore(\UserBundle\Entity\Mentore $mentore)
+    public function removeMentore(Mentore $mentore)
     {
         $this->mentores->removeElement($mentore);
     }

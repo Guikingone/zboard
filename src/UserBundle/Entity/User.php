@@ -1,10 +1,28 @@
 <?php
 
+/*
+ * This file is part of the Zboard project.
+ *
+ * (c) Guillaume Loulier <guillaume.loulier@hotmail.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use AbstractBundle\Interfaces\UserInterface;
+use AdminBundle\Entity\Activity;
+use FacturationBundle\Entity\Facture;
+use AbstractBundle\Interfaces\CountryInterface;
+use AbstractBundle\Interfaces\EventsInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use MentoratBundle\Entity\Notes;
+use MentoratBundle\Entity\Sessions;
+use MentoratBundle\Entity\Soutenance;
+use MentoratBundle\Entity\Suivi;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -13,7 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="zboard_user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  */
-class User extends BaseUser
+class User extends BaseUser implements UserInterface
 {
     /**
      * @var int
@@ -23,40 +41,42 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\OneToMany(targetEntity="UserBundle\Entity\Informations", mappedBy="author")
      */
-    protected $id;
+    private static $id;
 
     /**
      * @var string
      * @ORM\Column(name="firstname", type="string", length=255)
      */
-    protected $firstname;
+    private $firstname;
 
     /**
      * @var string
      * @ORM\Column(name="lastname", type="string", length=255)
      */
-    protected $lastname;
+    private $lastname;
 
     /**
      * @var string
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
-    protected $address;
+    private $address;
 
     /**
      * @var string
      * @ORM\Column(name="zipcode", type="string", length=255, nullable=true)
      */
-    protected $zipcode;
+    private $zipcode;
 
     /**
      * @var string
      * @ORM\Column(name="city", type="string", length=150, nullable=true)
      */
-    protected $city;
+    private $city;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AdminBundle\Entity\Country", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="AbstractBundle\Interfaces\CountryInterface", inversedBy="users")
+     *
+     * @var CountryInterface
      */
     private $country;
 
@@ -132,8 +152,10 @@ class User extends BaseUser
     private $archived;
 
     /**
-     * @ORM\ManyToMany(targetEntity="NotificationBundle\Entity\Events", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="AbstractBundle\Interfaces\EventsInterface", inversedBy="users")
      * @ORM\JoinTable(name="zboard_user_events")
+     *
+     * @var EventsInterface
      */
     private $events;
 
@@ -150,10 +172,13 @@ class User extends BaseUser
 
     /**
      * User constructor.
+     *
+     * @param $id
      */
-    public function __construct()
+    public function __construct($id)
     {
         parent::__construct();
+        self::$id = $id;
         $this->competences = new ArrayCollection();
         $this->suivi = new ArrayCollection();
         $this->notes = new ArrayCollection();
@@ -380,13 +405,11 @@ class User extends BaseUser
     }
 
     /**
-     * Set country.
+     * @param CountryInterface|null $country
      *
-     * @param \AdminBundle\Entity\Country $country
-     *
-     * @return User
+     * @return $this
      */
-    public function setCountry(\AdminBundle\Entity\Country $country = null)
+    public function setCountry(CountryInterface $country = null)
     {
         $this->country = $country;
 
@@ -394,9 +417,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get country.
-     *
-     * @return \AdminBundle\Entity\Country
+     * @return CountryInterface
      */
     public function getCountry()
     {
@@ -410,7 +431,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function addSuivi(\MentoratBundle\Entity\Suivi $suivi)
+    public function addSuivi(Suivi $suivi)
     {
         $this->suivi[] = $suivi;
 
@@ -422,7 +443,7 @@ class User extends BaseUser
      *
      * @param \MentoratBundle\Entity\Suivi $suivi
      */
-    public function removeSuivi(\MentoratBundle\Entity\Suivi $suivi)
+    public function removeSuivi(Suivi $suivi)
     {
         $this->suivi->removeElement($suivi);
     }
@@ -444,7 +465,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function addNote(\MentoratBundle\Entity\Notes $note)
+    public function addNote(Notes $note)
     {
         $this->notes[] = $note;
 
@@ -456,7 +477,7 @@ class User extends BaseUser
      *
      * @param \MentoratBundle\Entity\Notes $note
      */
-    public function removeNote(\MentoratBundle\Entity\Notes $note)
+    public function removeNote(Notes $note)
     {
         $this->notes->removeElement($note);
     }
@@ -478,7 +499,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function addSession(\MentoratBundle\Entity\Sessions $session)
+    public function addSession(Sessions $session)
     {
         $this->sessions[] = $session;
 
@@ -490,7 +511,7 @@ class User extends BaseUser
      *
      * @param \MentoratBundle\Entity\Sessions $session
      */
-    public function removeSession(\MentoratBundle\Entity\Sessions $session)
+    public function removeSession(Sessions $session)
     {
         $this->sessions->removeElement($session);
     }
@@ -512,7 +533,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function addSoutenance(\MentoratBundle\Entity\Soutenance $soutenance)
+    public function addSoutenance(Soutenance $soutenance)
     {
         $this->soutenances[] = $soutenance;
 
@@ -524,7 +545,7 @@ class User extends BaseUser
      *
      * @param \MentoratBundle\Entity\Soutenance $soutenance
      */
-    public function removeSoutenance(\MentoratBundle\Entity\Soutenance $soutenance)
+    public function removeSoutenance(Soutenance $soutenance)
     {
         $this->soutenances->removeElement($soutenance);
     }
@@ -546,7 +567,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function addCompetence(\UserBundle\Entity\Competences $competence)
+    public function addCompetence(Competences $competence)
     {
         $this->competences[] = $competence;
 
@@ -558,7 +579,7 @@ class User extends BaseUser
      *
      * @param \UserBundle\Entity\Competences $competence
      */
-    public function removeCompetence(\UserBundle\Entity\Competences $competence)
+    public function removeCompetence(Competences $competence)
     {
         $this->competences->removeElement($competence);
     }
@@ -580,7 +601,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function addUserGroup(\UserBundle\Entity\UserGroup $userGroup)
+    public function addUserGroup(UserGroup $userGroup)
     {
         $this->user_groups[] = $userGroup;
 
@@ -592,7 +613,7 @@ class User extends BaseUser
      *
      * @param \UserBundle\Entity\UserGroup $userGroup
      */
-    public function removeUserGroup(\UserBundle\Entity\UserGroup $userGroup)
+    public function removeUserGroup(UserGroup $userGroup)
     {
         $this->user_groups->removeElement($userGroup);
     }
@@ -608,13 +629,11 @@ class User extends BaseUser
     }
 
     /**
-     * Add event.
+     * @param EventsInterface $event
      *
-     * @param \NotificationBundle\Entity\Events $event
-     *
-     * @return User
+     * @return $this
      */
-    public function addEvent(\NotificationBundle\Entity\Events $event)
+    public function addEvent(EventsInterface $event)
     {
         $this->events[] = $event;
 
@@ -622,11 +641,9 @@ class User extends BaseUser
     }
 
     /**
-     * Remove event.
-     *
-     * @param \NotificationBundle\Entity\Events $event
+     * @param EventsInterface $event
      */
-    public function removeEvent(\NotificationBundle\Entity\Events $event)
+    public function removeEvent(EventsInterface $event)
     {
         $this->events->removeElement($event);
     }
@@ -642,7 +659,9 @@ class User extends BaseUser
     }
 
     /**
-     * Getters/Setters used in order to upload files.
+     * @param $profileImage
+     *
+     * @return $this
      */
     public function setProfileImage($profileImage)
     {
@@ -651,6 +670,9 @@ class User extends BaseUser
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getProfileImage()
     {
         return $this->profileImage;
@@ -663,7 +685,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function addActivity(\AdminBundle\Entity\Activity $activity)
+    public function addActivity(Activity $activity)
     {
         $this->activity[] = $activity;
 
@@ -675,7 +697,7 @@ class User extends BaseUser
      *
      * @param \AdminBundle\Entity\Activity $activity
      */
-    public function removeActivity(\AdminBundle\Entity\Activity $activity)
+    public function removeActivity(Activity $activity)
     {
         $this->activity->removeElement($activity);
     }
@@ -697,7 +719,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function addFacture(\FacturationBundle\Entity\Facture $facture)
+    public function addFacture(Facture $facture)
     {
         $this->factures[] = $facture;
 
@@ -709,7 +731,7 @@ class User extends BaseUser
      *
      * @param \FacturationBundle\Entity\Facture $facture
      */
-    public function removeFacture(\FacturationBundle\Entity\Facture $facture)
+    public function removeFacture(Facture $facture)
     {
         $this->factures->removeElement($facture);
     }

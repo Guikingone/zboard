@@ -86,7 +86,7 @@ class Back
     /**
      * Allow the back to get all the tutorials.
      *
-     * @return array|\Mentorat\Entity\TutorialCategory[]
+     * @return array|\MentoratBundle\Entity\TutorialCategory[]
      */
     public function getTutorialCategories()
     {

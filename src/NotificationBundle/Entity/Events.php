@@ -3,6 +3,10 @@
 namespace NotificationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use AbstractBundle\Interfaces\EventsInterface;
+use UserBundle\Entity\Mentore;
+use UserBundle\Entity\User;
 
 /**
  * Events.
@@ -10,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="zboard_events")
  * @ORM\Entity(repositoryClass="NotificationBundle\Repository\EventsRepository")
  */
-class Events
+class Events implements EventsInterface
 {
     /**
      * @var int
@@ -59,8 +63,8 @@ class Events
      */
     public function __construct()
     {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->mentores = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->mentores = new ArrayCollection();
     }
 
     /**
@@ -152,7 +156,7 @@ class Events
      *
      * @return Events
      */
-    public function addUser(\UserBundle\Entity\User $user)
+    public function addUser(User $user)
     {
         $this->users[] = $user;
 
@@ -164,7 +168,7 @@ class Events
      *
      * @param \UserBundle\Entity\User $user
      */
-    public function removeUser(\UserBundle\Entity\User $user)
+    public function removeUser(User $user)
     {
         $this->users->removeElement($user);
     }
@@ -186,7 +190,7 @@ class Events
      *
      * @return Events
      */
-    public function addMentore(\UserBundle\Entity\Mentore $mentore)
+    public function addMentore(Mentore $mentore)
     {
         $this->mentores[] = $mentore;
 
@@ -198,7 +202,7 @@ class Events
      *
      * @param \UserBundle\Entity\Mentore $mentore
      */
-    public function removeMentore(\UserBundle\Entity\Mentore $mentore)
+    public function removeMentore(Mentore $mentore)
     {
         $this->mentores->removeElement($mentore);
     }
